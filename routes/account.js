@@ -382,6 +382,14 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'launchtemplate'){
+		const params = req.body
+		let lambda = null
+
+
+		return
+	}
+
 
 	// clone an app into another app
 	// TODO: this should moved to a platform lambda
@@ -459,7 +467,6 @@ router.post('/:action', function(req, res, next){
 
 		return
 	}
-
 
 	if (action == 'updateclone') {
 		const params = req.body
