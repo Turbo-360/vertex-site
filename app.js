@@ -5,7 +5,7 @@ const controllers = require('./controllers')
 const config = {
 	session: {
 		cookieName: 'session',
-		secret: '123123',
+		secret: process.env.SESSION_SECRET,
 		duration: 14*24*60*60*1000, // 14 days
 	  activeDuration:30*60*1000
 	},
