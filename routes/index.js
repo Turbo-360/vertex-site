@@ -26,6 +26,19 @@ router.get('/', (req, res) => {
 	res.render('index', data)
 })
 
+router.get('/me', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	const data = {
+		user: req.user
+	}
+
+	res.render('account', data)
+})
+
 router.get('/template/:slug', (req, res) => {
 	// query template by slug
 	// TODO: this should be done internally through rest api
