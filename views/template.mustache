@@ -39,6 +39,7 @@
       // hide register form, user already signed up
       if (user != null){
         $('#register-form').css('visibility', 'hidden')
+        return
       }
 
       $('#btn-register').click(function(event){
