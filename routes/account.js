@@ -123,6 +123,7 @@ router.post('/:action', function(req, res, next){
 			req.session.user = id
 			res.json({
 				confirmation: 'success',
+				redirect: params.redirect || null,
 				user: {
 					id: id,
 					username: user.username,
