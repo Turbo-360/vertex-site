@@ -179,7 +179,6 @@ module.exports = {
 									return
 								}
 
-								console.log('TEST 7')
 								resolve(profile.summary())
 								return
 							})
@@ -193,7 +192,6 @@ module.exports = {
 					}
 				}
 
-				console.log('TEST 8')
 				Profile.create(params, (error, profile) => {
 					if (error){
 						reject(error)
