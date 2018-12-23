@@ -24,6 +24,7 @@
     "encodeurl": "^1.0.2",
     "escape-html": "^1.0.3",
     "etag": "^1.8.1",
+    "express": "^4.16.4",
     "finalhandler": "1.1.1",
     "fresh": "0.5.2",
     "js-base64": "^2.5.0",
@@ -52,9 +53,6 @@
     "uuid": "^3.3.2",
     "vary": "^1.1.2",
     "vertex360": "latest"
-  },
-  "devDependencies": {
-    "express": "^4.16.4"
   },
   "deploy": [
     "."
