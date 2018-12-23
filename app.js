@@ -9,7 +9,7 @@ const config = {
 		duration: 14*24*60*60*1000, // 14 days
 	  activeDuration:30*60*1000
 	},
-	db: { 					// Database configuration. Remember to set env variables in .env file: MONGODB_URI, PROD_MONGODB_URI
+	db: {
 		url: process.env.MONGODB_URI,
 		type: 'mongo',
 		onError: (err) => {
@@ -21,7 +21,7 @@ const config = {
 	}
 }
 
-const app = vertex.app(config) // initialize app with config options
+const app = vertex.app(config)
 
 
 app.use((req, res, next) => {
@@ -41,15 +41,12 @@ app.use((req, res, next) => {
   })
 })
 
-// import routes
 const index = require('./routes/index')
 const api = require('./routes/api')
 const account = require('./routes/account')
 
-// set routes
 app.use('/', index)
 app.use('/api', api)
 app.use('/account', account)
-
 
 module.exports = app
