@@ -64,7 +64,6 @@
             // {"confirmation":"success","user":{"id":"5c2002867ca814083d0aa5d0","username":"dan.kwon234",
             // "email":"dan.kwon234@gmail.com","image":"https://lh3.googleusercontent.com/FdU2WvDKVMndsRNCSfypX3U4k_AiPC5-OZDIXER_yXJEBhmFjdO2NTQqJVaj9rcLQl-KLO8rRQpBhCOkdtkDT0e0Ig",
             // "slug":"dan.kwon234-hotoe5","notifications":[]}}
-
             if (data.confirmation != 'success'){
   						alert('Error: ' + data.message)
   						return
@@ -73,11 +72,11 @@
             var user = data.user
             console.log(JSON.stringify(data))
             if (data.redirect != null){
-              // TODO: redirect to data.redirect endpoint
+              window.location.href = data.redirect // redirect to data.redirect endpoint
               return
             }
 
-            // TODO: redirect to account page
+            window.location.href = '/me' // redirect to account page
           },
           error: function(xhr, status, err){
             alert(err.message)
