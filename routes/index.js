@@ -65,7 +65,12 @@ router.get('/template/:slug', (req, res) => {
 			return
 		}
 
-		const data = body.results[0]
+		const data = {
+			template: body.results[0],
+			user: req.user,
+		}
+		data['preloaded'] = JSON.stringify(data)
+		
 		res.render('template', data)
 	})
 })

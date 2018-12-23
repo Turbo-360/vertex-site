@@ -14,23 +14,33 @@
 		</div>
 
 		<div class="col-md-6">
-			<h1>{{name}}</h1>
+			<h1>{{template.name}}</h1>
 			<hr />
       <button>Use This Template</button>
-      <form style="margin-top:40px">
+      <form id="register-form" style="margin-top:40px">
         <input id="input-name" type="text" placeholder="Full Name" /><br />
         <input id="input-email" type="text" placeholder="Email" /><br />
         <input id="input-password" type="password" placeholder="Password" /><br />
         <button id="btn-register">Join</button>
-        <input id="input-redirect" type="hidden" value="/template/{{slug}}" />
+        <input id="input-redirect" type="hidden" value="/template/{{template.slug}}" />
       </form>
 		</div>
 	</div>
 
+  <script type="text/javascript">window.__PRELOADED_DATA__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="/js/jquery.js"></script>
 	<script type="text/javascript" src="/js/mustache.js"></script>
   <script type="text/javascript">
     (function(){
+      const data = window.__PRELOADED_DATA__
+      const template = data.template
+      const user = data.user
+
+      // hide register form, user already signed up
+      if (user != null){
+        $('#register-form').css('visibility', 'hidden')
+      }
+
       $('#btn-register').click(function(event){
         if (event)
           event.preventDefault()
