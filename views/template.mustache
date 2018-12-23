@@ -38,7 +38,8 @@
         var visitor = {
           fullName: $('#input-name').val().trim(),
           email: $('#input-email').val().trim(),
-          password: $('#input-password').val().trim()
+          password: $('#input-password').val().trim(),
+          redirect: $('#input-redirect').val().trim()
         }
 
         var required = ['password', 'email', 'fullName']
@@ -70,7 +71,12 @@
   					}
 
             var user = data.user
-            console.log(JSON.stringify(user))
+            console.log(JSON.stringify(data))
+            if (data.redirect != null){
+              // TODO: redirect to data.redirect endpoint
+              return
+            }
+
             // TODO: redirect to account page
           },
           error: function(xhr, status, err){
