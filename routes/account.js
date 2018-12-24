@@ -392,6 +392,7 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
+		console.log('PARAMS = ' + JSON.stringify(params))
 		const newSiteInfo = {
 			name: params.name,
 			profile: {
@@ -415,11 +416,13 @@ router.post('/:action', function(req, res, next){
 
 		controllers.site.post(newSiteInfo) // create new site first
 		.then(data => {
+			console.log('TEST 1')
 			newSite = data
 			folder['app'] = newSite.slug // new app to copy source to
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
+			console.log('TEST 2')
 			copiedSite = data
 			folder['source'] = copiedSite.slug
 
@@ -429,6 +432,7 @@ router.post('/:action', function(req, res, next){
 			return utils.HTTP.post(url, folder)
 		})
 		.then(data => {
+			console.log('TEST 3')
 			res.json({
 				confirmation: 'success',
 				data: data
