@@ -418,11 +418,13 @@ router.post('/:action', function(req, res, next){
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
+			console.log('TEST 1')
 			copiedSite = data
 			folder['source'] = copiedSite.id
 			return utils.AWS.copyFolder(folder)
 		})
 		.then(data => {
+			console.log('TEST 2')
 			lambda = {
 				// name: params.app, // this has to be the appslug
 				// path: params.app + '/package.zip',
@@ -440,6 +442,7 @@ router.post('/:action', function(req, res, next){
 			return utils.AWS.getFunction({name: copiedSite.slug}) // slug of app being copied
 		})
 		.then(data => {
+			console.log('TEST 3')
 			const envVariables = data.Configuration.Environment.Variables
 			const keys = Object.keys(envVariables)
 			keys.forEach(function(key, i){
@@ -450,30 +453,14 @@ router.post('/:action', function(req, res, next){
 			return utils.AWS.getFunction(lambda) // check if already exists first. If so, delete
 		})
 		.then(data => { // check if already exists first. If so, delete
+			console.log('TEST 4')
 			return (data == null) ? null : utils.AWS.deleteFunction(lambda)
 		})
 		.then(data => { // connect to lambda
+			console.log('TEST 5')
 			return utils.AWS.deployVertex(lambda)
 		})
 		.then(data => {
-			// console.log('PARAMS: ' + JSON.stringify(params))
-			// if (params.pages!=null && params.sourceId!=null){
-			// 	try { // might be stringified client-side
-			// 		params['pages'] = JSON.parse(params.pages)
-			// 	}
-			// 	catch (err){}
-			//
-			// 	const vertexBucket = 'turbo360-vertex'
-			// 	params.pages.forEach(function(page, i){
-			// 		const pageKey = params.appId+'-'+page+'.json'
-			// 		utils.AWS.copyObject({
-			// 			object: '/'+vertexBucket+'/pages/'+params.sourceId+'-'+page+'.json',
-			// 			newObject: pageKey,
-			// 			destinationBucket: vertexBucket+'/pages'
-			// 		})
-			// 	})
-			// }
-
 			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'Turbo Site Cloned', JSON.stringify(params))
 			res.json({
 				confirmation: 'success',
