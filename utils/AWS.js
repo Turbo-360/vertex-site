@@ -223,6 +223,7 @@ module.exports = {
 	// },
 
 	// http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#copyObject-property
+	// This copies a folder from inside a bucket to another folder in the SAME bucket
 	copyFolder: function(pkg){
 		return new Promise(function(resolve, reject){
 
@@ -238,7 +239,6 @@ module.exports = {
 				return
 			}
 
-			// const vertexBucket = 'turbo360-vertex'
 			const bucket = pkg.bucket || 'turbo360-vertex'
 			const s3 = new aws.S3()
 
