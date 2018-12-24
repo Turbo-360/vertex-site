@@ -422,13 +422,13 @@ router.post('/:action', function(req, res, next){
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
-			console.log('TEST 2: ' + JSON.stringify(data))
 			copiedSite = data
 			folder['source'] = copiedSite.slug
 
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
 			// const url = 'https://platform.turbo360-vector.com/launchtemplate'
+			console.log('TEST 2: ' + JSON.stringify(data))
 			const url = 'http://platform.turbo360-vector.com/launchtemplate'
 			return utils.HTTP.post(url, folder)
 		})
