@@ -387,9 +387,6 @@ router.post('/:action', function(req, res, next){
 		const params = req.body
 		let lambda = null
 
-		const params = req.body
-		let lambda = null
-
 		utils.AWS.copyFolder(params)
 		.then(data => {
 			lambda = {
