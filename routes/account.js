@@ -382,10 +382,81 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// TODO: this should moved to a platform lambda
 	if (action == 'launchtemplate'){
 		const params = req.body
 		let lambda = null
 
+		const params = req.body
+		let lambda = null
+
+		utils.AWS.copyFolder(params)
+		.then(data => {
+			lambda = {
+				name: params.app, // this has to be the appslug
+				path: params.app + '/package.zip',
+				env: {
+					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+params.app+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
+					TURBO_ENV: 'prod',
+					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
+					TURBO_APP_ID: params.appId
+				}
+			}
+
+			return utils.AWS.getFunction({name: params.source}) // slug of app being copied
+		})
+		.then(data => {
+			const envVariables = data.Configuration.Environment.Variables
+			const keys = Object.keys(envVariables)
+			keys.forEach(function(key, i){
+				if (lambda.env[key] == null)
+					lambda.env[key] = envVariables[key]
+			})
+
+			return utils.AWS.getFunction(lambda) // check if already exists first. If so, delete
+		})
+		.then(data => { // check if already exists first. If so, delete
+			return (data == null) ? null : utils.AWS.deleteFunction(lambda)
+		})
+		.then(data => { // connect to lambda
+			return utils.AWS.deployVertex(lambda)
+		})
+		.then(data => {
+			// console.log('PARAMS: ' + JSON.stringify(params))
+			// if (params.pages!=null && params.sourceId!=null){
+			// 	try { // might be stringified client-side
+			// 		params['pages'] = JSON.parse(params.pages)
+			// 	}
+			// 	catch (err){}
+			//
+			// 	const vertexBucket = 'turbo360-vertex'
+			// 	params.pages.forEach(function(page, i){
+			// 		const pageKey = params.appId+'-'+page+'.json'
+			// 		utils.AWS.copyObject({
+			// 			object: '/'+vertexBucket+'/pages/'+params.sourceId+'-'+page+'.json',
+			// 			newObject: pageKey,
+			// 			destinationBucket: vertexBucket+'/pages'
+			// 		})
+			// 	})
+			// }
+
+			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'Turbo Site Cloned', JSON.stringify(params))
+			res.json({
+				confirmation: 'success',
+				result: {
+					format: 'vertex',
+					slug: params.app
+				}
+			})
+
+			return
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message || err
+			})
+		})
 
 		return
 	}
