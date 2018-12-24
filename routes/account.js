@@ -405,8 +405,9 @@ router.post('/:action', function(req, res, next){
 			}
 		}
 
+		const vertexBucket = 'turbo360-vertex'
 		const folder = {
-			bucket: 'turbo360-vertex'
+			bucket: vertexBucket
 		}
 
 		let lambda = null
@@ -456,11 +457,13 @@ router.post('/:action', function(req, res, next){
 		.then(data => { // connect to lambda
 			return utils.AWS.deployVertex(lambda)
 		})
-		// .then(data => {
-		// 	return utils.AWS.copyFolder({
-		//
-		// 	})
-		// })
+		.then(data => {
+			return utils.AWS.copyFolder({
+				bucket: vertexBucket,
+				source: 'stores/'+copiedSite.slug,
+				app: 'stores/'+newSite.slug
+			})
+		})
 		.then(data => {
 			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(params))
 			res.json({
