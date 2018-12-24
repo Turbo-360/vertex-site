@@ -418,7 +418,6 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			newSite = data
 			folder['app'] = newSite.slug // new app to copy source to
-			// folder['appId'] = newSite.id
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
@@ -438,7 +437,6 @@ router.post('/:action', function(req, res, next){
 				}
 			}
 
-			// return utils.AWS.getFunction({name: params.source}) // slug of app being copied
 			return utils.AWS.getFunction({name: copiedSite.slug}) // slug of app being copied
 		})
 		.then(data => {
@@ -462,6 +460,13 @@ router.post('/:action', function(req, res, next){
 				bucket: vertexBucket,
 				source: 'stores/'+copiedSite.slug,
 				app: 'stores/'+newSite.slug
+			})
+		})
+		.then(data => {
+			return utils.AWS.copyFolder({
+				bucket: vertexBucket,
+				source: 'pages/'+copiedSite.slug,
+				app: 'pages/'+newSite.slug
 			})
 		})
 		.then(data => {
