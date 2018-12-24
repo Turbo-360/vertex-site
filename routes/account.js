@@ -393,7 +393,6 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		console.log('TEST A')
 		const newSiteInfo = {
 			name: params.name,
 			profile: {
@@ -406,31 +405,24 @@ router.post('/:action', function(req, res, next){
 			}
 		}
 
-		console.log('TEST B')
 		const folder = {}
 		let lambda = null
 		let newSite = null
 		let copiedSite = null
 
-		console.log('TEST C')
 		controllers.site.post(newSiteInfo) // create new site first
 		.then(data => {
-			console.log('TEST 0')
 			newSite = data
 			folder['app'] = newSite.slug // new app to copy source to
 			folder['appId'] = newSite.id
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
-			console.log('TEST 1')
 			copiedSite = data
-			// folder['source'] = copiedSite.id
 			folder['source'] = copiedSite.slug
-			console.log('TEST 11')
 			return utils.AWS.copyFolder(folder)
 		})
 		.then(data => {
-			console.log('TEST 2')
 			lambda = {
 				name: newSite.slug, // this has to be the appslug
 				path: newSite.slug + '/package.zip',
@@ -446,7 +438,6 @@ router.post('/:action', function(req, res, next){
 			return utils.AWS.getFunction({name: copiedSite.slug}) // slug of app being copied
 		})
 		.then(data => {
-			console.log('TEST 3')
 			const envVariables = data.Configuration.Environment.Variables
 			const keys = Object.keys(envVariables)
 			keys.forEach(function(key, i){
@@ -457,15 +448,12 @@ router.post('/:action', function(req, res, next){
 			return utils.AWS.getFunction(lambda) // check if already exists first. If so, delete
 		})
 		.then(data => { // check if already exists first. If so, delete
-			console.log('TEST 4')
 			return (data == null) ? null : utils.AWS.deleteFunction(lambda)
 		})
 		.then(data => { // connect to lambda
-			console.log('TEST 5')
 			return utils.AWS.deployVertex(lambda)
 		})
 		.then(data => {
-			console.log('TEST 6')
 			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'Turbo Site Cloned', JSON.stringify(params))
 			res.json({
 				confirmation: 'success',
