@@ -478,6 +478,7 @@ router.post('/:action', function(req, res, next){
 			return
 		})
 		.catch(err => {
+			console.log('FAIL: ' + err)
 			res.json({
 				confirmation: 'fail',
 				message: err.message || err
