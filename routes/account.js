@@ -385,22 +385,59 @@ router.post('/:action', function(req, res, next){
 	// TODO: this should moved to a platform lambda
 	if (action == 'launchtemplate'){
 		const params = req.body
-		let lambda = null
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'User not logged in'
+			})
+			return
+		}
 
-		utils.AWS.copyFolder(params)
+		const newSiteInfo = {
+			name: params.name,
+			profile: {
+				id: req.user.id,
+		    slug: req.user.slug,
+  			image: req.user.image,
+  			username: req.user.username,
+  			lastName: req.user.lastName,
+  			firstName: req.user.firstName
+			}
+		}
+
+		const folder = {}
+		let lambda = null
+		let newSite = null
+		let copiedSite = null
+
+		controllers.site.post(newSiteInfo) // create new site first
+		.then(data => {
+			newSite = data
+			folder['app'] = newSite.slug // new app to copy source to
+			folder['appId'] = newSite.id
+			return controllers.site.getById(params.source) // get site that is being copied
+		})
+		.then(data => {
+			copiedSite = data
+			folder['source'] = copiedSite.id
+			return utils.AWS.copyFolder(folder)
+		})
 		.then(data => {
 			lambda = {
-				name: params.app, // this has to be the appslug
-				path: params.app + '/package.zip',
+				// name: params.app, // this has to be the appslug
+				// path: params.app + '/package.zip',
+				name: newSite.slug, // this has to be the appslug
+				path: newSite.slug + '/package.zip',
 				env: {
-					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+params.app+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
+					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+newSite.slug+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
 					TURBO_ENV: 'prod',
 					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
-					TURBO_APP_ID: params.appId
+					TURBO_APP_ID: newSite.id
 				}
 			}
 
-			return utils.AWS.getFunction({name: params.source}) // slug of app being copied
+			// return utils.AWS.getFunction({name: params.source}) // slug of app being copied
+			return utils.AWS.getFunction({name: copiedSite.slug}) // slug of app being copied
 		})
 		.then(data => {
 			const envVariables = data.Configuration.Environment.Variables
@@ -442,7 +479,7 @@ router.post('/:action', function(req, res, next){
 				confirmation: 'success',
 				result: {
 					format: 'vertex',
-					slug: params.app
+					slug: newSite.slug
 				}
 			})
 
