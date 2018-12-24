@@ -184,10 +184,10 @@ module.exports = {
 			}
 
 			// const s3 = s3Client()
-			aws.config.update({
-				accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-				secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-			})
+			// aws.config.update({
+			// 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+			// 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+			// })
 
 			const s3 = new aws.S3()
 			s3.upload(params, function(err, data) {
