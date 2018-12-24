@@ -382,6 +382,69 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'launch-template'){
+		const params = req.body
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'User not logged in'
+			})
+			return
+		}
+
+		const newSiteInfo = {
+			name: params.name,
+			profile: {
+				id: req.user.id,
+		    slug: req.user.slug,
+  			image: req.user.image,
+  			username: req.user.username,
+  			lastName: req.user.lastName,
+  			firstName: req.user.firstName
+			}
+		}
+
+		const vertexBucket = 'turbo360-vertex'
+		const folder = {
+			bucket: vertexBucket
+		}
+
+		let lambda = null
+		let newSite = null
+		let copiedSite = null
+
+		controllers.site.post(newSiteInfo) // create new site first
+		.then(data => {
+			newSite = data
+			folder['app'] = newSite.slug // new app to copy source to
+			return controllers.site.getById(params.source) // get site that is being copied
+		})
+		.then(data => {
+			copiedSite = data
+			folder['source'] = copiedSite.slug
+
+			// send POST request to https://platform.turbo360-vector.com/launchtemplate
+			// with 'folder' as params
+			const url = 'https://platform.turbo360-vector.com/launchtemplate'
+			return HTTP.post(url, folder)
+		})
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: data
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message || err
+			})
+		})
+
+		return
+	}
+
+
 	// TODO: this should moved to a platform lambda
 	if (action == 'launchtemplate'){
 		const params = req.body
