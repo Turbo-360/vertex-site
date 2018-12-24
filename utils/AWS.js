@@ -238,11 +238,13 @@ module.exports = {
 				return
 			}
 
-			const vertexBucket = 'turbo360-vertex'
+			// const vertexBucket = 'turbo360-vertex'
+			const bucket = pkg.bucket || 'turbo360-vertex'
 			const s3 = new aws.S3()
 
 			// have to list all objects individually because there are no folders in S3
-			s3.listObjects({Bucket:vertexBucket, Prefix:pkg.source, MaxKeys:50000}, function(err, data) {
+			// s3.listObjects({Bucket:vertexBucket, Prefix:pkg.source, MaxKeys:50000}, function(err, data) {
+			s3.listObjects({Bucket:bucket, Prefix:pkg.source, MaxKeys:50000}, function(err, data) {
 				if (err) {
 					reject(err)
 					return
@@ -251,9 +253,10 @@ module.exports = {
 				if (data.Contents){
 					data.Contents.forEach(function(object, i){
 						const params = {
-							Bucket: vertexBucket, // destination bucket
+							Bucket: bucket, // destination bucket
 							ACL: 'public-read',
-							CopySource: '/turbo360-vertex/' + object.Key, // "Key": "text-board-tjpt0b/DOCUMENTATION.md",
+							// CopySource: '/turbo360-vertex/' + object.Key, // "Key": "text-board-tjpt0b/DOCUMENTATION.md",
+							CopySource: '/'+bucket+'/' + object.Key, // "Key": "text-board-tjpt0b/DOCUMENTATION.md",
 							Key: pkg.app + object.Key.replace(pkg.source, '')
 						}
 
