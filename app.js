@@ -5,7 +5,6 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const sessions = require('client-sessions')
-// const passport = require('passport')
 const mongoose = require('mongoose')
 const compression = require('compression')
 const controllers = require('./controllers')
@@ -54,7 +53,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(sessions({
-  // cookieName: 'sessionDashboard',
   cookieName: 'session',
   secret: process.env.SESSION_SECRET,
   duration: 14*24*60*60*1000, // 14 days
