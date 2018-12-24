@@ -15,6 +15,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "1.18.2",
     "cloudfront": "^0.4.1",
+    "compression": "^1.7.3",
     "content-disposition": "0.5.2",
     "content-type": "^1.0.4",
     "cookie": "0.3.1",
