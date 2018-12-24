@@ -405,7 +405,10 @@ router.post('/:action', function(req, res, next){
 			}
 		}
 
-		const folder = {}
+		const folder = {
+			bucket: 'vertex-360'
+		}
+		
 		let lambda = null
 		let newSite = null
 		let copiedSite = null
@@ -414,7 +417,7 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			newSite = data
 			folder['app'] = newSite.slug // new app to copy source to
-			folder['appId'] = newSite.id
+			// folder['appId'] = newSite.id
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
@@ -453,8 +456,13 @@ router.post('/:action', function(req, res, next){
 		.then(data => { // connect to lambda
 			return utils.AWS.deployVertex(lambda)
 		})
+		// .then(data => {
+		// 	return utils.AWS.copyFolder({
+		//
+		// 	})
+		// })
 		.then(data => {
-			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'Turbo Site Cloned', JSON.stringify(params))
+			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(params))
 			res.json({
 				confirmation: 'success',
 				result: {
