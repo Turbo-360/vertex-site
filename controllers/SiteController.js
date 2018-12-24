@@ -108,17 +108,12 @@ module.exports = {
 					// const summary = site.summary()
 					resolve(site.summary())
 					return
-					// return UpdateController.post({site:{id:summary.id, slug:summary.slug, image:summary.image, name:summary.name}, profile:summary.profile, description:'App created'})
 				})
-				// .then(data => {
-				// 	resolve(site.summary())
-				// })
 				.catch(err => {
 					console.log('ERROR: '+err)
-					resolve(site.summary())
+					reject(err)
 				})
 
-				// resolve(site.summary())
 				return
 			})
 		})
