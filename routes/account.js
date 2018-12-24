@@ -406,9 +406,9 @@ router.post('/:action', function(req, res, next){
 		}
 
 		const folder = {
-			bucket: 'vertex-360'
+			bucket: 'turbo360-vertex'
 		}
-		
+
 		let lambda = null
 		let newSite = null
 		let copiedSite = null
