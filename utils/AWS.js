@@ -255,7 +255,6 @@ module.exports = {
 						const params = {
 							Bucket: bucket, // destination bucket
 							ACL: 'public-read',
-							// CopySource: '/turbo360-vertex/' + object.Key, // "Key": "text-board-tjpt0b/DOCUMENTATION.md",
 							CopySource: '/'+bucket+'/' + object.Key, // "Key": "text-board-tjpt0b/DOCUMENTATION.md",
 							Key: pkg.app + object.Key.replace(pkg.source, '')
 						}
