@@ -431,8 +431,6 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			console.log('TEST 2')
 			lambda = {
-				// name: params.app, // this has to be the appslug
-				// path: params.app + '/package.zip',
 				name: newSite.slug, // this has to be the appslug
 				path: newSite.slug + '/package.zip',
 				env: {
@@ -466,6 +464,7 @@ router.post('/:action', function(req, res, next){
 			return utils.AWS.deployVertex(lambda)
 		})
 		.then(data => {
+			console.log('TEST 6')
 			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'Turbo Site Cloned', JSON.stringify(params))
 			res.json({
 				confirmation: 'success',
