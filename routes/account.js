@@ -485,12 +485,14 @@ router.post('/:action', function(req, res, next){
 		controllers.site.post(newSiteInfo) // create new site first
 		.then(data => {
 			newSite = data
+			folder['newSite'] = newSite
 			folder['app'] = newSite.slug // new app to copy source to
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
 			copiedSite = data
 			folder['source'] = copiedSite.slug
+			folder['copiedSite'] = copiedSite
 			return utils.AWS.copyFolder(folder)
 		})
 		.then(data => {
