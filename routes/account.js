@@ -416,13 +416,13 @@ router.post('/:action', function(req, res, next){
 
 		controllers.site.post(newSiteInfo) // create new site first
 		.then(data => {
-			console.log('TEST 1')
+			console.log('TEST 1: ' + JSON.stringify(data))
 			newSite = data
 			folder['app'] = newSite.slug // new app to copy source to
 			return controllers.site.getById(params.source) // get site that is being copied
 		})
 		.then(data => {
-			console.log('TEST 2')
+			console.log('TEST 2: ' + JSON.stringify(data))
 			copiedSite = data
 			folder['source'] = copiedSite.slug
 
