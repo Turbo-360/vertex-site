@@ -16,7 +16,9 @@
 		<div class="col-md-6">
 			<h1>{{template.name}}</h1>
 			<hr />
-      <button>Use This Template</button>
+      <input id="input-site-name" type="text" placeholder="Your Site Name" /><br />
+      <button id="btn-launch-template">Use This Template</button>
+
       <form id="register-form" style="margin-top:40px">
         <input id="input-name" type="text" placeholder="Full Name" /><br />
         <input id="input-email" type="text" placeholder="Email" /><br />
@@ -36,9 +38,92 @@
       const template = data.template
       const user = data.user
 
+      var postRequest = function(url, data, completion){
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: data,
+          success: function(response, status, xhr){
+            if (response.confirmation != 'success'){
+              completion(response, null) // 'data' is the error object here.
+  						return
+  					}
+
+            completion(null, response)
+          },
+          error: function(xhr, status, err){
+            completion(err, null)
+          }
+        })
+      }
+
+      var launchTemplate = function(){
+        if (user == null){
+          alert('Please log in or register to clone this site.')
+          return
+        }
+
+        // 1. create app using current profile as profile property
+        // 2. send followup request to /account/launchtemplate with
+        // params: {app:'abc', appId:'123', source:'landing-template-slug'}
+        // where "app" param is the slug of the new site
+
+        var newSite = {
+          name: $('#input-site-name').val().trim(), // this needs to be entered by the user
+          profile: {
+            slug: user.slug,
+      			image: user.image,
+      			username: user.username,
+      			lastName: user.lastName,
+      			firstName: user.firstName,
+      			id: user.id
+          }
+        }
+
+        if (newSite.name.length == 0){
+          alert('Please enter a name for your site')
+          return
+        }
+
+        console.log('Launch Template: ' + JSON.stringify(newSite))
+        postRequest('/api/site', newSite, function(err, data){
+          if (err){
+            alert('Error: ' + err.message)
+            return
+          }
+
+          console.log('NEW SITE: ' + JSON.stringify(data))
+          // NEW SITE: {"confirmation":"success","result":{"profile":{},"format":"vertex","clonePrice":0,"collaborators":[],"tags":[],"invited":[],"isClone":"no","cloneSource":"","canClone":"no","featured":"no","published":"no","github":"","slug":"test-site-vgsqok","name":"test site","description":"","image":"https://lh3.googleusercontent.com/zcu5RGyy3JbHQkhvMlrT6fjGcrs1TC7Gu0VaIJbCtwCA-vBr_NabfWTt_Sk0YceR59XoLROBANLiSPG6x-XfTlZMOA","images":[],"url":"","resources":["user","post","comment"],"oauth":{},"smtp":{},"stripe":{},"api":{"key":"92df74a8-d720-4e8f-9990-bf9228dd91a6","secret":""},"functions":{},"pages":["home"],"authorized":["92df74a8-d720-4e8f-9990-bf9228dd91a6"],"services":["datastore","blog","storage"],"template":{"category":"misc","status":"dev"},"timestamp":"2018-12-24T05:02:32.516Z","schema":"site","id":"5c206868390cba0db3199116"}}
+
+          var site = data.result
+          var params = {
+    				source: template.slug, // source project that is being copied
+    				app: site.slug, // new app to copy source to
+    				appId: site.id
+    			}
+
+          // Send "params" to '/account/launchtemplate' endpoint
+          postRequest('/account/launchtemplate', params, function(err, response){
+            if (err){
+              alert('Error: ' + err.message)
+              return
+            }
+
+            console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+          })
+        })
+      }
+
       // hide register form, user already signed up
       if (user != null){
         $('#register-form').css('visibility', 'hidden')
+        $('#btn-launch-template').click(function(event){
+          console.log('Launch Template')
+          if (event)
+            event.preventDefault()
+
+          launchTemplate()
+        })
         return
       }
 
@@ -67,32 +152,21 @@
         }
 
         // console.log('Register button clicked: ' + JSON.stringify(visitor))
-        $.ajax({
-          url:'/account/register',
-          type: 'POST',
-          data: visitor,
-          success: function(data, status, xhr){
-            // {"confirmation":"success","user":{"id":"5c2002867ca814083d0aa5d0","username":"dan.kwon234",
-            // "email":"dan.kwon234@gmail.com","image":"https://lh3.googleusercontent.com/FdU2WvDKVMndsRNCSfypX3U4k_AiPC5-OZDIXER_yXJEBhmFjdO2NTQqJVaj9rcLQl-KLO8rRQpBhCOkdtkDT0e0Ig",
-            // "slug":"dan.kwon234-hotoe5","notifications":[]}}
-            if (data.confirmation != 'success'){
-  						alert('Error: ' + data.message)
-  						return
-  					}
-
-            var user = data.user
-            // console.log(JSON.stringify(data))
-            if (data.redirect != null){
-              window.location.href = data.redirect // redirect to data.redirect endpoint
-              return
-            }
-
-            window.location.href = '/me' // redirect to account page
-          },
-          error: function(xhr, status, err){
+        postRequest('/account/register', visitor, function(err, data){
+          if (err){
             alert(err.message)
+            return
           }
+
+          var user = data.user
+          if (data.redirect != null){
+            window.location.href = data.redirect // redirect to data.redirect endpoint
+            return
+          }
+
+          window.location.href = '/me' // redirect to account page
         })
+
       })
     })()
   </script>
