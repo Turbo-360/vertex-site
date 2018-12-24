@@ -1,10 +1,11 @@
 const aws = require('aws-sdk')
-const Promise = require('bluebird')
 const cloudfront = require('cloudfront')
+const VERTEX_BUCKET = 'turbo360-vertex'
+const DEFAULT_ZONE = 'us-east-1'
 
 const lambdaClient = function(){
 	const lambda = new aws.Lambda({
-		region: 'us-east-1',
+		region: DEFAULT_ZONE,
 		accessKeyId: process.env.AWS_ACCESS_KEY_ID,
 		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 	})
@@ -12,12 +13,29 @@ const lambdaClient = function(){
 	return lambda
 }
 
+const s3Client = function(){
+	// aws.config.update({
+	// 	region: DEFAULT_ZONE,
+	// 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+	// 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+	// })
+
+	const s3 = new aws.S3({
+		region: DEFAULT_ZONE,
+		accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+	})
+
+	return s3
+}
+
 
 module.exports = {
 
 	createBucket: function(bucketName){
 		return new Promise(function(resolve, reject){
-			const s3 = new aws.S3()
+			// const s3 = new aws.S3()
+			const s3 = s3Client()
 			const params = {
 				Bucket: bucketName, /* required */
 				ACL: 'public-read-write', // private | public-read | public-read-write | authenticated-read,
@@ -44,7 +62,8 @@ module.exports = {
 
 	updateBucket: function(bucketConfig){
 		return new Promise(function(resolve, reject){
-			const s3 = new aws.S3()
+			// const s3 = new aws.S3()
+			const s3 = s3Client()
 			s3.putBucketWebsite(bucketConfig, function(err, data) {
 				if (err) {
 					reject(err)
@@ -65,7 +84,8 @@ module.exports = {
 				Prefix: folder
 			}
 
-			const s3 = new aws.S3()
+			// const s3 = new aws.S3()
+			const s3 = s3Client()
 			s3.listObjects(params, function(err, data) {
 				if (err) {
 					reject(err)
@@ -105,7 +125,8 @@ module.exports = {
 				Key: newObject // name of the new file
 			}
 
-			const s3 = new aws.S3()
+			// const s3 = new aws.S3()
+			const s3 = s3Client()
 			s3.copyObject(params, function(err, data) {
 				if (err) {
 					reject(err)
@@ -118,7 +139,8 @@ module.exports = {
 
 	deleteObject: function(params){
 		return new Promise(function(resolve, reject){
-			const s3 = new aws.S3()
+			// const s3 = new aws.S3()
+			const s3 = s3Client()
 			s3.listObjects({Bucket:params.Bucket, Prefix:params.Key+'/'}, function(err, data) {
 				if (err) {
 					reject(err)
@@ -161,7 +183,7 @@ module.exports = {
 				Body: folderName
 			}
 
-			const s3 = new aws.S3()
+			const s3 = s3Client()
 			s3.upload(params, function(err, data) {
 				if (err) {
 					reject(err)
@@ -238,11 +260,12 @@ module.exports = {
 				return
 			}
 
-			const vertexBucket = 'turbo360-vertex'
-			const s3 = new aws.S3()
+			// const vertexBucket = 'turbo360-vertex'
+			// const s3 = new aws.S3()
+			const s3 = s3Client()
 
 			// have to list all objects individually because there are no folders in S3
-			s3.listObjects({Bucket:vertexBucket, Prefix:pkg.source, MaxKeys:50000}, function(err, data) {
+			s3.listObjects({Bucket:VERTEX_BUCKET, Prefix:pkg.source, MaxKeys:50000}, function(err, data) {
 				if (err) {
 					reject(err)
 					return
@@ -251,7 +274,7 @@ module.exports = {
 				if (data.Contents){
 					data.Contents.forEach(function(object, i){
 						const params = {
-							Bucket: vertexBucket, // destination bucket
+							Bucket: VERTEX_BUCKET, // destination bucket
 							ACL: 'public-read',
 							CopySource: '/turbo360-vertex/' + object.Key, // "Key": "text-board-tjpt0b/DOCUMENTATION.md",
 							Key: pkg.app + object.Key.replace(pkg.source, '')
@@ -332,7 +355,6 @@ module.exports = {
 			})
 		})
 	},
-
 
 	deleteFunction: function(pkg){
 		// console.log('DELETE FUNCTION: ' + JSON.stringify(pkg))
