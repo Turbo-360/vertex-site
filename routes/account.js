@@ -405,7 +405,7 @@ router.post('/:action', function(req, res, next){
 				env: {
 					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+params.app+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
 					TURBO_ENV: 'prod',
-					SESSION_SECRET: 'ew1234fhaulwef',
+					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
 					TURBO_APP_ID: params.appId
 				}
 			}
