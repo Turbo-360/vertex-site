@@ -392,7 +392,6 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		console.log('PARAMS = ' + JSON.stringify(params))
 		const newSiteInfo = {
 			name: params.name,
 			profile: {
@@ -416,7 +415,6 @@ router.post('/:action', function(req, res, next){
 
 		controllers.site.post(newSiteInfo) // create new site first
 		.then(data => {
-			console.log('TEST 1: ' + JSON.stringify(data))
 			newSite = data
 			folder['newSite'] = newSite
 			folder['app'] = newSite.slug // new app to copy source to
@@ -430,17 +428,23 @@ router.post('/:action', function(req, res, next){
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
 			// const url = 'https://platform.turbo360-vector.com/launchtemplate'
-			console.log('TEST 2: ' + JSON.stringify(folder))
-			const url = 'http://platform.turbo360-vector.com/launchtemplate'
-			return utils.HTTP.post(url, folder)
-		})
-		.then(data => {
-			console.log('TEST 3')
+
+			// Don't wait for this to return, it takes ~20 seconds. Send back response
+			// right away then do follow up requests client-side 
+			utils.HTTP.post('http://platform.turbo360-vector.com/launchtemplate', folder)
 			res.json({
 				confirmation: 'success',
-				data: data
+				data: newSite
 			})
+
+			return
 		})
+		// .then(data => {
+		// 	res.json({
+		// 		confirmation: 'success',
+		// 		data: data
+		// 	})
+		// })
 		.catch(err => {
 			res.json({
 				confirmation: 'fail',
