@@ -425,6 +425,7 @@ router.post('/:action', function(req, res, next){
 			console.log('TEST 1')
 			copiedSite = data
 			folder['source'] = copiedSite.id
+			console.log('TEST 11')
 			return utils.AWS.copyFolder(folder)
 		})
 		.then(data => {
