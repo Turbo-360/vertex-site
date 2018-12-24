@@ -271,7 +271,7 @@ module.exports = {
 
 					setTimeout(function(){
 						resolve(data)
-					}, 5000)
+					}, 4000)
 
 					return
 				}
