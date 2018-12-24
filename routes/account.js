@@ -433,6 +433,7 @@ router.post('/:action', function(req, res, next){
 					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+newSite.slug+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
 					TURBO_ENV: 'prod',
 					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
+					TURBO_API_KEY: newSite.api.key,
 					TURBO_APP_ID: newSite.id
 				}
 			}
@@ -508,6 +509,7 @@ router.post('/:action', function(req, res, next){
 					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+params.app+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
 					TURBO_ENV: 'prod',
 					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
+					TURBO_API_KEY: params.api.key,
 					TURBO_APP_ID: params.appId
 				}
 			}
