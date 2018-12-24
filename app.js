@@ -1,29 +1,76 @@
-// Full Documentation - https://www.turbo360.co/docs
-const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
+const express = require('express')
+const path = require('path')
+const favicon = require('serve-favicon')
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const sessions = require('client-sessions')
+// const passport = require('passport')
+const mongoose = require('mongoose')
+const compression = require('compression')
 const controllers = require('./controllers')
 require('dotenv').config()
 
-const config = {
-	session: {
-		cookieName: 'session',
-		secret: process.env.SESSION_SECRET,
-		duration: 14*24*60*60*1000, // 14 days
-	  activeDuration:30*60*1000
-	},
-	db: {
-		url: process.env.MONGODB_URI,
-		type: 'mongo',
-		onError: (err) => {
-			console.log('DB Connection Failed!')
-		},
-		onSuccess: () => {
-			console.log('DB Successfully Connected!')
-		}
-	}
+// mpromise (mongoose's default promise library) is deprecated,
+// plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
+mongoose.Promise = require('bluebird')
+
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true})
+.then(data => {
+  console.log ('DB Connection success')
+})
+.catch(err => {
+  console.log ('DB Connection ERROR: ' + err)
+})
+
+
+const app = express()
+app.use(compression())
+
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'mustache')
+app.engine('mustache', require('hogan-middleware').__express)
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+const allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, '+process.env.TURBO_HEADER)
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, ' + process.env.TURBO_HEADER + ', ' + process.env.TURBO_APP_ID_HEADER)
+
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method)
+    res.send(200)
+  else
+    next()
 }
 
-const app = vertex.app(config)
+app.use(allowCrossDomain)
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(sessions({
+  // cookieName: 'sessionDashboard',
+  cookieName: 'session',
+  secret: process.env.SESSION_SECRET,
+  duration: 14*24*60*60*1000, // 14 days
+  activeDuration:30*60*1000,
+  // cookie: {
+  //  domain: (process.env.ENVIRONMENT=='dev') ? 'localhost' : '.turbo360.co'
+  // }
+}))
 
+app.use(express.static(path.join(__dirname, 'public')))
+
+// set CDN
+app.use((req, res, next) => {
+  req.cdn = (process.env.TURBO_ENV == 'dev') ? '' : process.env.TURBO_CDN
+  next()
+})
 
 app.use((req, res, next) => {
   if (req.session == null)
@@ -42,12 +89,15 @@ app.use((req, res, next) => {
   })
 })
 
+// import routes
 const index = require('./routes/index')
 const api = require('./routes/api')
 const account = require('./routes/account')
 
+// set routes
 app.use('/', index)
-app.use('/api', api)
+app.use('/api', api) // sample API Routes
 app.use('/account', account)
+
 
 module.exports = app
