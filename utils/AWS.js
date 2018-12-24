@@ -189,6 +189,10 @@ module.exports = {
 			// 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 			// })
 
+			aws.config = new aws.Config()
+			aws.config.accessKeyId = process.env.AWS_ACCESS_KEY_ID
+			aws.config.secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+
 			const s3 = new aws.S3()
 			s3.upload(params, function(err, data) {
 				if (err) {
