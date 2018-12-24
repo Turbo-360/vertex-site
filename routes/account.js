@@ -393,6 +393,7 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
+		console.log('TEST A')
 		const newSiteInfo = {
 			name: params.name,
 			profile: {
@@ -405,11 +406,13 @@ router.post('/:action', function(req, res, next){
 			}
 		}
 
+		console.log('TEST B')
 		const folder = {}
 		let lambda = null
 		let newSite = null
 		let copiedSite = null
 
+		console.log('TEST C')
 		controllers.site.post(newSiteInfo) // create new site first
 		.then(data => {
 			console.log('TEST 0')
