@@ -97,24 +97,16 @@ module.exports = {
 			if (params.image == null)
 				params['image'] = process.env.IMAGE_PLACEHOLDER
 
-			Site.create(params, (err, site) => {
-				if (err){
-					reject(err)
-					return
-				}
-
-				utils.AWS.createFolder(site.slug)
-				.then(response => {
-					// const summary = site.summary()
-					resolve(site.summary())
-					return
-				})
-				.catch(err => {
-					console.log('ERROR: '+err)
-					reject(err)
-				})
-
-				return
+			utils.AWS.createFolder(params.slug)
+			.then(data => {
+				return Site.create(params)
+			})
+			.then(site => {
+				resolve(site.summary())
+			})
+			.catch(err => {
+				console.log('ERROR: '+err)
+				reject(err)
 			})
 		})
 	},
