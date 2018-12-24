@@ -14,18 +14,13 @@ const lambdaClient = function(){
 }
 
 const s3Client = function(){
-	// aws.config.update({
-	// 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-	// 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-	// 	credentials: new aws.SharedIniFileCredentials()
-	// })
-
-	const s3 = new aws.S3({
-		region: DEFAULT_ZONE,
+	aws.config.update({
 		accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-		credentials: new aws.SharedIniFileCredentials()
+		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+		// credentials: new aws.SharedIniFileCredentials()
 	})
+
+	const s3 = new aws.S3()
 
 	return s3
 }
