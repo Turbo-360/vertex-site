@@ -428,7 +428,7 @@ router.post('/:action', function(req, res, next){
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
 			// const url = 'https://platform.turbo360-vector.com/launchtemplate'
-			console.log('TEST 2: ' + JSON.stringify(data))
+			console.log('TEST 2: ' + JSON.stringify(folder))
 			const url = 'http://platform.turbo360-vector.com/launchtemplate'
 			return utils.HTTP.post(url, folder)
 		})
