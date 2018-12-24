@@ -268,6 +268,8 @@ module.exports = {
 						})
 					})
 
+					// leave enough time for all objects to copy over.
+					// there must be a better way to do this:
 					setTimeout(function(){
 						resolve(data)
 					}, 4000)
