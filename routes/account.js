@@ -430,7 +430,7 @@ router.post('/:action', function(req, res, next){
 			// const url = 'https://platform.turbo360-vector.com/launchtemplate'
 
 			// Don't wait for this to return, it takes ~20 seconds. Send back response
-			// right away then do follow up requests client-side 
+			// right away then do follow up requests client-side
 			utils.HTTP.post('http://platform.turbo360-vector.com/launchtemplate', folder)
 			res.json({
 				confirmation: 'success',
@@ -439,12 +439,6 @@ router.post('/:action', function(req, res, next){
 
 			return
 		})
-		// .then(data => {
-		// 	res.json({
-		// 		confirmation: 'success',
-		// 		data: data
-		// 	})
-		// })
 		.catch(err => {
 			res.json({
 				confirmation: 'fail',
@@ -457,6 +451,7 @@ router.post('/:action', function(req, res, next){
 
 
 	// TODO: this should moved to a platform lambda
+	/*
 	if (action == 'launchtemplate'){
 		const params = req.body
 		if (req.user == null){
@@ -566,7 +561,7 @@ router.post('/:action', function(req, res, next){
 
 		return
 	}
-
+	*/
 
 	// clone an app into another app
 	// TODO: this should moved to a platform lambda
