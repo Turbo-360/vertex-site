@@ -7,7 +7,6 @@
 		.categories a {
 			text-transform: capitalize;
 		}
-
 	</style>
 </head>
 
@@ -33,9 +32,11 @@
 
 	<script type="text/template" id="tpl-list-item-template">
 		<li>
-				<div>
-						<strong><% name %></strong>
-				</div>
+			<div>
+          <a href="/template/<% slug %>">
+					  <strong><% name %></strong>
+          </a>
+			</div>
 		</li>
 	</script>
 
