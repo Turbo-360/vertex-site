@@ -7,7 +7,6 @@ const utils = require('../utils')
 const controllers = require('../controllers')
 
 router.get('/test', (req, res) => {
-
 	const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/landing-test-50-vck340/home.txt'
 	return utils.HTTP.get(url)
 	.then(config => { // this is a string
@@ -19,18 +18,6 @@ router.get('/test', (req, res) => {
 			throw err
 			return
 		}
-		// const data = {
-		// 	pageConfig: JSON.stringify({
-		// 		page: {
-		// 			// pageName: req.params.page,
-		// 			pageName: page,
-		// 			config: config
-		// 		},
-		// 		app: {site_id:site.id, apiKey:site.api.key}
-		// 	})
-		// }
-		//
-		// res.render('admin', data)
 		return
 	})
 	.catch(err => {
@@ -39,7 +26,6 @@ router.get('/test', (req, res) => {
 			message: err.message
 		})
 	})
-
 })
 
 router.get('/:slug', (req, res) => {
@@ -63,7 +49,6 @@ router.get('/:slug', (req, res) => {
 			const data = {
 				pageConfig: JSON.stringify({
 					page: {
-						// pageName: req.params.page,
 						pageName: page,
 						config: pageConfig
 					},
@@ -78,19 +63,6 @@ router.get('/:slug', (req, res) => {
 			return
 		}
 
-
-		// const data = {
-		// 	pageConfig: JSON.stringify({
-		// 		page: {
-		// 			// pageName: req.params.page,
-		// 			pageName: page,
-		// 			config: config
-		// 		},
-		// 		app: {site_id:site.id, apiKey:site.api.key}
-		// 	})
-		// }
-		//
-		// res.render('admin', data)
 		return
 	})
 	.catch(err => {
@@ -101,6 +73,5 @@ router.get('/:slug', (req, res) => {
 	})
 
 })
-
 
 module.exports = router
