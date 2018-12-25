@@ -202,6 +202,9 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// this endpoint checks to see if a recently launched template is ready to serve
+	// requests yet. when launching a template, the avg set-up time is around 15 secs
+	// so we need an endpoint to poll before directing user to template admin page:
 	if (action == 'check-template'){
 		const siteSlug = req.body.template
 		// const url = 'https://d2tycy5p4rnywu.cloudfront.net/pages/'+siteSlug+'/home.txt'
