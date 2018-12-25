@@ -210,7 +210,7 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			res.json({
 				confirmation: 'success',
-				data: 'template ready'
+				data: 'https://'+siteSlug+'.vertex360.co'
 			})
 		})
 		.catch(err => {
