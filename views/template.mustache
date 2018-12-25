@@ -76,8 +76,10 @@
       }
 
       $('#btn-check-template').click(function(){
-        // working version: landing-template-90347a
-        checkTemplate('landing-template-90347')
+        setTimeout(function(){
+          // working version: landing-template-90347a
+          checkTemplate('landing-template-90347')
+        }, 4000)
       })
 
       var launchTemplate = function(){
@@ -104,7 +106,9 @@
           }
 
           console.log('SITE LAUNCHED: ' + JSON.stringify(response))
-          checkTemplate(response.data.slug)
+          setTimeout(function(){
+            checkTemplate(response.data.slug)
+          }, 4000)
         })
       }
 
