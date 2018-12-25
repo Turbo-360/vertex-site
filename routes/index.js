@@ -14,12 +14,13 @@ const templates = {
 	landing: [{id:'abc', name:'landing page temp'}]
 }
 
+const categories = ['landing', 'resume', 'restaurant', 'fitness', 'realtor', 'lessons']
+
 router.get('/', (req, res) => {
-	const categories = Object.keys(templates)
 	const data = {
 		categories: categories,
 		preloaded: JSON.stringify({
-			selected: categories[0],
+			selected: 'landing',
 			templates: templates
 		})
 	}
