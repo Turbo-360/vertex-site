@@ -16,8 +16,10 @@
 		<div class="col-md-6">
 			<h1>{{template.name}}</h1>
 			<hr />
-      <input id="input-site-name" type="text" placeholder="Your Site Name" /><br />
-      <button id="btn-launch-template">Use This Template</button>
+      <div id="launch-template-container">
+        <input id="input-site-name" type="text" placeholder="Your Site Name" /><br />
+        <button id="btn-launch-template">Use This Template</button>
+      </div>
 
       <form id="register-form" style="margin-top:40px">
         <input id="input-name" type="text" placeholder="Full Name" /><br />
@@ -96,6 +98,8 @@
         })
         return
       }
+
+      $('#launch-template-container').css('visibility', 'hidden')
 
       $('#btn-register').click(function(event){
         if (event)
