@@ -42,14 +42,15 @@ module.exports = {
 			superagent
 			.get(endpoint)
 			.query(params)
-			.set('Accept', 'application/json')
+			// .set('Accept', 'application/json')
 			.end(function(err, res) {
 				if (err){
 					reject(err)
 					return
 				}
 
-				resolve(res.body)
+				const payload = res.text || res.body
+				resolve(payload)
 			})
 		})
 	},
