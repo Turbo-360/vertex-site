@@ -29,17 +29,21 @@ router.get('/test', (req, res) => {
 })
 
 router.get('/:slug', (req, res) => {
-	// res.json({
-	// 	confirmation: 'success',
-	// 	data: 'admin over page for ' + req.params.slug
-	// })
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
 
 	const data = {}
-
 	res.render('admin/overview', data)
 })
 
 router.get('/cms/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
 	res.json({
 		confirmation: 'success',
 		data: 'CMS page for ' + req.params.slug
@@ -47,6 +51,11 @@ router.get('/cms/:slug', (req, res) => {
 })
 
 router.get('/pages/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
 	let site = null
 	const page = 'home'
 
