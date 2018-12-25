@@ -28,6 +28,7 @@
         <button id="btn-register">Join</button>
         <input id="input-redirect" type="hidden" value="/template/{{template.slug}}" />
       </form>
+      <button id="btn-check-template">check template</button>
 		</div>
 	</div>
 
@@ -59,6 +60,26 @@
         })
       }
 
+      var checkTemplate = function(siteSlug){
+        var body = {template:siteSlug}
+        postRequest('/account/check-template', body, function(err, response){
+          if (err){
+            console.log('TEMPLATE NOT READY: ')
+            setTimeout(function(){
+              checkTemplate(siteSlug)
+            }, 4000)
+            return
+          }
+
+          console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+        })
+      }
+
+      $('#btn-check-template').click(function(){
+        // working version: landing-template-90347a
+        checkTemplate('landing-template-90347')
+      })
+
       var launchTemplate = function(){
         if (user == null){
           alert('Please log in or register to clone this site.')
@@ -83,6 +104,7 @@
           }
 
           console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+          checkTemplate(response.data.slug)
         })
       }
 
