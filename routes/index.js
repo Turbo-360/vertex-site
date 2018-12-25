@@ -47,7 +47,8 @@ router.get('/me', (req, res) => {
 })
 
 router.get('/template/:slug', (req, res) => {
-	controllers.site.get({slug: req.params.slug}) // query template by slug
+	// TODO: check if template is live
+	controllers.site.get({slug:req.params.slug}) // query template by slug
 	.then(results => {
 		if (results.length == 0){
 			throw new Error('Template not found')
