@@ -28,7 +28,7 @@ router.get('/test', (req, res) => {
 	})
 })
 
-router.get('/:slug', (req, res) => {
+router.get('/page/:slug', (req, res) => {
 	let site = null
 	const page = 'home'
 
