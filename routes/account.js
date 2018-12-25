@@ -202,6 +202,26 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'check-template'){
+		const siteSlug = req.body.template
+		const url = 'https://d2tycy5p4rnywu.cloudfront.net/pages/'+siteSlug+'/home.txt'
+		utils.HTTP.get(url)
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: 'template ready'
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: 'template not found'
+			})
+		})
+
+		return
+	}
+
 	if (action == 'subscribe'){ // subscribe to mailing list
 		const body = req.body
 		if (body.email == null){
