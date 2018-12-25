@@ -41,38 +41,62 @@ router.get('/me', (req, res) => {
 })
 
 router.get('/template/:slug', (req, res) => {
-	// query template by slug
-	// TODO: this should be done internally through rest api
-	const url = 'https://turbo-dashboard.herokuapp.com/api/site?slug=landing-template-90347a'
-	superagent.get(url)
-	.query(null)
-	.set('Accept', 'application/json')
-	.end((err, response) => {
-		if (err){
-			res.json({
-				confirmation: 'fail',
-				message: err.message
-			})
-			return
-		}
-
-		const body = response.body
-		if (body.confirmation != 'success'){
-			res.json({
-				confirmation: 'fail',
-				message: body.message
-			})
+	controllers.site.get({slug: req.params.slug}) // query template by slug
+	.then(results => {
+		if (results.length == 0){
+			throw new Error('Template not found')
 			return
 		}
 
 		const data = {
-			template: body.results[0],
+			template: results[0],
 			user: req.user,
 		}
+
 		data['preloaded'] = JSON.stringify(data)
-		
 		res.render('template', data)
 	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
 })
+
+// router.get('/template/:slug', (req, res) => {
+// 	// query template by slug
+// 	// TODO: this should be done internally through rest api
+// 	const url = 'https://turbo-dashboard.herokuapp.com/api/site?slug=landing-template-90347a'
+// 	superagent.get(url)
+// 	.query(null)
+// 	.set('Accept', 'application/json')
+// 	.end((err, response) => {
+// 		if (err){
+// 			res.json({
+// 				confirmation: 'fail',
+// 				message: err.message
+// 			})
+// 			return
+// 		}
+//
+// 		const body = response.body
+// 		if (body.confirmation != 'success'){
+// 			res.json({
+// 				confirmation: 'fail',
+// 				message: body.message
+// 			})
+// 			return
+// 		}
+//
+// 		const data = {
+// 			template: body.results[0],
+// 			user: req.user,
+// 		}
+// 		data['preloaded'] = JSON.stringify(data)
+//
+// 		res.render('template', data)
+// 	})
+// })
 
 module.exports = router
