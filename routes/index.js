@@ -5,27 +5,32 @@ const superagent = require('superagent')
 const router = vertex.router()
 const controllers = require('../controllers')
 
-const templates = {
-	resume: [{id:'123', name:'my resume'}, {id:'234', name:'my resume 2'}],
-	restaurant: [{id:'345', name:'restaurant site 1'}, {id:'456', name:'restaurant site 2'}, {id:'2226', name:'restaurant site 3'}],
-	realtor: [{id:'567', name:'realtor site 1'}, {id:'678', name:'realtor site 2'}],
-	fitness: [{id:'789', name:'fitness site 1'}, {id:'901', name:'fitness site 2'}],
-	lessons: [{id:'987', name:'lessons site 1'}, {id:'876', name:'lessons site 2'}],
-	landing: [{id:'abc', name:'landing page temp'}]
-}
-
+const templates = {}
 const categories = ['landing', 'resume', 'restaurant', 'fitness', 'realtor', 'lessons']
 
 router.get('/', (req, res) => {
+	const selected = categories[0]
 	const data = {
-		categories: categories,
-		preloaded: JSON.stringify({
-			selected: 'landing',
-			templates: templates
-		})
+		categories: categories
 	}
 
-	res.render('index', data)
+	controllers.site.get({'template.statue':'live', 'template.category':selected})
+	.then(sites => {
+		templates[selected] = sites
+		data['preloaded'] = JSON.stringify({
+			selected: selected,
+			templates: templates
+		})
+
+		res.render('index', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
 })
 
 router.get('/me', (req, res) => {
