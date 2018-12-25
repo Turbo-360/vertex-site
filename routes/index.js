@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 		categories: categories
 	}
 
-	controllers.site.get({'template.statue':'live', 'template.category':selected})
+	controllers.site.get({'template.status':'live', 'template.category':selected})
 	.then(sites => {
 		templates[selected] = sites
 		data['preloaded'] = JSON.stringify({
