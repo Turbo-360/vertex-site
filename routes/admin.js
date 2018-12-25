@@ -28,6 +28,24 @@ router.get('/test', (req, res) => {
 	})
 })
 
+router.get('/:slug', (req, res) => {
+	// res.json({
+	// 	confirmation: 'success',
+	// 	data: 'admin over page for ' + req.params.slug
+	// })
+
+	const data = {}
+
+	res.render('admin/overview', data)
+})
+
+router.get('/cms/:slug', (req, res) => {
+	res.json({
+		confirmation: 'success',
+		data: 'CMS page for ' + req.params.slug
+	})
+})
+
 router.get('/page/:slug', (req, res) => {
 	let site = null
 	const page = 'home'
@@ -56,7 +74,7 @@ router.get('/page/:slug', (req, res) => {
 				})
 			}
 
-			res.render('admin', data)
+			res.render('admin/page', data)
 		}
 		catch(err) {
 			throw err
