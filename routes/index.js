@@ -40,10 +40,10 @@ router.get('/me', (req, res) => {
 	}
 
 	controllers.site.get({'profile.id':req.user.id})
-	.then(data => {
+	.then(sites => {
 		const data = {
 			user: req.user,
-			sites: data
+			sites: sites
 		}
 
 		res.render('account', data)
