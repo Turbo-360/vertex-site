@@ -39,11 +39,21 @@ router.get('/me', (req, res) => {
 		return
 	}
 
-	const data = {
-		user: req.user
-	}
+	controllers.site.get({'profile.id':req.user.id})
+	.then(data => {
+		const data = {
+			user: req.user,
+			sites: data
+		}
 
-	res.render('account', data)
+		res.render('account', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
 })
 
 router.get('/template/:slug', (req, res) => {
