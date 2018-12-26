@@ -44,10 +44,31 @@ router.get('/cms/:slug', (req, res) => {
 		return
 	}
 
-	res.json({
-		confirmation: 'success',
-		data: 'CMS page for ' + req.params.slug
+	controllers.site.get({slug:req.params.slug})
+	.then(data => {
+		if (data.length == 0){
+			throw new Error('Site not found')
+			return
+		}
+
+		site = data[0]
+		const preloaded = {
+			site: JSON.stringify(site)
+		}
+		
+		res.render('admin/cms', preloaded)
 	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
+	// res.json({
+	// 	confirmation: 'success',
+	// 	data: 'CMS page for ' + req.params.slug
+	// })
 })
 
 router.get('/pages/:slug', (req, res) => {
