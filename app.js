@@ -98,6 +98,7 @@ const rest = require('./routes/rest')
 app.use('/', index)
 app.use('/api', api) // sample API Routes
 app.use('/account', account)
+app.use('/admin', admin)
 app.use('/rest', rest)
 
 
