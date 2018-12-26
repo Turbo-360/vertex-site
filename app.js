@@ -92,12 +92,13 @@ const index = require('./routes/index')
 const api = require('./routes/api')
 const account = require('./routes/account')
 const admin = require('./routes/admin')
+const rest = require('./routes/rest')
 
 // set routes
 app.use('/', index)
 app.use('/api', api) // sample API Routes
 app.use('/account', account)
-app.use('/admin', admin)
+app.use('/rest', rest)
 
 
 module.exports = app
