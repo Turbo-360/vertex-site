@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 	.then(sites => {
 		templates[selected] = sites
 		data['preloaded'] = JSON.stringify({
+			user: req.user,
 			selected: selected,
 			templates: templates
 		})
