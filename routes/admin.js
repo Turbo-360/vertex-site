@@ -34,8 +34,27 @@ router.get('/:slug', (req, res) => {
 		return
 	}
 
-	const data = {}
-	res.render('admin/overview', data)
+	controllers.site.get({slug:req.params.slug})
+	.then(sites => {
+		if (sites.length == 0){
+			throw new Error('Site not found')
+			return
+		}
+
+		const site = sites[0]
+		const data = {
+			site: site
+		}
+		
+		res.render('admin/overview', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
 })
 
 router.get('/cms/:slug', (req, res) => {
@@ -55,7 +74,7 @@ router.get('/cms/:slug', (req, res) => {
 		const preloaded = {
 			site: JSON.stringify(site)
 		}
-		
+
 		res.render('admin/cms', preloaded)
 	})
 	.catch(err => {
