@@ -6,6 +6,10 @@
   const data = window.__PRELOADED_DATA__
   const templates = data.templates
   var selected = data.selected
+  var user = data.user
+
+  if (user == null)
+    $('#btn-account-container').html('')
 
   var fetchTemplates = function(category){
     // console.log('Fetch templates: ' + category)
