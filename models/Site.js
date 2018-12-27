@@ -59,7 +59,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		image: (this.image.length == 0) ? process.env.IMAGE_PLACEHOLDER : this.image,
 		images: this.images,
 		url: this.url,
-		resources: this.resources,
+		// resources: this.resources,
 		oauth: this.oauth,
 		smtp: this.smtp,
 		stripe: this.stripe,
