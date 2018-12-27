@@ -125,7 +125,7 @@ router.get('/pages/:slug', (req, res) => {
 			}
 
 			const data = {
-				pageConfig: JSON.stringify({
+				pageConfig: JSON.stringify({ // these are the reducers
 					page: pageReducer,
 					app: appReducer
 				})
