@@ -124,14 +124,12 @@ router.get('/pages/:slug', (req, res) => {
 				summary: site
 			}
 
-			const data = {
-				pageConfig: JSON.stringify({ // these are the reducers
-					page: pageReducer,
-					app: appReducer
-				})
+			const reducers = {
+				page: pageReducer,
+				app: appReducer
 			}
 
-			res.render('admin/page', data)
+			res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
 		}
 		catch(err) {
 			throw err
