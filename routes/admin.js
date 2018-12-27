@@ -112,14 +112,33 @@ router.get('/pages/:slug', (req, res) => {
 	})
 	.then(config => { // this is a string
 		try {
-			const pageConfig = JSON.parse(config)
+			// const pageConfig = JSON.parse(config)
+			// const data = {
+			// 	pageConfig: JSON.stringify({
+			// 		page: {
+			// 			pageName: page,
+			// 			config: pageConfig
+			// 		},
+			// 		app: {site_id:site.id, apiKey:site.api.key, summary:site}
+			// 	})
+			// }
+
+			const pageReducer = {
+				selected: page,
+			}
+
+			pageReducer[page] = JSON.parse(config)
+
+			const appReducer = {
+				site_id: site.id,
+				apiKey: site.api.key,
+				summary: site
+			}
+
 			const data = {
 				pageConfig: JSON.stringify({
-					page: {
-						pageName: page,
-						config: pageConfig
-					},
-					app: {site_id:site.id, apiKey:site.api.key, summary:site}
+					page: pageReducer,
+					app: appReducer
 				})
 			}
 
