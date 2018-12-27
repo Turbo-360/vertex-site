@@ -20,7 +20,9 @@
 			<hr />
       <div id="launch-template-container">
         <input id="input-site-name" type="text" placeholder="Your Site Name" /><br />
-        <button id="btn-launch-template">Use This Template</button>
+        <div id="btn-launch-container">
+          <button id="btn-launch-template">Use This Template</button>
+        </div>
       </div>
 
       <form id="register-form" style="margin-top:40px">
@@ -83,21 +85,22 @@
       }
 
       var launchTemplate = function(){
-        if (user == null){
-          alert('Please log in or register to clone this site.')
-          return
-        }
+          if (user == null){
+            alert('Please log in or register to clone this site.')
+            return
+          }
 
-        var body = {
-          name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
-          source: template.id // ID of the template being copied
-        }
+          var body = {
+            name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+            source: template.id // ID of the template being copied
+          }
 
-        if (body.name.length == 0){
-          alert('Please enter a name for your site')
-          return
-        }
+          if (body.name.length == 0){
+            alert('Please enter a name for your site')
+            return
+          }
 
+          $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em>Launching your site...</em>")
           postRequest('/account/launch-template', body, function(err, response){
           if (err){
             alert('Error: ' + err.message)
