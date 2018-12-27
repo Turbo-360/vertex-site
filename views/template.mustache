@@ -72,7 +72,13 @@
             return
           }
 
-          console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+          // console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          window.location.href = '/admin/'+siteSlug
         })
       }
 
