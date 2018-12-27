@@ -45,7 +45,7 @@ router.get('/:slug', (req, res) => {
 		const data = {
 			site: site
 		}
-		
+
 		res.render('admin/overview', data)
 	})
 	.catch(err => {
@@ -119,7 +119,7 @@ router.get('/pages/:slug', (req, res) => {
 						pageName: page,
 						config: pageConfig
 					},
-					app: {site_id:site.id, apiKey:site.api.key}
+					app: {site_id:site.id, apiKey:site.api.key, summary:site}
 				})
 			}
 
