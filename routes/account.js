@@ -451,7 +451,7 @@ router.post('/:action', function(req, res, next){
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
-			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) || ['home']
+			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
 			console.log('NEW SITE INFO: ' + JSON.stringify(newSiteInfo))
 
 			return controllers.site.post(newSiteInfo) // create new site
