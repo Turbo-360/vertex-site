@@ -81,7 +81,23 @@
             return
           }
 
-          console.log('LOGIN: ' + JSON.stringify(visitor))
+          // console.log('LOGIN: ' + JSON.stringify(visitor))
+          $.ajax({
+            url: '/account/login',
+            type: 'POST',
+            data: visitor,
+            success: function(response, status, xhr){
+              if (response.confirmation != 'success'){
+                alert('Error: ' + response.message)
+    						return
+    					}
+
+              window.location.href = '/me'
+            },
+            error: function(xhr, status, err){
+              alert('Error: ' + err.message)
+            }
+          })
         })
       }
 
