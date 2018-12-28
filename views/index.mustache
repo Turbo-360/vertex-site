@@ -23,6 +23,12 @@
 				<li><a class="category-link" href="#">{{.}}</a></li>
 				{{/categories}}
 			</ul>
+
+      <form>
+        <input id="input-email" type="text" placeholder="Email" name="email" /><br />
+        <input id="input-pasword" type="password" placeholder="Password" name="password" /><br />
+        <button id="btn-login">Log In</button>
+      </form>
 		</div>
 
 		<div class="col-md-6">
@@ -45,6 +51,91 @@
 	<script type="text/javascript">window.__PRELOADED_DATA__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="/js/jquery.js"></script>
 	<script type="text/javascript" src="/js/mustache.js"></script>
-  <script type="text/javascript" src="/js/app.js"></script>
+  <script type="text/javascript">
+    (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+
+      const data = window.__PRELOADED_DATA__
+      const templates = data.templates
+      var selected = data.selected
+      var user = data.user
+
+      if (user == null){
+        $('#btn-account-container').html('')
+        $('#btn-login').click(function(event){
+          if (event)
+            event.preventDefault()
+
+          var visitor = {
+            email: $('#input-email').val(),
+            password: $('#input-pasword').val()
+          }
+
+          if (visitor.email.length == 0){
+            alert('Please enter your EMAIL')
+            return
+          }
+
+          if (visitor.password.length == 0){
+            alert('Please enter your PASSWORD')
+            return
+          }
+
+          console.log('LOGIN: ' + JSON.stringify(visitor))
+        })
+      }
+
+
+      var fetchTemplates = function(category){
+        $.ajax({
+          url: '/api/site?template.status=live&template.category='+category,
+          type: 'GET',
+          data: null,
+          success: function(response, status, xhr){
+            if (response.confirmation != 'success'){
+              alert(response.message)
+              return
+            }
+
+            templates[category] = response.results
+            reloadUI()
+          },
+          error: function(xhr, status, err){
+            alert(err.message)
+          }
+        })
+      }
+
+      var reloadUI = function(){
+        const templatesList = templates[selected]
+        if (templatesList == null){
+          fetchTemplates(selected)
+          return
+        }
+
+        var html = '<ol>'
+        var template = $('#tpl-list-item-template').html()
+        templatesList.forEach(function(summary, i){
+          html += Mustache.render(template, summary)
+        })
+
+        html += '</ol>'
+        $('#templates').html(html)
+      }
+
+      $('.category-link').each(function(i, link){
+        $(this).click(function(event){
+          if (event)
+            event.preventDefault()
+
+          selected = $(this).html()
+          reloadUI()
+        })
+      })
+
+      reloadUI()
+    })()
+
+  </script>
 </body>
 </html>
