@@ -438,18 +438,30 @@ router.post('/:action', function(req, res, next){
 		let newSite = null
 		let copiedSite = null
 
-		controllers.site.post(newSiteInfo) // create new site first
-		.then(data => {
-			newSite = data
-			folder['newSite'] = newSite
-			folder['app'] = newSite.slug // new app to copy source to
-			return controllers.site.getById(params.source) // get site that is being copied
-		})
+		// controllers.site.post(newSiteInfo) // create new site first
+		// .then(data => {
+		// 	newSite = data
+		// 	folder['newSite'] = newSite
+		// 	folder['app'] = newSite.slug // new app to copy source to
+		// 	return controllers.site.getById(params.source) // get site that is being copied
+		// })
+
+		controllers.site.getById(params.source) // fetch original site first
 		.then(data => {
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
+			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) || ['home']
+			console.log('NEW SITE INFO: ' + JSON.stringify(newSiteInfo))
 
+			return controllers.site.post(newSiteInfo) // create new site
+			// return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(folder))
+		})
+		.then(data => {
+			newSite = data
+			folder['newSite'] = newSite
+			folder['app'] = newSite.slug // new app to copy source to
+			// return controllers.site.getById(params.source) // get site that is being copied
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(folder))
 		})
 		.then(data => {
