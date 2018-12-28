@@ -20,7 +20,8 @@ router.get('/:action', function(req, res, next){
 		// 	res.cookie(cookieName, '', {domain:'.turbo360.co', expires:now})
 		// })
 
-		res.redirect(process.env.TURBO360_URL)
+		// res.redirect(process.env.TURBO360_URL)
+		res.redirect('/')
 		return
 	}
 
