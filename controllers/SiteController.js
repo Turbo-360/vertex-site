@@ -87,12 +87,12 @@ module.exports = {
 			}
 
 			// if coming from jQuery AJAX, profile is stringified. Parse it here first.
-			if (params.pages != null){
-				try {
-					params['pages'] = JSON.parse(params.pages)
-				}
-				catch(err){}
-			}
+			// if (params.pages != null){
+			// 	try {
+			// 		params['pages'] = JSON.parse(params.pages)
+			// 	}
+			// 	catch(err){}
+			// }
 
 			if (params.image == null)
 				params['image'] = process.env.IMAGE_PLACEHOLDER
