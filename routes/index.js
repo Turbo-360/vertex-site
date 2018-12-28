@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
 			message: err.message
 		})
 	})
-
 })
 
 router.get('/me', (req, res) => {
@@ -55,6 +54,10 @@ router.get('/me', (req, res) => {
 			message: err.message
 		})
 	})
+})
+
+router.get('/landing', (req, res) => {
+	res.render('landing', null)
 })
 
 router.get('/template/:slug', (req, res) => {
