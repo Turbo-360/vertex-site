@@ -25,6 +25,14 @@
 			</ul>
 
       <form>
+        <input id="input-register-name" type="text" placeholder="Name" name="name" /><br />
+        <input id="input-register-email" type="text" placeholder="Email" name="email" /><br />
+        <input id="input-register-pasword" type="password" placeholder="Password" name="password" /><br />
+        <button id="btn-register">Register</button>
+      </form>
+      <br />
+
+      <form>
         <input id="input-email" type="text" placeholder="Email" name="email" /><br />
         <input id="input-pasword" type="password" placeholder="Password" name="password" /><br />
         <button id="btn-login">Log In</button>
@@ -62,6 +70,49 @@
 
       if (user == null){
         $('#btn-account-container').html('')
+        $('#btn-register').click(function(event){
+          if (event)
+            event.preventDefault()
+
+          var visitor = {
+            fullName: $('#input-register-name').val(),
+            email: $('#input-register-email').val(),
+            password: $('#input-register-pasword').val()
+          }
+
+          if (visitor.fullName.length == 0){
+            alert('Please enter your NAME')
+            return
+          }
+
+          if (visitor.email.length == 0){
+            alert('Please enter your EMAIL')
+            return
+          }
+
+          if (visitor.password.length == 0){
+            alert('Please enter your PASSWORD')
+            return
+          }
+
+          $.ajax({
+            url: '/account/register',
+            type: 'POST',
+            data: visitor,
+            success: function(response, status, xhr){
+              if (response.confirmation != 'success'){
+                alert('Error: ' + response.message)
+    						return
+    					}
+
+              window.location.href = '/me'
+            },
+            error: function(xhr, status, err){
+              alert('Error: ' + err.message)
+            }
+          })
+        })
+
         $('#btn-login').click(function(event){
           if (event)
             event.preventDefault()
@@ -81,7 +132,6 @@
             return
           }
 
-          // console.log('LOGIN: ' + JSON.stringify(visitor))
           $.ajax({
             url: '/account/login',
             type: 'POST',
