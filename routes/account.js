@@ -443,6 +443,7 @@ router.post('/:action', function(req, res, next){
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
+
 			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
 			return controllers.site.post(newSiteInfo) // create new site
 		})
@@ -450,6 +451,7 @@ router.post('/:action', function(req, res, next){
 			newSite = data
 			folder['newSite'] = newSite
 			folder['app'] = newSite.slug // new app to copy source to
+			// return controllers.site.getById(params.source) // get site that is being copied
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(folder))
 		})
 		.then(data => {
