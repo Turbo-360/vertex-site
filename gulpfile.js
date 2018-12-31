@@ -14,7 +14,7 @@ gulp.task('css', function(){
     return gulp.src(
             [
                 './public/css/style.css',
-                './public/css/colors/main.css'
+                './public/css/colors/cyan.css'
             ]
         )
         .pipe(minifyCSS())
