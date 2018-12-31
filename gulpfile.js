@@ -13,7 +13,8 @@ const path = require('path')
 gulp.task('css', function(){
     return gulp.src(
             [
-                './public/css/style.css'
+                './public/css/style.css',
+                './public/css/colors/main.css'
             ]
         )
         .pipe(minifyCSS())
@@ -22,7 +23,6 @@ gulp.task('css', function(){
         .pipe(gulp.dest('./public/dist/css/'))
 })
 
-/*
 // When using a theme, usuually there is a fonts
 // directory that should be copied to dist
 gulp.task('copy-fonts', function(){
@@ -33,15 +33,24 @@ gulp.task('copy-fonts', function(){
         )
         .pipe(gulp.dest('./public/dist/fonts/'))
 })
-*/
 
-gulp.task('style', ['css'], function(){})
+gulp.task('style', ['css', 'copy-fonts'], function(){})
 
 // Add javascript files here
 gulp.task('vendor', function(){
     return gulp.src(
             [
-                './public/js/jquery.min.js'
+                './public/scripts/jquery-2.2.0.min.js',
+                './public/scripts/jquery-ui.min.js',
+                './public/scripts/mmenu.min.js',
+                './public/scripts/chosen.min.js',
+                './public/scripts/slick.min.js',
+                './public/scripts/rangeslider.min.js',
+                './public/scripts/magnific-popup.min.js',
+                './public/scripts/waypoints.min.js',
+                './public/scripts/counterup.min.js',
+                './public/scripts/tooltips.min.js',
+                './public/scripts/custom.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
@@ -54,21 +63,4 @@ gulp.task('vendor', function(){
 
 gulp.task('js', ['vendor'], function(){})
 
-
-gulp.task('es6-es5', function(){
-    return gulp.src([
-                './src/*/**.js',
-                './src/*/*/**.js'
-            ]
-        )
-        .pipe(to5())
-        .pipe(gulp.dest('./es5/'))
-});
-
-gulp.task('watch', function() {
-    gulp.watch(['./src/*/**.js', './src/*/*/**.js', './public/js/**.js'], ['es6-es5'])
-})
-
-
 gulp.task('prod', ['style', 'js'], function(){})
-gulp.task('default', ['js', 'watch'], function(){})
