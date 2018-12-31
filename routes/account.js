@@ -443,7 +443,6 @@ router.post('/:action', function(req, res, next){
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
-
 			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
 			return controllers.site.post(newSiteInfo) // create new site
 		})
@@ -478,120 +477,6 @@ router.post('/:action', function(req, res, next){
 
 		return
 	}
-
-
-	// TODO: this should moved to a platform lambda
-	/*
-	if (action == 'launchtemplate'){
-		const params = req.body
-		if (req.user == null){
-			res.json({
-				confirmation: 'fail',
-				message: 'User not logged in'
-			})
-			return
-		}
-
-		const newSiteInfo = {
-			name: params.name,
-			profile: {
-				id: req.user.id,
-		    slug: req.user.slug,
-  			image: req.user.image,
-  			username: req.user.username,
-  			lastName: req.user.lastName,
-  			firstName: req.user.firstName
-			}
-		}
-
-		const vertexBucket = 'turbo360-vertex'
-		const folder = {
-			bucket: vertexBucket
-		}
-
-		let lambda = null
-		let newSite = null
-		let copiedSite = null
-
-		controllers.site.post(newSiteInfo) // create new site first
-		.then(data => {
-			newSite = data
-			folder['app'] = newSite.slug // new app to copy source to
-			return controllers.site.getById(params.source) // get site that is being copied
-		})
-		.then(data => {
-			copiedSite = data
-			folder['source'] = copiedSite.slug
-			return utils.AWS.copyFolder(folder)
-		})
-		.then(data => {
-			lambda = {
-				name: newSite.slug, // this has to be the appslug
-				path: newSite.slug + '/package.zip',
-				env: {
-					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+newSite.slug+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
-					TURBO_ENV: 'prod',
-					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
-					TURBO_API_KEY: newSite.api.key,
-					TURBO_APP_ID: newSite.id
-				}
-			}
-
-			return utils.AWS.getFunction({name: copiedSite.slug}) // slug of app being copied
-		})
-		.then(data => {
-			const envVariables = data.Configuration.Environment.Variables
-			const keys = Object.keys(envVariables)
-			keys.forEach(function(key, i){
-				if (lambda.env[key] == null)
-					lambda.env[key] = envVariables[key]
-			})
-
-			return utils.AWS.getFunction(lambda) // check if already exists first. If so, delete
-		})
-		.then(data => { // check if already exists first. If so, delete
-			return (data == null) ? null : utils.AWS.deleteFunction(lambda)
-		})
-		.then(data => { // connect to lambda
-			return utils.AWS.deployVertex(lambda)
-		})
-		.then(data => {
-			return utils.AWS.copyFolder({
-				bucket: vertexBucket,
-				source: 'stores/'+copiedSite.slug,
-				app: 'stores/'+newSite.slug
-			})
-		})
-		.then(data => {
-			return utils.AWS.copyFolder({
-				bucket: vertexBucket,
-				source: 'pages/'+copiedSite.slug,
-				app: 'pages/'+newSite.slug
-			})
-		})
-		.then(data => {
-			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(params))
-			res.json({
-				confirmation: 'success',
-				result: {
-					format: 'vertex',
-					slug: newSite.slug
-				}
-			})
-
-			return
-		})
-		.catch(err => {
-			console.log('FAIL: ' + err)
-			res.json({
-				confirmation: 'fail',
-				message: err.message || err
-			})
-		})
-
-		return
-	}
-	*/
 
 	// clone an app into another app
 	// TODO: this should moved to a platform lambda
