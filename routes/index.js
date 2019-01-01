@@ -57,7 +57,11 @@ router.get('/me', (req, res) => {
 })
 
 router.get('/landing', (req, res) => {
-	res.render('landing', null)
+	const data = {
+		categories: categories
+	}
+	
+	res.render('landing', data)
 })
 
 router.get('/template/:slug', (req, res) => {
