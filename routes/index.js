@@ -58,9 +58,10 @@ router.get('/me', (req, res) => {
 
 router.get('/landing', (req, res) => {
 	const data = {
-		categories: categories
+		categories: categories,
+		cdn: process.env.CDN_ROOT
 	}
-	
+
 	res.render('landing', data)
 })
 
