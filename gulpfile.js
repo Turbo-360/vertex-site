@@ -60,6 +60,28 @@ gulp.task('vendor', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
+// copy public directory to CDN project:
+gulp.task('copy-public', function(){
+    return gulp.src(
+            [
+                './public/**',
+                './public/**/**'
+            ]
+        )
+        .pipe(gulp.dest('./cdn/public/'))
+})
+
+// clear out unnecessary directories in CDN folder:
+gulp.task('clean', function() {
+    return gulp.src(
+            [
+                './cdn/public/images',
+                './cdn/public/assets'
+            ],
+            {read: false}
+        )
+        .pipe(clean())
+})
 
 gulp.task('js', ['vendor'], function(){})
 
