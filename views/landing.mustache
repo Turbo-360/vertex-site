@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Listeo</title>
+  <title>Vertex 360 | Professional Websites. Fast.</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="/dist/css/style.min.css">
@@ -46,11 +46,9 @@
 						<li><a href="#">How It Works</a></li>
 						<li><a href="#">Templates</a>
               <ul>
-								<li><a href="#">Dashboard</a></li>
-								<li><a href="#">Messages</a></li>
-								<li><a href="#">Bookings</a></li>
-								<li><a href="#">My templates</a></li>
-								<li><a href="#">Reviews</a></li>
+                {{#categories}}
+                <li><a style="text-transform:capitalize" href="#">{{.}}</a></li>
+                {{/categories}}
 							</ul>
             </li>
 					</ul>
@@ -185,14 +183,12 @@
 
 						<div class="main-search-input-item">
 							<select data-placeholder="All Categories" class="chosen-select">
-								<option>Resume</option>
-								<option>Fitness</option>
-								<option>Restaurant</option>
-								<option>Events</option>
+                {{#categories}}
+                <option style="text-transform:capitalize" value={{.}}>{{.}}</option>
+                {{/categories}}
 							</select>
 						</div>
-
-						<button class="button">View Templates</button>
+						<button class="button">Browse Templates</button>
 
 					</div>
 				</div>
@@ -208,7 +204,7 @@
 		<div class="col-md-12">
 			<h3 class="headline centered margin-top-75">
 				Categories
-				<span>Browse <i>the most desirable</i> categories</span>
+				<span>Check out our templates across a variety of categories</span>
 			</h3>
 		</div>
 
@@ -220,37 +216,12 @@
 <div class="fullwidth-carousel-container margin-top-25">
 	<div class="fullwidth-slick-carousel category-carousel">
 
-		<!-- Item -->
-		<div class="fw-carousel-item">
-
-			<!-- this (first) box will be hidden under 1680px resolution -->
-			<div class="category-box-container half">
-				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-01.jpg">
-					<div class="category-box-content">
-						<h3>Hotels</h3>
-						<span>64 templates</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-
-			<div class="category-box-container half">
-				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-02.jpg">
-					<div class="category-box-content">
-						<h3>Shops</h3>
-						<span>14 templates</span>
-					</div>
-					<span class="category-box-btn">Browse</span>
-				</a>
-			</div>
-		</div>
-
-		<!-- Item -->
+    <!-- Item -->
 		<div class="fw-carousel-item">
 			<div class="category-box-container">
-				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-03.jpg">
+				<a href="#" class="category-box" data-background-image="https://lh3.googleusercontent.com/PhXbSqJFxRJ8pwxdwd-NXm_D0i1gHCw_Z6Xacz699h53YcyyVJZ7-3k40dX-lIMnN_kUyP5288m1yEDTPZH4NAuneg">
 					<div class="category-box-content">
-						<h3>Events</h3>
+						<h3>Resume</h3>
 						<span>67 templates</span>
 					</div>
 					<span class="category-box-btn">Browse</span>
@@ -261,7 +232,20 @@
 		<!-- Item -->
 		<div class="fw-carousel-item">
 			<div class="category-box-container">
-				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-04.jpg">
+				<a href="#" class="category-box" data-background-image="https://lh3.googleusercontent.com/tOTfAZyD6h4TrnRD_L2EcjFnqAaPokiCKmJleu6JMghlJLZeYPq77HSRbq6qAh9AnzeJ7z1Bv220hH5_fN65vGMxw6Y">
+					<div class="category-box-content">
+						<h3>Restaurant</h3>
+						<span>67 templates</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Item -->
+		<div class="fw-carousel-item">
+			<div class="category-box-container">
+				<a href="#" class="category-box" data-background-image="https://lh3.googleusercontent.com/s3bpe7xXO561pGCzJdUyF35t_vopjoc1iVGmN5Sbt3wxyXM6DcgRm_PPwQf6YYbIuS5F2IiZ_P3e2rHFvhLESj_B">
 					<div class="category-box-content">
 						<h3>Fitness</h3>
 						<span>27 templates</span>
@@ -274,9 +258,22 @@
 		<!-- Item -->
 		<div class="fw-carousel-item">
 			<div class="category-box-container">
-				<a href="listings-half-screen-map-list.html" class="category-box" data-background-image="images/category-box-05.jpg">
+				<a href="#" class="category-box" data-background-image="https://lh3.googleusercontent.com/Qjamm9WtrLx3GphaqkxpH9EJMeTEdg-7EOJSJ_sHKH_sSR-63xBf6tRew8um4bHw4k42HSA3AItfKFODiFkD30m9Ig">
 					<div class="category-box-content">
-						<h3>Nightlife</h3>
+						<h3>Realtor</h3>
+						<span>22 templates</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+    <!-- Item -->
+		<div class="fw-carousel-item">
+			<div class="category-box-container">
+				<a href="#" class="category-box" data-background-image="https://lh3.googleusercontent.com/cl7Q23mDhdH2rL7E1C8ruw9mojuQ8OKsoszhJumoQu81HVJYvqgLOuQq3iyGMLSSHqsM-un_fz_dWlUvF6w5xmBIYFE">
+					<div class="category-box-content">
+						<h3>Lessons</h3>
 						<span>22 templates</span>
 					</div>
 					<span class="category-box-btn">Browse</span>
@@ -287,9 +284,9 @@
 		<!-- Item -->
 		<div class="fw-carousel-item">
 			<div class="category-box-container">
-				<a href="listings-half-screen-map-list.html" class="category-box" data-background-image="images/category-box-06.jpg">
+				<a href="#" class="category-box" data-background-image="https://lh3.googleusercontent.com/Ruprmo7dbJiSee0WqCEUf6S2egek-gYJT7Noi5ooJa7GctfNKNSeRy76k0rYbuQiIRrZcUYx8Ur-OGRVsyjyDhQM3A">
 					<div class="category-box-content">
-						<h3>Eat & Drink</h3>
+						<h3>Landing Page</h3>
 						<span>130 templates</span>
 					</div>
 					<span class="category-box-btn">Browse</span>
