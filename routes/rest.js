@@ -111,6 +111,7 @@ router.put('/:app/:resource/:id', (req, res, next) => {
       return
     }
 
+    console.log('DATA: ' + JSON.stringify(data))
     res.json(data)
   })
   .catch(err => {
