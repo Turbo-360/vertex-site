@@ -105,6 +105,7 @@ module.exports = {
 				}
 
 				const payload = res.text || res.body
+				console.log('PAYLOAD: ' + payload)
 				resolve(payload)
 			})
 		})
