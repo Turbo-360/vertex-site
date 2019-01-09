@@ -67,7 +67,9 @@ module.exports = {
 					return
 				}
 
-				resolve(res.body)
+				const payload = res.text || res.body
+				resolve(payload)
+				// resolve(res.body)
 			})
 		})
 	},
@@ -84,7 +86,9 @@ module.exports = {
 					return
 				}
 
-				resolve(res.body)
+				const payload = res.text || res.body
+				resolve(payload)
+				// resolve(res.body)
 			})
 		})
 	}
