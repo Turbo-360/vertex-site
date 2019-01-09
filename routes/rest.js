@@ -23,10 +23,10 @@ const queryEndpoint = (endpoint, params, method) => {
       request = utils.HTTP.post(endpoint, params)
     else if (method == 'put')
       request = utils.HTTP.put(endpoint, params)
+    else if (method == 'delete')
+      request = utils.HTTP.delete(endpoint, params)
     else // default to GET method
       request = utils.HTTP.get(endpoint, params)
-    // else if (method == 'delete') // this doesn't exist yet on utils.HTTP
-    //   request = utils.HTTP.delete(endpoint, params)
 
     request.then(data => {
       try {

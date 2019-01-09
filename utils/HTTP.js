@@ -91,6 +91,23 @@ module.exports = {
 				// resolve(res.body)
 			})
 		})
+	},
+
+	delete: function(endpoint){
+		return new Promise(function(resolve, reject){
+			superagent
+			.delete(endpoint)
+			// .send(body)
+			.end(function(err, res) {
+				if (err){
+					reject(err)
+					return
+				}
+
+				const payload = res.text || res.body
+				resolve(payload)
+			})
+		})
 	}
 
 }
