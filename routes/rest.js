@@ -106,7 +106,6 @@ router.put('/:app/:resource/:id', (req, res, next) => {
   const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
   queryEndpoint(endpoint, req.body, 'put')
   .then(data => {
-    console.log('DATA: ' + JSON.stringify(data))
     if (data.confirmation != 'success'){
       throw new Error(data.message)
       return
@@ -115,7 +114,6 @@ router.put('/:app/:resource/:id', (req, res, next) => {
     res.json(data)
   })
   .catch(err => {
-    console.log('DATA ERR: ' + err)
     res.json({
       confirmation: 'fail',
       message: err.message
