@@ -125,7 +125,6 @@ router.delete('/:app/:resource/:id', (req, res, next) => {
   const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
   queryEndpoint(endpoint, null, 'delete')
   .then(data => {
-    console.log('DATA: ' + JSON.stringify(data))
     if (data.confirmation != 'success'){
       throw new Error(data.message)
       return
@@ -134,7 +133,6 @@ router.delete('/:app/:resource/:id', (req, res, next) => {
     res.json(data)
   })
   .catch(err => {
-    console.log('ERR: ' + err)
     res.json({
       confirmation: 'fail',
       message: err.message
