@@ -60,7 +60,7 @@ module.exports = {
 			superagent
 			.post(endpoint)
 			.send(body)
-			.set('Accept', 'application/json')
+			// .set('Accept', 'application/json')
 			.end(function(err, res) {
 				if (err){
 					reject(err)
@@ -79,7 +79,7 @@ module.exports = {
 			superagent
 			.put(endpoint)
 			.send(body)
-			.set('Accept', 'application/json')
+			// .set('Accept', 'application/json')
 			.end(function(err, res) {
 				if (err){
 					reject(err)
