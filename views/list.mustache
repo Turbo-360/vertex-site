@@ -437,7 +437,9 @@
     var user = data.user
 
     var reloadUI = function(){
-
+      var tpl = $('#tpl-selected-template').html()
+      var html = Mustache.render(tpl, selected)
+      $('#selected-template').html(html)
     }
 
     $('.template-preview').each(function(i, el){
