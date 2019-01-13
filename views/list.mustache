@@ -350,8 +350,8 @@
 
 				{{#templates}}
 				<div class="col-lg-12 col-md-12">
-					<div class="listing-item-container list-layout" data-marker-id="1">
-						<a href="#" class="listing-item">
+					<div class="listing-item-container list-layout">
+						<a id="{{index}}" href="#" class="listing-item">
 
 							<div class="listing-item-image">
 								<img src="{{image}}=s360-c" alt="">
@@ -373,6 +373,7 @@
 					</div>
 				</div>
         {{/templates}}
+
 			</div>
 
 			<div class="row fs-listings">
@@ -385,10 +386,7 @@
 		</div>
 	</div>
 	<div class="fs-inner-container map-fixed" style="overflow:scroll">
-    <div class="blog-post" style="margin-top:0px">
-
-
-			<!-- Content -->
+    <div id="selected-template" class="blog-post" style="margin-top:0px">
 			<div class="post-content">
         <img style="max-width:360px" src="images/blog-post-02.jpg" alt="">
 				<h3 style="margin-top:20px"><a href="#">The 50 Greatest Street Arts In London</a></h3>
@@ -412,8 +410,52 @@
 </div>
 <!-- Wrapper / End -->
 
+<script type="text/template" id="tpl-selected-template">
+  <div class="post-content">
+    <img style="max-width:360px" src="<% image %>" alt="">
+    <h3 style="margin-top:20px"><a href="#"><% name %></a></h3>
+    <ul class="post-meta">
+      <li>August 18, 2017</li>
+      <li><a href="#">Tips</a></li>
+      <li><a href="#">7 Comments</a></li>
+    </ul>
+    <p><% description %></p>
+    <a href="#" class="read-more">Use This Template <i class="fa fa-angle-right"></i></a>
+  </div>
+</script>
+
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+<script type="text/javascript" src="/js/mustache.js"></script>
+<script>
+  (function(){
+    Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+
+    var data = window.__PRELOADED__
+    var templates = data.templates // this is an array
+    var selected = data.selected
+    var user = data.user
+
+    var reloadUI = function(){
+
+    }
+
+    $('.template-preview').each(function(i, el){
+      $(this).click(function(event){
+        if (event)
+          event.preventDefault()
+
+        var template = templates[this.id]
+        console.log('SELECT TEMPLATE: ' + JSON.stringify(template))
+        selected = template
+        reloadUI()
+      })
+
+    })
+
+
+  })()
+</script>
 
 </body>
 </html>
