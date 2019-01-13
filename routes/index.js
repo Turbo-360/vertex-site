@@ -65,6 +65,34 @@ router.get('/landing', (req, res) => {
 	res.render('landing', data)
 })
 
+router.get('/list', (req, res) => {
+	const selected = categories[0]
+	const data = {
+		categories: categories,
+		cdn: process.env.CDN_ROOT
+	}
+
+	// res.render('list', data)
+	controllers.site.get({'template.status':'live', 'template.category':selected})
+	.then(sites => {
+		templates[selected] = sites
+		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			user: req.user,
+			selected: selected,
+			templates: templates
+		})
+
+		res.render('list', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/template/:slug', (req, res) => {
 	// TODO: check if template is live
 	controllers.site.get({slug:req.params.slug}) // query template by slug
