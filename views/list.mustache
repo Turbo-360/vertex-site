@@ -225,9 +225,8 @@
 								<div class="col-fs-6">
 									<div class="input-with-icon location">
 										<div id="autocomplete-container">
-											<input id="autocomplete-input" type="text" placeholder="Location">
+											<input type="text" placeholder="Location">
 										</div>
-										<a href="#"><i class="fa fa-map-marker"></i></a>
 									</div>
 								</div>
 
@@ -415,29 +414,6 @@
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-
-<!-- Google Autocomplete -->
-<script>
-  function initAutocomplete() {
-    var input = document.getElementById('autocomplete-input');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-
-    autocomplete.addListener('place_changed', function() {
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
-      }
-    });
-
-	if ($('.main-search-input-item')[0]) {
-	    setTimeout(function(){
-	        $(".pac-container").prependTo("#autocomplete-container");
-	    }, 300);
-	}
-}
-</script>
-
 
 </body>
 </html>
