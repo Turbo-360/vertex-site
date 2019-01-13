@@ -79,8 +79,8 @@ router.get('/list', (req, res) => {
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
 			user: req.user,
-			selected: selected,
-			templates: templates
+			selected: sites[0],
+			templates: sites
 		})
 
 		res.render('list', data)
