@@ -75,6 +75,10 @@ router.get('/list', (req, res) => {
 	// res.render('list', data)
 	controllers.site.get({'template.status':'live', 'template.category':selected})
 	.then(sites => {
+		sites.forEach((site, i) => {
+			site['index'] = i
+		})
+
 		templates[selected] = sites
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
