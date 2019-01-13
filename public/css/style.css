@@ -758,7 +758,7 @@ body #navigation ul ul {
 	opacity: 0;
 }
 
-#navigation ul li .mega-menu ul { 
+#navigation ul li .mega-menu ul {
 	opacity: 0;
 	visibility: hidden;
 	transform: translate3d(0,0,0);
@@ -810,7 +810,7 @@ body #navigation ul ul {
 	opacity: 1;
 }
 
-#navigation ul li:hover .mega-menu ul a, 
+#navigation ul li:hover .mega-menu ul a,
 #navigation ul .mega-menu ul a {
     padding: 6px 0 !important;
     line-height: 22px !important;
@@ -3062,7 +3062,7 @@ button.panel-cancel:active { transform: translateY(-2px); }
 }
 
 .fs-inner-container.content {
-	width: 55%;
+	width: 45%;
 	background-color: #f7f7f7;
 	z-index: 995;
 	box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.12);
@@ -3071,7 +3071,7 @@ button.panel-cancel:active { transform: translateY(-2px); }
 }
 
 .fs-inner-container {
-	width: 45%;
+	width: 55%;
 	background-color: #fff;
 	z-index: 10;
 }
@@ -4574,7 +4574,7 @@ input#date-picker:hover {
   border: none;
 }
 
-.daterangepicker .calendar-table .next span, 
+.daterangepicker .calendar-table .next span,
 .daterangepicker .calendar-table .prev span {
   color: #fff;
   border: solid #aaa;
@@ -4600,7 +4600,7 @@ input#date-picker:hover {
   -webkit-transform: rotate(135deg);
 }
 
-.daterangepicker .calendar-table th, 
+.daterangepicker .calendar-table th,
 .daterangepicker .calendar-table td {
   white-space: nowrap;
   text-align: center;
@@ -4830,7 +4830,7 @@ input#date-picker:hover {
 	float: right;
 	background: #fff;
 	border-radius: 3px;
-	cursor: pointer; 
+	cursor: pointer;
 	padding: 6px;
 	display: inline-block;
 	position: relative;
@@ -4876,7 +4876,7 @@ input#date-picker:hover {
 
 #booking-date-range i {
 	color: #999;
-	background-color: 
+	background-color:
 }
 
 /* Booking Requests Filter / End */
@@ -11429,7 +11429,7 @@ input:checked + .slider:before {
 	padding: 12px 17px;
 }
 
-.single-slot-right { 
+.single-slot-right {
     flex: 0 0 auto;
     background-color: #eee;
     position: relative;
@@ -11587,7 +11587,7 @@ input[type="time"]::-webkit-clear-button{
 .add-slot-inputs input::-webkit-outer-spin-button,
 .add-slot-inputs input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
 .add-slot-inputs input{ padding-right: 4px; }
@@ -11667,7 +11667,7 @@ input[type="time"]::-webkit-clear-button{
 	font-weight: 700;
 	text-align: center;
 }
-.plusminus input[type="number"]::-webkit-outer-spin-button, 
+.plusminus input[type="number"]::-webkit-outer-spin-button,
 .plusminus input[type="number"]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
@@ -11754,8 +11754,8 @@ input[type="time"]::-webkit-clear-button{
 	.add-slot-btn button {
 		width: 100%;
 		margin-left: 0;
-		margin-top: 8px; 
-		background-color: rgba(255,255,255,0.15); 
+		margin-top: 8px;
+		background-color: rgba(255,255,255,0.15);
 		color: #fff;
 		padding: 3px 0;
 	}
