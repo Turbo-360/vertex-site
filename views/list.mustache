@@ -386,23 +386,7 @@
 		</div>
 	</div>
 	<div class="fs-inner-container map-fixed" style="overflow:scroll">
-    <div id="selected-template" class="blog-post" style="margin-top:0px">
-			<div class="post-content">
-        <img style="max-width:360px" src="images/blog-post-02.jpg" alt="">
-				<h3 style="margin-top:20px"><a href="#">The 50 Greatest Street Arts In London</a></h3>
-
-				<ul class="post-meta">
-					<li>August 18, 2017</li>
-					<li><a href="#">Tips</a></li>
-					<li><a href="#">7 Comments</a></li>
-				</ul>
-
-				<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
-        <p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
-
-				<a href="pages-blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
-			</div>
-		</div>
+    <div id="selected-template" class="blog-post" style="margin-top:0px"></div>
 	</div>
 </div>
 
@@ -412,7 +396,7 @@
 
 <script type="text/template" id="tpl-selected-template">
   <div class="post-content">
-    <img style="max-width:360px" src="<% image %>" alt="">
+    <img src="<% image %>" alt="">
     <h3 style="margin-top:20px"><a href="#"><% name %></a></h3>
     <ul class="post-meta">
       <li>August 18, 2017</li>
@@ -450,10 +434,9 @@
         selected = template
         reloadUI()
       })
-
     })
 
-
+    reloadUI()
   })()
 </script>
 
