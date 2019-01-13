@@ -438,8 +438,7 @@
 
     var reloadUI = function(){
       var tpl = $('#tpl-selected-template').html()
-      var html = Mustache.render(tpl, selected)
-      $('#selected-template').html(html)
+      $('#selected-template').html(Mustache.render(tpl, selected))
     }
 
     $('.template-preview').each(function(i, el){
@@ -448,7 +447,6 @@
           event.preventDefault()
 
         var template = templates[this.id]
-        console.log('SELECT TEMPLATE: ' + JSON.stringify(template))
         selected = template
         reloadUI()
       })
