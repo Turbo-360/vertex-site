@@ -279,7 +279,7 @@
 <!-- Wrapper / End -->
 
 <script type="text/template" id="tpl-selected-template">
-  <div class="post-content">
+  <div class="post-content selected-template">
     <img src="<% image %>=s1024" alt="">
     <h3 style="margin-top:20px"><a href="#"><% name %></a></h3>
     <ul class="post-meta">
@@ -294,7 +294,6 @@
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-<script type="text/javascript" src="/js/mustache.js"></script>
 <script>
   (function(){
     Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
