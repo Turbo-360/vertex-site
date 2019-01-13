@@ -4,6 +4,7 @@ const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const superagent = require('superagent')
 const router = vertex.router()
 const controllers = require('../controllers')
+const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const templates = {}
 const categories = ['landing', 'resume', 'restaurant', 'fitness', 'realtor', 'lessons']
@@ -59,7 +60,7 @@ router.get('/me', (req, res) => {
 router.get('/landing', (req, res) => {
 	const data = {
 		categories: categories,
-		cdn: process.env.CDN_ROOT
+		cdn: CDN
 	}
 
 	res.render('landing', data)
@@ -69,7 +70,7 @@ router.get('/list', (req, res) => {
 	const selected = categories[0]
 	const data = {
 		categories: categories,
-		cdn: process.env.CDN_ROOT
+		cdn: CDN
 	}
 
 	// res.render('list', data)
