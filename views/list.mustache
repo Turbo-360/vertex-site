@@ -24,6 +24,13 @@
     .bg-yellow {
       background: #fffffa !important;
     }
+
+    .profile-icon {
+      float:left;
+      width:32px !important;
+      border-radius:50% !important;
+      margin-right:4px;
+    }
   </style>
 </head>
 
@@ -231,12 +238,12 @@
   								<div class="listing-item-inner">
   									<h3>{{name}}</h3>
   									<span>{{template.category}}</span>
-  									<div class="star-rating" data-rating="3.5">
-  										<div class="rating-counter">(12 reviews)</div>
+                    <div>
+                      <img class="profile-icon" src="{{profile.image}}=s64-c" />
+  										<span style="margin-top:2px">{{profile.username}}</span>
   									</div>
   								</div>
 
-  								<span class="like-icon"></span>
   							</div>
   						</a>
   					</div>
