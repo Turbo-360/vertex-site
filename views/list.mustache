@@ -129,7 +129,7 @@
 
 			<div class="right-side">
 				<div class="header-widget">
-					<a href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Log In <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
+					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Log In <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
 				</div>
 			</div>
 
@@ -322,7 +322,9 @@
         if (event)
           event.preventDefault()
 
-        console.log('clone template')        
+        // console.log('clone template')
+        // TODO: check if user logged in. if so, don't do this:
+        document.getElementById('btn-login').click()
       })
     }
 
