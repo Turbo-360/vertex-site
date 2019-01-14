@@ -319,8 +319,12 @@
     var user = data.user
 
     var reloadUI = function(){
-      var templateContainer = document.getElementById('selected-template-container')
-      templateContainer.scrollTop = 0
+      // var templateContainer = document.getElementById('selected-template-container')
+      // templateContainer.scrollTop = 0
+
+      $('#selected-template-container').animate({
+         scrollTop: 0
+      }, 'slow');
 
       var tpl = $('#tpl-selected-template').html()
       $('#selected-template').html(Mustache.render(tpl, selected))
@@ -342,7 +346,7 @@
         var template = templates[this.id]
         if (template.id == selected.id)
           return
-          
+
         selected = template
         reloadUI()
       })
