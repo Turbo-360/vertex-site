@@ -295,12 +295,12 @@
     <img src="<% image %>=s1024" alt="Vertex 360">
     <h3><a class="capitalize" href="#"><% name %></a></h3>
     <ul class="post-meta">
-      <li><% template.category %></li>
+      <li class="capitalize"><% template.category %></li>
       <li><% profile.username %></li>
-      <li>Free</li>
+      <li class="capitalize">Free</li>
     </ul>
     <p><% description %></p>
-    <a href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Use This Template <i class="fa fa-angle-right"></i></a>
+    <a id="btn-clone-template" href="#" class="button with-icon">Use This Template <i class="fa fa-angle-right"></i></a>
   </div>
 </script>
 
@@ -318,6 +318,12 @@
     var reloadUI = function(){
       var tpl = $('#tpl-selected-template').html()
       $('#selected-template').html(Mustache.render(tpl, selected))
+      $('#btn-clone-template').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        console.log('clone template')        
+      })
     }
 
     $('.template-preview').each(function(i, el){
