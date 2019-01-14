@@ -44,6 +44,14 @@
     .template-preview {
       max-height: 160px !important;
     }
+
+    .selected-template h3 {
+      margin-top: 20px;
+    }
+
+    .capitalize {
+      text-transform: capitalize;
+    }
   </style>
 </head>
 
@@ -285,14 +293,14 @@
 <script type="text/template" id="tpl-selected-template">
   <div class="post-content selected-template">
     <img src="<% image %>=s1024" alt="">
-    <h3 style="margin-top:20px"><a href="#"><% name %></a></h3>
+    <h3><a class="capitalize" href="#"><% name %></a></h3>
     <ul class="post-meta">
       <li>August 18, 2017</li>
-      <li><a href="#"><% profile.username %></a></li>
-      <li><a href="#">Free</a></li>
+      <li><% profile.username %></li>
+      <li>Free</li>
     </ul>
     <p><% description %></p>
-    <a href="#" class="read-more">Use This Template <i class="fa fa-angle-right"></i></a>
+    <a href="#" class="button with-icon popup-with-zoom-anim">Use This Template <i class="fa fa-angle-right"></i></a>
   </div>
 </script>
 
