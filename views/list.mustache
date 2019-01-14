@@ -281,7 +281,7 @@
 
 		</div>
 	</div>
-	<div class="fs-inner-container map-fixed" style="overflow:scroll">
+	<div id="selected-template-container" class="fs-inner-container map-fixed" style="overflow:scroll">
     <div id="selected-template" class="blog-post" style="margin-top:0px"></div>
 	</div>
 </div>
@@ -319,6 +319,9 @@
     var user = data.user
 
     var reloadUI = function(){
+      var templateContainer = document.getElementById('selected-template-container')
+      templateContainer.scrollTop = 0
+
       var tpl = $('#tpl-selected-template').html()
       $('#selected-template').html(Mustache.render(tpl, selected))
       $('#btn-clone-template').click(function(event){
