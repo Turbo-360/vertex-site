@@ -37,7 +37,9 @@
   						<li><a href="#">How It Works</a></li>
   					</ul>
   				</nav>
-					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Log In <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
+          <div id="login-container">
+  					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Log In <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
+          </div>
 				</div>
 			</div>
 
@@ -225,6 +227,9 @@
           }
         })
       })
+    }
+    else {
+      $('#login-container').html('<a href="/me" class="button">Welcome '+user.username+'</a>')
     }
 
     var reloadUI = function(){
