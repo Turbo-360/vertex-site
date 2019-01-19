@@ -54,19 +54,21 @@
             {{#sites}}
 						<li>
 							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-02.jpg" alt=""></a></div>
+								<div class="list-box-listing-img">
+                  <a href="#">
+                    <img src="{{image}}=s512-c" alt="Vertex 360 | {{name}}" />
+                  </a>
+                </div>
 								<div class="list-box-listing-content">
 									<div class="inner">
-										<h3>Sticky Band</h3>
-										<span>Bishop Avenue, New York</span>
-										<div class="star-rating" data-rating="5.0">
-											<div class="rating-counter">(23 reviews)</div>
-										</div>
+										<h3>{{name}}</h3>
+										<span>{{category}}</span>
 									</div>
 								</div>
 							</div>
 							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
+								<a href="#" class="button"><i class="sl sl-icon-close"></i> Pages</a>
+                <a href="#" class="button"><i class="sl sl-icon-close"></i> Delete</a>
 							</div>
 						</li>
             {{/sites}}
