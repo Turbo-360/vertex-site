@@ -9,6 +9,7 @@ const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 const templates = {}
 const categories = ['landing', 'resume', 'restaurant', 'fitness', 'realtor', 'lessons']
 
+/*
 router.get('/', (req, res) => {
 	const selected = categories[0]
 	const data = {
@@ -22,6 +23,38 @@ router.get('/', (req, res) => {
 			user: req.user,
 			selected: selected,
 			templates: templates
+		})
+
+		res.render('index', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+}) */
+
+router.get('/', (req, res) => {
+	const selected = categories[0]
+	const data = {
+		categories: categories,
+		cdn: CDN
+	}
+
+	// res.render('list', data)
+	controllers.site.get({'template.status':'live', 'template.category':selected})
+	.then(sites => {
+		sites.forEach((site, i) => {
+			site['index'] = i
+		})
+
+		templates[selected] = sites
+		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			user: req.user,
+			selected: sites[0],
+			templates: sites
 		})
 
 		res.render('index', data)
@@ -64,38 +97,6 @@ router.get('/landing', (req, res) => {
 	}
 
 	res.render('landing', data)
-})
-
-router.get('/list', (req, res) => {
-	const selected = categories[0]
-	const data = {
-		categories: categories,
-		cdn: CDN
-	}
-
-	// res.render('list', data)
-	controllers.site.get({'template.status':'live', 'template.category':selected})
-	.then(sites => {
-		sites.forEach((site, i) => {
-			site['index'] = i
-		})
-
-		templates[selected] = sites
-		data['templates'] = sites
-		data['preloaded'] = JSON.stringify({
-			user: req.user,
-			selected: sites[0],
-			templates: sites
-		})
-
-		res.render('list', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
 })
 
 router.get('/template/:slug', (req, res) => {
