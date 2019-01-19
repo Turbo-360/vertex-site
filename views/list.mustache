@@ -204,7 +204,7 @@
 
         postRequest('/account/register', visitor, function(err, response){
           if (err){
-            alert(response.message)
+            alert(err.message)
             return
           }
 
@@ -233,7 +233,7 @@
 
         postRequest('/account/login', visitor, function(err, response){
           if (err){
-            alert(response.message)
+            alert(err.message)
             return
           }
 
