@@ -206,7 +206,8 @@
 
       var body = {
         name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
-        source: template.id // ID of the template being copied
+        source: selected.id // ID of the template being copied
+        // source: template.id // ID of the template being copied
       }
 
       if (body.name.length == 0){
