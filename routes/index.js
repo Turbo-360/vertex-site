@@ -90,6 +90,10 @@ router.get('/me', (req, res) => {
 	})
 })
 
+router.get('/dashboard', (req, res) => {
+	res.render('account', null)	
+})
+
 router.get('/landing', (req, res) => {
 	const data = {
 		categories: categories,
