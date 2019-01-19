@@ -90,5 +90,16 @@
 
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+
+      var data = window.__PRELOADED__
+      var user = data.user
+
+      $('#login-container').html('<a href="/me" class="button">My Account</a>')
+
+    })()
+  </script>
 </body>
 </html>
