@@ -6,47 +6,7 @@
 <body>
 
 <div id="wrapper">
-
-<header id="header-container" class="fixed fullwidth">
-	<div id="header" class="not-sticky">
-		<div class="container">
-
-			<div class="left-side">
-
-				<div id="logo">
-					<a href="/">
-            <img src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-2.svg" alt="Vertex 360">
-          </a>
-				</div>
-
-				<div class="mmenu-trigger">
-					<button class="hamburger hamburger--collapse" type="button">
-						<span class="hamburger-box">
-							<span class="hamburger-inner"></span>
-						</span>
-					</button>
-				</div>
-
-			</div>
-
-			<div class="right-side">
-				<div class="header-widget">
-          <nav id="navigation" class="style-1">
-  					<ul id="responsive">
-  						<li><a class="current" href="/">Home</a></li>
-  						<li><a href="#">How It Works</a></li>
-  					</ul>
-  				</nav>
-          <div id="login-container">
-  					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Log In <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
-          </div>
-				</div>
-			</div>
-
-      {{>auth}}
-		</div>
-	</div>
-</header>
+  {{>nav}}
 
 <div class="clearfix"></div>
 
@@ -93,11 +53,9 @@
           {{/templates}}
   			</div>
 
-  			<div class="row fs-listings">
-  				<div class="col-md-12">
-  					<div style="text-align:left" class="copyrights margin-top-0">&copy; 2019 Vertex 360. All Rights Reserved.</div>
-  				</div>
-  			</div>
+        <div class="row fs-listings">
+          {{>footer}}
+        </div>
   		</section>
 
 		</div>
