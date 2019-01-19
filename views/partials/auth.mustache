@@ -1,0 +1,63 @@
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide" style="background:#fffffa">
+  <div class="small-dialog-header">
+    <img style="max-width:180px" src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-2.svg" />
+  </div>
+
+  <div class="sign-in-form style-1">
+    <ul class="tabs-nav">
+      <li><a href="#tab1">Log In</a></li>
+      <li><a href="#tab2">Register</a></li>
+    </ul>
+
+    <div class="tabs-container alt">
+      <div class="tab-content" id="tab1" style="display: none;">
+        <form method="post" class="login">
+
+          <p class="form-row form-row-wide">
+            <label for="username">Email:
+              <i class="im im-icon-Email"></i>
+              <input id="input-login-email" type="text" class="input-text" name="email" />
+            </label>
+          </p>
+
+          <p class="form-row form-row-wide">
+            <label for="password">Password:
+              <i class="im im-icon-Lock-2"></i>
+              <input id="input-login-password" class="input-text" type="password" />
+            </label>
+          </p>
+
+          <input id="input-login" type="submit" class="button border fw margin-top-10" name="login" value="Log In" />
+        </form>
+      </div>
+
+      <!-- Register -->
+      <div class="tab-content" id="tab2" style="display: none;">
+        <form method="post" class="register">
+          <p class="form-row form-row-wide">
+            <label for="username2">Full Name:
+              <i class="im im-icon-Male"></i>
+              <input id="input-register-name" type="text" class="input-text" />
+            </label>
+          </p>
+
+          <p class="form-row form-row-wide">
+            <label for="email2">Email Address:
+              <i class="im im-icon-Mail"></i>
+              <input id="input-register-email" type="text" class="input-text" />
+            </label>
+          </p>
+
+          <p class="form-row form-row-wide">
+            <label for="password1">Password:
+              <i class="im im-icon-Lock-2"></i>
+              <input id="input-register-password" class="input-text" type="password" />
+            </label>
+          </p>
+
+          <input id="input-register" type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

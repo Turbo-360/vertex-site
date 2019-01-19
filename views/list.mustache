@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <head>
-  <title>Vertex 360 | Professional Websites. Fast.</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="{{{cdn}}}/dist/css/style.min.css">
+  {{>head}}
 </head>
 
 <body>
 
-<!-- Wrapper -->
 <div id="wrapper">
 
 <header id="header-container" class="fixed fullwidth">
@@ -18,8 +14,8 @@
 			<div class="left-side">
 
 				<div id="logo">
-					<a href="index.html">
-            <img src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-2.svg" alt="">
+					<a href="/">
+            <img src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-2.svg" alt="Vertex 360">
           </a>
 				</div>
 
@@ -30,7 +26,6 @@
 						</span>
 					</button>
 				</div>
-
 
 			</div>
 
@@ -46,86 +41,12 @@
 				</div>
 			</div>
 
-			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide" style="background:#fffffa">
-				<div class="small-dialog-header">
-          <img style="max-width:180px" src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-2.svg" />
-				</div>
-
-				<div class="sign-in-form style-1">
-
-					<ul class="tabs-nav">
-						<li><a href="#tab1">Log In</a></li>
-						<li><a href="#tab2">Register</a></li>
-					</ul>
-
-					<div class="tabs-container alt">
-
-						<div class="tab-content" id="tab1" style="display: none;">
-							<form method="post" class="login">
-
-								<p class="form-row form-row-wide">
-									<label for="username">Email:
-										<i class="im im-icon-Email"></i>
-										<input type="text" class="input-text" name="email" value="" />
-									</label>
-								</p>
-
-								<p class="form-row form-row-wide">
-									<label for="password">Password:
-										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="password" />
-									</label>
-								</p>
-
-                <input type="submit" class="button border fw margin-top-10" name="login" value="Log In" />
-							</form>
-						</div>
-
-						<!-- Register -->
-						<div class="tab-content" id="tab2" style="display: none;">
-							<form method="post" class="register">
-  							<p class="form-row form-row-wide">
-  								<label for="username2">Full Name:
-  									<i class="im im-icon-Male"></i>
-  									<input type="text" class="input-text" name="name" value="" />
-  								</label>
-  							</p>
-
-  							<p class="form-row form-row-wide">
-  								<label for="email2">Email Address:
-  									<i class="im im-icon-Mail"></i>
-  									<input type="text" class="input-text" name="email" value="" />
-  								</label>
-  							</p>
-
-  							<p class="form-row form-row-wide">
-  								<label for="password1">Password:
-  									<i class="im im-icon-Lock-2"></i>
-  									<input class="input-text" type="password" name="password1" />
-  								</label>
-  							</p>
-
-                <div class="form-row">
-									<div class="checkboxes margin-top-10">
-										<input id="remember-me" type="checkbox" name="check">
-										<label for="remember-me">Remember Me</label>
-									</div>
-								</div>
-
-  							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
+      {{>auth}}
 		</div>
 	</div>
-
 </header>
-<div class="clearfix"></div>
 
+<div class="clearfix"></div>
 
 <div class="fs-container">
 
@@ -138,7 +59,6 @@
           Create fully-featured professional websites in minutes. Select a template
           below to get started.
         </p>
-
 			</section>
 
   		<section class="listings-container margin-top-30">
@@ -225,10 +145,89 @@
     var selected = data.selected
     var user = data.user
 
-    var reloadUI = function(){
-      // var templateContainer = document.getElementById('selected-template-container')
-      // templateContainer.scrollTop = 0
+    if (user == null){
+      $('#input-register').click(function(event){
+        if (event)
+          event.preventDefault()
 
+        var visitor = {
+          fullName: $('#input-register-name').val(),
+          email: $('#input-register-email').val(),
+          password: $('#input-register-password').val()
+        }
+
+        if (visitor.fullName.length == 0){
+          alert('Please enter your NAME')
+          return
+        }
+
+        if (visitor.email.length == 0){
+          alert('Please enter your EMAIL')
+          return
+        }
+
+        if (visitor.password.length == 0){
+          alert('Please enter your PASSWORD')
+          return
+        }
+
+        $.ajax({
+          url: '/account/register',
+          type: 'POST',
+          data: visitor,
+          success: function(response, status, xhr){
+            if (response.confirmation != 'success'){
+              alert('Error: ' + response.message)
+              return
+            }
+
+            window.location.href = '/me'
+          },
+          error: function(xhr, status, err){
+            alert('Error: ' + err.message)
+          }
+        })
+      })
+
+      $('#input-login').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        var visitor = {
+          email: $('#input-login-email').val(),
+          password: $('#input-login-password').val()
+        }
+
+        if (visitor.email.length == 0){
+          alert('Please enter your EMAIL')
+          return
+        }
+
+        if (visitor.password.length == 0){
+          alert('Please enter your PASSWORD')
+          return
+        }
+
+        $.ajax({
+          url: '/account/login',
+          type: 'POST',
+          data: visitor,
+          success: function(response, status, xhr){
+            if (response.confirmation != 'success'){
+              alert('Error: ' + response.message)
+              return
+            }
+
+            window.location.href = '/me'
+          },
+          error: function(xhr, status, err){
+            alert('Error: ' + err.message)
+          }
+        })
+      })
+    }
+
+    var reloadUI = function(){
       $('#selected-template-container').animate({
          scrollTop: 0
       }, 'slow');
