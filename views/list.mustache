@@ -130,7 +130,13 @@
     <div class="screenshot"><img src="<% . %>" /></div>
     <%/images %>
 
-    <a style="margin-top:20px" id="btn-clone-template" href="#" class="button with-icon">Use This Template <i class="fa fa-angle-right"></i></a>
+    <div id="launch-template-container">
+      <div id="btn-launch-container">
+        <input id="input-site-name" type="text" placeholder="Your Site Name" />
+        <a style="margin-top:20px" id="btn-clone-template" href="#" class="button with-icon">Use This Template <i class="fa fa-angle-right"></i></a>
+      </div>
+    </div>
+
   </div>
 </script>
 
@@ -244,8 +250,9 @@
         // TODO: check if user logged in. if so, don't do this:
         if (user == null)
           document.getElementById('btn-login').click()
-        else
+        else {
           console.log('LAUNCH TEMPLATE')
+        }
       })
     }
 
