@@ -81,6 +81,11 @@ router.get('/me', (req, res) => {
 			sites: sites
 		}
 
+		data['preloaded'] = JSON.stringify({
+			user: req.user,
+			sites: sites
+		})
+
 		res.render('account', data)
 	})
 	.catch(err => {
