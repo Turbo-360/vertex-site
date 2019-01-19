@@ -157,6 +157,25 @@
     var selected = data.selected
     var user = data.user
 
+    var postRequest = function(url, data, completion){
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: data,
+        success: function(response, status, xhr){
+          if (response.confirmation != 'success'){
+            completion(response, null) // 'data' is the error object here.
+            return
+          }
+
+          completion(null, response)
+        },
+        error: function(xhr, status, err){
+          completion(err, null)
+        }
+      })
+    }
+
     if (user == null){
       $('#input-register').click(function(event){
         if (event)
@@ -183,21 +202,13 @@
           return
         }
 
-        $.ajax({
-          url: '/account/register',
-          type: 'POST',
-          data: visitor,
-          success: function(response, status, xhr){
-            if (response.confirmation != 'success'){
-              alert('Error: ' + response.message)
-              return
-            }
-
-            window.location.href = '/me'
-          },
-          error: function(xhr, status, err){
-            alert('Error: ' + err.message)
+        postRequest('/account/register', visitor, function(err, response){
+          if (err){
+            alert(response.message)
+            return
           }
+
+          window.location.href = '/me'
         })
       })
 
@@ -220,21 +231,13 @@
           return
         }
 
-        $.ajax({
-          url: '/account/login',
-          type: 'POST',
-          data: visitor,
-          success: function(response, status, xhr){
-            if (response.confirmation != 'success'){
-              alert('Error: ' + response.message)
-              return
-            }
-
-            window.location.href = '/me'
-          },
-          error: function(xhr, status, err){
-            alert('Error: ' + err.message)
+        postRequest('/account/login', visitor, function(err, response){
+          if (err){
+            alert(response.message)
+            return
           }
+
+          window.location.href = '/me'
         })
       })
     }
