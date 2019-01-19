@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
+  <style>
+    .list-box-listing-img {
+      width: 96px !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,12 +35,11 @@
 		<div id="titlebar">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Bookmarks</h2>
+					<h2>Sites</h2>
 					<!-- Breadcrumbs -->
 					<nav id="breadcrumbs">
 						<ul>
 							<li><a href="#">Home</a></li>
-							<li><a href="#">Dashboard</a></li>
 							<li>Bookmarks</li>
 						</ul>
 					</nav>
@@ -45,12 +49,11 @@
 
 		<div class="row">
 
-			<!-- Listings -->
 			<div class="col-lg-12 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
 					<h4>Bookmarked Listings</h4>
-					<ul>
 
+					<ul>
             {{#sites}}
 						<li>
 							<div class="list-box-listing">
@@ -67,12 +70,11 @@
 								</div>
 							</div>
 							<div class="buttons-to-right">
-								<a href="#" class="button"><i class="sl sl-icon-close"></i> Pages</a>
-                <a href="#" class="button"><i class="sl sl-icon-close"></i> Delete</a>
+								<a href="/pages/{{slug}}" class="button"><i class="sl sl-icon-close"></i> Pages</a>
+                <a href="/cms/{{slug}}" class="button"><i class="sl sl-icon-close"></i> CMS</a>
 							</div>
 						</li>
             {{/sites}}
-
 					</ul>
 				</div>
 			</div>
