@@ -133,11 +133,11 @@
     <hr />
     <p style="margin-bottom:16px">Launch this template on your account.</p>
     <div id="launch-template-container">
-      <div class="row" id="btn-launch-container">
+      <div class="row">
         <div class="col-md-6">
           <input id="input-site-name" type="text" placeholder="Your Site Name" />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" id="btn-launch-container">
           <a style="margin-top:4px" id="btn-clone-template" href="#" class="button with-icon">Use This Template <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -174,6 +174,58 @@
           completion(err, null)
         }
       })
+    }
+
+    // checks if a template is ready when cloning:
+    var checkTemplate = function(siteSlug){
+      var body = {template:siteSlug}
+      postRequest('/account/check-template', body, function(err, response){
+        if (err){
+          console.log('TEMPLATE NOT READY: ')
+          setTimeout(function(){
+            checkTemplate(siteSlug)
+          }, 4000)
+          return
+        }
+
+        // console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+        if (response.confirmation != 'success'){
+          alert('Error - ' + response.message)
+          return
+        }
+
+        window.location.href = '/admin/'+siteSlug
+      })
+    }
+
+    var launchTemplate = function(){
+      if (user == null){
+        alert('Please log in or register to clone this site.')
+        return
+      }
+
+      var body = {
+        name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+        source: template.id // ID of the template being copied
+      }
+
+      if (body.name.length == 0){
+        alert('Please enter a name for your site')
+        return
+      }
+
+      $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em>Launching your site...</em>")
+      // postRequest('/account/launch-template', body, function(err, response){
+      //   if (err){
+      //     alert('Error: ' + err.message)
+      //     return
+      //   }
+      //
+      // // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+      //   setTimeout(function(){
+      //     checkTemplate(response.data.slug)
+      //   }, 4000)
+      // })
     }
 
     if (user == null){
@@ -260,7 +312,8 @@
         if (user == null)
           document.getElementById('btn-login').click()
         else {
-          console.log('LAUNCH TEMPLATE')
+          // console.log('LAUNCH TEMPLATE')
+          launchTemplate()
         }
       })
     }
