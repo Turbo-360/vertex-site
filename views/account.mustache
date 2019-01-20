@@ -34,8 +34,49 @@
 		<div class="row">
 
 			<div class="col-lg-9 col-md-9">
-				<div class="dashboard-list-box margin-top-0">
-					<h4>Manage Your Sites</h4>
+        <div id="content-profile" class="dashboard-list-box margin-top-0">
+					<h4 class="gray">Profile Details</h4>
+					<div class="dashboard-list-box-static">
+
+						<div class="edit-profile-photo">
+							<img src="images/user-avatar.jpg" alt="">
+							<div class="change-photo-btn">
+								<div class="photoUpload">
+								    <span><i class="fa fa-upload"></i> Upload Photo</span>
+								    <input type="file" class="upload" />
+								</div>
+							</div>
+						</div>
+
+						<div class="my-profile">
+							<label>Your Name</label>
+							<input value="Tom Perrin" type="text">
+
+							<label>Phone</label>
+							<input value="(123) 123-456" type="text">
+
+							<label>Email</label>
+							<input value="tom@example.com" type="text">
+
+							<label>Notes</label>
+							<textarea name="notes" id="notes" cols="30" rows="10">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
+
+							<label><i class="fa fa-twitter"></i> Twitter</label>
+							<input placeholder="https://www.twitter.com/" type="text">
+
+							<label><i class="fa fa-facebook-square"></i> Facebook</label>
+							<input placeholder="https://www.facebook.com/" type="text">
+
+							<label><i class="fa fa-google-plus"></i> Google+</label>
+							<input placeholder="https://www.google.com/" type="text">
+						</div>
+
+						<button class="button margin-top-15">Save Changes</button>
+					</div>
+				</div>
+
+				<div id="content-sites" class="dashboard-list-box margin-top-0">
+					<h4 class="gray">Manage Your Sites</h4>
 					<ul>
             {{#sites}}
 						<li>
@@ -60,6 +101,7 @@
             {{/sites}}
 					</ul>
 				</div>
+
 			</div>
 
       {{>footer}}
@@ -67,7 +109,6 @@
 	</div>
 
 </div>
-
 
 </div>
 
@@ -83,6 +124,16 @@
       var sidebarMenu = ['list-item-profile', 'list-item-sites']
 
       var reloadUI = function(){
+        if (selected == 'profile'){
+          $('#content-sites').css('display', 'none')
+          $('#content-profile').css('display', '')
+        }
+
+        if (selected == 'sites'){
+          $('#content-profile').css('display', 'none')
+          $('#content-sites').css('display', '')
+        }
+
         sidebarMenu.forEach(function(listItem){
           var selectedListItem = 'list-item-'+selected
           if (listItem == selectedListItem)
