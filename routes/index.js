@@ -83,7 +83,8 @@ router.get('/me', (req, res) => {
 
 		data['preloaded'] = JSON.stringify({
 			user: req.user,
-			sites: sites
+			sites: sites,
+			selected: req.query.selected || 'profile'
 		})
 
 		res.render('account', data)
@@ -101,7 +102,8 @@ router.get('/dashboard', (req, res) => {
 
 	data['preloaded'] = JSON.stringify({
 		user: data.user,
-		sites: data.sites
+		sites: data.sites,
+		selected: req.query.selected || 'profile'
 	})
 
 	res.render('account', data)
