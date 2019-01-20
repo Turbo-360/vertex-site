@@ -63,7 +63,7 @@
 							<input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
 
 							<label>Bio</label>
-							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6"></textarea>
+							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6">{{user.bio}}</textarea>
 						</div>
 
 						<button id="btn-update-profile" class="button margin-top-15">Update Profile</button>
@@ -166,13 +166,11 @@
           bio: $('#input-profile-bio').val()
         }
 
-        // console.log('Update Profile: ' + JSON.stringify(updatedProfile))
         $.ajax({
           url: '/account/update',
           type: 'POST',
           data: updatedProfile,
           success: function(response, status, xhr){
-            console.log('Update Profile: ' + JSON.stringify(response))
             if (response.confirmation != 'success'){
               alert('Error - ' + response.message)
               return
