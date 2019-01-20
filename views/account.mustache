@@ -54,19 +54,19 @@
 
 						<div class="my-profile">
 							<label>First Name</label>
-							<input style="background:#fffffa" value="{{user.firstName}}" type="text" />
+							<input id="input-profile-firstName" style="background:#fffffa" value="{{user.firstName}}" type="text" />
 
               <label>Last Name</label>
-							<input style="background:#fffffa" value="{{user.lastName}}" type="text" />
+							<input id="input-profile-lastName" style="background:#fffffa" value="{{user.lastName}}" type="text" />
 
               <label>Username</label>
-							<input style="background:#fffffa" value="{{user.username}}" type="text" />
+							<input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
 
 							<label>Bio</label>
-							<textarea style="background:#fffffa" name="notes" cols="30" rows="6"></textarea>
+							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6"></textarea>
 						</div>
 
-						<button class="button margin-top-15">Update Profile</button>
+						<button id="btn-update-profile" class="button margin-top-15">Update Profile</button>
 					</div>
 				</div>
 
@@ -151,8 +151,42 @@
       })
 
       $('#login-container').html('<a href="/me" class="button">My Account</a>')
-      reloadUI()
+      $('#btn-update-profile').click(function(event){
+        if (event)
+          event.preventDefault()
 
+        if (user == null)
+          return
+
+        var updatedProfile = {
+          id: user.id,
+          firstName: $('#input-profile-firstName').val().trim().toLowerCase(),
+          lastName: $('#input-profile-lastName').val().trim().toLowerCase(),
+          username: $('#input-profile-username').val().trim(),
+          bio: $('#input-profile-bio').val()
+        }
+
+        // console.log('Update Profile: ' + JSON.stringify(updatedProfile))
+        $.ajax({
+          url: '/account/update',
+          type: 'POST',
+          data: updatedProfile,
+          success: function(response, status, xhr){
+            console.log('Update Profile: ' + JSON.stringify(response))
+            if (response.confirmation != 'success'){
+              alert('Error - ' + response.message)
+              return
+            }
+
+            alert('Profile Successfully Updated')
+          },
+          error: function(xhr, status, err){
+            alert('Error - ' + err.message)
+          }
+        })
+      })
+
+      reloadUI()
     })()
   </script>
 </body>
