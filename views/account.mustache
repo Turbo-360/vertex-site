@@ -42,29 +42,39 @@
 					<h4 class="gray">Profile Details</h4>
 					<div class="dashboard-list-box-static">
 
-						<div class="edit-profile-photo">
-							<img src="images/user-avatar.jpg" alt="">
-							<div class="change-photo-btn">
-								<div class="photoUpload">
-								    <span><i class="fa fa-upload"></i> Upload Photo</span>
-								    <input type="file" class="upload" />
-								</div>
-							</div>
-						</div>
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="my-profile">
+    							<label>First Name</label>
+    							<input id="input-profile-firstName" style="background:#fffffa" value="{{user.firstName}}" type="text" />
 
-						<div class="my-profile">
-							<label>First Name</label>
-							<input id="input-profile-firstName" style="background:#fffffa" value="{{user.firstName}}" type="text" />
+                  <label>Last Name</label>
+    							<input id="input-profile-lastName" style="background:#fffffa" value="{{user.lastName}}" type="text" />
 
-              <label>Last Name</label>
-							<input id="input-profile-lastName" style="background:#fffffa" value="{{user.lastName}}" type="text" />
+                  <label>Username</label>
+    							<input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
 
-              <label>Username</label>
-							<input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
+    							<label>Bio</label>
+    							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6">{{user.bio}}</textarea>
+    						</div>
+              </div>
 
-							<label>Bio</label>
-							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6">{{user.bio}}</textarea>
-						</div>
+              <div class="col-lg-4">
+                <div class="edit-profile-photo">
+    							<img src="images/user-avatar.jpg" alt="">
+    						</div>
+                <div class="photoUpload">
+                    <span><i class="fa fa-upload"></i> Upload Photo</span>
+                    <input type="file" class="upload btn btn-success" />
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+
 
 						<button id="btn-update-profile" class="button margin-top-15">Update Profile</button>
 					</div>
