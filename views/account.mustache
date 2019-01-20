@@ -23,8 +23,8 @@
 	<div class="dashboard-nav">
 		<div class="dashboard-nav-inner">
 			<ul data-submenu-title="Account">
-				<li><a href="#"><i class="sl sl-icon-settings"></i> Profile</a></li>
-				<li class="active"><a href="#"><i class="sl sl-icon-envelope-open"></i> Sites</a></li>
+				<li><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-settings"></i> Profile</a></li>
+				<li class="active"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-envelope-open"></i> Sites</a></li>
 			</ul>
 		</div>
 	</div>
@@ -80,6 +80,24 @@
 
       var data = window.__PRELOADED__
       var user = data.user
+      var selected = data.selected
+
+      var reloadUI = function(){
+        console.log('reloadUI: ' + selected)
+
+      }
+
+      $('.sidebar-menu-option').each(function(i, el){
+        console.log('sidebar-menu-option')
+        $(this).click(function(event){
+          if (event)
+            event.preventDefault()
+
+          // console.log('TEST: ' + event.target.text)
+          selected = event.target.text.toLowerCase()
+          reloadUI()
+        })
+      })
 
       $('#login-container').html('<a href="/me" class="button">My Account</a>')
 
