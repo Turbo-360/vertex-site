@@ -5,6 +5,10 @@
     .list-box-listing-img {
       max-width: 96px !important;
     }
+
+    .my-profile textarea {
+      max-height: 120px;
+    }
   </style>
 </head>
 
@@ -49,29 +53,20 @@
 						</div>
 
 						<div class="my-profile">
-							<label>Your Name</label>
-							<input value="Tom Perrin" type="text">
+							<label>First Name</label>
+							<input style="background:#fffffa" value="{{user.firstName}}" type="text" />
 
-							<label>Phone</label>
-							<input value="(123) 123-456" type="text">
+              <label>Last Name</label>
+							<input style="background:#fffffa" value="{{user.lastName}}" type="text" />
 
-							<label>Email</label>
-							<input value="tom@example.com" type="text">
+              <label>Username</label>
+							<input style="background:#fffffa" value="{{user.username}}" type="text" />
 
-							<label>Notes</label>
-							<textarea name="notes" id="notes" cols="30" rows="10">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
-
-							<label><i class="fa fa-twitter"></i> Twitter</label>
-							<input placeholder="https://www.twitter.com/" type="text">
-
-							<label><i class="fa fa-facebook-square"></i> Facebook</label>
-							<input placeholder="https://www.facebook.com/" type="text">
-
-							<label><i class="fa fa-google-plus"></i> Google+</label>
-							<input placeholder="https://www.google.com/" type="text">
+							<label>Bio</label>
+							<textarea style="background:#fffffa" name="notes" cols="30" rows="6"></textarea>
 						</div>
 
-						<button class="button margin-top-15">Save Changes</button>
+						<button class="button margin-top-15">Update Profile</button>
 					</div>
 				</div>
 
