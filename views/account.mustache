@@ -23,8 +23,8 @@
 	<div class="dashboard-nav">
 		<div class="dashboard-nav-inner">
 			<ul data-submenu-title="Account">
-				<li><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-settings"></i> Profile</a></li>
-				<li class="active"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-envelope-open"></i> Sites</a></li>
+				<li id="list-item-profile"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-settings"></i> Profile</a></li>
+				<li id="list-item-sites" class="active"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-envelope-open"></i> Sites</a></li>
 			</ul>
 		</div>
 	</div>
@@ -81,20 +81,25 @@
       var data = window.__PRELOADED__
       var user = data.user
       var selected = data.selected
+      var sidebarMenu = ['list-item-profile', 'list-item-sites']
 
       var reloadUI = function(){
-        console.log('reloadUI: ' + selected)
-
+        sidebarMenu.forEach(function(listItem){
+          var selectedListItem = 'list-item-'+selected
+          if (listItem == selectedListItem)
+            $('#'+listItem).addClass('active')
+          else
+            $('#'+listItem).removeClass('active')
+        })
       }
 
       $('.sidebar-menu-option').each(function(i, el){
-        console.log('sidebar-menu-option')
         $(this).click(function(event){
           if (event)
             event.preventDefault()
 
           // console.log('TEST: ' + event.target.text)
-          selected = event.target.text.toLowerCase()
+          selected = event.target.text.trim().toLowerCase()
           reloadUI()
         })
       })
