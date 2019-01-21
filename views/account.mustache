@@ -63,10 +63,7 @@
                 <div class="edit-profile-photo">
     							<img src="{{user.image}}=s512-c" alt="">
     						</div>
-                <div class="photoUpload">
-                    <span><i class="fa fa-upload"></i> Upload Photo</span>
-                    <input type="file" class="upload btn btn-success" />
-                </div>
+                <button id="btn-upload" class="button">Upload Photo</button>
               </div>
             </div>
 
@@ -114,7 +111,6 @@
 
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-  <script type="text/javascript" src="{{{cdn}}}/js/dropzone.js"></script>
   <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
   <script type="text/javascript">
     (function(){
@@ -124,6 +120,17 @@
       var user = data.user
       var selected = data.selected
       var sidebarMenu = ['list-item-profile', 'list-item-sites']
+
+      var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
+      $('#btn-upload').click(function(event){
+        console.log('upload photo')
+        turbo.uploadFile({
+          apiKey: '16874eb4-417b-4147-9657-18a4a2c8cada',
+  				completion: function(file){
+  					console.log('File Uploaded: ' + JSON.stringify(file))
+  				}
+        })
+      })
 
       var reloadUI = function(){
         if (selected == 'profile'){
