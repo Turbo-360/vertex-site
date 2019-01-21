@@ -9,31 +9,6 @@ const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 const templates = {}
 const categories = ['landing', 'resume', 'restaurant', 'fitness', 'realtor', 'lessons']
 
-/*
-router.get('/', (req, res) => {
-	const selected = categories[0]
-	const data = {
-		categories: categories
-	}
-
-	controllers.site.get({'template.status':'live', 'template.category':selected})
-	.then(sites => {
-		templates[selected] = sites
-		data['preloaded'] = JSON.stringify({
-			user: req.user,
-			selected: selected,
-			templates: templates
-		})
-
-		res.render('index', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-}) */
 
 router.get('/', (req, res) => {
 	const selected = categories[0]
