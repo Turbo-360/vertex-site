@@ -52,6 +52,7 @@ gulp.task('vendor', function(){
                 './public/scripts/counterup.min.js',
                 './public/scripts/tooltips.min.js',
                 './public/js/mustache.js',
+                './public/js/dropzone.js',
                 './public/scripts/custom.js'
             ]
         )
