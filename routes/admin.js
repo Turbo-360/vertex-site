@@ -28,6 +28,8 @@ router.get('/test', (req, res) => {
 	})
 })
 
+// this is no longer in use
+/*
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -54,8 +56,7 @@ router.get('/:slug', (req, res) => {
 			message: err.message
 		})
 	})
-
-})
+}) */
 
 router.get('/cms/:slug', (req, res) => {
 	if (req.user == null){
@@ -83,11 +84,6 @@ router.get('/cms/:slug', (req, res) => {
 			message: err.message
 		})
 	})
-
-	// res.json({
-	// 	confirmation: 'success',
-	// 	data: 'CMS page for ' + req.params.slug
-	// })
 })
 
 router.get('/pages/:slug', (req, res) => {
