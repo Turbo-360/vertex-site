@@ -123,7 +123,9 @@
 
       var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
       $('#btn-upload').click(function(event){
-        console.log('upload photo')
+        if (user == null)
+          return
+
         turbo.uploadFile({
           apiKey: '16874eb4-417b-4147-9657-18a4a2c8cada',
   				completion: function(err, file){
@@ -134,6 +136,28 @@
 
             var imageUrl = file.result.url+'=s512-c'
             $('#profile-image').attr('src', imageUrl)
+
+            var updatedProfile = {
+              id: user.id,
+              image: file.result.url
+            }
+
+            $.ajax({
+              url: '/account/update',
+              type: 'POST',
+              data: updatedProfile,
+              success: function(response, status, xhr){
+                if (response.confirmation != 'success'){
+                  alert('Error - ' + response.message)
+                  return
+                }
+
+                alert('Profile Successfully Updated')
+              },
+              error: function(xhr, status, err){
+                alert('Error - ' + err.message)
+              }
+            })
   				}
         })
       })
