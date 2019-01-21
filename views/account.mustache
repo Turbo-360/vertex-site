@@ -126,7 +126,7 @@
         console.log('upload photo')
         turbo.uploadFile({
           apiKey: '16874eb4-417b-4147-9657-18a4a2c8cada',
-  				completion: function(file){
+  				completion: function(err, file){
   					console.log('File Uploaded: ' + JSON.stringify(file))
   				}
         })
