@@ -444,6 +444,9 @@ router.post('/:action', function(req, res, next){
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
 			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
+			newSiteInfo['image'] = copiedSite.image
+			newSiteInfo['template'] = {staus:'dev', category:copiedSite.template.category}
+			newSiteInfo['globalConfig'] = Object.assign({}, copiedSite.globalConfig)
 			return controllers.site.post(newSiteInfo) // create new site
 		})
 		.then(data => {
