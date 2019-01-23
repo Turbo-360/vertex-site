@@ -138,6 +138,15 @@ module.exports = {
 			// 	return
 			// })
 
+			if (params['globalConfig'] != null){
+				try {
+					params['globalConfig'] = JSON.parse(params.globalConfig)
+				}
+				catch(err){
+
+				}
+			}
+
 			Site.findByIdAndUpdate(id, params, {new:true}, function(err, site){
 				if (err){
 					reject(err)
@@ -161,12 +170,12 @@ module.exports = {
 				}
 
 				// Create corresponding update object for the Feed:
-				var summary = site.summary()
-				var update = {
-					site: {id:summary.id, slug:summary.slug, image:summary.image, name:summary.name},
-					description: 'App updated: ' + Object.keys(params).join(', '),
-					profile: summary.profile // TODO: this has to change, it can be a collaborator
-				}
+				// var summary = site.summary()
+				// var update = {
+				// 	site: {id:summary.id, slug:summary.slug, image:summary.image, name:summary.name},
+				// 	description: 'App updated: ' + Object.keys(params).join(', '),
+				// 	profile: summary.profile // TODO: this has to change, it can be a collaborator
+				// }
 
 				// UpdateController.post(update)
 
