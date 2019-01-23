@@ -68,7 +68,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		// authorized: this.authorized,
 		// services: this.services,
 		api: this.api,
-		globalConfig: globalConfig,
+		globalConfig: this.globalConfig,
 		pages: this.pages,
 		template: this.template,
 		meta: () => { // meta data for <head> tag
