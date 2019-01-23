@@ -143,7 +143,7 @@ module.exports = {
 					params['globalConfig'] = JSON.parse(params.globalConfig)
 				}
 				catch(err){
-
+					console.log('PARSE ERROR: ' + err.message)
 				}
 			}
 
