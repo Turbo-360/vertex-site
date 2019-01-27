@@ -49,7 +49,7 @@ router.get('/me', (req, res) => {
 		return
 	}
 
-	controllers.site.get({'profile.id':req.user.id})
+	controllers.site.get({'profile.id':req.user.id, format:'vertex'})
 	.then(sites => {
 		const data = {
 			cdn: CDN,
