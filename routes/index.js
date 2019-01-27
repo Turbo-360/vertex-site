@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 	// res.render('list', data)
 	// controllers.site.get({'template.status':'live', 'template.category':selected})
-	controllers.site.get({'template.status':'live'})
+	controllers.site.get({'template.status':'live', format:'vertex'})
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['index'] = i
