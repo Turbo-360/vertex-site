@@ -4,6 +4,7 @@ const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const superagent = require('superagent')
 const router = vertex.router()
 const controllers = require('../controllers')
+const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const templates = {}
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['index'] = i
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
 		})
 
 		templates[selected] = sites
