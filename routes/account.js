@@ -73,6 +73,39 @@ router.get('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'env'){
+		const variables = req.query.variables
+		if (variables == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'missing variables query parameter.'
+			})
+
+			return
+		}
+
+		try {
+			const env = JSON.parse(variables)
+			const keys = Object.keys(env)
+			let envString = ''
+			keys.forEach((key, i) => {
+				envString += key+'='+env[key]+'\r'
+			})
+
+			res.set("Content-Disposition", "attachment;filename=env.txt")
+			res.set("Content-Type", "text/plain")
+			// res.send('ENV=Variables\rTEST=123')
+			res.send(envString)
+		}
+		catch (err) {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		}
+
+		return
+	}
 
 	res.json({
 		confirmation: 'fail',
