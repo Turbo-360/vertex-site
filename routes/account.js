@@ -453,6 +453,7 @@ router.post('/:action', function(req, res, next){
 		const newSiteInfo = {
 			name: params.name,
 			isClone: 'yes',
+			source: 'vertex360',
 			profile: {
 				id: req.user.id,
 		    slug: req.user.slug,
