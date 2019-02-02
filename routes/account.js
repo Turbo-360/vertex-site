@@ -452,6 +452,7 @@ router.post('/:action', function(req, res, next){
 
 		const newSiteInfo = {
 			name: params.name,
+			isClone: 'yes',
 			profile: {
 				id: req.user.id,
 		    slug: req.user.slug,
@@ -480,6 +481,7 @@ router.post('/:action', function(req, res, next){
 			newSiteInfo['image'] = copiedSite.image
 			newSiteInfo['template'] = {staus:'dev', category:copiedSite.template.category}
 			newSiteInfo['globalConfig'] = Object.assign({}, copiedSite.globalConfig)
+			newSiteInfo['cloneSource'] = copiedSite.id
 			return controllers.site.post(newSiteInfo) // create new site
 		})
 		.then(data => {
