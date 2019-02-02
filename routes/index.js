@@ -51,7 +51,7 @@ router.get('/me', (req, res) => {
 		return
 	}
 
-	controllers.site.get({'profile.id':req.user.id, format:'vertex'})
+	controllers.site.get({'profile.id':req.user.id, format:'vertex', isClone:'yes'})
 	.then(sites => {
 		const data = {
 			cdn: CDN,
