@@ -45,6 +45,7 @@ SiteSchema.methods.summary = function(authLevel) {
 	const summary = {
 		profile: this.profile,
 		format: this.format,
+		origin: this.origin,
 		collaborators: this.collaborators,
 		tags: this.tags,
 		invited: this.invited,
