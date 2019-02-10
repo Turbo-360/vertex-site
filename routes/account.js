@@ -131,7 +131,7 @@ router.post('/:action', function(req, res, next){
 	if (action == 'currentuser'){
 		res.json({
 			confirmation: 'success',
-			user: req.user || null
+			user: req.user || req.body
 		})
 
 		return
