@@ -140,9 +140,11 @@ router.post('/:action', function(req, res, next){
 		}
 
 		try {
+			let currentUser = null
 			const decoded = sessions.util.decode({cookieName:'vertex_session', secret:process.env.SESSION_SECRET}, params.vertex_session)
 			controllers.profile.getById(decoded.content.user) // decoded.content.user == userID
 		  .then(user => {
+				currentUser = user
 				return controllers.site({slug: params.site}) // 'great-landing-page-2qcx0x'
 		  })
 			.then(sites => {
@@ -152,15 +154,15 @@ router.post('/:action', function(req, res, next){
 				}
 
 				const site = sites[0]
-				if (site.profile.id != user.id){
+				if (site.profile.id != currentUser.id){
 					throw new Error('Unauthorized')
 					return
 				}
 
 				res.json({
 					confirmation: 'success',
-					user: user,
-					site: params.site
+					user: currentUser,
+					site: site
 				})
 			})
 		  .catch(err => {
