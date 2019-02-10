@@ -128,6 +128,15 @@ router.post('/:action', function(req, res, next){
 		params['confirmed'] = 'yes'
 	}
 
+	if (action == 'currentuser'){
+		res.json({
+			confirmation: 'success',
+			user: req.user || null
+		})
+
+		return
+	}
+
 	let user = null
 	if (action == 'register'){
 		controllers.profile.post(params)
