@@ -143,20 +143,30 @@ router.post('/:action', function(req, res, next){
 			const decoded = sessions.util.decode({cookieName:'vertex_session', secret:process.env.SESSION_SECRET}, params.vertex_session)
 			controllers.profile.getById(decoded.content.user) // decoded.content.user == userID
 		  .then(user => {
+				return controllers.site({slug: params.site}) // 'great-landing-page-2qcx0x'
+		  })
+			.then(sites => {
+				if (sites.length == 0){
+					throw new Error('Site '+params.site+' not found')
+					return
+				}
+
+				const site = sites[0]
+				if (site.profile.id != user.id){
+					throw new Error('Unauthorized')
+					return
+				}
+
 				res.json({
 					confirmation: 'success',
 					user: user,
 					site: params.site
 				})
-		  })
+			})
 		  .catch(err => {
 				throw err
 		  })
 
-			// res.json({
-			// 	confirmation: 'success',
-			// 	user: decoded.content.user
-			// })
 		}
 		catch(err){
 			res.json({
