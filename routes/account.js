@@ -5,6 +5,7 @@ const controllers = require('../controllers')
 const jwt = require('jsonwebtoken')
 const Base64 = require('js-base64').Base64
 const fs = require('fs')
+const sessions = require('client-sessions')
 
 router.get('/:action', function(req, res, next){
 	const action = req.params.action
@@ -138,10 +139,20 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		res.json({
-			confirmation: 'success',
-			user: params.vertex_session
-		})
+		try {
+			const decoded = sessions.util.decode({cookieName:'vertex_session', secret:process.env.SESSION_SECRET}, params.vertex_session)
+			res.json({
+				confirmation: 'success',
+				user: decoded
+			})
+		}
+		catch(err){
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		}
+
 		return
 	}
 
