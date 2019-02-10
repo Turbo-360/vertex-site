@@ -58,7 +58,8 @@ app.use(sessions({
   duration: 14*24*60*60*1000, // 14 days
   activeDuration:30*60*1000,
   cookie: {
-   domain: (process.env.ENVIRONMENT=='dev') ? 'localhost' : '.vertex360.co'
+   domain: (process.env.ENVIRONMENT=='dev') ? 'localhost' : '.vertex360.co',
+   httpOnly: false
   }
 }))
 
