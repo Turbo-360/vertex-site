@@ -141,10 +141,21 @@ router.post('/:action', function(req, res, next){
 
 		try {
 			const decoded = sessions.util.decode({cookieName:'vertex_session', secret:process.env.SESSION_SECRET}, params.vertex_session)
-			res.json({
-				confirmation: 'success',
-				user: decoded
-			})
+			controllers.profile.getById(decoded.content.user) // decoded.content.user == userID
+		  .then(user => {
+				res.json({
+					confirmation: 'success',
+					user: user
+				})
+		  })
+		  .catch(err => {
+				throw err
+		  })
+
+			// res.json({
+			// 	confirmation: 'success',
+			// 	user: decoded.content.user
+			// })
 		}
 		catch(err){
 			res.json({
