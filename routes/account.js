@@ -129,11 +129,19 @@ router.post('/:action', function(req, res, next){
 	}
 
 	if (action == 'currentuser'){
+		if (params.vertex_session == null){
+			res.json({
+				confirmation: 'success',
+				user: req.user
+			})
+
+			return
+		}
+
 		res.json({
 			confirmation: 'success',
-			user: req.user || req.body
+			user: params.vertex_session
 		})
-
 		return
 	}
 
