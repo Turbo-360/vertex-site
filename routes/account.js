@@ -145,7 +145,8 @@ router.post('/:action', function(req, res, next){
 		  .then(user => {
 				res.json({
 					confirmation: 'success',
-					user: user
+					user: user,
+					site: params.site
 				})
 		  })
 		  .catch(err => {
