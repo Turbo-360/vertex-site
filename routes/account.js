@@ -11,7 +11,7 @@ router.get('/:action', function(req, res, next){
 
 	if (action == 'logout') {
 		// req.sessionDashboard.reset()
-		req.session.reset()
+		req.vertex_session.reset()
 
 		// 'turbo360' is the sso cookie, 'session' is the cookie set by main site
 		// const cookies = [process.env.TURBO_COOKIE_NAME, 'session']
@@ -216,7 +216,7 @@ router.post('/:action', function(req, res, next){
 			}
 
 			// set session here:
-			req.session.user = profile.id
+			req.vertex_session.user = profile.id
 			res.json({
 				confirmation: 'success',
 				user: profile

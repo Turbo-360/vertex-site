@@ -53,13 +53,13 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(sessions({
-  cookieName: 'session',
+  cookieName: 'vertex_session',
   secret: process.env.SESSION_SECRET,
   duration: 14*24*60*60*1000, // 14 days
   activeDuration:30*60*1000,
-  // cookie: {
-  //  domain: (process.env.ENVIRONMENT=='dev') ? 'localhost' : '.turbo360.co'
-  // }
+  cookie: {
+   domain: (process.env.ENVIRONMENT=='dev') ? 'localhost' : '.vertex360.co'
+  }
 }))
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -71,13 +71,21 @@ app.use((req, res, next) => {
 })
 
 app.use((req, res, next) => {
-  if (req.session == null)
+  // if (req.session == null)
+  //   return next()
+  //
+  // if (req.session.user == null)
+  //   return next()
+  //
+  // controllers.profile.getById(req.session.user)
+
+  if (req.vertex_session == null)
     return next()
 
-  if (req.session.user == null)
+  if (req.vertex_session.user == null)
     return next()
 
-  controllers.profile.getById(req.session.user)
+  controllers.profile.getById(req.vertex_session.user)
   .then(user => {
     req.user = user
     return next()
