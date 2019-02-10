@@ -145,7 +145,7 @@ router.post('/:action', function(req, res, next){
 			controllers.profile.getById(decoded.content.user) // decoded.content.user == userID
 		  .then(user => {
 				currentUser = user
-				return controllers.site({slug: params.site}) // 'great-landing-page-2qcx0x'
+				return controllers.site.get({slug: params.site}) // 'great-landing-page-2qcx0x'
 		  })
 			.then(sites => {
 				if (sites.length == 0){
