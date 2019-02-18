@@ -206,7 +206,7 @@ router.post('/:action', function(req, res, next){
 
 			// set session here:
 			const id = user._id || user.id
-			req.session.user = id
+			req.vertex_session.user = id
 			res.json({
 				confirmation: 'success',
 				redirect: params.redirect || null,
