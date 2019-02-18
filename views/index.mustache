@@ -111,6 +111,15 @@
     var selected = data.selected
     var user = data.user
 
+    // the following 2 click handlers need to be added to any new page as well:
+    $('#nav-login').click(function(){
+      $('#tab-login').click()
+    })
+
+    $('#btn-login').click(function(){
+      $('#tab-register').click()
+    })
+
     var postRequest = function(url, data, completion){
       $.ajax({
         url: url,
