@@ -73,7 +73,7 @@ router.get('/cms/:slug', (req, res) => {
 
 		site = data[0]
 		const preloaded = {
-			site: JSON.stringify(site)
+			app: JSON.stringify(site)
 		}
 
 		res.render('admin/cms', preloaded)
