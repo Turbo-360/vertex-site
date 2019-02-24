@@ -73,10 +73,10 @@ router.get('/cms/:slug', (req, res) => {
 
 		site = data[0]
 		const preloaded = {
-			app: JSON.stringify(site)
+			app: site
 		}
 
-		res.render('admin/cms', {data: preloaded})
+		res.render('admin/cms', {data: JSON.stringify(preloaded)})
 	})
 	.catch(err => {
 		res.json({
