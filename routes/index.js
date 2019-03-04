@@ -51,18 +51,30 @@ router.get('/me', (req, res) => {
 		return
 	}
 
-	// TODO: fetch collaborator sites also:
+	const allSites = []
 	controllers.site.get({'profile.id':req.user.id, format:'vertex', origin:'vertex360'})
 	.then(sites => {
+		sites.forEach(site => {
+			allSites.push(site)
+		})
+
+		// Fetch collaborator sites also:
+		return controllers.site.get({'collaborators.id':req.user.id, format:'vertex', origin:'vertex360'})
+	})
+	.then(sites => {
+		sites.forEach(site => {
+			allSites.push(site)
+		})
+
 		const data = {
 			cdn: CDN,
 			user: req.user,
-			sites: sites
+			sites: allSites
 		}
 
 		data['preloaded'] = JSON.stringify({
 			user: req.user,
-			sites: sites,
+			sites: allSites,
 			selected: req.query.selected || 'profile'
 		})
 
