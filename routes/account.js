@@ -154,7 +154,27 @@ router.post('/:action', function(req, res, next){
 				}
 
 				const site = sites[0]
-				if (site.profile.id != currentUser.id){
+				let authorized = false
+				// if (site.profile.id != currentUser.id){
+				// 	throw new Error('Unauthorized')
+				// 	return
+				// }
+
+				if (site.profile.id == currentUser.id){
+					authorized = true
+				}
+				else { // check if collaborator:
+					const collaborators = site.collaborators
+					for (let i=0; i<collaborators.length; i++){
+						const collaborator = collaborators[i]
+						if (collaborator.id == currentUser.id){
+							authorized = true
+							break
+						}
+					}
+				}
+
+				if (authorized != true){
 					throw new Error('Unauthorized')
 					return
 				}
