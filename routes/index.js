@@ -51,6 +51,7 @@ router.get('/me', (req, res) => {
 		return
 	}
 
+	// TODO: fetch collaborator sites also:
 	controllers.site.get({'profile.id':req.user.id, format:'vertex', origin:'vertex360'})
 	.then(sites => {
 		const data = {
