@@ -9326,7 +9326,7 @@ body .notification strong { border: none; }
 
 .listing-item-container.list-layout .listing-item-image {
 	min-height: 200px;
-	flex: 2;
+	flex: 4;
 	height: 100%;
 	overflow: hidden;
 	border-radius: 4px 0 0 4px;
