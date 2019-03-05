@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
+  <style>
+    .tag {
+      background: #f9f9f9;
+      padding: 1px 4px;
+      line-height: 16px;
+      border-radius: 4px;
+      border: 1px solid #ededed;
+      font-size: 10px;
+    }
+  </style>
 </head>
 
 <body>
@@ -42,7 +52,8 @@
   									<span>{{template.category}}</span>
                     <div class="profile-row">
                       <img class="profile-icon" src="{{profile.image}}=s64-c" />
-  										<span>{{profile.username}}</span>
+                      <span class="booking-status pending">Pending</span>
+                      {{#tags}}<span class="tag">{{.}}</span>{{/tags}}
   									</div>
   								</div>
 
