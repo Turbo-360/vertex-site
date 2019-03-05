@@ -175,7 +175,11 @@ router.post('/:action', function(req, res, next){
 				}
 
 				if (authorized != true){
-					throw new Error('Unauthorized')
+					// throw new Error('Unauthorized')
+					res.json({
+						confirmation: 'fail',
+						message: 'Unauthorized'
+					})
 					return
 				}
 
@@ -188,7 +192,6 @@ router.post('/:action', function(req, res, next){
 		  .catch(err => {
 				throw err
 		  })
-
 		}
 		catch(err){
 			res.json({
