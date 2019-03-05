@@ -9314,7 +9314,7 @@ body .notification strong { border: none; }
 }
 
 .listing-item-container.list-layout .listing-item-content {
-	flex: 5;
+	flex: 6;
 	position: relative;
 	bottom: 0;
 	left: 0;
