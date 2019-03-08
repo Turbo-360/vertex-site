@@ -306,11 +306,23 @@
           event.preventDefault()
 
         var template = templates[this.id]
-        if (template.id == selected.id)
+        if (selected == null){
+          selected = template
+          reloadUI()
+        }
+        else if (template.id == selected.id){ // already selected
           return
+        }
+        else {
+          selected = template
+          reloadUI()
+        }
 
-        selected = template
-        reloadUI()
+        // if (template.id == selected.id)
+        //   return
+        //
+        // selected = template
+        // reloadUI()
       })
     })
 
