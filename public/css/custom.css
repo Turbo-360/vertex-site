@@ -52,3 +52,7 @@
   border: 1px solid #ddd;
   padding: 6px;
 }
+
+.right-side-loggedin {
+  width: 30%;
+}
