@@ -279,6 +279,11 @@
          scrollTop: 0
       }, 'slow');
 
+      if (selected == null){
+        $('#selected-template').html('<div>How it Works Content</div>')
+        return
+      }
+
       var tpl = $('#tpl-selected-template').html()
       $('#selected-template').html(Mustache.render(tpl, selected))
       $('#btn-clone-template').click(function(event){
@@ -307,6 +312,15 @@
         selected = template
         reloadUI()
       })
+    })
+
+    $('#nav-how-it-works').click(function(event){
+      if (event)
+        event.preventDefault()
+
+      selected = null
+      reloadUI()
+      console.log('show how it works')
     })
 
     reloadUI()
