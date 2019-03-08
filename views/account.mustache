@@ -125,8 +125,10 @@
       var selected = data.selected
       var sidebarMenu = ['list-item-profile', 'list-item-sites']
 
-      if (user!=null)
+      if (user!=null){
         $('#nav-login').hide()
+        $('#nav-menu').addClass('right-side-loggedin')
+      }
 
       var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
       $('#btn-upload').click(function(event){
