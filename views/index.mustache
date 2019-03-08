@@ -12,6 +12,10 @@
       margin-right: 4px;
       text-transform: lowercase;
     }
+
+    .right-side-loggedin {
+      width: 32%;
+    }
   </style>
 </head>
 
@@ -271,6 +275,7 @@
     }
     else {
       $('#login-container').html('<a href="/me" class="button">My Account</a>')
+      $('#nav-menu').addClass('right-side-loggedin')
       $('#nav-login').hide()
     }
 
