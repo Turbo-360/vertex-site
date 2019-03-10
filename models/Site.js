@@ -58,6 +58,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		github: this.github,
 		slug: this.slug,
 		name: this.name,
+		level: this.level,
 		description: this.description,
 		image: (this.image.length == 0) ? process.env.IMAGE_PLACEHOLDER : this.image,
 		images: this.images,
