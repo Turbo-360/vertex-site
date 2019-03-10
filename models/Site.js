@@ -9,6 +9,7 @@ const truncateText = (str, limit) => {
 
 const SiteSchema = new mongoose.Schema({
 	profile: {type:mongoose.Schema.Types.Mixed, default:{}},
+	level: {type:String, trim:true, default: 'basic'},
 	origin: {type:String, trim:true, default: 'vertex360'}, // vertex360, turbo360
 	format: {type:String, trim:true, default: 'vertex'}, // static, vertex, react
 	clonePrice: {type:Number, default:0},
