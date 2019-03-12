@@ -80,6 +80,25 @@
 </div>
 <!-- Wrapper / End -->
 
+<script type="text/template" id="tpl-how-it-works">
+  <div>
+    <img src="/images/blog-post-02.jpg" alt="">
+
+  	<div class="post-content">
+  		<h3><a href="#">The 50 Greatest Street Arts In London</a></h3>
+
+  		<ul class="post-meta">
+  			<li>August 18, 2017</li>
+  			<li><a href="#">Tips</a></li>
+  			<li><a href="#">7 Comments</a></li>
+  		</ul>
+
+  		<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
+  		<a href="3" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+  	</div>
+  </div>
+</script>
+
 <script type="text/template" id="tpl-selected-template">
   <div class="selected-template">
     <img src="<% image %>=s1024" alt="Vertex 360">
@@ -281,7 +300,9 @@
       }, 'slow');
 
       if (selected == null){
-        $('#selected-template').html('<div>How it Works Content</div>')
+        var tpl = $('#tpl-how-it-works').html()
+        $('#selected-template').html(Mustache.render(tpl, null))
+        // $('#selected-template').html('<div>How it Works Content</div>')
         return
       }
 
@@ -318,12 +339,6 @@
           selected = template
           reloadUI()
         }
-
-        // if (template.id == selected.id)
-        //   return
-        //
-        // selected = template
-        // reloadUI()
       })
     })
 
@@ -333,7 +348,6 @@
 
       selected = null
       reloadUI()
-      console.log('show how it works')
     })
 
     reloadUI()
