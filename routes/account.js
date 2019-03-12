@@ -316,7 +316,6 @@ router.post('/:action', function(req, res, next){
 	// so we need an endpoint to poll before directing user to template admin page:
 	if (action == 'check-template'){
 		const siteSlug = req.body.template
-		// const url = 'https://d2tycy5p4rnywu.cloudfront.net/pages/'+siteSlug+'/home.txt'
 		const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/'+siteSlug+'/home.txt'
 		utils.HTTP.get(url)
 		.then(data => {
