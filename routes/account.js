@@ -620,7 +620,8 @@ router.post('/:action', function(req, res, next){
 		let copiedSite = null
 		const updatedSiteInfo = {}
 
-		controllers.site.getById(params.source) // fetch original site first
+		// controllers.site.getById(params.source) // fetch original site first
+		controllers.site.getById(cloneSource) // fetch original site first
 		.then(data => {
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
