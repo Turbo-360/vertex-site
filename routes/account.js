@@ -591,6 +591,35 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'update-template'){
+		const params = req.body
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'User not logged in'
+			})
+			return
+		}
+
+		const site = params.site
+		if (site == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing site parameter'
+			})
+			return
+		}
+
+		// for now, just return the original site:
+		res.json({
+			confirmation: 'success',
+			data: site
+		})
+
+		return
+	}
+
+
 	// clone an app into another app
 	// TODO: this should moved to a platform lambda
 	if (action == 'clone'){
