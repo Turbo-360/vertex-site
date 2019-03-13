@@ -7,6 +7,8 @@ const Base64 = require('js-base64').Base64
 const fs = require('fs')
 const sessions = require('client-sessions')
 
+const VERTEX_BUCKET = 'turbo360-vertex'
+
 router.get('/:action', function(req, res, next){
 	const action = req.params.action
 
@@ -538,11 +540,7 @@ router.post('/:action', function(req, res, next){
 			}
 		}
 
-		const vertexBucket = 'turbo360-vertex'
-		const folder = {
-			bucket: vertexBucket
-		}
-
+		const folder = {bucket: VERTEX_BUCKET}
 		let lambda = null
 		let newSite = null
 		let copiedSite = null
@@ -611,12 +609,12 @@ router.post('/:action', function(req, res, next){
 		}
 
 		const folder = {
-			bucket: 'turbo360-vertex'
+			bucket: VERTEX_BUCKET
 		}
 
 		const cloneSource = site.cloneSource // TODO: check if valid id string
 		let lambda = null
-		let newSite = null
+		let currentSite = null
 		let copiedSite = null
 		const updatedSiteInfo = {}
 
@@ -630,9 +628,9 @@ router.post('/:action', function(req, res, next){
 			return controllers.site.put(site.id, updatedSiteInfo) // update site globalConfig only
 		})
 		.then(data => {
-			newSite = data
-			folder['newSite'] = newSite
-			folder['app'] = newSite.slug // new app to copy source to
+			currentSite = data
+			folder['newSite'] = currentSite
+			folder['app'] = currentSite.slug // new app to copy source to
 
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
@@ -642,7 +640,7 @@ router.post('/:action', function(req, res, next){
 			utils.HTTP.post('http://platform.turbo360-vector.com/launchtemplate', folder)
 			res.json({
 				confirmation: 'success',
-				data: newSite
+				data: currentSite
 			})
 
 			return
@@ -653,12 +651,6 @@ router.post('/:action', function(req, res, next){
 				message: err.message || err
 			})
 		})
-
-		// for now, just return the original site:
-		// res.json({
-		// 	confirmation: 'success',
-		// 	data: site
-		// })
 
 		return
 	}
@@ -710,13 +702,12 @@ router.post('/:action', function(req, res, next){
 				}
 				catch (err){}
 
-				const vertexBucket = 'turbo360-vertex'
 				params.pages.forEach(function(page, i){
 					const pageKey = params.appId+'-'+page+'.json'
 					utils.AWS.copyObject({
-						object: '/'+vertexBucket+'/pages/'+params.sourceId+'-'+page+'.json',
+						object: '/'+VERTEX_BUCKET+'/pages/'+params.sourceId+'-'+page+'.json',
 						newObject: pageKey,
-						destinationBucket: vertexBucket+'/pages'
+						destinationBucket: VERTEX_BUCKET+'/pages'
 					})
 				})
 			}
