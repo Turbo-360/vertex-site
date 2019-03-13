@@ -447,6 +447,7 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// update current profile
 	if (action == 'update'){
 		// TODO: Check if user being updated is currently logged in. If not, block the update:
 
@@ -512,6 +513,11 @@ router.post('/:action', function(req, res, next){
 
 			return
 		})
+
+		return
+	}
+
+	if (action == 'deletesite'){
 
 		return
 	}
