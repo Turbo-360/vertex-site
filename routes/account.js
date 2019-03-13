@@ -633,10 +633,9 @@ router.post('/:action', function(req, res, next){
 
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
-
-			// Don't wait for this to return, it takes ~20 seconds. Send back response
-			// right away then do follow up requests client-side
-			utils.HTTP.post('http://platform.turbo360-vector.com/launchtemplate', folder)
+			return utils.HTTP.post('http://platform.turbo360-vector.com/updatetemplate', folder)
+		})
+		.then(data => {
 			res.json({
 				confirmation: 'success',
 				data: currentSite
