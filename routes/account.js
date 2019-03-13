@@ -518,6 +518,10 @@ router.post('/:action', function(req, res, next){
 	}
 
 	if (action == 'deletesite'){
+		res.json({
+			confirmation: 'success',
+			data: req.body
+		})
 
 		return
 	}
