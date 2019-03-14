@@ -177,7 +177,10 @@
       return
     }
 
-    $('#btn-launch-template').click(function(){
+    $('#btn-launch-template').click(function(event){
+      if (event)
+        event.preventDefault()
+
       var tpl = $('#tpl-launch-template').html()
       $('#modal-container').html(tpl)
       $('#btn-clone-template').click(function(event){
@@ -186,6 +189,8 @@
 
         launchTemplate()
       })
+
+      document.getElementById('btn-show-modal').click()
     })
   }
 
