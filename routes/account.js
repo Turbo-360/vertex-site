@@ -956,6 +956,7 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
+		console.log('INVITE collaborator: ' + JSON.stringify(params))
 		let invitee = null
 		let currentSite = null
 
