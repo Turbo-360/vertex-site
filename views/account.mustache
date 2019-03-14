@@ -153,24 +153,20 @@
   <div class="sign-in-form style-1">
     <h3>Reset Password</h3>
     <hr />
-    <form id="form-change-password" method="post" class="login">
+    <p class="form-row form-row-wide">
+      <label for="username">New Password:
+        <i class="im im-icon-Lock-2"></i>
+        <input id="input-password-1" type="password" class="input-text" placeholder="new password" />
+      </label>
+    </p>
 
-      <p class="form-row form-row-wide">
-        <label for="username">New Password:
-          <i class="im im-icon-Lock-2"></i>
-          <input id="input-password-1" type="password" class="input-text" placeholder="new password" />
-        </label>
-      </p>
-
-      <p class="form-row form-row-wide">
-        <label for="password">Re-Type New Password:
-          <i class="im im-icon-Lock-2"></i>
-          <input id="input-password-2" type="password" class="input-text" placeholder="re-type new password" />
-        </label>
-      </p>
-
-      <input id="input-update-password" type="submit" class="button border fw margin-top-10" value="Reset Password" />
-    </form>
+    <p class="form-row form-row-wide">
+      <label for="password">Re-Type New Password:
+        <i class="im im-icon-Lock-2"></i>
+        <input id="input-password-2" type="password" class="input-text" placeholder="re-type new password" />
+      </label>
+    </p>
+    <button id="input-update-password" class="button border fw margin-top-10">Reset Password</button>
   </div>
 </div>
 
@@ -191,7 +187,7 @@
       if (user!=null){
         $('#nav-login').hide()
         $('#nav-menu').addClass('right-side-loggedin')
-        $('#form-change-password').submit(function(event){
+        $('#input-update-password').click(function(event){
           event.preventDefault()
           console.log('RESET PASSWORD: ')
 
