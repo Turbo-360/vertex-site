@@ -319,7 +319,8 @@
           success: function(response, status, xhr){
             console.log('RESET PASSWORD: ' + JSON.stringify(response))
             alert('Password Successfully Reset')
-            document.getElementById('btn-change-pw').click()
+            $('.mfp-close')[0].click()
+            // document.getElementById('btn-change-pw').click()
           },
           error: function(xhr, status, err){
             alert('Error - ' + err)
