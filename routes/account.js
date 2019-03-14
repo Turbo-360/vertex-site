@@ -28,6 +28,7 @@ router.get('/:action', function(req, res, next){
 		return
 	}
 
+	/*
 	if (action == 'slackinvite'){
 		const body = req.query
 		// if (body.name == null){
@@ -65,7 +66,7 @@ router.get('/:action', function(req, res, next){
 		})
 
 		return
-	}
+	} */
 
 	if (action == 'currentuser'){
 		res.json({
@@ -106,6 +107,110 @@ router.get('/:action', function(req, res, next){
 				message: err.message
 			})
 		}
+
+		return
+	}
+
+	if (action == 'acceptinvitation'){
+		const invitation = req.query.invitation
+		if (invitation == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing invitation'
+			})
+			return
+		}
+
+		const decoded = Base64.decode(invitation)
+		const parsed = JSON.parse(decoded) // {"site":"591851091aba5200114c1fb6","invitee":"dennykwon2@gmail.com"}
+		if (parsed.site == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Invalid Invitation'
+			})
+			return
+		}
+
+		if (parsed.invitee == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Invalid Invitation'
+			})
+			return
+		}
+
+		let hostSite = null
+		controllers.site.getById(parsed.site)
+		.then(site => {
+			if (site.invited.indexOf(parsed.invitee) == -1){ // not actually invited
+				res.json({
+					confirmation: 'fail',
+					message: 'Invalid Invitation'
+				})
+
+				return
+			}
+
+			hostSite = site
+
+			// check if invitee already registered:
+			return controllers.profile.get({email: parsed.invitee.toLowerCase()})
+		})
+		.then(profiles => {
+			// console.log('PROFILES: ' + JSON.stringify(profiles))
+			if (profiles.length > 0){ // use existing profile
+				return profiles[0]
+			}
+			else {
+				// create new profile, remove email from invited array
+				const params = {
+					firstName: '',
+					lastName: '',
+					email: parsed.invitee,
+					username: parsed.invitee.split('@')[0],
+					password: utils.TextUtils.randomString(8) // assign random password
+				}
+
+				return controllers.profile.post(params)
+			}
+		})
+		.then(user => {
+			const userId = user._id || user.id
+			// req.session.user = userId // log user in
+			req.vertex_session.user = userId // log user in
+
+			const collaborators = hostSite.collaborators
+			collaborators.push({
+				id: userId,
+				email: user.email,
+				slug: user.slug,
+				image: user.image,
+				username: user.email.split('@')[0],
+				firstName: user.firstName,
+				lastName: user.lastName
+			})
+
+			// remove email from invited:
+			const invited = []
+			hostSite.invited.forEach((email, i) => {
+				if (email != user.email)
+					invited.push(email)
+			})
+
+			return controllers.site.put(hostSite.id, {collaborators:collaborators, invited:invited}, null)
+		})
+		.then(data => {
+			// res.redirect(process.env.TURBO360_URL)
+			res.redirect('https://www.vertex360.co/me?selected=sites')
+			return
+		})
+		.catch(function(err){
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+			return
+		})
 
 		return
 	}
