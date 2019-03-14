@@ -151,8 +151,9 @@
     <img style="max-width:180px" src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-3.svg" />
   </div>
   <div class="sign-in-form style-1">
-    <h4 class="gray">Reset Password</h4>
-    <form method="post" class="login">
+    <h3>Reset Password</h3>
+    <hr />
+    <form id="form-change-password" method="post" class="login">
 
       <p class="form-row form-row-wide">
         <label for="username">New Password:
@@ -190,7 +191,7 @@
       if (user!=null){
         $('#nav-login').hide()
         $('#nav-menu').addClass('right-side-loggedin')
-        $('#input-update-password').click(function(event){
+        $('#form-change-password').onSubmit(function(event){
           event.preventDefault()
           console.log('RESET PASSWORD: ')
 
