@@ -83,6 +83,7 @@
 <script type="text/template" id="tpl-launch-template">
   <div style="text-align:center">
     <h3 style="margin-bottom:20px">Launch Site</h3>
+    <p style="margin-bottom:16px">Launch this template on your account.</p>
     <input id="input-site-name" type="text" placeholder="Your Site Name" />
     <div id="btn-launch-container">
       <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
@@ -128,13 +129,8 @@
       <%/images %>
 
       <hr />
-      <p style="margin-bottom:16px">Launch this template on your account.</p>
       <div id="launch-template-container" style="width:50%">
-        <input id="input-site-name" type="text" placeholder="Your Site Name" />
-        <div id="btn-launch-container">
-          <a style="margin-top:4px" id="btn-clone-template" href="#" class="button with-icon">Use This Template <i class="fa fa-angle-right"></i></a>
-          <a style="padding-left:4px" id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">TEST <i class="sl sl-icon-login"></i></a>
-        </div>
+        <a style="padding-left:4px" id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Use This Template <i class="sl sl-icon-login"></i></a>
       </div>
     </div>
   </div>
@@ -341,16 +337,8 @@
           if (event)
             event.preventDefault()
 
-          console.log('TEST')
-          // launchTemplate()
-
-          // TODO: check if user logged in. if so, don't do this:
-          // if (user == null)
-          //   document.getElementById('btn-login').click()
-          // else {
-          //   // console.log('LAUNCH TEMPLATE')
-          //   launchTemplate()
-          // }
+          // console.log('TEST')
+          launchTemplate()
         })
 
       })
