@@ -129,8 +129,8 @@
       <%/images %>
 
       <hr />
-      <div id="launch-template-container" style="width:50%">
-        <a style="padding-left:16px" id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Use This Template <i class="sl sl-icon-login"></i></a>
+      <div id="launch-template-container">
+        <a style="width:100%;padding:20px;text-align:center;font-size:20px;border-radius:6px" id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Use This Template <i class="sl sl-icon-login"></i></a>
       </div>
     </div>
   </div>
@@ -314,18 +314,6 @@
 
       var tpl = $('#tpl-selected-template').html()
       $('#selected-template').html(Mustache.render(tpl, selected))
-      // $('#btn-clone-template').click(function(event){
-      //   if (event)
-      //     event.preventDefault()
-      //
-      //   // TODO: check if user logged in. if so, don't do this:
-      //   if (user == null)
-      //     document.getElementById('btn-login').click()
-      //   else {
-      //     // console.log('LAUNCH TEMPLATE')
-      //     launchTemplate()
-      //   }
-      // })
 
       if (user == null)
         return
@@ -337,10 +325,8 @@
           if (event)
             event.preventDefault()
 
-          // console.log('TEST')
           launchTemplate()
         })
-
       })
     }
 
