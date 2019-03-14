@@ -106,8 +106,8 @@
               </div>
             </div>
 
-            <a href="#sign-in-dialog" class="button margin-top-15 popup-with-zoom-anim">Change Password</a>
-						<button id="btn-update-profile" class="button margin-top-15">Update Profile</button>
+            <a href="#sign-in-dialog" class="button margin-top-15 margin-right-10 popup-with-zoom-anim">Change Password</a>
+						<a href="#" id="btn-update-profile" class="button margin-top-15">Update Profile</a>
 					</div>
 				</div>
 
@@ -154,20 +154,20 @@
     <form method="post" class="login">
 
       <p class="form-row form-row-wide">
-        <label for="username">Email:
-          <i class="im im-icon-Email"></i>
-          <input id="input-login-email" type="text" class="input-text" name="email" />
+        <label for="username">New Password:
+          <i class="im im-icon-Lock-2"></i>
+          <input id="input-password-1" type="password" class="input-text" placeholder="new password" />
         </label>
       </p>
 
       <p class="form-row form-row-wide">
-        <label for="password">Password:
+        <label for="password">Re-Type New Password:
           <i class="im im-icon-Lock-2"></i>
-          <input id="input-login-password" class="input-text" type="password" />
+          <input id="input-password-2" type="password" class="input-text" placeholder="re-type new password" />
         </label>
       </p>
 
-      <input id="input-login" type="submit" class="button border fw margin-top-10" name="login" value="Log In" />
+      <input id="input-update-password" type="submit" class="button border fw margin-top-10" value="Reset Password" />
     </form>
   </div>
 </div>
