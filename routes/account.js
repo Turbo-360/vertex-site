@@ -398,54 +398,54 @@ router.post('/:action', function(req, res, next){
 	}
 
 
-	if (action == 'slackinvite'){
-		const body = req.body
-		if (body.name == null){
-			res.json({
-				confirmation: 'fail',
-				message: 'Missing name'
-			})
-			return
-		}
-
-		if (body.email == null){
-			res.json({
-				confirmation: 'fail',
-				message: 'Missing email'
-			})
-			return
-		}
-
-		const firstName = body.name.split(' ')[0]
-		const emailHtml = 'Hello '+utils.TextUtils.capitalize(firstName)+',<br /><br />Thanks for requesting to join our Slack Channel. Please confirm your email by clicking <a style="color:red" href="https://www.turbo360.co/account/slackinvite?email='+body.email+'">HERE</a>. Thanks,<br /><br />Katrina Murphy<br />Community Developer<br /><a href="https://www.turbo360.co">Turbo 360</a>'
-		utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [body.email], 'Turbo 360 - Slack Invitation', emailHtml)
-		.then(function(data){
-			const pkg = {
-				email: body.email,
-				list: 'slack@mail.turbo360.co',
-				name: body.name
-			}
-
-			return utils.Email.addToMailingList(pkg)
-		})
-		.then(function(data){
-			return utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', ['dkwon@turbo360.co'], 'New Slack Subscriber', JSON.stringify(body))
-		})
-		.then(function(data){
-			res.json({
-				confirmation: 'success',
-				data: data
-			})
-		})
-		.catch(function(err){
-			res.json({
-				confirmation: 'fail',
-				message: err.message
-			})
-		})
-
-		return
-	}
+	// if (action == 'slackinvite'){
+	// 	const body = req.body
+	// 	if (body.name == null){
+	// 		res.json({
+	// 			confirmation: 'fail',
+	// 			message: 'Missing name'
+	// 		})
+	// 		return
+	// 	}
+	//
+	// 	if (body.email == null){
+	// 		res.json({
+	// 			confirmation: 'fail',
+	// 			message: 'Missing email'
+	// 		})
+	// 		return
+	// 	}
+	//
+	// 	const firstName = body.name.split(' ')[0]
+	// 	const emailHtml = 'Hello '+utils.TextUtils.capitalize(firstName)+',<br /><br />Thanks for requesting to join our Slack Channel. Please confirm your email by clicking <a style="color:red" href="https://www.turbo360.co/account/slackinvite?email='+body.email+'">HERE</a>. Thanks,<br /><br />Katrina Murphy<br />Community Developer<br /><a href="https://www.turbo360.co">Turbo 360</a>'
+	// 	utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [body.email], 'Turbo 360 - Slack Invitation', emailHtml)
+	// 	.then(function(data){
+	// 		const pkg = {
+	// 			email: body.email,
+	// 			list: 'slack@mail.turbo360.co',
+	// 			name: body.name
+	// 		}
+	//
+	// 		return utils.Email.addToMailingList(pkg)
+	// 	})
+	// 	.then(function(data){
+	// 		return utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', ['dkwon@turbo360.co'], 'New Slack Subscriber', JSON.stringify(body))
+	// 	})
+	// 	.then(function(data){
+	// 		res.json({
+	// 			confirmation: 'success',
+	// 			data: data
+	// 		})
+	// 	})
+	// 	.catch(function(err){
+	// 		res.json({
+	// 			confirmation: 'fail',
+	// 			message: err.message
+	// 		})
+	// 	})
+	//
+	// 	return
+	// }
 
 	// update current profile
 	if (action == 'update'){
@@ -614,6 +614,7 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	/*
 	if (action == 'update-template'){
 		const params = req.body
 		if (req.user == null){
@@ -819,7 +820,7 @@ router.post('/:action', function(req, res, next){
 		})
 
 		return
-	}
+	} */
 
 	if (action == 'uploadurl') {
 		// query requires folder, filename, filetype
@@ -934,6 +935,67 @@ router.post('/:action', function(req, res, next){
 			})
 		})
 
+		return
+	}
+
+	if (action == 'invitecollaborator'){
+		const params = req.query
+		if (params.site == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing site identifier.'
+			})
+			return
+		}
+
+		if (params.invited == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing invited parameter.'
+			})
+			return
+		}
+
+		let invitee = null
+		let currentSite = null
+
+		controllers.site.getById(params.site)
+		.then(site => {
+			const invited = params.invited
+			invitee = invited[invited.length-1]
+
+			const currentInvited = site.invited || []
+			if (currentInvited.indexOf(invitee) == -1)
+				currentInvited.push(invitee)
+
+			return controllers.site.put(params.site, {invited:currentInvited}, null)
+		})
+		.then(site => {
+			currentSite = site
+
+			// send email to invitee
+			const from = params.from
+			delete params['from']
+
+			const confirmLink = 'https://www.vertex360.co/account/acceptinvitation?invitation='+Base64.encode(JSON.stringify({site:params.site, invitee:invitee}))
+			const content = 'Hello,<br /><br />You have been invited to collaborate on a <a style="color:red" href="https://www.vertex360.co">Vertex 360</a> project: <strong>'+currentSite.name+'</strong>. You were invited by '+from+'.<br /><br />To confirm the invitation, click on the link below:<br /><br /><a style="color:red" href="'+confirmLink+'">'+confirmLink+'</a><br /><br />Thanks,<br /><br />The Vertex 360 Team<br />www.vertex360.co<br /><img src="https://d2t33r63549y14.cloudfront.net/landing-page-zejvaj/dist/images/canvasone.png" />'
+			return utils.Email.sendHtmlEmails('katrina@velocity360.io', 'Vertex 360', [invitee], 'Invitation', content)
+		})
+		.then(function(data){
+			res.json({
+				confirmation: 'success',
+				result: currentSite
+			})
+
+			return
+		})
+		.catch(function(err){
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+			return
+		})
 		return
 	}
 
