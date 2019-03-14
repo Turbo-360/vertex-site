@@ -124,6 +124,8 @@ router.get('/pages/:slug', (req, res) => {
 			const currentUser = {
 				id: req.user.id,
 				username: req.user.username,
+				firstName: req.user.firstName,
+				lastName: req.user.lastName,
 				image: req.user.image,
 				slug: req.user.slug
 			}
