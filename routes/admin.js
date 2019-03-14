@@ -131,7 +131,7 @@ router.get('/pages/:slug', (req, res) => {
 			const reducers = {
 				page: pageReducer,
 				app: appReducer,
-				user: currentUser
+				user: {currentUser: currentUser}
 			}
 
 			res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
