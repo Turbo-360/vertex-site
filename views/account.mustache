@@ -317,10 +317,9 @@
           url: '/account/resetpassword',
           data: null,
           success: function(response, status, xhr){
-            console.log('RESET PASSWORD: ' + JSON.stringify(response))
+            // console.log('RESET PASSWORD: ' + JSON.stringify(response))
             alert('Password Successfully Reset')
             $('.mfp-close')[0].click()
-            // document.getElementById('btn-change-pw').click()
           },
           error: function(xhr, status, err){
             alert('Error - ' + err)
