@@ -167,15 +167,15 @@
     if (selected == null){
       var tpl = $('#tpl-how-it-works').html()
       $('#selected-template').html(Mustache.render(tpl, null))
-      // $('#selected-template').html('<div>How it Works Content</div>')
       return
     }
 
     var tpl = $('#tpl-selected-template').html()
     $('#selected-template').html(Mustache.render(tpl, selected))
 
-    if (user == null)
+    if (user == null){
       return
+    }
 
     $('#btn-launch-template').click(function(){
       var tpl = $('#tpl-launch-template').html()
