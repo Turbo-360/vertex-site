@@ -297,9 +297,15 @@
 
       reloadUI()
       $('#btn-update-password').click(function(event){
-        event.preventDefault()
+        if (event)
+          event.preventDefault()
+
         var pw1 = $('#input-password-1').val()
         var pw2 = $('#input-password-2').val()
+        if (pw1.length==0 || pw2.length==0){
+          alert('Please complete both fields')
+          return
+        }
 
         if (pw1 != pw2){
           alert('Passwords do not match')
