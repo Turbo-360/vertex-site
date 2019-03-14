@@ -191,7 +191,7 @@
       if (user!=null){
         $('#nav-login').hide()
         $('#nav-menu').addClass('right-side-loggedin')
-        $('#form-change-password').onSubmit(function(event){
+        $('#form-change-password').submit(function(event){
           event.preventDefault()
           console.log('RESET PASSWORD: ')
 
