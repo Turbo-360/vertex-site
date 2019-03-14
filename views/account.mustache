@@ -190,6 +190,11 @@
       if (user!=null){
         $('#nav-login').hide()
         $('#nav-menu').addClass('right-side-loggedin')
+        $('#input-update-password').click(function(event){
+          event.preventDefault()
+          console.log('RESET PASSWORD: ')
+
+        })
       }
 
       var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
