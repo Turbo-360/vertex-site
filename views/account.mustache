@@ -306,9 +306,19 @@
           return
         }
 
-        console.log('RESET PASSWORD: ' + pw1)
+        $.ajax({
+          type: 'POST',
+          url: '/account/resetpassword',
+          data: null,
+          success: function(response, status, xhr){
+            console.log('RESET PASSWORD: ' + JSON.stringify(response))
+            alert('Password Successfully Reset')
+          },
+          error: function(xhr, status, err){
+            alert('Error - ' + err)
+          }
+        })
       })
-
     })()
   </script>
 </body>
