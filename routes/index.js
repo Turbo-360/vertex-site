@@ -67,14 +67,22 @@ router.get('/me', (req, res) => {
 			allSites.push(site)
 		})
 
+		const currentUser = {
+			id: req.user.id,
+			username: req.user.username,
+			firstName: req.user.firstName,
+			lastName: req.user.lastName,
+			image: req.user.image
+		}
+
 		const data = {
 			cdn: CDN,
-			user: req.user,
-			sites: allSites
+			sites: allSites,
+			user: currentUser
 		}
 
 		data['preloaded'] = JSON.stringify({
-			user: req.user,
+			user: currentUser,
 			sites: allSites,
 			selected: req.query.selected || 'profile'
 		})
