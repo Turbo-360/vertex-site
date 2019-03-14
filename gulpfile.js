@@ -63,6 +63,19 @@ gulp.task('vendor', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
+gulp.task('home', function(){
+    return gulp.src(
+            [
+                './public/js/home.js'
+            ]
+        )
+        .pipe(gp_concat('home.min.js'))
+        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gp_rename('home.min.js'))
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/dist/js/'))
+});
+
 // copy public directory to CDN project:
 gulp.task('copy-public', function(){
     return gulp.src(
@@ -86,6 +99,6 @@ gulp.task('clean', function() {
         .pipe(clean())
 })
 
-gulp.task('js', ['vendor'], function(){})
+gulp.task('js', ['vendor', 'home'], function(){})
 
 gulp.task('prod', ['style', 'js'], function(){})
