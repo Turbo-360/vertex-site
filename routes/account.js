@@ -939,7 +939,7 @@ router.post('/:action', function(req, res, next){
 	}
 
 	if (action == 'invitecollaborator'){
-		const params = req.query
+		const params = req.body
 		if (params.site == null){
 			res.json({
 				confirmation: 'fail',
