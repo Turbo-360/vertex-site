@@ -111,10 +111,7 @@ router.get('/pages/:slug', (req, res) => {
 	})
 	.then(config => { // this is a string
 		try {
-			const pageReducer = {
-				selected: page,
-			}
-
+			const pageReducer = {selected: page}
 			pageReducer[page] = JSON.parse(config)
 
 			const appReducer = {
@@ -125,7 +122,8 @@ router.get('/pages/:slug', (req, res) => {
 
 			const reducers = {
 				page: pageReducer,
-				app: appReducer
+				app: appReducer,
+				user: {currentUser: req.user}
 			}
 
 			res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
