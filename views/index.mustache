@@ -331,11 +331,13 @@
         }
       })
 
+      if (user == null)
+        return
+
       $('#btn-launch-template').click(function(){
         var tpl = $('#tpl-launch-template').html()
         $('#modal-container').html(tpl)
       })
-
     }
 
     $('.template-preview').each(function(i, el){
