@@ -166,7 +166,7 @@
         <input id="input-password-2" type="password" class="input-text" placeholder="re-type new password" />
       </label>
     </p>
-    <button id="input-update-password" class="button border fw margin-top-10">Reset Password</button>
+    <button id="btn-update-password" class="button border fw margin-top-10">Reset Password</button>
   </div>
 </div>
 
@@ -184,17 +184,14 @@
       var selected = data.selected
       var sidebarMenu = ['list-item-profile', 'list-item-sites']
 
-      if (user!=null){
+      if (user != null){
+        console.log('TEST')
         $('#nav-login').hide()
         $('#nav-menu').addClass('right-side-loggedin')
-        $('#input-update-password').click(function(event){
+        $('#btn-update-password').click(function(event){
           event.preventDefault()
           console.log('RESET PASSWORD: ')
-
         })
-      }
-      else {
-        console.log('USER NOT DEFINED')
       }
 
       var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
