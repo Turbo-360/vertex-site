@@ -318,18 +318,18 @@
 
       var tpl = $('#tpl-selected-template').html()
       $('#selected-template').html(Mustache.render(tpl, selected))
-      $('#btn-clone-template').click(function(event){
-        if (event)
-          event.preventDefault()
-
-        // TODO: check if user logged in. if so, don't do this:
-        if (user == null)
-          document.getElementById('btn-login').click()
-        else {
-          // console.log('LAUNCH TEMPLATE')
-          launchTemplate()
-        }
-      })
+      // $('#btn-clone-template').click(function(event){
+      //   if (event)
+      //     event.preventDefault()
+      //
+      //   // TODO: check if user logged in. if so, don't do this:
+      //   if (user == null)
+      //     document.getElementById('btn-login').click()
+      //   else {
+      //     // console.log('LAUNCH TEMPLATE')
+      //     launchTemplate()
+      //   }
+      // })
 
       if (user == null)
         return
@@ -337,6 +337,22 @@
       $('#btn-launch-template').click(function(){
         var tpl = $('#tpl-launch-template').html()
         $('#modal-container').html(tpl)
+        $('#btn-clone-template').click(function(event){
+          if (event)
+            event.preventDefault()
+
+          console.log('TEST')
+          // launchTemplate()
+
+          // TODO: check if user logged in. if so, don't do this:
+          // if (user == null)
+          //   document.getElementById('btn-login').click()
+          // else {
+          //   // console.log('LAUNCH TEMPLATE')
+          //   launchTemplate()
+          // }
+        })
+
       })
     }
 
