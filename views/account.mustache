@@ -15,7 +15,45 @@
 <body>
 
 <div id="wrapper">
-  {{>nav}}
+  <header id="header-container" class="fixed fullwidth">
+  	<div id="header" class="not-sticky">
+  		<div class="container">
+
+  			<div class="left-side">
+
+  				<div id="logo">
+  					<a href="/">
+              <img src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-3.svg" alt="Vertex 360">
+            </a>
+  				</div>
+
+  				<div class="mmenu-trigger">
+  					<button class="hamburger hamburger--collapse" type="button">
+  						<span class="hamburger-box">
+  							<span class="hamburger-inner"></span>
+  						</span>
+  					</button>
+  				</div>
+  			</div>
+
+  			<div id="nav-menu" class="right-side">
+  				<div class="header-widget">
+            <nav id="navigation" class="style-1">
+    					<ul id="responsive">
+    						<li><a class="current" href="/">Home</a></li>
+    						<li><a id="nav-how-it-works" href="#">How It Works</a></li>
+  							<li><a id="nav-login" href="#sign-in-dialog" class="popup-with-zoom-anim">Login</a></li>
+    					</ul>
+    				</nav>
+            <div id="login-container">
+    					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">JOIN <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
+            </div>
+  				</div>
+  			</div>
+
+  		</div>
+  	</div>
+  </header>
 
 <div class="clearfix"></div>
 
