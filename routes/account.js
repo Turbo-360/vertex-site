@@ -956,7 +956,6 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		console.log('INVITE collaborator: ' + JSON.stringify(params))
 		let invitee = null
 		let currentSite = null
 
@@ -975,11 +974,11 @@ router.post('/:action', function(req, res, next){
 			currentSite = site
 
 			// send email to invitee
-			const from = params.from
+			const from = params.from.toUpperCase()
 			delete params['from']
 
 			const confirmLink = 'https://www.vertex360.co/account/acceptinvitation?invitation='+Base64.encode(JSON.stringify({site:params.site, invitee:invitee}))
-			const content = 'Hello,<br /><br />You have been invited to collaborate on a <a style="color:red" href="https://www.vertex360.co">Vertex 360</a> project: <strong>'+currentSite.name+'</strong>. You were invited by '+from+'.<br /><br />To confirm the invitation, click on the link below:<br /><br /><a style="color:red" href="'+confirmLink+'">'+confirmLink+'</a><br /><br />Thanks,<br /><br />The Vertex 360 Team<br />www.vertex360.co<br /><img src="https://d2t33r63549y14.cloudfront.net/landing-page-zejvaj/dist/images/canvasone.png" />'
+			const content = 'Hello,<br /><br />You have been invited to collaborate on a <a style="color:red" href="https://www.vertex360.co">Vertex 360</a> project: <a href="https://'+currentSite.slug+'.vertex360.co"><strong>'+currentSite.name+'</strong></a>. You were invited by '+from+'.<br /><br />To confirm the invitation, click on the link below:<br /><br /><a style="color:red" href="'+confirmLink+'">'+confirmLink+'</a><br /><br />Thanks,<br /><br />The Vertex 360 Team<br />www.vertex360.co<br /><a href="https://www.vertex360.co"><img src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-3.svg" /></a>'
 			return utils.Email.sendHtmlEmails('katrina@velocity360.io', 'Vertex 360', [invitee], 'Invitation', content)
 		})
 		.then(function(data){
