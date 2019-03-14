@@ -315,7 +315,7 @@
         $.ajax({
           type: 'POST',
           url: '/account/resetpassword',
-          data: null,
+          data: {password:pw1, user:user.id},
           success: function(response, status, xhr){
             // console.log('RESET PASSWORD: ' + JSON.stringify(response))
             alert('Password Successfully Reset')

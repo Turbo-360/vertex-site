@@ -502,56 +502,6 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
-
-	// if (action == 'slackinvite'){
-	// 	const body = req.body
-	// 	if (body.name == null){
-	// 		res.json({
-	// 			confirmation: 'fail',
-	// 			message: 'Missing name'
-	// 		})
-	// 		return
-	// 	}
-	//
-	// 	if (body.email == null){
-	// 		res.json({
-	// 			confirmation: 'fail',
-	// 			message: 'Missing email'
-	// 		})
-	// 		return
-	// 	}
-	//
-	// 	const firstName = body.name.split(' ')[0]
-	// 	const emailHtml = 'Hello '+utils.TextUtils.capitalize(firstName)+',<br /><br />Thanks for requesting to join our Slack Channel. Please confirm your email by clicking <a style="color:red" href="https://www.turbo360.co/account/slackinvite?email='+body.email+'">HERE</a>. Thanks,<br /><br />Katrina Murphy<br />Community Developer<br /><a href="https://www.turbo360.co">Turbo 360</a>'
-	// 	utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [body.email], 'Turbo 360 - Slack Invitation', emailHtml)
-	// 	.then(function(data){
-	// 		const pkg = {
-	// 			email: body.email,
-	// 			list: 'slack@mail.turbo360.co',
-	// 			name: body.name
-	// 		}
-	//
-	// 		return utils.Email.addToMailingList(pkg)
-	// 	})
-	// 	.then(function(data){
-	// 		return utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', ['dkwon@turbo360.co'], 'New Slack Subscriber', JSON.stringify(body))
-	// 	})
-	// 	.then(function(data){
-	// 		res.json({
-	// 			confirmation: 'success',
-	// 			data: data
-	// 		})
-	// 	})
-	// 	.catch(function(err){
-	// 		res.json({
-	// 			confirmation: 'fail',
-	// 			message: err.message
-	// 		})
-	// 	})
-	//
-	// 	return
-	// }
-
 	// update current profile
 	if (action == 'update'){
 		// TODO: Check if user being updated is currently logged in. If not, block the update:
@@ -719,214 +669,6 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
-	/*
-	if (action == 'update-template'){
-		const params = req.body
-		if (req.user == null){
-			res.json({
-				confirmation: 'fail',
-				message: 'User not logged in'
-			})
-			return
-		}
-
-		const site = params.site
-		if (site == null){
-			res.json({
-				confirmation: 'fail',
-				message: 'Missing site parameter'
-			})
-			return
-		}
-
-		const folder = {
-			bucket: VERTEX_BUCKET
-		}
-
-		const cloneSource = site.cloneSource // TODO: check if valid id string
-		let lambda = null
-		let currentSite = null
-		let copiedSite = null
-		const updatedSiteInfo = {}
-
-		controllers.site.getById(cloneSource) // fetch original site first
-		.then(data => {
-			copiedSite = data
-			folder['copiedSite'] = copiedSite
-			folder['source'] = copiedSite.slug
-			updatedSiteInfo['globalConfig'] = Object.assign({}, copiedSite.globalConfig)
-			return controllers.site.put(site.id, updatedSiteInfo) // update site globalConfig only
-		})
-		.then(data => {
-			currentSite = data
-			folder['newSite'] = currentSite
-			folder['app'] = currentSite.slug // new app to copy source to
-
-			// send POST request to https://platform.turbo360-vector.com/launchtemplate
-			// with 'folder' as params
-			return utils.HTTP.post('http://platform.turbo360-vector.com/updatetemplate', folder)
-		})
-		.then(data => {
-			res.json({
-				confirmation: 'success',
-				data: currentSite
-			})
-
-			return
-		})
-		.catch(err => {
-			res.json({
-				confirmation: 'fail',
-				message: err.message || err
-			})
-		})
-
-		return
-	}
-
-
-	// clone an app into another app
-	// TODO: this should moved to a platform lambda
-	if (action == 'clone'){
-		const params = req.body
-		let lambda = null
-
-		utils.AWS.copyFolder(params)
-		.then(data => {
-			lambda = {
-				name: params.app, // this has to be the appslug
-				path: params.app + '/package.zip',
-				env: {
-					TURBO_CDN: 'https://cdn.turbo360-vertex.com/'+params.app+'/public', // https://cdn.turbo360-vertex.com/resume-clone-4aglq4/public
-					TURBO_ENV: 'prod',
-					SESSION_SECRET: '<YOUR_SESSION_SECRET>',
-					TURBO_API_KEY: params.api.key,
-					TURBO_APP_ID: params.appId
-				}
-			}
-
-			return utils.AWS.getFunction({name: params.source}) // slug of app being copied
-		})
-		.then(data => {
-			const envVariables = data.Configuration.Environment.Variables
-			const keys = Object.keys(envVariables)
-			keys.forEach(function(key, i){
-				if (lambda.env[key] == null)
-					lambda.env[key] = envVariables[key]
-			})
-
-			return utils.AWS.getFunction(lambda) // check if already exists first. If so, delete
-		})
-		.then(data => { // check if already exists first. If so, delete
-			return (data == null) ? null : utils.AWS.deleteFunction(lambda)
-		})
-		.then(data => { // connect to lambda
-			return utils.AWS.deployVertex(lambda)
-		})
-		.then(data => {
-			// console.log('PARAMS: ' + JSON.stringify(params))
-			if (params.pages!=null && params.sourceId!=null){
-				try { // might be stringified client-side
-					params['pages'] = JSON.parse(params.pages)
-				}
-				catch (err){}
-
-				params.pages.forEach(function(page, i){
-					const pageKey = params.appId+'-'+page+'.json'
-					utils.AWS.copyObject({
-						object: '/'+VERTEX_BUCKET+'/pages/'+params.sourceId+'-'+page+'.json',
-						newObject: pageKey,
-						destinationBucket: VERTEX_BUCKET+'/pages'
-					})
-				})
-			}
-
-			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'Turbo Site Cloned', JSON.stringify(params))
-			res.json({
-				confirmation: 'success',
-				result: {
-					format: 'vertex',
-					slug: params.app
-				}
-			})
-
-			return
-		})
-		.catch(err => {
-			res.json({
-				confirmation: 'fail',
-				message: err.message || err
-			})
-		})
-
-		return
-	}
-
-	if (action == 'updateclone') {
-		const params = req.body
-		let lambda = null
-
-		utils.AWS.copyFolder(params)
-		.then(function(data){
-			lambda = {
-				name: params.app, // this has to be the appslug
-				path: params.app + '/package.zip',
-				env: {} // no deafult env
-			}
-
-			return utils.AWS.getFunction({name: params.source}) // slug of app being copied
-		})
-		.then(function(data){ // env variables of original source:
-			const envVariables = data.Configuration.Environment.Variables
-			const keys = Object.keys(envVariables)
-			keys.forEach(function(key, i){
-				if (lambda.env[key] == null) // this adds any new keys since the last update or original clone:
-					lambda.env[key] = envVariables[key]
-			})
-
-			return utils.AWS.getFunction(lambda) // check if already exists first. If so, delete
-		})
-		.then(data => {
-			if (data != null){
-				// overwrite updated env with variables from user's version
-				const envVariables = data.Configuration.Environment.Variables
-				const keys = Object.keys(envVariables)
-				keys.forEach(function(key, i){
-					lambda.env[key] = envVariables[key]
-				})
-
-				return utils.AWS.deleteFunction(lambda)
-			}
-
-			return null
-		})
-		.then(function(data){ // connect to lambda
-			return utils.AWS.deployVertex(lambda)
-		})
-		.then(function(data){ // invalidate cache so static assets reload
-			return utils.AWS.invalidateCache('EQIKQLMTLKH4C', params.app, '*')
-		})
-		.then(function(data){
-			res.json({
-				confirmation: 'success',
-				result: {
-					format: 'vertex',
-					slug: params.app
-				}
-			})
-
-			return
-		})
-		.catch(err => {
-			res.json({
-				confirmation: 'fail',
-				message: err.message
-			})
-		})
-
-		return
-	} */
-
 	if (action == 'uploadurl') {
 		// query requires folder, filename, filetype
 
@@ -1044,9 +786,17 @@ router.post('/:action', function(req, res, next){
 	}
 
 	if (action == 'resetpassword'){
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'User not logged in'
+			})
+			return
+		}
+
 		res.json({
 			confirmation: 'success',
-			data: 'reset password'
+			data: req.body
 		})
 		return
 	}
