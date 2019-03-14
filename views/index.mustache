@@ -78,7 +78,17 @@
 
 
 </div>
+
 <!-- Wrapper / End -->
+<script type="text/template" id="tpl-launch-template">
+  <div style="text-align:center">
+    <h3 style="margin-bottom:20px">Launch Site</h3>
+    <input id="input-site-name" type="text" placeholder="Your Site Name" />
+    <div id="btn-launch-container">
+      <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</script>
 
 <script type="text/template" id="tpl-how-it-works">
   <div>
@@ -123,6 +133,7 @@
         <input id="input-site-name" type="text" placeholder="Your Site Name" />
         <div id="btn-launch-container">
           <a style="margin-top:4px" id="btn-clone-template" href="#" class="button with-icon">Use This Template <i class="fa fa-angle-right"></i></a>
+          <a style="padding-left:4px" id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">TEST <i class="sl sl-icon-login"></i></a>
         </div>
       </div>
     </div>
@@ -292,6 +303,7 @@
       $('#nav-login').hide()
     }
 
+
     var reloadUI = function(){
       $('#selected-template-container').animate({
          scrollTop: 0
@@ -318,6 +330,12 @@
           launchTemplate()
         }
       })
+
+      $('#btn-launch-template').click(function(){
+        var tpl = $('#tpl-launch-template').html()
+        $('#modal-container').html(tpl)
+      })
+
     }
 
     $('.template-preview').each(function(i, el){
