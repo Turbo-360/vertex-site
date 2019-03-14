@@ -120,10 +120,18 @@ router.get('/pages/:slug', (req, res) => {
 				summary: site
 			}
 
+			// don't send back everything:
+			const currentUser = {
+				id: req.user.id,
+				username: req.user.username,
+				image: req.user.image,
+				slug: req.user.slug
+			}
+
 			const reducers = {
 				page: pageReducer,
 				app: appReducer,
-				user: {currentUser: req.user}
+				user: currentUser
 			}
 
 			res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
