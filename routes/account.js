@@ -1043,6 +1043,14 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'resetpassword'){
+		res.json({
+			confirmation: 'success',
+			data: 'reset password'
+		})
+		return
+	}
+
 	if (action == 'invitecollaborator'){
 		const params = req.body
 		if (params.site == null){
