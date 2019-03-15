@@ -18,9 +18,7 @@ router.get('/', (req, res) => {
 		cdn: CDN
 	}
 
-	// res.render('list', data)
-	// controllers.site.get({'template.status':'live', 'template.category':selected})
-	controllers.site.get({'template.status':'live', format:'vertex'})
+	controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['index'] = i
