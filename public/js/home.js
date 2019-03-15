@@ -234,8 +234,8 @@
   }
 
   if (query.selected == 'how it works'){
-    reloadUI()
     selected = null
+    reloadUI()
   }
 
 })()
