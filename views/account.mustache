@@ -318,6 +318,11 @@
           data: {password:pw1, user:user.id},
           success: function(response, status, xhr){
             console.log('RESET PASSWORD: ' + JSON.stringify(response))
+            if (response.confirmation != 'success'){
+              alert('Error - ' + response.message)
+              return
+            }
+
             alert('Password Successfully Reset')
             $('.mfp-close')[0].click()
           },
