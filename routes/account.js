@@ -794,10 +794,21 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		res.json({
-			confirmation: 'success',
-			data: req.body
+		// req.body - {"password":"aaa","user":"5c20726d07f5280017e26074"}
+		controllers.profile.put(req.body.user, {password:req.body.password})
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: data
+			})
 		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
 		return
 	}
 
