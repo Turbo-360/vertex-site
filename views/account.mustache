@@ -181,6 +181,7 @@
 
       var data = window.__PRELOADED__
       var user = data.user
+      var query = data.query // query params
       var selected = data.selected
       var sidebarMenu = ['list-item-profile', 'list-item-sites']
 
@@ -331,6 +332,14 @@
           }
         })
       })
+
+      if (query == null)
+        return
+
+      if (query.resetpassword == null)
+        return
+
+      document.getElementById('btn-change-pw').click()
     })()
   </script>
 </body>
