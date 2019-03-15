@@ -339,7 +339,9 @@
       if (query.resetpassword == null)
         return
 
-      document.getElementById('btn-change-pw').click()
+      setTimeout(function(){
+        document.getElementById('btn-change-pw').click()
+      }, 500)
     })()
   </script>
 </body>
