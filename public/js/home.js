@@ -3,6 +3,7 @@
 
   var data = window.__PRELOADED__
   var templates = data.templates // this is an array
+  var query = data.query // query params
   var selected = data.selected
   var user = data.user
 
@@ -222,5 +223,19 @@
     reloadUI()
   })
 
-  reloadUI()
+  if (query == null){
+    reloadUI()
+    return
+  }
+
+  if (query.selected == null){
+    reloadUI()
+    return
+  }
+
+  if (query.selected == 'how it works'){
+    reloadUI()
+    selected = null
+  }
+
 })()
