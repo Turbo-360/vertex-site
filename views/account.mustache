@@ -317,7 +317,7 @@
           url: '/account/resetpassword',
           data: {password:pw1, user:user.id},
           success: function(response, status, xhr){
-            // console.log('RESET PASSWORD: ' + JSON.stringify(response))
+            console.log('RESET PASSWORD: ' + JSON.stringify(response))
             alert('Password Successfully Reset')
             $('.mfp-close')[0].click()
           },
