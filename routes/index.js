@@ -33,7 +33,8 @@ router.get('/', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			user: req.user,
 			selected: sites[0],
-			templates: sites
+			templates: sites,
+			query: req.query
 		})
 
 		res.render('index', data)
@@ -84,7 +85,8 @@ router.get('/me', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			user: currentUser,
 			sites: allSites,
-			selected: req.query.selected || 'profile'
+			selected: req.query.selected || 'profile',
+			query: req.query
 		})
 
 		res.render('account', data)
