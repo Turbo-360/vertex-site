@@ -794,6 +794,14 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
+		if (req.user != req.body.user){
+			res.json({
+				confirmation: 'fail',
+				message: 'User not logged in'
+			})
+			return
+		}
+
 		// req.body - {"password":"aaa","user":"5c20726d07f5280017e26074"}
 		controllers.profile.put(req.body.user, {password:req.body.password})
 		.then(data => {
