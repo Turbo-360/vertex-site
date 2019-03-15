@@ -140,6 +140,7 @@ router.get('/:action', function(req, res, next){
 		}
 
 		let hostSite = null
+		let resetpassword = false
 		controllers.site.getById(parsed.site)
 		.then(site => {
 			if (site.invited.indexOf(parsed.invitee) == -1){ // not actually invited
@@ -157,12 +158,12 @@ router.get('/:action', function(req, res, next){
 			return controllers.profile.get({email: parsed.invitee.toLowerCase()})
 		})
 		.then(profiles => {
-			// console.log('PROFILES: ' + JSON.stringify(profiles))
 			if (profiles.length > 0){ // use existing profile
 				return profiles[0]
 			}
 			else {
 				// create new profile, remove email from invited array
+				resetpassword = true
 				const params = {
 					firstName: '',
 					lastName: '',
@@ -200,8 +201,13 @@ router.get('/:action', function(req, res, next){
 			return controllers.site.put(hostSite.id, {collaborators:collaborators, invited:invited}, null)
 		})
 		.then(data => {
-			// res.redirect(process.env.TURBO360_URL)
-			res.redirect('https://www.vertex360.co/me?selected=sites')
+			const redirect = (resetpassword == true) ? 'https://www.vertex360.co/me?selected=sites&resetpassword=true' : 'https://www.vertex360.co/me?selected=sites'
+			res.redirect(redirect)
+
+			// if (resetpassword == true)
+			// 	res.redirect('https://www.vertex360.co/me?selected=sites&resetpassword=true')
+			// else
+			// 	res.redirect('https://www.vertex360.co/me?selected=sites')
 			return
 		})
 		.catch(function(err){
