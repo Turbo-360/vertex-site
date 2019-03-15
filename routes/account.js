@@ -787,7 +787,6 @@ router.post('/:action', function(req, res, next){
 
 	if (action == 'resetpassword'){
 		if (req.user == null){
-			console.log('TEST 1: ')
 			res.json({
 				confirmation: 'fail',
 				message: 'User not logged in'
@@ -795,9 +794,7 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		if (req.user != req.body.user){
-			console.log('TEST 2: ' + JSON.stringify(req.user))
-			console.log('TEST 2: ' + JSON.stringify(req.body.user))
+		if (req.user.id != req.body.user){
 			res.json({
 				confirmation: 'fail',
 				message: 'User not logged in'
