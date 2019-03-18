@@ -78,7 +78,7 @@ ProfileSchema.methods.summary = function(key) {
 		meta: () => { // meta data for <head> tag
 			return {
 				title: this.firstName+' '+this.lastName,
-				url: 'https://www.turbo360.co/profile/' + this.slug,
+				url: 'https://www.vertex360.co/profile/' + this.slug,
 				image: this.image+'=s260-c',
 				description: truncateText(this.bio, 220)
 			}
@@ -91,8 +91,10 @@ ProfileSchema.methods.summary = function(key) {
 	if (key === process.env.ADMIN_API_KEY){
 		summary['ip'] = this.ip
 		summary['api'] = this.api
+		summary['creditCard'] = this.creditCard
+		summary['stripeId'] = this.stripeId
 	}
-	
+
 	return summary
 }
 
