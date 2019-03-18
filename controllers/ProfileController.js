@@ -62,7 +62,7 @@ module.exports = {
 				delete params['filter']
 			}
 
-			// const key = req.query.key || ''
+			// TODO: extract this from headers, not query
 			let key = ''
 			if (req != null)
 				key = req.query.key || ''
