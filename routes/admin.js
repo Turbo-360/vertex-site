@@ -96,63 +96,9 @@ router.get('/pages/:slug', (req, res) => {
 	}
 
 	let site = null
+	let currentUser = null
 	const page = 'home'
 
-	// controllers.site.get({slug:req.params.slug})
-	// .then(data => {
-	// 	if (data.length == 0){
-	// 		throw new Error('Site not found')
-	// 		return
-	// 	}
-	//
-	// 	site = data[0]
-	// 	const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/'+req.params.slug+'/'+page+'.txt'
-	// 	return utils.HTTP.get(url)
-	// })
-	// .then(config => { // this is a string
-	// 	try {
-	// 		const pageReducer = {selected: page}
-	// 		pageReducer[page] = JSON.parse(config)
-	//
-	// 		const appReducer = {
-	// 			site_id: site.id,
-	// 			apiKey: site.api.key,
-	// 			summary: site
-	// 		}
-	//
-	// 		// don't send back everything:
-	// 		const currentUser = {
-	// 			id: req.user.id,
-	// 			username: req.user.username,
-	// 			firstName: req.user.firstName,
-	// 			lastName: req.user.lastName,
-	// 			image: req.user.image,
-	// 			slug: req.user.slug
-	// 		}
-	//
-	// 		const reducers = {
-	// 			page: pageReducer,
-	// 			app: appReducer,
-	// 			user: {currentUser: currentUser}
-	// 		}
-	//
-	// 		res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
-	// 	}
-	// 	catch(err) {
-	// 		throw err
-	// 		return
-	// 	}
-	//
-	// 	return
-	// })
-	// .catch(err => {
-	// 	res.json({
-	// 		confirmation: 'fail',
-	// 		message: err.message
-	// 	})
-	// })
-
-	let currentUser = null
 	controllers.site.get({slug:req.params.slug})
 	.then(data => {
 		if (data.length == 0){
@@ -161,17 +107,18 @@ router.get('/pages/:slug', (req, res) => {
 		}
 
 		site = data[0]
-		return controllers.profile.getById(req.user.id)
+		return controllers.profile.getById(req.user.id, true)
 	})
 	.then(user => {
 		currentUser = {
-			id: user.id,
-			username: user.username,
-			firstName: user.firstName,
-			lastName: user.lastName,
-			image: user.image,
-			slug: user.slug,
-			card: 'test'
+			id: req.user.id,
+			username: req.user.id.username,
+			firstName: req.user.id.firstName,
+			lastName: req.user.id.lastName,
+			image: req.user.id.image,
+			slug: req.user.id.slug,
+			creditCard: user.creditCard, // this is why we fetch the raw profile
+			stripeId: user.stripeId // this is why we fetch the raw profile
 		}
 
 		const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/'+req.params.slug+'/'+page+'.txt'
