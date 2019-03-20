@@ -112,11 +112,11 @@ router.get('/pages/:slug', (req, res) => {
 	.then(user => {
 		currentUser = {
 			id: req.user.id,
-			username: req.user.id.username,
-			firstName: req.user.id.firstName,
-			lastName: req.user.id.lastName,
-			image: req.user.id.image,
-			slug: req.user.id.slug,
+			username: req.user.username,
+			firstName: req.user.firstName,
+			lastName: req.user.lastName,
+			image: req.user.image,
+			slug: req.user.slug,
 			creditCard: user.creditCard, // this is why we fetch the raw profile
 			stripeId: user.stripeId // this is why we fetch the raw profile
 		}
