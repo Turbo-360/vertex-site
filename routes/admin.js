@@ -115,6 +115,7 @@ router.get('/pages/:slug', (req, res) => {
 			username: req.user.username,
 			firstName: req.user.firstName,
 			lastName: req.user.lastName,
+			email: req.user.email,
 			image: req.user.image,
 			slug: req.user.slug,
 			creditCard: user.creditCard, // this is why we fetch the raw profile
