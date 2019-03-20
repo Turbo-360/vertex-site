@@ -736,9 +736,8 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			customer = data.customer
 			card = data.card
-			const subject = (params.description==null) ? 'New PREMIUM Customer' : 'New Subscriber: '+params.description.toUpperCase()
-			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], subject, JSON.stringify(data))
-			// return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'New Premium Customer', JSON.stringify(data))
+			// const subject = (params.description==null) ? 'New PREMIUM Customer' : 'New Subscriber: '+params.description.toUpperCase()
+			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'CARD SUBMITTED', JSON.stringify(data))
 		})
 		.then(data => {
 			res.json({
