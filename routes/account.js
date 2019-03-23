@@ -647,8 +647,17 @@ router.post('/:action', function(req, res, next){
 			newSite = data
 			folder['newSite'] = newSite
 			folder['app'] = newSite.slug // new app to copy source to
+
 			// return controllers.site.getById(params.source) // get site that is being copied
-			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(folder))
+			const emailJson = {
+				newSite: newSite,
+				original: {
+					id: folder.copiedSite.id,
+					name: folder.copiedSite.name,
+					profile: folder.copiedSite.profile
+				}
+			}
+			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(emailJson))
 		})
 		.then(data => {
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
