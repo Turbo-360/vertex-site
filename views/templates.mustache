@@ -38,10 +38,10 @@
 		<div class="col-md-12">
 			<div class="main-search-input gray-style margin-top-0 margin-bottom-30">
 				<div class="main-search-input-item">
-					<input type="text" placeholder="What are you looking for?" />
+					<input id="input-search-templates" type="text" placeholder="What are you looking for?" />
 				</div>
 				<div class="main-search-input-item">
-					<select data-placeholder="Select Category" class="chosen-select">
+					<select id="select-search-templates" data-placeholder="Select Category" class="chosen-select">
 						<option value="featured">Featured</option>
 						<option value="resume">Resume</option>
 						<option value="landing">Landing Page</option>
@@ -49,7 +49,7 @@
 					</select>
 				</div>
 
-				<button class="button">Search</button>
+				<button id="btn-search-templates" class="button">Search</button>
 			</div>
 		</div>
 
@@ -132,6 +132,38 @@
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+<script>
+  (function(){
+    $('#btn-search-templates').click(function(event){
+      if (event)
+        event.preventDefault()
+
+      const category = $('#select-search-templates').val()
+      const tags = $('#input-search-templates').val()
+
+      console.log('SEARCH TEMPLATES: ' + category)
+      console.log('SEARCH TEMPLATES: ' + tags)
+
+      $.ajax({
+        url: '/api/site',
+        data: null,
+        type: 'GET',
+        success: function(response){
+          if (response.confirmation != 'success'){
+            alert(response.message)
+            return
+          }
+
+          var templates = response.results
+          console.log(JSON.stringify(templates))
+        },
+        error: function(){
+
+        }
+      })
+    })
+  })()
+</script>
 
 
 </body>
