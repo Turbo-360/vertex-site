@@ -685,9 +685,57 @@ router.post('/:action', function(req, res, next){
 	}
 
 	if (action == 'update-template'){
-		res.json({
-			confirmation: 'success',
-			data: req.body
+		const params = req.body
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'User not logged in'
+			})
+			return
+		}
+
+		const site = req.body.site
+		if (site == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing site parameter'
+			})
+			return
+		}
+
+		let lambda = null
+		// let newSite = null
+		let copiedSite = null
+		const folder = {
+			bucket: VERTEX_BUCKET,
+			newSite: site,
+			app: site.slug // new app to copy source to
+		}
+
+		controllers.site.getById(site.cloneSource) // fetch original site first
+		.then(data => {
+			copiedSite = data
+			folder['copiedSite'] = copiedSite
+			folder['source'] = copiedSite.slug
+			// newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
+			// newSiteInfo['image'] = copiedSite.image
+			// newSiteInfo['template'] = {staus:'dev', category:copiedSite.template.category}
+			// newSiteInfo['globalConfig'] = Object.assign({}, copiedSite.globalConfig)
+			// newSiteInfo['cloneSource'] = copiedSite.id
+			// return controllers.site.post(newSiteInfo) // create new site
+			return utils.HTTP.post('http://platform.turbo360-vector.com/updatetemplate', folder)
+		})
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: folder
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
 		})
 
 		return
