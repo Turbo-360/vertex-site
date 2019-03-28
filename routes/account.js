@@ -684,6 +684,15 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'update-template'){
+		res.json({
+			confirmation: 'success',
+			data: req.body
+		})
+
+		return
+	}
+
 	if (action == 'uploadurl') {
 		// query requires folder, filename, filetype
 
