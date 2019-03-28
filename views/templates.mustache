@@ -145,7 +145,7 @@
       console.log('SEARCH TEMPLATES: ' + tags)
 
       $.ajax({
-        url: '/api/site',
+        url: '/api/site?limit=10',
         data: null,
         type: 'GET',
         success: function(response){
