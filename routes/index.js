@@ -72,6 +72,31 @@ router.get('/templates', (req, res) => {
 	})
 })
 
+router.get('/template/:slug', (req, res) => {
+	// TODO: check if template is live
+	controllers.site.get({slug:req.params.slug}) // query template by slug
+	.then(results => {
+		if (results.length == 0){
+			throw new Error('Template not found')
+			return
+		}
+
+		const data = {
+			template: results[0],
+			user: req.user,
+		}
+
+		data['preloaded'] = JSON.stringify(data)
+		res.render('template', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/me', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -143,31 +168,6 @@ router.get('/landing', (req, res) => {
 	}
 
 	res.render('landing', data)
-})
-
-router.get('/template/:slug', (req, res) => {
-	// TODO: check if template is live
-	controllers.site.get({slug:req.params.slug}) // query template by slug
-	.then(results => {
-		if (results.length == 0){
-			throw new Error('Template not found')
-			return
-		}
-
-		const data = {
-			template: results[0],
-			user: req.user,
-		}
-
-		data['preloaded'] = JSON.stringify(data)
-		res.render('template', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
 })
 
 module.exports = router
