@@ -38,7 +38,7 @@
 					<div class="star-rating" data-rating="5">
 						<div class="rating-counter"><a href="#listing-reviews">(31 reviews)</a></div>
 					</div>
-          <img src="{{{template.image}}}=s1024" />
+          <img class="margin-top-20" src="{{{template.image}}}=s1024" />
 				</div>
 			</div>
 
@@ -69,12 +69,11 @@
 
 			<!-- Slider -->
 			<div id="listing-gallery" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-70">Gallery</h3>
+				<h3 class="listing-desc-headline margin-top-70">Screenshots</h3>
 				<div class="listing-slider-small mfp-gallery-container margin-bottom-0">
-					<a target="_blank" href="/images/single-listing-02a.jpg" data-background-image="/images/single-listing-02a.jpg" class="item mfp-gallery" title="Title 2"></a>
-					<a href="/images/single-listing-01a.jpg" data-background-image="/images/single-listing-01a.jpg" class="item mfp-gallery" title="Title 1"></a>
-					<a href="/images/single-listing-03a.jpg" data-background-image="/images/single-listing-03a.jpg" class="item mfp-gallery" title="Title 3"></a>
-					<a href="/images/single-listing-04a.jpg" data-background-image="/images/single-listing-04a.jpg" class="item mfp-gallery" title="Title 3"></a>
+          {{#template.screenshots}}
+					<a target="_blank" href="{{{.}}}" data-background-image="{{{.}}}" class="item mfp-gallery" title="Vertex 360"></a>
+          {{/template.screenshots}}
 				</div>
 			</div>
 
