@@ -29,10 +29,9 @@
 
 			<div id="titlebar" class="listing-titlebar padding-top-120">
 				<div class="listing-titlebar-title">
-					<h2>Sunny and Modern Apartment<span class="listing-tag">Apartments</span></h2>
+					<h2>{{template.name}}<span class="listing-tag">{{template.template.category}}</span></h2>
 					<span>
-						<a href="#listing-location" class="listing-address">
-							<i class="fa fa-map-marker"></i>
+						<a href="#" class="listing-address">
 							2726 Shinn Street, New York
 						</a>
 					</span>
@@ -56,31 +55,22 @@
 
 			<!-- Overview -->
 			<div id="listing-overview" class="listing-section">
-				<p>
-					Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.
-				</p>
+				<p>{{{template.description}}}</p>
 
-				<p>
-					 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.
-				</p>
-
-				<h3 class="listing-desc-headline">Amenities</h3>
+				<h3 class="listing-desc-headline">Features</h3>
 				<ul class="listing-features checkboxes">
 					<li>Elevator in building</li>
 					<li>Friendly workspace</li>
 					<li>Instant Book</li>
 					<li>Wireless Internet</li>
-					<li>Free parking on premises</li>
-					<li>Free parking on street</li>
 				</ul>
 			</div>
-
 
 			<!-- Slider -->
 			<div id="listing-gallery" class="listing-section">
 				<h3 class="listing-desc-headline margin-top-70">Gallery</h3>
 				<div class="listing-slider-small mfp-gallery-container margin-bottom-0">
-					<a href="/images/single-listing-02a.jpg" data-background-image="/images/single-listing-02a.jpg" class="item mfp-gallery" title="Title 2"></a>
+					<a target="_blank" href="/images/single-listing-02a.jpg" data-background-image="/images/single-listing-02a.jpg" class="item mfp-gallery" title="Title 2"></a>
 					<a href="/images/single-listing-01a.jpg" data-background-image="/images/single-listing-01a.jpg" class="item mfp-gallery" title="Title 1"></a>
 					<a href="/images/single-listing-03a.jpg" data-background-image="/images/single-listing-03a.jpg" class="item mfp-gallery" title="Title 3"></a>
 					<a href="/images/single-listing-04a.jpg" data-background-image="/images/single-listing-04a.jpg" class="item mfp-gallery" title="Title 3"></a>
