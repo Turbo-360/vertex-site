@@ -704,7 +704,6 @@ router.post('/:action', function(req, res, next){
 		}
 
 		let lambda = null
-		// let newSite = null
 		let copiedSite = null
 		const folder = {
 			bucket: VERTEX_BUCKET,
@@ -717,12 +716,6 @@ router.post('/:action', function(req, res, next){
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
-			// newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
-			// newSiteInfo['image'] = copiedSite.image
-			// newSiteInfo['template'] = {staus:'dev', category:copiedSite.template.category}
-			// newSiteInfo['globalConfig'] = Object.assign({}, copiedSite.globalConfig)
-			// newSiteInfo['cloneSource'] = copiedSite.id
-			// return controllers.site.post(newSiteInfo) // create new site
 			return utils.HTTP.post('http://platform.turbo360-vector.com/updatetemplate', folder)
 		})
 		.then(data => {
