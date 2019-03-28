@@ -58,7 +58,8 @@ router.get('/templates', (req, res) => {
 
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
-			user: req.user
+			user: req.user,
+			templates: sites
 		})
 
 		res.render('templates', data)
