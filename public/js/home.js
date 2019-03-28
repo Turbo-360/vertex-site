@@ -183,7 +183,7 @@
         event.preventDefault()
 
       var tpl = $('#tpl-launch-template').html()
-      $('#modal-container').html(tpl)
+      $('#modal-container').html(Mustache.render(tpl, selected))
       $('#btn-clone-template').click(function(event){
         if (event)
           event.preventDefault()
@@ -199,7 +199,8 @@
         event.preventDefault()
 
       var tpl = $('#tpl-launch-template').html()
-      $('#modal-container').html(tpl)
+      $('#modal-container').html(Mustache.render(tpl, selected))
+      // $('#modal-container').html(tpl)
       $('#btn-clone-template').click(function(event){
         if (event)
           event.preventDefault()
