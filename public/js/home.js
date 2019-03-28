@@ -193,6 +193,22 @@
 
       document.getElementById('btn-show-modal').click()
     })
+
+    $('#btn-launch-template-2').click(function(event){
+      if (event)
+        event.preventDefault()
+
+      var tpl = $('#tpl-launch-template').html()
+      $('#modal-container').html(tpl)
+      $('#btn-clone-template').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        launchTemplate()
+      })
+
+      document.getElementById('btn-show-modal').click()
+    })
   }
 
   $('.template-preview').each(function(i, el){
