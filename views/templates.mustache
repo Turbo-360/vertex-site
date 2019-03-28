@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
+  <style>
+    .template-details {
+      text-align: right
+    }
+
+    .template-details img {
+      width: 32px;
+      border-radius: 50%;
+      margin-left: 4px;
+    }
+  </style>
 </head>
 
 <body>
@@ -50,12 +61,12 @@
 					<a href="#" class="listing-item-container compact">
 						<div class="listing-item">
 							<img src="{{{image}}}=s1024" alt="Vertex 360">
-							<div class="listing-item-details" style="text-align:right">
+							<div class="listing-item-details template-details">
                 {{profile.username}}
-                <img style="width:32px;border-radius:50%;margin-left:4px" src="{{{profile.image}}}=s120-c" />
+                <img src="{{{profile.image}}}=s120-c" />
 							</div>
 							<div class="listing-item-content">
-								<h3>{{name}}</h3>
+								<h3 style="line-height:22px">{{name}}</h3>
 								<span>{{description}}</span>
 							</div>
 							<span class="like-icon"></span>
