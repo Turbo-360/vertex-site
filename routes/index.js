@@ -53,7 +53,7 @@ router.get('/templates', (req, res) => {
 	controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
 	.then(sites => {
 		sites.forEach((site, i) => {
-			site['description'] = utils.TextUtils.truncateText(site.description, 30)
+			site['description'] = utils.TextUtils.truncateText(site.description, 27)
 		})
 
 		data['templates'] = sites
