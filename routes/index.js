@@ -57,6 +57,10 @@ router.get('/templates', (req, res) => {
 		})
 
 		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			user: req.user
+		})
+
 		res.render('templates', data)
 	})
 	.catch(err => {
