@@ -12,6 +12,14 @@
       margin-right: 4px;
       text-transform: lowercase;
     }
+
+    #launch-template-container a {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      border-radius: 6px;
+    }
   </style>
 </head>
 
@@ -113,6 +121,7 @@
   <div class="selected-template">
     <img src="<% image %>=s1024" alt="Vertex 360">
     <div class="post-content">
+      <button style="float:right">Launch This Template</button>
       <h3><a class="capitalize" href="#"><% name %></a></h3>
       <ul class="post-meta">
         <li class="capitalize"><% template.category %></li>
@@ -131,7 +140,7 @@
 
       <hr />
       <div id="launch-template-container">
-        <a style="width:100%;padding:20px;text-align:center;font-size:20px;border-radius:6px" id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Use This Template <i class="sl sl-icon-login"></i></a>
+        <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Use This Template <i class="sl sl-icon-login"></i></a>
       </div>
     </div>
   </div>
