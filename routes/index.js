@@ -45,6 +45,24 @@ router.get('/', (req, res) => {
 	})
 })
 
+router.get('/templates', (req, res) => {
+	const data = {
+		cdn: CDN
+	}
+
+	controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
+	.then(sites => {
+		data['templates'] = sites
+		res.render('templates', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/me', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')

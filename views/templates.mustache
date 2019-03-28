@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<head>
+  {{>head}}
+</head>
+
+<body>
+<div id="wrapper">
+  {{>nav}}
+
+<div class="clearfix"></div>
+
+<div id="titlebar" class="gradient padding-top-120">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Templates</h2>
+        <span>Grid Layout With Sidebar</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="main-search-input gray-style margin-top-0 margin-bottom-30">
+				<div class="main-search-input-item">
+					<input type="text" placeholder="What are you looking for?" />
+				</div>
+				<div class="main-search-input-item">
+					<select data-placeholder="All Categories" class="chosen-select" >
+						<option>All Categories</option>
+						<option>Shops</option>
+						<option>Hotels</option>
+						<option>Restaurants</option>
+						<option>Fitness</option>
+						<option>Events</option>
+					</select>
+				</div>
+
+				<button class="button">Search</button>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="row">
+
+
+				<!-- Listing Item -->
+        {{#templates}}
+				<div class="col-lg-4 col-md-6">
+					<a href="#" class="listing-item-container compact">
+						<div class="listing-item">
+							<img src="{{{image}}}=s1024" alt="Vertex 360">
+							<div class="listing-item-details" style="text-align:right">
+                dkwon
+                <img style="width:32px;border-radius:50%;margin-left:4px" src="https://lh3.googleusercontent.com/fF69mg9RJLJr0mi-h7bfBf_er1skEQzJekC4N64v17QiKhlnuyWHPWRxP6iUktR_ZNFdJYaz0G4OIxwZag0hPrNr2A=s120-c" />
+							</div>
+							<div class="listing-item-content">
+								<h3>{{name}}</h3>
+								<span>{{category}}</span>
+							</div>
+							<span class="like-icon"></span>
+						</div>
+					</a>
+				</div>
+        {{/templates}}
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="col-lg-4 col-md-6">
+					<a href="listings-single-page.html" class="listing-item-container compact">
+						<div class="listing-item">
+							<img src="images/listing-item-03.jpg" alt="">
+							<div class="listing-item-details">
+								<ul>
+									<li>Starting from $59 per night</li>
+								</ul>
+							</div>
+							<div class="listing-item-content">
+								<div class="numerical-rating" data-rating="2.0"></div>
+								<h3>Hotel Govendor</h3>
+								<span>778 Country Street, New York</span>
+							</div>
+							<span class="like-icon"></span>
+						</div>
+
+					</a>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="col-lg-4 col-md-6">
+					<a href="listings-single-page.html" class="listing-item-container compact">
+						<div class="listing-item">
+							<img src="images/listing-item-04.jpg" alt="">
+
+							<div class="listing-badge now-open">Now Open</div>
+
+							<div class="listing-item-content">
+								<div class="numerical-rating" data-rating="5.0"></div>
+								<h3>Burger House <i class="verified-icon"></i></h3>
+								<span>2726 Shinn Street, New York</span>
+							</div>
+							<span class="like-icon"></span>
+						</div>
+					</a>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="col-lg-4 col-md-6">
+					<a href="listings-single-page.html" class="listing-item-container compact">
+						<div class="listing-item">
+							<img src="images/listing-item-05.jpg" alt="">
+							<div class="listing-item-content">
+								<div class="numerical-rating" data-rating="3.5"></div>
+								<h3>Airport</h3>
+								<span>1512 Duncan Avenue, New York</span>
+							</div>
+							<span class="like-icon"></span>
+						</div>
+					</a>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="col-lg-4 col-md-6">
+					<a href="listings-single-page.html" class="listing-item-container compact">
+						<div class="listing-item">
+							<img src="images/listing-item-06.jpg" alt="">
+
+							<div class="listing-badge now-closed">Now Closed</div>
+
+							<div class="listing-item-content">
+								<div class="numerical-rating" data-rating="4.5"></div>
+								<h3>Think Coffee</h3>
+								<span>215 Terry Lane, New York</span>
+							</div>
+							<span class="like-icon"></span>
+						</div>
+					</a>
+				</div>
+				<!-- Listing Item / End -->
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<div id="footer" class="margin-top-80" style="background:#f9f9f9">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-sm-6">
+				<img class="footer-logo" src="https://storage.turbo360.co/vertex360-cms-4hujkc/vertex-logo-3.svg" alt="Vertex 360">
+				<br><br>
+				<p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Our Partners</a></li>
+					<li><a href="#">How It Works</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="col-md-3 col-sm-12">
+				<h4>Contact</h4>
+				<div class="text-widget">
+					<span>12345 Little Lonsdale St, Melbourne</span> <br>
+					Phone: <span>(123) 123-456 </span><br>
+					E-Mail:<span> <a href="#">office@example.com</a> </span><br>
+				</div>
+
+				<ul class="social-icons margin-top-20">
+					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+					<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Copyright -->
+		<div class="row">
+      {{>footer}}
+		</div>
+
+	</div>
+
+</div>
+<!-- Footer / End -->
+
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+<script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+<script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+
+
+</body>
+</html>
