@@ -46,10 +46,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/templates', (req, res) => {
-	const data = {
-		cdn: CDN
-	}
-
+	const data = {cdn: CDN}
 	controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
 	.then(sites => {
 		sites.forEach((site, i) => {
@@ -73,6 +70,8 @@ router.get('/templates', (req, res) => {
 })
 
 router.get('/template/:slug', (req, res) => {
+	const data = {cdn: CDN}
+	
 	// TODO: check if template is live
 	controllers.site.get({slug:req.params.slug}) // query template by slug
 	.then(results => {
@@ -81,12 +80,12 @@ router.get('/template/:slug', (req, res) => {
 			return
 		}
 
-		const data = {
-			template: results[0],
-			user: req.user,
-		}
+		data['template'] = results[0]
+		data['preloaded'] = JSON.stringify({
+			template: data.template,
+			user: req.user
+		})
 
-		data['preloaded'] = JSON.stringify(data)
 		res.render('template', data)
 	})
 	.catch(err => {
