@@ -71,7 +71,7 @@ router.get('/templates', (req, res) => {
 
 router.get('/template/:slug', (req, res) => {
 	const data = {cdn: CDN}
-	
+
 	// TODO: check if template is live
 	controllers.site.get({slug:req.params.slug}) // query template by slug
 	.then(results => {
@@ -80,7 +80,9 @@ router.get('/template/:slug', (req, res) => {
 			return
 		}
 
-		data['template'] = results[0]
+		const site = results[0]
+		site['description'] = utils.TextUtils.convertToHtml(site.description)
+		data['template'] = site
 		data['preloaded'] = JSON.stringify({
 			template: data.template,
 			user: req.user
