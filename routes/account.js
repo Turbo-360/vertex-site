@@ -719,6 +719,11 @@ router.post('/:action', function(req, res, next){
 			return utils.HTTP.post('http://platform.turbo360-vector.com/updatetemplate', folder)
 		})
 		.then(data => {
+			// this lambda takes the updated page configurations from the original
+			// template and merges them with the page configurations of the current site
+			return utils.HTTP.post('http://platform.turbo360-vector.com/sync-pages', {template:copiedSite.slug, site:site.slug})
+		})
+		.then(data => {
 			res.json({
 				confirmation: 'success',
 				data: folder
