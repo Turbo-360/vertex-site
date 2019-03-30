@@ -724,6 +724,10 @@ router.post('/:action', function(req, res, next){
 			return utils.HTTP.post('http://platform.turbo360-vector.com/sync-pages', {template:copiedSite.slug, site:site.slug})
 		})
 		.then(data => {
+			// update global from copiedSite to current site
+			return controllers.site.put(site.id, {globalConfig: copiedSite.globalConfig})
+		})
+		.then(data => {
 			res.json({
 				confirmation: 'success',
 				data: folder
