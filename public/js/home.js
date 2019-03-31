@@ -53,7 +53,8 @@
         return
       }
 
-      window.location.href = '/me?selected=sites' // redirect to account page
+      // window.location.href = '/me?selected=sites' // redirect to account page
+      window.location.href = '/admin/pages/'+siteSlug // redirect to site admin page
     })
   }
 
