@@ -30,7 +30,8 @@ router.get('/', (req, res) => {
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
 			user: req.user,
-			selected: sites[0],
+			// selected: sites[0],
+			selected: null,
 			templates: sites,
 			query: req.query
 		})
