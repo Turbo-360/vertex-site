@@ -169,16 +169,30 @@
     if (selected == null){
       var tpl = $('#tpl-how-it-works').html()
       $('#selected-template').html(Mustache.render(tpl, null))
-      $('#btn-get-started').click(function(){
-        $('#tab-register').click()
-      })
+
+      // no template selected, show about section:
+      setTimeout(function(){
+        $('#btn-get-started').click(function(event){
+          if (event)
+            event.preventDefault()
+
+          $('#tab-register').click()
+          document.getElementById('btn-show-modal').click()
+        })
+      }, 500)
       return
     }
 
     var tpl = $('#tpl-selected-template').html()
     $('#selected-template').html(Mustache.render(tpl, selected))
-
     if (user == null){
+      $('#btn-launch-template').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        $('#tab-register').click()
+        document.getElementById('btn-show-modal').click()
+      })
       return
     }
 
