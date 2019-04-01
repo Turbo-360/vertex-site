@@ -168,7 +168,11 @@
 
     if (selected == null){
       var tpl = $('#tpl-how-it-works').html()
-      $('#selected-template').html(Mustache.render(tpl, null))
+      var data = {
+        showGetStarted: (user==null) ? true : false
+      }
+
+      $('#selected-template').html(Mustache.render(tpl, data))
 
       // no template selected, show about section:
       setTimeout(function(){
