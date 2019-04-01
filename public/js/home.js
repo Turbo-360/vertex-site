@@ -169,6 +169,9 @@
     if (selected == null){
       var tpl = $('#tpl-how-it-works').html()
       $('#selected-template').html(Mustache.render(tpl, null))
+      $('#btn-get-started').click(function(){
+        $('#tab-register').click()
+      })
       return
     }
 
