@@ -108,11 +108,28 @@
   </div>
 </script>
 
+<script type="text/template" id="tpl-faq">
+  <div>
+    <img src="https://lh3.googleusercontent.com/IWUouz6uPWLofipKuaHh219C5AdniATu6C85bd6DGogdQlJ1M8BAFk6uZx-Q10pVlgYMHrRuZC5V83P_g5XGv21_bRI=s1024" alt="Vertex 360">
+  	<div class="post-content">
+  		<h3>Frequently Asked Questions</h3>
+
+      <h4 class="margin-top-40">1. Web Design Made Easy</h4>
+      <p class="margin-top-0 margin-bottom-40">
+        A: Simply input your content and walk away - no coding required! No more tinkering with
+        confusing editors, drag &amp; drop tools, or ridiculously complicated features for
+        <em>"beginners"</em>. On Vertex 360, simply input your text and images and move on
+        with your life, business, more important stuff.
+      </p>
+
+  	</div>
+  </div>
+</script>
+
 <script type="text/template" id="tpl-how-it-works">
   <div>
     <img src="https://lh3.googleusercontent.com/ZrN5Nhga-8cd9ju47rv8l6lYlrF4Hu12R-rov72-0qIT1k1fGCl4Bn0KZRMt0An1PbkUiSHefxR_4oqvqL4nqOZB1Q=s1024" alt="Vertex 360">
   	<div class="post-content">
-
   		<h3><a href="#">Lightning Fast Web Design</a></h3>
   		<ul class="post-meta">
   			<li>No Coding Required</li>
@@ -307,7 +324,6 @@
     var body = {
       name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
       source: selected.id // ID of the template being copied
-      // source: template.id // ID of the template being copied
     }
 
     if (body.name.length == 0){
@@ -322,7 +338,7 @@
         return
       }
 
-    // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+      // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
       setTimeout(function(){
         checkTemplate(response.data.slug)
       }, 4000)
@@ -407,10 +423,8 @@
     }, 'slow');
 
     if (selected == 'faq'){
-      // var tpl = $('#tpl-selected-template').html()
-      // $('#selected-template').html(Mustache.render(tpl, selected))
-
-      $('#selected-template').html('FAQ')
+      var tpl = $('#tpl-faq').html()
+      $('#selected-template').html(Mustache.render(tpl, null))
       return
     }
 
@@ -490,7 +504,11 @@
     })
   })
 
-  var nav = [{nav:'nav-how-it-works', text:'how it works'}, {nav:'nav-faq', text:'faq'}]
+  var nav = [
+    {nav:'nav-how-it-works', text:'how it works'},
+    {nav:'nav-faq', text:'faq'}
+  ]
+
   nav.forEach(function(navItem){
     $('#'+navItem.nav).click(function(event){
       if (event)
