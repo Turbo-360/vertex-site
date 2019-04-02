@@ -406,7 +406,15 @@
        scrollTop: 0
     }, 'slow');
 
-    if (selected == null){
+    if (selected == 'faq'){
+      // var tpl = $('#tpl-selected-template').html()
+      // $('#selected-template').html(Mustache.render(tpl, selected))
+
+      $('#selected-template').html('FAQ')
+      return
+    }
+
+    if (selected == 'how it works'){
       var tpl = $('#tpl-how-it-works').html()
       var data = {
         showGetStarted: (user==null) ? true : false
@@ -437,6 +445,7 @@
         $('#tab-register').click()
         document.getElementById('btn-show-modal').click()
       })
+
       return
     }
 
@@ -481,13 +490,14 @@
     })
   })
 
-  var nav = ['nav-how-it-works', 'nav-faq']
+  var nav = [{nav:'nav-how-it-works', text:'how it works'}, {nav:'nav-faq', text:'faq'}]
   nav.forEach(function(navItem){
-    $('#'+navItem).click(function(event){
+    $('#'+navItem.nav).click(function(event){
       if (event)
         event.preventDefault()
 
-      selected = null
+      // selected = null
+      selected = navItem.text
       reloadUI()
     })
   })
