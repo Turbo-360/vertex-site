@@ -31,6 +31,9 @@ router.get('/', (req, res) => {
 			user: req.user,
 			selected: 'how it works',
 			templates: sites,
+			static: {
+				faq: require('../public/static/faq.json')
+			},
 			query: req.query
 		})
 
