@@ -5,6 +5,7 @@ const controllers = require('../controllers')
 const jwt = require('jsonwebtoken')
 const Base64 = require('js-base64').Base64
 const fs = require('fs')
+const deepmerge = require('deepmerge')
 const sessions = require('client-sessions')
 
 const VERTEX_BUCKET = 'turbo360-vertex'
@@ -725,7 +726,9 @@ router.post('/:action', function(req, res, next){
 		})
 		.then(data => {
 			// update global from copiedSite to current site
-			return controllers.site.put(site.id, {globalConfig: copiedSite.globalConfig})
+			// cloned = deepmerge.all([updatedPageConfiguration, currentConfig])
+			const updatedGlobalConfig = deepmerge.all([copiedSite.globalConfig, site.globalConfig])
+			return controllers.site.put(site.id, {globalConfig: updatedGlobalConfig})
 		})
 		.then(data => {
 			res.json({
