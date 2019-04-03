@@ -67,7 +67,6 @@
     var body = {
       name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
       source: selected.id // ID of the template being copied
-      // source: template.id // ID of the template being copied
     }
 
     if (body.name.length == 0){
@@ -82,7 +81,7 @@
         return
       }
 
-    // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+      // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
       setTimeout(function(){
         checkTemplate(response.data.slug)
       }, 4000)
@@ -160,19 +159,40 @@
     $('#nav-login').hide()
   }
 
+  var setNavSelected = function(current){
+    var navItems = ['nav-home', 'nav-how-it-works', 'nav-faq']
+    navItems.forEach(function(item){
+      if (item==current)
+        $('#'+item).addClass('current')
+      else
+      $('#'+item).removeClass('current')
+    })
+  }
 
   var reloadUI = function(){
     $('#selected-template-container').animate({
        scrollTop: 0
     }, 'slow');
 
-    if (selected == null){
+    if (selected == 'faq'){
+      var data = window.__PRELOADED__
+      if (data == null)
+        return
+
+      var tpl = $('#tpl-faq').html()
+      $('#selected-template').html(Mustache.render(tpl, data.static))
+      setNavSelected('nav-faq')
+      return
+    }
+
+    if (selected == 'how it works'){
       var tpl = $('#tpl-how-it-works').html()
       var data = {
         showGetStarted: (user==null) ? true : false
       }
 
       $('#selected-template').html(Mustache.render(tpl, data))
+      setNavSelected('nav-how-it-works')
 
       // no template selected, show about section:
       setTimeout(function(){
@@ -197,10 +217,11 @@
         $('#tab-register').click()
         document.getElementById('btn-show-modal').click()
       })
+
       return
     }
 
-    $('#btn-launch-template').click(function(event){
+    var launchTemplateHandler = function(event){
       if (event)
         event.preventDefault()
 
@@ -214,26 +235,14 @@
       })
 
       document.getElementById('btn-show-modal').click()
-    })
+    }
 
-    $('#btn-launch-template-2').click(function(event){
-      if (event)
-        event.preventDefault()
-
-      var tpl = $('#tpl-launch-template').html()
-      $('#modal-container').html(Mustache.render(tpl, selected))
-      // $('#modal-container').html(tpl)
-      $('#btn-clone-template').click(function(event){
-        if (event)
-          event.preventDefault()
-
-        launchTemplate()
-      })
-
-      document.getElementById('btn-show-modal').click()
-    })
+    $('#btn-launch-template').click(launchTemplateHandler)
+    $('#btn-launch-template-2').click(launchTemplateHandler)
+    setNavSelected('nav-home')
   }
 
+  // bind click handlers to each template preview on left column:
   $('.template-preview').each(function(i, el){
     $(this).click(function(event){
       if (event)
@@ -254,12 +263,20 @@
     })
   })
 
-  $('#nav-how-it-works').click(function(event){
-    if (event)
-      event.preventDefault()
+  var nav = [
+    {nav:'nav-how-it-works', text:'how it works'},
+    {nav:'nav-faq', text:'faq'}
+  ]
 
-    selected = null
-    reloadUI()
+  nav.forEach(function(navItem){
+    $('#'+navItem.nav).click(function(event){
+      if (event)
+        event.preventDefault()
+
+      // selected = null
+      selected = navItem.text
+      reloadUI()
+    })
   })
 
   if (query == null){
@@ -272,9 +289,8 @@
     return
   }
 
-  if (query.selected == 'how it works'){
+  if (query.selected=='how it works' || query.selected=='faq'){
     selected = null
     reloadUI()
   }
-
 })()
