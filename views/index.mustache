@@ -411,6 +411,16 @@
     $('#nav-login').hide()
   }
 
+  var setNavSelected = function(current){
+    var navItems = ['nav-home', 'nav-how-it-works', 'nav-faq']
+    navItems.forEach(function(item){
+      if (item==current)
+        $('#'+item).addClass('current')
+      else
+      $('#'+item).removeClass('current')
+    })
+  }
+
   var reloadUI = function(){
     $('#selected-template-container').animate({
        scrollTop: 0
@@ -423,6 +433,7 @@
 
       var tpl = $('#tpl-faq').html()
       $('#selected-template').html(Mustache.render(tpl, data.static))
+      setNavSelected('nav-faq')
       return
     }
 
@@ -433,6 +444,7 @@
       }
 
       $('#selected-template').html(Mustache.render(tpl, data))
+      setNavSelected('nav-how-it-works')
 
       // no template selected, show about section:
       setTimeout(function(){
@@ -479,6 +491,7 @@
 
     $('#btn-launch-template').click(launchTemplateHandler)
     $('#btn-launch-template-2').click(launchTemplateHandler)
+    setNavSelected('nav-home')
   }
 
   // bind click handlers to each template preview on left column:
