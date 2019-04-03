@@ -113,15 +113,10 @@
     <img src="https://lh3.googleusercontent.com/IWUouz6uPWLofipKuaHh219C5AdniATu6C85bd6DGogdQlJ1M8BAFk6uZx-Q10pVlgYMHrRuZC5V83P_g5XGv21_bRI=s1024" alt="Vertex 360">
   	<div class="post-content">
   		<h3>Frequently Asked Questions</h3>
-
-      <h4 class="margin-top-40">1. Web Design Made Easy</h4>
-      <p class="margin-top-0 margin-bottom-40">
-        A: Simply input your content and walk away - no coding required! No more tinkering with
-        confusing editors, drag &amp; drop tools, or ridiculously complicated features for
-        <em>"beginners"</em>. On Vertex 360, simply input your text and images and move on
-        with your life, business, more important stuff.
-      </p>
-
+      <%#faq%>
+      <h4 class="margin-top-40">Q: <% question %></h4>
+      <p class="margin-top-0 margin-bottom-40">A: <% answer %></p>
+      <%/faq%>
   	</div>
   </div>
 </script>
@@ -416,15 +411,18 @@
     $('#nav-login').hide()
   }
 
-
   var reloadUI = function(){
     $('#selected-template-container').animate({
        scrollTop: 0
     }, 'slow');
 
     if (selected == 'faq'){
+      var data = window.__PRELOADED__
+      if (data == null)
+        return
+
       var tpl = $('#tpl-faq').html()
-      $('#selected-template').html(Mustache.render(tpl, null))
+      $('#selected-template').html(Mustache.render(tpl, data.static))
       return
     }
 
