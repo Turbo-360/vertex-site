@@ -290,7 +290,7 @@
   }
 
   if (query.selected=='how it works' || query.selected=='faq'){
-    selected = null
+    selected = query.selected
     reloadUI()
   }
 })()
