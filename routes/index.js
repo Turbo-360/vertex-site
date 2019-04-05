@@ -110,6 +110,10 @@ router.get('/profile/:slug', (req, res) => {
 		}
 
 		data['profile'] = profiles[0]
+		return controllers.site.get({'profile.id':data.profile.id})
+	})
+	.then(sites => {
+		data['sites'] = sites
 		res.render('profile', data)
 	})
 	.catch(err => {
