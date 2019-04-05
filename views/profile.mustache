@@ -61,23 +61,21 @@
 
         {{#sites}}
         <div class="col-lg-6 col-md-12">
-          <a href="#" class="listing-item-container" data-marker-id="2">
-            <div class="listing-item">
-              <img src="{{{image}}}=s512-c" alt="">
-              <div class="listing-item-details">
-                <ul>
-                  <li>Friday, August 10</li>
-                </ul>
-              </div>
-              <div class="listing-item-content">
-                <span class="tag">{{template.category}}</span>
-                <h3>{{name}}</h3>
-                <span>Bishop Avenue, New York</span>
-              </div>
-              <span class="like-icon"></span>
-            </div>
-          </a>
-        </div>
+					<a href="#" class="listing-item-container compact">
+						<div class="listing-item">
+							<img src="{{{image}}}=s1024" alt="Vertex 360">
+							<div class="listing-item-details template-details">
+                {{profile.username}}
+                <img src="{{{profile.image}}}=s120-c" />
+							</div>
+							<div class="listing-item-content">
+								<h3 style="line-height:22px">{{name}}</h3>
+								<span>{{description}}</span>
+							</div>
+							<span class="like-icon"></span>
+						</div>
+					</a>
+				</div>
         {{/sites}}
 
       </div>
