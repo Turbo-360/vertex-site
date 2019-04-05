@@ -102,7 +102,7 @@ router.get('/template/:slug', (req, res) => {
 
 router.get('/profile/:slug', (req, res) => {
 	const data = {cdn: CDN}
-	controllers.site.get({slug:req.params.slug})
+	controllers.profile.get({slug:req.params.slug})
 	.then(profiles => {
 		if (profiles.length == 0){
 			throw new Error('Profile not found')
