@@ -58,12 +58,11 @@
 			<div id="listing-overview" class="listing-section">
 				<p>{{{template.description}}}</p>
 
-				<h3 class="listing-desc-headline">Features</h3>
+				<h3 class="listing-desc-headline">Tags</h3>
 				<ul class="listing-features checkboxes">
-					<li>Elevator in building</li>
-					<li>Friendly workspace</li>
-					<li>Instant Book</li>
-					<li>Wireless Internet</li>
+          {{#template.tags}}
+					<li>{{.}}</li>
+          {{/template.tags}}
 				</ul>
 			</div>
 
