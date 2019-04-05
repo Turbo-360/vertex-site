@@ -110,7 +110,7 @@ router.get('/profile/:slug', (req, res) => {
 		}
 
 		data['profile'] = profiles[0]
-		return controllers.site.get({'profile.id':data.profile.id})
+		return controllers.site.get({'profile.id':data.profile.id, format:'vertex'})
 	})
 	.then(sites => {
 		data['sites'] = sites
