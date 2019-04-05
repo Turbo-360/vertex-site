@@ -100,6 +100,28 @@ router.get('/template/:slug', (req, res) => {
 	})
 })
 
+router.get('/profile/:slug', (req, res) => {
+	const data = {cdn: CDN}
+	controllers.site.get({slug:req.params.slug})
+	.then(profiles => {
+		res.render('profile', data)
+
+		// if (profiles.length == 0){
+		// 	throw new Error('Profile not found')
+		// 	return
+		// }
+		//
+		// data['profile'] = profiles[0]
+		// res.render('profile', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/me', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
