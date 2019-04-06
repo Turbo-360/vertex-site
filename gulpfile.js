@@ -53,7 +53,8 @@ gulp.task('vendor', function(){
                 './public/scripts/tooltips.min.js',
                 './public/js/mustache.js',
                 './public/js/dropzone.js',
-                './public/scripts/custom.js'
+                './public/scripts/custom.js',
+                './public/scripts/auth.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
