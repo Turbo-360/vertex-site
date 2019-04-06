@@ -115,6 +115,11 @@ router.get('/profile/:slug', (req, res) => {
 	})
 	.then(sites => {
 		data['sites'] = sites
+		data['preloaded'] = JSON.stringify({
+			profile: data.profile,
+			user: req.user
+		})
+
 		res.render('profile', data)
 	})
 	.catch(err => {
