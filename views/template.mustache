@@ -177,6 +177,11 @@
 				<div class="clearfix"></div>
 			</div>
 
+      <div class="widget margin-top-40">
+				<h3>Related</h3>
+				<ul id="related-sites" class="widget-tabs"></ul>
+			</div>
+
 		</div>
 		<!-- Sidebar / End -->
 
@@ -188,8 +193,59 @@
 </div>
 <!-- Wrapper / End -->
 
+<script type="text/template" id="tpl-site-preview">
+  <li>
+  	<div class="widget-content">
+  		<div class="widget-thumb">
+  			<a href="#"><img src="<%{image}%>=s120-c" alt="Vertex 360" /></a>
+  		</div>
+
+  		<div class="widget-text">
+  			<h5><a href="#"><% name %></a></h5>
+  			<span><% template.category %></span>
+  		</div>
+  		<div class="clearfix"></div>
+  	</div>
+  </li>
+</script>
+
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+<script>
+  (function(){
+    Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+
+    var data = window.__PRELOADED__
+    // console.log(JSON.stringify(data))
+    var currentTemplate = data.template
+
+    $.ajax({
+      url: '/api/site?template.category='+currentTemplate.template.category+'&limit=5',
+      data: null,
+      type: 'GET',
+      success: function(response){
+        if (response.confirmation != 'success'){
+          return
+        }
+
+        var templates = response.results
+        console.log(JSON.stringify(templates))
+
+        var tpl = $('#tpl-site-preview').html()
+        var templatesHtml = ''
+        templates.forEach(function(template){
+          templatesHtml += Mustache.render(tpl, template)
+        })
+
+        $('#related-sites').html(templatesHtml)
+      },
+      error: function(response){
+
+      }
+    })
+
+  })()
+</script>
 
 </body>
 </html>
