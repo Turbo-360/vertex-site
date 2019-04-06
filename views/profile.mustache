@@ -38,6 +38,12 @@
           <hr class="margin-top-40" />
           <div>
             <p>{{{profile.bio}}}</p>
+            <h3 class="listing-desc-headline">Tags</h3>
+    				<ul class="listing-features checkboxes">
+              {{#template.tags}}
+    					<li>{{.}}</li>
+              {{/template.tags}}
+    				</ul>
           </div>
   			</section>
 
