@@ -110,6 +110,7 @@ router.get('/profile/:slug', (req, res) => {
 		}
 
 		data['profile'] = profiles[0]
+		data.profile['keywords'] = data.profile.tags.join(', ') // for <meta> tag
 		return controllers.site.get({'profile.id':data.profile.id, format:'vertex'})
 	})
 	.then(sites => {
