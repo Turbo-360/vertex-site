@@ -197,11 +197,11 @@
   <li>
   	<div class="widget-content">
   		<div class="widget-thumb">
-  			<a href="#"><img src="<%{image}%>=s120-c" alt="Vertex 360" /></a>
+  			<a href="/template/<% slug %>"><img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" /></a>
   		</div>
 
   		<div class="widget-text">
-  			<h5><a href="#"><% name %></a></h5>
+  			<h5><a href="/template/<% slug %>"><% name %></a></h5>
   			<span><% template.category %></span>
   		</div>
   		<div class="clearfix"></div>
@@ -220,7 +220,7 @@
     var currentTemplate = data.template
 
     $.ajax({
-      url: '/api/site?template.category='+currentTemplate.template.category+'&limit=5',
+      url: '/api/site?origin=vertex360&template.category='+currentTemplate.template.category+'&limit=5',
       data: null,
       type: 'GET',
       success: function(response){
@@ -229,7 +229,7 @@
         }
 
         var templates = response.results
-        console.log(JSON.stringify(templates))
+        // console.log(JSON.stringify(templates))
 
         var tpl = $('#tpl-site-preview').html()
         var templatesHtml = ''
