@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
+  <meta property="og:title" content="Vertex 360 | {{template.name}}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://www.vertex360.co/template/{{template.slug}}" />
+	<meta property="og:image" content="{{{template.image}}}=s260-c" />
+	<meta property="og:image:width" content="260px" />
+	<meta property="og:image:height" content="260px" />
+	<meta property="og:description" content="{{template.description}}" />
+
   <style>
     .template-details {
       text-align: right
@@ -27,7 +35,7 @@
   <div class="row sticky-wrapper">
     <div class="col-lg-8 col-md-8 padding-right-30 padding-top-120">
       <h2>{{template.name}}</h2>
-      <button style="float:right" class="button with-icon popup-with-zoom-anim">Launch This Template</button>
+      <button id="btn-launch-template" style="float:right" class="button with-icon">Launch This Template</button>
       <span>
         <a href="/profile/{{template.profile.slug}}" class="listing-address">{{template.profile.username}}</a>
       </span>
@@ -189,7 +197,7 @@
 </div>
 
 {{>footer}}
-
+<a style="display:none" id="btn-show-modal" href="#sign-in-dialog" class="popup-with-zoom-anim">test</a>
 </div>
 <!-- Wrapper / End -->
 
@@ -209,15 +217,51 @@
   </li>
 </script>
 
+<script type="text/template" id="tpl-launch-template">
+  <div style="text-align:center">
+    <h3 style="margin-bottom:0px;margin-top:0px">Launch Site</h3>
+    <p style="margin-bottom:16px;color:#888">Launch this template on your account.</p>
+    <img style="width:260px;margin-bottom:16px" src="<% image %>=s512" />
+    <input id="input-site-name" type="text" placeholder="Your Site Name" />
+    <div id="btn-launch-container">
+      <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</script>
+
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
 <script>
   (function(){
     Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
-
     var data = window.__PRELOADED__
-    // console.log(JSON.stringify(data))
+    var user = data.user
     var currentTemplate = data.template
+
+    var launchTemplateHandler = function(event){
+      if (event)
+        event.preventDefault()
+
+      if (user == null){
+        $('#tab-register').click()
+        document.getElementById('btn-show-modal').click()
+        return
+      }
+
+      var tpl = $('#tpl-launch-template').html()
+      $('#modal-container').html(Mustache.render(tpl, currentTemplate))
+      $('#btn-clone-template').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        // launchTemplate()
+      })
+
+     document.getElementById('btn-show-modal').click()
+    }
+
+    $('#btn-launch-template').click(launchTemplateHandler)
+
 
     $.ajax({
       url: '/api/site?origin=vertex360&template.category='+currentTemplate.template.category+'&limit=5',
@@ -239,11 +283,8 @@
 
         $('#related-sites').html(templatesHtml)
       },
-      error: function(response){
-
-      }
+      error: function(response){}
     })
-
   })()
 </script>
 
