@@ -84,19 +84,31 @@
 
             <div class="row">
               <div class="col-lg-8">
-                <div class="my-profile">
-    							<label>First Name</label>
-    							<input id="input-profile-firstName" style="background:#fffffa" value="{{user.firstName}}" type="text" />
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label>First Name</label>
+                    <input id="input-profile-firstName" style="background:#fffffa" value="{{user.firstName}}" type="text" />
+                  </div>
+                  <div class="col-lg-6">
+                    <label>Last Name</label>
+                    <input id="input-profile-lastName" style="background:#fffffa" value="{{user.lastName}}" type="text" />
+                  </div>
 
-                  <label>Last Name</label>
-    							<input id="input-profile-lastName" style="background:#fffffa" value="{{user.lastName}}" type="text" />
+                  <div class="col-lg-6">
+                    <label>Username</label>
+                    <input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
+                  </div>
+                  <div class="col-lg-6">
+                    <label>Tags</label>
+                    <input id="input-profile-tags" style="background:#fffffa" value="{{user.tags}}" type="text" />
+                  </div>
 
-                  <label>Username</label>
-    							<input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
+                  <div class="col-lg-12">
+                    <label>Bio</label>
+      							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6">{{user.bio}}</textarea>
+                  </div>
+                </div>
 
-    							<label>Bio</label>
-    							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6">{{user.bio}}</textarea>
-    						</div>
               </div>
 
               <div class="col-lg-4">
@@ -271,12 +283,21 @@
         if (user == null)
           return
 
+        var tagsStr = $('#input-profile-tags').val().trim().toLowerCase()
+        var tagsArray = tagsStr.split(',')
+        var tags = []
+        tagsArray.forEach(function(tag){
+          tags.push(tag.trim())
+        })
+
+
         var updatedProfile = {
           id: user.id,
           firstName: $('#input-profile-firstName').val().trim().toLowerCase(),
           lastName: $('#input-profile-lastName').val().trim().toLowerCase(),
           username: $('#input-profile-username').val().trim(),
           bio: $('#input-profile-bio').val()
+          tags: tags
         }
 
         $.ajax({
