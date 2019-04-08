@@ -100,7 +100,7 @@
                   </div>
                   <div class="col-lg-6">
                     <label>Tags</label>
-                    <input id="input-profile-tags" style="background:#fffffa" value="{{user.tags}}" type="text" />
+                    <input id="input-profile-tags" style="background:#fffffa" value="{{user.tags}}" placeholder="tag1, tag2, tag3..." type="text" />
                   </div>
 
                   <div class="col-lg-12">
@@ -283,21 +283,13 @@
         if (user == null)
           return
 
-        var tagsStr = $('#input-profile-tags').val().trim().toLowerCase()
-        var tagsArray = tagsStr.split(',')
-        var tags = []
-        tagsArray.forEach(function(tag){
-          tags.push(tag.trim())
-        })
-
-
         var updatedProfile = {
           id: user.id,
           firstName: $('#input-profile-firstName').val().trim().toLowerCase(),
           lastName: $('#input-profile-lastName').val().trim().toLowerCase(),
           username: $('#input-profile-username').val().trim(),
           bio: $('#input-profile-bio').val(),
-          tags: tags
+          tags: $('#input-profile-tags').val().trim().toLowerCase()
         }
 
         $.ajax({

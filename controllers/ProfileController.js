@@ -206,7 +206,18 @@ module.exports = {
 	},
 
 	put: (id, params, token) => {
-		// return utils.HTTP.put(process.env.VELOCITY_URL + '/api/profile/' + id, params)
+		if (params.tags != null){
+			if (typeof params.tags == 'string'){ // convert tag string to array
+				const tagsArray = params.tags.split(',')
+        const tags = []
+        tagsArray.forEach(tag => {
+          tags.push(tag.trim())
+        })
+
+				params['tags'] = tags
+			}
+		}
+
 		return new Promise((resolve, reject) => {
 			Profile.findByIdAndUpdate(id, params, {new:true}, (err, profile) => {
 				if (err){
