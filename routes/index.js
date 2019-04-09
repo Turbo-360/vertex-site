@@ -115,6 +115,13 @@ router.get('/profile/:slug', (req, res) => {
 	})
 	.then(sites => {
 		data['sites'] = sites
+		return controllers.site.get({'collaborators.id':data.profile.id, format:'vertex'})
+	})
+	.then(sites => {
+		sites.forEach(site => {
+			data.sites.push(site)
+		})
+
 		data['preloaded'] = JSON.stringify({
 			profile: data.profile,
 			user: req.user
