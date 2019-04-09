@@ -164,6 +164,7 @@ router.get('/me', (req, res) => {
 			firstName: req.user.firstName,
 			lastName: req.user.lastName,
 			image: req.user.image,
+			bio: req.user.bio,
 			tags: req.user.tags.join(',')
 		}
 
