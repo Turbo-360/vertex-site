@@ -322,7 +322,7 @@ router.post('/:action', function(req, res, next){
 		controllers.profile.post(params)
 		.then(data => {
 			user = data
-			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Turbo', ['dkwon@turbo360.co'], 'New Turbo User', JSON.stringify(params))
+			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 User', JSON.stringify(params))
 		})
 		.then(data => {
 			const pkg = {
@@ -339,7 +339,7 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			const firstName = params.firstName || ''
 			const html = data.replace('{{firstName}}', utils.TextUtils.capitalize(firstName))
-			utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [params.email], 'Welcome to Turbo 360!', html)
+			// utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [params.email], 'Welcome to Turbo 360!', html)
 
 			// set session here:
 			const id = user._id || user.id
@@ -358,8 +358,8 @@ router.post('/:action', function(req, res, next){
 			})
 
 			// send invite to slack channel:
-			const slackInvite = 'http://api.turbo360.co/vectors/slack-invite-jofodi/slackInvite'
-			utils.HTTP.get(slackInvite, {email:user.email, slack:'turbo-360', token:process.env.SLACK_ACCESS_TOKEN, key:'b6e61258-1151-4dd0-95d3-db2bec32d808'})
+			// const slackInvite = 'http://api.turbo360.co/vectors/slack-invite-jofodi/slackInvite'
+			// utils.HTTP.get(slackInvite, {email:user.email, slack:'turbo-360', token:process.env.SLACK_ACCESS_TOKEN, key:'b6e61258-1151-4dd0-95d3-db2bec32d808'})
 			return
 		})
 		.catch(err => {
