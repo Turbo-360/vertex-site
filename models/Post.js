@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const PostSchema = new mongoose.Schema({
 	author: {type:mongoose.Schema.Types.Mixed, default:{}},
-	// site: {type:String, trim:true, default: ''}, // id number of site
 	title: {type:String, trim:true, default: ''},
+	isPublic: {type:String, trim:true, default:'no'}, // posts are not visible until this is set to 'yes'
 	tags: {type:Array, default:[]},
 	preview: {type:String, trim:true, default: ''},
 	text: {type:String, trim:true, default: ''},
@@ -12,10 +12,8 @@ const PostSchema = new mongoose.Schema({
 	link: {type:String, trim:true, default:''}, // for links to outside posts
 	type: {type:String, lowercase:true, default:'original'}, // original or link
 	numReplies: {type:Number, default:0},
-	isPublic: {type:String, trim:true, default:'yes'},
 	thread: {type:String, default:'' },
 	dateString: {type:String, default:'' },
-	props: {type:mongoose.Schema.Types.Mixed, default:{}},
 	timestamp: {type:Date, default:Date.now}
 })
 
