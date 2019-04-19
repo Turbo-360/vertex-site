@@ -28,13 +28,13 @@ router.get('/', (req, res) => {
 		templates[selected] = sites
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
+			query: req.query,
 			user: req.user,
 			selected: 'how it works',
 			templates: sites,
 			static: {
 				faq: require('../public/static/faq.json')
-			},
-			query: req.query
+			}
 		})
 
 		res.render('index', data)
@@ -45,6 +45,22 @@ router.get('/', (req, res) => {
 			message: err.message
 		})
 	})
+})
+
+router.get('/blog', (req, res) => {
+	const data = {
+		cdn: CDN
+	}
+
+
+	data['preloaded'] = JSON.stringify({
+		query: req.query,
+		user: req.user
+	})
+
+
+	res.render('blog', data)
+
 })
 
 router.get('/templates', (req, res) => {
@@ -98,6 +114,38 @@ router.get('/template/:slug', (req, res) => {
 			message: err.message
 		})
 	})
+})
+
+// blog post
+router.get('/post/:slug', (req, res) => {
+	const data = {cdn: CDN}
+
+	res.render('post', data)
+
+	// TODO: check if template is live
+	// controllers.site.get({slug:req.params.slug}) // query template by slug
+	// .then(results => {
+	// 	if (results.length == 0){
+	// 		throw new Error('Template not found')
+	// 		return
+	// 	}
+	//
+	// 	const site = results[0]
+	// 	site['description'] = utils.TextUtils.convertToHtml(site.description)
+	// 	data['template'] = site
+	// 	data['preloaded'] = JSON.stringify({
+	// 		template: data.template,
+	// 		user: req.user
+	// 	})
+	//
+	// 	res.render('template', data)
+	// })
+	// .catch(err => {
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: err.message
+	// 	})
+	// })
 })
 
 router.get('/profile/:slug', (req, res) => {
