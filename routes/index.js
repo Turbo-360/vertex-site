@@ -120,32 +120,27 @@ router.get('/template/:slug', (req, res) => {
 router.get('/post/:slug', (req, res) => {
 	const data = {cdn: CDN}
 
-	res.render('post', data)
+	controllers.site.get({slug:req.params.slug})
+	.then(posts => {
+		// if (posts.length == 0){
+		// 	throw new Error('Post '+req.params.slug+' not found.')
+		// 	return
+		// }
 
-	// TODO: check if template is live
-	// controllers.site.get({slug:req.params.slug}) // query template by slug
-	// .then(results => {
-	// 	if (results.length == 0){
-	// 		throw new Error('Template not found')
-	// 		return
-	// 	}
-	//
-	// 	const site = results[0]
-	// 	site['description'] = utils.TextUtils.convertToHtml(site.description)
-	// 	data['template'] = site
-	// 	data['preloaded'] = JSON.stringify({
-	// 		template: data.template,
-	// 		user: req.user
-	// 	})
-	//
-	// 	res.render('template', data)
-	// })
-	// .catch(err => {
-	// 	res.json({
-	// 		confirmation: 'fail',
-	// 		message: err.message
-	// 	})
-	// })
+		// data['post'] = posts[0]
+		// data['preloaded'] = JSON.stringify({
+		// 	psot: data.post,
+		// 	user: req.user
+		// })
+
+		res.render('post', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
 })
 
 router.get('/profile/:slug', (req, res) => {
