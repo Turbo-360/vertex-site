@@ -62,7 +62,7 @@ router.get('/blog', (req, res) => {
 	res.render('blog', data)
 })
 
-router.get('/editor', (req, res) => {
+router.get('/submitpost', (req, res) => {
 	const data = {
 		cdn: CDN
 	}
@@ -73,7 +73,7 @@ router.get('/editor', (req, res) => {
 	})
 
 
-	res.render('editor', data)
+	res.render('submitpost', data)
 })
 
 router.get('/templates', (req, res) => {
