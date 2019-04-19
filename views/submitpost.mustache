@@ -20,19 +20,123 @@
     <div class="container">
 
     	<div class="row sticky-wrapper">
-    		<div class="col-lg-12 col-md-12 margin-top-120">
+    		<div class="col-lg-10 col-md-10 margin-top-120">
           <iframe src="https://wysiwyg-hcboqn.turbo360-vertex.com/"></iframe>
     		</div>
-
     	</div>
+
+      <div class="row sticky-wrapper">
+    		<div class="col-lg-10 col-md-10">
+
+          <div id="add-review" class="add-review-box">
+    				<h3 class="listing-desc-headline margin-bottom-20">Create Post</h3>
+
+    				<!-- Review Comment -->
+    				<form id="add-comment" class="add-comment">
+    					<fieldset>
+    						<div class="row">
+    							<div class="col-md-6">
+    								<label>Title:</label>
+    								<input id="input-post-title" type="text" />
+    							</div>
+
+    							<div class="col-md-6">
+    								<label>Image:</label>
+                    <div id="image-container"></div>
+    								<button id="btn-image-upload" class="button">Upload Image</button>
+    							</div>
+    						</div>
+
+    						<div>
+    							<label>Text:</label>
+    							<textarea id="input-post-text" cols="40" rows="3"></textarea>
+    						</div>
+
+    					</fieldset>
+
+    					<button id="btn-create-post" class="button">Create Post</button>
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+
     </div>
 
     {{>footer}}
     <a style="display:none" id="btn-show-modal" href="#sign-in-dialog" class="popup-with-zoom-anim">test</a>
   </div>
-  <!-- Wrapper / End -->
 
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+  <script>
+    (function(){
+      var turbo = Turbo({site_id:'5c244564231ff10015a113ea'})
+      var post = {
+        title: '',
+        text: '',
+        image: ''
+      }
+
+      $('#btn-image-upload').click(function(event){
+  			if (event)
+  				event.preventDefault()
+
+  			console.log('Upload Image')
+  			turbo.uploadFile({
+  				apiKey: '16874eb4-417b-4147-9657-18a4a2c8cada',
+  				completion: function(err, response){
+            if (response.confirmation != 'success'){
+              alert(response.message)
+              return
+            }
+
+            // console.log('File Uploaded: ' + url)
+            // File Uploaded: {"confirmation":"success","result":{"site":"5c244564231ff10015a113ea","name":"logo.jpg","type":"image/jpeg","url":"https://lh3.googleusercontent.com/ZJeWlO3KpLXdAKEfgNuqtfaLkRqCRvUJtG0AyfUpF1CMDyQohrF0lF7Zxy1125t3LOre1cwQSv6oB8sCAytxGuHK","size":39052,"timestamp":"2019-04-19T22:27:49.619Z","schema":"blob","id":"5cba4b6554f69a00156fbfee"}}
+            var image = response.result
+            var url = image.url
+            post['image'] = url
+            $('#image-container').html('<img style="margin-bottom:16px" src="'+url+'=s160" />')
+  				}
+  			})
+  		})
+
+      $('#btn-create-post').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        post['title'] = $('#input-post-title').val()
+        post['text'] = $('#input-post-text').val()
+
+        if (post.title.length == 0){
+          alert('Please enter a title.')
+          return
+        }
+
+        if (post.text.length == 0){
+          alert('Please enter text.')
+          return
+        }
+
+        $.ajax({
+          url: '/api/post',
+          type: 'POST',
+          data: post,
+          success: function(response){
+            if (response.confirmation != 'success'){
+              alert(response.message)
+              return
+            }
+
+            console.log(JSON.stringify(response.result))
+            window.location.href = '/post/'+response.result.slug
+          },
+          error: function(err){
+            console.log('ERROR - '+err)
+          }
+        })
+      })
+    })()
+  </script>
 </body>
 </html>
