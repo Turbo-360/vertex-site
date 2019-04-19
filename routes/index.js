@@ -60,7 +60,20 @@ router.get('/blog', (req, res) => {
 
 
 	res.render('blog', data)
+})
 
+router.get('/submitpost', (req, res) => {
+	const data = {
+		cdn: CDN
+	}
+
+	data['preloaded'] = JSON.stringify({
+		query: req.query,
+		user: req.user
+	})
+
+
+	res.render('submitpost', data)
 })
 
 router.get('/templates', (req, res) => {
