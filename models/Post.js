@@ -44,4 +44,14 @@ PostSchema.methods.summary = function(authLevel) {
 }
 
 
+PostSchema.statics.convertToJson = function(posts, key){ // key can be null
+	var results = new Array()
+	for (var i=0; i<posts.length; i++){
+		var p = posts[i]
+		results.push(p.summary(key))
+	}
+
+	return results
+}
+
 module.exports = mongoose.model('Post', PostSchema)
