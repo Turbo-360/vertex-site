@@ -72,11 +72,12 @@
       var data = window.__PRELOADED__
       var turbo = Turbo({site_id:'5c244564231ff10015a113ea'})
       var post = {title:'', text:'', image:''}
+      console.log('BASE_URL == '+window.location.origin)
 
       var wysiwyg = 'https://wysiwyg-hcboqn.turbo360-vertex.com'
       if (data.query != null){
-        if (data.query.url)
-          wysiwyg += '?url='+data.query.url
+        if (data.query.id)
+          wysiwyg += '?url='+window.location.origin+'/api/post/'+data.query.id
       }
 
       $('#editor-container').html('<iframe src="'+wysiwyg+'"></iframe>')
