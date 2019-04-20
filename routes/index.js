@@ -133,18 +133,18 @@ router.get('/template/:slug', (req, res) => {
 router.get('/post/:slug', (req, res) => {
 	const data = {cdn: CDN}
 
-	controllers.site.get({slug:req.params.slug})
+	controllers.post.get({slug:req.params.slug})
 	.then(posts => {
-		// if (posts.length == 0){
-		// 	throw new Error('Post '+req.params.slug+' not found.')
-		// 	return
-		// }
+		if (posts.length == 0){
+			throw new Error('Post '+req.params.slug+' not found.')
+			return
+		}
 
-		// data['post'] = posts[0]
-		// data['preloaded'] = JSON.stringify({
-		// 	psot: data.post,
-		// 	user: req.user
-		// })
+		data['post'] = posts[0]
+		data['preloaded'] = JSON.stringify({
+			post: data.post,
+			user: req.user
+		})
 
 		res.render('post', data)
 	})
