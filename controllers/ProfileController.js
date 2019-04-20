@@ -167,30 +167,31 @@ module.exports = {
 				const apiKey = 'pk_'+uuidv4() // pk_ prefix indicates that this is a profile key
 				params['api'] = {key:apiKey, secret:''} // generate random api key:
 
+				// 04/20/2019 - this started timing out and breaking registrations on Turbo 360:
 				// estimate location based on ip addr:
-				if (params.ip != null){
-					if (params.ip.length > 0){
-						utils.HTTP.get('http://ip-api.com/json/'+params.ip)
-						.then(data => {
-							params['ip'] = data
-							Profile.create(params, (error, profile) => {
-								if (error){
-									reject(error)
-									return
-								}
-
-								resolve(profile.summary())
-								return
-							})
-						})
-						.catch(err => {
-							reject(err)
-							return
-						})
-
-						return
-					}
-				}
+				// if (params.ip != null){
+				// 	if (params.ip.length > 0){
+				// 		utils.HTTP.get('http://ip-api.com/json/'+params.ip)
+				// 		.then(data => {
+				// 			params['ip'] = data
+				// 			Profile.create(params, (error, profile) => {
+				// 				if (error){
+				// 					reject(error)
+				// 					return
+				// 				}
+				//
+				// 				resolve(profile.summary())
+				// 				return
+				// 			})
+				// 		})
+				// 		.catch(err => {
+				// 			reject(err)
+				// 			return
+				// 		})
+				//
+				// 		return
+				// 	}
+				// }
 
 				Profile.create(params, (error, profile) => {
 					if (error){
