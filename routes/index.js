@@ -67,13 +67,33 @@ router.get('/submitpost', (req, res) => {
 		cdn: CDN
 	}
 
-	data['preloaded'] = JSON.stringify({
-		query: req.query,
-		user: req.user
+	if (req.query.id == null){
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user,
+			post: null
+		})
+
+		res.render('submitpost', data)
+	}
+
+	controllers.post.getById(req.query.id)
+	.then(post => {
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user,
+			post: post
+		})
+
+		res.render('submitpost', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: 'Post '+req.query.id+' not found'
+		})
 	})
 
-
-	res.render('submitpost', data)
 })
 
 router.get('/templates', (req, res) => {
