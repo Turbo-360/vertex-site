@@ -101,7 +101,7 @@ module.exports = {
 				image: req.user.image,
 				slug: req.user.slug,
 				firstName: req.user.firstName,
-				lasttName: req.user.lastName
+				lastName: req.user.lastName
 			}
 
 			params['dateString'] = moment().format('MMMM Do, YYYY')
