@@ -71,12 +71,9 @@
   <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
   <script>
     (function(){
+      var data = window.__PRELOADED__
       var turbo = Turbo({site_id:'5c244564231ff10015a113ea'})
-      var post = {
-        title: '',
-        text: '',
-        image: ''
-      }
+      var post = {title:'', text:'', image:''}
 
       $('#btn-image-upload').click(function(event){
   			if (event)
