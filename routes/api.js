@@ -82,8 +82,7 @@ router.post('/:resource', (req, res, next) => {
 		return
 	}
 
-	controller
-	.post(req.body, null)
+	controller.post(req.body, null, req) // controller.post(params, token, req)
 	.then(result => {
 		res.json({
 			confirmation: 'success',
