@@ -72,7 +72,7 @@
       var data = window.__PRELOADED__
       var turbo = Turbo({site_id:'5c244564231ff10015a113ea'})
       var post = {title:'', text:'', image:''}
-      console.log('BASE_URL == '+window.location.origin)
+      // console.log('BASE_URL == '+window.location.origin)
 
       var wysiwyg = 'https://wysiwyg-hcboqn.turbo360-vertex.com'
       if (data.query != null){
@@ -86,7 +86,7 @@
   			if (event)
   				event.preventDefault()
 
-  			console.log('Upload Image')
+  			// console.log('Upload Image')
   			turbo.uploadFile({
   				apiKey: '16874eb4-417b-4147-9657-18a4a2c8cada',
   				completion: function(err, response){
@@ -132,7 +132,7 @@
               return
             }
 
-            console.log(JSON.stringify(response.result))
+            // console.log(JSON.stringify(response.result))
             window.location.href = '/post/'+response.result.slug
           },
           error: function(err){
