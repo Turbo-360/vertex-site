@@ -28,20 +28,16 @@
 
 <body>
 
-<div id="wrapper">
+<div id="wrapper" style="background:#f9f9f9">
   {{>nav}}
   <div class="clearfix"></div>
-  <div id="titlebar" class="gradient padding-top-120"></div>
-
-  <div class="container">
-  	<div class="blog-page">
-  	<div class="row">
-
+  <div class="container padding-top-40">
+    <div class="row padding-top-120">
   		<div class="col-lg-9 col-md-8 padding-right-30">
   			<div class="blog-post single-post">
 
   				<div class="post-content">
-            <h1>{{post.title}}</h1>
+            <h1 style="font-size:32px">{{post.title}}</h1>
             <ul class="post-meta">
   						<li>{{post.dateString}}</li>
   						<li><a href="#">Tips</a></li>
@@ -54,20 +50,21 @@
             <img class="post-img" src="{{{post.image}}}=s1024" alt="Vertex 360 | {{post.title}}">
   					{{{post.text}}}
   				</div>
-  			</div>
 
-  			<!-- About Author -->
-  			<div class="about-author">
-          <a href="/profile/{{post.author.slug}}">
-    				<img src="{{{post.author.image}}}=s260-c" alt="Vertex 360 | {{post.author.firstName}} {{post.author.lastName}}" />
-          </a>
-  				<div class="about-description" style="min-height:120px">
+          <!-- About Author -->
+    			<div class="about-author" style="margin:0px;border-top:1px solid #ededed;background:#fffffa">
             <a href="/profile/{{post.author.slug}}">
-  					  <h4 class="margin-bottom-0 capitalize">{{post.author.firstName}} {{post.author.lastName}}</h4>
+      				<img src="{{{post.author.image}}}=s260-c" alt="Vertex 360 | {{post.author.firstName}} {{post.author.lastName}}" />
             </a>
-  					<a href="/profile/{{post.author.slug}}">{{post.author.username}}</a>
-  					<p>{{{post.author.bio}}}</p>
-  				</div>
+    				<div class="about-description" style="min-height:120px">
+              <a href="/profile/{{post.author.slug}}">
+    					  <h4 class="margin-bottom-0 capitalize">{{post.author.firstName}} {{post.author.lastName}}</h4>
+              </a>
+    					<a href="/profile/{{post.author.slug}}">{{post.author.username}}</a>
+    					<p>{{{post.author.bio}}}</p>
+    				</div>
+    			</div>
+
   			</div>
 
 
@@ -134,7 +131,6 @@
   	</div>
   	<!-- Sidebar / End -->
 
-  </div>
   </div>
 
   {{>footer}}
