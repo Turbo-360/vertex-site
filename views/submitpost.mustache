@@ -27,8 +27,6 @@
     		<div class="col-lg-10 col-md-10">
 
           <div id="add-review" class="add-review-box">
-    				<h3 class="listing-desc-headline margin-bottom-20">Create Post</h3>
-
     				<!-- Review Comment -->
     				<form id="add-comment" class="add-comment">
     					<fieldset>
@@ -53,6 +51,7 @@
     					</fieldset>
 
     					<button id="btn-create-post" class="button">Create Post</button>
+              <button id="btn-update-post" class="button">Update Post</button>
     				</form>
     			</div>
     		</div>
@@ -71,13 +70,20 @@
     (function(){
       var data = window.__PRELOADED__
       var turbo = Turbo({site_id:'5c244564231ff10015a113ea'})
-      var post = data.post || {title:'', text:'', image:''}
+      var post = data.post || {id:null, title:'', text:'', image:''}
       // console.log('BASE_URL == '+window.location.origin)
 
       var wysiwyg = 'https://wysiwyg-hcboqn.turbo360-vertex.com'
-      if (data.query != null){
-        if (data.query.id)
-          wysiwyg += '?url='+window.location.origin+'/api/post/'+data.query.id
+      if (post.id){
+        wysiwyg += '?url='+window.location.origin+'/api/post/'+post.id
+        // TODO: populate input fields with current post values
+        $('#input-post-title').val(post.title)
+        $('#input-post-text').val(post.text)
+        $('#image-container').html('<img style="margin-bottom:16px" src="'+post.image+'=s160" />')
+        $('#btn-create-post').css('display', 'none')
+      }
+      else {
+        $('#btn-update-post').css('display', 'none')
       }
 
       $('#editor-container').html('<iframe src="'+wysiwyg+'"></iframe>')
@@ -140,6 +146,50 @@
           }
         })
       })
+
+      $('#btn-update-post').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        // post['title'] = $('#input-post-title').val()
+        // post['text'] = $('#input-post-text').val()
+
+        // only send updates, not the entire post again:
+        var updates = {
+          title: $('#input-post-title').val(),
+          text: $('#input-post-text').val(),
+          image: post.image
+        }
+
+        if (updates.title.length == 0){
+          alert('Please enter a title.')
+          return
+        }
+
+        if (updates.text.length == 0){
+          alert('Please enter text.')
+          return
+        }
+
+        $.ajax({
+          url: '/api/post/'+post.id,
+          type: 'PUT',
+          data: updates,
+          success: function(response){
+            if (response.confirmation != 'success'){
+              alert(response.message)
+              return
+            }
+
+            // console.log(JSON.stringify(response.result))
+            window.location.href = '/post/'+response.result.slug
+          },
+          error: function(err){
+            console.log('ERROR - '+err)
+          }
+        })
+      })
+
     })()
   </script>
 </body>
