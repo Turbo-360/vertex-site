@@ -31,10 +31,14 @@
 
   			<!-- About Author -->
   			<div class="about-author">
-  				<img src="{{{post.author.image}}}=s260-c" alt="Vertex 360 | {{post.author.firstName}} {{post.author.lastName}}" />
+          <a href="/profile/{{post.author.slug}}">
+    				<img src="{{{post.author.image}}}=s260-c" alt="Vertex 360 | {{post.author.firstName}} {{post.author.lastName}}" />
+          </a>
   				<div class="about-description" style="min-height:120px">
-  					<h4>{{post.author.firstName}} {{post.author.lastName}}</h4>
-  					<a href="#">{{post.author.username}}</a>
+            <a href="/profile/{{post.author.slug}}">
+  					  <h4 class="margin-bottom-0">{{post.author.firstName}} {{post.author.lastName}}</h4>
+            </a>
+  					<a href="/profile/{{post.author.slug}}">{{post.author.username}}</a>
   					<p>{{{post.author.bio}}}</p>
   				</div>
   			</div>
@@ -82,7 +86,6 @@
   				<!-- Blog post Item / End -->
 
   			</div>
-
 
   			<div class="margin-top-50"></div>
   	</div>
