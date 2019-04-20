@@ -20,9 +20,7 @@
     <div class="container">
 
     	<div class="row sticky-wrapper">
-    		<div class="col-lg-10 col-md-10 margin-top-120">
-          <iframe src="https://wysiwyg-hcboqn.turbo360-vertex.com/"></iframe>
-    		</div>
+    		<div id="editor-container" class="col-lg-10 col-md-10 margin-top-120"></div>
     	</div>
 
       <div class="row sticky-wrapper">
@@ -74,6 +72,14 @@
       var data = window.__PRELOADED__
       var turbo = Turbo({site_id:'5c244564231ff10015a113ea'})
       var post = {title:'', text:'', image:''}
+
+      var wysiwyg = 'https://wysiwyg-hcboqn.turbo360-vertex.com'
+      if (data.query != null){
+        if (data.query.url)
+          wysiwyg += '?url='+data.query.url
+      }
+
+      $('#editor-container').html('<iframe src="'+wysiwyg+'"></iframe>')
 
       $('#btn-image-upload').click(function(event){
   			if (event)
