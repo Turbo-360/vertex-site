@@ -1,5 +1,6 @@
 var cheerio = require('cheerio')
 var moment = require('moment')
+var ProfileController = require('./ProfileController')
 var Post = require('../models/Post')
 var utils = require('../utils')
 
@@ -95,30 +96,37 @@ module.exports = {
 				return
 			}
 
-			params['author'] = {
-				id: req.user.id,
-				username: req.user.username,
-				image: req.user.image,
-				slug: req.user.slug,
-				firstName: req.user.firstName,
-				lastName: req.user.lastName,
-				bio: req.user.bio
-			}
-
-			params['dateString'] = moment().format('MMMM Do, YYYY')
-			if (params.text != null)
-				params['preview'] = scrapePreview(params.text, 200)
-
-			if (params.title != null)
-				params['slug'] = slugVersion(params.title, 6)
-
-			Post.create(params, function(err, post){
-				if (err){
-					reject(err)
-					return
+			ProfileController.getById(req.user.id)
+			.then(profile => {
+				params['author'] = {
+					id: profile.id,
+					username: profile.username,
+					image: profile.image,
+					slug: profile.slug,
+					firstName: profile.firstName,
+					lastName: profile.lastName,
+					bio: profile.bio
 				}
 
-				resolve(post.summary())
+				params['dateString'] = moment().format('MMMM Do, YYYY')
+				if (params.text != null)
+					params['preview'] = scrapePreview(params.text, 200)
+
+				if (params.title != null)
+					params['slug'] = slugVersion(params.title, 6)
+
+				Post.create(params, function(err, post){
+					if (err){
+						reject(err)
+						return
+					}
+
+					resolve(post.summary())
+					return
+				})
+			})
+			.catch(err => {
+				reject(err)
 				return
 			})
 		})
