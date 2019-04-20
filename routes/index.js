@@ -161,6 +161,7 @@ router.get('/post/:slug', (req, res) => {
 		}
 
 		data['post'] = posts[0]
+		data['isAuthor'] = (req.user) ? (req.user.id == data.post.author.id) : false
 		data['preloaded'] = JSON.stringify({
 			post: data.post,
 			user: req.user

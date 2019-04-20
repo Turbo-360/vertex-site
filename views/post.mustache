@@ -8,6 +8,22 @@
 	<meta property="og:image:width" content="260px" />
 	<meta property="og:image:height" content="260px" />
 	<meta property="og:description" content="{{post.preview}}" />
+
+  <style>
+    .btn-edit {
+      text-transform: uppercase;
+      font-size: 9.7px;
+      letter-spacing: 2.5px;
+      font-weight: 60;
+      background: #f91942;
+      border-radius: 24px;
+      padding: 8px 12px;
+      line-height: 20px;
+      color: #fff !important;
+      font-weight: 400;
+      margin-bottom: 9px;
+    }
+  </style>
 </head>
 
 <body>
@@ -31,6 +47,9 @@
   						<li>{{post.dateString}}</li>
   						<li><a href="#">Tips</a></li>
   						<li><a href="#">5 Comments</a></li>
+              {{#isAuthor}}
+              <li><a href="/submitpost?id={{post.id}}" class="btn-edit">Edit Post</a></li>
+              {{/isAuthor}}
   					</ul>
   					{{{post.text}}}
   				</div>
