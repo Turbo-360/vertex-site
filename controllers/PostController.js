@@ -88,8 +88,22 @@ module.exports = {
 		})
 	},
 
-	post: function(params){
+	post: function(params, token, req){
 		return new Promise(function(resolve, reject){
+			if (req.user == null){
+				reject(new Error('Please login or register to create a blog post'))
+				return
+			}
+
+			params['author'] = {
+				id: req.user.id,
+				username: req.user.username,
+				image: req.user.image,
+				slug: req.user.slug,
+				firstName: req.user.firstName,
+				lasttName: req.user.lastName
+			}
+
 			params['dateString'] = moment().format('MMMM Do, YYYY')
 			if (params.text != null)
 				params['preview'] = scrapePreview(params.text, 200)
