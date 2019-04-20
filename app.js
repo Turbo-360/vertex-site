@@ -72,14 +72,6 @@ app.use((req, res, next) => {
 })
 
 app.use((req, res, next) => {
-  // if (req.session == null)
-  //   return next()
-  //
-  // if (req.session.user == null)
-  //   return next()
-  //
-  // controllers.profile.getById(req.session.user)
-
   if (req.vertex_session == null)
     return next()
 
