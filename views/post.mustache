@@ -40,10 +40,9 @@
   		<div class="col-lg-9 col-md-8 padding-right-30">
   			<div class="blog-post single-post">
 
-  				<img class="post-img" src="{{{post.image}}}=s1024" alt="Vertex 360 | {{post.title}}">
   				<div class="post-content">
-  					<h3>{{post.title}}</h3>
-  					<ul class="post-meta">
+            <h3>{{post.title}}</h3>
+            <ul class="post-meta">
   						<li>{{post.dateString}}</li>
   						<li><a href="#">Tips</a></li>
   						<li><a href="#">5 Comments</a></li>
@@ -51,6 +50,8 @@
               <li><a href="/submitpost?id={{post.id}}" class="btn-edit">Edit Post</a></li>
               {{/isAuthor}}
   					</ul>
+            <hr class="margin-top-20 margin-bottom-30" />
+            <img class="post-img" src="{{{post.image}}}=s1024" alt="Vertex 360 | {{post.title}}">
   					{{{post.text}}}
   				</div>
   			</div>
