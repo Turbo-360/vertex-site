@@ -23,6 +23,22 @@
       font-weight: 400;
       margin-bottom: 9px;
     }
+
+    @media (min-width: 768px) {
+      .post-container {
+        padding-top: 120px
+      }
+
+      .lg-pt-40 {
+        padding-top: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .post-content {
+        padding: 16px !important;
+      }
+    }
   </style>
 </head>
 
@@ -31,8 +47,8 @@
 <div id="wrapper" style="background:#f9f9f9">
   {{>nav}}
   <div class="clearfix"></div>
-  <div class="container padding-top-40">
-    <div class="row padding-top-120">
+  <div class="container lg-pt-40">
+    <div class="row post-container">
   		<div class="col-lg-9 col-md-8 padding-right-30">
   			<div class="blog-post single-post">
 
@@ -40,8 +56,7 @@
             <h1 style="font-size:32px">{{post.title}}</h1>
             <ul class="post-meta">
   						<li>{{post.dateString}}</li>
-  						<li><a href="#">Tips</a></li>
-  						<li><a href="#">5 Comments</a></li>
+  						<li><a style="color:#37b6bd" href="/profile/{{post.author.slug}}">{{post.author.username}}</a></li>
               {{#isAuthor}}
               <li><a href="/submitpost?id={{post.id}}" class="btn-edit">Edit Post</a></li>
               {{/isAuthor}}
