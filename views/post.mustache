@@ -163,11 +163,15 @@
   <li>
     <div class="widget-content">
         <div class="widget-thumb">
-        <a href="#"><img src="<%{image}%>=s120-c" alt="Vertex 360"></a>
+        <a href="/post/<% slug %>">
+          <img src="<%{image}%>=s120-c" alt="Vertex 360 | <% title %>">
+        </a>
       </div>
 
       <div class="widget-text">
-        <h5 class="preview-title"><a href="#"><% title %></a></h5>
+        <h5 class="preview-title">
+          <a href="/post/<% slug %>"><% title %></a>
+        </h5>
         <span><% dateString %></span>
       </div>
       <div class="clearfix"></div>
