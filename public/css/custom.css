@@ -56,3 +56,9 @@
 .right-side-loggedin {
   width: 38%;
 }
+
+@media (max-width: 768px) {
+  .header-widget {
+    border: none
+  }
+}
