@@ -24,6 +24,13 @@
       margin-bottom: 9px;
     }
 
+    .preview-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
     @media (min-width: 768px) {
       .post-container {
         padding-top: 120px
@@ -160,7 +167,7 @@
       </div>
 
       <div class="widget-text">
-        <h5><a href="#"><% title %></a></h5>
+        <h5 class="preview-title"><a href="#"><% title %></a></h5>
         <span><% dateString %></span>
       </div>
       <div class="clearfix"></div>
