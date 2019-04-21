@@ -89,50 +89,12 @@
 
   			</div>
 
-
   			<!-- Related Posts -->
   			<div class="clearfix"></div>
-  			<h4 class="headline margin-top-25">Related Posts</h4>
-  			<div class="row">
-
-  				<!-- Blog Post Item -->
-  				<div class="col-md-6">
-  					<a href="#" class="blog-compact-item-container">
-  						<div class="blog-compact-item">
-  							<img src="images/blog-compact-post-01.jpg" alt="">
-  							<span class="blog-item-tag">Tips</span>
-  							<div class="blog-compact-item-content">
-  								<ul class="blog-post-tags">
-  									<li>22 August 2017</li>
-  								</ul>
-  								<h3>Hotels for All Budgets</h3>
-  								<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
-  							</div>
-  						</div>
-  					</a>
-  				</div>
-  				<!-- Blog post Item / End -->
-
-  				<!-- Blog Post Item -->
-  				<div class="col-md-6">
-  					<a href="#" class="blog-compact-item-container">
-  						<div class="blog-compact-item">
-  							<img src="images/blog-compact-post-03.jpg" alt="">
-  							<span class="blog-item-tag">Tips</span>
-  							<div class="blog-compact-item-content">
-  								<ul class="blog-post-tags">
-  									<li>10 August 2017</li>
-  								</ul>
-  								<h3>The Best Cofee Shops In Sydney Neighborhoods</h3>
-  								<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
-  							</div>
-  						</div>
-  					</a>
-  				</div>
-  				<!-- Blog post Item / End -->
-
-  			</div>
-
+        <hr />
+  			<h3 class="headline margin-top-25 margin-bottom-10">Launch Your Website</h3>
+        <p>Explore some of the best tips from around the world from our partners and friends. Discover some of the most popular templates in Sydney.</p>
+  			<div id="featured-templates" class="row"></div>
   			<div class="margin-top-50"></div>
   	</div>
 
@@ -140,14 +102,10 @@
   	<!-- Widgets -->
   	<div class="col-lg-3 col-md-4">
   		<div class="sidebar right">
-
-  			<!-- Widget -->
   			<div class="widget margin-top-40">
   				<h3>Recent Posts</h3>
   				<ul id="recent-posts" class="widget-tabs"></ul>
   			</div>
-  			<!-- Widget / End-->
-
   		</div>
   	</div>
   	</div>
@@ -179,6 +137,25 @@
   </li>
 </script>
 
+<script type="text/template" id="tpl-site-preview">
+  <div class="col-lg-4 col-md-6">
+    <a href="/template/<% slug %>" class="listing-item-container compact">
+      <div class="listing-item">
+        <img src="<%{image}%>=s1024" alt="Vertex 360">
+        <div class="listing-item-details template-details">
+          <% profile.username %>
+          <img src="<%{profile.image}%>=s120-c" />
+        </div>
+        <div class="listing-item-content">
+          <h3 style="line-height:22px"><% name %></h3>
+          <span><% description %></span>
+        </div>
+        <span class="like-icon"></span>
+      </div>
+    </a>
+  </div>
+</script>
+
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
@@ -186,28 +163,48 @@
   (function(){
     Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
     var data = window.__PRELOADED__
+    var getRequest = function(url, completion){
+      $.ajax({
+        url: url,
+        type: 'GET',
+        data: null,
+        success: function(response){
+          completion(null, response)
+        },
+        error: function(response){
+          completion(response, null)
+        }
+      })
+    }
 
-    $.ajax({
-      url: '/api/post?limit=5',
-      type: 'GET',
-      data: null,
-      success: function(response){
+    getRequest('/api/post?limit=5', function(err, response){
+      if (response.confirmation != 'success'){
+        return
+      }
+
+      var posts = response.results
+      var tpl = $('#tpl-post-preview').html()
+      var postsHtml = ''
+      posts.forEach(function(post){
+        postsHtml += Mustache.render(tpl, post)
+      })
+
+      $('#recent-posts').html(postsHtml)
+      getRequest('/api/site?template.status=live&format=vertex&limit=4', function(err, response){
         if (response.confirmation != 'success'){
           return
         }
 
-        var posts = response.results
-        var tpl = $('#tpl-post-preview').html()
-        var postsHtml = ''
-        posts.forEach(function(post){
-          postsHtml += Mustache.render(tpl, post)
+        // console.log('SITES: ' + JSON.stringify(response))
+        var sites = response.results
+        var tpl = $('#tpl-site-preview').html()
+        var sitesHtml = ''
+        sites.forEach(function(site){
+          sitesHtml += Mustache.render(tpl, site)
         })
 
-        $('#recent-posts').html(postsHtml)
-      },
-      error: function(){
-
-      }
+        $('#featured-templates').html(sitesHtml)
+      })
     })
   })()
 </script>
