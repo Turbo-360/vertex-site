@@ -61,4 +61,8 @@
   .header-widget {
     border: none
   }
+
+  #header {
+    padding-bottom: 20px;
+  }
 }
