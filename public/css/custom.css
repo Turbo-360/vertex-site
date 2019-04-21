@@ -57,6 +57,20 @@
   width: 38%;
 }
 
+.footer-dark {
+  background: #333 !important;
+  color: #fff;
+}
+
+.footer-dark a {
+  color: #fff !important;
+}
+
+.footer-dark span {
+  color: #fff;
+}
+
+
 @media (max-width: 768px) {
   .header-widget {
     border: none
