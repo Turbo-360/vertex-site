@@ -23,24 +23,24 @@
 
     <div class="row">
 
-      <!-- Listing Item -->
+      {{#posts}}
       <div class="col-md-4">
-        <a href="#" class="listing-item-container">
+        <a href="/post/{{slug}}" class="listing-item-container">
           <div class="listing-item">
-            <img src="images/listing-item-02.jpg" alt="">
+            <img src="{{image}}=s512-c" alt="Vertex 360 | {{title}}">
             <div class="listing-item-content" style="padding-right:12px">
-              <span class="tag">April 12, 2019</span>
-              <h3>Sticky Band</h3>
-              <span style="font-size:14px;line-height:18px">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</span>
+              <span class="tag">{{dateString}}</span>
+              <h3>{{title}}</h3>
+              <span style="font-size:14px;line-height:18px">{{preview}}</span>
             </div>
           </div>
           <div class="star-rating">
-            <img style="width:32px;border-radius:50%;margin-right:4px" src="https://lh3.googleusercontent.com/J3-040if0ajACYaNNi2X2W4B8DHNxSOCYXysQQeBz9dgV095ftgI5BbO3znqnJRUxtuyJkgy3V7HrINWcRxo7hhw=s512-c" />
-            <small>Tabitha Smith</small>
+            <img style="width:32px;border-radius:50%;margin-right:4px" src="{{{author.image}}}=s260-c" />
+            <small style="text-transform:capitalize">{{author.firstName}} {{author.lastName}}</small>
           </div>
         </a>
       </div>
-      <!-- Listing Item / End -->
+      {{/posts}}
 
     </div>
 	</div>

@@ -52,14 +52,26 @@ router.get('/blog', (req, res) => {
 		cdn: CDN
 	}
 
+	controllers.post.get({limit:10})
+	.then(posts => {
+		data['posts'] = posts.map(post => {
+			post['preview'] = utils.TextUtils.truncateText(post.preview, 80)
+			return post
+		})
 
-	data['preloaded'] = JSON.stringify({
-		query: req.query,
-		user: req.user
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user
+		})
+
+		res.render('blog', data)
 	})
-
-
-	res.render('blog', data)
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: 'Post '+req.query.id+' not found'
+		})
+	})
 })
 
 router.get('/submitpost', (req, res) => {
