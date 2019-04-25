@@ -84,10 +84,12 @@ router.get('/:app/:resource/:id', (req, res, next) => {
 })
 
 router.post('/:app/:resource', (req, res, next) => {
-  console.log('REST POST: ' + JSON.stringify(req.body))
   const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+  console.log('REST POST: ' + JSON.stringify(req.body))
+  console.log('endpoint: ' + endpoint)
   queryEndpoint(endpoint, req.body, 'post')
   .then(data => {
+    console.log('DATA: ' + JSON.stringify(data))
     if (data.confirmation != 'success'){
       throw new Error(data.message)
       return
