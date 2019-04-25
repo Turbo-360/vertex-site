@@ -55,12 +55,12 @@ module.exports = {
 		})
 	},
 
-	post: function(endpoint, body){
+	post: function(endpoint, body, headers){
 		return new Promise(function(resolve, reject){
 			superagent
 			.post(endpoint)
 			.send(body)
-			// .set('Accept', 'application/json')
+			.set(headers)
 			.end(function(err, res) {
 				if (err){
 					reject(err)
@@ -69,7 +69,6 @@ module.exports = {
 
 				const payload = res.text || res.body
 				resolve(payload)
-				// resolve(res.body)
 			})
 		})
 	},
