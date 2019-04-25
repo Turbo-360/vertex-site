@@ -12,6 +12,8 @@ const apiBaseUrl = (appSlug, resource, resourceId) => {
 }
 
 const queryEndpoint = (endpoint, params, method) => {
+  console.log('queryEndpoint: ' + endpoint)
+  console.log('PARAMS: ' + JSON.stringify(params))
   return new Promise((resolve, reject) => {
     if (method == null)
       method = 'get'
