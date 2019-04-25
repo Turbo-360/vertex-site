@@ -67,15 +67,14 @@ router.get('/cms/:slug', (req, res) => {
 	controllers.site.get({slug:req.params.slug})
 	.then(data => {
 		if (data.length == 0){
-			throw new Error('Site not found')
+			throw new Error('Site ' + req.params.slug + ' not found')
 			return
 		}
 
-		site = data[0]
 		const preloaded = {
 			container: 'standard',
 			app: {
-				summary: site
+				summary: data[0]
 			}
 		}
 
