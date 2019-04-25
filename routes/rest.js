@@ -84,6 +84,7 @@ router.get('/:app/:resource/:id', (req, res, next) => {
 })
 
 router.post('/:app/:resource', (req, res, next) => {
+  console.log('REST POST: ' + JSON.stringify(req.body))
   const endpoint = apiBaseUrl(req.params.app, req.params.resource)
   queryEndpoint(endpoint, req.body, 'post')
   .then(data => {
