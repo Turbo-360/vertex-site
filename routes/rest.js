@@ -12,7 +12,7 @@ const apiBaseUrl = (appSlug, resource, resourceId) => {
 }
 
 const queryEndpoint = (endpoint, params, method) => {
-  console.log('queryEndpoint: ' + endpoint)
+  console.log('queryEndpoint: ' + method.toUpperCase()+' - '+endpoint)
   console.log('PARAMS: ' + JSON.stringify(params))
   return new Promise((resolve, reject) => {
     if (method == null)
@@ -84,6 +84,14 @@ router.get('/:app/:resource/:id', (req, res, next) => {
     })
   })
 })
+
+// const apiBaseUrl = (appSlug, resource, resourceId) => {
+//   let base = 'https://'+appSlug+'.vertex360.co/api'
+//   if (resourceId == null)
+//     return base+'/'+resource
+//
+//   return base+'/'+resource+'/'+resourceId
+// }
 
 router.post('/:app/:resource', (req, res, next) => {
   const endpoint = apiBaseUrl(req.params.app, req.params.resource)

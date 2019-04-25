@@ -60,7 +60,7 @@ module.exports = {
 			superagent
 			.post(endpoint)
 			.send(body)
-			.set(headers)
+			// .set(headers)
 			.end(function(err, res) {
 				if (err){
 					reject(err)
