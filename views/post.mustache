@@ -89,6 +89,8 @@
 
   			</div>
 
+        {{>newsletter}}
+
   			<!-- Related Posts -->
   			<div class="clearfix"></div>
         <hr />
@@ -200,6 +202,44 @@
         $('#featured-templates').html(sitesHtml)
       })
     })
+
+    $('#btn-newsletter-subscribe').click(function(event){
+      if (event)
+        event.preventDefault()
+
+      var subscriber = {
+        name: $('#input-newsletter-name').val(),
+        email: $('#input-newsletter-email').val()
+      }
+
+      if (subscriber.name.length == 0){
+        alert('Please enter your NAME')
+        return
+      }
+
+      if (subscriber.email.length == 0){
+        alert('Please enter your EMAIL')
+        return
+      }
+
+      $.ajax({
+        url: '/account/newsletter',
+        type: 'POST',
+        data: subscriber,
+        success: function(response){
+          if (response.confirmation != 'success'){
+            alert('Error - '+response.message)
+            return
+          }
+
+          alert('Thanks For Subscribing!')
+        },
+        error: function(err){
+          alert('Error - ' + err)
+        }
+      })
+    })
+
   })()
 </script>
 </body>
