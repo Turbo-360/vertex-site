@@ -448,6 +448,56 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'mailchimp'){ // subscribe to Mailchimp mailing list
+		const body = req.body
+		if (body.email == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing EMAIL'
+			})
+			return
+		}
+
+		if (body.name == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing NAME'
+			})
+			return
+		}
+
+		const parts = body.name.split(' ')
+		const firstName = parts[0]
+		const lastName = (parts.length > 1) ? parts[parts.length-1] : ''
+		const subscriber = {
+				email_address: body.email.toLowerCase().trim(),
+		    status: 'subscribed',
+		    merge_fields: {
+		        FNAME: firstName.trim(),
+		        LNAME: lastName.trim()
+		    }
+		}
+
+		const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
+		const basic = 'Basic '+Base64.encode('awef:2b0dc07208fa30a74935a75c3269a0b3-us20')
+		const headers = {'Authorization': basic}
+		utils.HTTP.post(endpoint, subscriber, headers)
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: data
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
+		return
+	}
+
 	if (action == 'subscribe'){ // subscribe to mailing list
 		const body = req.body
 		if (body.email == null){
