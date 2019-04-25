@@ -479,7 +479,7 @@ router.post('/:action', function(req, res, next){
 		}
 
 		const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
-		const basic = 'Basic '+Base64.encode('awef:2b0dc07208fa30a74935a75c3269a0b3-us20')
+		const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
 		const headers = {'Authorization': basic}
 		utils.HTTP.post(endpoint, subscriber, headers)
 		.then(data => {
