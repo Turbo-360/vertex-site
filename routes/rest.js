@@ -85,14 +85,6 @@ router.get('/:app/:resource/:id', (req, res, next) => {
   })
 })
 
-// const apiBaseUrl = (appSlug, resource, resourceId) => {
-//   let base = 'https://'+appSlug+'.vertex360.co/api'
-//   if (resourceId == null)
-//     return base+'/'+resource
-//
-//   return base+'/'+resource+'/'+resourceId
-// }
-
 router.post('/:app/:resource', (req, res, next) => {
   const endpoint = apiBaseUrl(req.params.app, req.params.resource)
   console.log('REST POST: ' + JSON.stringify(req.body))
