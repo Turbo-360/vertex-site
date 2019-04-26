@@ -22,7 +22,7 @@
   }
 
   if (user != null){
-    $('#login-container').html('<a href="/me" class="button">My Account</a>')
+    $('#login-container').html('<a href="/me" class="button hidden-xs">My Account</a>')
     $('#nav-menu').addClass('right-side-loggedin')
     $('#nav-login').hide()
     return
