@@ -28,36 +28,6 @@ router.get('/test', (req, res) => {
 	})
 })
 
-// this is no longer in use
-/*
-router.get('/:slug', (req, res) => {
-	if (req.user == null){
-		res.redirect('/')
-		return
-	}
-
-	controllers.site.get({slug:req.params.slug})
-	.then(sites => {
-		if (sites.length == 0){
-			throw new Error('Site not found')
-			return
-		}
-
-		const site = sites[0]
-		const data = {
-			site: site
-		}
-
-		res.render('admin/overview', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-}) */
-
 router.get('/cms/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -88,6 +58,38 @@ router.get('/cms/:slug', (req, res) => {
 	})
 })
 
+// this is no longer in use
+/*
+router.get('/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	controllers.site.get({slug:req.params.slug})
+	.then(sites => {
+		if (sites.length == 0){
+			throw new Error('Site not found')
+			return
+		}
+
+		const site = sites[0]
+		const data = {
+			site: site
+		}
+
+		res.render('admin/overview', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+}) */
+
+// this is no longer in use
+/*
 router.get('/pages/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -156,7 +158,6 @@ router.get('/pages/:slug', (req, res) => {
 			message: err.message
 		})
 	})
-
-})
+}) */
 
 module.exports = router
