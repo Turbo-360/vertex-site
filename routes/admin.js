@@ -88,8 +88,6 @@ router.get('/:slug', (req, res) => {
 	})
 }) */
 
-// this is no longer in use
-/*
 router.get('/pages/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -158,6 +156,6 @@ router.get('/pages/:slug', (req, res) => {
 			message: err.message
 		})
 	})
-}) */
+})
 
 module.exports = router
