@@ -42,7 +42,8 @@ router.get('/cms/:slug', (req, res) => {
 		}
 
 		const preloaded = {
-			container: 'standard',
+			// container: 'standard',
+			container: 'custom',
 			app: {
 				summary: data[0]
 			}
