@@ -6,27 +6,27 @@ const router = vertex.router()
 const utils = require('../utils')
 const controllers = require('../controllers')
 
-router.get('/test', (req, res) => {
-	const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/landing-test-50-vck340/home.txt'
-	return utils.HTTP.get(url)
-	.then(config => { // this is a string
-		try {
-			const pageConfig = JSON.parse(config)
-			res.json(pageConfig)
-		}
-		catch(err) {
-			throw err
-			return
-		}
-		return
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
+// router.get('/test', (req, res) => {
+// 	const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/landing-test-50-vck340/home.txt'
+// 	return utils.HTTP.get(url)
+// 	.then(config => { // this is a string
+// 		try {
+// 			const pageConfig = JSON.parse(config)
+// 			res.json(pageConfig)
+// 		}
+// 		catch(err) {
+// 			throw err
+// 			return
+// 		}
+// 		return
+// 	})
+// 	.catch(err => {
+// 		res.json({
+// 			confirmation: 'fail',
+// 			message: err.message
+// 		})
+// 	})
+// })
 
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
