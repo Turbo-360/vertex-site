@@ -47,7 +47,7 @@ const queryEndpoint = (endpoint, params, method) => {
 }
 
 router.get('/:app', (req, res, next) => {
-  queryEndpoint('https://'+req.params.app+'.vertex360.co', null, null)
+  queryEndpoint('https://'+req.params.app+'.vertex360.co/api', null, null)
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
