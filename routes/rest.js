@@ -46,6 +46,24 @@ const queryEndpoint = (endpoint, params, method) => {
   })
 }
 
+router.get('/:app', (req, res, next) => {
+  queryEndpoint('https://'+req.params.app+'.vertex360.co', null, null)
+  .then(data => {
+    if (data.confirmation != 'success'){
+      throw new Error(data.message)
+      return
+    }
+
+    res.json(data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+
 router.get('/:app/:resource', (req, res, next) => {
 
   // template-test-55-4bkhc9
