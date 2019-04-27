@@ -28,76 +28,6 @@ router.get('/test', (req, res) => {
 	})
 })
 
-// router.get('/:slug', (req, res) => {
-// 	if (req.user == null){
-// 		res.redirect('/')
-// 		return
-// 	}
-//
-// 	let site = null
-// 	let currentUser = null
-// 	const page = 'home'
-//
-// 	controllers.site.get({slug:req.params.slug})
-// 	.then(data => {
-// 		if (data.length == 0){
-// 			throw new Error('Site not found')
-// 			return
-// 		}
-//
-// 		site = data[0]
-// 		return controllers.profile.getById(req.user.id, true)
-// 	})
-// 	.then(user => {
-// 		currentUser = {
-// 			id: req.user.id,
-// 			username: req.user.username,
-// 			firstName: req.user.firstName,
-// 			lastName: req.user.lastName,
-// 			email: req.user.email,
-// 			image: req.user.image,
-// 			slug: req.user.slug,
-// 			creditCard: user.creditCard, // this is why we fetch the raw profile
-// 			stripeId: user.stripeId // this is why we fetch the raw profile
-// 		}
-//
-// 		const url = 'https://s3.amazonaws.com/turbo360-vertex/pages/'+req.params.slug+'/'+page+'.txt'
-// 		return utils.HTTP.get(url)
-// 	})
-// 	.then(config => { // this is a string
-// 		try {
-// 			const pageReducer = {selected: page}
-// 			pageReducer[page] = JSON.parse(config)
-//
-// 			const appReducer = {
-// 				site_id: site.id,
-// 				apiKey: site.api.key,
-// 				summary: site
-// 			}
-//
-// 			const reducers = {
-// 				page: pageReducer,
-// 				app: appReducer,
-// 				user: {currentUser: currentUser}
-// 			}
-//
-// 			res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
-// 		}
-// 		catch(err) {
-// 			throw err
-// 			return
-// 		}
-//
-// 		return
-// 	})
-// 	.catch(err => {
-// 		res.json({
-// 			confirmation: 'fail',
-// 			message: err.message
-// 		})
-// 	})
-// })
-
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -106,8 +36,6 @@ router.get('/:slug', (req, res) => {
 
 	let site = null
 	let currentUser = null
-	// const page = 'home'
-
 	controllers.site.get({slug:req.params.slug})
 	.then(data => {
 		if (data.length == 0){
@@ -131,16 +59,13 @@ router.get('/:slug', (req, res) => {
 			stripeId: user.stripeId // this is why we fetch the raw profile
 		}
 
-		const appReducer = {
-			site_id: site.id,
-			apiKey: site.api.key,
-			summary: site
-		}
-
 		const reducers = {
 			user: {currentUser: currentUser},
-			app: appReducer
-			// page: pageReducer,
+			app: {
+				site_id: site.id,
+				apiKey: site.api.key,
+				summary: site
+			}
 		}
 
 		res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
