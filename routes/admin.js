@@ -28,67 +28,8 @@ router.get('/test', (req, res) => {
 	})
 })
 
-router.get('/cms/:slug', (req, res) => {
-	if (req.user == null){
-		res.redirect('/')
-		return
-	}
-
-	controllers.site.get({slug:req.params.slug})
-	.then(data => {
-		if (data.length == 0){
-			throw new Error('Site ' + req.params.slug + ' not found')
-			return
-		}
-
-		const preloaded = {
-			container: 'standard',
-			app: {
-				summary: data[0]
-			}
-		}
-
-		res.render('admin/cms', {data: JSON.stringify(preloaded)})
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-// this is no longer in use
-/*
+//router.get('/pages/:slug', (req, res) => {
 router.get('/:slug', (req, res) => {
-	if (req.user == null){
-		res.redirect('/')
-		return
-	}
-
-	controllers.site.get({slug:req.params.slug})
-	.then(sites => {
-		if (sites.length == 0){
-			throw new Error('Site not found')
-			return
-		}
-
-		const site = sites[0]
-		const data = {
-			site: site
-		}
-
-		res.render('admin/overview', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-}) */
-
-router.get('/pages/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
 		return
@@ -157,5 +98,65 @@ router.get('/pages/:slug', (req, res) => {
 		})
 	})
 })
+
+router.get('/cms/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	controllers.site.get({slug:req.params.slug})
+	.then(data => {
+		if (data.length == 0){
+			throw new Error('Site ' + req.params.slug + ' not found')
+			return
+		}
+
+		const preloaded = {
+			container: 'standard',
+			app: {
+				summary: data[0]
+			}
+		}
+
+		res.render('admin/cms', {data: JSON.stringify(preloaded)})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+// this is no longer in use
+/*
+router.get('/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	controllers.site.get({slug:req.params.slug})
+	.then(sites => {
+		if (sites.length == 0){
+			throw new Error('Site not found')
+			return
+		}
+
+		const site = sites[0]
+		const data = {
+			site: site
+		}
+
+		res.render('admin/overview', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+}) */
 
 module.exports = router
