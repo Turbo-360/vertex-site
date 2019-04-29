@@ -15,6 +15,7 @@ gulp.task('css', function(){
             [
                 './public/css/style.css',
                 './public/css/colors/cyan.css',
+                './public/css/summernote.min.css',
                 './public/css/custom.css'
             ]
         )
@@ -53,6 +54,8 @@ gulp.task('vendor', function(){
                 './public/scripts/tooltips.min.js',
                 './public/js/mustache.js',
                 './public/js/dropzone.js',
+                './public/js/summernote.min.js',
+                './public/js/summernote-example.js',
                 './public/scripts/custom.js',
                 './public/scripts/auth.js'
             ]
