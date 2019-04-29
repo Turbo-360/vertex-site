@@ -44,6 +44,7 @@ gulp.task('vendor', function(){
             [
                 './public/scripts/jquery-2.2.0.min.js',
                 './public/scripts/jquery-ui.min.js',
+                './public/scripts/bootstrap.min.js',
                 './public/scripts/mmenu.min.js',
                 './public/scripts/chosen.min.js',
                 './public/scripts/slick.min.js',
