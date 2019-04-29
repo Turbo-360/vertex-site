@@ -13,6 +13,7 @@ const path = require('path')
 gulp.task('css', function(){
     return gulp.src(
             [
+                './public/css/bootstrap.css',
                 './public/css/style.css',
                 './public/css/colors/cyan.css',
                 './public/css/summernote.min.css',
@@ -36,7 +37,14 @@ gulp.task('copy-fonts', function(){
         .pipe(gulp.dest('./public/dist/fonts/'))
 })
 
-gulp.task('style', ['css', 'copy-fonts'], function(){})
+gulp.task('copy-summernote', function(){
+    return gulp.src(
+            ['./public/css/font/**']
+        )
+        .pipe(gulp.dest('./public/dist/css/font/'))
+})
+
+gulp.task('style', ['css', 'copy-fonts', 'copy-summernote'], function(){})
 
 // Add javascript files here
 gulp.task('vendor', function(){
