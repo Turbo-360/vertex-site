@@ -54,11 +54,12 @@ router.get('/blog', (req, res) => {
 
 	controllers.post.get({limit:10})
 	.then(posts => {
-		data['posts'] = posts.map(post => {
-			post['preview'] = utils.TextUtils.truncateText(post.preview, 80)
-			return post
-		})
+		// data['posts'] = posts.map(post => {
+		// 	post['preview'] = utils.TextUtils.truncateText(post.preview, 80)
+		// 	return post
+		// })
 
+		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user
