@@ -5581,7 +5581,7 @@ a.send-message-to-owner.button {
 
 .comment-content {
 	color: #666;
-	padding: 0 0 0 100px;
+	padding: 0 0 0 80px;
 }
 
 .comments ul li ul {
@@ -5621,7 +5621,7 @@ body .comment-content p { padding: 5px 0; font-size: 15px; }
 }
 
 .avatar img {
-	max-width: 80px;
+	max-width: 60px;
 	border-radius: 50%;
 }
 
