@@ -34,7 +34,11 @@
   					<ul>
               {{#posts}}
   						<li>
-                <div class="avatar"><img src="{{{author.image}}}=s120-c" alt="Vertex 360"></div>
+                <div class="avatar">
+                  <a href="/profile/{{author.slug}}">
+                    <img src="{{{author.image}}}=s120-c" alt="Vertex 360">
+                  </a>
+                </div>
                 <div class="comment-content"><div class="arrow-comment"></div>
                   <div class="comment-by">
                     <h3 class="margin-top-0">
@@ -55,28 +59,6 @@
 			</div>
 		</div>
 
-    <div class="row">
-
-      {{#posts}}
-      <div class="col-md-4">
-        <a href="/post/{{slug}}" class="listing-item-container">
-          <div class="listing-item">
-            <img src="{{image}}=s512-c" alt="Vertex 360 | {{title}}">
-            <div class="listing-item-content" style="padding-right:12px">
-              <span class="tag">{{dateString}}</span>
-              <h3>{{title}}</h3>
-              <span style="font-size:14px;line-height:18px">{{preview}}</span>
-            </div>
-          </div>
-          <div class="star-rating">
-            <img style="width:32px;border-radius:50%;margin-right:4px" src="{{{author.image}}}=s260-c" />
-            <small style="text-transform:capitalize">{{author.firstName}} {{author.lastName}}</small>
-          </div>
-        </a>
-      </div>
-      {{/posts}}
-
-    </div>
 	</div>
 
 </section>
