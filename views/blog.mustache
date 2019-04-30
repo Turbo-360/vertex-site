@@ -10,6 +10,12 @@
         font-size: 20px;
         border-radius: 6px;
       }
+
+      @media (max-width: 768px) {
+        .primary-content {
+          margin-top: 0px !important;
+        }
+      }
   </style>
 </head>
 
@@ -18,101 +24,98 @@
 <div id="wrapper">
   {{>nav}}
   <div class="clearfix"></div>
+  <section class="fullwidth margin-top-65 padding-top-75 padding-bottom-70 primary-content" data-background-color="#f8f8f8">
 
-<section class="fullwidth margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f8f8f8">
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-8 col-md-offset-2">
+  				<h3 class="headline centered margin-bottom-45">
+  					Blog
+  				</h3>
+          <hr />
+          <div id="listing-reviews" class="listing-section">
+    				<section class="comments listing-reviews">
+    					<ul>
+                {{#posts}}
+    						<li>
+                  <div class="avatar">
+                    <a href="/profile/{{author.slug}}">
+                      <img src="{{{author.image}}}=s120-c" alt="Vertex 360">
+                    </a>
+                  </div>
+                  <div class="comment-content"><div class="arrow-comment"></div>
+                    <div class="comment-by">
+                      <h4 class="margin-top-0 margin-bottom-10">
+                        <a href="/post/{{slug}}">{{title}}</a>
+                      </h4>
+                      <span class="date">{{dateString}}</span></div>
+                      <a style="float:right;margin-left:12px" href="/post/{{slug}}"><img src="{{{image}}}=s140-c" alt="Vertex 360"></a>
+                      <p><a href="/post/{{slug}}">{{preview}}</a></p>
+                  </div>
+    						</li>
+                {{/posts}}
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<h3 class="headline centered margin-bottom-45">
-					Blog
-				</h3>
-        <hr />
-        <div id="listing-reviews" class="listing-section">
-  				<section class="comments listing-reviews">
-  					<ul>
-              {{#posts}}
-  						<li>
-                <div class="avatar">
-                  <a href="/profile/{{author.slug}}">
-                    <img src="{{{author.image}}}=s120-c" alt="Vertex 360">
-                  </a>
-                </div>
-                <div class="comment-content"><div class="arrow-comment"></div>
-                  <div class="comment-by">
-                    <h4 class="margin-top-0 margin-bottom-10">
-                      <a href="/post/{{slug}}">{{title}}</a>
-                    </h4>
-                    <span class="date">{{dateString}}</span></div>
-                    <a style="float:right;margin-left:12px" href="/post/{{slug}}"><img src="{{{image}}}=s140-c" alt="Vertex 360"></a>
-                    <p><a href="/post/{{slug}}">{{preview}}</a></p>
-                </div>
-  						</li>
-              {{/posts}}
+    					 </ul>
+    				</section>
 
-  					 </ul>
-  				</section>
+    			</div>
 
   			</div>
+  		</div>
 
-			</div>
-		</div>
+  	</div>
 
-	</div>
-
-</section>
+  </section>
 
 
-<!-- Info Section -->
-<div class="container">
+  <!-- Info Section -->
+  <div class="container">
 
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<h2 class="headline centered margin-top-80">
-				Lightning Fast Web Design
-				<span class="margin-top-25">Get up and running with a professional new website in under an hour.</span>
-			</h2>
-		</div>
-	</div>
+  	<div class="row">
+  		<div class="col-md-6 col-md-offset-3">
+  			<h2 class="headline centered margin-top-80">
+  				Lightning Fast Web Design
+  				<span class="margin-top-25">Get up and running with a professional new website in under an hour.</span>
+  			</h2>
+  		</div>
+  	</div>
 
-	<div class="row icons-container">
-		<!-- Stage -->
-		<div class="col-md-4">
-			<div class="icon-box-2 with-line">
-				<i class="im im-icon-Retouching"></i>
-				<h3>Web Design Made Easy</h3>
-				<p>No coding required! No tinkering with confusing editors, drag &amp; drop tools, or complicated features for "beginners".</p>
-			</div>
-		</div>
+  	<div class="row icons-container">
+  		<!-- Stage -->
+  		<div class="col-md-4">
+  			<div class="icon-box-2 with-line">
+  				<i class="im im-icon-Retouching"></i>
+  				<h3>Web Design Made Easy</h3>
+  				<p>No coding required! No tinkering with confusing editors, drag &amp; drop tools, or complicated features for "beginners".</p>
+  			</div>
+  		</div>
 
-		<!-- Stage -->
-		<div class="col-md-4">
-			<div class="icon-box-2 with-line">
-				<i class="im im-icon-Gears"></i>
-				<h3>Powerful Features</h3>
-				<p>Easily interact with your customers with email subscriber lists, image hosting and blog support.</p>
-			</div>
-		</div>
+  		<!-- Stage -->
+  		<div class="col-md-4">
+  			<div class="icon-box-2 with-line">
+  				<i class="im im-icon-Gears"></i>
+  				<h3>Powerful Features</h3>
+  				<p>Easily interact with your customers with email subscriber lists, image hosting and blog support.</p>
+  			</div>
+  		</div>
 
-		<!-- Stage -->
-		<div class="col-md-4">
-			<div class="icon-box-2">
-				<i class="im im-icon-Coin"></i>
-				<h3>Free To Start</h3>
-				<p>Vertex websites are free to start. Once you are ready to connect your site to a custom domain, our plans begin at only $5.</p>
-			</div>
-		</div>
-	</div>
+  		<!-- Stage -->
+  		<div class="col-md-4">
+  			<div class="icon-box-2">
+  				<i class="im im-icon-Coin"></i>
+  				<h3>Free To Start</h3>
+  				<p>Vertex websites are free to start. Once you are ready to connect your site to a custom domain, our plans begin at only $5.</p>
+  			</div>
+  		</div>
+  	</div>
 
+    <div class="row">
+  		<div class="col-md-6 col-md-offset-3">
+        <a id="btn-join" href="/templates" class="button with-icon margin-top-40">Get Started</a>
+  		</div>
+  	</div>
 
-  <div class="row">
-		<div class="col-md-6 col-md-offset-3">
-      <a id="btn-join" href="/templates" class="button with-icon margin-top-40">Get Started</a>
-		</div>
-	</div>
-
-
-</div>
+  </div>
 
 {{>footer-dark}}
 </div>
