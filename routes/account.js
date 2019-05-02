@@ -777,7 +777,7 @@ router.post('/:action', function(req, res, next){
 		.then(data => {
 			// update global from copiedSite to current site
 			// cloned = deepmerge.all([updatedPageConfiguration, currentConfig])
-			const updatedGlobalConfig = deepmerge.all([copiedSite.globalConfig, site.globalConfig])
+			const updatedGlobalConfig = deepmerge.all([copiedSite.globalConfig, site.globalConfig], {arrayMerge:(destinationArray, sourceArray, options) => sourceArray})
 			return controllers.site.put(site.id, {globalConfig: updatedGlobalConfig})
 		})
 		.then(data => {
