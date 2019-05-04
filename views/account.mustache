@@ -9,6 +9,30 @@
     .my-profile textarea {
       max-height: 120px;
     }
+
+    .input-row {
+      margin-left: 10px;
+      margin-bottom: 3px;
+      display: flex;
+    }
+
+    .input-label {
+      font-size: 14px;
+      margin-left: 0px;
+      flex: 1 1 0%;
+      color: rgb(204, 0, 0);
+      margin-top: 4px;
+    }
+
+    .input-container {
+      flex: 5 1 0%;
+      margin-left: 10px;
+    }
+
+    .input-container input {
+      line-height: 14px; max-width: 100%; height: 36px; border: none; background: rgb(249, 249, 249); padding: 3px 3px 3px 8px;
+    }
+
   </style>
 </head>
 
@@ -82,47 +106,57 @@
         <div id="content-profile" class="dashboard-list-box margin-top-0">
 					<h4 class="gray">Profile Details</h4>
 					<div class="dashboard-list-box-static">
-
             <div class="row">
-              <div class="col-lg-8">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <label>First Name</label>
-                    <input id="input-profile-firstName" style="background:#fffffa" value="{{user.firstName}}" type="text" />
-                  </div>
-                  <div class="col-lg-6">
-                    <label>Last Name</label>
-                    <input id="input-profile-lastName" style="background:#fffffa" value="{{user.lastName}}" type="text" />
-                  </div>
+              <div class="col-lg-4">
+                <div class="edit-profile-photo">
+                  <img id="profile-image" src="{{user.image}}=s512-c" alt="Vertex 360" />
+                  <span>Click to Change</span>
+                </div>
+              </div>
 
-                  <div class="col-lg-6">
-                    <label>Username</label>
-                    <input id="input-profile-username" style="background:#fffffa" value="{{user.username}}" type="text" />
-                  </div>
-                  <div class="col-lg-6">
-                    <label>Tags</label>
-                    <input id="input-profile-tags" style="background:#fffffa" value="{{user.tags}}" placeholder="tag1, tag2, tag3..." type="text" />
-                  </div>
-
-                  <div class="col-lg-12">
-                    <label>Bio</label>
-      							<textarea id="input-profile-bio" style="background:#fffffa" name="notes" cols="30" rows="6">{{user.bio}}</textarea>
+              <div class="col-lg-12">
+                <div class="input-row">
+                  <div class="input-label">First Name</div>
+                  <div class="input-container">
+                    <input id="input-profile-firstName" type="text" value="{{user.firstName}}" style="line-height: 14px; max-width: 100%; height: 36px; border: none; background: rgb(249, 249, 249); padding: 3px 3px 3px 8px;">
                   </div>
                 </div>
 
-              </div>
+                <div class="input-row">
+                  <div class="input-label">Last Name</div>
+                  <div class="input-container">
+                    <input id="input-profile-lastName"type="text" value="{{user.lastName}}" />
+                  </div>
+                </div>
 
-              <div class="col-lg-4">
-                <div class="edit-profile-photo">
-    							<img id="profile-image" src="{{user.image}}=s512-c" alt="">
-    						</div>
-                <button id="btn-upload" class="button">Change Photo</button>
-              </div>
-            </div>
+                <div class="input-row">
+                  <div class="input-label">Username</div>
+                  <div class="input-container">
+                    <input id="input-profile-username" type="text" value="{{user.username}}" />
+                  </div>
+                </div>
 
-            <a href="#sign-in-dialog" id="btn-change-pw" class="button margin-top-15 margin-right-10 popup-with-zoom-anim">Change Password</a>
-						<a href="#" id="btn-update-profile" class="button margin-top-15">Update Profile</a>
+                <div class="input-row">
+                  <div class="input-label">Tags</div>
+                  <div class="input-container">
+                    <input id="input-profile-tags" type="text" value="{{user.tags}}" />
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <div class="input-label">Bio</div>
+                  <div class="input-container">
+                    <input id="input-profile-bio" type="text" value="{{user.bio}}" />
+                  </div>
+                </div>
+
+                <hr />
+              </div>
 					</div>
+          <div style="text-align:right">
+            <a href="#sign-in-dialog" id="btn-change-pw" class="button margin-top-15 margin-right-10 popup-with-zoom-anim">Change Password</a>
+            <a href="#" id="btn-update-profile" class="button margin-top-15">Update Profile</a>
+          </div>
 				</div>
 
 				<div id="content-sites" class="dashboard-list-box margin-top-0">
@@ -205,7 +239,7 @@
       // }
 
       var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
-      $('#btn-upload').click(function(event){
+      $('#profile-image').click(function(event){
         if (user == null)
           return
 
