@@ -154,14 +154,14 @@
 <script type="text/template" id="tpl-profile-sidebar">
   <div class="hosted-by-title" style="padding:0px">
     <a href="/profile/<% slug %>">
-      <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="<%{profile.image}%>=s120-c" alt="Vertex 360" />
+      <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="<%{image}%>=s120-c" alt="Vertex 360" />
     </a>
     <h4>
       <span>Created by</span> <a style="text-transform:capitalize" href="/profile/<%slug%>"><%firstName%> <%lastName%></a>
     </h4>
   </div>
 
-  <p id="profile-bio" style="font-size:12px;line-height:16px">{{bio}}</p>
+  <p style="font-size:12px;line-height:16px"><%bio%></p>
   <a style="width:100%;text-align:center" href="/profile/<%slug%>" class="send-message-to-owner button">View Full Profile</a>
 </script>
 
@@ -232,12 +232,9 @@
       })
 
       $('#related-sites').html(templatesHtml)
-      // if (currentTemplate.profile.slug == null)
-      //   return
-
       var url = (currentTemplate.profile.slug) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
       getRequest(url, null, function(err2, resp){
-        console.log('PROFILES: ' + JSON.stringify(resp))
+        // console.log('PROFILES: ' + JSON.stringify(resp))
         if (err2){
           console.log('ERROR: ' + err2.message)
           return
@@ -252,8 +249,8 @@
         // $('#profile-bio').html(truncated)
 
         profile['bio'] = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
+        console.log('PROFILE: ' + JSON.stringify(profile))
         var tpl = $('#tpl-profile-sidebar').html()
-        console.log('TPL: ' + tpl)
         $('#profile-sidebar').html(Mustache.render(tpl, profile))
       })
     })
