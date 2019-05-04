@@ -172,36 +172,34 @@
             <a href="#" id="btn-update-profile" class="button margin-top-15">Update Profile</a>
           </div>
 				</div>
-
-				<div id="content-sites" class="dashboard-list-box margin-top-0">
-					<h4 class="gray">Manage Your Sites</h4>
-					<ul>
-            {{#sites}}
-						<li>
-							<div class="list-box-listing">
-								<div class="list-box-listing-img">
-                  <a target="_blank" href="https://{{slug}}.vertex360.co">
-                    <img src="{{image}}=s512-c" alt="Vertex 360 | {{name}}" />
-                  </a>
-                </div>
-								<div class="list-box-listing-content">
-									<div class="inner">
-										<h3><a target="_blank" href="https://{{slug}}.vertex360.co">{{name}}</a></h3>
-										<span>{{template.category}}</span>
-									</div>
-								</div>
-							</div>
-							<div class="buttons-to-right" style="bottom:0%;top:unset;opacity:1.0">
-                <a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> View Site</a>
-								<a href="/admin/{{slug}}" class="button"><i class="sl sl-icon-close"></i> Manage</a>
-							</div>
-						</li>
-            {{/sites}}
-					</ul>
-				</div>
-
 			</div>
 
+      <div id="content-sites" class="dashboard-list-box margin-top-0">
+        <h4 class="gray">Manage Your Sites</h4>
+        <ul>
+          {{#sites}}
+          <li>
+            <div class="list-box-listing">
+              <div class="list-box-listing-img">
+                <a target="_blank" href="https://{{slug}}.vertex360.co">
+                  <img src="{{image}}=s512-c" alt="Vertex 360 | {{name}}" />
+                </a>
+              </div>
+              <div class="list-box-listing-content">
+                <div class="inner">
+                  <h3><a target="_blank" href="https://{{slug}}.vertex360.co">{{name}}</a></h3>
+                  <span>{{template.category}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="buttons-to-right" style="bottom:0%;top:unset;opacity:1.0">
+              <a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> View Site</a>
+              <a href="/admin/{{slug}}" class="button"><i class="sl sl-icon-close"></i> Manage</a>
+            </div>
+          </li>
+          {{/sites}}
+        </ul>
+      </div>
       {{>copyright}}
 		</div>
 	</div>
