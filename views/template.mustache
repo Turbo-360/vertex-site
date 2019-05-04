@@ -100,6 +100,20 @@
     	<!-- Widgets -->
     	<div class="col-lg-3 col-md-4">
     		<div class="sidebar right">
+          <div class="boxed-widget margin-top-20" style="background:#fff">
+    				<div class="hosted-by-title">
+    					<h4>
+                <span>Created by</span> <a style="text-transform:capitalize" href="/profile/{{template.profile.slug}}">{{template.profile.firstName}} {{template.profile.lastName}}</a>
+              </h4>
+    					<a href="/profile/{{template.profile.slug}}" class="hosted-by-avatar">
+                <img id="profile-avatar" src="{{{template.profile.image}}}=s120-c" alt="Vertex 360" />
+              </a>
+    				</div>
+
+            <p id="profile-bio"></p>
+    				<a style="width:100%;text-align:center" href="/profile/{{template.profile.slug}}" class="send-message-to-owner button">View Profile</a>
+    			</div>
+
     			<div class="widget margin-top-40">
     				<h3>Featured Templates</h3>
     				<ul id="related-sites" class="widget-tabs"></ul>
@@ -158,6 +172,25 @@
     var user = data.user
     var currentTemplate = data.template
 
+    var getRequest = function(url, data, completion){
+      $.ajax({
+        url: url,
+        type: 'GET',
+        data: data,
+        success: function(response, status, xhr){
+          if (response.confirmation != 'success'){
+            completion(response, null) // 'data' is the error object here.
+            return
+          }
+
+          completion(null, response)
+        },
+        error: function(xhr, status, err){
+          completion(err, null)
+        }
+      })
+    }
+
     var launchTemplateHandler = function(event){
       if (event)
         event.preventDefault()
@@ -182,28 +215,37 @@
 
     $('#btn-launch-template').click(launchTemplateHandler)
 
-    $.ajax({
-      url: '/api/site?template.status=live&format=vertex&sort=asc',
-      data: null,
-      type: 'GET',
-      success: function(response){
-        if (response.confirmation != 'success'){
+    getRequest('/api/site?template.status=live&format=vertex&sort=asc', null, function(err, response){
+      if (err)
+        return
+
+      var templates = response.results
+      console.log(JSON.stringify(templates))
+
+      var tpl = $('#tpl-site-preview').html()
+      var templatesHtml = ''
+      templates.forEach(function(template){
+        templatesHtml += Mustache.render(tpl, template)
+      })
+
+      $('#related-sites').html(templatesHtml)
+      if (currentTemplate.profile.slug == null)
+        return
+
+      getRequest('/api/profile?'+currentTemplate.profile.slug, null, function(err, response){
+        if (err)
           return
-        }
 
-        var templates = response.results
-        console.log(JSON.stringify(templates))
+        var profiles = response.results
+        if (profiles.length == 0)
+          return
 
-        var tpl = $('#tpl-site-preview').html()
-        var templatesHtml = ''
-        templates.forEach(function(template){
-          templatesHtml += Mustache.render(tpl, template)
-        })
-
-        $('#related-sites').html(templatesHtml)
-      },
-      error: function(response){}
+        var profile = profiles[0]
+        console.log('PROFILE: ' + JSON.stringify(profiles))
+        $('#profile-bio').html(profile.bio)
+      })
     })
+
   })()
 </script>
 
