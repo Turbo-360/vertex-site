@@ -88,16 +88,22 @@
 
             <!-- About Author -->
       			<div class="about-author" style="margin:0px;border-top:1px solid #ededed;background:#fffffa">
-              <a href="/profile/{{template.author.slug}}">
-        				<img src="{{{template.author.image}}}=s260-c" alt="Vertex 360 | {{template.author.firstName}} {{template.author.lastName}}" />
-              </a>
-      				<div class="about-description" style="min-height:120px">
-                <a href="/profile/{{template.author.slug}}">
-      					  <h4 class="margin-bottom-0 capitalize">{{template.author.firstName}} {{template.author.lastName}}</h4>
-                </a>
-      					<a href="/profile/{{template.author.slug}}">{{template.author.username}}</a>
-      					<p>{{{template.author.bio}}}</p>
-      				</div>
+              <h2 class="margin-bottom-0 margin-top-0 capitalize">Launch This Template</h2>
+              <p style="margin-bottom:16px;color:#888">
+                Launch this template on your account.
+              </p>
+              <img style="max-width:320px;float:inherit" src="{{{template.image}}}=s512" />
+
+              <div class="input-row margin-top-40">
+                <div class="input-label">Your Site Name</div>
+                <div class="input-container">
+                  <input id="input-site-name" type="text" />
+                </div>
+              </div>
+
+              <div style="text-align:right">
+                <a style="margin-top:4px;color:#fff" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
+              </div>
       			</div>
 
     			</div>
