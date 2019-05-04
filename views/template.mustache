@@ -109,14 +109,6 @@
     			</div>
 
           {{>newsletter}}
-
-    			<!-- Related Posts -->
-    			<div class="clearfix"></div>
-          <hr />
-    			<h3 class="headline margin-top-25 margin-bottom-10">Launch Your Website</h3>
-          <p>Create fully-featured professional websites in minutes. Select a template below to get started.</p>
-    			<div id="featured-templates" class="row"></div>
-    			<div class="margin-top-50"></div>
     	</div>
 
 
@@ -205,9 +197,8 @@
 
     $('#btn-launch-template').click(launchTemplateHandler)
 
-
     $.ajax({
-      url: '/api/site?origin=vertex360&template.category='+currentTemplate.template.category+'&limit=5',
+      url: '/api/site?template.status=live&format=vertex&sort=asc',
       data: null,
       type: 'GET',
       success: function(response){
