@@ -102,16 +102,16 @@
     		<div class="sidebar right">
           <div class="boxed-widget margin-top-20" style="background:#fff">
     				<div class="hosted-by-title">
+              <a href="/profile/{{template.profile.slug}}">
+                <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="{{{template.profile.image}}}=s120-c" alt="Vertex 360" />
+              </a>
     					<h4>
                 <span>Created by</span> <a style="text-transform:capitalize" href="/profile/{{template.profile.slug}}">{{template.profile.firstName}} {{template.profile.lastName}}</a>
               </h4>
-    					<a href="/profile/{{template.profile.slug}}" class="hosted-by-avatar">
-                <img id="profile-avatar" src="{{{template.profile.image}}}=s120-c" alt="Vertex 360" />
-              </a>
     				</div>
 
             <p id="profile-bio" style="font-size:12px;line-height:16px"></p>
-    				<a style="width:100%;text-align:center" href="/profile/{{template.profile.slug}}" class="send-message-to-owner button">View Profile</a>
+    				<a style="width:100%;text-align:center" href="/profile/{{template.profile.slug}}" class="send-message-to-owner button">View Full Profile</a>
     			</div>
 
     			<div class="widget margin-top-40">
@@ -232,7 +232,8 @@
       if (currentTemplate.profile.slug == null)
         return
 
-      getRequest('/api/profile?slug='+currentTemplate.profile.slug, null, function(err2, resp){
+      var url = (currentTemplate.profile.slug.length>0) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
+      getRequest(url, null, function(err2, resp){
         console.log('PROFILES: ' + JSON.stringify(resp))
         if (err2)
           return
