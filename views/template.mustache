@@ -81,7 +81,7 @@
               <h4>Screenshots</h4>
               {{#template.images}}
               <div class="screenshot">
-                <a target="_blank" href="{{{ . }}}"><img src="{{{ . }}}" /></a>
+                <a target="_blank" href="{{{ . }}}=s1024"><img src="{{{ . }}}" /></a>
               </div>
               {{/template.images}}
     				</div>
@@ -125,7 +125,7 @@
     		<div class="sidebar right">
     			<div class="widget margin-top-40">
     				<h3>Related</h3>
-    				<ul id="recent-posts" class="widget-tabs"></ul>
+    				<ul id="related-sites" class="widget-tabs"></ul>
     			</div>
     		</div>
     	</div>
@@ -212,7 +212,7 @@
         }
 
         var templates = response.results
-        // console.log(JSON.stringify(templates))
+        console.log(JSON.stringify(templates))
 
         var tpl = $('#tpl-site-preview').html()
         var templatesHtml = ''
