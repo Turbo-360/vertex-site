@@ -69,17 +69,15 @@
     			<div class="blog-post single-post">
 
     				<div class="post-content">
+              <a style="float:right;font-weight:600" target="_blank" href="https://{{template.slug}}.vertex360.co" class="btn-edit margin-top-20">View Example</a>
               <h1 style="font-size:32px">{{template.name}}</h1>
               <ul class="post-meta">
     						<li style="text-transform:capitalize">{{template.template.category}}</li>
     						<li><a style="color:#37b6bd" href="/profile/{{template.profile.slug}}">{{template.profile.username}}</a></li>
-                {{#isAuthor}}
-                <li><a href="/submitpost?id={{template.id}}" class="btn-edit">Edit Post</a></li>
-                {{/isAuthor}}
     					</ul>
               <hr class="margin-top-20 margin-bottom-30" />
-              <img style="max-width:50%" class="post-img" src="{{{template.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
-    					{{{template.description}}}
+              <img style="max-width:60%" class="post-img" src="{{{template.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
+    					<p>{{{template.description}}}</p>
     				</div>
 
             <!-- About Author -->
