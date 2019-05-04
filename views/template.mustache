@@ -80,7 +80,9 @@
     					<p>{{{template.description}}}</p>
               <h4>Screenshots</h4>
               {{#template.images}}
-              <div class="screenshot"><img src="{{{ . }}}" /></div>
+              <div class="screenshot">
+                <a target="_blank" href="{{{ . }}}"><img src="{{{ . }}}" /></a>
+              </div>
               {{/template.images}}
     				</div>
 
