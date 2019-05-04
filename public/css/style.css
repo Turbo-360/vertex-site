@@ -6474,16 +6474,16 @@ a.read-more i {
 
 .widget-thumb a img {
 	display: block;
-	width: 95px;
-	height: 95px;
+	width: 60px;
+	height: 60px;
 	float: left;
-	border-radius: 3px;
+	border-radius: 2px;
 	margin: 3px 22px 0 0;
 }
 
 .widget-thumb {
-	width: 85px;
-	margin-right: 23px;
+	width: 60px;
+	margin-right: 12px;
 }
 
 .widget-text h5 {
@@ -6526,12 +6526,12 @@ a.read-more i {
 
 .widget-tabs .widget-content .widget-text {
 	display: table-cell;
-	vertical-align: middle;
+	vertical-align: top;
 }
 
 .widget-tabs li {
-	padding: 0 0 20px 0;
-	margin: 24px 0 0 0;
+	padding: 0 0 6px 0;
+	margin: 10px 0 0 0;
 }
 
 .widget-tabs li:first-child {
