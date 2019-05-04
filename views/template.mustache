@@ -100,19 +100,7 @@
     	<!-- Widgets -->
     	<div class="col-lg-3 col-md-4">
     		<div class="sidebar right">
-          <div class="boxed-widget margin-top-20" style="background:#fff">
-    				<div class="hosted-by-title" style="padding:0px">
-              <a href="/profile/{{template.profile.slug}}">
-                <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="{{{template.profile.image}}}=s120-c" alt="Vertex 360" />
-              </a>
-    					<h4>
-                <span>Created by</span> <a style="text-transform:capitalize" href="/profile/{{template.profile.slug}}">{{template.profile.firstName}} {{template.profile.lastName}}</a>
-              </h4>
-    				</div>
-
-            <p id="profile-bio" style="font-size:12px;line-height:16px"></p>
-    				<a style="width:100%;text-align:center" href="/profile/{{template.profile.slug}}" class="send-message-to-owner button">View Full Profile</a>
-    			</div>
+          <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
 
     			<div class="widget margin-top-40">
     				<h3>Featured Templates</h3>
@@ -161,6 +149,20 @@
       <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
     </div>
   </div>
+</script>
+
+<script type="text/template" id="tpl-profile-sidebar">
+  <div class="hosted-by-title" style="padding:0px">
+    <a href="/profile/<% slug %>">
+      <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="<%{profile.image}%>=s120-c" alt="Vertex 360" />
+    </a>
+    <h4>
+      <span>Created by</span> <a style="text-transform:capitalize" href="/profile/<%slug%>"><%firstName%> <%lastName%></a>
+    </h4>
+  </div>
+
+  <p id="profile-bio" style="font-size:12px;line-height:16px">{{bio}}</p>
+  <a style="width:100%;text-align:center" href="/profile/<%slug%>" class="send-message-to-owner button">View Full Profile</a>
 </script>
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
@@ -246,8 +248,13 @@
           return
 
         var profile = profiles[0]
-        var truncated = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
-        $('#profile-bio').html(truncated)
+        // var truncated = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
+        // $('#profile-bio').html(truncated)
+
+        profile['bio'] = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
+        var tpl = $('#tpl-profile-sidebar').html()
+        console.log('TPL: ' + tpl)
+        $('#profile-sidebar').html(Mustache.render(tpl, profile))
       })
     })
 
