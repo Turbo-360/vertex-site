@@ -101,7 +101,7 @@
     	<div class="col-lg-3 col-md-4">
     		<div class="sidebar right">
           <div class="boxed-widget margin-top-20" style="background:#fff">
-    				<div class="hosted-by-title" style="padding:inherit">
+    				<div class="hosted-by-title" style="padding:0px">
               <a href="/profile/{{template.profile.slug}}">
                 <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="{{{template.profile.image}}}=s120-c" alt="Vertex 360" />
               </a>
@@ -173,6 +173,7 @@
     var currentTemplate = data.template
 
     var getRequest = function(url, data, completion){
+      console.log('GET: ' + url)
       $.ajax({
         url: url,
         type: 'GET',
