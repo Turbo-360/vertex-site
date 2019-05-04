@@ -101,7 +101,7 @@
     	<div class="col-lg-3 col-md-4">
     		<div class="sidebar right">
           <div class="boxed-widget margin-top-20" style="background:#fff">
-    				<div class="hosted-by-title">
+    				<div class="hosted-by-title" style="padding:inherit">
               <a href="/profile/{{template.profile.slug}}">
                 <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="{{{template.profile.image}}}=s120-c" alt="Vertex 360" />
               </a>
@@ -179,7 +179,7 @@
         data: data,
         success: function(response, status, xhr){
           if (response.confirmation != 'success'){
-            completion(response, null) // 'data' is the error object here.
+            completion(new Error(response.message), null) // 'data' is the error object here.
             return
           }
 
@@ -235,8 +235,10 @@
       var url = (currentTemplate.profile.slug.length>0) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
       getRequest(url, null, function(err2, resp){
         console.log('PROFILES: ' + JSON.stringify(resp))
-        if (err2)
+        if (err2){
+          console.log('ERROR: ' + err2.message)
           return
+        }
 
         var profiles = resp.results
         if (profiles.length == 0)
