@@ -110,7 +110,7 @@
               </a>
     				</div>
 
-            <p id="profile-bio"></p>
+            <p id="profile-bio" style="font-size:12px;line-height:16px"></p>
     				<a style="width:100%;text-align:center" href="/profile/{{template.profile.slug}}" class="send-message-to-owner button">View Profile</a>
     			</div>
 
@@ -242,7 +242,8 @@
           return
 
         var profile = profiles[0]
-        $('#profile-bio').html(profile.bio)
+        var truncated = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
+        $('#profile-bio').html(truncated)
       })
     })
 
