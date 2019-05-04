@@ -232,11 +232,11 @@
       if (currentTemplate.profile.slug == null)
         return
 
-      getRequest('/api/profile?slug='+currentTemplate.profile.slug, null, function(err, response){
-        if (err)
+      getRequest('/api/profile?slug='+currentTemplate.profile.slug, null, function(err2, resp){
+        if (err2)
           return
 
-        var profiles = response.results
+        var profiles = resp.results
         if (profiles.length == 0)
           return
 
