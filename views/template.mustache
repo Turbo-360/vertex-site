@@ -233,7 +233,7 @@
       // if (currentTemplate.profile.slug == null)
       //   return
 
-      var url = (currentTemplate.profile.slug.length>0) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
+      var url = (currentTemplate.profile.slug) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
       getRequest(url, null, function(err2, resp){
         console.log('PROFILES: ' + JSON.stringify(resp))
         if (err2){
