@@ -220,7 +220,7 @@
         return
 
       var templates = response.results
-      console.log(JSON.stringify(templates))
+      // console.log(JSON.stringify(templates))
 
       var tpl = $('#tpl-site-preview').html()
       var templatesHtml = ''
@@ -233,6 +233,7 @@
         return
 
       getRequest('/api/profile?slug='+currentTemplate.profile.slug, null, function(err2, resp){
+        console.log('PROFILES: ' + JSON.stringify(resp))
         if (err2)
           return
 
@@ -241,7 +242,6 @@
           return
 
         var profile = profiles[0]
-        console.log('PROFILE: ' + JSON.stringify(profiles))
         $('#profile-bio').html(profile.bio)
       })
     })
