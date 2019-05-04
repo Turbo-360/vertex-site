@@ -144,12 +144,16 @@
   <li>
   	<div class="widget-content">
   		<div class="widget-thumb">
-  			<a href="/template/<% slug %>"><img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" /></a>
+  			<a href="/template/<% slug %>">
+          <img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" />
+        </a>
   		</div>
 
-  		<div class="widget-text">
-  			<h5><a href="/template/<% slug %>"><% name %></a></h5>
-  			<span><% template.category %></span>
+      <div class="widget-text" style="padding-top:6px">
+        <h5 class="preview-title" style="line-height:12px;margin-bottom:0px">
+          <a href="/post/<% slug %>"><% name %></a>
+        </h5>
+  			<small><% template.category %></small>
   		</div>
   		<div class="clearfix"></div>
   	</div>
