@@ -49,6 +49,14 @@
         padding: 16px !important;
       }
     }
+
+    #launch-template-container a {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      border-radius: 6px;
+    }
   </style>
 </head>
 
@@ -77,28 +85,12 @@
                 <a target="_blank" href="{{{ . }}}=s1024"><img src="{{{ . }}}" /></a>
               </div>
               {{/template.images}}
+
+              <hr />
+              <div id="launch-template-container">
+                <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
+              </div>
     				</div>
-
-            <!-- About Author -->
-      			<div class="about-author" style="margin:0px;border-top:1px solid #ededed;background:#fffffa">
-              <h2 class="margin-bottom-0 margin-top-0 capitalize">Launch This Template</h2>
-              <p style="margin-bottom:16px;color:#888">
-                Launch this template on your account.
-              </p>
-              <img style="max-width:320px;float:inherit;width:inherit;height:inherit;border-radius:inherit;margin:inherit" src="{{{template.image}}}=s512" />
-
-              <div class="input-row margin-top-40">
-                <div class="input-label">Your Site Name</div>
-                <div class="input-container">
-                  <input id="input-site-name" type="text" />
-                </div>
-              </div>
-
-              <div style="text-align:right">
-                <a style="margin-top:4px;color:#fff" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
-              </div>
-      			</div>
-
     			</div>
 
           {{>newsletter}}
