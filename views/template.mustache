@@ -259,14 +259,12 @@
       })
     })
 
-    // if (currentTemplate.cloneSource.length == 0)
-    //   return
+    if (currentTemplate.cloneSource == null)
+      return
+
     // this template is cloned from another template. Hide launch
     // template button and fetch the original template instead
-    // $('#launch-template-container').css('display', 'none')
-    // getRequest('/api/site/'+currentTemplate.cloneSource, null, function(err, response){
-    //
-    // })
+    $('#launch-template-container').html('CLONE SOURCE: '+currentTemplate.cloneSource.name)
   })()
 </script>
 
