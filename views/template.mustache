@@ -87,9 +87,11 @@
               {{/template.images}}
 
               <hr />
+              {{#template.isOriginal}}
               <div id="launch-template-container">
                 <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
               </div>
+              {{/template.isOriginal}}
     				</div>
     			</div>
 
@@ -257,17 +259,14 @@
       })
     })
 
-    if (currentTemplate.cloneSource.length == 0)
-      return
-
+    // if (currentTemplate.cloneSource.length == 0)
+    //   return
     // this template is cloned from another template. Hide launch
     // template button and fetch the original template instead
     // $('#launch-template-container').css('display', 'none')
     // getRequest('/api/site/'+currentTemplate.cloneSource, null, function(err, response){
     //
     // })
-
-
   })()
 </script>
 
