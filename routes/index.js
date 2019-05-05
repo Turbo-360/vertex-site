@@ -145,7 +145,6 @@ router.get('/template/:slug', (req, res) => {
 		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
 	})
 	.then(cloneSource => {
-		data.template['isOriginal'] = (cloneSource==null)
 		data.template['cloneSource'] = cloneSource
 		data['preloaded'] = JSON.stringify({
 			template: data.template,
