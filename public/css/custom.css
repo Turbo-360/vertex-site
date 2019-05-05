@@ -81,6 +81,10 @@
   #header {
     padding-bottom: 20px;
   }
+
+  .left-side {
+    width: 50% !important;
+  }
 }
 
 
