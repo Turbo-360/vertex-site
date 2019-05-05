@@ -56,6 +56,7 @@
       text-align: center;
       font-size: 20px;
       border-radius: 6px;
+      color: #fff;
     }
   </style>
 </head>
@@ -86,11 +87,18 @@
               </div>
               {{/template.images}}
 
-              <div id="launch-template-container">
-                <hr />
-                <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
-              </div>
     				</div>
+
+            <!-- About Author -->
+      			<div id="launch-template-container" class="about-author" style="margin:0px;border-top:1px solid #ededed;background:#fffffa">
+      				<div style="min-height:120px">
+                <h2 class="margin-bottom-0 margin-top-0">Launch This Site</h2>
+      					<p>Launch Site</p>
+      				</div>
+
+              <hr />
+              <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
+      			</div>
     			</div>
 
           {{>newsletter}}
