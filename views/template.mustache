@@ -86,8 +86,8 @@
               </div>
               {{/template.images}}
 
-              <hr />
               <div id="launch-template-container">
+                <hr />
                 <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
               </div>
     				</div>
@@ -162,6 +162,13 @@
 
   <p style="font-size:12px;line-height:16px"><%bio%></p>
   <a style="width:100%;text-align:center" href="/profile/<%slug%>" class="send-message-to-owner button">View Full Profile</a>
+</script>
+
+<script type="text/template" id="tpl-clone-source">
+  <h4>Clone Source</h4>
+  <div class="screenshot">
+    <a target="_blank" href="<%{ image }%>=s1024"><img src="<%{ image }%>" /></a>
+  </div>
 </script>
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
@@ -262,7 +269,8 @@
 
     // this template is cloned from another template. Hide launch
     // template button and fetch the original template instead
-    $('#launch-template-container').html('CLONE SOURCE: '+currentTemplate.cloneSource.name)
+    var tpl = $('#tpl-clone-source').html()
+    $('#launch-template-container').html(Mustache.render(tpl, currentTemplate.cloneSource))
   })()
 </script>
 
