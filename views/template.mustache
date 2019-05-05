@@ -94,20 +94,19 @@
     			</div>
 
           {{>newsletter}}
-    	</div>
+    	  </div>
 
+      	<!-- Widgets -->
+      	<div class="col-lg-3 col-md-4">
+      		<div class="sidebar right">
+            <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
 
-    	<!-- Widgets -->
-    	<div class="col-lg-3 col-md-4">
-    		<div class="sidebar right">
-          <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
-
-    			<div class="widget margin-top-40">
-    				<h3>Featured Templates</h3>
-    				<ul id="related-sites" class="widget-tabs"></ul>
-    			</div>
-    		</div>
-    	</div>
+      			<div class="widget margin-top-40">
+      				<h3>Featured Templates</h3>
+      				<ul id="related-sites" class="widget-tabs"></ul>
+      			</div>
+      		</div>
+      	</div>
     	</div>
     	<!-- Sidebar / End -->
 
@@ -218,6 +217,7 @@
 
     $('#btn-launch-template').click(launchTemplateHandler)
 
+    // fetch featured templates for sidebar
     getRequest('/api/site?template.status=live&format=vertex&sort=asc', null, function(err, response){
       if (err)
         return
@@ -232,6 +232,8 @@
       })
 
       $('#related-sites').html(templatesHtml)
+
+      // fetch profile of current template:
       var url = (currentTemplate.profile.slug) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
       getRequest(url, null, function(err2, resp){
         // console.log('PROFILES: ' + JSON.stringify(resp))
@@ -254,6 +256,17 @@
         $('#profile-sidebar').html(Mustache.render(tpl, profile))
       })
     })
+
+    if (currentTemplate.cloneSource.length == 0)
+      return
+
+    // this template is cloned from another template. Hide launch
+    // template button and fetch the original template instead
+    // $('#launch-template-container').css('display', 'none')
+    // getRequest('/api/site/'+currentTemplate.cloneSource, null, function(err, response){
+    //
+    // })
+
 
   })()
 </script>
