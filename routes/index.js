@@ -142,6 +142,10 @@ router.get('/template/:slug', (req, res) => {
 		const site = results[0]
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		data['template'] = site
+		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
+	})
+	.then(cloneSource => {
+		data.template['cloneSource'] = cloneSource
 		data['preloaded'] = JSON.stringify({
 			template: data.template,
 			user: req.user
