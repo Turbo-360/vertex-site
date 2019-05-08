@@ -630,14 +630,18 @@ router.post('/:action', function(req, res, next){
 	}
 
 	if (action == 'deletesite'){
+		console.log('DELETE SITE: ' + JSON.stringify(req.body))
 		controllers.site.getById(req.body.site) // fetch app first to get full details
 		.then(data => {
+			console.log('DELETE SITE: data == ' + JSON.stringify(data))
 			return utils.AWS.deleteFunction({name: data.slug}) // delete function from lamdba
 		})
 		.then(data => {
+			console.log('DELETE SITE: data 2 == ' + JSON.stringify(data))
 			return controllers.site.delete(req.body.site)
 		})
 		.then(data => {
+			console.log('DELETE SITE: data 3 == ' + JSON.stringify(data))
 			res.json({
 				confirmation: 'success',
 				data: req.body
