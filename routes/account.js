@@ -832,12 +832,15 @@ router.post('/:action', function(req, res, next){
 
 		controllers.site.post(template)
 		.then(data => {
+			// TODO: create stores and pages folders
+			// this lamdba creates 'stores' and 'pages' directories for
+			// the new template. don't wait for it to return, let it run.
+			utils.HTTP.post(PLATFORM_VECTOR_URL+'/seedtemplate', {source:req.body.category, app:data.slug}, null)
+
 			res.json({
 				confirmation: 'success',
 				data: data
 			})
-
-			// TODO: create stores and pages folders
 		})
 		.catch(err => {
 			res.json({
