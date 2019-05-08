@@ -648,6 +648,7 @@ router.post('/:action', function(req, res, next){
 			})
 		})
 		.catch(err => {
+			console.log('DELETE SITE: ERROR - '+err.message)
 			res.json({
 				confirmation: 'fail',
 				message: err.message
