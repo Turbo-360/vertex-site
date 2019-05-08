@@ -653,6 +653,7 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// Called when user clones and existing template:
 	if (action == 'launch-template'){
 		const params = req.body
 		if (req.user == null){
@@ -735,6 +736,7 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// called when user "refreshes" template from original source
 	if (action == 'update-template'){
 		const params = req.body
 		if (req.user == null){
@@ -795,6 +797,58 @@ router.post('/:action', function(req, res, next){
 
 		return
 	}
+
+	// called when user (developer) creates a template from scratch
+	if (action == 'createtemplate') {
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Please register or login to create a template.'
+			})
+
+			return
+		}
+
+		const profile = {
+			id: req.user.id,
+			username: req.user.username,
+			firstName: req.user.firstName,
+			lastName: req.user.lastName,
+			image: req.user.image,
+			slug: req.user.slug
+		}
+
+		const template = {
+			profile: profile,
+			name: req.body.name,
+			format: 'vertex',
+			origin: 'vertex360',
+			isClone: 'no',
+			template: {
+				category: req.body.category,
+				status: 'dev'
+			}
+		}
+
+		controllers.site.post(template)
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: data
+			})
+
+			// TODO: create stores and pages folders
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
+		return
+	}
+
 
 	if (action == 'uploadurl') {
 		// query requires folder, filename, filetype

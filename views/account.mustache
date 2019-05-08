@@ -9,6 +9,24 @@
     .my-profile textarea {
       max-height: 120px;
     }
+
+    .btn-view {
+      padding: 8px !important;
+      font-size: 14px !important;
+      margin: 0px 10px 0px 0px !important;
+      width: 100% !important;
+      border-radius: 4px !important;
+      text-align: center !important;
+    }
+
+    .input-container select {
+      line-height: 14px;
+      max-width: 100%;
+      height: 36px;
+      border: none;
+      background: #f9f9f9;
+      padding: 3px 3px 3px 8px;
+    }
   </style>
 </head>
 
@@ -165,6 +183,34 @@
       </div>
       {{>copyright}}
 		</div>
+
+    <div class="col-lg-4 col-md-4">
+      <div class="dashboard-list-box margin-top-0" style="position:fixed;width:310px">
+        <h4 class="gray">Create Template</h4>
+        <div class="dashboard-list-box-static">
+
+          <div class="input-container margin-left-0">
+            <input id="input-template-name" type="text" placeholder="Name" />
+          </div>
+
+          <div class="input-container margin-left-0">
+            <input id="input-template-description" type="text" placeholder="Description (optional)" />
+          </div>
+
+          <div class="input-container margin-left-0">
+            <select id="input-template-category">
+              <option value="base">Base</option>
+              <option value="resume">Resume</option>
+              <option value="landing">Landing</option>
+            </select>
+          </div>
+
+          <hr />
+          <a href="#" id="btn-create-template" class="button btn-view">Create Template</a>
+        </div>
+      </div>
+    </div>
+
 	</div>
 
 </div>
@@ -208,10 +254,19 @@
       var selected = data.selected
       var sidebarMenu = ['list-item-profile', 'list-item-sites']
 
-      // if (user != null){
-      //   $('#nav-login').hide()
-      //   $('#nav-menu').addClass('right-side-loggedin')
-      // }
+      var postRequest = function(url, params, completion){
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: params,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
+          }
+        })
+      }
 
       var turbo = Turbo({site_id: '5c244564231ff10015a113ea'})
       $('#profile-image').click(function(event){
@@ -234,21 +289,18 @@
               image: file.result.url
             }
 
-            $.ajax({
-              url: '/account/update',
-              type: 'POST',
-              data: updatedProfile,
-              success: function(response, status, xhr){
-                if (response.confirmation != 'success'){
-                  alert('Error - ' + response.message)
-                  return
-                }
-
-                alert('Profile Successfully Updated')
-              },
-              error: function(xhr, status, err){
+            postRequest('/account/update', updatedProfile, function(err, response){
+              if (err){
                 alert('Error - ' + err.message)
+                return
               }
+
+              if (response.confirmation != 'success'){
+                alert('Error - ' + response.message)
+                return
+              }
+
+              alert('Profile Successfully Updated')
             })
   				}
         })
@@ -302,25 +354,53 @@
           tags: $('#input-profile-tags').val().trim().toLowerCase()
         }
 
-        $.ajax({
-          url: '/account/update',
-          type: 'POST',
-          data: updatedProfile,
-          success: function(response, status, xhr){
-            if (response.confirmation != 'success'){
-              alert('Error - ' + response.message)
-              return
-            }
-
-            alert('Profile Successfully Updated')
-          },
-          error: function(xhr, status, err){
+        postRequest('/account/update', updatedProfile, function(err, response){
+          if (err){
             alert('Error - ' + err.message)
+            return
           }
+
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          alert('Profile Successfully Updated')
         })
       })
 
       reloadUI()
+      $('#btn-create-template').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        var template = {
+          name: $('#input-template-name').val(),
+          description: $('#input-template-description').val(),
+          category: $('#input-template-category').val()
+        }
+
+        if (template.name.length == 0){
+          alert('Please enter a template NAME.')
+          return
+        }
+
+        postRequest('/account/createtemplate', template, function(err, response){
+          if (err){
+            alert('Error - ' + err.message)
+            return
+          }
+
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          // console.log('CREATE TEMPLATE: ' + JSON.stringify(response))
+          window.location.href = '/admin/'+response.data.slug
+        })
+      })
+
       $('#btn-update-password').click(function(event){
         if (event)
           event.preventDefault()
@@ -337,23 +417,19 @@
           return
         }
 
-        $.ajax({
-          type: 'POST',
-          url: '/account/resetpassword',
-          data: {password:pw1, user:user.id},
-          success: function(response, status, xhr){
-            console.log('RESET PASSWORD: ' + JSON.stringify(response))
-            if (response.confirmation != 'success'){
-              alert('Error - ' + response.message)
-              return
-            }
-
-            alert('Password Successfully Reset')
-            $('.mfp-close')[0].click()
-          },
-          error: function(xhr, status, err){
-            alert('Error - ' + err)
+        postRequest('/account/resetpassword', {password:pw1, user:user.id}, function(err, response){
+          if (err){
+            alert('Error - ' + err.message)
+            return
           }
+
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          alert('Password Successfully Reset')
+          $('.mfp-close')[0].click()
         })
       })
 
