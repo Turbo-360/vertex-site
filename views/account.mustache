@@ -185,6 +185,21 @@
 		</div>
 
     <div class="col-lg-4 col-md-4">
+      <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+        <h4 class="gray">Profile</h4>
+        <div class="dashboard-list-box-static">
+          <img style="border-radius:50%" src="{{{user.image}}}=s96-c" />
+          <br />
+          <br />
+          <small>Profile</small>
+          <h4 class="padding-left-0 margin-bottom-20 padding-top-0 padding-bottom-10">
+            <a style="text-transform:capitalize" href="/profile/dan.kwon234-4ckonr">{{user.firstName}} {{user.lastName}}</a>
+          </h4>
+          <p>{{user.bio}}</p>
+          <a href="#" class="button btn-view">View Full Profile</a>
+        </div>
+      </div>
+
       <div id="create-template-form" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;display:none">
         <h4 class="gray">Create Template</h4>
         <div class="dashboard-list-box-static">
@@ -202,6 +217,7 @@
               <option value="base">Base</option>
               <option value="resume">Resume</option>
               <option value="landing">Landing</option>
+              <option value="portfolio">Portfolio</option>
             </select>
           </div>
 
@@ -311,12 +327,14 @@
           $('#content-sites').css('display', 'none')
           $('#content-profile').css('display', '')
           $('#create-template-form').css('display', 'none')
+          $('#profile-card').css('display', '')
         }
 
         if (selected == 'sites'){
           $('#content-profile').css('display', 'none')
           $('#content-sites').css('display', '')
           $('#create-template-form').css('display', '')
+          $('#profile-card').css('display', 'none')
         }
 
         sidebarMenu.forEach(function(listItem){
