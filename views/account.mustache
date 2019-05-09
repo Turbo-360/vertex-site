@@ -188,7 +188,9 @@
       <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
         <h4 class="gray">Profile</h4>
         <div class="dashboard-list-box-static">
-          <img style="border-radius:50%" src="{{{user.image}}}=s96-c" />
+          <a href="/profile/{{user.slug}}">
+            <img style="border-radius:50%" src="{{{user.image}}}=s96-c" />
+          </a>
           <br />
           <br />
           <small>Profile</small>
