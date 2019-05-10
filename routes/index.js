@@ -250,6 +250,7 @@ router.get('/me', (req, res) => {
 		const currentUser = {
 			id: req.user.id,
 			username: req.user.username,
+			slug: req.user.slug,
 			firstName: req.user.firstName,
 			lastName: req.user.lastName,
 			image: req.user.image,
