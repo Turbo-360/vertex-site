@@ -23,7 +23,7 @@
     }
 
     .post-preview span {
-      margin: 12px;
+      margin: 8px;
       font-weight: 600;
       color: #000;
     }
@@ -49,6 +49,42 @@
       color: blue;
     }
 
+    .message-bubble input {
+      border: none !important;
+      box-shadow: none !important;
+      background: #f6f6f6;
+      height: 30px;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .message-bubble textarea {
+      font-size:14px;
+      font-weight:200;
+      min-height:80px;
+      resize:none;
+      border:none;
+      background:#f6f6f6;
+      box-shadow:none;
+      padding:0px;
+    }
+
+    .message-bubble button {
+      padding:0px 9px;
+      border-radius:3px;
+      margin:0px;
+    }
+
+    .message-avatar img {
+      width: 44px !important;
+      height: 44px  !important;
+    }
+
+    .vote-box {
+      text-align: center;
+      max-width: 30px;
+      line-height: 16px
+    }
   </style>
 </head>
 
@@ -94,80 +130,40 @@
   						<!-- Message Content -->
   						<div class="message-content">
                 <div class="message-bubble margin-bottom-60">
-  								<div class="message-avatar"><img style="width:44px;height:44px" src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+  								<div class="message-avatar">
+                    <img id="comment-avatar" src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" />
+                  </div>
   								<div class="message-text" style="margin-left:60px">
-                    <input style="height:30px;border:none;background:#f6f6f6;box-shadow:none;margin:0px;padding:0px" type="text" placeholder="Title" />
-                    <textarea style="font-size:14px;font-weight:200;min-height:80px;resize:none;border:none;background:#f6f6f6;box-shadow:none;padding:0px" placeholder="Enter your comment..."></textarea>
-                    <div style="text-align:right"><button class="button" style="padding:0px 9px;border-radius:3px;margin:0px">Submit post</button></div>
+                    <input id="input-comment-title" type="text" placeholder="Title" />
+                    <textarea id="input-comment-text"  placeholder="Enter your comment..."></textarea>
+                    <div style="text-align:right"><button id="btn-submit-comment" class="button">Submit post</button></div>
                   </div>
   							</div>
 
+                {{#comments}}
                 <div class="post-preview">
-                  <div style="flex:15">
-                    <a href="#">
-                      <img src="https://lh3.googleusercontent.com/CuEfj955nT_eoHDAgH7m70-IpC4jFnN4XElxLr66N7TB1f8xInOfMpYPiDlG7Oxlw9eSl8zGmRLGme2TIGsxYfg7=s96-c" alt="" />
+                  <div style="flex:1">
+                    <a href="/profile/{{profile.slug}}">
+                      <img src="{{{profile.image}}}=s96-c" alt="" />
                     </a>
                     <p>
-                      <a class="text-green" href="#">Hello, I'm Andrew, in the process of founding Opplaud.com.</a>
+                      <a class="text-green" href="/comments/{{slug}}">{{title}}</a>
                       <br />
-                      <small>submitted by
-                        <a class="text-blue" href="#">Dkwon</a>
+                      <small>
+                        by
+                        <a class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
                         <span>·</span>3 hours ago
                         <span>·</span>10 comments
                       </small>
                     </p>
                   </div>
-                  <div style="flex:1;text-align:right;max-width:30px;line-height:16px">
+                  <div class="vote-box">
                     <a href="#"><i class="sl sl-icon-arrow-up"></i></a>
-                    <div style="padding-right:2px">11</div>
+                    <div>11</div>
                     <a href="#"><i class="sl sl-icon-arrow-down"></i></a>
                   </div>
                 </div>
-
-                <div class="post-preview">
-                  <div style="flex:15">
-                    <a href="#">
-                      <img src="https://lh3.googleusercontent.com/CuEfj955nT_eoHDAgH7m70-IpC4jFnN4XElxLr66N7TB1f8xInOfMpYPiDlG7Oxlw9eSl8zGmRLGme2TIGsxYfg7=s96-c" alt="" />
-                    </a>
-                    <p>
-                      <a class="text-green" href="#">Hello, I'm Andrew, in the process of founding Opplaud.com. Hello, I'm Andrew, in the process of founding Opplaud.com.</a>
-                      <br />
-                      <small>submitted by
-                        <a class="text-blue" href="#">Dkwon</a>
-                        <span>·</span>3 hours ago
-                        <span>·</span>10 comments
-                      </small>
-                    </p>
-                  </div>
-                  <div style="flex:1;text-align:right;max-width:30px;line-height:16px">
-                    <a href="#"><i class="sl sl-icon-arrow-up"></i></a>
-                    <div style="padding-right:2px">11</div>
-                    <a href="#"><i class="sl sl-icon-arrow-down"></i></a>
-                  </div>
-                </div>
-
-                <div class="post-preview">
-                  <div style="flex:15">
-                    <a href="#">
-                      <img src="https://lh3.googleusercontent.com/CuEfj955nT_eoHDAgH7m70-IpC4jFnN4XElxLr66N7TB1f8xInOfMpYPiDlG7Oxlw9eSl8zGmRLGme2TIGsxYfg7=s96-c" alt="" />
-                    </a>
-                    <p>
-                      <a class="text-green" href="#">Hello, I'm Andrew, in the process of founding Opplaud.com. Hello, I'm Andrew, in the process of founding Opplaud.com.</a>
-                      <br />
-                      <small>submitted by
-                        <a class="text-blue" href="#">Dkwon</a>
-                        <span>·</span>3 hours ago
-                        <span>·</span>10 comments
-                      </small>
-                    </p>
-                  </div>
-                  <div style="flex:1;text-align:right;max-width:30px;line-height:16px">
-                    <a href="#"><i class="sl sl-icon-arrow-up"></i></a>
-                    <div style="padding-right:2px">11</div>
-                    <a href="#"><i class="sl sl-icon-arrow-down"></i></a>
-                  </div>
-                </div>
-
+                {{/comments}}
 
   						</div>
   						<!-- Message Content -->
@@ -185,8 +181,63 @@
   </div>
 </div>
 
-
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script>
+    (function(){
+      var data = window.__PRELOADED__
+      var user = data.user
+      console.log('USER == ' + JSON.stringify(user))
+
+      if (user != null){
+        $('#comment-avatar').attr('src', user.image+'=s120-c')
+
+      }
+
+      $('#btn-submit-comment').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        if (user == null){
+          alert('Please log in or register to submit a comment.')
+          return
+        }
+
+        var comment = {
+          profile: JSON.stringify({id:user.id, firstName:user.firstName, lastName:user.lastName, username:user.username, image:user.image, slug:user.slug}),
+          title: $('#input-comment-title').val(),
+          text: $('#input-comment-text').val()
+        }
+
+        if (comment.title.length == 0){
+          alert('Please enter a title for your comment')
+          return
+        }
+
+        if (comment.text.length == 0){
+          alert('Please enter text for your comment')
+          return
+        }
+
+        $.ajax({
+          url: '/api/comment',
+          type: 'POST',
+          data: comment,
+          success: function(response){
+            if (response.confirmation != 'success'){
+              alert('Error - ' + response.message)
+              return
+            }
+
+            // console.log('COMMENT CREATED: ' + JSON.stringify(response))
+            window.location.href = '/comments/'+response.result.slug
+          },
+          error: function(response){
+
+          }
+        })
+      })
+    })()
+  </script>
 </body>
 </html>
