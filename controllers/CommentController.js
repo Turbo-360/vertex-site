@@ -70,7 +70,7 @@ module.exports = {
 
 	post: (params) => {
 		return new Promise((resolve, reject) => {
-			params['slug'] = utils.TextUtils.slugVersion(params.name)+'-'+utils.TextUtils.randomString(6).toLowerCase()
+			params['slug'] = utils.TextUtils.slugVersion(params.title)+'-'+utils.TextUtils.randomString(6).toLowerCase()
 			params['dateString'] = moment().format("MMMM Do, YYYY") // human readable date:
 
 			// if coming from jQuery AJAX, profile is stringified. Parse it here first.
