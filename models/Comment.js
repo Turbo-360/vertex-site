@@ -5,14 +5,14 @@ const CommentSchema = new mongoose.Schema({
 	title: {type:String, trim:true, default:''},
 	text: {type:String, trim:true, default:''},
 	slug: {type:String, trim:true, default:''},
-	dateString: {type:String, trim:true, default:''},
 	url: {type:String, trim:true, default:''},
 	attachment: {type:String, trim:true, default:''},
 	image: {type:String, trim:true, default:''},
 	thread: {type:String, trim:true, default:''}, // id number of post comment refers to
 	isInitial: {type:String, trim:true, default:'yes'},
-	// thread: {type:mongoose.Schema.Types.Mixed, default:{}},
+	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
 	updated: {type:Date, default:Date.now},
+	dateString: {type:String, trim:true, default:''},
 	timestamp: {type:Date, default:Date.now},
 })
 
@@ -20,7 +20,6 @@ CommentSchema.methods.summary = function() {
 	var summary = {
 		profile: this.profile,
 		text: this.text,
-		dateString: this.dateString,
 		title: this.title,
 		slug: this.slug,
 		url: this.url,
@@ -28,8 +27,9 @@ CommentSchema.methods.summary = function() {
 		image: this.image,
 		isInitial: this.isInitial,
 		thread: this.thread,
-		// thread: this.thread,
+		votes: this.votes,
 		updated: this.updated,
+		dateString: this.dateString,
 		timestamp: this.timestamp,
 		schema: 'comment',
 		id: this._id.toString()
