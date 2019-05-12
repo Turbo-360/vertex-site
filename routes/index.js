@@ -75,13 +75,13 @@ router.get('/forum', (req, res) => {
 		cdn: CDN
 	}
 
-	controllers.post.get({limit:10})
+	controllers.comment.get({limit:10})
 	.then(posts => {
-		data['posts'] = posts
-		// data['preloaded'] = JSON.stringify({
-		// 	query: req.query,
-		// 	user: req.user
-		// })
+		data['comments'] = posts
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user
+		})
 
 		res.render('forum', data)
 	})
