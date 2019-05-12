@@ -65,7 +65,30 @@ router.get('/blog', (req, res) => {
 	.catch(err => {
 		res.json({
 			confirmation: 'fail',
-			message: 'Post '+req.query.id+' not found'
+			message: err.message
+		})
+	})
+})
+
+router.get('/forum', (req, res) => {
+	const data = {
+		cdn: CDN
+	}
+
+	controllers.post.get({limit:10})
+	.then(posts => {
+		data['posts'] = posts
+		// data['preloaded'] = JSON.stringify({
+		// 	query: req.query,
+		// 	user: req.user
+		// })
+
+		res.render('forum', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
 		})
 	})
 })
@@ -187,6 +210,11 @@ router.get('/post/:slug', (req, res) => {
 			message: err.message
 		})
 	})
+})
+
+router.get('/comments/:slug', (req, res) => {
+	const data = {cdn: CDN}
+	res.render('comments', data)
 })
 
 router.get('/profile/:slug', (req, res) => {
