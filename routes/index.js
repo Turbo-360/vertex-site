@@ -76,8 +76,8 @@ router.get('/forum', (req, res) => {
 	}
 
 	controllers.comment.get({limit:10})
-	.then(posts => {
-		data['comments'] = posts
+	.then(comments => {
+		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user
@@ -214,7 +214,30 @@ router.get('/post/:slug', (req, res) => {
 
 router.get('/comments/:slug', (req, res) => {
 	const data = {cdn: CDN}
-	res.render('comments', data)
+
+	controllers.comment.get({slug:req.params.slug})
+	.then(comments => {
+		if (comments.length == 0){
+			throw new Error('Comment '+req.params.slug+' not found.')
+			return
+		}
+
+		data['comment'] = comments[0]
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user,
+			comment: data.comment
+		})
+
+		res.render('comments', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
 })
 
 router.get('/profile/:slug', (req, res) => {
