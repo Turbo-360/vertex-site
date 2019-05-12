@@ -87,6 +87,11 @@
   }
 }
 
+@media (max-width: 375px) {
+  #header {
+    padding-bottom: 0px;
+  }
+}
 
 .input-row {
   margin-left: 10px;
