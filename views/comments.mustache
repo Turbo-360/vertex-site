@@ -57,6 +57,16 @@
       box-shadow:none;
       padding:0px;
     }
+
+    .submit-button-container {
+      text-align: right;
+    }
+
+    .submit-button-container button {
+      padding: 0px 9px;
+      border-radius: 3px;
+      margin: 0px;
+    }
   </style>
 </head>
 
@@ -118,8 +128,10 @@
                     <img id="reply-avatar" style="width:44px;height:44px" src="" alt="" />
                   </div>
                   <div class="message-text margin-left-60">
-                    <textarea id="input-reply-text" placeholder="Enter your comment..."></textarea>
-                    <div style="text-align:right"><button id="btn-submit-reply" class="button" style="padding:0px 9px;border-radius:3px;margin:0px">Submit Reply</button></div>
+                    <textarea id="input-reply-text" placeholder="Enter your reply..."></textarea>
+                    <div class="submit-button-container">
+                      <button id="btn-submit-reply" class="button">Submit Reply</button>
+                    </div>
                   </div>
   							</div>
 

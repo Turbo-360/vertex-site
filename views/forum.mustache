@@ -85,6 +85,16 @@
       max-width: 30px;
       line-height: 16px
     }
+
+    .submit-button-container {
+      text-align: right;
+    }
+
+    .submit-button-container button {
+      padding: 0px 9px;
+      border-radius: 3px;
+      margin: 0px;
+    }
   </style>
 </head>
 
@@ -133,7 +143,9 @@
   								<div class="message-text" style="margin-left:60px">
                     <input id="input-comment-title" type="text" placeholder="Title" />
                     <textarea id="input-comment-text"  placeholder="Enter your comment..."></textarea>
-                    <div style="text-align:right"><button id="btn-submit-comment" class="button">Submit post</button></div>
+                    <div class="submit-button-container">
+                      <button id="btn-submit-comment" class="button">Submit post</button>
+                    </div>
                   </div>
   							</div>
 
