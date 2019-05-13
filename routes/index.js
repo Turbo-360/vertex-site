@@ -75,7 +75,7 @@ router.get('/forum', (req, res) => {
 		cdn: CDN
 	}
 
-	controllers.comment.get({limit:10})
+	controllers.comment.get({limit:10, isInitial:'yes'})
 	.then(comments => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
