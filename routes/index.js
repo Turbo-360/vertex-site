@@ -223,10 +223,15 @@ router.get('/comments/:slug', (req, res) => {
 		}
 
 		data['comment'] = comments[0]
+		return controllers.comment.get({thread:data.comment.id})
+	})
+	.then(replies => {
+		data['replies'] = replies
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user,
-			comment: data.comment
+			comment: data.comment,
+			replies: data.replies
 		})
 
 		res.render('comments', data)
