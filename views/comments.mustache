@@ -77,6 +77,15 @@
       border-radius: 3px;
       margin: 0px;
     }
+
+    .small-button {
+      flex:1;
+      text-align: center;
+      font-size: 14px;
+      margin: 0px;
+      padding: 8px !important;
+      border-radius: 4px !important;
+    }
   </style>
 </head>
 
@@ -191,7 +200,19 @@
           <div class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
             <h4 class="gray">Register or Login</h4>
             <div class="dashboard-list-box-static">
+              <div class="input-container margin-left-0">
+                <input id="input-profile-firstName" type="text" placeholder="Email" />
+              </div>
 
+              <div class="input-container margin-left-0">
+                <input id="input-profile-lastName"type="text" placeholder="Password" />
+              </div>
+
+              <hr />
+              <div style="display:flex">
+                <button class="button small-button margin-right-10">LOG IN</button>
+                <button class="button small-button">JOIN</button>
+              </div>
             </div>
           </div>
           {{/profile}}
