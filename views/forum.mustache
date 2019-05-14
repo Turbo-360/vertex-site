@@ -111,9 +111,8 @@
   		<div class="dashboard-nav-inner">
 
   			<ul data-submenu-title="Main">
-  				<li class="active"><a href="#"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-  				<li><a href="#"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-  				<li><a href="#"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
+  				<li class="active"><a id="sidebar-forum" href="#"><i class="sl sl-icon-bubbles"></i> Forum</a></li>
+  				<li><a id="sidebar-blog" href="#"><i class="sl sl-icon-book-open"></i> Blog</a></li>
   			</ul>
 
   		</div>
@@ -139,11 +138,11 @@
   						<div class="message-content">
                 <div class="message-bubble margin-bottom-60">
   								<div class="message-avatar">
-                    <img id="comment-avatar" src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" />
+                    <img id="comment-avatar" src="" alt="" />
                   </div>
   								<div class="message-text" style="margin-left:60px">
                     <input id="input-comment-title" type="text" placeholder="Title" />
-                    <textarea id="input-comment-text"  placeholder="Enter your comment..."></textarea>
+                    <textarea id="input-comment-text"  placeholder="Enter your comment or link (https://www.example.com)"></textarea>
                     <div class="submit-button-container">
                       <button id="btn-submit-comment" class="button">Submit post</button>
                     </div>
@@ -157,19 +156,24 @@
                       <img src="{{{profile.image}}}=s96-c" alt="" />
                     </a>
                     <p>
+                      {{#isLink}}
+                      <a class="text-green" target="_blank" href="{{url}}">{{title}} <small><i class="margin-left-10 sl sl-icon-share-alt"></i> ({{domain}})</small></a>
+                      {{/isLink}}
+                      {{^isLink}}
                       <a class="text-green" href="/comments/{{slug}}">{{title}}</a>
+                      {{/isLink}}
                       <br />
                       <small>
                         by
                         <a class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
                         <span>·</span>{{dateString}}
-                        <span>·</span>10 comments
+                        <span>·</span><a class="text-blue" href="/comments/{{slug}}">{{numReplies}} comments</a>
                       </small>
                     </p>
                   </div>
                   <div class="vote-box">
                     <a href="#"><i class="sl sl-icon-arrow-up"></i></a>
-                    <div>11</div>
+                    <div id="score-{{id}}">{{votes.score}}</div>
                     <a href="#"><i class="sl sl-icon-arrow-down"></i></a>
                   </div>
                 </div>
@@ -197,12 +201,72 @@
     (function(){
       var data = window.__PRELOADED__
       var user = data.user
-      // console.log('USER == ' + JSON.stringify(user))
+      var isFetching = false
+
+      var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+      var regex = new RegExp(expression)
+      var isUrl = function(str){
+        return str.match(regex) ? true : false
+      }
+
+      var scrapeUrl = function(url){
+        if (isUrl(url) == false) // invalid URL
+          return
+
+        if (isFetching == true)
+          return
+
+        isFetching = true
+        $.ajax({
+          url: '/account/scrape?url='+url,
+          type: 'GET',
+          data: null,
+          success: function(response){
+            console.log('SCRAPE: ' + JSON.stringify(response))
+            isFetching = false
+            if (response.confirmation != 'success'){
+              return
+            }
+
+            var metaData = response.data
+            $('#input-comment-title').val(metaData.title)
+
+          },
+          error: function(response){
+            console.log('ERROR: ' + JSON.stringify(response))
+            isFetching = false
+          }
+        })
+      }
+
+      var extractHostname = function(url) {
+          // var hostname;
+          // if (url.indexOf("//") > -1)
+          //     hostname = url.split('/')[2];
+          // else
+          //     hostname = url.split('/')[0];
+
+          var hostname = (url.indexOf("//") > -1) ? url.split('/')[2] : hostname = url.split('/')[0]
+          hostname = hostname.split(':')[0] //find & remove port number
+          hostname = hostname.split('?')[0] //find & remove "?"
+          return hostname
+      }
 
       if (user != null){
         $('#comment-avatar').attr('src', user.image+'=s120-c')
-
       }
+
+      $('#input-comment-text').on('change keyup paste', function(){
+          var text = $('#input-comment-text').val()
+          if (isUrl(text) == false)
+            return
+
+          if ($('#input-comment-title').val().length > 0) // title already set
+            return
+
+          console.log('Scrape URL: ' + text)
+          scrapeUrl(text)
+      })
 
       $('#btn-submit-comment').click(function(event){
         if (event)
@@ -213,10 +277,17 @@
           return
         }
 
+        var text = $('#input-comment-text').val()
+        var domain = ''
+        if (isUrl(text)==true)
+          domain = extractHostname(text)
+
         var comment = {
           profile: JSON.stringify({id:user.id, firstName:user.firstName, lastName:user.lastName, username:user.username, image:user.image, slug:user.slug}),
           title: $('#input-comment-title').val(),
-          text: $('#input-comment-text').val()
+          text: text,
+          url: (isUrl(text)==true) ? text : '',
+          domain: domain
         }
 
         if (comment.title.length == 0){
@@ -229,6 +300,10 @@
           return
         }
 
+        if (isFetching == true)
+          return
+
+        isFetching = true
         $.ajax({
           url: '/api/comment',
           type: 'POST',
@@ -238,12 +313,11 @@
               alert('Error - ' + response.message)
               return
             }
-
             // console.log('COMMENT CREATED: ' + JSON.stringify(response))
             window.location.href = '/comments/'+response.result.slug
           },
           error: function(response){
-
+            isFetching = false
           }
         })
       })
