@@ -82,6 +82,10 @@ router.get('/community', (req, res) => {
 		})
 
 		data['comments'] = comments
+		return controllers.post.get()
+	})
+	.then(posts => {
+		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user

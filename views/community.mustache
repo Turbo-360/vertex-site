@@ -111,8 +111,8 @@
   		<div class="dashboard-nav-inner">
 
   			<ul data-submenu-title="Main">
-  				<li class="active"><a id="sidebar-forum" href="#"><i class="sl sl-icon-bubbles"></i> Forum</a></li>
-  				<li><a id="sidebar-blog" href="#"><i class="sl sl-icon-book-open"></i> Blog</a></li>
+  				<li id="sidebar-forum" class="active"><a href="#"><i class="sl sl-icon-bubbles"></i> Forum</a></li>
+  				<li id="sidebar-blog"><a href="#"><i class="sl sl-icon-book-open"></i> Blog</a></li>
   			</ul>
 
   		</div>
@@ -132,7 +132,7 @@
   					<div class="messages-container-inner">
 
   						<!-- Message Content -->
-  						<div class="message-content">
+  						<div id="container-forum" class="message-content">
                 <div class="message-bubble margin-bottom-60">
   								<div class="message-avatar">
                     <img id="comment-avatar" src="" alt="" />
@@ -179,6 +179,25 @@
   						</div>
   						<!-- Message Content -->
 
+              <section id="container-blog" class="message-content">
+      					<ul style="list-style-type:none">
+                  {{#posts}}
+      						<li>
+                    <div class="margin-bottom-60">
+                      <div class="comment-by">
+                        <h4 class="margin-top-0 margin-bottom-10">
+                          <a style="color:#37b6bd" href="/post/{{slug}}">{{title}}</a>
+                        </h4>
+                        <span class="date">{{dateString}}</span>
+                      </div>
+                      <a style="float:right;margin-left:12px" href="/post/{{slug}}"><img src="{{{image}}}=s140-c" alt="Vertex 360"></a>
+                      <p style="min-height:115px"><a href="/post/{{slug}}">{{preview}}</a></p>
+                    </div>
+      						</li>
+                  {{/posts}}
+      					 </ul>
+      				</section>
+
   					</div>
 
   				</div>
@@ -198,7 +217,45 @@
     (function(){
       var data = window.__PRELOADED__
       var user = data.user
+      var sidebarItems = ['forum', 'blog']
+      var selected = 'forum'
       var isFetching = false
+
+      var reloadUI = function(){
+        sidebarItems.forEach(function(item){
+          if (item == selected)
+            $('#sidebar-'+item).addClass('active')
+          else
+            $('#sidebar-'+item).removeClass('active')
+
+          if (selected == 'forum'){
+            $('#container-blog').hide()
+            $('#container-forum').show()
+
+          }
+
+          if (selected == 'blog'){
+            $('#container-forum').hide()
+            $('#container-blog').show()
+
+          }
+        })
+      }
+
+
+      sidebarItems.forEach(function(item){
+        $('#sidebar-'+item).click(function(event){
+          if (event)
+            event.preventDefault()
+
+          if (item == selected)
+            return
+
+          selected = item
+          console.log('SELECT: ' + item)
+          reloadUI()
+        })
+      })
 
       var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
       var regex = new RegExp(expression)
@@ -312,6 +369,8 @@
           }
         })
       })
+
+      reloadUI()
     })()
   </script>
 </body>
