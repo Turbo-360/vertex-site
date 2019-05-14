@@ -235,6 +235,7 @@ router.get('/comments/:slug', (req, res) => {
 	})
 	.then(replies => {
 		data['replies'] = replies
+		data['profile'] = req.user
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user,
