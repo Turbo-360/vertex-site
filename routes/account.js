@@ -112,6 +112,46 @@ router.get('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'scrape'){
+		if (req.query.url == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing url parameter'
+			})
+			return
+		}
+
+		utils.Scraper.scrape({url:req.query.url})
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: data
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				data: err.message
+			})
+		})
+
+		// utils.HTTP.post(process.env.PLATFORM_VECTOR_URL, {url:req.query.url, props:['title', 'description', 'image']})
+		// .then(data => {
+		// 	res.json({
+		// 		confirmation: 'success',
+		// 		data: data
+		// 	})
+		// })
+		// .catch(err => {
+		// 	res.json({
+		// 		confirmation: 'fail',
+		// 		data: err.message
+		// 	})
+		// })
+
+		return
+	}
+
 	if (action == 'acceptinvitation'){
 		const invitation = req.query.invitation
 		if (invitation == null){
