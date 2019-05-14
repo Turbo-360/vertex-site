@@ -96,6 +96,18 @@
       border-radius: 3px;
       margin: 0px;
     }
+
+    .comment-by small {
+      color: #999;
+      font-weight: 200;
+      font-size: 12px;
+    }
+
+    .comment-by span {
+      margin: 8px;
+      font-weight: 600;
+      color: #000;
+    }
   </style>
 </head>
 
@@ -126,7 +138,7 @@
 
   				<div class="messages-container margin-top-0">
   					<div class="messages-headline">
-              <h4>FORUM</h4>
+              <h4 id="selected-header">FORUM</h4>
   					</div>
 
   					<div class="messages-container-inner">
@@ -185,13 +197,17 @@
       						<li>
                     <div class="margin-bottom-60">
                       <div class="comment-by">
-                        <h4 class="margin-top-0 margin-bottom-10">
+                        <h4 class="margin-top-0 margin-bottom-0">
                           <a style="color:#37b6bd" href="/post/{{slug}}">{{title}}</a>
                         </h4>
-                        <span class="date">{{dateString}}</span>
+                        <small>
+                          by
+                          <a class="text-blue" href="/profile/{{author.slug}}">{{author.username}}</a>
+                          <span>·</span>{{dateString}}
+                        </small>
                       </div>
-                      <a style="float:right;margin-left:12px" href="/post/{{slug}}"><img src="{{{image}}}=s140-c" alt="Vertex 360"></a>
-                      <p style="min-height:115px"><a href="/post/{{slug}}">{{preview}}</a></p>
+                      <a style="float:right;margin-left:12px" href="/post/{{slug}}"><img style="max-width:120px" src="{{{image}}}=s220-c" alt="Vertex 360"></a>
+                      <p style="min-height:115px"><a href="/post/{{slug}}">{{preview}}</a><a style="color:red" href="/post/{{slug}}"> read more</a></p>
                     </div>
       						</li>
                   {{/posts}}
@@ -222,6 +238,7 @@
       var isFetching = false
 
       var reloadUI = function(){
+        $('#selected-header').html(selected.toUpperCase())
         sidebarItems.forEach(function(item){
           if (item == selected)
             $('#sidebar-'+item).addClass('active')
@@ -237,7 +254,6 @@
           if (selected == 'blog'){
             $('#container-forum').hide()
             $('#container-blog').show()
-
           }
         })
       }
