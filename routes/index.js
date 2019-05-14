@@ -70,7 +70,7 @@ router.get('/blog', (req, res) => {
 	})
 })
 
-router.get('/forum', (req, res) => {
+router.get('/community', (req, res) => {
 	const data = {
 		cdn: CDN
 	}
@@ -80,14 +80,14 @@ router.get('/forum', (req, res) => {
 		comments.forEach(comment => {
 			comment['isLink'] = (comment.url.length > 0)
 		})
-		
+
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user
 		})
 
-		res.render('forum', data)
+		res.render('community', data)
 	})
 	.catch(err => {
 		res.json({
