@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
+
+  <meta property="og:title" content="Vertex 360 | {{comment.title}}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://www.vertex360.co/comments/{{comment.slug}}" />
+	<meta property="og:image" content="{{{comment.image}}}=s260-c" />
+	<meta property="og:image:width" content="260px" />
+	<meta property="og:image:height" content="260px" />
+	<meta property="og:description" content="{{comment.text}}" />
+
   <style>
     .message-by {
       margin-left: 50px !important;
