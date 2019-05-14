@@ -77,6 +77,10 @@ router.get('/forum', (req, res) => {
 
 	controllers.comment.get({limit:10, isInitial:'yes'})
 	.then(comments => {
+		comments.forEach(comment => {
+			comment['isLink'] = (comment.url.length > 0)
+		})
+		
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
