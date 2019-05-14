@@ -181,9 +181,9 @@
                     </p>
                   </div>
                   <div class="vote-box">
-                    <a href="#"><i class="sl sl-icon-arrow-up"></i></a>
+                    <a id="upvote-{{id}}" href="#"><i class="sl sl-icon-arrow-up"></i></a>
                     <div id="score-{{id}}">{{votes.score}}</div>
-                    <a href="#"><i class="sl sl-icon-arrow-down"></i></a>
+                    <a id="downvote-{{id}}" href="#"><i class="sl sl-icon-arrow-down"></i></a>
                   </div>
                 </div>
                 {{/comments}}
@@ -236,8 +236,11 @@
       var sidebarItems = ['forum', 'blog']
       var isFetching = false
       var selected = 'forum' // default
-      if (data.query)
+      if (data.query){
         selected = data.query.selected || 'forum'
+        if (sidebarItems.indexOf(selected == -1))
+          selected = 'forum'
+      }
 
       var reloadUI = function(){
         $('#selected-header').html(selected.toUpperCase())
@@ -259,7 +262,6 @@
           }
         })
       }
-
 
       sidebarItems.forEach(function(item){
         $('#sidebar-'+item).click(function(event){
@@ -385,6 +387,26 @@
           error: function(response){
             isFetching = false
           }
+        })
+      })
+
+      $('.sl-icon-arrow-up').each(function(i, upvote){
+        $(this).click(function(event){
+          if (event)
+            event.preventDefault()
+
+          var parent = $(this).parent()
+          console.log('UPVOTE: ' + parent.attr('id'))
+        })
+      })
+
+      $('.sl-icon-arrow-down').each(function(i, downvote){
+        $(this).click(function(event){
+          if (event)
+            event.preventDefault()
+
+          var parent = $(this).parent()
+          console.log('DOWNVOTE: ' + parent.attr('id'))
         })
       })
 
