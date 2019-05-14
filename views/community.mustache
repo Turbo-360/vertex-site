@@ -234,8 +234,10 @@
       var data = window.__PRELOADED__
       var user = data.user
       var sidebarItems = ['forum', 'blog']
-      var selected = 'forum'
       var isFetching = false
+      var selected = 'forum' // default
+      if (data.query)
+        selected = data.query.selected || 'forum'
 
       var reloadUI = function(){
         $('#selected-header').html(selected.toUpperCase())
