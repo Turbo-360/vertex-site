@@ -238,7 +238,7 @@
       var selected = 'forum' // default
       if (data.query){
         selected = data.query.selected || 'forum'
-        if (sidebarItems.indexOf(selected == -1))
+        if (sidebarItems.indexOf(selected) == -1)
           selected = 'forum'
       }
 
