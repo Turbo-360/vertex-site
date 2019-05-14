@@ -9,6 +9,7 @@ const Email = require('./Email')
 const AWS = require('./AWS')
 const HTTP = require('./HTTP')
 const Stripe = require('./Stripe')
+const Scraper = require('./Scraper')
 
 
 module.exports = {
@@ -19,6 +20,7 @@ module.exports = {
 	Email: Email,
 	HTTP: HTTP,
 	Stripe: Stripe,
+	Scraper: Scraper,
 	fetchFile: function(path){
 		return new Promise(function(resolve, reject){
 			fs.readFile(path, 'utf8', function(err, data) {
