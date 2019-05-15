@@ -7392,11 +7392,12 @@ body .style-2 .trigger a { text-transform: none; }
 
 .plan {
 	flex: 1;
-	box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.1);
 	text-align: center;
 	position: relative;
 	z-index: 9;
 	overflow: hidden;
+	border: 1px solid #ededed;
+	margin: 12px;
 }
 
 .plan-price {
