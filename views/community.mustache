@@ -108,6 +108,15 @@
       font-weight: 600;
       color: #000;
     }
+
+    .small-button {
+      flex:1;
+      text-align: center;
+      font-size: 14px;
+      margin: 0px;
+      padding: 8px !important;
+      border-radius: 4px !important;
+    }
   </style>
 </head>
 
@@ -215,10 +224,75 @@
       				</section>
 
   					</div>
-
   				</div>
-
   			</div>
+
+        <div class="col-lg-4 col-md-4">
+          {{#profile}}
+          <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+            <h4 class="gray">Profile</h4>
+            <div class="dashboard-list-box-static">
+              <a href="/profile/{{profile.slug}}">
+                <img style="border-radius:50%" src="{{{profile.image}}}=s96-c">
+              </a>
+              <br /><br />
+              <small>Profile</small>
+              <h4 class="padding-left-0 margin-bottom-20 padding-top-0 padding-bottom-10">
+                <a style="text-transform:capitalize" href="/profile/{{profile.slug}}">{{profile.firstName}} {{profile.lastName}}</a>
+              </h4>
+              <p style="font-size:14px;line-height:20px">{{profile.bio}}</p>
+              <a href="/profile/{{profile.slug}}" class="button btn-view">View Full Profile</a>
+            </div>
+          </div>
+          {{/profile}}
+
+          {{^profile}}
+          <div class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+            <h4 class="gray">Register or Login</h4>
+            <div class="dashboard-list-box-static">
+              <div class="input-container margin-left-0">
+                <input id="input-profile-firstName" type="text" placeholder="Email" />
+              </div>
+
+              <div class="input-container margin-left-0">
+                <input id="input-profile-lastName"type="text" placeholder="Password" />
+              </div>
+
+              <hr />
+              <div style="display:flex">
+                <button class="button small-button margin-right-10">LOG IN</button>
+                <button class="button small-button">JOIN</button>
+              </div>
+            </div>
+          </div>
+          {{/profile}}
+
+          <div id="create-template-form" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;display:none">
+            <h4 class="gray">Create Template</h4>
+            <div class="dashboard-list-box-static">
+
+              <div class="input-container margin-left-0">
+                <input id="input-template-name" type="text" placeholder="Name">
+              </div>
+
+              <div class="input-container margin-left-0">
+                <input id="input-template-description" type="text" placeholder="Description (optional)">
+              </div>
+
+              <div class="input-container margin-left-0">
+                <select id="input-template-category">
+                  <option value="base">Base</option>
+                  <option value="resume">Resume</option>
+                  <option value="landing">Landing</option>
+                  <option value="portfolio">Portfolio</option>
+                </select>
+              </div>
+
+              <hr>
+              <a href="#" id="btn-create-template" class="button btn-view">Create Template</a>
+            </div>
+          </div>
+        </div>
 
         {{>copyright}}
   		</div>

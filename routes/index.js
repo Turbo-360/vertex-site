@@ -86,6 +86,7 @@ router.get('/community', (req, res) => {
 	})
 	.then(posts => {
 		data['posts'] = posts
+		data['profile'] = req.user
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user
