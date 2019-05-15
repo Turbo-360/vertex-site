@@ -170,24 +170,26 @@
                 {{#comments}}
                 <div class="post-preview">
                   <div style="flex:1">
-                    <a href="/profile/{{profile.slug}}">
-                      <img src="{{{profile.image}}}=s96-c" alt="" />
-                    </a>
-                    <p>
-                      {{#isLink}}
-                      <a class="text-green" target="_blank" href="{{url}}">{{title}} <small><i class="margin-left-10 sl sl-icon-share-alt"></i> ({{domain}})</small></a>
-                      {{/isLink}}
-                      {{^isLink}}
-                      <a class="text-green" href="/comments/{{slug}}">{{title}}</a>
-                      {{/isLink}}
-                      <br />
-                      <small>
-                        by
-                        <a class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
-                        <span>·</span>{{dateString}}
-                        <span>·</span><a class="text-blue" href="/comments/{{slug}}">{{numReplies}} comments</a>
-                      </small>
-                    </p>
+                    <div style="display:flex">
+                      <a href="/profile/{{profile.slug}}">
+                        <img src="{{{profile.image}}}=s96-c" alt="" />
+                      </a>
+                      <p style="flex:1">
+                        {{#isLink}}
+                        <a class="text-green" target="_blank" href="{{url}}">{{title}} <small><i class="margin-left-10 sl sl-icon-share-alt"></i> ({{domain}})</small></a>
+                        {{/isLink}}
+                        {{^isLink}}
+                        <a class="text-green" href="/comments/{{slug}}">{{title}}</a>
+                        {{/isLink}}
+                        <br />
+                        <small>
+                          by
+                          <a class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
+                          <span>·</span>{{dateString}}
+                          <span>·</span><a class="text-blue" href="/comments/{{slug}}">{{numReplies}} comments</a>
+                        </small>
+                      </p>
+                    </div>
                   </div>
                   <div class="vote-box">
                     <a id="upvote-{{id}}" href="#"><i class="sl sl-icon-arrow-up"></i></a>
