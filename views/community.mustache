@@ -358,7 +358,6 @@
             return
 
           selected = item
-          console.log('SELECT: ' + item)
           reloadUI()
         })
       })
@@ -382,7 +381,7 @@
           type: 'GET',
           data: null,
           success: function(response){
-            console.log('SCRAPE: ' + JSON.stringify(response))
+            // console.log('SCRAPE: ' + JSON.stringify(response))
             isFetching = false
             if (response.confirmation != 'success'){
               return
@@ -418,7 +417,7 @@
           if ($('#input-comment-title').val().length > 0) // title already set
             return
 
-          console.log('Scrape URL: ' + text)
+          // console.log('Scrape URL: ' + text)
           scrapeUrl(text)
       })
 
@@ -499,7 +498,7 @@
             }
 
             var data = response.data
-            console.log('VOTE: ' + JSON.stringify(data))
+            // console.log('VOTE: ' + JSON.stringify(data))
             $('#score-'+data.id).html(data.votes.score)
           })
         })
@@ -530,7 +529,7 @@
             }
 
             var data = response.data
-            console.log('VOTE: ' + JSON.stringify(data))
+            // console.log('VOTE: ' + JSON.stringify(data))
             $('#score-'+data.id).html(data.votes.score)
           })
         })
