@@ -38,6 +38,7 @@ const SiteSchema = new mongoose.Schema({
 	pages: {type:Array, default:['home']}, // array of static pages
 	api: {type:mongoose.Schema.Types.Mixed, default:{key:'', secret:''}}, // api key and secret
 	authorized: {type:Array, default:[]}, // array of authorized api keys
+	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
 	services: {type:Array, default: ['datastore', 'blog', 'storage']}, // the defaults are free. after that, updgrade required.
 	timestamp: {type:Date, default:Date.now}
 })
@@ -63,6 +64,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		image: (this.image.length == 0) ? process.env.IMAGE_PLACEHOLDER : this.image,
 		images: this.images,
 		url: this.url,
+		votes: {up:this.votes.up.length, down:this.votes.down.length, score:this.votes.score},
 		// clonePrice: this.clonePrice,
 		// resources: this.resources,
 		// oauth: this.oauth,

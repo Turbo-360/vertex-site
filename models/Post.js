@@ -12,6 +12,7 @@ const PostSchema = new mongoose.Schema({
 	link: {type:String, trim:true, default:''}, // for links to outside posts
 	type: {type:String, lowercase:true, default:'original'}, // original or link
 	numReplies: {type:Number, default:0},
+	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
 	thread: {type:String, default:'' },
 	dateString: {type:String, default:'' },
 	timestamp: {type:Date, default:Date.now}
@@ -30,6 +31,7 @@ PostSchema.methods.summary = function(authLevel) {
 		numReplies: this.numReplies,
 		link: this.link,
 		type: this.type,
+		votes: {up:this.votes.up.length, down:this.votes.down.length, score:this.votes.score},
 		thread: this.thread,
 		dateString: this.dateString,
 		timestamp: this.timestamp,
