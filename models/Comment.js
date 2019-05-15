@@ -30,7 +30,7 @@ CommentSchema.methods.summary = function() {
 		image: this.image,
 		isInitial: this.isInitial,
 		thread: this.thread,
-		votes: this.votes,
+		votes: {up:this.votes.up.length, down:this.votes.down.length, score:this.votes.score},
 		numReplies: this.numReplies,
 		updated: this.updated,
 		dateString: this.dateString,

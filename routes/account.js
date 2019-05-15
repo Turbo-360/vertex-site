@@ -1070,7 +1070,7 @@ router.post('/:action', function(req, res, next){
 		const upOrDown = parts[0] // 'upvote' or 'downvote'
 		const commentId = parts[1]
 
-		controllers.comment.getById(commentId, true)
+		controllers.comment.getById(commentId, true) // fetch raw version
 		.then(comment => {
 			const votes = Object.assign({}, comment.votes)
 			let votesChanged = false
