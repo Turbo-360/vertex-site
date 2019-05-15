@@ -399,10 +399,10 @@
       }
 
       var extractHostname = function(url) {
-          var hostname = (url.indexOf("//") > -1) ? url.split('/')[2] : hostname = url.split('/')[0]
-          hostname = hostname.split(':')[0] //find & remove port number
-          hostname = hostname.split('?')[0] //find & remove "?"
-          return hostname
+        var hostname = (url.indexOf("//") > -1) ? url.split('/')[2] : hostname = url.split('/')[0]
+        hostname = hostname.split(':')[0] //find & remove port number
+        hostname = hostname.split('?')[0] //find & remove "?"
+        return hostname
       }
 
       if (user != null){

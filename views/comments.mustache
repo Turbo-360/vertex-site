@@ -276,9 +276,22 @@
       var replies = data.replies || []
       // console.log('USER == ' + JSON.stringify(user))
 
+      var postRequest = function(url, params, completion){
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: params,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
+          }
+        })
+      }
+
       if (user != null){
         $('#reply-avatar').attr('src', user.image+'=s120-c')
-
       }
 
       $('#btn-submit-reply').click(function(event){
@@ -303,30 +316,37 @@
           return
         }
 
-        $.ajax({
-          url: '/api/comment',
-          type: 'POST',
-          data: reply,
-          success: function(response){
-            if (response.confirmation != 'success'){
-              alert('Error - ' + response.message)
-              return
-            }
-
-            // console.log('REPLY CREATED: ' + JSON.stringify(response))
-            replies.unshift(response.result)
-            var tpl = $('#tpl-reply').html()
-            var repliesHtml = ''
-            replies.forEach(function(reply){
-              repliesHtml += Mustache.render(tpl, reply)
-            })
-
-            $('#container-replies').html(repliesHtml)
-            $('#input-reply-text').val('')
-          },
-          error: function(response){
-
+        postRequest('/api/comment', reply, function(err, response){
+          if (err){
+            alert('Error - ' + err)
+            return
           }
+
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          // console.log('REPLY CREATED: ' + JSON.stringify(response))
+          replies.unshift(response.result)
+          var tpl = $('#tpl-reply').html()
+          var repliesHtml = ''
+          replies.forEach(function(reply){
+            repliesHtml += Mustache.render(tpl, reply)
+          })
+
+          $('#container-replies').html(repliesHtml)
+          $('#input-reply-text').val('')
+
+          // update original comment with numRelies
+          setTimeout(function(){
+            postRequest('/account/updatereplies', {comment:comment.id}, function(err2, resp){
+              if (err2)
+                return
+
+              console.log('Num Replies: ' + JSON.stringify(resp))
+            })
+          }, 1000)
         })
       })
     })()

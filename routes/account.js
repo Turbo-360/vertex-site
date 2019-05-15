@@ -244,11 +244,6 @@ router.get('/:action', function(req, res, next){
 		.then(data => {
 			const redirect = (resetpassword == true) ? 'https://www.vertex360.co/me?selected=sites&resetpassword=true' : 'https://www.vertex360.co/me?selected=sites'
 			res.redirect(redirect)
-
-			// if (resetpassword == true)
-			// 	res.redirect('https://www.vertex360.co/me?selected=sites&resetpassword=true')
-			// else
-			// 	res.redirect('https://www.vertex360.co/me?selected=sites')
 			return
 		})
 		.catch(function(err){
@@ -1108,6 +1103,37 @@ router.post('/:action', function(req, res, next){
 
 		return
 	}
+
+	if (action == 'updatereplies'){
+		const commentId = req.body.comment
+		if (commentId == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing commentId parameter'
+			})
+			return
+		}
+
+		controllers.comment.get({thread: commentId})
+		.then(replies => {
+			return controllers.comment.put(commentId, {numReplies:replies.length})
+		})
+		.then(comment => {
+			res.json({
+				confirmation: 'success',
+				data: comment
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
+		return
+	}
+
 
 	if (action == 'invitecollaborator'){
 		const params = req.body
