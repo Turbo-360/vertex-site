@@ -316,6 +316,20 @@
           selected = 'forum'
       }
 
+      var postRequest = function(url, params, completion){
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: params,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
+          }
+        })
+      }
+
       var reloadUI = function(){
         $('#selected-header').html(selected.toUpperCase())
         sidebarItems.forEach(function(item){
@@ -446,21 +460,19 @@
           return
 
         isFetching = true
-        $.ajax({
-          url: '/api/comment',
-          type: 'POST',
-          data: comment,
-          success: function(response){
-            if (response.confirmation != 'success'){
-              alert('Error - ' + response.message)
-              return
-            }
-            // console.log('COMMENT CREATED: ' + JSON.stringify(response))
-            window.location.href = '/comments/'+response.result.slug
-          },
-          error: function(response){
+        postRequest('/api/comment', comment, function(err, response){
+          if (err){
             isFetching = false
+            return
           }
+
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          // console.log('COMMENT CREATED: ' + JSON.stringify(response))
+          window.location.href = '/comments/'+response.result.slug
         })
       })
 
@@ -469,8 +481,29 @@
           if (event)
             event.preventDefault()
 
+          if (user == null){
+            alert('Please log in or register to upvote')
+            return
+          }
+
           var parent = $(this).parent()
-          console.log('UPVOTE: ' + parent.attr('id'))
+          var voteInfo = parent.attr('id')
+          isFetching = true
+          postRequest('/account/vote', {profile:user.id, comment:voteInfo}, function(err, response){
+            if (err){
+              isFetching = false
+              return
+            }
+
+            if (response.confirmation != 'success'){
+              alert('Error - ' + response.message)
+              return
+            }
+
+            var data = response.data
+            console.log('VOTE: ' + JSON.stringify(data))
+            $('#score-'+data.id).html(data.votes.score)
+          })
         })
       })
 
@@ -479,8 +512,29 @@
           if (event)
             event.preventDefault()
 
+          if (user == null){
+            alert('Please log in or register to downvote')
+            return
+          }
+
           var parent = $(this).parent()
-          console.log('DOWNVOTE: ' + parent.attr('id'))
+          var voteInfo = parent.attr('id')
+          isFetching = true
+          postRequest('/account/vote', {profile:user.id, comment:voteInfo}, function(err, response){
+            if (err){
+              isFetching = false
+              return
+            }
+
+            if (response.confirmation != 'success'){
+              alert('Error - ' + response.message)
+              return
+            }
+
+            var data = response.data
+            console.log('VOTE: ' + JSON.stringify(data))
+            $('#score-'+data.id).html(data.votes.score)
+          })
         })
       })
 
