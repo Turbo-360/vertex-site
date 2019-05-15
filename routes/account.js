@@ -1045,6 +1045,70 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// upvote or downvote something
+	if (action == 'vote'){
+		if (req.user == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Please register or login to vote.'
+			})
+
+			return
+		}
+
+		// req.body == {"profile":"5cb93ce57df02703d5ddc25a","comment":"downvote-5cd859b13c68910c1f909bad"}
+		const voteInfo = req.body.comment
+		const parts = voteInfo.split('-')
+		if (parts.length < 2){
+			res.json({
+				confirmation: 'fail',
+				message: 'Invalid vote info'
+			})
+			return
+		}
+
+		const upOrDown = parts[0] // 'upvote' or 'downvote'
+		const commentId = parts[1]
+
+		controllers.comment.getById(commentId, true)
+		.then(comment => {
+			const votes = Object.assign({}, comment.votes)
+			let votesChanged = false
+			if (upOrDown=='upvote' && votes.up.indexOf(req.user.id)==-1){
+				votesChanged = true
+				votes.up.push(req.user.id)
+				if (votes.down.indexOf(req.user.id)!=-1)
+					votes.down.splice(votes.up.indexOf(req.user.id), 1)
+			}
+
+			if (upOrDown=='downvote' && votes.down.indexOf(req.user.id)==-1){
+				votesChanged = true
+				votes.down.push(req.user.id)
+				if (votes.up.indexOf(req.user.id)!=-1)
+					votes.up.splice(votes.up.indexOf(req.user.id), 1)
+			}
+
+			if (votesChanged == true){
+				votes.score = (votes.up.length-votes.down.length)
+				comment['votes'] = votes
+				comment.save()
+			}
+
+			res.json({
+				confirmation: 'success',
+				data: comment.summary()
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
+		return
+	}
+
 	if (action == 'invitecollaborator'){
 		const params = req.body
 		if (params.site == null){
