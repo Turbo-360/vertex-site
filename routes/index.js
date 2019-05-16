@@ -280,7 +280,12 @@ router.get('/profile/:slug', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			profile: data.profile,
-			user: req.user
+			user: req.user,
+			content: {
+				templates: data.sites,
+				posts: null,
+				comments: null
+			}
 		})
 
 		res.render('profile', data)
