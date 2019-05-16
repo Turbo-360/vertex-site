@@ -1,110 +1,254 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
-  <meta name="description" content="{{profile.bio}}" />
-	<meta name="keywords" content="{{profile.keywords}}">
-
-	<meta property="og:title" content="Vertex 360 | {{profile.firstName}} {{profile.lastName}}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://www.vertex360.co/profile/{{profile.slug}}" />
-	<meta property="og:image" content="{{{profile.image}}}=s260-c" />
-	<meta property="og:image:width" content="260px" />
-	<meta property="og:image:height" content="260px" />
-	<meta property="og:description" content="{{profile.bio}}" />
-
   <style>
-    .template-details {
-      text-align: right
+    .message-by {
+      margin-left: 50px !important;
     }
 
-    .template-details img {
-      width: 32px;
+    .user-link {
+      padding: 0px !important;
+      display: inherit !important;
+      color: #37b6bd !important;
+    }
+
+    .post-preview {
+      margin-bottom: 24px;
+      display: flex;
+    }
+
+    .post-preview p {
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+    .post-preview span {
+      margin: 8px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .post-preview small {
+      color: #999;
+      font-weight: 200;
+      font-size: 12px;
+    }
+
+    .post-preview img {
+      float: left;
+      width: 44px;
+      margin-right: 12px;
       border-radius: 50%;
-      margin-left: 4px;
+    }
+
+    .text-green {
+      color: #0f949b;
+    }
+
+    .text-blue {
+      color: blue;
+    }
+
+    .message-bubble input {
+      border: none !important;
+      box-shadow: none !important;
+      background: #f6f6f6;
+      height: 30px;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .message-bubble textarea {
+      font-size:14px;
+      font-weight:200;
+      min-height:72px;
+      resize:none;
+      border:none;
+      background:#f6f6f6;
+      box-shadow:none;
+      padding:0px;
+      margin-bottom: 0px !important;
+    }
+
+    .message-bubble button {
+      padding:0px 9px;
+      border-radius:3px;
+      margin:0px;
+    }
+
+    .message-avatar img {
+      width: 44px !important;
+      height: 44px  !important;
+    }
+
+    .vote-box {
+      text-align: center;
+      max-width: 30px;
+      line-height: 16px
+    }
+
+    .submit-button-container {
+      text-align: right;
+    }
+
+    .submit-button-container button {
+      padding: 0px 9px;
+      border-radius: 3px;
+      margin: 0px;
+    }
+
+    .comment-by small {
+      color: #999;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .comment-by span {
+      margin: 8px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .small-button {
+      flex:1;
+      text-align: center;
+      font-size: 14px;
+      margin: 0px;
+      padding: 8px !important;
+      border-radius: 4px !important;
     }
   </style>
 </head>
 
 <body>
-  <div id="wrapper">
-    {{>nav}}
-    <div class="clearfix"></div>
 
+<!-- Wrapper -->
+<div id="wrapper">
+  {{>nav}}
+  <div class="clearfix"></div>
 
-  <div class="fs-container">
+  <div id="dashboard">
+  	<div class="dashboard-nav hidden-xs">
+  		<div class="dashboard-nav-inner">
 
-  	<div class="fs-inner-container content">
-  		<div class="fs-content">
-
-  			<section class="search" style="min-height:800px;background:#f7f7f7">
-          <div class="user-profile-titlebar">
-            <div class="user-profile-avatar">
-              <img src="{{{profile.image}}}=s512-c" alt="Vertex 360">
-            </div>
-            <div class="user-profile-name">
-              <h2 class="margin-bottom-0 capitalize">{{profile.firstName}} {{profile.lastName}}</h2>
-              <span>{{profile.username}}</span>
-            </div>
-          </div>
-          <hr class="margin-top-40" />
-          <div>
-            <p>{{{profile.bio}}}</p>
-            <h3 class="listing-desc-headline">Tags</h3>
-    				<ul class="listing-features checkboxes">
-              {{#profile.tags}}
-    					<li>{{.}}</li>
-              {{/profile.tags}}
-    				</ul>
-          </div>
-  			</section>
-
-    		<section class="listings-container margin-top-30">
-    			<div class="row fs-listings">
-    				<div class="col-md-12">
-    					<div class="copyrights margin-top-0">&copy; 2019 Listeo. All Rights Reserved.</div>
-    				</div>
-    			</div>
-    		</section>
+  			<ul data-submenu-title="Community">
+  				<li id="sidebar-forum" class="active"><a href="#"><i class="sl sl-icon-picture"></i> Templates</a></li>
+          <li id="sidebar-blog"><a href="#"><i class="sl sl-icon-bubbles"></i> Comments</a></li>
+  				<li id="sidebar-blog"><a href="#"><i class="sl sl-icon-book-open"></i> Blog Posts</a></li>
+  			</ul>
 
   		</div>
   	</div>
 
+  	<div class="dashboard-content">
+  		<div class="row">
 
-  	<div class="fs-inner-container map-fixed" style="overflow:scroll">
+  			<!-- Listings -->
+  			<div class="col-lg-8 col-md-8">
+          <div id="selected-content" class="dashboard-list-box margin-top-0">
+    				<h4>TEMPLATES</h4>
+    				<ul>
 
-      <!-- Listings -->
-      <div class="row fs-listings margin-top-40">
+              {{#sites}}
+              <li>
+    						<div class="list-box-listing" style="min-height:110px">
+    							<div class="list-box-listing-img" style="max-width:110px">
+                    <a href="/template/{{slug}}">
+                      <img src="{{{image}}}=s220-c" alt="Vertex 360">
+                    </a>
+                  </div>
+    							<div class="list-box-listing-content">
+    								<div class="inner">
+    									<h3><a href="/template/{{slug}}">{{name}}</a></h3>
+    									<span style="text-transform:capitalize">{{template.category}}</span>
+                      <div class="margin-top-20">
+                        <a href="/template/{{slug}}" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View More</a>
+          							<a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
+                      </div>
+    								</div>
+    							</div>
+    						</div>
+    					</li>
+              {{/sites}}
 
-        {{#sites}}
-        <div class="col-lg-6 col-md-12">
-					<a href="/template/{{slug}}" class="listing-item-container compact">
-						<div class="listing-item">
-							<img src="{{{image}}}=s1024" alt="Vertex 360">
-							<div class="listing-item-details template-details">
-                {{profile.username}}
-                <img src="{{{profile.image}}}=s120-c" />
-							</div>
-							<div class="listing-item-content">
-								<h3 style="line-height:22px">{{name}}</h3>
-								<span>{{template.category}}</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-					</a>
-				</div>
-        {{/sites}}
+    				</ul>
+    			</div>
+  			</div>
 
-      </div>
+        <div class="col-lg-4 col-md-4">
+          {{#profile}}
+          <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+            <h4 class="gray">Profile</h4>
+            <div class="dashboard-list-box-static">
+              <a href="/profile/{{profile.slug}}">
+                <img style="border-radius:50%" src="{{{profile.image}}}=s96-c">
+              </a>
+              <br /><br />
+              <small>Profile</small>
+              <h4 class="padding-left-0 margin-bottom-20 padding-top-0 padding-bottom-10">
+                <a style="text-transform:capitalize" href="/profile/{{profile.slug}}">{{profile.firstName}} {{profile.lastName}}</a>
+              </h4>
+              <p style="font-size:14px;line-height:20px">{{profile.bio}}</p>
+            </div>
+          </div>
+          {{/profile}}
 
+          {{^profile}}
+          <div class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+            <h4 class="gray">Register or Login</h4>
+            <div class="dashboard-list-box-static">
+              <div class="input-container margin-left-0">
+                <input id="input-profile-firstName" type="text" placeholder="Email" />
+              </div>
+
+              <div class="input-container margin-left-0">
+                <input id="input-profile-lastName"type="text" placeholder="Password" />
+              </div>
+
+              <hr />
+              <div style="display:flex">
+                <button class="button small-button margin-right-10">LOG IN</button>
+                <button class="button small-button">JOIN</button>
+              </div>
+            </div>
+          </div>
+          {{/profile}}
+
+          <div id="create-template-form" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;display:none">
+            <h4 class="gray">Create Template</h4>
+            <div class="dashboard-list-box-static">
+
+              <div class="input-container margin-left-0">
+                <input id="input-template-name" type="text" placeholder="Name">
+              </div>
+
+              <div class="input-container margin-left-0">
+                <input id="input-template-description" type="text" placeholder="Description (optional)">
+              </div>
+
+              <div class="input-container margin-left-0">
+                <select id="input-template-category">
+                  <option value="base">Base</option>
+                  <option value="resume">Resume</option>
+                  <option value="landing">Landing</option>
+                  <option value="portfolio">Portfolio</option>
+                </select>
+              </div>
+
+              <hr>
+              <a href="#" id="btn-create-template" class="button btn-view">Create Template</a>
+            </div>
+          </div>
+        </div>
+
+        {{>copyright}}
+  		</div>
   	</div>
-  </div>
-
 
   </div>
-  <!-- Wrapper / End -->
+</div>
 
-<script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
-<script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-
+  <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
 </body>
 </html>
