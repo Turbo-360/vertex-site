@@ -117,6 +117,28 @@
       padding: 8px !important;
       border-radius: 4px !important;
     }
+
+    .reply-box {
+      margin-bottom: 40px;
+    }
+
+    .reply-box p {
+      font-size: 15px;
+      line-height: 27px;
+      margin-bottom: 0px;
+    }
+
+    .reply-box img {
+      width: 24px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .reply-box span {
+      margin: 8px;
+      font-weight: 600;
+      color: #000;
+    }
   </style>
 </head>
 
@@ -248,15 +270,68 @@
   </div>
 </div>
 
+  <script type="text/template" id="tpl-template-preview">
+    <li>
+      <div class="list-box-listing" style="min-height:110px">
+        <div class="list-box-listing-img" style="max-width:110px">
+          <a href="/template/<% slug %>">
+            <img src="<%{image}%>=s220-c" alt="Vertex 360">
+          </a>
+        </div>
+        <div class="list-box-listing-content">
+          <div class="inner">
+            <h3><a href="/template/<%slug%>"><%name%></a></h3>
+            <span style="text-transform:capitalize"><%template.category%></span>
+            <div class="margin-top-20">
+              <a href="/template/<%slug%>" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View More</a>
+              <a target="_blank" href="https://<%slug%>.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </script>
+
+  <script type="text/template" id="tpl-comment">
+    <div class="reply-box" style="background:#fff;padding:16px 30px;border-bottom:1px solid #ededed;margin-bottom:0px">
+      <a href="/profile/<% profile.slug %>">
+        <img src="<%{profile.image}%>=s96-c" alt="" />
+      </a>
+      <small>
+        by <a class="text-blue" href="/profile/<% profile.slug %>">Dkwon</a>
+        <span>·</span>
+        <% dateString %>
+      </small>
+      <p class="margin-top-10"><% text %></p>
+    </div>
+  </script>
+
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
   <script>
     (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
       var data = window.__PRELOADED__
-      var user = data.user
+      var profile = data.profile // profile of the page
+      var user = data.user // current user
+      var content = data.content
       var isFetching = false
       var sidebarItems = ['templates', 'comments', 'blog']
       var selected = 'templates' // default
+
+      var getRequest = function(url, completion){
+        $.ajax({
+          url: url,
+          type: 'GET',
+          data: null,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
+          }
+        })
+      }
 
       var reloadUI = function(){
         $('#selected-header').html(selected.toUpperCase())
@@ -265,18 +340,64 @@
             $('#sidebar-'+item).addClass('active')
           else
             $('#sidebar-'+item).removeClass('active')
-
-          // if (selected == 'forum'){
-          //   $('#container-blog').hide()
-          //   $('#container-forum').show()
-          //
-          // }
-          //
-          // if (selected == 'blog'){
-          //   $('#container-forum').hide()
-          //   $('#container-blog').show()
-          // }
         })
+
+        if (selected == 'templates'){
+          var templatesHtml = '<ul>'
+          var tpl = $('#tpl-template-preview').html()
+          content.templates.forEach(function(template){
+            templatesHtml += Mustache.render(tpl, template)
+          })
+
+          templatesHtml += '</ul>'
+          $('#selected-content').html(templatesHtml)
+          return
+        }
+
+        if (selected == 'blog'){
+          var posts = content['posts']
+          if (posts==null){ // fetch data
+            getRequest('/api/post?author.id='+user.id, function(err, response){
+              if (err){
+                return
+              }
+
+              console.log('POSTS == ' + JSON.stringify(response))
+              content[selected] = response.results
+              reloadUI()
+            })
+            return
+          }
+
+          $('#selected-content').html('')
+          return
+        }
+
+        if (selected == 'comments'){
+          var comments = content['comments']
+          if (comments==null){ // fetch data
+            getRequest('/api/comment?profile.id='+user.id, function(err, response){
+              if (err){
+                return
+              }
+
+              // console.log('COMMENTS == ' + JSON.stringify(response))
+              content[selected] = response.results
+              reloadUI()
+            })
+
+            return
+          }
+
+          var commentHtml = ''
+          var tpl = $('#tpl-comment').html()
+          comments.forEach(function(comment){
+            commentHtml += Mustache.render(tpl, comment)
+          })
+
+          $('#selected-content').html(commentHtml)
+          return
+        }
       }
 
       sidebarItems.forEach(function(item){
@@ -284,17 +405,13 @@
           if (event)
             event.preventDefault()
 
-          if (item == selected)
+          if (item == selected) // no change
             return
 
           selected = item
           reloadUI()
         })
       })
-
-
-
-
     })()
   </script>
 </body>
