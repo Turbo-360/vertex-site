@@ -357,7 +357,7 @@
         if (selected == 'blog'){
           var posts = content['posts']
           if (posts==null){ // fetch data
-            getRequest('/api/post?author.id='+user.id, function(err, response){
+            getRequest('/api/post?author.id='+profile.id, function(err, response){
               if (err){
                 return
               }
@@ -376,7 +376,7 @@
         if (selected == 'comments'){
           var comments = content['comments']
           if (comments==null){ // fetch data
-            getRequest('/api/comment?profile.id='+user.id, function(err, response){
+            getRequest('/api/comment?profile.id='+profile.id, function(err, response){
               if (err){
                 return
               }
