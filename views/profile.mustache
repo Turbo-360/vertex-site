@@ -130,48 +130,48 @@
   <div id="dashboard">
   	<div class="dashboard-nav hidden-xs">
   		<div class="dashboard-nav-inner">
-
-  			<ul data-submenu-title="Community">
-  				<li id="sidebar-forum" class="active"><a href="#"><i class="sl sl-icon-picture"></i> Templates</a></li>
-          <li id="sidebar-blog"><a href="#"><i class="sl sl-icon-bubbles"></i> Comments</a></li>
+  			<ul data-submenu-title="Profile">
+  				<li id="sidebar-templates" class="active"><a href="#"><i class="sl sl-icon-picture"></i> Templates</a></li>
+          <li id="sidebar-comments"><a href="#"><i class="sl sl-icon-bubbles"></i> Comments</a></li>
   				<li id="sidebar-blog"><a href="#"><i class="sl sl-icon-book-open"></i> Blog Posts</a></li>
   			</ul>
-
   		</div>
   	</div>
 
   	<div class="dashboard-content">
   		<div class="row">
 
-  			<!-- Listings -->
   			<div class="col-lg-8 col-md-8">
-          <div id="selected-content" class="dashboard-list-box margin-top-0">
-    				<h4>TEMPLATES</h4>
-    				<ul>
+          <div class="dashboard-list-box margin-top-0">
+    				<h4 id="selected-header">TEMPLATES</h4>
 
-              {{#sites}}
-              <li>
-    						<div class="list-box-listing" style="min-height:110px">
-    							<div class="list-box-listing-img" style="max-width:110px">
-                    <a href="/template/{{slug}}">
-                      <img src="{{{image}}}=s220-c" alt="Vertex 360">
-                    </a>
-                  </div>
-    							<div class="list-box-listing-content">
-    								<div class="inner">
-    									<h3><a href="/template/{{slug}}">{{name}}</a></h3>
-    									<span style="text-transform:capitalize">{{template.category}}</span>
-                      <div class="margin-top-20">
-                        <a href="/template/{{slug}}" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View More</a>
-          							<a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
-                      </div>
-    								</div>
-    							</div>
-    						</div>
-    					</li>
-              {{/sites}}
+            <div id="selected-content">
+              <ul>
+                {{#sites}}
+                <li>
+      						<div class="list-box-listing" style="min-height:110px">
+      							<div class="list-box-listing-img" style="max-width:110px">
+                      <a href="/template/{{slug}}">
+                        <img src="{{{image}}}=s220-c" alt="Vertex 360">
+                      </a>
+                    </div>
+      							<div class="list-box-listing-content">
+      								<div class="inner">
+      									<h3><a href="/template/{{slug}}">{{name}}</a></h3>
+      									<span style="text-transform:capitalize">{{template.category}}</span>
+                        <div class="margin-top-20">
+                          <a href="/template/{{slug}}" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View More</a>
+            							<a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
+                        </div>
+      								</div>
+      							</div>
+      						</div>
+      					</li>
+                {{/sites}}
 
-    				</ul>
+      				</ul>
+            </div>
+
     			</div>
   			</div>
 
@@ -250,5 +250,52 @@
 
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script>
+    (function(){
+      var data = window.__PRELOADED__
+      var user = data.user
+      var isFetching = false
+      var sidebarItems = ['templates', 'comments', 'blog']
+      var selected = 'templates' // default
+
+      var reloadUI = function(){
+        $('#selected-header').html(selected.toUpperCase())
+        sidebarItems.forEach(function(item){
+          if (item == selected)
+            $('#sidebar-'+item).addClass('active')
+          else
+            $('#sidebar-'+item).removeClass('active')
+
+          // if (selected == 'forum'){
+          //   $('#container-blog').hide()
+          //   $('#container-forum').show()
+          //
+          // }
+          //
+          // if (selected == 'blog'){
+          //   $('#container-forum').hide()
+          //   $('#container-blog').show()
+          // }
+        })
+      }
+
+      sidebarItems.forEach(function(item){
+        $('#sidebar-'+item).click(function(event){
+          if (event)
+            event.preventDefault()
+
+          if (item == selected)
+            return
+
+          selected = item
+          reloadUI()
+        })
+      })
+
+
+
+
+    })()
+  </script>
 </body>
 </html>
