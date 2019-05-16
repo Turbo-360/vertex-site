@@ -363,7 +363,7 @@
               }
 
               console.log('POSTS == ' + JSON.stringify(response))
-              content[selected] = response.results
+              content['posts'] = response.results
               reloadUI()
             })
             return
@@ -382,7 +382,7 @@
               }
 
               // console.log('COMMENTS == ' + JSON.stringify(response))
-              content[selected] = response.results
+              content['comments'] = response.results
               reloadUI()
             })
 
