@@ -117,6 +117,13 @@
       padding: 8px !important;
       border-radius: 4px !important;
     }
+
+    @media (max-width: 375px) {
+      .comments-container {
+        padding: 8px;
+      }
+    }
+
   </style>
 </head>
 
@@ -139,7 +146,7 @@
   		</div>
   	</div>
 
-  	<div class="dashboard-content">
+  	<div class="dashboard-content comments-container">
   		<div class="row">
 
   			<!-- Listings -->
@@ -154,7 +161,7 @@
 
   						<!-- Message Content -->
   						<div id="container-forum" class="message-content">
-                <div class="message-bubble margin-bottom-60">
+                <div class="message-bubble margin-bottom-60 hidden-xs">
   								<div class="message-avatar">
                     <img id="comment-avatar" src="" alt="" />
                   </div>
@@ -169,7 +176,7 @@
 
                 {{#comments}}
                 <div class="post-preview">
-                  <a href="/profile/{{profile.slug}}">
+                  <a class="hidden-xs" href="/profile/{{profile.slug}}">
                     <img src="{{{profile.image}}}=s96-c" alt="Vertex 360 | {{profile.username}}" />
                   </a>
                   <p style="flex:1">
