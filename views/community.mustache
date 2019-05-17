@@ -133,6 +133,7 @@
 
   			<ul data-submenu-title="Community">
   				<li id="sidebar-forum" class="active"><a href="#"><i class="sl sl-icon-bubbles"></i> Forum</a></li>
+          <li id="sidebar-templates"><a href="#"><i class="sl sl-icon-picture"></i> Templates</a></li>
   				<li id="sidebar-blog"><a href="#"><i class="sl sl-icon-book-open"></i> Blog</a></li>
   			</ul>
 
@@ -224,6 +225,32 @@
       					 </ul>
       				</section>
 
+              <section id="container-templates" class="message-content">
+                <ul>
+                  {{#templates}}
+                  <li>
+        						<div class="list-box-listing" style="min-height:110px">
+        							<div class="list-box-listing-img" style="max-width:110px">
+                        <a href="/template/{{slug}}">
+                          <img src="{{{image}}}=s220-c" alt="Vertex 360">
+                        </a>
+                      </div>
+        							<div class="list-box-listing-content">
+        								<div class="inner">
+        									<h3><a href="/template/{{slug}}">{{name}}</a></h3>
+        									<span style="text-transform:capitalize">{{template.category}}</span>
+                          <div class="margin-top-20">
+                            <a href="/template/{{slug}}" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View More</a>
+              							<a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
+                          </div>
+        								</div>
+        							</div>
+        						</div>
+        					</li>
+                  {{/templates}}
+
+        				</ul>
+      				</section>
   					</div>
   				</div>
   			</div>
