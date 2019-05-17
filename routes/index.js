@@ -72,8 +72,10 @@ router.get('/blog', (req, res) => {
 
 router.get('/community', (req, res) => {
 	const data = {
-		cdn: CDN
+		cdn: CDN,
+		profile: req.user
 	}
+
 
 	controllers.comment.get({limit:10, isInitial:'yes'})
 	.then(comments => {
@@ -86,7 +88,16 @@ router.get('/community', (req, res) => {
 	})
 	.then(posts => {
 		data['posts'] = posts
-		data['profile'] = req.user
+		return controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
+	})
+	.then(sites => {
+		sites.forEach((site, i) => {
+			site['index'] = i
+			site['tags'] = site.tags.slice(0, 3) // use only first 3
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
+		})
+
+		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
 			user: req.user
