@@ -1,7 +1,7 @@
 (function(){
   var data = window.__PRELOADED__
   var user = data.user
-  var sidebarItems = ['forum', 'blog']
+  var sidebarItems = ['forum', 'templates', 'blog']
   var isFetching = false
   var selected = 'forum' // default
   if (data.query){
@@ -33,14 +33,23 @@
         $('#sidebar-'+item).removeClass('active')
 
       if (selected == 'forum'){
+        $('#container-templates').hide()
         $('#container-blog').hide()
         $('#container-forum').show()
       }
 
       if (selected == 'blog'){
+        $('#container-templates').hide()
         $('#container-forum').hide()
         $('#container-blog').show()
       }
+
+      if (selected == 'templates'){
+        $('#container-templates').show()
+        $('#container-forum').hide()
+        $('#container-blog').hide()
+      }
+
     })
   }
 
