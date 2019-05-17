@@ -213,6 +213,61 @@
       })
     }
 
+    // checks if a template is ready when cloning:
+    var checkTemplate = function(siteSlug){
+      var body = {template:siteSlug}
+      postRequest('/account/check-template', body, function(err, response){
+        if (err){
+          console.log('TEMPLATE NOT READY: ')
+          setTimeout(function(){
+            checkTemplate(siteSlug)
+          }, 4000)
+          return
+        }
+
+        // console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+        if (response.confirmation != 'success'){
+          alert('Error - ' + response.message)
+          return
+        }
+
+        // window.location.href = '/me?selected=sites' // redirect to account page
+        window.location.href = '/admin/'+siteSlug // redirect to site admin page
+      })
+    }
+
+    var launchTemplate = function(){
+      if (user == null){
+        alert('Please log in or register to clone this site.')
+        return
+      }
+
+      var body = {
+        name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+        source: currentTemplate.id // ID of the template being copied
+      }
+
+      if (body.name.length == 0){
+        alert('Please enter a name for your site')
+        return
+      }
+
+      $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
+      console.log('LAUNCH TEMPLATE: ' + JSON.stringify(body))
+
+      // postRequest('/account/launch-template', body, function(err, response){
+      //   if (err){
+      //     alert('Error: ' + err.message)
+      //     return
+      //   }
+      //
+      //   // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+      //   setTimeout(function(){
+      //     checkTemplate(response.data.slug)
+      //   }, 4000)
+      // })
+    }
+
     var launchTemplateHandler = function(event){
       if (event)
         event.preventDefault()
