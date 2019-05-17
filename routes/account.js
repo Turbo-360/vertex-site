@@ -753,7 +753,8 @@ router.post('/:action', function(req, res, next){
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(emailJson))
 		})
 		.then(data => {
-			console.log('TEST 3: ' + JSON.stringify(data))
+			// console.log('TEST 3: ' + JSON.stringify(data))
+			console.log('FOLDER: ' + JSON.stringify(folder))
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
 			// const url = 'https://platform.turbo360-vector.com/launchtemplate'
