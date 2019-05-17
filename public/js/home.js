@@ -114,7 +114,7 @@
       return
     }
 
-    if (selected == 'how it works'){
+    if (selected=='how it works' || selected=='about'){
       var tpl = $('#tpl-how-it-works').html()
       var data = {
         showGetStarted: (user==null) ? true : false
@@ -126,6 +126,14 @@
       // no template selected, show about section:
       setTimeout(function(){
         $('#btn-get-started').click(function(event){
+          if (event)
+            event.preventDefault()
+
+          $('#tab-register').click()
+          document.getElementById('btn-show-modal').click()
+        })
+
+        $('#btn-join-basic').click(function(event){
           if (event)
             event.preventDefault()
 
