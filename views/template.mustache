@@ -269,7 +269,8 @@
       }
 
       $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
-      // console.log('LAUNCH TEMPLATE: ' + JSON.stringify(body))
+      console.log('LAUNCH TEMPLATE: ' + JSON.stringify(body))
+      
       postRequest('/account/launch-template', body, function(err, response){
         if (err){
           alert('Error: ' + err.message)

@@ -701,6 +701,8 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
+		console.log('LAUNCH TEMPLATE: ' + JSON.stringify(params))
+
 		const newSiteInfo = {
 			name: params.name,
 			isClone: 'yes',
@@ -722,6 +724,7 @@ router.post('/:action', function(req, res, next){
 
 		controllers.site.getById(params.source) // fetch original site first
 		.then(data => {
+			console.log('TEST 1: ' + JSON.stringify(data))
 			copiedSite = data
 			folder['copiedSite'] = copiedSite
 			folder['source'] = copiedSite.slug
@@ -733,6 +736,7 @@ router.post('/:action', function(req, res, next){
 			return controllers.site.post(newSiteInfo) // create new site
 		})
 		.then(data => {
+			console.log('TEST 2: ' + JSON.stringify(data))
 			newSite = data
 			folder['newSite'] = newSite
 			folder['app'] = newSite.slug // new app to copy source to
@@ -749,6 +753,7 @@ router.post('/:action', function(req, res, next){
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Vertex Template Launched', JSON.stringify(emailJson))
 		})
 		.then(data => {
+			console.log('TEST 3: ' + JSON.stringify(data))
 			// send POST request to https://platform.turbo360-vector.com/launchtemplate
 			// with 'folder' as params
 			// const url = 'https://platform.turbo360-vector.com/launchtemplate'
@@ -764,6 +769,7 @@ router.post('/:action', function(req, res, next){
 			return
 		})
 		.catch(err => {
+			console.log('ERROR: ' + err)
 			res.json({
 				confirmation: 'fail',
 				message: err.message || err
