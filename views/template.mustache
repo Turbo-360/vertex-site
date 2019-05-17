@@ -214,8 +214,7 @@
 
     // checks if a template is ready when cloning:
     var checkTemplate = function(siteSlug){
-      var body = {template:siteSlug}
-      postRequest('/account/check-template', body, function(err, response){
+      postRequest('/account/check-template', {template:siteSlug}, function(err, response){
         if (err){
           console.log('TEMPLATE NOT READY: ')
           setTimeout(function(){
@@ -251,19 +250,18 @@
       }
 
       $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
-      console.log('LAUNCH TEMPLATE: ' + JSON.stringify(body))
+      // console.log('LAUNCH TEMPLATE: ' + JSON.stringify(body))
+      postRequest('/account/launch-template', body, function(err, response){
+        if (err){
+          alert('Error: ' + err.message)
+          return
+        }
 
-      // postRequest('/account/launch-template', body, function(err, response){
-      //   if (err){
-      //     alert('Error: ' + err.message)
-      //     return
-      //   }
-      //
-      //   // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
-      //   setTimeout(function(){
-      //     checkTemplate(response.data.slug)
-      //   }, 4000)
-      // })
+        console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+        setTimeout(function(){
+          checkTemplate(response.data.slug)
+        }, 4000)
+      })
     }
 
     var launchTemplateHandler = function(event){
