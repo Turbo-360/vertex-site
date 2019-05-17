@@ -212,6 +212,20 @@
       })
     }
 
+    var postRequest = function(url, params, completion){
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: params,
+        success: function(response){
+          completion(null, response)
+        },
+        error: function(response){
+          completion(response, null)
+        }
+      })
+    }
+
     // checks if a template is ready when cloning:
     var checkTemplate = function(siteSlug){
       postRequest('/account/check-template', {template:siteSlug}, function(err, response){
