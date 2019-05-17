@@ -194,7 +194,6 @@
     var currentTemplate = data.template
 
     var getRequest = function(url, data, completion){
-      console.log('GET: ' + url)
       $.ajax({
         url: url,
         type: 'GET',
@@ -231,7 +230,6 @@
           return
         }
 
-        // window.location.href = '/me?selected=sites' // redirect to account page
         window.location.href = '/admin/'+siteSlug // redirect to site admin page
       })
     }
@@ -326,7 +324,7 @@
         // $('#profile-bio').html(truncated)
 
         profile['bio'] = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
-        console.log('PROFILE: ' + JSON.stringify(profile))
+        // console.log('PROFILE: ' + JSON.stringify(profile))
         var tpl = $('#tpl-profile-sidebar').html()
         $('#profile-sidebar').html(Mustache.render(tpl, profile))
       })
@@ -341,10 +339,7 @@
     $('#launch-template-container').html(Mustache.render(tpl, currentTemplate.cloneSource))
   })()
 </script>
-
-{{#cdn}}
-{{>analytics}}
-{{/cdn}}
+{{#cdn}}{{>analytics}}{{/cdn}}
 
 </body>
 </html>
