@@ -93,7 +93,11 @@
   }
 
   .mobile-nav {
-    padding-left: 20px;
+    padding-left: 20px !important;
+  }
+
+  .mobile-container {
+    padding: 8px;
   }
 }
 
