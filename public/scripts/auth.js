@@ -1,5 +1,8 @@
 (function(){
   var data = window.__PRELOADED__
+  if (!data)
+    return
+
   var user = data.user
 
   var postRequest = function(url, data, completion){
