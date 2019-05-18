@@ -21,12 +21,12 @@ module.exports = {
 	convertToHtml: function(str){
 		var find = '\n'
 		var re = new RegExp(find, 'g')
-        var html = str.replace(re, '<br />')
+    var html = str.replace(re, '<br />')
 
-	 //    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
-		// html = html.replace(exp, "<a href='$1' target='_blank'>$1</a>")
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
+		html = html.replace(exp, "<a href='$1' target='_blank'>$1</a>")
 
-        return html
+    return html
 	},
 
 	stringToArray: function(str, separator){
@@ -72,7 +72,7 @@ module.exports = {
 
 		if (numRandomChars <= 0)
 			return slug.toLowerCase()
-		
+
 		var randomString = ''
 		var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 		for (var i=0; i <numRandomChars; i++)
