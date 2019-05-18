@@ -235,7 +235,7 @@ router.get('/post/:slug', (req, res) => {
 router.get('/comments/:slug', (req, res) => {
 	const data = {cdn: CDN}
 
-	controllers.comment.get({slug:req.params.slug, sort:'asc'})
+	controllers.comment.get({slug:req.params.slug})
 	.then(comments => {
 		if (comments.length == 0){
 			throw new Error('Comment '+req.params.slug+' not found.')
@@ -243,7 +243,7 @@ router.get('/comments/:slug', (req, res) => {
 		}
 
 		data['comment'] = comments[0]
-		return controllers.comment.get({thread:data.comment.id})
+		return controllers.comment.get({thread:data.comment.id, sort:'asc'})
 	})
 	.then(replies => {
 		data['replies'] = replies
