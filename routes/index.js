@@ -235,7 +235,7 @@ router.get('/post/:slug', (req, res) => {
 router.get('/comments/:slug', (req, res) => {
 	const data = {cdn: CDN}
 
-	controllers.comment.get({slug:req.params.slug})
+	controllers.comment.get({slug:req.params.slug, sort:'asc'})
 	.then(comments => {
 		if (comments.length == 0){
 			throw new Error('Comment '+req.params.slug+' not found.')

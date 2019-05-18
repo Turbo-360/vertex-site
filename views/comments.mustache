@@ -338,7 +338,7 @@
           }
 
           // console.log('REPLY CREATED: ' + JSON.stringify(response))
-          replies.unshift(response.result)
+          replies.push(response.result)
           var tpl = $('#tpl-reply').html()
           var repliesHtml = ''
           replies.forEach(function(reply){
