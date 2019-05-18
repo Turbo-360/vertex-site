@@ -85,6 +85,8 @@ module.exports = {
 			if (params.image == null)
 				params['image'] = process.env.IMAGE_PLACEHOLDER
 
+			params['text'] = utils.TextUtils.convertToHtml(params.text)
+
       Comment.create(params)
 			.then(comment => {
 				resolve(comment.summary())
