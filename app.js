@@ -88,6 +88,23 @@ app.use((req, res, next) => {
   })
 })
 
+const requireHTTPS = (req, res, next) => {
+  const host = req.get('host')
+  if (host.indexOf('localhost') != -1){
+    next()
+    return
+  }
+
+  // The 'x-forwarded-proto' check is for Heroku
+  if (!req.secure && req.get('x-forwarded-proto')!=='https' && process.env.NODE_ENV!=="development") {
+    return res.redirect('https://' + host + req.url)
+  }
+
+  next()
+}
+
+app.use(requireHTTPS)
+
 // import routes
 const index = require('./routes/index')
 const api = require('./routes/api')
