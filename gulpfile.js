@@ -66,7 +66,8 @@ gulp.task('vendor', function(){
                 './public/js/summernote.min.js',
                 './public/js/summernote-example.js',
                 './public/scripts/custom.js',
-                './public/scripts/auth.js'
+                './public/scripts/auth.js',
+                './public/scripts/ssl.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
