@@ -140,6 +140,15 @@
           $('#tab-register').click()
           document.getElementById('btn-show-modal').click()
         })
+
+        $('#btn-join-premium').click(function(event){
+          if (event)
+            event.preventDefault()
+
+          $('#tab-register').click()
+          document.getElementById('btn-show-premium-modal').click()
+        })
+
       }, 500)
       return
     }
