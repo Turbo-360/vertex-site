@@ -13,49 +13,49 @@
       <div class="tab-content" id="tab1" style="display: none;">
         <form method="post" class="login">
 
-          <p class="form-row form-row-wide">
-            <label for="username">Email:
-              <i class="im im-icon-Email"></i>
-              <input id="input-login-email" type="text" class="input-text" name="email" />
-            </label>
-          </p>
+          <div class="input-row">
+            <div class="input-label">Email</div>
+            <div class="input-container">
+              <input id="input-login-email" type="text" />
+            </div>
+          </div>
 
-          <p class="form-row form-row-wide">
-            <label for="password">Password:
-              <i class="im im-icon-Lock-2"></i>
-              <input id="input-login-password" class="input-text" type="password" />
-            </label>
-          </p>
+          <div class="input-row">
+            <div class="input-label">Password</div>
+            <div class="input-container">
+              <input id="input-login-password" type="text" />
+            </div>
+          </div>
 
-          <input id="input-login" type="submit" class="button border fw margin-top-10" name="login" value="Log In" />
+          <input id="input-login" style="width:100%" type="submit" class="button border fw margin-top-10 width-100" name="login" value="Log In" />
         </form>
       </div>
 
       <!-- Register -->
       <div class="tab-content" id="tab2" style="display: none;">
         <form method="post" class="register">
-          <p class="form-row form-row-wide">
-            <label for="username2">Full Name:
-              <i class="im im-icon-Male"></i>
-              <input id="input-register-name" type="text" class="input-text" />
-            </label>
-          </p>
+          <div class="input-row">
+            <div class="input-label">Name</div>
+            <div class="input-container">
+              <input id="input-register-name" placeholder="First and Last Name" type="text" />
+            </div>
+          </div>
 
-          <p class="form-row form-row-wide">
-            <label for="email2">Email Address:
-              <i class="im im-icon-Mail"></i>
-              <input id="input-register-email" type="text" class="input-text" />
-            </label>
-          </p>
+          <div class="input-row">
+            <div class="input-label">Email</div>
+            <div class="input-container">
+              <input id="input-register-email" placeholder="email@example.com" type="text" />
+            </div>
+          </div>
 
-          <p class="form-row form-row-wide">
-            <label for="password1">Password:
-              <i class="im im-icon-Lock-2"></i>
-              <input id="input-register-password" class="input-text" type="password" />
-            </label>
-          </p>
+          <div class="input-row">
+            <div class="input-label">Password</div>
+            <div class="input-container">
+              <input id="input-register-password" placeholder="***" type="password" />
+            </div>
+          </div>
 
-          <input id="input-register" type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+          <input style="width:100%" id="input-register" type="submit" class="button border fw margin-top-10" name="register" value="Register" />
         </form>
       </div>
     </div>
