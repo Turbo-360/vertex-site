@@ -129,6 +129,15 @@
   padding: 3px 3px 3px 8px;
 }
 
+.input-container select {
+  line-height: 14px;
+  max-width: 100%;
+  height: 36px;
+  border: none;
+  background: rgb(249, 249, 249);
+  padding: 3px 3px 3px 8px;
+}
+
 .input-container textarea {
   line-height: 24px;
   max-width: 100%;
