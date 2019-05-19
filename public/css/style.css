@@ -13189,6 +13189,7 @@ button.mfp-close {
 }
 
 #small-dialog .mfp-close,
+#premium-dialog, .mfp-close,
 #sign-in-dialog, .mfp-close,
 .mfp-close:hover {
 	color: #fff;
@@ -13197,6 +13198,7 @@ button.mfp-close {
 
 /* Popup close button*/
 #sign-in-dialog .mfp-close,
+#premium-dialog .mfp-close,
 #small-dialog .mfp-close {
 	color: #666;
 	background-color: #e4e4e4;
@@ -13208,6 +13210,7 @@ button.mfp-close {
 }
 
 #sign-in-dialog .mfp-close:hover,
+#premium-dialog .mfp-close:hover,
 #small-dialog .mfp-close:hover {
 	color: #fff;
 	transform: rotate(0);
@@ -13216,6 +13219,8 @@ button.mfp-close {
 
 #sign-in-dialog .mfp-close::after,
 #sign-in-dialog .mfp-close::before,
+#premium-dialog .mfp-close::after,
+#premium-dialog .mfp-close::before,
 #small-dialog .mfp-close::after,
 #small-dialog .mfp-close::before {
 	top: 4px;
@@ -13341,6 +13346,7 @@ button.mfp-close {
 
 /* Popup */
 #sign-in-dialog,
+#premium-dialog,
 #small-dialog {
 	background: #fff;
 	padding: 40px;
@@ -13353,7 +13359,7 @@ button.mfp-close {
 	border-radius: 4px;
 }
 
-
+#premium-dialog,
 #sign-in-dialog {
 	max-width: 500px;
 }
