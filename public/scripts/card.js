@@ -105,11 +105,10 @@
         type: 'POST',
         data: params,
         success: function(response){
-          alert('SUCCESS - ')
-
+          alert('SUCCESS - ' + JSON.stringify(response))
         },
-        error: function(){
-
+        error: function(request, err){
+          alert('ERROR - ' + JSON.stringify(request))
         }
       })
 
