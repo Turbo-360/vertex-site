@@ -64,7 +64,7 @@
 
 
 <div id="premium-dialog" class="zoom-anim-dialog mfp-hide" style="background:#fffffa">
-  <div class="small-dialog-header">
+  <div class="small-dialog-header text-center">
     <img style="max-width:180px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s360" />
   </div>
 
@@ -83,6 +83,40 @@
       </div>
     </div>
 
-    <input id="input-login" style="width:100%" type="submit" class="button border fw margin-top-10 width-100" name="login" value="Log In" />
+    <hr />
+    <div class="text-center margin-bottom-20">
+      <h4>Payment Info</h4>
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Street</div>
+      <div class="input-container">
+        <input type="text" />
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">City</div>
+      <div class="input-container">
+        <input type="text" />
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Country</div>
+      <div class="input-container">
+        <input type="text" />
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Card</div>
+      <div class="input-container">
+        <div id="card-element" style="width:100%;"></div>
+        <div id="card-errors" role="alert"></div>
+      </div>
+    </div>
+
+    <input id="input-register-premium" style="width:100%" type="submit" class="button border fw margin-top-20" value="Register" />
   </form>
 </div>
