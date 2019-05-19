@@ -103,7 +103,21 @@ gulp.task('community', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
-gulp.task('pages', ['home', 'community'], function(){})
+gulp.task('card', function(){
+    return gulp.src(
+            [
+                './public/scripts/card.js'
+            ]
+        )
+        .pipe(gp_concat('card.min.js'))
+        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gp_rename('card.min.js'))
+        .pipe(to5())
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/dist/js/'))
+});
+
+gulp.task('pages', ['home', 'community', 'card'], function(){})
 
 // copy public directory to CDN project:
 gulp.task('copy-public', function(){
