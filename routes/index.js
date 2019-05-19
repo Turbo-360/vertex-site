@@ -28,6 +28,7 @@ router.get('/', (req, res) => {
 		templates[selected] = sites
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
+			stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
 			selected: 'how it works',
