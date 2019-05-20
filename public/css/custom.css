@@ -158,7 +158,7 @@
 /* mobile fix */
 @media (min-width: 1025px) and (max-width: 1239px)  {
 	.right-side-loggedin {
-		width: 50%;
+		width: 53%;
 		display: inline-block;
 		position: relative;
 	}
