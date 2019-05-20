@@ -52,6 +52,7 @@
 
     					<button id="btn-create-post" class="button">Create Post</button>
               <button id="btn-update-post" class="button">Update Post</button>
+              <button id="btn-delete-post" class="button" style="background:red">Delete Post</button>
     				</form>
     			</div>
     		</div>
@@ -84,6 +85,7 @@
       }
       else {
         $('#btn-update-post').css('display', 'none')
+        $('#btn-delete-post').css('display', 'none')
       }
 
       $('#editor-container').html('<iframe src="'+wysiwyg+'"></iframe>')
@@ -185,6 +187,14 @@
             console.log('ERROR - '+err)
           }
         })
+      })
+
+      $('#btn-delete-post').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        confirm('Are you sure? This cannot be reversed.')
+
       })
 
     })()
