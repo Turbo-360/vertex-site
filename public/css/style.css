@@ -299,14 +299,15 @@ header.fullwidth .container {
 /* mobile fix */
 @media (min-width: 1025px) and (max-width: 1239px)  {
 	.right-side {
-		width: auto;
+		/* width: auto; */
+		width: 60%;
 		display: inline-block;
-		margin-top: -126px;
+		/* margin-top: -126px; */
 		position: relative;
 	}
 
 	.left-side {
-		width: 100%;
+		width: 35%;
 		display: inline-block;
 	}
 }
@@ -14594,9 +14595,10 @@ img.mfp-img {
 @media (max-width: 1239px) {
 
 	#navigation.style-1 {
-		margin: 25px 0 5px -5px;
-		width: 100%;
-		padding-top: 15px;
+		/* margin: 25px 0 5px -5px; */
+		margin: 0px 0 5px -5px;
+		width: 75%;
+		/* padding-top: 15px; */
 		padding-bottom: 0;
 		position: relative;
 	}

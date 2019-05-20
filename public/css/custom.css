@@ -54,7 +54,7 @@
 }
 
 .right-side-loggedin {
-  width: 44%;
+  width: 40%;
 }
 
 .footer-dark {
@@ -153,4 +153,18 @@
   max-width: 180px;
   line-height:18px;
   margin-bottom:0px !important;
+}
+
+/* mobile fix */
+@media (min-width: 1025px) and (max-width: 1239px)  {
+	.right-side-loggedin {
+		width: 50%;
+		display: inline-block;
+		position: relative;
+	}
+
+	.left-side {
+		width: 35%;
+		display: inline-block;
+	}
 }
