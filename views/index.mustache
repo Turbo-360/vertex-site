@@ -496,8 +496,7 @@
 
 			// this.setState({isLoading: false})
 			console.log('TOKEN: ' + JSON.stringify(result.token))
-			// {"id":"tok_1CqvUVC5b8QCRB75CopRXyHn","object":"token",
-			// "card":{"id":"card_1CqvUUC5b8QCRB75sGSv518b","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":"10003","address_zip_check":"unchecked","brand":"Visa","country":"US","cvc_check":"unchecked","dynamic_last4":null,"exp_month":3,"exp_year":2022,"funding":"debit","last4":"6856","metadata":{},"name":null,"tokenization_method":null},"client_ip":"74.71.60.50","created":1532319467,"livemode":false,"type":"card","used":false}
+      // TOKEN: {"id":"tok_1Ec1OwC5b8QCRB75s0gRulGY","object":"token","card":{"id":"card_1Ec1OvC5b8QCRB75VGbMWCWU","object":"card","address_city":"new york","address_country":"US","address_line1":"76 east 7th street","address_line1_check":"unchecked","address_line2":null,"address_state":null,"address_zip":"10003","address_zip_check":"unchecked","brand":"Visa","country":"US","cvc_check":"unchecked","dynamic_last4":null,"exp_month":3,"exp_year":2022,"funding":"debit","last4":"6856","metadata":{},"name":"denny kwon","tokenization_method":null},"client_ip":"173.73.93.73","created":1558319938,"email":"dennykwon2@gmail.com","livemode":true,"type":"card","used":false}
 
 			// Send the token to your server.
 			// this.props.submitCallback(result.token, visitor)
@@ -506,7 +505,7 @@
   			stripeToken: token.id,
   			email: token.email,
   			name: token.card.name,
-  			description: 'Vertex Pro Member'
+  			description: token.email+' - Vertex Pro Member'
   		}
 
       postRequest('/account/create-stripe-customer', params, function(err, response){
@@ -516,7 +515,7 @@
         }
 
         alert('SUCCESS - ' + JSON.stringify(response))
-        // TODO: create new profile
+        // TODO: create new profile with name, email, password
       })
 
 			return
