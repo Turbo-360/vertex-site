@@ -1716,7 +1716,7 @@ em.mm-counter+a.mm-fullsubopen+span {
 	#header-container.header-style-2 .header-widget { float: left; margin-top: 35px; margin-bottom: -5px }
 
 	.header-widget { text-align: left; }
-	#header { padding-bottom: 0; }
+	#header { padding-bottom: 20px; }
 
 	ul.top-bar-menu { z-index: 99; position: relative; }
 
