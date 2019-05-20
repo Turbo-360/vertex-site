@@ -56,10 +56,14 @@
     // 	address_country: visitor.address_country.trim()
     // }
 
+    if ($('#input-premium-password').val().length == 0){
+      alert('Please enter your PASSWORD')
+      return
+    }
+
     var visitor = {
       name: $('#input-premium-name').val(),
       email: $('#input-premium-email').val().trim(),
-      password: $('#input-premium-password').val(),
       address_line1: $('#input-address-street').val().trim(),
       address_city: $('#input-address-city').val().trim(),
       address_country: $('#input-address-country').val().trim()
@@ -76,11 +80,6 @@
     // 	return
     // }
 
-    if (visitor.password.length == 0){
-      alert('Please enter your PASSWORD')
-      return
-    }
-
     if (visitor.address_line1.length == 0){
       alert('Please enter your ADDRESS')
       return
@@ -91,12 +90,11 @@
       return
     }
 
-    stripe.createToken(card, visitor)
+    stripeMgr.createToken(card, visitor)
 		.then(result => {
 			if (result.error) { // Inform the user if there was an error.
 				const errorElement = document.getElementById('card-errors')
 				errorElement.textContent = result.error.message
-				// this.setState({isLoading: false})
 				return
 			}
 
@@ -124,19 +122,6 @@
         alert('SUCCESS - ' + JSON.stringify(response))
         // TODO: create new profile
       })
-
-      // $.ajax({
-      //   url: '/account/create-stripe-customer',
-      //   type: 'POST',
-      //   data: params,
-      //   success: function(response){
-      //     alert('SUCCESS - ' + JSON.stringify(response))
-      //     // TODO: create new profile
-      //   },
-      //   error: function(request, err){
-      //     alert('ERROR - ' + JSON.stringify(request))
-      //   }
-      // })
 
 			return
 		})
