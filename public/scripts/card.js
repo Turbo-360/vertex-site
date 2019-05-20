@@ -3,6 +3,20 @@
   if (data.stripe==null)
     return
 
+  var postRequest = function(url, params, completion){
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: params,
+      success: function(response){
+        completion(null, response)
+      },
+      error: function(response){
+        completion(response, null)
+      }
+    })
+  }
+
   var stripeStyle = {
     base: {
       color: '#32325d',
@@ -43,8 +57,9 @@
     // }
 
     var visitor = {
-      // name: $('#input-premium-email').val(),
+      name: $('#input-premium-name').val(),
       email: $('#input-premium-email').val().trim(),
+      password: $('#input-premium-password').val(),
       address_line1: $('#input-address-street').val().trim(),
       address_city: $('#input-address-city').val().trim(),
       address_country: $('#input-address-country').val().trim()
@@ -100,17 +115,28 @@
   			description: 'Vertex Pro Member'
   		}
 
-      $.ajax({
-        url: '/account/create-stripe-customer',
-        type: 'POST',
-        data: params,
-        success: function(response){
-          alert('SUCCESS - ' + JSON.stringify(response))
-        },
-        error: function(request, err){
-          alert('ERROR - ' + JSON.stringify(request))
+      postRequest('/account/create-stripe-customer', params, function(err, response){
+        if (err){
+          alert('ERROR - ' + err)
+          return
         }
+
+        alert('SUCCESS - ' + JSON.stringify(response))
+        // TODO: create new profile
       })
+
+      // $.ajax({
+      //   url: '/account/create-stripe-customer',
+      //   type: 'POST',
+      //   data: params,
+      //   success: function(response){
+      //     alert('SUCCESS - ' + JSON.stringify(response))
+      //     // TODO: create new profile
+      //   },
+      //   error: function(request, err){
+      //     alert('ERROR - ' + JSON.stringify(request))
+      //   }
+      // })
 
 			return
 		})
