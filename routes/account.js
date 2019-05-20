@@ -944,9 +944,7 @@ router.post('/:action', function(req, res, next){
 		}
 
 		console.log('create-stripe-customer: ' + JSON.stringify(params))
-		// create-stripe-customer: {"stripeToken":"tok_1DFDEBC5b8QCRB75JdFLN1Fs",
-		// "email":"dennykwon2@gmail.com","name":"denny kwon","firstName":"denny","lastName":"kwon",
-		// "username":"denny","confirmed":"yes"}
+		// create-stripe-customer: {"stripeToken":"tok_1Ec1OwC5b8QCRB75s0gRulGY","email":"dennykwon2@gmail.com","name":"denny kwon","description":"Vertex Pro Member","firstName":"denny","lastName":"kwon","username":"denny","confirmed":"yes"}
 
 		let customer = null
 		let card = null
@@ -956,7 +954,7 @@ router.post('/:action', function(req, res, next){
 			customer = data.customer
 			card = data.card
 			// const subject = (params.description==null) ? 'New PREMIUM Customer' : 'New Subscriber: '+params.description.toUpperCase()
-			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'CARD SUBMITTED', JSON.stringify(data))
+			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], params.description, JSON.stringify(data))
 		})
 		.then(data => {
 			res.json({
