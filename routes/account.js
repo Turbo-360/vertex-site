@@ -268,15 +268,15 @@ router.post('/:action', function(req, res, next){
 	// console.log('BODY: ' + JSON.stringify(req.body))
 	const params = req.body
 
-	if (params.name){ // parse name into firstName and lastName
-		const parts = params.name.split(' ')
-		params['firstName'] = parts[0]
-		if (parts.length > 1)
-			params['lastName'] = parts[parts.length-1]
-
-		params['username'] = params.firstName
-		params['confirmed'] = 'yes'
-	}
+	// if (params.name){ // parse name into firstName and lastName
+	// 	const parts = params.name.split(' ')
+	// 	params['firstName'] = parts[0]
+	// 	if (parts.length > 1)
+	// 		params['lastName'] = parts[parts.length-1]
+	//
+	// 	params['username'] = params.firstName
+	// 	params['confirmed'] = 'yes'
+	// }
 
 	if (action == 'currentuser'){
 		if (params.vertex_session == null){

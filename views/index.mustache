@@ -515,7 +515,7 @@
         }
 
         //create new profile with name, email, password
-        postRequest('/api/profile', {fullName:visitor.name, email:visitor.email, password:visitor.password, accountType:'pro'}, function(err2, response2){
+        postRequest('/account/register', {fullName:visitor.name, email:visitor.email, password:visitor.password, accountType:'pro'}, function(err2, response2){
           if (err2){
             alert('ERROR - ' + err2)
             return
