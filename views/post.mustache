@@ -43,6 +43,10 @@
     .post-content img {
       min-width: 320px;
     }
+
+    .post-text a {
+      color: red;
+    }
   </style>
 </head>
 
@@ -80,7 +84,7 @@
     					  <h4 class="margin-bottom-0 capitalize">{{post.author.firstName}} {{post.author.lastName}}</h4>
               </a>
     					<a href="/profile/{{post.author.slug}}">{{post.author.username}}</a>
-    					<p>{{{post.author.bio}}}</p>
+    					<p class="post-text">{{{post.author.bio}}}</p>
     				</div>
     			</div>
 
