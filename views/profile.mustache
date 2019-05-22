@@ -139,6 +139,20 @@
       font-weight: 600;
       color: #000;
     }
+
+    @media (min-width: 768px)  {
+      #profile-card {
+        position:fixed;
+        width:310px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      #profile-card {
+        position: inherit;
+        width: 100%
+      }
+    }
   </style>
 </head>
 
@@ -163,7 +177,7 @@
   	<div class="dashboard-content">
   		<div class="row">
 
-  			<div class="col-lg-8 col-md-8">
+  			<div class="col-lg-8 col-md-8 hidden-xs">
           <div class="dashboard-list-box margin-top-0">
     				<h4 id="selected-header">TEMPLATES</h4>
 
@@ -199,7 +213,7 @@
 
         <div class="col-lg-4 col-md-4">
           {{#profile}}
-          <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+          <div id="profile-card" class="dashboard-list-box margin-top-0">
             <h4 class="gray">Profile</h4>
             <div class="dashboard-list-box-static">
               <a href="/profile/{{profile.slug}}">
