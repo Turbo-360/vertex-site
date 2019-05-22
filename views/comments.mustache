@@ -138,14 +138,16 @@
   						<div class="message-content">
                 <div class="message-bubble margin-bottom-60">
   								<div class="message-avatar">
-                    <img style="width:44px;height:44px" src="{{{comment.profile.image}}}=s96-c" alt="" />
+                    <a href="/profile/{{comment.profile.slug}}">
+                      <img style="width:44px;height:44px" src="{{{comment.profile.image}}}=s96-c" alt="" />
+                    </a>
                   </div>
   								<div class="message-text margin-left-60">
                     <p class="comment-text">{{{comment.text}}}</p>
                     <hr />
                     <div style="text-align:right">
                       <small>submitted by
-                        <a class="text-blue" href="#">{{comment.profile.username}}</a>
+                        <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
                         <span style="margin:8px">·</span>{{dateString}}
                       </small>
                     </div>
