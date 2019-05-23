@@ -98,6 +98,13 @@
     .comment-text a {
       color: red
     }
+
+    @media (max-width: 768px) {
+      .message-text {
+        margin-left: 0px !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -136,8 +143,8 @@
 
   						<!-- Message Content -->
   						<div class="message-content">
-                <div class="message-bubble margin-bottom-60">
-  								<div class="message-avatar">
+                <div class="message-bubble margin-bottom-30">
+  								<div class="message-avatar hidden-xs">
                     <a href="/profile/{{comment.profile.slug}}">
                       <img style="width:44px;height:44px" src="{{{comment.profile.image}}}=s96-c" alt="" />
                     </a>
@@ -145,12 +152,21 @@
   								<div class="message-text margin-left-60">
                     <p class="comment-text">{{{comment.text}}}</p>
                     <hr />
-                    <div style="text-align:right">
+                    <div class="hidden-xs hidden-sm" style="text-align:right">
                       <small>submitted by
                         <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
                         <span style="margin:8px">·</span>{{dateString}}
                       </small>
                     </div>
+                  </div>
+                  <div class="hidden-md hidden-lg margin-top-10" style="text-align:right">
+                    <a href="/profile/{{comment.profile.slug}}">
+                      <img style="width:32px;height:32px;border-radius:50%" src="{{{comment.profile.image}}}=s96-c" alt="" />
+                    </a>
+                    <small>submitted by
+                      <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
+                      <span style="margin:8px">·</span>{{dateString}}
+                    </small>
                   </div>
   							</div>
 
