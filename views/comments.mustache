@@ -113,7 +113,6 @@
 <!-- Wrapper -->
 <div id="wrapper">
   {{>nav}}
-
   <div class="clearfix"></div>
 
   <div id="dashboard">
@@ -144,6 +143,14 @@
   						<!-- Message Content -->
   						<div class="message-content">
                 <div class="message-bubble margin-bottom-30">
+                  <div class="hidden-md hidden-lg margin-bottom-10">
+                    <a href="/profile/{{comment.profile.slug}}">
+                      <img style="width:32px;height:32px;border-radius:50%" src="{{{comment.profile.image}}}=s96-c" alt="" />
+                    </a>
+                    <small>submitted by
+                      <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
+                    </small>
+                  </div>
   								<div class="message-avatar hidden-xs">
                     <a href="/profile/{{comment.profile.slug}}">
                       <img style="width:44px;height:44px" src="{{{comment.profile.image}}}=s96-c" alt="" />
@@ -158,14 +165,6 @@
                         <span style="margin:8px">·</span>{{dateString}}
                       </small>
                     </div>
-                  </div>
-                  <div class="hidden-md hidden-lg margin-top-10" style="text-align:right">
-                    <a href="/profile/{{comment.profile.slug}}">
-                      <img style="width:32px;height:32px;border-radius:50%" src="{{{comment.profile.image}}}=s96-c" alt="" />
-                    </a>
-                    <small>submitted by
-                      <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
-                    </small>
                   </div>
   							</div>
 
