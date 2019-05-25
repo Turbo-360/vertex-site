@@ -87,10 +87,7 @@
     					<p>{{{post.author.bio}}}</p>
     				</div>
     			</div>
-
   			</div>
-
-        {{>newsletter}}
 
   			<!-- Related Posts -->
   			<div class="clearfix"></div>
@@ -213,10 +210,10 @@
         email: $('#input-newsletter-email').val()
       }
 
-      if (subscriber.name.length == 0){
-        alert('Please enter your NAME')
-        return
-      }
+      // if (subscriber.name.length == 0){
+      //   alert('Please enter your NAME')
+      //   return
+      // }
 
       if (subscriber.email.length == 0){
         alert('Please enter your EMAIL')
