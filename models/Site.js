@@ -33,7 +33,7 @@ const SiteSchema = new mongoose.Schema({
 	smtp: {type:mongoose.Schema.Types.Mixed, default:{}}, // DNS records for mailgun verification
 	stripe: {type:mongoose.Schema.Types.Mixed, default:{}}, // stripe API credentials
 	functions: {type:mongoose.Schema.Types.Mixed, default:{}}, // vectors
-	template: {type:mongoose.Schema.Types.Mixed, default:{category:'misc', status:'dev'}}, // template info for vertex360.co. status="published" means template is live for use in vertex360
+	template: {type:mongoose.Schema.Types.Mixed, default:{category:'misc', status:'dev', tutorial:'', video:''}}, // template info for vertex360.co. status="published" means template is live for use in vertex360
 	globalConfig: {type:mongoose.Schema.Types.Mixed, default:{}}, // global configuration for pages
 	pages: {type:Array, default:['home']}, // array of static pages
 	api: {type:mongoose.Schema.Types.Mixed, default:{key:'', secret:''}}, // api key and secret
