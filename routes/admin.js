@@ -61,6 +61,7 @@ router.get('/:slug', (req, res) => {
 
 		const reducers = {
 			user: {currentUser: currentUser},
+			query: req.query,
 			app: {
 				site_id: site.id,
 				apiKey: site.api.key,
