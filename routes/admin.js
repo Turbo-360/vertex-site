@@ -59,7 +59,10 @@ router.get('/:slug', (req, res) => {
 			stripeId: user.stripeId // this is why we fetch the raw profile
 		}
 
-		const selected = (req.query) ? req.query.selected : 'settings'
+		let selected = 'settings'
+		if (req.query)
+			selected = req.query.selected || 'settings'
+
 		const reducers = {
 			user: {currentUser: currentUser},
 			session: {selected: selected},
