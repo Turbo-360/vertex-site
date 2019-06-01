@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   {{>head}}
-  <meta property="og:title" content="Vertex 360 | {{event.name}}" />
+  <meta property="og:title" content="Meetup | {{event.name}}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://www.vertex360.co/event/{{event.slug}}" />
 	<meta property="og:image" content="{{{event.image}}}=s260-c" />
@@ -94,6 +94,13 @@
       			</div>
     			</div>
 
+          <!-- Related Posts -->
+    			<div class="clearfix"></div>
+          <hr />
+    			<h3 class="headline margin-top-25 margin-bottom-10">Launch Your Website</h3>
+          <p>Create fully-featured professional websites in minutes. Select a template below to get started.</p>
+    			<div id="featured-templates" class="row"></div>
+    			<div class="margin-top-50"></div>
     	  </div>
 
       	<!-- Widgets -->
@@ -179,6 +186,74 @@
 
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
 <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+<script>
+  (function(){
+    Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+    var data = window.__PRELOADED__
+    var getRequest = function(url, completion){
+      $.ajax({
+        url: url,
+        type: 'GET',
+        data: null,
+        success: function(response){
+          completion(null, response)
+        },
+        error: function(response){
+          completion(response, null)
+        }
+      })
+    }
+
+    getRequest('/api/site?template.status=live&format=vertex&limit=4', function(err, response){
+      if (response.confirmation != 'success'){
+        return
+      }
+
+      console.log('SITES: ' + JSON.stringify(response))
+      var sites = response.results
+      var tpl = $('#tpl-site-preview').html()
+      var sitesHtml = ''
+      sites.forEach(function(site){
+        sitesHtml += Mustache.render(tpl, site)
+      })
+
+      $('#featured-templates').html(sitesHtml)
+    })
+
+    $('#btn-newsletter-subscribe').click(function(event){
+      if (event)
+        event.preventDefault()
+
+      var subscriber = {
+//        name: $('#input-newsletter-name').val(),
+        email: $('#input-newsletter-email').val()
+      }
+
+      if (subscriber.email.length == 0){
+        alert('Please enter your EMAIL')
+        return
+      }
+
+      $.ajax({
+        url: '/account/mailchimp',
+        type: 'POST',
+        data: subscriber,
+        success: function(response){
+          if (response.confirmation != 'success'){
+            alert('Error - '+response.message)
+            return
+          }
+
+          alert('Thanks For Subscribing!')
+        },
+        error: function(err){
+          alert('Error - ' + err)
+        }
+      })
+    })
+
+  })()
+</script>
 
 {{#cdn}}{{>analytics}}{{/cdn}}
 </body>
