@@ -125,25 +125,19 @@
   <!-- Wrapper / End -->
 
 
-<script type="text/template" id="tpl-site-preview">
-  <li>
-  	<div class="widget-content">
-  		<div class="widget-thumb">
-  			<a href="/template/<% slug %>">
-          <img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" />
-        </a>
-  		</div>
-
-      <div class="widget-text" style="padding-top:6px">
-        <h5 class="preview-title">
-          <a href="/post/<% slug %>"><% name %></a>
-        </h5>
-  			<small><% template.category %></small>
-  		</div>
-  		<div class="clearfix"></div>
-  	</div>
-  </li>
-</script>
+  <script type="text/template" id="tpl-site-preview">
+    <div class="col-lg-6 col-md-6">
+      <a href="/template/<% slug %>" class="listing-item-container compact">
+        <div class="listing-item">
+          <img src="<%{image}%>=s1024-c" alt="Vertex 360">
+          <div class="listing-item-content">
+            <h3 style="line-height:22px;text-transform:capitalize"><% name %></h3>
+            <small style="color:#999;font-size:16px"><% template.category %></small>
+          </div>
+        </div>
+      </a>
+    </div>
+  </script>
 
 <script type="text/template" id="tpl-launch-template">
   <div style="text-align:center">
