@@ -7,6 +7,7 @@ var Event = new mongoose.Schema({
   description: {type:String, trim:true, default:''},
   dateString: {type:String, trim:true, default:''},
   date: {type:Date, default:Date.now},
+	location: {type:mongoose.Schema.Types.Mixed, default:{address:'', city:'', state:'', zip:'', lat:'', lng:''}},
 	timestamp: {type:Date, default:Date.now}
 })
 
@@ -18,6 +19,7 @@ Event.methods.summary = function() {
 		description: this.description,
     dateString: this.dateString,
 		date: this.date,
+		location: this.location,
 		timestamp: this.timestamp,
 		schema: 'event',
 		id: this._id.toString()
