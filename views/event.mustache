@@ -139,116 +139,77 @@
     </div>
   </script>
 
-<script type="text/template" id="tpl-launch-template">
-  <div style="text-align:center">
-    <h3 style="margin-bottom:0px;margin-top:0px">Launch Site</h3>
-    <p style="margin-bottom:16px;color:#888">Launch this template on your account.</p>
-    <img style="width:260px;margin-bottom:16px" src="<% image %>=s512" />
-    <input id="input-site-name" type="text" placeholder="Your Site Name" />
-    <div id="btn-launch-container">
-      <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-</script>
-
-<script type="text/template" id="tpl-profile-sidebar">
-  <div class="hosted-by-title" style="padding:0px">
-    <a href="/profile/<% slug %>">
-      <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="<%{image}%>=s120-c" alt="Vertex 360" />
-    </a>
-    <h4>
-      <span>Created by</span> <a style="text-transform:capitalize" href="/profile/<%slug%>"><%firstName%> <%lastName%></a>
-    </h4>
-  </div>
-
-  <p style="font-size:12px;line-height:18px"><% bio %></p>
-  <a style="width:100%;text-align:center" href="/profile/<% slug %>" class="send-message-to-owner button">View Full Profile</a>
-</script>
-
-<script type="text/template" id="tpl-clone-source">
-  <div style="min-height:120px">
-    <h2 class="margin-bottom-20 margin-top-0">Clone Source</h2>
-    <p>
-      This site was cloned from another template. To see the original
-      template and launch your own version, click the button below.
-    </p>
-  </div>
-
-  <hr />
-  <a href="/template/<% slug %>" class="button with-icon">View Original Site <i class="sl sl-icon-login"></i></a>
-</script>
-
-<script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
-<script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-<script>
-  (function(){
-    Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
-    var data = window.__PRELOADED__
-    var getRequest = function(url, completion){
-      $.ajax({
-        url: url,
-        type: 'GET',
-        data: null,
-        success: function(response){
-          completion(null, response)
-        },
-        error: function(response){
-          completion(response, null)
-        }
-      })
-    }
-
-    getRequest('/api/site?template.status=live&format=vertex&limit=4', function(err, response){
-      if (response.confirmation != 'success'){
-        return
-      }
-
-      console.log('SITES: ' + JSON.stringify(response))
-      var sites = response.results
-      var tpl = $('#tpl-site-preview').html()
-      var sitesHtml = ''
-      sites.forEach(function(site){
-        sitesHtml += Mustache.render(tpl, site)
-      })
-
-      $('#featured-templates').html(sitesHtml)
-    })
-
-    $('#btn-newsletter-subscribe').click(function(event){
-      if (event)
-        event.preventDefault()
-
-      var subscriber = {
-//        name: $('#input-newsletter-name').val(),
-        email: $('#input-newsletter-email').val()
-      }
-
-      if (subscriber.email.length == 0){
-        alert('Please enter your EMAIL')
-        return
-      }
-
-      $.ajax({
-        url: '/account/mailchimp',
-        type: 'POST',
-        data: subscriber,
-        success: function(response){
-          if (response.confirmation != 'success'){
-            alert('Error - '+response.message)
-            return
+  <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script>
+    (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+      var data = window.__PRELOADED__
+      var getRequest = function(url, completion){
+        $.ajax({
+          url: url,
+          type: 'GET',
+          data: null,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
           }
+        })
+      }
 
-          alert('Thanks For Subscribing!')
-        },
-        error: function(err){
-          alert('Error - ' + err)
+      getRequest('/api/site?template.status=live&format=vertex&limit=4', function(err, response){
+        if (response.confirmation != 'success'){
+          return
         }
+
+        console.log('SITES: ' + JSON.stringify(response))
+        var sites = response.results
+        var tpl = $('#tpl-site-preview').html()
+        var sitesHtml = ''
+        sites.forEach(function(site){
+          sitesHtml += Mustache.render(tpl, site)
+        })
+
+        $('#featured-templates').html(sitesHtml)
       })
-    })
 
-  })()
-</script>
+      $('#btn-newsletter-subscribe').click(function(event){
+        if (event)
+          event.preventDefault()
 
-{{#cdn}}{{>analytics}}{{/cdn}}
+        var subscriber = {
+  //        name: $('#input-newsletter-name').val(),
+          email: $('#input-newsletter-email').val()
+        }
+
+        if (subscriber.email.length == 0){
+          alert('Please enter your EMAIL')
+          return
+        }
+
+        $.ajax({
+          url: '/account/mailchimp',
+          type: 'POST',
+          data: subscriber,
+          success: function(response){
+            if (response.confirmation != 'success'){
+              alert('Error - '+response.message)
+              return
+            }
+
+            alert('Thanks For Subscribing!')
+          },
+          error: function(err){
+            alert('Error - ' + err)
+          }
+        })
+      })
+
+    })()
+  </script>
+
+  {{#cdn}}{{>analytics}}{{/cdn}}
 </body>
 </html>
