@@ -7,7 +7,7 @@ var Event = new mongoose.Schema({
   description: {type:String, trim:true, default:''},
   dateString: {type:String, trim:true, default:''},
   date: {type:Date, default:Date.now},
-	location: {type:mongoose.Schema.Types.Mixed, default:{address:'', city:'', state:'', zip:'', lat:'', lng:''}},
+	location: {type:mongoose.Schema.Types.Mixed, default:{venue:'', address:'', city:'', state:'', zip:'', lat:'', lng:''}},
 	timestamp: {type:Date, default:Date.now}
 })
 
