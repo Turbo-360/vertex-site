@@ -273,7 +273,6 @@ router.get('/comments/:slug', (req, res) => {
 			message: err.message
 		})
 	})
-
 })
 
 router.get('/profile/:slug', (req, res) => {
@@ -310,6 +309,35 @@ router.get('/profile/:slug', (req, res) => {
 		})
 
 		res.render('profile', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+router.get('/event/:slug', (req, res) => {
+	const data = {cdn: CDN}
+
+	controllers.event.get({slug:req.params.slug})
+	.then(events => {
+		if (events.length == 0){
+			throw new Error('Event '+req.params.slug+' not found.')
+			return
+		}
+
+		data['event'] = events[0]
+		data['profile'] = req.user
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user
+			// comment: data.comment,
+			// replies: data.replies
+		})
+
+		res.render('event', data)
 	})
 	.catch(err => {
 		res.json({

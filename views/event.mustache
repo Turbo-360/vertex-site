@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<head>
+  {{>head}}
+  <meta property="og:title" content="Vertex 360 | {{event.name}}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://www.vertex360.co/event/{{event.slug}}" />
+	<meta property="og:image" content="{{{event.image}}}=s260-c" />
+	<meta property="og:image:width" content="260px" />
+	<meta property="og:image:height" content="260px" />
+	<meta property="og:description" content="{{event.preview}}" />
+
+  <style>
+    .template-details {
+      text-align: right
+    }
+
+    .template-details img {
+      width: 32px;
+      border-radius: 50%;
+      margin-left: 4px;
+    }
+
+    .btn-edit {
+      text-transform: uppercase;
+      font-size: 9.7px;
+      letter-spacing: 2.5px;
+      font-weight: 60;
+      background: #f91942;
+      border-radius: 24px;
+      padding: 8px 12px;
+      line-height: 20px;
+      color: #fff !important;
+      font-weight: 400;
+      margin-bottom: 9px;
+    }
+
+    @media (min-width: 768px) {
+      .post-container {
+        padding-top: 120px
+      }
+
+      .lg-pt-40 {
+        padding-top: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .post-content {
+        padding: 16px !important;
+      }
+    }
+
+    #launch-template-container a {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      border-radius: 6px;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper" style="background:#f9f9f9">
+    {{>nav}}
+    <div class="clearfix"></div>
+    <div class="container lg-pt-40">
+      <div class="row post-container">
+    		<div class="col-lg-9 col-md-8 padding-right-30">
+    			<div class="blog-post single-post">
+
+    				<div class="post-content">
+              <a style="float:right;font-weight:600" target="_blank" href="https://{{template.slug}}.vertex360.co" class="btn-edit margin-top-20">View Example</a>
+              <h1 style="font-size:32px">{{event.name}}</h1>
+              <ul class="post-meta">
+    						<li style="text-transform:capitalize">{{event.dateString}}</li>
+    						<li><a style="color:#37b6bd" href="/profile/{{template.profile.slug}}">{{template.profile.username}}</a></li>
+    					</ul>
+              <hr class="margin-top-20 margin-bottom-30" />
+              <img style="max-width:60%" class="post-img" src="{{{event.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
+    					<p>{{{event.description}}}</p>
+    				</div>
+
+            <!-- About Author -->
+      			<div id="launch-template-container" class="about-author" style="margin:0px;border-top:1px solid #ededed;border-bottom:1px solid #ededed;background:#fffffa">
+      				<div style="min-height:120px">
+                <h2 class="margin-bottom-20 margin-top-0">Launch This Site</h2>
+      					<p>To launch your own version of this template and create a website with your site information, details, images and more, click the button below.</p>
+      				</div>
+
+              <hr />
+              <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
+      			</div>
+    			</div>
+
+    	  </div>
+
+      	<!-- Widgets -->
+      	<div class="col-lg-3 col-md-4">
+      		<div class="sidebar right">
+            <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
+
+      			<div class="widget margin-top-40">
+      				<h3>Featured Templates</h3>
+      				<ul id="related-sites" class="widget-tabs"></ul>
+      			</div>
+      		</div>
+      	</div>
+    	</div>
+    	<!-- Sidebar / End -->
+
+    </div>
+
+    {{>footer-dark}}
+    <a style="display:none" id="btn-show-modal" href="#sign-in-dialog" class="popup-with-zoom-anim">test</a>
+  </div>
+  <!-- Wrapper / End -->
+
+
+<script type="text/template" id="tpl-site-preview">
+  <li>
+  	<div class="widget-content">
+  		<div class="widget-thumb">
+  			<a href="/template/<% slug %>">
+          <img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" />
+        </a>
+  		</div>
+
+      <div class="widget-text" style="padding-top:6px">
+        <h5 class="preview-title">
+          <a href="/post/<% slug %>"><% name %></a>
+        </h5>
+  			<small><% template.category %></small>
+  		</div>
+  		<div class="clearfix"></div>
+  	</div>
+  </li>
+</script>
+
+<script type="text/template" id="tpl-launch-template">
+  <div style="text-align:center">
+    <h3 style="margin-bottom:0px;margin-top:0px">Launch Site</h3>
+    <p style="margin-bottom:16px;color:#888">Launch this template on your account.</p>
+    <img style="width:260px;margin-bottom:16px" src="<% image %>=s512" />
+    <input id="input-site-name" type="text" placeholder="Your Site Name" />
+    <div id="btn-launch-container">
+      <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="tpl-profile-sidebar">
+  <div class="hosted-by-title" style="padding:0px">
+    <a href="/profile/<% slug %>">
+      <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="<%{image}%>=s120-c" alt="Vertex 360" />
+    </a>
+    <h4>
+      <span>Created by</span> <a style="text-transform:capitalize" href="/profile/<%slug%>"><%firstName%> <%lastName%></a>
+    </h4>
+  </div>
+
+  <p style="font-size:12px;line-height:18px"><% bio %></p>
+  <a style="width:100%;text-align:center" href="/profile/<% slug %>" class="send-message-to-owner button">View Full Profile</a>
+</script>
+
+<script type="text/template" id="tpl-clone-source">
+  <div style="min-height:120px">
+    <h2 class="margin-bottom-20 margin-top-0">Clone Source</h2>
+    <p>
+      This site was cloned from another template. To see the original
+      template and launch your own version, click the button below.
+    </p>
+  </div>
+
+  <hr />
+  <a href="/template/<% slug %>" class="button with-icon">View Original Site <i class="sl sl-icon-login"></i></a>
+</script>
+
+<script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+<script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+
+{{#cdn}}{{>analytics}}{{/cdn}}
+</body>
+</html>
