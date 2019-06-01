@@ -85,12 +85,28 @@
             <!-- About Author -->
       			<div id="launch-template-container" class="about-author" style="margin:0px;border-top:1px solid #ededed;border-bottom:1px solid #ededed;background:#fffffa">
       				<div style="min-height:120px">
-                <h2 class="margin-bottom-20 margin-top-0">Launch This Site</h2>
+                <h2 class="margin-bottom-20 margin-top-0">RSVP</h2>
       					<p>To launch your own version of this template and create a website with your site information, details, images and more, click the button below.</p>
+
+                <form method="post" class="login margin-top-40">
+                  <div class="input-row">
+                    <div class="input-label">Name</div>
+                    <div class="input-container">
+                      <input id="input-rsvp-name" type="text">
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div class="input-label">Email</div>
+                    <div class="input-container">
+                      <input id="input-rsvp-email" type="text">
+                    </div>
+                  </div>
+                </form>
       				</div>
 
               <hr />
-              <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
+              <a id="btn-attend-event" href="#" class="button with-icon">Attend This Event <i class="sl sl-icon-login"></i></a>
       			</div>
     			</div>
 
@@ -173,6 +189,33 @@
         })
 
         $('#featured-templates').html(sitesHtml)
+      })
+
+      $('#btn-attend-event').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        var attendee = {
+          name: $('#input-rsvp-name').val(),
+          email: $('#input-rsvp-email').val()
+        }
+
+        if (attendee.name.length==0){
+          alert('Please enter your NAME')
+          return
+        }
+
+        if (attendee.email.length==0){
+          alert('Please enter your EMAIL')
+          return
+        }
+
+        // TODO: create attendee object or add to list in Event in DB
+        getRequest('/api/site?limit=1', function(err, response){
+          console.log('CONFIRMATION: ' + JSON.stringify(response))
+          alert('Thanks! Check your email for confirmation.')
+          window.location.href = '/'
+        })
       })
 
       $('#btn-newsletter-subscribe').click(function(event){
