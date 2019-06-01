@@ -48,29 +48,6 @@ router.get('/', (req, res) => {
 	})
 })
 
-router.get('/blog', (req, res) => {
-	const data = {
-		cdn: CDN
-	}
-
-	controllers.post.get({limit:10})
-	.then(posts => {
-		data['posts'] = posts
-		data['preloaded'] = JSON.stringify({
-			query: req.query,
-			user: req.user
-		})
-
-		res.render('blog', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
 router.get('/community', (req, res) => {
 	const data = {
 		cdn: CDN,
