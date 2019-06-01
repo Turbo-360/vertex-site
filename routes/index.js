@@ -122,7 +122,39 @@ router.get('/submitpost', (req, res) => {
 			message: 'Post '+req.query.id+' not found'
 		})
 	})
+})
 
+router.get('/submitevent', (req, res) => {
+	const data = {
+		cdn: CDN
+	}
+
+	if (req.query.id == null){
+		data['preloaded'] = JSON.stringify({
+			query: req.query,
+			user: req.user,
+			post: null
+		})
+
+		res.render('submitevent', data)
+	}
+
+	// controllers.post.getById(req.query.id)
+	// .then(post => {
+	// 	data['preloaded'] = JSON.stringify({
+	// 		query: req.query,
+	// 		user: req.user,
+	// 		post: post
+	// 	})
+	//
+	// 	res.render('submitpost', data)
+	// })
+	// .catch(err => {
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: 'Post '+req.query.id+' not found'
+	// 	})
+	// })
 })
 
 router.get('/templates', (req, res) => {
