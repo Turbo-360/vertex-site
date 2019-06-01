@@ -1,4 +1,5 @@
 var Event = require('../models/Event')
+var cheerio = require('cheerio')
 var moment = require('moment')
 var utils = require('../utils')
 
