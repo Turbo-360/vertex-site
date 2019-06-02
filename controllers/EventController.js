@@ -100,7 +100,7 @@ module.exports = {
 			}
 
 			var date = new Date(params.date)
-			params['dateString'] = moment(date).format('MMMM Do, YYYY')
+			params['dateString'] = moment(date).format('MMMM Do, YYYY @ hh:mm a')
 			if (params.name != null)
 				params['slug'] = slugVersion(params.name, 6)
 
