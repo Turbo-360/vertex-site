@@ -79,8 +79,13 @@
               <hr class="margin-top-20 margin-bottom-30" />
               <img style="max-width:60%" class="post-img" src="{{{event.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
     					{{{event.description}}}
-              <h4>When</h4>
-              <p>{{event.dateString}}<br />{{event.location.address}}</p>
+              <h3>When & Where</h3>
+              <p>
+                <strong>{{event.dateString}}</strong><br />
+                <strong>{{event.location.venue}}</strong><br />
+                <strong>{{event.location.address}}</strong><br />
+                <strong>{{event.location.city}}</strong>
+              </p>
     				</div>
 
             <!-- About Author -->
