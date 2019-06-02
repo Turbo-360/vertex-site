@@ -75,11 +75,12 @@
               <h1 style="font-size:32px">{{event.name}}</h1>
               <ul class="post-meta">
     						<li style="text-transform:capitalize">{{event.dateString}}</li>
-    						<li><a style="color:#37b6bd" href="/profile/{{template.profile.slug}}">{{template.profile.username}}</a></li>
     					</ul>
               <hr class="margin-top-20 margin-bottom-30" />
               <img style="max-width:60%" class="post-img" src="{{{event.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
-    					<p>{{{event.description}}}</p>
+    					{{{event.description}}}
+              <h4>When</h4>
+              <p>{{dateString}}<br />{{location.address}}</p>
     				</div>
 
             <!-- About Author -->
