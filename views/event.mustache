@@ -58,6 +58,12 @@
       border-radius: 6px;
       color: #fff;
     }
+
+    .details {
+      color: red;
+      font-weight: 600;
+      font-size: 20px;
+    }
   </style>
 </head>
 
@@ -81,10 +87,10 @@
     					{{{event.description}}}
               <h3>When & Where</h3>
               <p>
-                <strong>{{event.dateString}}</strong><br />
-                <strong>{{event.location.venue}}</strong><br />
-                <strong>{{event.location.address}}</strong><br />
-                <strong>{{event.location.city}}</strong>
+                <strong class="details">{{event.dateString}}</strong><br />
+                <strong class="details">{{event.location.venue}}</strong><br />
+                <strong class="details">{{event.location.address}}</strong><br />
+                <strong class="details">{{event.location.city}}</strong>
               </p>
     				</div>
 
