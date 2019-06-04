@@ -85,20 +85,19 @@
               <hr class="margin-top-20 margin-bottom-30" />
               <img style="max-width:60%" class="post-img" src="{{{event.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
     					{{{event.description}}}
-              <h3>When & Where</h3>
-              <p>
-                <strong class="details">{{event.dateString}}</strong><br />
-                <strong class="details">{{event.location.venue}}</strong><br />
-                <strong class="details">{{event.location.address}}</strong><br />
-                <strong class="details">{{event.location.city}}, {{event.location.state}}</strong>
-              </p>
     				</div>
 
             <!-- About Author -->
       			<div id="launch-template-container" class="about-author" style="margin:0px;border-top:1px solid #ededed;border-bottom:1px solid #ededed;background:#fffffa">
       				<div style="min-height:120px">
                 <h2 class="margin-bottom-20 margin-top-0">RSVP</h2>
-      					<p>To launch your own version of this template and create a website with your site information, details, images and more, click the button below.</p>
+                <p>
+                  <strong class="details">{{event.dateString}}</strong><br />
+                  <strong class="details">{{event.location.venue}}</strong><br />
+                  <strong class="details">{{event.location.address}}</strong><br />
+                  <strong class="details">{{event.location.city}}, {{event.location.state}}</strong>
+                </p>
+      					<p>To attend this event, complete the form below:</p>
 
                 <form method="post" class="login margin-top-40">
                   <div class="input-row">
