@@ -19,7 +19,7 @@ const createCollection = (collectionName, appSlug) => {
 
 	utils.AWS.uploadUrl(params, VERTEX_BUCKET)
 	.then(data => {
-		console.log('UPLOAD URL: ' + JSON.stringify(data))
+		// console.log('UPLOAD URL: ' + JSON.stringify(data))
 		return utils.HTTP.put(data.upload, '', {'Content-Type':'text/plain'}) // create empty collection
 	})
 	.then(data => {
@@ -45,9 +45,9 @@ const checkCollection = (appSlug, collectionName) => {
 	})
 	.catch(err => {
 		if (err.status>=400 && err.status<=500){
-			// TODO: create new store file for collection, then upload to bucket.
+			// console.log(err.status)
+			// create new store file for collection, then upload to bucket.
 			createCollection(collectionName, appSlug)
-			console.log(err.status)
 		}
 	})
 }
