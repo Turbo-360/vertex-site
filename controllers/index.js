@@ -4,6 +4,7 @@ const BlobController = require('./BlobController')
 const PostController = require('./PostController')
 const CommentController = require('./CommentController')
 const EventController = require('./EventController')
+const TicketController = require('./TicketController')
 
 module.exports = {
 
@@ -12,6 +13,7 @@ module.exports = {
 	blob: BlobController,
 	post: PostController,
 	comment: CommentController,
-	event: EventController
+	event: EventController,
+	ticket: TicketController
 
 }
