@@ -10,6 +10,32 @@ const sessions = require('client-sessions')
 
 const VERTEX_BUCKET = 'turbo360-vertex'
 
+const addToMailchimp = (body) => {
+	return new Promise((resolve, reject) => {
+		const parts = body.name.split(' ')
+		const firstName = parts[0]
+		const lastName = (parts.length > 1) ? parts[parts.length-1] : ''
+		const subscriber = {
+				email_address: body.email.toLowerCase().trim(),
+		    status: 'subscribed',
+		    merge_fields: {
+		        FNAME: firstName.trim(),
+		        LNAME: lastName.trim()
+		    }
+		}
+
+		const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
+		const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
+		utils.HTTP.post(endpoint, subscriber, {'Authorization': basic})
+		.then(data => {
+			resolve(data)
+		})
+		.catch(err => {
+			reject(err)
+		})
+	})
+}
+
 router.get('/:action', function(req, res, next){
 	const action = req.params.action
 
@@ -476,6 +502,9 @@ router.post('/:action', function(req, res, next){
 	if (action == 'rsvp'){
 		controllers.ticket.post(req.body)
 		.then(data => {
+			return addToMailchimp(req.body)
+		})
+		.then(data => {
 			res.json({
 				confirmation: 'success',
 				data: data
@@ -510,22 +539,24 @@ router.post('/:action', function(req, res, next){
 			return
 		}
 
-		const parts = body.name.split(' ')
-		const firstName = parts[0]
-		const lastName = (parts.length > 1) ? parts[parts.length-1] : ''
-		const subscriber = {
-				email_address: body.email.toLowerCase().trim(),
-		    status: 'subscribed',
-		    merge_fields: {
-		        FNAME: firstName.trim(),
-		        LNAME: lastName.trim()
-		    }
-		}
+		// const parts = body.name.split(' ')
+		// const firstName = parts[0]
+		// const lastName = (parts.length > 1) ? parts[parts.length-1] : ''
+		// const subscriber = {
+		// 		email_address: body.email.toLowerCase().trim(),
+		//     status: 'subscribed',
+		//     merge_fields: {
+		//         FNAME: firstName.trim(),
+		//         LNAME: lastName.trim()
+		//     }
+		// }
+		//
+		// const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
+		// const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
+		// const headers = {'Authorization': basic}
+		// utils.HTTP.post(endpoint, subscriber, headers)
 
-		const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
-		const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
-		const headers = {'Authorization': basic}
-		utils.HTTP.post(endpoint, subscriber, headers)
+		addToMailchimp(body)
 		.then(data => {
 			res.json({
 				confirmation: 'success',
