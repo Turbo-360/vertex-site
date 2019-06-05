@@ -186,7 +186,7 @@ router.get('/templates', (req, res) => {
 			}
 		})
 
-		res.render('index', data)
+		res.render('templates', data)
 	})
 	.catch(err => {
 		res.json({
