@@ -179,7 +179,7 @@ router.get('/templates', (req, res) => {
 			stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
-			selected: 'how it works',
+			selected: sites[0],
 			templates: sites,
 			static: {
 				faq: require('../public/static/faq.json')
