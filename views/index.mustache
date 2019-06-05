@@ -88,9 +88,8 @@
 
   								<div class="listing-item-inner" style="padding-right:0px;left:20px">
   									<h3>{{name}}</h3>
-  									<span>{{template.category}}</span>
+                    {{#tags}}<span class="template-tag">{{.}}</span>{{/tags}}
                     <div class="profile-row">
-                      {{#tags}}<span class="template-tag">{{.}}</span>{{/tags}}
   									</div>
   								</div>
 
