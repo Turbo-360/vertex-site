@@ -133,10 +133,8 @@
       	<!-- Widgets -->
       	<div class="col-lg-3 col-md-4">
       		<div class="sidebar right">
-            <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
-
-      			<div class="widget margin-top-40">
-      				<h3>Featured Templates</h3>
+      			<div class="widget margin-top-20">
+      				<h3>Recent Posts</h3>
       				<ul id="related-sites" class="widget-tabs"></ul>
       			</div>
       		</div>
@@ -186,6 +184,20 @@
         })
       }
 
+      var postRequest = function(url, params, completion){
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: params,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
+          }
+        })
+      }
+
       getRequest('/api/site?template.status=live&format=vertex&limit=4', function(err, response){
         if (response.confirmation != 'success'){
           return
@@ -221,12 +233,21 @@
           return
         }
 
+        attendee['event'] = JSON.stringify(data.event)
+        console.log('TICKET == ' + JSON.stringify(attendee))
+
         // TODO: create attendee object or add to list in Event in DB
-        getRequest('/api/site?limit=1', function(err, response){
-          console.log('CONFIRMATION: ' + JSON.stringify(response))
-          alert('Thanks! Check your email for confirmation.')
-          window.location.href = '/'
-        })
+        // getRequest('/api/site?limit=1', function(err, response){
+        //   console.log('CONFIRMATION: ' + JSON.stringify(response))
+        //   alert('Thanks! Check your email for confirmation.')
+        //   window.location.href = '/'
+        // })
+
+        // postRequest('/api/ticket', attendee, function(err, response){
+        //   console.log('CONFIRMATION: ' + JSON.stringify(response))
+        //   alert('Thanks! Check your email for confirmation.')
+        //   window.location.href = '/'
+        // })
       })
 
       $('#btn-newsletter-subscribe').click(function(event){
