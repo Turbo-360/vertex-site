@@ -203,7 +203,7 @@
           return
         }
 
-        console.log('SITES: ' + JSON.stringify(response))
+        // console.log('SITES: ' + JSON.stringify(response))
         var sites = response.results
         var tpl = $('#tpl-site-preview').html()
         var sitesHtml = ''
@@ -233,7 +233,14 @@
           return
         }
 
-        attendee['event'] = JSON.stringify(data.event)
+        attendee['event'] = JSON.stringify({
+          id: data.event.id,
+          name: data.event.name,
+          slug: data.event.slug,
+          image: data.event.image,
+          location: data.event.location
+        })
+
         console.log('TICKET == ' + JSON.stringify(attendee))
 
         // TODO: create attendee object or add to list in Event in DB
@@ -243,11 +250,11 @@
         //   window.location.href = '/'
         // })
 
-        // postRequest('/api/ticket', attendee, function(err, response){
-        //   console.log('CONFIRMATION: ' + JSON.stringify(response))
-        //   alert('Thanks! Check your email for confirmation.')
-        //   window.location.href = '/'
-        // })
+        postRequest('/api/ticket', attendee, function(err, response){
+          console.log('CONFIRMATION: ' + JSON.stringify(response))
+          alert('Thanks! Check your email for confirmation.')
+          window.location.href = '/'
+        })
       })
 
       $('#btn-newsletter-subscribe').click(function(event){

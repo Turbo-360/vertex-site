@@ -98,6 +98,16 @@ module.exports = {
 			// if (params.description != null)
 			// 	params['preview'] = scrapePreview(params.description, 200)
 
+			// from AJAX call, this comes in stringified
+			if (params.event != null){
+				try {
+					params['event'] = JSON.parse(params.event)
+				}
+				catch(err){
+
+				}
+			}
+
 			Ticket.create(params, function(err, ticket){
 				if (err){
 					reject(err)
