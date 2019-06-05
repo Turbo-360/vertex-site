@@ -241,17 +241,9 @@
           location: data.event.location
         })
 
-        console.log('TICKET == ' + JSON.stringify(attendee))
-
-        // TODO: create attendee object or add to list in Event in DB
-        // getRequest('/api/site?limit=1', function(err, response){
-        //   console.log('CONFIRMATION: ' + JSON.stringify(response))
-        //   alert('Thanks! Check your email for confirmation.')
-        //   window.location.href = '/'
-        // })
-
+        // create attendee object or add to list in Event in DB
         postRequest('/api/ticket', attendee, function(err, response){
-          console.log('CONFIRMATION: ' + JSON.stringify(response))
+          // console.log('CONFIRMATION: ' + JSON.stringify(response))
           alert('Thanks! Check your email for confirmation.')
           window.location.href = '/'
         })
