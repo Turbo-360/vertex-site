@@ -472,6 +472,26 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
+	// attend event:
+	if (action == 'rsvp'){
+		controllers.ticket.post(req.body)
+		.then(data => {
+			res.json({
+				confirmation: 'success',
+				data: data
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
+		return
+	}
+
+
 	if (action == 'mailchimp'){ // subscribe to Mailchimp mailing list
 		const body = req.body
 		if (body.email == null){
