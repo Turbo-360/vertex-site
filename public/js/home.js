@@ -164,6 +164,14 @@
         document.getElementById('btn-show-modal').click()
       })
 
+      $('#btn-launch-template-2').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        $('#tab-register').click()
+        document.getElementById('btn-show-modal').click()
+      })
+
       return
     }
 
