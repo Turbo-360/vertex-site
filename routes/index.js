@@ -159,20 +159,34 @@ router.get('/submitevent', (req, res) => {
 })
 
 router.get('/templates', (req, res) => {
-	const data = {cdn: CDN}
-	controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
+	const selected = categories[0]
+	const data = {
+		categories: categories,
+		cdn: CDN
+	}
+
+	controllers.site.get({'template.status':'live', format:'vertex'})
 	.then(sites => {
 		sites.forEach((site, i) => {
-			site['description'] = utils.TextUtils.truncateText(site.description, 26)
+			site['index'] = i
+			site['tags'] = site.tags.slice(0, 3) // use only first 3
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
 		})
 
+		templates[selected] = sites
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
+			stripe: process.env.STRIPE_PK_LIVE,
+			query: req.query,
 			user: req.user,
-			templates: sites
+			selected: 'how it works',
+			templates: sites,
+			static: {
+				faq: require('../public/static/faq.json')
+			}
 		})
 
-		res.render('templates', data)
+		res.render('index', data)
 	})
 	.catch(err => {
 		res.json({
