@@ -347,7 +347,8 @@ router.get('/event/:slug', (req, res) => {
 		data['profile'] = req.user
 		data['preloaded'] = JSON.stringify({
 			query: req.query,
-			user: req.user
+			user: req.user,
+			event: data.event
 			// comment: data.comment,
 			// replies: data.replies
 		})
