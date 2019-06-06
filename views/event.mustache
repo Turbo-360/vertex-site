@@ -131,10 +131,12 @@
     	  </div>
 
       	<!-- Widgets -->
-      	<div class="col-lg-3 col-md-4">
+        <div class="col-lg-3 col-md-4">
       		<div class="sidebar right">
-      			<div class="widget margin-top-20">
-      				<h3>Recent Posts</h3>
+            <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
+
+      			<div class="widget margin-top-40">
+      				<h3>Featured Templates</h3>
       				<ul id="related-sites" class="widget-tabs"></ul>
       			</div>
       		</div>
@@ -162,6 +164,26 @@
         </div>
       </a>
     </div>
+  </script>
+
+  <script type="text/template" id="tpl-site-sidebar">
+    <li>
+    	<div class="widget-content">
+    		<div class="widget-thumb">
+    			<a href="/template/<% slug %>">
+            <img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" />
+          </a>
+    		</div>
+
+        <div class="widget-text" style="padding-top:6px">
+          <h5 class="preview-title">
+            <a href="/post/<% slug %>"><% name %></a>
+          </h5>
+    			<small><% template.category %></small>
+    		</div>
+    		<div class="clearfix"></div>
+    	</div>
+    </li>
   </script>
 
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
@@ -206,12 +228,17 @@
         // console.log('SITES: ' + JSON.stringify(response))
         var sites = response.results
         var tpl = $('#tpl-site-preview').html()
+        var tplSidebar = $('#tpl-site-sidebar').html()
+
         var sitesHtml = ''
+        var sidebarHtml = ''
         sites.forEach(function(site){
           sitesHtml += Mustache.render(tpl, site)
+          sidebarHtml += Mustache.render(tplSidebar, site)
         })
 
         $('#featured-templates').html(sitesHtml)
+        $('#related-sites').html(sidebarHtml)
       })
 
       $('#btn-attend-event').click(function(event){
