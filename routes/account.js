@@ -24,13 +24,15 @@ const addToMailchimp = (body) => {
 		    }
 		}
 
+		// console.log('Subscriber: ' + JSON.stringify(subscriber))
 		const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
 		const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
 		utils.HTTP.post(endpoint, subscriber, {'Authorization': basic})
 		.then(data => {
-			resolve(data)
+			resolve(subscriber)
 		})
 		.catch(err => {
+			// console.log('MAILCHIMP ERR - '+err)
 			reject(err)
 		})
 	})
