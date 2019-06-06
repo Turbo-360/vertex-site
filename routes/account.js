@@ -24,7 +24,8 @@ const addToMailchimp = (body) => {
 		    }
 		}
 
-		// console.log('Subscriber: ' + JSON.stringify(subscriber))
+		// mailchimp blocks requests if user is removed
+		// from list or unsubscribes.
 		const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
 		const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
 		utils.HTTP.post(endpoint, subscriber, {'Authorization': basic})
@@ -376,15 +377,15 @@ router.post('/:action', function(req, res, next){
 			user = data
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 User', JSON.stringify(params))
 		})
-		.then(data => {
-			const pkg = {
-				email: params.email,
-				name: params.name,
-				list: 'registered_users@mail.turbo360.co'
-			}
-
-			return utils.Email.addToMailingList(pkg)
-		})
+		// .then(data => {
+		// 	const pkg = {
+		// 		email: params.email,
+		// 		name: params.name,
+		// 		list: 'registered_users@mail.turbo360.co'
+		// 	}
+		//
+		// 	return utils.Email.addToMailingList(pkg)
+		// })
 		.then(data => {
 			return utils.fetchFile('emailtemplates/welcome/welcome.html')
 		})
@@ -540,23 +541,6 @@ router.post('/:action', function(req, res, next){
 			})
 			return
 		}
-
-		// const parts = body.name.split(' ')
-		// const firstName = parts[0]
-		// const lastName = (parts.length > 1) ? parts[parts.length-1] : ''
-		// const subscriber = {
-		// 		email_address: body.email.toLowerCase().trim(),
-		//     status: 'subscribed',
-		//     merge_fields: {
-		//         FNAME: firstName.trim(),
-		//         LNAME: lastName.trim()
-		//     }
-		// }
-		//
-		// const endpoint = 'https://us20.api.mailchimp.com/3.0/lists/3cb0bfbc56/members/'
-		// const basic = 'Basic '+Base64.encode('awef:'+process.env.MAILCHIMP_API_KEY)
-		// const headers = {'Authorization': basic}
-		// utils.HTTP.post(endpoint, subscriber, headers)
 
 		addToMailchimp(body)
 		.then(data => {
