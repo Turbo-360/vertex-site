@@ -500,9 +500,16 @@ router.post('/:action', function(req, res, next){
 	if (action == 'rsvp'){
 		controllers.ticket.post(req.body)
 		.then(data => {
-			return addToMailchimp(req.body)
+			return utils.fetchFile('emailtemplates/welcome/workshop.html')
 		})
 		.then(data => {
+			const parts = body.name.split(' ')
+			const firstName = parts[0]
+			const html = data.replace('{{firstName}}', utils.TextUtils.capitalize(firstName))
+			html = html.replace('{{eventName}}', req.body.event.name)
+			utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Vertex 360', [params.email], 'Welcome to Vertex 360!', html)
+			addToMailchimp(req.body)
+
 			res.json({
 				confirmation: 'success',
 				data: data
