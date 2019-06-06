@@ -512,7 +512,7 @@ router.post('/:action', function(req, res, next){
 
 			res.json({
 				confirmation: 'success',
-				data: data
+				data: req.body
 			})
 		})
 		.catch(err => {
