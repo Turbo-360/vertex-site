@@ -377,15 +377,6 @@ router.post('/:action', function(req, res, next){
 			user = data
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 User', JSON.stringify(params))
 		})
-		// .then(data => {
-		// 	const pkg = {
-		// 		email: params.email,
-		// 		name: params.name,
-		// 		list: 'registered_users@mail.turbo360.co'
-		// 	}
-		//
-		// 	return utils.Email.addToMailingList(pkg)
-		// })
 		.then(data => {
 			return utils.fetchFile('emailtemplates/welcome/welcome.html')
 		})
@@ -413,6 +404,10 @@ router.post('/:action', function(req, res, next){
 			// send invite to slack channel:
 			// const slackInvite = 'http://api.turbo360.co/vectors/slack-invite-jofodi/slackInvite'
 			// utils.HTTP.get(slackInvite, {email:user.email, slack:'turbo-360', token:process.env.SLACK_ACCESS_TOKEN, key:'b6e61258-1151-4dd0-95d3-db2bec32d808'})
+			addToMailchimp({
+				email: user.email,
+				name: user.firstName+' '+user.lastName
+			})
 			return
 		})
 		.catch(err => {
