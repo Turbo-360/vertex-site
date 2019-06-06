@@ -133,9 +133,7 @@
       	<!-- Widgets -->
         <div class="col-lg-3 col-md-4">
       		<div class="sidebar right">
-            <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
-
-      			<div class="widget margin-top-40">
+      			<div class="widget margin-top-20">
       				<h3>Featured Templates</h3>
       				<ul id="related-sites" class="widget-tabs"></ul>
       			</div>
@@ -220,7 +218,7 @@
         })
       }
 
-      getRequest('/api/site?template.status=live&format=vertex&limit=4', function(err, response){
+      getRequest('/api/site?template.status=live&format=vertex', function(err, response){
         if (response.confirmation != 'success'){
           return
         }
@@ -232,9 +230,10 @@
 
         var sitesHtml = ''
         var sidebarHtml = ''
-        sites.forEach(function(site){
-          sitesHtml += Mustache.render(tpl, site)
+        sites.forEach(function(site, i){
           sidebarHtml += Mustache.render(tplSidebar, site)
+          if (i<4)
+            sitesHtml += Mustache.render(tpl, site)
         })
 
         $('#featured-templates').html(sitesHtml)
