@@ -56,11 +56,12 @@ module.exports = {
 	},
 
 	post: function(endpoint, body, headers){
+		const reqHeaders = headers || {'Accept': 'application/json'}
 		return new Promise(function(resolve, reject){
 			superagent
 			.post(endpoint)
 			.send(body)
-			// .set(headers)
+			.set(reqHeaders)
 			.end(function(err, res) {
 				if (err){
 					reject(err)
