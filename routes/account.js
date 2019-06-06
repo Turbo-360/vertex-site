@@ -1205,7 +1205,7 @@ router.post('/:action', function(req, res, next){
 			delete params['from']
 
 			const confirmLink = 'https://www.vertex360.co/account/acceptinvitation?invitation='+Base64.encode(JSON.stringify({site:params.site, invitee:invitee}))
-			const content = 'Hello,<br /><br />You have been invited to collaborate on a <a style="color:red" href="https://www.vertex360.co">Vertex 360</a> project: <a href="https://'+currentSite.slug+'.vertex360.co"><strong>'+currentSite.name+'</strong></a>. You were invited by '+from+'.<br /><br />To confirm the invitation, click on the link below:<br /><br /><a style="color:red" href="'+confirmLink+'">'+confirmLink+'</a><br /><br />Thanks,<br /><br />The Vertex 360 Team<br />www.vertex360.co<br /><a href="https://www.vertex360.co"><img src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" /></a>'
+			const content = 'Hello,<br /><br />You have been invited to collaborate on a <a style="color:red" href="https://www.vertex360.co">Vertex 360</a> project: <a href="https://'+currentSite.slug+'.vertex360.co"><strong>'+currentSite.name+'</strong></a>. You were invited by '+from+'.<br /><br />To confirm the invitation, click on the link below:<br /><br /><a style="color:red" href="'+confirmLink+'">'+confirmLink+'</a><br /><br />Thanks,<br /><br />The Vertex 360 Team<br />www.vertex360.co<br /><a href="https://www.vertex360.co"><img style="margin-top:20px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s160" /></a>'
 			return utils.Email.sendHtmlEmails('katrina@velocity360.io', 'Vertex 360', [invitee], 'Invitation', content)
 		})
 		.then(function(data){
