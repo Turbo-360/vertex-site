@@ -131,7 +131,20 @@ gulp.task('sidebar', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
-gulp.task('pages', ['home', 'community', 'card', 'sidebar'], function(){})
+gulp.task('account', function(){
+    return gulp.src(
+            [
+                './public/scripts/account.js'
+            ]
+        )
+        .pipe(gp_concat('account.min.js'))
+        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gp_rename('account.min.js'))
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/dist/js/'))
+});
+
+gulp.task('pages', ['home', 'community', 'card', 'sidebar', 'account'], function(){})
 
 // copy public directory to CDN project:
 gulp.task('copy-public', function(){
