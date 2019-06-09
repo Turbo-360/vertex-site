@@ -64,6 +64,10 @@
       font-weight: 600;
       font-size: 20px;
     }
+
+    .post-content p {
+      margin-top: 0px;
+    }
   </style>
 </head>
 
@@ -82,7 +86,7 @@
     						<li style="text-transform:capitalize">{{event.dateString}}</li>
     					</ul>
               <hr class="margin-top-20 margin-bottom-30" />
-              <img style="max-width:60%" class="post-img" src="{{{event.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
+              <img class="post-img" src="{{{event.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
     					{{{event.description}}}
     				</div>
 
