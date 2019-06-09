@@ -533,6 +533,19 @@
   })
 })()
 </script>
+<script>
+  (function(){
+    console.log('REFERRER: ' + document.referrer)
+    var data = window.__PRELOADED__
+    if (data.user != null)
+      return
+
+    if (data.referrer != null)
+      return
+
+    console.log('SET REFERRER: ' + document.referrer)
+  })()
+</script>
 
 {{#cdn}}{{>analytics}}{{/cdn}}
 

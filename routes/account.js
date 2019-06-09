@@ -372,6 +372,7 @@ router.post('/:action', function(req, res, next){
 
 	let user = null
 	if (action == 'register'){
+		params['referrer'] = req.vertex_session.referrer || ''
 		controllers.profile.post(params)
 		.then(data => {
 			user = data
@@ -1164,7 +1165,6 @@ router.post('/:action', function(req, res, next){
 		return
 	}
 
-
 	if (action == 'invitecollaborator'){
 		const params = req.body
 		if (params.site == null){
@@ -1225,6 +1225,33 @@ router.post('/:action', function(req, res, next){
 		})
 		return
 	}
+
+	if (action == 'set-referrer'){
+		if (req.user != null){ // don't do anything, user already registered
+			res.json({
+				confirmation: 'success'
+			})
+			return
+		}
+
+		if (req.body.referrer == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing referrer parameter'
+			})
+
+			return
+		}
+
+		req.vertex_session.referrer = req.body.referrer
+		res.json({
+			confirmation: 'success',
+			data: req.body.referrer
+		})
+
+		return
+	}
+
 
 	res.json({
 		confirmation: 'fail',
