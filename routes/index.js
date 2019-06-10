@@ -21,6 +21,10 @@ router.get('/', (req, res) => {
 	controllers.site.get({'template.status':'live', format:'vertex'})
 	.then(sites => {
 		sites.forEach((site, i) => {
+			site['hasVideo'] = false
+			if (site.template.video != null)
+				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+
 			site['index'] = i
 			site['tags'] = site.tags.slice(0, 3) // use only first 3
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
