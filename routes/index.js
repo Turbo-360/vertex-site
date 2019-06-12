@@ -467,12 +467,46 @@ router.get('/dashboard', (req, res) => {
 })
 
 router.get('/landing', (req, res) => {
+	const selected = 'landing'
 	const data = {
 		cdn: CDN,
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	res.render('landing', data)
+	controllers.site.get({'template.status':'live', format:'vertex', limit:3})
+	.then(sites => {
+		sites.forEach((site, i) => {
+			site['hasVideo'] = false
+			if (site.template.video != null)
+				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+
+			site['index'] = i
+			site['tags'] = site.tags.slice(0, 3) // use only first 3
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
+		})
+
+		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			stripe: process.env.STRIPE_PK_LIVE,
+			query: req.query,
+			user: req.user,
+			selected: 'how it works',
+			templates: sites,
+			static: {
+				faq: require('../public/static/faq.json')
+			}
+		})
+
+		res.render('landing', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
 })
 
 module.exports = router
