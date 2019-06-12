@@ -7,13 +7,11 @@ const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const templates = {}
-const categories = ['landing', 'resume', 'restaurant', 'fitness', 'realtor', 'lessons']
 
 
 router.get('/', (req, res) => {
-	const selected = categories[0]
+	const selected = 'landing'
 	const data = {
-		categories: categories,
 		cdn: CDN
 	}
 
@@ -165,9 +163,8 @@ router.get('/submitevent', (req, res) => {
 })
 
 router.get('/templates', (req, res) => {
-	const selected = categories[0]
+	const selected = 'landing'
 	const data = {
-		categories: categories,
 		cdn: CDN
 	}
 
@@ -444,7 +441,6 @@ router.get('/dashboard', (req, res) => {
 
 router.get('/landing', (req, res) => {
 	const data = {
-		categories: categories,
 		cdn: CDN
 	}
 
