@@ -6,11 +6,13 @@ const controllers = require('../controllers')
 const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
+let renderAnalytics = (CDN!=null)
 
 router.get('/', (req, res) => {
 	const selected = 'landing'
 	const data = {
-		cdn: CDN
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
 	}
 
 	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
@@ -52,6 +54,7 @@ router.get('/', (req, res) => {
 router.get('/community', (req, res) => {
 	const data = {
 		cdn: CDN,
+		renderAnalytics: renderAnalytics,
 		profile: req.user
 	}
 
@@ -162,7 +165,8 @@ router.get('/submitevent', (req, res) => {
 router.get('/templates', (req, res) => {
 	const selected = 'landing'
 	const data = {
-		cdn: CDN
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
 	}
 
 	controllers.site.get({'template.status':'live', format:'vertex'})
@@ -197,7 +201,10 @@ router.get('/templates', (req, res) => {
 })
 
 router.get('/template/:slug', (req, res) => {
-	const data = {cdn: CDN}
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
+	}
 
 	// TODO: check if template is live
 	controllers.site.get({slug:req.params.slug}) // query template by slug
@@ -232,7 +239,10 @@ router.get('/template/:slug', (req, res) => {
 
 // blog post
 router.get('/post/:slug', (req, res) => {
-	const data = {cdn: CDN}
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
+	}
 
 	controllers.post.get({slug:req.params.slug})
 	.then(posts => {
@@ -260,7 +270,10 @@ router.get('/post/:slug', (req, res) => {
 })
 
 router.get('/comments/:slug', (req, res) => {
-	const data = {cdn: CDN}
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
+	}
 
 	controllers.comment.get({slug:req.params.slug})
 	.then(comments => {
@@ -294,7 +307,11 @@ router.get('/comments/:slug', (req, res) => {
 })
 
 router.get('/profile/:slug', (req, res) => {
-	const data = {cdn: CDN}
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
+	}
+
 	controllers.profile.get({slug:req.params.slug})
 	.then(profiles => {
 		if (profiles.length == 0){
@@ -338,7 +355,10 @@ router.get('/profile/:slug', (req, res) => {
 })
 
 router.get('/event/:slug', (req, res) => {
-	const data = {cdn: CDN}
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
+	}
 
 	controllers.event.get({slug:req.params.slug})
 	.then(events => {
@@ -437,7 +457,8 @@ router.get('/dashboard', (req, res) => {
 
 router.get('/landing', (req, res) => {
 	const data = {
-		cdn: CDN
+		cdn: CDN,
+		renderAnalytics: renderAnalytics
 	}
 
 	res.render('landing', data)
