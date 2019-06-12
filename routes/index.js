@@ -22,8 +22,7 @@ router.get('/', (req, res) => {
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
-	controllers.site.get({'template.status':'live', format:'vertex'})
+	controllers.site.get({'template.status':'live', format:'vertex', limit:3})
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['hasVideo'] = false
@@ -36,13 +35,17 @@ router.get('/', (req, res) => {
 		})
 
 		data['templates'] = sites
+		return controllers.post.get({limit:3})
+	})
+	.then(posts => {
+		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
 			selected: 'how it works',
-			templates: sites,
+			templates: data.templates,
 			static: {
 				faq: require('../public/static/faq.json')
 			}
@@ -473,7 +476,8 @@ router.get('/landing', (req, res) => {
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	controllers.site.get({'template.status':'live', format:'vertex', limit:3})
+	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
+	controllers.site.get({'template.status':'live', format:'vertex'})
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['hasVideo'] = false
@@ -486,17 +490,13 @@ router.get('/landing', (req, res) => {
 		})
 
 		data['templates'] = sites
-		return controllers.post.get({limit:3})
-	})
-	.then(posts => {
-		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
 			selected: 'how it works',
-			templates: data.templates,
+			templates: sites,
 			static: {
 				faq: require('../public/static/faq.json')
 			}
@@ -510,7 +510,6 @@ router.get('/landing', (req, res) => {
 			message: err.message
 		})
 	})
-
 })
 
 module.exports = router
