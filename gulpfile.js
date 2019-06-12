@@ -77,6 +77,26 @@ gulp.task('vendor', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
+gulp.task('revolution', function(){
+    return gulp.src(
+            [
+                './public/scripts/extensions/revolution.extension.carousel.min.js',
+                './public/scripts/extensions/revolution.extension.kenburn.min.js',
+                './public/scripts/extensions/revolution.extension.layeranimation.min.js',
+                './public/scripts/extensions/revolution.extension.migration.min.js',
+                './public/scripts/extensions/revolution.extension.navigation.min.js',
+                './public/scripts/extensions/revolution.extension.parallax.min.js',
+                './public/scripts/extensions/revolution.extension.slideanims.min.js',
+                './public/scripts/extensions/revolution.extension.video.min.js'
+            ]
+        )
+        .pipe(gp_concat('revolution.min.js'))
+        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gp_rename('revolution.min.js'))
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/dist/js/'))
+});
+
 gulp.task('home', function(){
     return gulp.src(
             [
@@ -157,7 +177,7 @@ gulp.task('referrer', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
-gulp.task('pages', ['home', 'community', 'card', 'sidebar', 'account', 'referrer'], function(){})
+gulp.task('pages', ['home', 'community', 'card', 'sidebar', 'account', 'referrer', 'revolution'], function(){})
 
 // copy public directory to CDN project:
 gulp.task('copy-public', function(){
