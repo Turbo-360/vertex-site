@@ -210,22 +210,23 @@
 		</div>
 
 		<div class="row">
-			<!-- Blog Post Item -->
+
+			{{#posts}}
 			<div class="col-md-4">
-				<a href="pages-blog-post.html" class="blog-compact-item-container">
+				<a href="/post/{{slug}}" class="blog-compact-item-container">
 					<div class="blog-compact-item">
-						<img src="{{{cdn}}}/images/blog-compact-post-01.jpg" alt="">
+						<img src="{{{image}}}" alt="Vertex 360">
 						<div class="blog-compact-item-content">
 							<ul class="blog-post-tags">
-								<li>22 August 2017</li>
+								<li>{{dateString}}</li>
 							</ul>
-							<h3>Hotels for All Budgets</h3>
+							<h3>{{title}}</h3>
 							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
 						</div>
 					</div>
 				</a>
 			</div>
-			<!-- Blog post Item / End -->
+      {{/posts}}
 
 			<!-- Blog Post Item -->
 			<div class="col-md-4">

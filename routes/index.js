@@ -486,13 +486,17 @@ router.get('/landing', (req, res) => {
 		})
 
 		data['templates'] = sites
+		return controllers.post.get({limit:3})
+	})
+	.then(posts => {
+		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
 			selected: 'how it works',
-			templates: sites,
+			templates: data.templates,
 			static: {
 				faq: require('../public/static/faq.json')
 			}
