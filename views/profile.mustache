@@ -434,9 +434,6 @@
     })()
   </script>
 
-  {{#cdn}}
-  {{>analytics}}
-  {{/cdn}}
-
+  {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
 </body>
 </html>

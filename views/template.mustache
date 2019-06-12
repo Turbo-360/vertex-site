@@ -358,7 +358,6 @@
     $('#launch-template-container').html(Mustache.render(tpl, currentTemplate.cloneSource))
   })()
 </script>
-{{#cdn}}{{>analytics}}{{/cdn}}
-
+{{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
 </body>
 </html>
