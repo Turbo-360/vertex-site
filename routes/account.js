@@ -508,7 +508,9 @@ router.post('/:action', function(req, res, next){
 			const firstName = parts[0]
 			let html = data.replace('{{firstName}}', utils.TextUtils.capitalize(firstName))
 			html = html.replace('{{eventName}}', req.body.event.name)
+			
 			utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Vertex 360', [req.body.email], 'Welcome to Vertex 360!', html)
+			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'Event RSVP', JSON.stringify(req.body))
 			addToMailchimp(req.body)
 
 			res.json({
