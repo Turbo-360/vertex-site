@@ -6,8 +6,6 @@ const controllers = require('../controllers')
 const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
-const templates = {}
-
 
 router.get('/', (req, res) => {
 	const selected = 'landing'
@@ -28,7 +26,6 @@ router.get('/', (req, res) => {
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
 		})
 
-		templates[selected] = sites
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
@@ -176,7 +173,6 @@ router.get('/templates', (req, res) => {
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
 		})
 
-		templates[selected] = sites
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
