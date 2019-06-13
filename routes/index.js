@@ -39,9 +39,9 @@ router.get('/', (req, res) => {
 	})
 	.then(posts => {
 		posts.forEach(post => {
-			post['preview'] = utils.TextUtils.truncateText(post.preview, 130)
+			post['preview'] = utils.TextUtils.truncateText(post.preview, 90)
 		})
-		
+
 		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
