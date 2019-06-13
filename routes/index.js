@@ -38,6 +38,10 @@ router.get('/', (req, res) => {
 		return controllers.post.get({limit:3})
 	})
 	.then(posts => {
+		posts.forEach(post => {
+			post['preview'] = utils.TextUtils.truncateText(post.preview, 130)
+		})
+		
 		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
