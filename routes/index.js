@@ -15,6 +15,13 @@ const renderAnalytics = (req) => {
 	return !found
 }
 
+const hasVideo = (site) => {
+	if (site.template.video == null)
+		return false
+
+	return (site.template.video.length==11) // youtube IDs are 11 characters;
+}
+
 router.get('/', (req, res) => {
 	const selected = 'landing'
 	const data = {
@@ -25,10 +32,7 @@ router.get('/', (req, res) => {
 	controllers.site.get({'template.status':'live', format:'vertex', limit:3})
 	.then(sites => {
 		sites.forEach((site, i) => {
-			site['hasVideo'] = false
-			if (site.template.video != null)
-				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
-
+			site['hasVideo'] = hasVideo(site)
 			site['index'] = i
 			site['tags'] = site.tags.slice(0, 3) // use only first 3
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
@@ -233,6 +237,7 @@ router.get('/template/:slug', (req, res) => {
 		}
 
 		const site = results[0]
+		site['hasVideo'] = hasVideo(site)
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		data['template'] = site
 		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
