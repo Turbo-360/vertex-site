@@ -80,9 +80,9 @@
               <hr class="margin-top-20 margin-bottom-30" />
               <img style="max-width:60%" class="post-img" src="{{{template.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
     					<p>{{{template.description}}}</p>
-              {{#hasVideo}}
+              {{#template.hasVideo}}
               <iframe width="560" height="315" src="https://www.youtube.com/embed/<%template.video%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              {{/hasVideo}}
+              {{/template.hasVideo}}
               <h4>Screenshots</h4>
               {{#template.images}}
               <div class="screenshot">
