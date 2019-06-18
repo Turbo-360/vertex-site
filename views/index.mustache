@@ -71,7 +71,7 @@
   					style="z-index: 6; color: #fff; letter-spacing: 0px; font-weight: 600;">Build Professional Websites. Fast.</div>
 
   					<div class="caption-text">Get up and running with a gorgeous new website in under an hour.<br />No coding knowledge required. No confusing tools - we promise.</div>
-  					<a href="#" class="button medium">Learn More</a>
+  					<a id="btn-learn-more" href="#" class="button medium">Learn More</a>
   				</div>
   			</li>
   		</ul>
@@ -82,7 +82,7 @@
   <!-- Revolution Slider / End -->
 
 <!-- Info Section -->
-<div class="container">
+<div id="how-it-works" class="container">
 
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -198,7 +198,7 @@
         </a>
       </div>
     </div>
-    
+
 	</div>
 
 </section>
@@ -401,6 +401,15 @@
 <script>
 (function(){
   var data = window.__PRELOADED__
+  $('#btn-learn-more').click(function(event){
+    if (event)
+      event.preventDefault()
+
+    $('html, body').animate({
+        scrollTop: $("#how-it-works").offset().top
+    }, 1000)
+  })
+
   if (data.stripe==null)
     return
 
