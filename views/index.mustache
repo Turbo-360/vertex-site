@@ -9,6 +9,18 @@
 	<meta property="og:image:width" content="260px" />
 	<meta property="og:image:height" content="260px" />
 	<meta property="og:description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
+
+  <style>
+    #card-element {
+      line-height: 14px;
+      max-width: 100%;
+      height: 36px;
+      border: none;
+      border-radius: 3px;
+      background: #f9f9f9;
+      padding: 8px 3px 3px 8px;
+    }
+  </style>
 </head>
 
 <body>
@@ -291,7 +303,7 @@
               <li>Custom Domain</li>
               <li>$5 per Additional Site</li>
             </ul>
-            <a class="button" href="#">Get Started</a>
+            <a class="button popup-with-zoom-anim" href="#premium-dialog">Get Started</a>
           </div>
         </div>
 
@@ -408,6 +420,14 @@
     $('html, body').animate({
         scrollTop: $("#how-it-works").offset().top
     }, 1000)
+  })
+
+  $('#btn-join-premium').click(function(event){
+    if (event)
+      event.preventDefault()
+
+    $('#tab-register').click()
+    document.getElementById('btn-show-premium-modal').click()
   })
 
   if (data.stripe==null)
