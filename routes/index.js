@@ -478,7 +478,7 @@ router.get('/dashboard', (req, res) => {
 	res.render('account', data)
 })
 
-router.get('/landing', (req, res) => {
+/router.get('/landing', (req, res) => {
 	const selected = 'landing'
 	const data = {
 		cdn: CDN,
@@ -511,7 +511,8 @@ router.get('/landing', (req, res) => {
 			}
 		})
 
-		res.render('landing', data)
+		// res.render('landing', data)
+		res.render('landing-2', data)
 	})
 	.catch(err => {
 		res.json({
