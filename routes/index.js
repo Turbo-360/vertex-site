@@ -501,10 +501,9 @@ router.get('/landing', (req, res) => {
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			stripe: process.env.STRIPE_PK_LIVE,
+			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
-			// selected: 'how it works',
 			templates: sites,
 			static: {
 				faq: require('../public/static/faq.json')
