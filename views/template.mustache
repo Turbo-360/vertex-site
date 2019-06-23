@@ -1,370 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <head>
-  {{>head}}
-  <meta property="og:title" content="Vertex 360 | {{template.name}}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://www.vertex360.co/template/{{template.slug}}" />
-	<meta property="og:image" content="{{{template.image}}}=s260-c" />
-	<meta property="og:image:width" content="260px" />
-	<meta property="og:image:height" content="260px" />
-	<meta property="og:description" content="{{template.description}}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{template.name}}</title>
+    <meta name="description" content="{{template.description}}" />
+    <link rel="icon" href="https://lh3.googleusercontent.com/5SVrpLI9utkuVJbQb48cpD3tar59mgWaWSAM73Ghj8dxFJMD2UOzkhO5ptWDd2uV2eqgSvDCSa-Ad8aOrygXx6nv=s32-c" type="image/png" />
 
-  <style>
-    .template-details {
-      text-align: right
-    }
+    <meta property="og:title" content="Vertex 360 | {{template.name}}" />
+  	<meta property="og:type" content="article" />
+  	<meta property="og:url" content="https://www.vertex360.co/template/{{template.slug}}" />
+  	<meta property="og:image" content="{{{template.image}}}=s260-c" />
+  	<meta property="og:image:width" content="260px" />
+  	<meta property="og:image:height" content="260px" />
+  	<meta property="og:description" content="{{template.description}}" />
 
-    .template-details img {
-      width: 32px;
-      border-radius: 50%;
-      margin-left: 4px;
-    }
 
-    .btn-edit {
-      text-transform: uppercase;
-      font-size: 9.7px;
-      letter-spacing: 2.5px;
-      font-weight: 60;
-      background: #f91942;
-      border-radius: 24px;
-      padding: 8px 12px;
-      line-height: 20px;
-      color: #fff !important;
-      font-weight: 400;
-      margin-bottom: 9px;
-    }
+    <link href="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/css/inter-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/css/slick.min.css">
+    <link rel="stylesheet" href="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/css/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/css/blue.css" id="theme-color">
 
-    @media (min-width: 768px) {
-      .post-container {
-        padding-top: 120px
+    <style>
+			.logo {
+				width: 160px;
+			}
+
+      .icon-avatar {
+        border-radius: 50%;
+        margin-right: 6px;
+        padding: 4px;
+        border: 1px solid #56b48c;
       }
 
-      .lg-pt-40 {
-        padding-top: 40px;
+      .author-container {
+        display: flex;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
+        padding: 20px 0px
       }
-    }
 
-    @media (max-width: 768px) {
-      .post-content {
-        padding: 16px !important;
+      .author-container h3 {
+        text-transform: capitalize;
       }
-    }
 
-    #launch-template-container a {
-      width: 100%;
-      padding: 20px;
-      text-align: center;
-      font-size: 20px;
-      border-radius: 6px;
-      color: #fff;
-    }
-  </style>
+      .template-header {
+        background: #fff;
+        padding: 24px;
+      }
+
+      .template-header small {
+        font-size: 14px;
+      }
+
+      .template-header p {
+        margin-bottom: 0px;
+        line-height: 2.0;
+        font-size: 18px;
+      }
+
+      .screenshot {
+        margin-bottom: 24px;
+        max-width: 100%;
+        border: 1px solid #ddd;
+        padding: 3px;
+        background: #fff;
+      }
+
+      .bg-green {
+        background: #56b48c;
+        border-color: #56b48c;
+      }
+
+      .btn-get-started {
+        width: 100%;
+        border-radius: 4px;
+        padding: 12px 11em;
+      }
+
+      @media (max-width: 768px) {
+        .btn-get-started {
+          padding: 12px 5.5em;
+        }
+      }
+
+		</style>
 </head>
+    <body>
+      {{>nav}}
 
-<body>
-  <div id="wrapper" style="background:#f9f9f9">
-    {{>nav}}
-    <div class="clearfix"></div>
-    <div class="container lg-pt-40">
-      <div class="row post-container">
-    		<div class="col-lg-9 col-md-8 padding-right-30">
-    			<div class="blog-post single-post">
+        <!-- features section -->
+        <section class="py-6" id="features" style="background:#f9f9f9">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 mx-auto">
+                        <div class="template-header">
+                          <h1>{{template.name}} Template</h1>
+                          <img class="icon-avatar" src="{{{template.profile.image}}}=s34-c" />
+                          <small>{{template.profile.username}}</small>
+                          <span style="margin:16px">&bull;</span>
+                          <small><a style="color:red" target="_blank" href="https://{{template.slug}}.vertex360.co">Live Example</a></small>
+                          <hr />
+                          <img style="max-width:100%;margin-bottom:20px" src="{{{template.image}}}=s1024" />
+                          <p class="mb-5">{{{template.description}}}</p>
+                          <h3>Screenshots</h3>
+                          {{#template.images}}
+                          <a target="_blank" href="{{{.}}}=s1024">
+                            <img class="screenshot" src="{{{.}}}=s512" />
+                          </a>
+                          {{/template.images}}
 
-    				<div class="post-content">
-              <a style="float:right;font-weight:600" target="_blank" href="https://{{template.slug}}.vertex360.co" class="btn-edit margin-top-20">View Example</a>
-              <h1 style="font-size:32px">{{template.name}}</h1>
-              <ul class="post-meta">
-    						<li style="text-transform:capitalize">{{template.template.category}}</li>
-    						<li><a style="color:#37b6bd" href="/profile/{{template.profile.slug}}">{{template.profile.username}}</a></li>
-    					</ul>
-              <hr class="margin-top-20 margin-bottom-30" />
-              <img style="max-width:100%" class="post-img" src="{{{template.image}}}=s1024" alt="Vertex 360 | {{template.name}}">
+                          <a href="/templates" class="btn btn-primary d-inline-flex flex-row align-items-center text-white btn-lg btn-get-started bg-green">
+                              Launch This Template
+                          </a>
+                        </div>
 
-              {{#template.hasVideo}}
-              <div style="margin-top:30px">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{template.template.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-              {{/template.hasVideo}}
+                        <div class="author-container">
+                          <div style="">
+                            <img class="icon-avatar" src="{{{template.profile.image}}}=s48-c" />
+                          </div>
+                          <div style="flex:1;padding-left:12px">
+                            <h3>{{template.profile.firstName}} {{template.profile.lastName}}</h3>
+                            <p class="text-muted">{{template.profile.bio}}</p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
 
-    					<p>{{{template.description}}}</p>
-              <h4>Screenshots</h4>
-              {{#template.images}}
-              <div class="screenshot">
-                <a target="_blank" href="{{{ . }}}=s1024"><img src="{{{ . }}}" /></a>
-              </div>
-              {{/template.images}}
+            </div>
+        </section>
 
-    				</div>
+        {{>register}}
+        {{>footer}}
 
-            <!-- About Author -->
-      			<div id="launch-template-container" class="about-author" style="margin:0px;border-top:1px solid #ededed;border-bottom:1px solid #ededed;background:#fffffa">
-      				<div style="min-height:120px">
-                <h2 class="margin-bottom-20 margin-top-0">Launch This Site</h2>
-      					<p>To launch your own version of this template and create a website with your site information, details, images and more, click the button below.</p>
-      				</div>
-
-              <hr />
-              <a id="btn-launch-template" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">Launch This Template <i class="sl sl-icon-login"></i></a>
-      			</div>
-    			</div>
-
-    	  </div>
-
-      	<!-- Widgets -->
-      	<div class="col-lg-3 col-md-4">
-      		<div class="sidebar right">
-            <div id="profile-sidebar" class="boxed-widget margin-top-20" style="background:#fff"></div>
-
-      			<div class="widget margin-top-40">
-      				<h3>Featured Templates</h3>
-      				<ul id="related-sites" class="widget-tabs"></ul>
-      			</div>
-      		</div>
-      	</div>
-    	</div>
-    	<!-- Sidebar / End -->
-
-    </div>
-
-    {{>footer-dark}}
-    <a style="display:none" id="btn-show-modal" href="#sign-in-dialog" class="popup-with-zoom-anim">test</a>
-  </div>
-  <!-- Wrapper / End -->
-
-
-<script type="text/template" id="tpl-site-preview">
-  <li>
-  	<div class="widget-content">
-  		<div class="widget-thumb">
-  			<a href="/template/<% slug %>">
-          <img src="<%{image}%>=s120-c" alt="Vertex 360 | <% name %>" />
-        </a>
-  		</div>
-
-      <div class="widget-text" style="padding-top:6px">
-        <h5 class="preview-title">
-          <a href="/post/<% slug %>"><% name %></a>
-        </h5>
-  			<small><% template.category %></small>
-  		</div>
-  		<div class="clearfix"></div>
-  	</div>
-  </li>
-</script>
-
-<script type="text/template" id="tpl-launch-template">
-  <div style="text-align:center">
-    <h3 style="margin-bottom:0px;margin-top:0px">Launch Site</h3>
-    <p style="margin-bottom:16px;color:#888">Launch this template on your account.</p>
-    <img style="width:260px;margin-bottom:16px" src="<% image %>=s512" />
-    <input id="input-site-name" type="text" placeholder="Your Site Name" />
-    <div id="btn-launch-container">
-      <a style="margin-top:4px;width:100%" id="btn-clone-template" href="#" class="button with-icon">Launch This Template <i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-</script>
-
-<script type="text/template" id="tpl-profile-sidebar">
-  <div class="hosted-by-title" style="padding:0px">
-    <a href="/profile/<% slug %>">
-      <img style="width:72px;border-radius:50%;margin-bottom:16px" id="profile-avatar" src="<%{image}%>=s120-c" alt="Vertex 360" />
-    </a>
-    <h4>
-      <span>Created by</span> <a style="text-transform:capitalize" href="/profile/<%slug%>"><%firstName%> <%lastName%></a>
-    </h4>
-  </div>
-
-  <p style="font-size:12px;line-height:18px"><% bio %></p>
-  <a style="width:100%;text-align:center" href="/profile/<% slug %>" class="send-message-to-owner button">View Full Profile</a>
-</script>
-
-<script type="text/template" id="tpl-clone-source">
-  <div style="min-height:120px">
-    <h2 class="margin-bottom-20 margin-top-0">Clone Source</h2>
-    <p>
-      This site was cloned from another template. To see the original
-      template and launch your own version, click the button below.
-    </p>
-  </div>
-
-  <hr />
-  <a href="/template/<% slug %>" class="button with-icon">View Original Site <i class="sl sl-icon-login"></i></a>
-</script>
-
-<script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
-<script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-<script type="text/javascript" src="{{{cdn}}}/dist/js/referrer.min.js"></script>
-<script>
-  (function(){
-    Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
-    var data = window.__PRELOADED__
-    var user = data.user
-    var currentTemplate = data.template
-
-    var getRequest = function(url, data, completion){
-      $.ajax({
-        url: url,
-        type: 'GET',
-        data: data,
-        success: function(response, status, xhr){
-          if (response.confirmation != 'success'){
-            completion(new Error(response.message), null) // 'data' is the error object here.
-            return
-          }
-
-          completion(null, response)
-        },
-        error: function(xhr, status, err){
-          completion(err, null)
-        }
-      })
-    }
-
-    var postRequest = function(url, params, completion){
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: params,
-        success: function(response, status, xhr){
-          if (response.confirmation != 'success'){
-            completion(response, null) // 'data' is the error object here.
-            return
-          }
-
-          completion(null, response)
-        },
-        error: function(response){
-          completion(response, null)
-        }
-      })
-    }
-
-    // checks if a template is ready when cloning:
-    var checkTemplate = function(siteSlug){
-      postRequest('/account/check-template', {template:siteSlug}, function(err, response){
-        if (err){
-          console.log('TEMPLATE NOT READY: ')
-          setTimeout(function(){
-            checkTemplate(siteSlug)
-          }, 4000)
-          return
-        }
-
-        // console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
-        if (response.confirmation != 'success'){
-          alert('Error - ' + response.message)
-          return
-        }
-
-        window.location.href = '/admin/'+siteSlug // redirect to site admin page
-      })
-    }
-
-    var launchTemplate = function(){
-      if (user == null){
-        alert('Please log in or register to clone this site.')
-        return
-      }
-
-      var body = {
-        name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
-        source: currentTemplate.id // ID of the template being copied
-      }
-
-      if (body.name.length == 0){
-        alert('Please enter a name for your site')
-        return
-      }
-
-      $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
-      console.log('LAUNCH TEMPLATE: ' + JSON.stringify(body))
-
-      postRequest('/account/launch-template', body, function(err, response){
-        if (err){
-          alert('Error: ' + err.message)
-          return
-        }
-
-        console.log('SITE LAUNCHED: ' + JSON.stringify(response))
-        setTimeout(function(){
-          checkTemplate(response.data.slug)
-        }, 4000)
-      })
-    }
-
-    var launchTemplateHandler = function(event){
-      if (event)
-        event.preventDefault()
-
-      if (user == null){
-        $('#tab-register').click()
-        document.getElementById('btn-show-modal').click()
-        return
-      }
-
-      var tpl = $('#tpl-launch-template').html()
-      $('#modal-container').html(Mustache.render(tpl, currentTemplate))
-      $('#btn-clone-template').click(function(event){
-        if (event)
-          event.preventDefault()
-
-        launchTemplate()
-      })
-
-     document.getElementById('btn-show-modal').click()
-    }
-
-    $('#btn-launch-template').click(launchTemplateHandler)
-
-    // fetch featured templates for sidebar
-    getRequest('/api/site?template.status=live&format=vertex&sort=asc', null, function(err, response){
-      if (err)
-        return
-
-      var templates = response.results
-      // console.log(JSON.stringify(templates))
-
-      var tpl = $('#tpl-site-preview').html()
-      var templatesHtml = ''
-      templates.forEach(function(template){
-        templatesHtml += Mustache.render(tpl, template)
-      })
-
-      $('#related-sites').html(templatesHtml)
-
-      // fetch profile of current template:
-      var url = (currentTemplate.profile.slug) ? '/api/profile?slug='+currentTemplate.profile.slug : '/api/profile?username='+currentTemplate.profile.username
-      getRequest(url, null, function(err2, resp){
-        // console.log('PROFILES: ' + JSON.stringify(resp))
-        if (err2){
-          console.log('ERROR: ' + err2.message)
-          return
-        }
-
-        var profiles = resp.results
-        if (profiles.length == 0)
-          return
-
-        var profile = profiles[0]
-        // var truncated = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
-        // $('#profile-bio').html(truncated)
-
-        profile['bio'] = (profile.bio.length < 230) ? profile.bio : profile.bio.substring(0, 230)+'...'
-        // console.log('PROFILE: ' + JSON.stringify(profile))
-        var tpl = $('#tpl-profile-sidebar').html()
-        $('#profile-sidebar').html(Mustache.render(tpl, profile))
-      })
-    })
-
-    if (currentTemplate.cloneSource == null)
-      return
-
-    // this template is cloned from another template. Hide launch
-    // template button and fetch the original template instead
-    var tpl = $('#tpl-clone-source').html()
-    $('#launch-template-container').html(Mustache.render(tpl, currentTemplate.cloneSource))
-  })()
-</script>
-{{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
-</body>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/js/jquery-3.2.1.min.js"></script>
+        <script src="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/js/popper.min.js"></script>
+        <script src="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/js/bootstrap.min.js"></script>
+        <script src="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/js/feather.min.js"></script>
+        <script src="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/js/slick.min.js"></script>
+        <script src="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/js/scripts.js"></script>
+    </body>
 </html>
