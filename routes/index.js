@@ -238,6 +238,7 @@ router.get('/template/:slug', (req, res) => {
 		const site = results[0]
 		site['hasVideo'] = hasVideo(site)
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
+		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
 		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
 	})
