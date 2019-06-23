@@ -1,43 +1,28 @@
-<header id="header-container" class="fixed fullwidth">
-	<div id="header" class="not-sticky">
-		<div class="container mobile-nav">
-
-			<div class="left-side">
-				<div id="logo">
-					<a href="/">
-            <img src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" alt="Vertex 360">
-          </a>
-				</div>
-
-				<div class="mmenu-trigger margin-bottom-0">
-					<button class="hamburger hamburger--collapse" type="button">
-						<span class="hamburger-box">
-							<span class="hamburger-inner"></span>
-						</span>
-					</button>
-				</div>
-
-			</div>
-
-
-			<div id="nav-menu" class="right-side hidden-xs">
-				<div class="header-widget hidden-xs hidden-sm">
-          <nav id="navigation" class="style-1">
-  					<ul id="responsive">
-  						<li><a href="/templates">Templates</a></li>
-							<li class="hidden-xs hidden-sm"><a id="nav-faq" href="/?selected=faq">FAQ</a></li>
-							<li class="hidden-md hidden-lg"><a href="/community?selected=blog">Blog</a></li>
-							<li><a id="nav-faq" href="/community">Community</a></li>
-							<li class="hidden-xs hidden-sm"><a id="nav-login" href="#sign-in-dialog" class="popup-with-zoom-anim">Login</a></li>
-  					</ul>
-  				</nav>
-          <div id="login-container" class="hidden-xs hidden-sm">
-  					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">JOIN <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
-          </div>
-				</div>
-			</div>
-
-      {{>auth}}
+<!--navigation-->
+<nav style="height:72px;border-bottom:1px solid #ddd" class="navbar navbar-expand-md navbar-light bg-white fixed-top sticky-navigation">
+	<div class="container">
+		<a class="navbar-brand mx-auto" href="/">
+				<img class="logo" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
+		</a>
+		<button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+						data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span data-feather="grid"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+								<a class="nav-link page-scroll" href="/">Home</a>
+						</li>
+						<li class="nav-item">
+								<a class="nav-link page-scroll" href="/templates">Templates</a>
+						</li>
+						<li class="nav-item">
+								<a class="nav-link page-scroll" href="/blog">Blog</a>
+						</li>
+						<li id="login-container" class="nav-item">
+								<a style="border-radius:6px;color:#fff" class="nav-link page-scroll btn btn-primary" href="#">Join</a>
+						</li>
+				</ul>
 		</div>
 	</div>
-</header>
+</nav>
