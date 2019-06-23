@@ -22,43 +22,40 @@ const hasVideo = (site) => {
 	return (site.template.video.length==11) // youtube IDs are 11 characters;
 }
 
+
 router.get('/', (req, res) => {
-	const selected = 'landing'
+	// const selected = 'landing'
 	const data = {
 		cdn: CDN,
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	controllers.site.get({'template.status':'live', format:'vertex', limit:3})
+	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
+	controllers.site.get({'template.status':'live', format:'vertex'})
 	.then(sites => {
 		sites.forEach((site, i) => {
-			site['hasVideo'] = hasVideo(site)
+			site['hasVideo'] = false
+			if (site.template.video != null)
+				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+
 			site['index'] = i
 			site['tags'] = site.tags.slice(0, 3) // use only first 3
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
 		})
 
 		data['templates'] = sites
-		return controllers.post.get({limit:3})
-	})
-	.then(posts => {
-		posts.forEach(post => {
-			post['preview'] = utils.TextUtils.truncateText(post.preview, 90)
-		})
-
-		data['posts'] = posts
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			stripe: process.env.STRIPE_PK_LIVE,
+			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: req.user,
-			selected: 'how it works',
-			templates: data.templates,
+			templates: sites,
 			static: {
 				faq: require('../public/static/faq.json')
 			}
 		})
 
+		// res.render('landing', data)
 		res.render('index', data)
 	})
 	.catch(err => {
@@ -180,6 +177,8 @@ router.get('/submitevent', (req, res) => {
 	// })
 })
 
+
+
 router.get('/templates', (req, res) => {
 	const selected = 'landing'
 	const data = {
@@ -206,10 +205,10 @@ router.get('/templates', (req, res) => {
 			query: req.query,
 			user: req.user,
 			selected: sites[0],
-			templates: sites,
-			static: {
-				faq: require('../public/static/faq.json')
-			}
+			templates: sites
+			// static: {
+			// 	faq: require('../public/static/faq.json')
+			// }
 		})
 
 		res.render('templates', data)
@@ -476,160 +475,6 @@ router.get('/dashboard', (req, res) => {
 	})
 
 	res.render('account', data)
-})
-
-router.get('/landing', (req, res) => {
-	// const selected = 'landing'
-	const data = {
-		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
-	}
-
-	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
-	controllers.site.get({'template.status':'live', format:'vertex'})
-	.then(sites => {
-		sites.forEach((site, i) => {
-			site['hasVideo'] = false
-			if (site.template.video != null)
-				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
-
-			site['index'] = i
-			site['tags'] = site.tags.slice(0, 3) // use only first 3
-			site['description'] = utils.TextUtils.convertToHtml(site.description)
-		})
-
-		data['templates'] = sites
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			// stripe: process.env.STRIPE_PK_LIVE,
-			query: req.query,
-			user: req.user,
-			templates: sites,
-			static: {
-				faq: require('../public/static/faq.json')
-			}
-		})
-
-		// res.render('landing', data)
-		res.render('landing-2', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-router.get('/templates2', (req, res) => {
-	const selected = 'landing'
-	const data = {
-		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
-	}
-
-	controllers.site.get({'template.status':'live', format:'vertex'})
-	.then(sites => {
-		sites.forEach((site, i) => {
-			site['index'] = i
-			site['tags'] = site.tags.slice(0, 3) // use only first 3
-			site['description'] = utils.TextUtils.convertToHtml(site.description)
-
-			site['hasVideo'] = false
-			if (site.template.video != null)
-				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
-		})
-
-		data['templates'] = sites
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			stripe: process.env.STRIPE_PK_LIVE,
-			query: req.query,
-			user: req.user,
-			selected: sites[0],
-			templates: sites
-			// static: {
-			// 	faq: require('../public/static/faq.json')
-			// }
-		})
-
-		res.render('templates2', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-router.get('/template2/:slug', (req, res) => {
-	const data = {
-		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
-	}
-
-	// TODO: check if template is live
-	controllers.site.get({slug:req.params.slug}) // query template by slug
-	.then(results => {
-		if (results.length == 0){
-			throw new Error('Template not found')
-			return
-		}
-
-		const site = results[0]
-		site['hasVideo'] = hasVideo(site)
-		site['description'] = utils.TextUtils.convertToHtml(site.description)
-		data['template'] = site
-		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
-	})
-	.then(cloneSource => {
-		data.template['cloneSource'] = cloneSource
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			template: data.template,
-			user: req.user
-		})
-
-		res.render('template2', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-router.get('/blog2/:slug', (req, res) => {
-	const data = {
-		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
-	}
-
-	controllers.post.get({slug:req.params.slug})
-	.then(posts => {
-		if (posts.length == 0){
-			throw new Error('Post '+req.params.slug+' not found.')
-			return
-		}
-
-		data['post'] = posts[0]
-		data['isAuthor'] = (req.user) ? (req.user.id == data.post.author.id) : false
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			post: data.post,
-			user: req.user
-		})
-
-		res.render('blog2', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
 })
 
 module.exports = router
