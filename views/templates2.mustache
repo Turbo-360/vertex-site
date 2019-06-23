@@ -132,9 +132,13 @@
                 <div class="row">
                     {{#templates}}
                     <div class="col-md-4">
-                      <div class="card">
-                        <h3>{{name}}</h3>
-                        <img src="{{{image}}}=s256" />
+                      <div class="card mb-4" style="border-radius:3px">
+                        <div style="padding:16px">
+                          <h3><a href="/template/{{slug}}">{{name}}</a></h3>
+                        </div>
+                        <a href="/template/{{slug}}">
+                          <img src="{{{image}}}=s256-c" />
+                        </a>
                         <a href="/template/{{slug}}">View More</a>
                       </div>
                     </div>
