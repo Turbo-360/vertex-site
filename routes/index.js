@@ -522,6 +522,48 @@ router.get('/landing', (req, res) => {
 	})
 })
 
+router.get('/templates2', (req, res) => {
+	const selected = 'landing'
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	controllers.site.get({'template.status':'live', format:'vertex'})
+	.then(sites => {
+		sites.forEach((site, i) => {
+			site['index'] = i
+			site['tags'] = site.tags.slice(0, 3) // use only first 3
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
+
+			site['hasVideo'] = false
+			if (site.template.video != null)
+				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+		})
+
+		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			stripe: process.env.STRIPE_PK_LIVE,
+			query: req.query,
+			user: req.user,
+			selected: sites[0],
+			templates: sites
+			// static: {
+			// 	faq: require('../public/static/faq.json')
+			// }
+		})
+
+		res.render('templates2', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/template2/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
