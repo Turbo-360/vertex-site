@@ -27,28 +27,10 @@
 
     <!-- Bootstrap CSS / Color Scheme -->
     <link rel="stylesheet" href="https://cdn.turbo360-vertex.com/vertex360-cms-4hujkc/public/snap/css/blue.css" id="theme-color">
-		<style>
+    <style>
 			.logo {
 				width: 160px;
 			}
-
-      .post-content p {
-        margin-bottom: 0px;
-        line-height: 2.0;
-        font-size: 18px;
-      }
-
-      .post-content img {
-        margin: 12px 0px;
-      }
-
-      .post-header small {
-        font-size: 14px;
-      }
-
-      .post-header hr {
-        border-top: 1px solid #ddd;
-      }
 
       .icon-avatar {
         border-radius: 50%;
@@ -66,6 +48,38 @@
 
       .author-container h3 {
         text-transform: capitalize;
+      }
+
+      .template-header {
+        background: #fff;
+        padding: 24px;
+      }
+
+      .template-header small {
+        font-size: 14px;
+      }
+
+      .template-header p {
+        margin-bottom: 0px;
+        line-height: 2.0;
+        font-size: 18px;
+      }
+
+      .screenshot {
+        margin-bottom: 24px;
+        border: 1px solid #ddd;
+        padding: 3px;
+        background: #fff;
+      }
+
+      .btn-get-started {
+        width: 100%;
+        border-radius: 4px;
+      }
+
+      .bg-green {
+        background: #56b48c;
+        border-color: #56b48c;
       }
 		</style>
 </head>
@@ -108,32 +122,36 @@
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-8 mx-auto">
-                        <div class="post-header">
-                          <h1>{{post.title}}</h1>
-                          <img class="icon-avatar" src="{{{post.author.image}}}=s34-c" />
-                          <small>{{post.author.username}}</small>
+                        <div class="template-header">
+                          <h1>{{template.name}} Template</h1>
+                          <img class="icon-avatar" src="{{{template.profile.image}}}=s34-c" />
+                          <small>{{template.profile.username}}</small>
                           <span style="margin:16px">&bull;</span>
-                          <small>{{post.dateString}}</small>
+                          <small><a style="color:red" target="_blank" href="https://{{template.slug}}.vertex360.co">Live Example</a></small>
                           <hr />
-                          <img style="max-width:100%" src="{{{post.image}}}=s400" />
-                        </div>
-                    </div>
-                </div>
+                          <img style="max-width:100%;margin-bottom:20px" src="{{{template.image}}}=s1024" />
+                          <p class="mb-5">{{{template.description}}}</p>
+                          <h3>Screenshots</h3>
+                          {{#template.images}}
+                          <a target="_blank" href="{{{.}}}=s1024">
+                            <img class="screenshot" src="{{{.}}}=s512" />
+                          </a>
+                          {{/template.images}}
 
-                <div class="row mt-4">
-                    <div class="col-sm-8 mx-auto">
-                      <div class="post-content">
-                        {{{post.text}}}
-                      </div>
-                      <div class="author-container">
-                        <div style="">
-                          <img class="icon-avatar" src="{{{post.author.image}}}=s48-c" />
+                          <a href="/templates" class="btn btn-primary d-inline-flex flex-row align-items-center text-white btn-lg bg-green">
+                              Launch This Template
+                          </a>
                         </div>
-                        <div style="flex:1;padding-left:12px">
-                          <h3>{{post.author.firstName}} {{post.author.lastName}}</h3>
-                          <p class="text-muted">{{post.author.bio}}</p>
+
+                        <div class="author-container">
+                          <div style="">
+                            <img class="icon-avatar" src="{{{template.profile.image}}}=s48-c" />
+                          </div>
+                          <div style="flex:1;padding-left:12px">
+                            <h3>{{template.profile.firstName}} {{template.profile.lastName}}</h3>
+                            <p class="text-muted">{{template.profile.bio}}</p>
+                          </div>
                         </div>
-                      </div>
                     </div>
                 </div>
 
