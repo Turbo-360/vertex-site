@@ -25,7 +25,7 @@
   // }
 
   if (user != null){
-    $('#login-container').html('<a href="/me" class="nav-link btn btn-primary hidden-xs">My Account</a>')
+    $('#login-container').html('<a href="/me" class="nav-link btn btn-primary text-white hidden-xs">My Account</a>')
     $('#nav-menu').addClass('right-side-loggedin')
     $('#nav-login').hide()
     return
