@@ -138,9 +138,9 @@
                 <p class="text-center mt-4">To launch this template on your account and update its configuration with your content, enter the name of your site below.</p>
                 <hr />
               </div>
-              <div class="modal-footer pt-0">
-                <input style="background:#fffffa" class="form-control" type="text" id="site-name" placeholder="Your Site Name" />
-                <button type="button" class="btn btn-primary">Launch!</button>
+              <div id="btn-launch-container" class="modal-footer pt-0">
+                <input style="background:#fffffa" class="form-control" type="text" id="input-site-name" placeholder="Your Site Name" />
+                <button id="btn-launch-template" type="button" class="btn btn-primary">Launch!</button>
               </div>
             </div>
           </div>
@@ -149,5 +149,76 @@
         {{>register}}
         {{>footer}}
         {{>scripts}}
+        <script>
+          (function(){
+            // Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+
+            var data = window.__PRELOADED__
+            var selected = data.template // this is an array
+            var query = data.query // query params
+            var user = data.user
+
+            // checks if a template is ready when cloning:
+            var checkTemplate = function(siteSlug){
+              var body = {template:siteSlug}
+              window.vertexLib.postRequest('/account/check-template', body, function(err, response){
+                if (err){
+                  console.log('TEMPLATE NOT READY: ')
+                  setTimeout(function(){
+                    checkTemplate(siteSlug)
+                  }, 4000)
+                  return
+                }
+
+                // console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+                if (response.confirmation != 'success'){
+                  alert('Error - ' + response.message)
+                  return
+                }
+
+                // window.location.href = '/me?selected=sites' // redirect to account page
+                window.location.href = '/admin/'+siteSlug // redirect to site admin page
+              })
+            }
+
+            var launchTemplate = function(){
+              var body = {
+                name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+                source: selected.id // ID of the template being copied
+              }
+
+              if (body.name.length == 0){
+                alert('Please enter a name for your site')
+                return
+              }
+
+              $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
+              window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
+                if (err){
+                  alert('Error: ' + err.message)
+                  return
+                }
+
+                // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+                setTimeout(function(){
+                  checkTemplate(response.data.slug)
+                }, 4000)
+              })
+            }
+
+            $('#btn-launch-template').click(function(event){
+              if (event)
+                event.preventDefault()
+
+              if (user == null){
+                alert('Please log in or register to clone this site.')
+                return
+              }
+
+              launchTemplate()
+            })
+
+          })()
+        </script>
     </body>
 </html>
