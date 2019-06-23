@@ -1,0 +1,42 @@
+<script>
+  var vertexLib = {
+    postRequest: function(url, params, completion){
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: params,
+        success: function(response){
+          completion(null, response)
+        },
+        error: function(response){
+          completion(response, null)
+        }
+      })
+    },
+
+    getRequest: function(url, params, completion){
+      $.ajax({
+        url: url,
+        type: 'GET',
+        data: params,
+        success: function(response){
+          completion(null, response)
+        },
+        error: function(response){
+          completion(response, null)
+        }
+      })
+    }
+  }
+
+  window.vertexLib = vertexLib
+</script>
+<script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+<script src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
+<script src="{{{cdn}}}/snap/js/popper.min.js"></script>
+<script src="{{{cdn}}}/snap/js/bootstrap.min.js"></script>
+<script src="{{{cdn}}}/snap/js/feather.min.js"></script>
+<script src="{{{cdn}}}/snap/js/slick.min.js"></script>
+<script src="{{{cdn}}}/snap/js/scripts.js"></script>
+<script src="{{{cdn}}}/scripts/auth.js"></script>
+{{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}

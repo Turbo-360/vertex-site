@@ -126,15 +126,6 @@
 
         {{>register}}
         {{>footer}}
-
-        <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
-        <script src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
-        <script src="{{{cdn}}}/snap/js/popper.min.js"></script>
-        <script src="{{{cdn}}}/snap/js/bootstrap.min.js"></script>
-        <script src="{{{cdn}}}/snap/js/feather.min.js"></script>
-        <script src="{{{cdn}}}/snap/js/slick.min.js"></script>
-        <script src="{{{cdn}}}/snap/js/scripts.js"></script>
-        <script src="{{{cdn}}}/scripts/auth.js"></script>
-        {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
+        {{>scripts}}
     </body>
 </html>
