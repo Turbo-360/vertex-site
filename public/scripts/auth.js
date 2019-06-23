@@ -5,27 +5,27 @@
 
   var user = data.user
 
-  var postRequest = function(url, data, completion){
-    $.ajax({
-      url: url,
-      type: 'POST',
-      data: data,
-      success: function(response, status, xhr){
-        if (response.confirmation != 'success'){
-          completion(response, null) // 'data' is the error object here.
-          return
-        }
-
-        completion(null, response)
-      },
-      error: function(xhr, status, err){
-        completion(err, null)
-      }
-    })
-  }
+  // var postRequest = function(url, data, completion){
+  //   $.ajax({
+  //     url: url,
+  //     type: 'POST',
+  //     data: data,
+  //     success: function(response, status, xhr){
+  //       if (response.confirmation != 'success'){
+  //         completion(response, null) // 'data' is the error object here.
+  //         return
+  //       }
+  //
+  //       completion(null, response)
+  //     },
+  //     error: function(xhr, status, err){
+  //       completion(err, null)
+  //     }
+  //   })
+  // }
 
   if (user != null){
-    $('#login-container').html('<a href="/me" class="button hidden-xs">My Account</a>')
+    $('#login-container').html('<a href="/me" class="nav-link btn btn-primary hidden-xs">My Account</a>')
     $('#nav-menu').addClass('right-side-loggedin')
     $('#nav-login').hide()
     return
@@ -56,7 +56,7 @@
       return
     }
 
-    postRequest('/account/register', visitor, function(err, response){
+    window.vertexLib.postRequest('/account/register', visitor, function(err, response){
       if (err){
         alert(err.message)
         return
@@ -85,7 +85,7 @@
       return
     }
 
-    postRequest('/account/login', visitor, function(err, response){
+    window.vertexLib.postRequest('/account/login', visitor, function(err, response){
       if (err){
         alert(err.message)
         return
