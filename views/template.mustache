@@ -170,7 +170,7 @@
                   return
                 }
 
-                // console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+                console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
                 if (response.confirmation != 'success'){
                   alert('Error - ' + response.message)
                   return
@@ -199,7 +199,7 @@
                   return
                 }
 
-                // console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+                console.log('SITE LAUNCHED: ' + JSON.stringify(response))
                 setTimeout(function(){
                   checkTemplate(response.data.slug)
                 }, 4000)
