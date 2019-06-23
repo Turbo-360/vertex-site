@@ -490,7 +490,7 @@ router.post('/:action', function(req, res, next){
 		.catch(err => {
 			res.json({
 				confirmation: 'fail',
-				message: 'template not found'
+				message: 'template not found: '+siteSlug
 			})
 		})
 
