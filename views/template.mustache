@@ -152,18 +152,17 @@
         <script>
           (function(){
             // Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
-
             var data = window.__PRELOADED__
-            var selected = data.template // this is an array
-            var query = data.query // query params
+            var selected = data.template
             var user = data.user
+            // var query = data.query // query params
 
             // checks if a template is ready when cloning:
             var checkTemplate = function(siteSlug){
               var body = {template:siteSlug}
               window.vertexLib.postRequest('/account/check-template', body, function(err, response){
                 if (err){
-                  console.log('TEMPLATE NOT READY: ')
+                  console.log('TEMPLATE NOT READY: ' + siteSlug)
                   setTimeout(function(){
                     checkTemplate(siteSlug)
                   }, 4000)
