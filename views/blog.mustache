@@ -15,7 +15,7 @@
     <meta property="og:description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
 
     {{>styles}}
-		<style>
+    <style>
 			.logo {
 				width: 160px;
 			}
@@ -57,10 +57,17 @@
       }
 
       .sidebar-box {
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding-top: 8rem;
+      }
+
+      .sidebar-content {
         background: #fff;
+        min-width: 320px;
         padding: 16px;
-        position: fixed;
-        max-width: 350px
       }
 
       .sidebar-box h4 {
@@ -69,6 +76,10 @@
 
       .sidebar-box img {
         max-width:100%
+      }
+
+      .content-main {
+        padding-top: 8rem;
       }
 		</style>
 </head>
@@ -105,18 +116,21 @@
 
                     <div class="col-md-4 col-lg-4">
                       <div class="sidebar-box">
-                        <h4>Build Your Website</h4>
-                        <hr />
-                        <a href="/templates">
-                          <img src="https://lh3.googleusercontent.com/WfG4FNM7pFvI4HPJON9wT-Uh6sqM_4uusRKc2AJuHddEaEsKckdE2tSlwYgkC8P2dNnY_yUe0dexShUVLOYpy35wFv0=s512" />
-                        </a>
-                        <p class="mt-3">
-                          Vertex 360 is the easiest way to build a professional website with no coding
-                          skill necessary. Simply choose a template, enter your content and that's it.
-                          Click the button below to get started.
-                        </p>
-                        <a style="background:#56b48c;border-color:#56b48c;width:100%;border-radius:4px" class="btn btn-lg btn-primary" href="/templates">Get Started</a>
+                          <div class="sidebar-content">
+                            <h4>Build Your Website</h4>
+                            <hr />
+                            <a href="/templates">
+                            <img src="https://lh3.googleusercontent.com/WfG4FNM7pFvI4HPJON9wT-Uh6sqM_4uusRKc2AJuHddEaEsKckdE2tSlwYgkC8P2dNnY_yUe0dexShUVLOYpy35wFv0=s512" />
+                            </a>
+                            <p class="mt-3">
+                            Vertex 360 is the easiest way to build a professional website with no coding
+                            skill necessary. Simply choose a template, enter your content and that's it.
+                            Click the button below to get started.
+                            </p>
+                            <a style="background:#56b48c;border-color:#56b48c;width:100%;border-radius:4px" class="btn btn-lg btn-primary" href="/templates">Get Started</a>
+                         </div>
                       </div>
+
                     </div>
                 </div>
 
