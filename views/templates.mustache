@@ -16,6 +16,107 @@
 
     {{>styles}}
     <style>
+        .wrapper {
+            display: flex;
+            width: 100%;
+        }
+        #sidebar {
+            width: 250px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            color: #fff;
+            transition: all 0.3s;
+            padding-top: 10rem;
+        }
+        #sidebar ul li a,
+        #sidebar .sidebar-header {
+            padding-left: 2rem;
+        }
+        #sidebar ul li a:hover {
+            transition: all 0.2s;
+            color: #0000cc;
+        }
+        #sidebar ul li.active {
+            background: #f9f9f9;
+        }
+        #sidebar ul li.active a {
+            color: #0000cc;
+        }
+        #sidebar ul li {
+            padding: .5rem 0;
+        }
+        #content {
+            width: calc(100% - 250px);
+            min-height: 100vh;
+            transition: all 0.3s;
+            position: relative;
+            padding-top: 3rem;
+        }
+        #features {
+            min-height: 100vh;
+        }
+        #features .card {
+            margin-bottom: 1rem !important;
+            height: 300px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+        }
+        #features article {
+            margin-bottom: 3rem;
+        }
+        #features article h5 {
+            text-align: center;
+            font-size: 1.15rem;
+        }
+
+        @media (min-width: 820px) {
+            #features .container {
+                max-width: 93%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 200px;
+            }
+            #content {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 475px) {
+            #sidebar {
+                margin-left: 0;
+                height: auto;
+                width: 100%;
+                padding-left: 0;
+                padding-top: 7rem;
+                transition: all 0.3s;
+            }
+            .wrapper {
+                display: block;
+            }
+            .sidebar-header h5,
+            .list-unstyled {
+                text-align: center;
+            }
+            .list-unstyled {
+                margin-bottom: 0;
+            }
+            #sidebar ul li {
+                display: inline-block;
+                margin-right: .5rem;
+            }
+            #sidebar ul li a,
+            #sidebar .sidebar-header {
+                padding-left: 0;
+            }
+        }
+
 			.logo {
 				width: 160px;
 			}
@@ -77,35 +178,152 @@
           padding: 12px 5.5em;
         }
       }
-
 		</style>
 </head>
     <body>
       {{>nav}}
 
-        <!-- features section -->
-        <section class="py-6" id="features" style="background:#f9f9f9">
-            <div class="container mt-4">
-                <div class="row">
-                    {{#templates}}
-                    <div class="col-md-3">
-                      <div class="card mb-4" style="border-radius:3px">
-                        <div style="padding:12px">
-                          <h4 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h4>
-                        </div>
-                        <a href="/template/{{slug}}">
-                          <img style="width:100%" src="{{{image}}}=s512-c" />
-                        </a>
+      <div class="wrapper">
+
+          <!-- Sidebar -->
+          <nav id="sidebar">
+              <div class="sidebar-header">
+                  <h5>Categories</h5>
+              </div>
+              <ul class="list-unstyled components">
+                  <li class="active">
+                      <a href="#" class="sidebar-link" data-rel="all">All templates</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="landing">Landing</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="personal">Personal</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="business">Business</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="performer">Performer</a>
+                  </li>
+              </ul>
+          </nav>
+
+          <div id="content">
+              <!-- features section -->
+              <section class="py-6" id="features" style="background:#f9f9f9">
+                  <div class="container mt-4">
+                      <div class="row">
+
+                          <article class="col-md-6 performer all">
+                              <a href="/template/mixtape-1qhwa4">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/WfG4FNM7pFvI4HPJON9wT-Uh6sqM_4uusRKc2AJuHddEaEsKckdE2tSlwYgkC8P2dNnY_yUe0dexShUVLOYpy35wFv0=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/mixtape-1qhwa4">Mixtape</a></h5>
+                          </article>
+
+                          <article class="col-md-6 business all">
+                              <a href="/template/digital-gzmvir">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/7DjKSIegqinAz3cF1JoiFg7PmXUnDL1CI3BHzwZbD3-rsogRGQemDVn72CBorMpDl_MzZqND2fMR2nX6fNUteqPppg=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/digital-gzmvir">Digital</a></h5>
+                          </article>
+
+                          <article class="col-md-6 landing all">
+                              <a href="/template/nova-zfjcbp">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/hQurgvAYIptoAHYMenEu9LqUpAcI9AuOJgC--vt2LNEY5z9Ei4mx6da8NQdbfQUYkfKKknzIBzT4rx36v9RtdYIR=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/nova-zfjcbp">Nova</a></h5>
+                          </article>
+
+                          <article class="col-md-6 landing all">
+                              <a href="/template/fresh-h1stqg">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/LlwAHPBNJKw1o2-lLyZ5AwzWIUjEpMPZf--hp76dLJTKoFsU9Y7lA-i6PkmvBThxDa93ZU61e6vIQJ_s0WaHYxOGbg=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/fresh-h1stqg">Fresh</a></h5>
+                          </article>
+
+                          <article class="col-md-6 landing all">
+                              <a href="/template/app-plus-cfkce3">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/LxcAcUtRiYXfT5WFleQp2YkRTxQsGADusX4wj9IcNcrxpQW68TFrXcAlsAFZtjYWQHm7cRU5N97WNURsp-9V65TaryY=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/app-plus-cfkce3">App Plus</a></h5>
+                          </article>
+
+                          <article class="col-md-6 landing all">
+                              <a href="/template/evie-yzpymq">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/DqayfsiG_mt07qS1JIq3q-jiiskEnBG_aG_c23Ww8Hk1cvEAr4FsL1iikTF62gyh43qazbEzjjqd92Qf2ZoKTUuq2eI=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/evie-yzpymq">Evie</a></h5>
+                          </article>
+
+                          <article class="col-md-6 performer all">
+                              <a href="/template/rocket-man-9gnjll">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/baiYgW3WxujE8qu4ALBze_qU2T4nVF4PbA76s9vCokMpfYMgVNLCp6vUCFWAAOK0JMLQ179oI-sSq3k6Z4_OIsCy=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/rocket-man-9gnjll">Rocket Man</a></h5>
+                          </article>
+
+                          <article class="col-md-6 personal all">
+                              <a href="/template/resume-site-2-th0kli">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/Hr25YiJpSzE2IhIs86EUe0pVG4GO8E2Du6BI6HBB_LZPYU-Hfpdd7DZUIVSYW7Jj5sUc00M8ipXs-yDgLC6xyr0BCg=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/resume-site-2-th0kli">one page resume</a></h5>
+                          </article>
+
+                          <article class="col-md-6 business all">
+                              <a href="/template/delta-yqgzoh">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/v7gIiguYRjCLEp1N3cBkqhZTcB_gztBhVoaHgljRLEVqNLxZcUjXYwXOuE6pFW0yd4HzVIu1JyDc9YVnMoC5oSAOeg=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/delta-yqgzoh">Delta</a></h5>
+                          </article>
+
+                          <article class="col-md-6 personal all">
+                              <a href="/template/resume-website-4cpswl">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/twep9CWJLLaIY-E4NOY3rw5xBCwntN6p0tz5wjdBqy-biBZzExkOT1-mGIqrU1riWXcZYMJ4wFsfhYSDdyqpt1kn=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/resume-website-4cpswl">resume template</a></h5>
+                          </article>
+
+                          <article class="col-md-6 personal all">
+                              <a href="/template/professional-service-site-ztyr7k">
+                                  <div class="card mb-4" style="background-image: url('https:lh3.googleusercontent.com/UuKW2G4xc1CiN9HIC6pwRYzor1mE0Xi91-s_kDGmm95QgATyLcqS9a23ODcHXHQEgfBthvkNgVmC9OvU7r2jJggiOF4=s640');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/professional-service-site-ztyr7k">professional service</a></h5>
+                          </article>
+
+                          <article class="col-md-6 landing all">
+                              <a href="/template/great-landing-page-2qcx0x">
+                                  <div class="card mb-4" style="background-image: url('https://lh3.googleusercontent.com/eG87A0qjw-QoEBn_rOLR_Y-DBuniTEMt8LnW2yo7N66XjOqvPd71kgjKR4r7R1QWCzsvcHDZrEhNHJ9hJ3pPtVl2gw=s2040');"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px"><a href="/template/great-landing-page-2qcx0x">Startup Landing Page</a></h5>
+                          </article>
+
+
                       </div>
-                    </div>
-                    {{/templates}}
-                </div>
+                  </div>
+              </section>
+          </div>
+      </div>
 
-            </div>
-        </section>
+      {{>register}}
+      {{>footer}}
+      {{>scripts}}
+      <script>
+          $(document).ready(function () {
+              $('.sidebar-link').on('click', function (e) {
+                  e.preventDefault();
+                  $(this).parent().addClass('active').siblings().removeClass('active');
 
-        {{>register}}
-        {{>footer}}
-        {{>scripts}}
+                  var type = $(this).attr("data-rel");
+                  $("#features").fadeTo(100, 0.1);
+                  $("#features .container .row article").not("."+type).fadeOut();
+                  setTimeout(function() {
+                      $("."+type).fadeIn();
+                      $("#features").fadeTo(300, 1);
+                  }, 300);
+              });
+          });
+      </script>
     </body>
 </html>
