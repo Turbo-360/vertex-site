@@ -10,7 +10,7 @@
       <div class="modal-body">
         <input id="input-login-email" style="background:#fffffa" class="form-control mb-4" type="text" placeholder="Email" />
         <input id="input-login-password" style="background:#fffffa" class="form-control mb-4" type="password" placeholder="Password" />
-        <button style="width:100%" type="button" class="btn btn-primary btn-lg">Login</button>
+        <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg">Login</button>
         <hr />
       </div>
       <div class="text-center" style="padding:1.5rem">
@@ -28,6 +28,11 @@
         type: 'POST',
         data: params,
         success: function(response){
+          if (response.confirmation != 'success'){
+            completion(response, null)
+            return
+          }
+
           completion(null, response)
         },
         error: function(response){
@@ -42,6 +47,11 @@
         type: 'GET',
         data: params,
         success: function(response){
+          if (response.confirmation != 'success'){
+            completion(response, null)
+            return
+          }
+
           completion(null, response)
         },
         error: function(response){
