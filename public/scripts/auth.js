@@ -52,8 +52,8 @@
       event.preventDefault()
 
     var visitor = {
-      email: $('#input-login-email').val(),
-      password: $('#input-login-password').val()
+      email: $('#input-login-email').val().trim(),
+      password: $('#input-login-password').val().trim()
     }
 
     if (visitor.email.length == 0){
