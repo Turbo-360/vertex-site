@@ -103,6 +103,10 @@
                             <img class="screenshot" src="{{{.}}}=s512" />
                           </a>
                           {{/template.images}}
+                          
+                          {{#template.hasVideo}}
+                          <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{template.template.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          {{/template.hasVideo}}
 
                           <a href="#" data-toggle="modal" data-target="#launch-template-modal" class="btn btn-primary d-inline-flex flex-row align-items-center text-white btn-lg btn-get-started bg-green">
                               Launch This Template
