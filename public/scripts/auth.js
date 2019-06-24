@@ -19,7 +19,8 @@
     var visitor = {
       fullName: $('#input-register-name').val(),
       email: $('#input-register-email').val(),
-      password: $('#input-register-password').val()
+      password: $('#input-register-password').val(),
+      promoCode: $('#input-register-promo').val()
     }
 
     if (visitor.fullName.length == 0){
