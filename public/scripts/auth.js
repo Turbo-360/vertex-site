@@ -51,6 +51,11 @@
     if (event)
       event.preventDefault()
 
+    if (user != null){
+      window.location.href = '/me'
+      return
+    }
+
     var visitor = {
       email: $('#input-login-email').val().trim(),
       password: $('#input-login-password').val().trim()
