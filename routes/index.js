@@ -66,6 +66,7 @@ router.get('/', (req, res) => {
 	})
 })
 
+/*
 router.get('/community', (req, res) => {
 	const data = {
 		cdn: CDN,
@@ -110,6 +111,7 @@ router.get('/community', (req, res) => {
 		})
 	})
 })
+*/
 
 router.get('/submitpost', (req, res) => {
 	const data = {
@@ -177,7 +179,30 @@ router.get('/submitevent', (req, res) => {
 	// })
 })
 
+router.get('/blog', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
 
+	controllers.post.get()
+	.then(posts => {
+		data['posts'] = posts
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: req.user
+		})
+
+		res.render('blog', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
 
 router.get('/templates', (req, res) => {
 	const selected = 'landing'
@@ -292,6 +317,7 @@ router.get('/post/:slug', (req, res) => {
 	})
 })
 
+/*
 router.get('/comments/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
@@ -328,7 +354,10 @@ router.get('/comments/:slug', (req, res) => {
 		})
 	})
 })
+*/
 
+
+/*
 router.get('/profile/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
@@ -376,6 +405,7 @@ router.get('/profile/:slug', (req, res) => {
 		})
 	})
 })
+*/
 
 router.get('/event/:slug', (req, res) => {
 	const data = {
