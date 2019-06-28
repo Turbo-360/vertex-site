@@ -1,439 +1,247 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <head>
-  {{>head}}
-  <style>
-    .message-by {
-      margin-left: 50px !important;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vertex 360 | The Easiest Website Builder. Period.</title>
+    <meta name="description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
 
-    .user-link {
-      padding: 0px !important;
-      display: inherit !important;
-      color: #37b6bd !important;
-    }
+    <meta property="og:title" content="Vertex 360 | The Easiest Website Builder. Period." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.vertex360.co" />
+    <meta property="og:image" content="https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ=s260-c" />
+    <meta property="og:image:width" content="260px" />
+    <meta property="og:image:height" content="260px" />
+    <meta property="og:description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
 
-    .post-preview {
-      margin-bottom: 24px;
-      display: flex;
-    }
+    {{>styles}}
+    <style>
+        .wrapper {
+            display: flex;
+            width: 100%;
+        }
+        #sidebar {
+            width: 250px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            color: #fff;
+            transition: all 0.3s;
+            padding-top: 10rem;
+        }
+        #sidebar ul li a,
+        #sidebar .sidebar-header {
+            padding-left: 2rem;
+        }
+        #sidebar ul li a:hover {
+            transition: all 0.2s;
+            color: #0000cc;
+        }
+        #sidebar ul li.active {
+            background: #f9f9f9;
+        }
+        #sidebar ul li.active a {
+            color: #0000cc;
+        }
+        #sidebar ul li {
+            padding: .5rem 0;
+        }
+        #content {
+            width: calc(100% - 250px);
+            min-height: 100vh;
+            transition: all 0.3s;
+            position: relative;
+            padding-top: 3rem;
+        }
+        #features {
+            min-height: 100vh;
+        }
+        #features .card {
+            margin-bottom: 1rem !important;
+            height: 300px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+        }
+        #features article {
+            margin-bottom: 3rem;
+        }
+        #features article h5 {
+            text-align: center;
+            font-size: 1.15rem;
+        }
 
-    .post-preview p {
-      font-weight: 400;
-      line-height: 20px;
-    }
+        @media (min-width: 820px) {
+            #features .container {
+                max-width: 93%;
+            }
+        }
 
-    .post-preview span {
-      margin: 8px;
-      font-weight: 600;
-      color: #000;
-    }
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 200px;
+            }
+            #content {
+                width: 100%;
+            }
+        }
 
-    .post-preview small {
-      color: #999;
-      font-weight: 200;
-      font-size: 12px;
-    }
+        @media (max-width: 475px) {
+            #sidebar {
+                margin-left: 0;
+                height: auto;
+                width: 100%;
+                padding-left: 0;
+                padding-top: 7rem;
+                transition: all 0.3s;
+            }
+            .wrapper {
+                display: block;
+            }
+            .sidebar-header h5,
+            .list-unstyled {
+                text-align: center;
+            }
+            .list-unstyled {
+                margin-bottom: 0;
+            }
+            #sidebar ul li {
+                display: inline-block;
+                margin-right: .5rem;
+            }
+            #sidebar ul li a,
+            #sidebar .sidebar-header {
+                padding-left: 0;
+            }
+        }
 
-    .post-preview img {
-      float: left;
-      width: 44px;
-      margin-right: 12px;
-      border-radius: 50%;
-    }
+			.logo {
+				width: 160px;
+			}
 
-    .text-green {
-      color: #0f949b;
-    }
-
-    .text-blue {
-      color: blue;
-    }
-
-    .message-bubble input {
-      border: none !important;
-      box-shadow: none !important;
-      background: #f6f6f6;
-      height: 30px;
-      margin: 0px;
-      padding: 0px;
-    }
-
-    .message-bubble textarea {
-      font-size:14px;
-      font-weight:200;
-      min-height:72px;
-      resize:none;
-      border:none;
-      background:#f6f6f6;
-      box-shadow:none;
-      padding:0px;
-      margin-bottom: 0px !important;
-    }
-
-    .message-bubble button {
-      padding:0px 9px;
-      border-radius:3px;
-      margin:0px;
-    }
-
-    .message-avatar img {
-      width: 44px !important;
-      height: 44px  !important;
-    }
-
-    .vote-box {
-      text-align: center;
-      max-width: 30px;
-      line-height: 16px
-    }
-
-    .submit-button-container {
-      text-align: right;
-    }
-
-    .submit-button-container button {
-      padding: 0px 9px;
-      border-radius: 3px;
-      margin: 0px;
-    }
-
-    .comment-by small {
-      color: #999;
-      font-weight: 400;
-      font-size: 12px;
-    }
-
-    .comment-by span {
-      margin: 8px;
-      font-weight: 600;
-      color: #000;
-    }
-
-    .small-button {
-      flex:1;
-      text-align: center;
-      font-size: 14px;
-      margin: 0px;
-      padding: 8px !important;
-      border-radius: 4px !important;
-    }
-
-    .reply-box {
-      margin-bottom: 40px;
-    }
-
-    .reply-box p {
-      font-size: 15px;
-      line-height: 27px;
-      margin-bottom: 0px;
-    }
-
-    .reply-box img {
-      width: 24px;
-      border-radius: 50%;
-      margin-right: 6px;
-    }
-
-    .reply-box span {
-      margin: 8px;
-      font-weight: 600;
-      color: #000;
-    }
-
-    .reply-box a {
-      color: red;
-    }
-
-    @media (min-width: 768px)  {
-      #profile-card {
-        position:fixed;
-        width:310px;
+      .icon-avatar {
+        border-radius: 50%;
+        margin-right: 6px;
+        padding: 4px;
+        border: 1px solid #56b48c;
       }
-    }
 
-    @media (max-width: 375px) {
-      #profile-card {
-        position: inherit;
-        width: 100%
+      .author-container {
+        display: flex;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
+        padding: 20px 0px
       }
-    }
-  </style>
+
+      .author-container h3 {
+        text-transform: capitalize;
+      }
+
+      .template-header {
+        background: #fff;
+        padding: 24px;
+      }
+
+      .template-header small {
+        font-size: 14px;
+      }
+
+      .template-header p {
+        margin-bottom: 0px;
+        line-height: 2.0;
+        font-size: 18px;
+      }
+
+      .screenshot {
+        margin-bottom: 24px;
+        max-width: 100%;
+        border: 1px solid #ddd;
+        padding: 3px;
+        background: #fff;
+      }
+
+      .bg-green {
+        background: #56b48c;
+        border-color: #56b48c;
+      }
+
+      .btn-get-started {
+        width: 100%;
+        border-radius: 4px;
+        padding: 12px 11em;
+      }
+
+      @media (max-width: 768px) {
+        .btn-get-started {
+          padding: 12px 5.5em;
+        }
+      }
+
+      h5 {
+        text-transform: capitalize;
+      }
+		</style>
 </head>
+    <body>
+      {{>nav}}
 
-<body>
+      <div class="wrapper">
 
-<!-- Wrapper -->
-<div id="wrapper">
-  {{>nav}}
-  <div class="clearfix"></div>
+          <!-- Sidebar -->
+          <nav id="sidebar">
+              <div class="sidebar-header">
+                  <h5>Categories</h5>
+              </div>
+              <ul class="list-unstyled components">
+                  <li class="active">
+                      <a href="#" class="sidebar-link" data-rel="all">Sites</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="landing">About</a>
+                  </li>
+              </ul>
+          </nav>
 
-  <div id="dashboard">
-  	<div class="dashboard-nav hidden-xs">
-  		<div class="dashboard-nav-inner">
-  			<ul data-submenu-title="Profile">
-  				<li id="sidebar-templates" class="active"><a href="#"><i class="sl sl-icon-picture"></i> Templates</a></li>
-          <li id="sidebar-comments"><a href="#"><i class="sl sl-icon-bubbles"></i> Comments</a></li>
-  				<li id="sidebar-blog"><a href="#"><i class="sl sl-icon-book-open"></i> Blog Posts</a></li>
-  			</ul>
-  		</div>
-  	</div>
+          <div id="content">
+              <!-- features section -->
+              <section class="py-6" id="features" style="background:#f9f9f9">
+                  <div class="container mt-4">
+                      <div class="row">
 
-  	<div class="dashboard-content">
-  		<div class="row">
+                        {{#sites}}
+                        <article class="col-md-6 {{template.category}} all">
+                            <a href="/template/{{slug}}">
+                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
+                            </a>
+                            <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
+                        </article>
+                        {{/sites}}
 
-  			<div class="col-lg-8 col-md-8 hidden-xs">
-          <div class="dashboard-list-box margin-top-0">
-    				<h4 id="selected-header">TEMPLATES</h4>
-
-            <div id="selected-content">
-              <ul>
-                {{#sites}}
-                <li>
-      						<div class="list-box-listing" style="min-height:110px">
-      							<div class="list-box-listing-img" style="max-width:110px">
-                      <a href="/template/{{slug}}">
-                        <img src="{{{image}}}=s220-c" alt="Vertex 360">
-                      </a>
-                    </div>
-      							<div class="list-box-listing-content">
-      								<div class="inner">
-      									<h3><a href="/template/{{slug}}">{{name}}</a></h3>
-      									<span style="text-transform:capitalize">{{template.category}}</span>
-                        <div class="margin-top-20">
-                          <a href="/template/{{slug}}" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View Details</a>
-            							<a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
-                        </div>
-      								</div>
-      							</div>
-      						</div>
-      					</li>
-                {{/sites}}
-
-      				</ul>
-            </div>
-
-    			</div>
-  			</div>
-
-        <div class="col-lg-4 col-md-4">
-          {{#profile}}
-          <div id="profile-card" class="dashboard-list-box margin-top-0">
-            <h4 class="gray">Profile</h4>
-            <div class="dashboard-list-box-static">
-              <a href="/profile/{{profile.slug}}">
-                <img style="border-radius:50%" src="{{{profile.image}}}=s96-c">
-              </a>
-              <br /><br />
-              <small>Profile</small>
-              <h4 class="padding-left-0 margin-bottom-20 padding-top-0 padding-bottom-10">
-                <a style="text-transform:capitalize" href="/profile/{{profile.slug}}">{{profile.firstName}} {{profile.lastName}}</a>
-              </h4>
-              <p style="font-size:14px;line-height:20px">{{profile.bio}}</p>
-            </div>
+                      </div>
+                  </div>
+              </section>
+              {{>footer-dark}}
           </div>
-          {{/profile}}
-
-          {{^profile}}
-          <div class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
-            <h4 class="gray">Register or Login</h4>
-            <div class="dashboard-list-box-static">
-              <div class="input-container margin-left-0">
-                <input id="input-profile-firstName" type="text" placeholder="Email" />
-              </div>
-
-              <div class="input-container margin-left-0">
-                <input id="input-profile-lastName"type="text" placeholder="Password" />
-              </div>
-
-              <hr />
-              <div style="display:flex">
-                <button class="button small-button margin-right-10">LOG IN</button>
-                <button class="button small-button">JOIN</button>
-              </div>
-            </div>
-          </div>
-          {{/profile}}
-
-          <div id="create-template-form" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;display:none">
-            <h4 class="gray">Create Template</h4>
-            <div class="dashboard-list-box-static">
-
-              <div class="input-container margin-left-0">
-                <input id="input-template-name" type="text" placeholder="Name">
-              </div>
-
-              <div class="input-container margin-left-0">
-                <input id="input-template-description" type="text" placeholder="Description (optional)">
-              </div>
-
-              <div class="input-container margin-left-0">
-                <select id="input-template-category">
-                  <option value="base">Base</option>
-                  <option value="resume">Resume</option>
-                  <option value="landing">Landing</option>
-                  <option value="portfolio">Portfolio</option>
-                </select>
-              </div>
-
-              <hr>
-              <a href="#" id="btn-create-template" class="button btn-view">Create Template</a>
-            </div>
-          </div>
-        </div>
-
-        {{>copyright}}
-  		</div>
-  	</div>
-
-  </div>
-</div>
-
-  <script type="text/template" id="tpl-template-preview">
-    <li>
-      <div class="list-box-listing" style="min-height:110px">
-        <div class="list-box-listing-img" style="max-width:110px">
-          <a href="/template/<% slug %>">
-            <img src="<%{image}%>=s220-c" alt="Vertex 360">
-          </a>
-        </div>
-        <div class="list-box-listing-content">
-          <div class="inner">
-            <h3><a href="/template/<%slug%>"><%name%></a></h3>
-            <span style="text-transform:capitalize"><%template.category%></span>
-            <div class="margin-top-20">
-              <a href="/template/<%slug%>" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View Details</a>
-              <a target="_blank" href="https://<%slug%>.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
-            </div>
-          </div>
-        </div>
       </div>
-    </li>
-  </script>
 
-  <script type="text/template" id="tpl-comment">
-    <div class="reply-box" style="background:#fff;padding:16px 30px;border-bottom:1px solid #ededed;margin-bottom:0px">
-      <a href="/profile/<% profile.slug %>">
-        <img src="<%{profile.image}%>=s96-c" alt="" />
-      </a>
-      <small>
-        by <a class="text-blue" href="/profile/<% profile.slug %>"><% profile.username %></a>
-        <span>·</span>
-        <% dateString %>
-      </small>
-      <p class="margin-top-10"><%{text}%></p>
-    </div>
-  </script>
+      {{>scripts}}
+      <script>
+          $(document).ready(function () {
+              $('.sidebar-link').on('click', function (e) {
+                  e.preventDefault();
+                  $(this).parent().addClass('active').siblings().removeClass('active');
 
-  <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
-  <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-  <script type="text/javascript" src="{{{cdn}}}/dist/js/referrer.min.js"></script>
-  <script>
-    (function(){
-      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
-      var data = window.__PRELOADED__
-      var profile = data.profile // profile of the page
-      var user = data.user // current user
-      var content = data.content
-      var isFetching = false
-      var sidebarItems = ['templates', 'comments', 'blog']
-      var selected = 'templates' // default
-
-      var getRequest = function(url, completion){
-        $.ajax({
-          url: url,
-          type: 'GET',
-          data: null,
-          success: function(response){
-            completion(null, response)
-          },
-          error: function(response){
-            completion(response, null)
-          }
-        })
-      }
-
-      var reloadUI = function(){
-        $('#selected-header').html(selected.toUpperCase())
-        sidebarItems.forEach(function(item){
-          if (item == selected)
-            $('#sidebar-'+item).addClass('active')
-          else
-            $('#sidebar-'+item).removeClass('active')
-        })
-
-        if (selected == 'templates'){
-          var templatesHtml = '<ul>'
-          var tpl = $('#tpl-template-preview').html()
-          content.templates.forEach(function(template){
-            templatesHtml += Mustache.render(tpl, template)
-          })
-
-          templatesHtml += '</ul>'
-          $('#selected-content').html(templatesHtml)
-          return
-        }
-
-        if (selected == 'blog'){
-          var posts = content['posts']
-          if (posts==null){ // fetch data
-            getRequest('/api/post?author.id='+profile.id, function(err, response){
-              if (err){
-                return
-              }
-
-              console.log('POSTS == ' + JSON.stringify(response))
-              content['posts'] = response.results
-              reloadUI()
-            })
-            return
-          }
-
-          $('#selected-content').html('')
-          return
-        }
-
-        if (selected == 'comments'){
-          var comments = content['comments']
-          if (comments==null){ // fetch data
-            getRequest('/api/comment?profile.id='+profile.id, function(err, response){
-              if (err){
-                return
-              }
-
-              // console.log('COMMENTS == ' + JSON.stringify(response))
-              content['comments'] = response.results
-              reloadUI()
-            })
-
-            return
-          }
-
-          var commentHtml = ''
-          var tpl = $('#tpl-comment').html()
-          comments.forEach(function(comment){
-            commentHtml += Mustache.render(tpl, comment)
-          })
-
-          $('#selected-content').html(commentHtml)
-          return
-        }
-      }
-
-      sidebarItems.forEach(function(item){
-        $('#sidebar-'+item).click(function(event){
-          if (event)
-            event.preventDefault()
-
-          if (item == selected) // no change
-            return
-
-          selected = item
-          reloadUI()
-        })
-      })
-    })()
-  </script>
-
-  {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
-</body>
+                  var type = $(this).attr("data-rel");
+                  $("#features").fadeTo(100, 0.1);
+                  $("#features .container .row article").not("."+type).fadeOut();
+                  setTimeout(function() {
+                      $("."+type).fadeIn();
+                      $("#features").fadeTo(300, 1);
+                  }, 300);
+              });
+          });
+      </script>
+    </body>
 </html>
