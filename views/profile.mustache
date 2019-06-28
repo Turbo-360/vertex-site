@@ -192,14 +192,15 @@
           <!-- Sidebar -->
           <nav id="sidebar">
               <div class="sidebar-header">
-                  <h5>Categories</h5>
+                  <img style="border-radius:50%" src="{{{profile.image}}}=s160-c" />
+                  <h5 class="mt-5">{{profile.firstName}} {{profile.lastName}}</h5>
               </div>
               <ul class="list-unstyled components">
                   <li class="active">
                       <a href="#" class="sidebar-link" data-rel="all">Sites</a>
                   </li>
                   <li>
-                      <a href="#" class="sidebar-link" data-rel="landing">About</a>
+                      <a href="#" class="sidebar-link" data-rel="bio">About</a>
                   </li>
               </ul>
           </nav>
@@ -211,13 +212,20 @@
                       <div class="row">
 
                         {{#sites}}
-                        <article class="col-md-6 {{template.category}} all">
+                        <article class="col-md-6 all">
                             <a href="/template/{{slug}}">
                                 <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
                             </a>
                             <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
                         </article>
                         {{/sites}}
+
+                        <article class="col-md-10 offset-md-1 bio">
+                            <a href="/template/{{slug}}">
+                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
+                            </a>
+                            <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
+                        </article>
 
                       </div>
                   </div>
@@ -229,7 +237,7 @@
       {{>scripts}}
       <script>
           $(document).ready(function () {
-              $('.sidebar-link').on('click', function (e) {
+              $('.sidebar-link').on('click', function(e){
                   e.preventDefault();
                   $(this).parent().addClass('active').siblings().removeClass('active');
 
