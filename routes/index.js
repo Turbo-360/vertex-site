@@ -356,8 +356,6 @@ router.get('/comments/:slug', (req, res) => {
 })
 */
 
-
-/*
 router.get('/profile/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
@@ -405,7 +403,6 @@ router.get('/profile/:slug', (req, res) => {
 		})
 	})
 })
-*/
 
 router.get('/event/:slug', (req, res) => {
 	const data = {
