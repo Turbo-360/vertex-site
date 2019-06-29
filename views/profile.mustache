@@ -221,10 +221,11 @@
                         {{/sites}}
 
                         <article style="display:none" class="col-md-10 offset-md-1 bio">
-                            <a href="/template/{{slug}}">
-                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
-                            </a>
-                            <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
+                            <h5>Meet {{profile.firstName}}</h5>
+                            <hr />
+                            <p>
+                              {{profile.bio}}
+                            </p>
                         </article>
 
                       </div>
