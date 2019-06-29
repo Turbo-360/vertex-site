@@ -52,6 +52,18 @@ const checkCollection = (appSlug, collectionName) => {
 	})
 }
 
+const currentUser = (req) => {
+	return {
+		id: req.user.id,
+		username: req.user.username,
+		firstName: req.user.firstName,
+		lastName: req.user.lastName,
+		email: req.user.email,
+		image: req.user.image,
+		slug: req.user.slug
+	}
+}
+
 // this endpoint checks to see if all the collections for a specified
 // app has the requisite "seed" data on deployment. If not, it
 // seeds the collection with an empty set:
@@ -99,7 +111,7 @@ router.get('/:slug', (req, res) => {
 	}
 
 	let site = null
-	let currentUser = null
+	let currentUser = currentUser(req)
 	controllers.site.get({slug:req.params.slug})
 	.then(data => {
 		if (data.length == 0){
@@ -111,17 +123,21 @@ router.get('/:slug', (req, res) => {
 		return controllers.profile.getById(req.user.id, true)
 	})
 	.then(user => {
-		currentUser = {
-			id: req.user.id,
-			username: req.user.username,
-			firstName: req.user.firstName,
-			lastName: req.user.lastName,
-			email: req.user.email,
-			image: req.user.image,
-			slug: req.user.slug,
-			creditCard: user.creditCard, // this is why we fetch the raw profile
-			stripeId: user.stripeId // this is why we fetch the raw profile
-		}
+		// currentUser = {
+		// 	id: req.user.id,
+		// 	username: req.user.username,
+		// 	firstName: req.user.firstName,
+		// 	lastName: req.user.lastName,
+		// 	email: req.user.email,
+		// 	image: req.user.image,
+		// 	slug: req.user.slug,
+		// 	creditCard: user.creditCard, // this is why we fetch the raw profile
+		// 	stripeId: user.stripeId // this is why we fetch the raw profile
+		// }
+
+		// this is why we fetch the raw profile
+		currentUser['creditCard'] = user.creditCard
+		currentUser['stripeId'] = user.stripeId
 
 		let selected = 'settings'
 		if (req.query)
@@ -137,7 +153,8 @@ router.get('/:slug', (req, res) => {
 			}
 		}
 
-		res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
+		// res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
+		res.render('admin/main', {pageConfig: JSON.stringify(reducers)})
 	})
 	.catch(err => {
 		res.json({
@@ -147,6 +164,29 @@ router.get('/:slug', (req, res) => {
 	})
 })
 
+router.get('/pages/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	let currentUser = currentUser(req)
+	controllers.site.get({slug:req.params.slug})
+	.then(sites => {
+		res.json({
+			confirmation: 'success',
+			data: 'page editor'
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+/*
 router.get('/cms/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -176,6 +216,7 @@ router.get('/cms/:slug', (req, res) => {
 		})
 	})
 })
+*/
 
 // this is no longer in use
 /*
