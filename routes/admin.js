@@ -52,7 +52,7 @@ const checkCollection = (appSlug, collectionName) => {
 	})
 }
 
-const currentUser = (req) => {
+const getCurrentUser = (req) => {
 	return {
 		id: req.user.id,
 		username: req.user.username,
@@ -111,7 +111,7 @@ router.get('/:slug', (req, res) => {
 	}
 
 	let site = null
-	let currentUser = currentUser(req)
+	let currentUser = getCurrentUser(req)
 	controllers.site.get({slug:req.params.slug})
 	.then(data => {
 		if (data.length == 0){
