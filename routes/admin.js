@@ -141,7 +141,6 @@ router.get('/:slug', (req, res) => {
 			}
 		}
 
-		// res.render('admin/page', {pageConfig: JSON.stringify(reducers)})
 		res.render('admin/main', {pageConfig: JSON.stringify(reducers)})
 	})
 	.catch(err => {
@@ -161,10 +160,23 @@ router.get('/pages/:slug', (req, res) => {
 	let currentUser = getCurrentUser(req)
 	controllers.site.get({slug:req.params.slug})
 	.then(sites => {
-		res.json({
-			confirmation: 'success',
-			data: 'page editor'
-		})
+		if (sites.length == 0){
+			throw new Error('Site '+req.params.slug+' not found.')
+			return
+		}
+
+		const site = sites[0]
+		const reducers = {
+			user: {currentUser: currentUser},
+			page: {selected:'home'},
+			app: {
+				site_id: site.id,
+				apiKey: site.api.key,
+				summary: site
+			}
+		}
+
+		res.render('admin/pages', {pageConfig: JSON.stringify(reducers)})
 	})
 	.catch(err => {
 		res.json({
