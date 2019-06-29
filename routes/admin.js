@@ -123,18 +123,6 @@ router.get('/:slug', (req, res) => {
 		return controllers.profile.getById(req.user.id, true)
 	})
 	.then(user => {
-		// currentUser = {
-		// 	id: req.user.id,
-		// 	username: req.user.username,
-		// 	firstName: req.user.firstName,
-		// 	lastName: req.user.lastName,
-		// 	email: req.user.email,
-		// 	image: req.user.image,
-		// 	slug: req.user.slug,
-		// 	creditCard: user.creditCard, // this is why we fetch the raw profile
-		// 	stripeId: user.stripeId // this is why we fetch the raw profile
-		// }
-
 		// this is why we fetch the raw profile
 		currentUser['creditCard'] = user.creditCard
 		currentUser['stripeId'] = user.stripeId
@@ -170,7 +158,7 @@ router.get('/pages/:slug', (req, res) => {
 		return
 	}
 
-	let currentUser = currentUser(req)
+	let currentUser = getCurrentUser(req)
 	controllers.site.get({slug:req.params.slug})
 	.then(sites => {
 		res.json({
