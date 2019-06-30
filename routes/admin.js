@@ -102,16 +102,25 @@ router.post('/seed', (req, res) => {
 
 
 // fetch page html
-router.post('/page/:slug', (req, res) => {
+router.post('/page', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
 		return
 	}
 
-	const selectedPage = req.query.selected || '/' // default to home
-	const stagingUrl = 'https://'+req.params.slug+'.vertex360.co'
+	const endpoint = req.body.endpoint
+	if (endpoint == null){
+		res.json({
+			confirmation:'fail',
+			message: 'missing endpoint parameter'
+		})
+		return
+	}
+
+	// const selectedPage = req.query.selected || '/' // default to home
+	// const stagingUrl = 'https://'+req.params.slug+'.vertex360.co'
 	const headers = {'Accept':'application/json', 'turbo-vertex-client':'admin'}
-	utils.HTTP.get(stagingUrl, null, headers)
+	utils.HTTP.get(endpoint, null, headers)
 	.then(payload => {
 		res.send(payload)
 	})
