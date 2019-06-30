@@ -37,12 +37,13 @@ module.exports = {
 		}
 	},
 
-	get: function(endpoint, params){
+	get: function(endpoint, params, headers){
+		const reqHeaders = headers || {'Accept': 'application/json'}
 		return new Promise(function(resolve, reject){
 			superagent
 			.get(endpoint)
 			.query(params)
-			// .set('Accept', 'application/json')
+			.set(reqHeaders)
 			.end(function(err, res) {
 				if (err){
 					reject(err)
