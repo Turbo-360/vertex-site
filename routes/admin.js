@@ -139,8 +139,7 @@ router.post('/config', (req, res) => {
 		return
 	}
 
-	const headers = {'Accept':'application/json', 'turbo-vertex-client':'widget'}
-	utils.HTTP.get(endpoint, null, headers)
+	utils.HTTP.get(endpoint, null, {'Accept':'application/json', 'turbo-vertex-client':'widget'})
 	.then(payload => {
 		const jsonPageConfig = JSON.parse(payload)
 		res.send(jsonPageConfig)
