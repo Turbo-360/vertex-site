@@ -123,6 +123,35 @@ router.post('/page/:slug', (req, res) => {
 	})
 })
 
+// fetch page config
+router.post('/config', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	const endpoint = req.body.endpoint
+	if (endpoint == null){
+		res.json({
+			confirmation:'fail',
+			message: 'missing endpoint parameter'
+		})
+		return
+	}
+
+	const headers = {'Accept':'application/json', 'turbo-vertex-client':'widget'}
+	utils.HTTP.get(endpoint, null, headers)
+	.then(payload => {
+		res.send(payload)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
