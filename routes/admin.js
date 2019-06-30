@@ -100,6 +100,28 @@ router.post('/seed', (req, res) => {
 	})
 })
 
+
+// fetch page html
+router.post('/page/:slug', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	const selectedPage = req.query.selected || '/' // default to home
+	const stagingUrl = 'https://'+req.params.slug+'.vertex360.co'
+	utils.HTTP.get(stagingUrl)
+	.then(payload => {
+		res.send(payload)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -182,26 +204,6 @@ router.get('/pages/:slug', (req, res) => {
 	})
 })
 
-// fetch page html
-router.post('/page/:slug', (req, res) => {
-	if (req.user == null){
-		res.redirect('/')
-		return
-	}
-
-	const selectedPage = req.query.selected || '/' // default to home
-	const stagingUrl = 'https://'+req.params.slug+'.vertex360.co'
-	utils.HTTP.get(stagingUrl)
-	.then(payload => {
-		res.send(payload)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
 
 /*
 router.get('/cms/:slug', (req, res) => {
