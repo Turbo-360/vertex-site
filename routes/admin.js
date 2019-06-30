@@ -68,10 +68,6 @@ const getCurrentUser = (req) => {
 // app has the requisite "seed" data on deployment. If not, it
 // seeds the collection with an empty set:
 router.post('/seed', (req, res) => {
-	// const body = {
-	// 	app: 'rocket-man-9gnjll'
-	// }
-
 	if (req.body.app == null){
 		res.json({
 			confirmation: 'fail',
@@ -187,7 +183,7 @@ router.get('/pages/:slug', (req, res) => {
 })
 
 // fetch page html
-router.get('/page/:slug', (req, res) => {
+router.post('/page/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
 		return
