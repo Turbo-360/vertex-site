@@ -110,7 +110,8 @@ router.post('/page/:slug', (req, res) => {
 
 	const selectedPage = req.query.selected || '/' // default to home
 	const stagingUrl = 'https://'+req.params.slug+'.vertex360.co'
-	utils.HTTP.get(stagingUrl)
+	const headers = {'Accept':'application/json', 'turbo-vertex-client':'admin'}
+	utils.HTTP.get(stagingUrl, null, headers)
 	.then(payload => {
 		res.send(payload)
 	})
