@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<head>
+  <title>Vertex 360 | Powerful Website Builder. Easy, Fast, Professional.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="{{{cdn}}}/dist/css/style.min.css">
+  <link rel="icon" href="https://lh3.googleusercontent.com/5SVrpLI9utkuVJbQb48cpD3tar59mgWaWSAM73Ghj8dxFJMD2UOzkhO5ptWDd2uV2eqgSvDCSa-Ad8aOrygXx6nv=s32-c" type="image/png" />
+
+  <style>
+    .list-box-listing-img {
+      max-width: 96px !important;
+    }
+
+    .my-profile textarea {
+      max-height: 120px;
+    }
+
+    .btn-view {
+      padding: 8px !important;
+      font-size: 14px !important;
+      margin: 0px 10px 0px 0px !important;
+      width: 100% !important;
+      border-radius: 4px !important;
+      text-align: center !important;
+    }
+
+    .input-container select {
+      line-height: 14px;
+      max-width: 100%;
+      height: 36px;
+      border: none;
+      background: #f9f9f9;
+      padding: 3px 3px 3px 8px;
+    }
+
+    .sidebar-menu-option {
+      margin-left: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="wrapper">
+  <header id="header-container" class="fixed fullwidth">
+  	<div id="header" class="not-sticky">
+  		<div class="container">
+
+  			<div class="left-side">
+
+  				<div id="logo">
+  					<a href="/">
+              <img src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" alt="Vertex 360">
+            </a>
+  				</div>
+
+  				<div class="mmenu-trigger">
+  					<button class="hamburger hamburger--collapse" type="button">
+  						<span class="hamburger-box">
+  							<span class="hamburger-inner"></span>
+  						</span>
+  					</button>
+  				</div>
+  			</div>
+
+  			<div id="nav-menu" class="right-side">
+          <div class="header-widget hidden-xs hidden-sm">
+            <nav id="navigation" class="style-1">
+    					<ul id="responsive">
+                <li><a href="/">Home</a></li>
+                <li><a href="/templates">Templates</a></li>
+                <li><a href="/blog">Blog</a></li>
+  							<li><a id="nav-login" href="#sign-in-dialog" class="popup-with-zoom-anim">Login</a></li>
+    					</ul>
+    				</nav>
+            <div id="login-container" class="hidden-xs hidden-sm">
+    					<a id="btn-login" href="#sign-in-dialog" class="button with-icon popup-with-zoom-anim">JOIN <i class="sl sl-icon-login" style="padding-left:4px"></i></a>
+            </div>
+  				</div>
+  			</div>
+
+  		</div>
+  	</div>
+  </header>
+
+<div class="clearfix"></div>
+
+<div id="dashboard">
+	<div class="dashboard-nav">
+		<div class="dashboard-nav-inner">
+			<ul data-submenu-title="Account">
+				<li id="list-item-profile"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-user-following"></i> Profile</a></li>
+				<li id="list-item-sites"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-docs"></i> Sites</a></li>
+        <li><a style="margin-left:4px" href="/account/logout"><i class="sl sl-icon-close"></i> Log Out</a></li>
+        <li><a style="width:89%;border-radius:4px;margin-left:4px;background:#357d3e" class="button" href="/templates"><i class="sl sl-icon-plus"></i> Create Your Site</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="dashboard-content">
+
+		<div class="row">
+
+			<div class="col-lg-8 col-md-8">
+        <div id="content-profile" class="dashboard-list-box margin-top-0">
+          <a style="float:right;border-radius:4px;background:#357d3e;margin-top:16px;margin-right:16px" class="button" href="/templates"><i class="sl sl-icon-plus"></i> Create Your Site</a>
+					<h4 class="gray">Profile Details</h4>
+					<div class="dashboard-list-box-static">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="input-row">
+                  <div class="input-label">Image</div>
+                  <div class="input-container">
+                    <img style="max-width:160px;margin-bottom:16px" id="profile-image" src="{{user.image}}=s512-c" alt="Vertex 360" />
+                    <span>Click to Change</span>
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <div class="input-label">First Name</div>
+                  <div class="input-container">
+                    <input id="input-profile-firstName" type="text" value="{{user.firstName}}" />
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <div class="input-label">Last Name</div>
+                  <div class="input-container">
+                    <input id="input-profile-lastName"type="text" value="{{user.lastName}}" />
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <div class="input-label">Username</div>
+                  <div class="input-container">
+                    <input id="input-profile-username" type="text" value="{{user.username}}" />
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <div class="input-label">Tags</div>
+                  <div class="input-container">
+                    <input id="input-profile-tags" type="text" value="{{user.tags}}" />
+                  </div>
+                </div>
+
+                <div class="input-row">
+                  <div class="input-label">Bio</div>
+                  <div class="input-container">
+                    <textarea id="input-profile-bio" rows="10">{{user.bio}}</textarea>
+                  </div>
+                </div>
+
+                <hr />
+              </div>
+					</div>
+          <div style="text-align:right">
+            <a href="#sign-in-dialog" id="btn-change-pw" class="button margin-top-15 margin-right-10 popup-with-zoom-anim">Change Password</a>
+            <a href="#" id="btn-update-profile" class="button margin-top-15">Update Profile</a>
+          </div>
+				</div>
+			</div>
+
+      <div id="content-sites" class="dashboard-list-box margin-top-0">
+        <h4 class="gray">Manage Your Sites</h4>
+        <ul>
+          {{#sites}}
+          <li>
+            <div class="list-box-listing">
+              <div class="list-box-listing-img">
+                <a target="_blank" href="https://www.vertex360.co/template/{{slug}}">
+                  <img src="{{image}}=s512-c" alt="Vertex 360 | {{name}}" />
+                </a>
+              </div>
+              <div class="list-box-listing-content">
+                <div class="inner">
+                  <h3><a target="_blank" href="https://www.vertex360.co/template/{{slug}}">{{name}}</a></h3>
+                  <span>{{template.category}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="buttons-to-right" style="bottom:0%;top:unset;opacity:1.0">
+              <a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> View Site</a>
+              <a href="/admin/{{slug}}" class="button"><i class="sl sl-icon-close"></i> Manage</a>
+            </div>
+          </li>
+          {{/sites}}
+        </ul>
+      </div>
+      {{>copyright}}
+		</div>
+
+    <div class="col-lg-4 col-md-4">
+      <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
+        <h4 class="gray">Profile</h4>
+        <div class="dashboard-list-box-static">
+          <a href="/profile/{{user.slug}}">
+            <img style="border-radius:50%" src="{{{user.image}}}=s96-c" />
+          </a>
+          <br />
+          <br />
+          <small>Profile</small>
+          <h4 class="padding-left-0 margin-bottom-20 padding-top-0 padding-bottom-10">
+            <a style="text-transform:capitalize" href="/profile/{{user.slug}}">{{user.firstName}} {{user.lastName}}</a>
+          </h4>
+          <p style="font-size:14px;line-height:20px">{{user.bio}}</p>
+          <a href="/profile/{{user.slug}}" class="button btn-view">View Full Profile</a>
+        </div>
+      </div>
+
+      <div id="create-template-form" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;display:none">
+        <h4 class="gray">Create Template</h4>
+        <div class="dashboard-list-box-static">
+
+          <div class="input-container margin-left-0">
+            <input id="input-template-name" type="text" placeholder="Name" />
+          </div>
+
+          <div class="input-container margin-left-0">
+            <input id="input-template-description" type="text" placeholder="Description (optional)" />
+          </div>
+
+          <div class="input-container margin-left-0">
+            <select id="input-template-category">
+              <option value="base">Base</option>
+              <option value="resume">Resume</option>
+              <option value="landing">Landing</option>
+              <option value="portfolio">Portfolio</option>
+              <option value="professional">Professional</option>
+              <option value="performer">Performer</option>
+              <option value="agency">Agency</option>
+              <option value="community">Community</option>
+            </select>
+          </div>
+
+          <hr />
+          <a href="#" id="btn-create-template" class="button btn-view">Create Template</a>
+        </div>
+      </div>
+    </div>
+
+	</div>
+
+</div>
+
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide" style="background:#fffffa">
+  <div class="small-dialog-header">
+    <img style="max-width:180px" src="https://lh3.googleusercontent.com/LZSrYzE4jotCF5YwMk_r0qSZ4GSmft_KmvWFN0Q0dq7OD9kwWpuz8AJqMlyNYZDy5X7stxJIoHIO9ZZijnAdJF1yXg=s360" />
+  </div>
+  <div class="sign-in-form style-1">
+    <h3>Reset Password</h3>
+    <hr />
+    <p class="form-row form-row-wide">
+      <label for="username">New Password:
+        <i class="im im-icon-Lock-2"></i>
+        <input id="input-password-1" type="password" class="input-text" placeholder="new password" />
+      </label>
+    </p>
+
+    <p class="form-row form-row-wide">
+      <label for="password">Re-Type New Password:
+        <i class="im im-icon-Lock-2"></i>
+        <input id="input-password-2" type="password" class="input-text" placeholder="re-type new password" />
+      </label>
+    </p>
+    <a href="#" id="btn-update-password" class="button fw margin-top-10">Reset Password</a>
+  </div>
+</div>
+
+</div>
+
+  <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/account.min.js"></script>
+</body>
+</html>

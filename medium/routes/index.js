@@ -40,6 +40,61 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/me', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	const allSites = []
+	controllers.site.get({'profile.id':req.user.id, format:'vertex', origin:'vertex360'})
+	.then(sites => {
+		sites.forEach(site => {
+			allSites.push(site)
+		})
+
+		// Fetch collaborator sites also:
+		return controllers.site.get({'collaborators.id':req.user.id, format:'vertex', origin:'vertex360'})
+	})
+	.then(sites => {
+		sites.forEach(site => {
+			allSites.push(site)
+		})
+
+		const currentUser = {
+			id: req.user.id,
+			username: req.user.username,
+			slug: req.user.slug,
+			firstName: req.user.firstName,
+			lastName: req.user.lastName,
+			image: req.user.image,
+			bio: req.user.bio,
+			tags: req.user.tags.join(',')
+		}
+
+		const data = {
+			cdn: CDN,
+			sites: allSites,
+			user: currentUser
+		}
+
+		data['preloaded'] = JSON.stringify({
+			user: currentUser,
+			sites: allSites,
+			selected: req.query.selected || 'profile',
+			query: req.query
+		})
+
+		res.render('account', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/post/:slug', (req, res) => {
   const data = {
 		cdn: CDN,
