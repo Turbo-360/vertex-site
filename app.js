@@ -28,7 +28,8 @@ app.use(compression())
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'))
+// app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'medium'))
 app.set('view engine', 'mustache')
 app.engine('mustache', require('hogan-middleware').__express)
 
@@ -106,7 +107,8 @@ const requireHTTPS = (req, res, next) => {
 app.use(requireHTTPS)
 
 // import routes
-const index = require('./routes/index')
+// const index = require('./routes/index')
+const index = require('./medium/routes/index')
 const api = require('./routes/api')
 const account = require('./routes/account')
 const admin = require('./routes/admin')
