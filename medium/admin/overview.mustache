@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+</head>
+
+<body style="padding-top:70px">
+  {{>nav}}
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+      <h1>Admin overview page</h1>
+      <a target="_blank" class="btn btn-success" href="https://{{site.slug}}.vertex360.co/">View Site</a>
+			<hr />
+		</div>
+    <div class="col-md-4">
+      <h1>{{site.name}}</h1>
+      <ul>
+        <li><a href="/admin/pages/{{site.slug}}">PAGES</a></li>
+        <li><a href="/admin/cms/{{site.slug}}">CMS</a></li>
+      </ul>
+		</div>
+
+	</div>
+
+  <script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/mustache.js"></script>
+</body>
+</html>
