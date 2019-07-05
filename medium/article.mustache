@@ -26,9 +26,9 @@
 				<a class="text-danger" href="#">Stories</a>
 			</p>
 			<h1 style="font-weight:600" class="display-5 mb-3">{{post.title}}</h1>
-			<p class="mb-3">
-				 Analysts told CNBC that the currency could hit anywhere between $1.35-$1.40 if the deal gets passed through the U.K. parliament.
-			</p>
+      {{#post.tagLine}}
+			<p class="mb-3">{{post.tagLine}}</p>
+      {{/post.tagLine}}
 			<div class="d-flex align-items-center">
 				<img class="rounded-circle" src="{{{post.author.image}}}=s72-c" width="36">
 				<small class="ml-2 text-capitalize">{{post.author.firstName}} {{post.author.lastName}}<span class="text-muted d-block">{{post.dateString}} &middot; 5 min. read</span>
