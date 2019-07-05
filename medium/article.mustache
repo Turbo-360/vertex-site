@@ -85,44 +85,7 @@
       <h5 class="font-weight-bold spanborder">
         <span>Read next</span>
       </h5>
-			<div class="flex-md-row mb-4 box-shadow h-xl-300">
-				<div class="mb-3 d-flex align-items-center">
-					<img height="80" src="/img/demo/blog4.jpg">
-					<div class="pl-3">
-						<h2 class="mb-2 h6 font-weight-bold">
-						<a class="text-dark" href="./article.html">Nasa's IceSat space laser makes height maps of Earth</a>
-						</h2>
-						<div class="card-text text-muted small">
-							 Jake Bittle in LOVE/HATE
-						</div>
-						<small class="text-muted">Dec 12 · 5 min read</small>
-					</div>
-				</div>
-				<div class="mb-3 d-flex align-items-center">
-					<img height="80" src="/img/demo/blog5.jpg">
-					<div class="pl-3">
-						<h2 class="mb-2 h6 font-weight-bold">
-						<a class="text-dark" href="./article.html">Underwater museum brings hope to Lake Titicaca</a>
-						</h2>
-						<div class="card-text text-muted small">
-							 Jake Bittle in LOVE/HATE
-						</div>
-						<small class="text-muted">Dec 12 · 5 min read</small>
-					</div>
-				</div>
-				<div class="mb-3 d-flex align-items-center">
-					<img height="80" src="/img/demo/blog6.jpg">
-					<div class="pl-3">
-						<h2 class="mb-2 h6 font-weight-bold">
-						<a class="text-dark" href="./article.html">Sun-skimming probe starts calling home</a>
-						</h2>
-						<div class="card-text text-muted small">
-							 Jake Bittle in LOVE/HATE
-						</div>
-						<small class="text-muted">Dec 12 · 5 min read</small>
-					</div>
-				</div>
-			</div>
+			<div id="container-article-previews" class="flex-md-row mb-4 box-shadow h-xl-300"></div>
 		</div>
 
 	</div>
@@ -131,6 +94,52 @@
 
   {{>footer}}
   {{>auth}}
+
+  <script type="text/template" id="tpl-article-preview">
+    <div class="mb-3 d-flex align-items-center">
+      <a href="/post/<% slug %>">
+        <img height="80" src="<% image %>=s120-c">
+      </a>
+      <div class="pl-3">
+        <h2 class="mb-2 h6 font-weight-bold">
+          <a style="text-decoration:none" class="text-dark" href="/post/<% slug %>"><% title %></a>
+        </h2>
+        <div class="card-text text-muted small text-capitalize">
+           <% author.firstName %> <% author.lastName %>
+        </div>
+        <small class="text-muted"><% dateString %> · 5 min read</small>
+      </div>
+    </div>
+  </script>
+
   {{>scripts}}
+  <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+  <script>
+    (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+      var data = window.__PRELOADED__
+      if (data == null)
+        return
+
+      var post = data.post
+
+      window.vertexLib.getRequest('/api/post?limit=3', null, function(err, response){
+        if (err)
+          return
+
+        var posts = response.results
+        console.log('Fetch Related Posts: ' + JSON.stringify(posts))
+
+        var tpl = $('#tpl-article-preview').html()
+        var previewsHtml = ''
+        posts.forEach(function(post){
+          previewsHtml += Mustache.render(tpl, post)
+        })
+
+        $('#container-article-previews').html(previewsHtml)
+
+      })
+    })()
+  </script>
 </body>
 </html>
