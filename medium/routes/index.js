@@ -46,6 +46,15 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/about', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	res.render('about', data)
+})
+
 router.get('/me', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
