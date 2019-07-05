@@ -123,8 +123,6 @@ router.get('/post/:slug', (req, res) => {
       message: err.message
     })
   })
-
 })
-
 
 module.exports = router
