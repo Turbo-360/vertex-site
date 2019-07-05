@@ -30,6 +30,12 @@ router.get('/', (req, res) => {
   controllers.post.get({limit:6})
   .then(posts => {
     data['posts'] = posts
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: req.user
+		})
+
     res.render('index', data)
   })
   .catch(err => {
