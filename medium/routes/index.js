@@ -217,4 +217,41 @@ router.get('/template/:slug', (req, res) => {
 	})
 })
 
+router.get('/comments/:slug', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	controllers.comment.get({slug:req.params.slug})
+	.then(comments => {
+		if (comments.length == 0){
+			throw new Error('Comment '+req.params.slug+' not found.')
+			return
+		}
+
+		data['comment'] = comments[0]
+		return controllers.comment.get({thread:data.comment.id, sort:'asc'})
+	})
+	.then(replies => {
+		data['replies'] = replies
+		data['profile'] = req.user
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: req.user,
+			comment: data.comment,
+			replies: data.replies
+		})
+
+		res.render('comments', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 module.exports = router

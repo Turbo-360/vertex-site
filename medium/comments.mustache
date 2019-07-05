@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<head>
+  <title>{{comment.title}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="{{{cdn}}}/dist/css/style.min.css">
+  <link rel="icon" href="https://lh3.googleusercontent.com/5SVrpLI9utkuVJbQb48cpD3tar59mgWaWSAM73Ghj8dxFJMD2UOzkhO5ptWDd2uV2eqgSvDCSa-Ad8aOrygXx6nv=s32-c" type="image/png" />
+
+  <meta property="og:title" content="{{comment.title}}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://www.vertex360.co/comments/{{comment.slug}}" />
+	<meta property="og:image" content="{{{comment.image}}}=s260-c" />
+	<meta property="og:image:width" content="260px" />
+	<meta property="og:image:height" content="260px" />
+	<meta property="og:description" content="{{comment.text}}" />
+
+  <style>
+    .message-by {
+      margin-left: 50px !important;
+    }
+
+    .user-link {
+      padding: 0px !important;
+      display: inherit !important;
+      color: #37b6bd !important;
+    }
+
+    .text-blue {
+      color: blue;
+    }
+
+    .reply-box {
+      margin-bottom: 40px;
+    }
+
+    .reply-box p {
+      font-size: 15px;
+      line-height: 27px;
+      margin-bottom: 0px;
+    }
+
+    .reply-box img {
+      width: 24px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .reply-box span {
+      margin: 8px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .reply-box a {
+      color: red;
+    }
+
+    .message-bubble input {
+      border: none !important;
+      box-shadow: none !important;
+      background: #f6f6f6;
+      height: 30px;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .message-bubble textarea {
+      font-size:14px;
+      font-weight:200;
+      min-height:72px;
+      resize:none;
+      border:none;
+      background:#f6f6f6;
+      box-shadow:none;
+      padding:0px;
+      margin-bottom: 0px !important;
+    }
+
+    .submit-button-container {
+      text-align: right;
+    }
+
+    .submit-button-container button {
+      padding: 0px 9px;
+      border-radius: 3px;
+      margin: 0px;
+    }
+
+    .small-button {
+      flex:1;
+      text-align: center;
+      font-size: 14px;
+      margin: 0px;
+      padding: 8px !important;
+      border-radius: 4px !important;
+    }
+
+    .comment-text a {
+      color: red
+    }
+
+    @media (max-width: 768px) {
+      .message-text {
+        margin-left: 0px !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+  {{>nav}}
+  <div class="clearfix"></div>
+
+  <div id="dashboard">
+  	<div class="dashboard-nav hidden-xs">
+  		<div class="dashboard-nav-inner">
+
+  			<ul data-submenu-title="Main">
+  				<li class="active"><a href="#"><i class="sl sl-icon-bubbles"></i> Comments</a></li>
+  				<li><a href="/community"><i class="sl sl-icon-arrow-left"></i> Back</a></li>
+  			</ul>
+
+  		</div>
+  	</div>
+
+  	<div class="dashboard-content mobile-container">
+  		<div class="row">
+
+  			<!-- Listings -->
+  			<div class="col-lg-8 col-md-8">
+
+  				<div class="messages-container margin-top-0">
+  					<div class="messages-headline">
+              <h4 style="line-height:26px">{{comment.title}}</h4>
+  					</div>
+
+  					<div class="messages-container-inner">
+
+  						<!-- Message Content -->
+  						<div class="message-content">
+                <div class="message-bubble margin-bottom-30">
+                  <div class="hidden-md hidden-lg margin-bottom-10">
+                    <a href="/profile/{{comment.profile.slug}}">
+                      <img style="width:32px;height:32px;border-radius:50%" src="{{{comment.profile.image}}}=s96-c" alt="" />
+                    </a>
+                    <small>submitted by
+                      <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
+                    </small>
+                  </div>
+  								<div class="message-avatar hidden-xs">
+                    <a href="/profile/{{comment.profile.slug}}">
+                      <img style="width:44px;height:44px" src="{{{comment.profile.image}}}=s96-c" alt="" />
+                    </a>
+                  </div>
+  								<div class="message-text margin-left-60">
+                    <p class="comment-text">{{{comment.text}}}</p>
+                    <hr />
+                    <div class="hidden-xs hidden-sm" style="text-align:right">
+                      <small>submitted by
+                        <a class="text-blue" href="/profile/{{comment.profile.slug}}">{{comment.profile.username}}</a>
+                        <span style="margin:8px">·</span>{{dateString}}
+                      </small>
+                    </div>
+                  </div>
+  							</div>
+
+                <hr />
+
+                {{#profile}}
+                <div class="message-bubble margin-bottom-60 hidden-xs">
+  								<div class="message-avatar">
+                    <img id="reply-avatar" style="width:44px;height:44px" src="" alt="" />
+                  </div>
+                  <div class="message-text margin-left-60">
+                    <textarea id="input-reply-text" placeholder="Enter your reply..."></textarea>
+                    <div class="submit-button-container">
+                      <button id="btn-submit-reply" class="button">Submit Reply</button>
+                    </div>
+                  </div>
+  							</div>
+                {{/profile}}
+
+                <div id="container-replies">
+                  {{#replies}}
+                  <div class="reply-box">
+                    <a class="hidden-xs" href="/profile/{{profile.slug}}">
+                      <img src="{{{profile.image}}}=s96-c" alt="" />
+                    </a>
+                    <small>
+                      by <a class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
+                      <span>·</span>
+                      {{dateString}}
+                    </small>
+                    <p class="margin-top-10 comment-text">{{{text}}}</p>
+                  </div>
+                  {{/replies}}
+                </div>
+
+  						</div>
+  						<!-- Message Content -->
+
+  					</div>
+  				</div>
+  			</div>
+
+
+        {{>copyright}}
+  		</div>
+  	</div>
+
+  </div>
+</div>
+
+<script type="text/template" id="tpl-reply">
+  <div class="reply-box">
+    <a href="/profile/<% profile.slug %>">
+      <img src="<%{profile.image}%>=s96-c" alt="" />
+    </a>
+    <small>
+      by <a class="text-blue" href="/profile/<% profile.slug %>"><% profile.username %></a>
+      <span>·</span>
+      <% dateString %>
+    </small>
+    <p class="margin-top-10 comment-text"><%{text}%></p>
+  </div>
+</script>
+
+  <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/sidebar.min.js"></script>
+  <script type="text/javascript" src="{{{cdn}}}/dist/js/referrer.min.js"></script>
+  <script>
+    (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+      var data = window.__PRELOADED__
+      var user = data.user
+      var comment = data.comment
+      var replies = data.replies || []
+      // console.log('USER == ' + JSON.stringify(user))
+
+      var postRequest = function(url, params, completion){
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: params,
+          success: function(response){
+            completion(null, response)
+          },
+          error: function(response){
+            completion(response, null)
+          }
+        })
+      }
+
+      if (user != null){
+        $('#reply-avatar').attr('src', user.image+'=s120-c')
+      }
+
+      $('#btn-submit-reply').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        if (user == null){
+          alert('Please log in or register to submit a reply.')
+          return
+        }
+
+        // no title required
+        var reply = {
+          profile: JSON.stringify({id:user.id, firstName:user.firstName, lastName:user.lastName, username:user.username, image:user.image, slug:user.slug}),
+          text: $('#input-reply-text').val(),
+          isInitial: 'no',
+          thread: comment.id
+        }
+
+        if (reply.text.length == 0){
+          alert('Please enter text for your reply')
+          return
+        }
+
+        postRequest('/api/comment', reply, function(err, response){
+          if (err){
+            alert('Error - ' + err)
+            return
+          }
+
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          // console.log('REPLY CREATED: ' + JSON.stringify(response))
+          replies.push(response.result)
+          var tpl = $('#tpl-reply').html()
+          var repliesHtml = ''
+          replies.forEach(function(reply){
+            repliesHtml += Mustache.render(tpl, reply)
+          })
+
+          $('#container-replies').html(repliesHtml)
+          $('#input-reply-text').val('')
+          $("html, body").animate({
+            scrollTop: $(document).height()
+          }, 1000)
+
+          // update original comment with numRelies
+          setTimeout(function(){
+            postRequest('/account/updatereplies', {comment:comment.id}, function(err2, resp){
+              if (err2)
+                return
+
+              console.log('Num Replies: ' + JSON.stringify(resp))
+            })
+          }, 1000)
+        })
+      })
+    })()
+  </script>
+
+  {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
+</body>
+</html>
