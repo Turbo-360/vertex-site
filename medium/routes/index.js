@@ -161,6 +161,12 @@ router.get('/post/:slug', (req, res) => {
     }
 
     data['post'] = posts[0]
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: req.user
+		})
+
     res.render('article', data)
   })
   .catch(err => {
