@@ -5,6 +5,7 @@ const PostController = require('./PostController')
 const CommentController = require('./CommentController')
 const EventController = require('./EventController')
 const TicketController = require('./TicketController')
+const ThreadController = require('./ThreadController')
 
 module.exports = {
 
@@ -14,6 +15,7 @@ module.exports = {
 	post: PostController,
 	comment: CommentController,
 	event: EventController,
-	ticket: TicketController
+	ticket: TicketController,
+	thread: ThreadController
 
 }
