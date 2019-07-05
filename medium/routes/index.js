@@ -134,4 +134,43 @@ router.get('/post/:slug', (req, res) => {
   })
 })
 
+router.get('/template/:slug', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	// TODO: check if template is live
+	controllers.site.get({slug:req.params.slug}) // query template by slug
+	.then(results => {
+		if (results.length == 0){
+			throw new Error('Template not found')
+			return
+		}
+
+		const site = results[0]
+		site['hasVideo'] = hasVideo(site)
+		site['description'] = utils.TextUtils.convertToHtml(site.description)
+		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
+		data['template'] = site
+		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
+	})
+	.then(cloneSource => {
+		data.template['cloneSource'] = cloneSource
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			template: data.template,
+			user: req.user
+		})
+
+		res.render('template', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 module.exports = router
