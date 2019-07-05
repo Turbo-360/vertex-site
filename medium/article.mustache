@@ -85,7 +85,7 @@
       <h5 class="font-weight-bold spanborder">
         <span>Read next</span>
       </h5>
-			<div id="container-article-previews" class="flex-md-row mb-4 box-shadow h-xl-300"></div>
+			<div id="container-article-previews" class="flex-md-row mb-4 box-shadow"></div>
 		</div>
 
 	</div>
@@ -96,18 +96,18 @@
   {{>auth}}
 
   <script type="text/template" id="tpl-article-preview">
-    <div class="mb-3 d-flex align-items-center">
+    <div class="mb-5 d-flex align-items-center">
       <a href="/post/<% slug %>">
-        <img height="80" src="<% image %>=s120-c">
+        <img style="width:120px;height:120px;max-width:inherit" src="<% image %>=s240-c">
       </a>
       <div class="pl-3">
-        <h2 class="mb-2 h6 font-weight-bold">
+        <h2 class="mb-2 h5 font-weight-bold">
           <a style="text-decoration:none" class="text-dark" href="/post/<% slug %>"><% title %></a>
         </h2>
+        <p><% preview %></p>
         <div class="card-text text-muted small text-capitalize">
-           <% author.firstName %> <% author.lastName %>
+           <% author.firstName %> <% author.lastName %> · <% dateString %> · 5 min read
         </div>
-        <small class="text-muted"><% dateString %> · 5 min read</small>
       </div>
     </div>
   </script>
@@ -133,6 +133,7 @@
         var tpl = $('#tpl-article-preview').html()
         var previewsHtml = ''
         posts.forEach(function(post){
+          post['preview'] = post.preview.substring(0, 120)+'...'
           previewsHtml += Mustache.render(tpl, post)
         })
 
