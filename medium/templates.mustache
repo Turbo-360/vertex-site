@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vertex 360 | The Easiest Website Builder. Period.</title>
+    <meta name="description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
+
+    <meta property="og:title" content="Vertex 360 | The Easiest Website Builder. Period." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.vertex360.co" />
+    <meta property="og:image" content="https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ=s260-c" />
+    <meta property="og:image:width" content="260px" />
+    <meta property="og:image:height" content="260px" />
+    <meta property="og:description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
+
+    <link rel="icon" href="https://lh3.googleusercontent.com/5SVrpLI9utkuVJbQb48cpD3tar59mgWaWSAM73Ghj8dxFJMD2UOzkhO5ptWDd2uV2eqgSvDCSa-Ad8aOrygXx6nv=s32-c" type="image/png" />
+    <link href="{{{cdn}}}/snap/css/inter-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{{cdn}}}/snap/css/slick.min.css">
+    <link rel="stylesheet" href="{{{cdn}}}/snap/css/slick-theme.min.css">
+    <link rel="stylesheet" href="{{{cdn}}}/snap/css/blue.css" id="theme-color">
+
+    <style>
+        .wrapper {
+            display: flex;
+            width: 100%;
+        }
+        #sidebar {
+            width: 250px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            color: #fff;
+            transition: all 0.3s;
+            padding-top: 10rem;
+        }
+        #sidebar ul li a,
+        #sidebar .sidebar-header {
+            padding-left: 2rem;
+        }
+        #sidebar ul li a:hover {
+            transition: all 0.2s;
+            color: #0000cc;
+        }
+        #sidebar ul li.active {
+            background: #f9f9f9;
+        }
+        #sidebar ul li.active a {
+            color: #0000cc;
+        }
+        #sidebar ul li {
+            padding: .5rem 0;
+        }
+        #content {
+            width: calc(100% - 250px);
+            min-height: 100vh;
+            transition: all 0.3s;
+            position: relative;
+            padding-top: 3rem;
+        }
+        #features {
+            min-height: 100vh;
+        }
+        #features .card {
+            margin-bottom: 1rem !important;
+            height: 300px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+        }
+        #features article {
+            margin-bottom: 3rem;
+        }
+        #features article h5 {
+            text-align: center;
+            font-size: 1.15rem;
+        }
+
+        @media (min-width: 820px) {
+            #features .container {
+                max-width: 93%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 200px;
+            }
+            #content {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 475px) {
+            #sidebar {
+                margin-left: 0;
+                height: auto;
+                width: 100%;
+                padding-left: 0;
+                padding-top: 7rem;
+                transition: all 0.3s;
+            }
+            .wrapper {
+                display: block;
+            }
+            .sidebar-header h5,
+            .list-unstyled {
+                text-align: center;
+            }
+            .list-unstyled {
+                margin-bottom: 0;
+            }
+            #sidebar ul li {
+                display: inline-block;
+                margin-right: .5rem;
+            }
+            #sidebar ul li a,
+            #sidebar .sidebar-header {
+                padding-left: 0;
+            }
+        }
+
+			.logo {
+				width: 160px;
+			}
+
+      .icon-avatar {
+        border-radius: 50%;
+        margin-right: 6px;
+        padding: 4px;
+        border: 1px solid #56b48c;
+      }
+
+      .author-container {
+        display: flex;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
+        padding: 20px 0px
+      }
+
+      .author-container h3 {
+        text-transform: capitalize;
+      }
+
+      .template-header {
+        background: #fff;
+        padding: 24px;
+      }
+
+      .template-header small {
+        font-size: 14px;
+      }
+
+      .template-header p {
+        margin-bottom: 0px;
+        line-height: 2.0;
+        font-size: 18px;
+      }
+
+      .screenshot {
+        margin-bottom: 24px;
+        max-width: 100%;
+        border: 1px solid #ddd;
+        padding: 3px;
+        background: #fff;
+      }
+
+      .bg-green {
+        background: #56b48c;
+        border-color: #56b48c;
+      }
+
+      .btn-get-started {
+        width: 100%;
+        border-radius: 4px;
+        padding: 12px 11em;
+      }
+
+      @media (max-width: 768px) {
+        .btn-get-started {
+          padding: 12px 5.5em;
+        }
+      }
+
+      h5 {
+        text-transform: capitalize;
+      }
+		</style>
+</head>
+    <body>
+      {{>nav}}
+
+      <div class="wrapper">
+
+          <!-- Sidebar -->
+          <nav id="sidebar">
+              <div class="sidebar-header">
+                  <h5>Categories</h5>
+              </div>
+              <ul class="list-unstyled components">
+                  <li class="active">
+                      <a href="#" class="sidebar-link" data-rel="all">All templates</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="landing">Landing</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="resume">Resume</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="portfolio">Portfolio</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="agency">Agency</a>
+                  </li>
+                  <li>
+                      <a href="#" class="sidebar-link" data-rel="performer">Performer</a>
+                  </li>
+              </ul>
+          </nav>
+
+          <div id="content">
+              <!-- features section -->
+              <section class="py-6" id="features" style="background:#f9f9f9">
+                  <div class="container mt-4">
+                      <div class="row">
+
+                        {{#templates}}
+                        <article class="col-md-6 {{template.category}} all">
+                            <a href="/template/{{slug}}">
+                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
+                            </a>
+                            <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
+                        </article>
+                        {{/templates}}
+
+                      </div>
+                  </div>
+              </section>
+              {{>footer-dark}}
+          </div>
+      </div>
+
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content" style="border-radius:4px">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input id="input-login-email" style="background:#fffffa" class="form-control mb-4" type="text" placeholder="Email" />
+              <input id="input-login-password" style="background:#fffffa" class="form-control mb-4" type="password" placeholder="Password" />
+              <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg">Login</button>
+              <hr />
+            </div>
+            <div class="text-center" style="padding:1.5rem">
+              <img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/popper.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/feather.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/slick.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/scripts.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/referrer.js"></script>
+      {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
+
+      <script>
+          $(document).ready(function () {
+              $('.sidebar-link').on('click', function (e) {
+                  e.preventDefault();
+                  $(this).parent().addClass('active').siblings().removeClass('active');
+
+                  var type = $(this).attr("data-rel");
+                  $("#features").fadeTo(100, 0.1);
+                  $("#features .container .row article").not("."+type).fadeOut();
+                  setTimeout(function() {
+                      $("."+type).fadeIn();
+                      $("#features").fadeTo(300, 1);
+                  }, 300);
+              });
+          });
+      </script>
+    </body>
+</html>
