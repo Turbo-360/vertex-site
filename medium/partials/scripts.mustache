@@ -1,48 +1,5 @@
-<script>
-  var vertexLib = {
-    postRequest: function(url, params, completion){
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: params,
-        success: function(response){
-          if (response.confirmation != 'success'){
-            completion(response, null)
-            return
-          }
-
-          completion(null, response)
-        },
-        error: function(response){
-          completion(response, null)
-        }
-      })
-    },
-
-    getRequest: function(url, params, completion){
-      $.ajax({
-        url: url,
-        type: 'GET',
-        data: params,
-        success: function(response){
-          if (response.confirmation != 'success'){
-            completion(response, null)
-            return
-          }
-
-          completion(null, response)
-        },
-        error: function(response){
-          completion(response, null)
-        }
-      })
-    }
-  }
-
-  window.vertexLib = vertexLib
-</script>
-
 <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+<script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
 <script type="text/javascript" src="{{{cdn}}}/medium/js/vendor/jquery.min.js"></script>
 <script type="text/javascript" src="{{{cdn}}}/medium/js/vendor/popper.min.js"></script>
 <script type="text/javascript" src="{{{cdn}}}/medium/js/vendor/bootstrap.min.js"></script>
