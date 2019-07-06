@@ -22,7 +22,10 @@ const hasVideo = (site) => {
 }
 
 const sanitizedUser = (user) => {
-	currentUser = {
+	if (user == null)
+		return null
+
+	var currentUser = {
 		id: user.id,
 		username: user.username,
 		slug: user.slug,
