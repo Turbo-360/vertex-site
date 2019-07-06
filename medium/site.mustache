@@ -95,8 +95,8 @@
             }
 
             var site = data.site
-            var siteUrl = (site.url.legth==0) ? 'https://'+site.slug+'.vertex360.co' : site.url
-            var postUrl = siteUrl+'/post/'+selectedPost.slug
+            var siteUrl = (site.url.legth==0) ? 'https://'+site.slug+'.vertex360.co' : 'https://'+site.url
+            var postUrl = (site.url.legth==0) ? 'https://'+site.slug+'.vertex360.co/post/'+selectedPost.slug : 'https://'+site.url+'/post/'+selectedPost.slug
 
             // not found, create one
             var params = {
