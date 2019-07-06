@@ -229,7 +229,8 @@ router.get('/site/:slug', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			user: sanitizedUser(req.user),
-			site: data.site
+			site: data.site,
+			posts: data.posts
 		})
 
 		res.render('site', data)
