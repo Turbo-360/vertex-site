@@ -27,7 +27,11 @@ router.get('/', (req, res) => {
 		renderAnalytics: renderAnalytics(req)
 	}
 
-  controllers.post.get({limit:6})
+	controllers.site.get({limit:3, featured:'yes'})
+	.then(sites => {
+		data['sites'] = sites
+		return controllers.post.get({limit:6})
+	})
   .then(posts => {
     data['posts'] = posts
 		data['preloaded'] = JSON.stringify({

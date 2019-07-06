@@ -11,62 +11,27 @@
 
 <div class="container pt-5">
   <div class="row">
+    {{#sites}}
     <div class="col-lg-4 col-md-4">
       <div class="card mb-3" style="border:1px solid #ededed">
         <div style="height:220px;overflow:hidden;">
           <a href="#">
-            <img src="https://lh3.googleusercontent.com/1arnINnEBE0l1OwBhY3UcyAPYvG7zlFVlS3iXbarnAjKeWTRk_vJTQLkhAMpcpxP-PuRP1F3WvNs84_1Mo310m_MNkM=s512-c" />
+            <img src="{{{image}}}=s512-c" />
           </a>
         </div>
         <div style="padding:16px;background:#f1f1f1">
           <small>Featured Site</small>
           <h4>
-            <a style="color:#333" href="#">Service Business Website Must Haves</a>
+            <a style="color:#333" href="#">{{name}}</a>
           </h4>
           <p class="mt-3">
-            <a style="color:#333" href="#">If you have a service business, there a couple key pages that your website...</a><a href="#">read more</a>
+            <a style="color:#333" href="#">{{description}}</a>
           </p>
         </div>
       </div>
     </div>
+    {{/sites}}
 
-    <div class="col-lg-4 col-md-4">
-      <div class="card mb-3" style="border:1px solid #ededed">
-        <div style="height:220px;overflow:hidden;">
-          <a href="#">
-            <img src="https://lh3.googleusercontent.com/1arnINnEBE0l1OwBhY3UcyAPYvG7zlFVlS3iXbarnAjKeWTRk_vJTQLkhAMpcpxP-PuRP1F3WvNs84_1Mo310m_MNkM=s512-c" />
-          </a>
-        </div>
-        <div style="padding:16px;background:#f1f1f1">
-          <small>Featured Site</small>
-          <h4>
-            <a style="color:#333" href="#">Service Business Website Must Haves</a>
-          </h4>
-          <p class="mt-3">
-            <a style="color:#333" href="#">If you have a service business, there a couple key pages that your website...</a><a href="#">read more</a>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-4">
-      <div class="card mb-3" style="border:1px solid #ededed">
-        <div style="height:220px;overflow:hidden;">
-          <a href="#">
-            <img src="https://lh3.googleusercontent.com/1arnINnEBE0l1OwBhY3UcyAPYvG7zlFVlS3iXbarnAjKeWTRk_vJTQLkhAMpcpxP-PuRP1F3WvNs84_1Mo310m_MNkM=s512-c" />
-          </a>
-        </div>
-        <div style="padding:16px;background:#f1f1f1">
-          <small>Featured Site</small>
-          <h4>
-            <a style="color:#333" href="#">Service Business Website Must Haves</a>
-          </h4>
-          <p class="mt-3">
-            <a style="color:#333" href="#">If you have a service business, there a couple key pages that your website...</a><a href="#">read more</a>
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
