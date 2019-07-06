@@ -99,17 +99,6 @@ router.get('/me', (req, res) => {
 			allSites.push(site)
 		})
 
-		// const currentUser = {
-		// 	id: req.user.id,
-		// 	username: req.user.username,
-		// 	slug: req.user.slug,
-		// 	firstName: req.user.firstName,
-		// 	lastName: req.user.lastName,
-		// 	image: req.user.image,
-		// 	bio: req.user.bio,
-		// 	tags: req.user.tags.join(',')
-		// }
-
 		const data = {
 			cdn: CDN,
 			sites: allSites,
