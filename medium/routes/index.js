@@ -194,22 +194,27 @@ router.get('/site/:slug', (req, res) => {
 		const site = results[0]
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
+		data['site'] = site
 
 		const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
 		return utils.HTTP.get(postsEndpoint, null)
 	})
 	.then(response => {
 		// console.log('RESPOONSE == ' + JSON.stringify(response))
-		const parsed = JSON.parse(response)
+		const parsed = JSON.parse(response) // this comes in as a string so have to parse
 		if (parsed.confirmation != 'success'){
 			throw new Error(parsed.message)
 			return
 		}
 
 		data['posts'] = parsed.data
+		data.posts.forEach(post => {
+			post['site_slug'] = data.site.slug
+		})
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			user: req.user
+			// site: data.site
 		})
 
 		res.render('site', data)
