@@ -1259,50 +1259,6 @@ router.post('/:action', (req, res, next) => {
 		return
 	}
 
-	if (action == 'createthread'){
-		const params = req.body // subject, schema
-		const schema = params.schema // "post", "site", etc
-		const subject = params.subject // id of the relevant post
-		const site = params.site // site slug
-
-		const ctr = controllers[schema]
-		if (ctr == null){
-			res.json({
-				confirmation: 'fail',
-				message: 'Invalid Resource'
-			})
-			return
-		}
-
-		ctr.getById(subject) // probably a post, could be site
-		.then(entity => {
-			params['subject'] = {
-				id: entity.id,
-				text: entity.preview || entity.description || '',
-				slug: entity.slug,
-				image: entity.image,
-				category: entity.category || ''
-			}
-
-			return controllers.thread.post(params)
-		})
-		.then(thread => {
-			res.json({
-				confirmation: 'success',
-				data: thread
-			})
-		})
-		.catch(err => {
-			res.json({
-				confirmation: 'fail',
-				message: err.message
-			})
-		})
-
-		return
-	}
-
-
 	res.json({
 		confirmation: 'fail',
 		message: 'Invalid action'
