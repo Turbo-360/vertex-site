@@ -1261,8 +1261,9 @@ router.post('/:action', (req, res, next) => {
 
 	if (action == 'createthread'){
 		const params = req.body // subject, schema
-		const schema = params.schema
-		const subject = params.subject
+		const schema = params.schema // "post", "site", etc
+		const subject = params.subject // id of the relevant post
+		const site = params.site // site slug
 
 		const ctr = controllers[schema]
 		if (ctr == null){
