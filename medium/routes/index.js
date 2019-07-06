@@ -27,9 +27,13 @@ router.get('/', (req, res) => {
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	controllers.site.get({limit:3, featured:'yes'})
+	controllers.site.get({limit:3, origin:'vertex360', featured:'yes'})
 	.then(sites => {
 		data['sites'] = sites
+		data.sites.forEach(site => {
+			site['description'] = utils.TextUtils.truncateText(site.description, 100)
+		})
+
 		return controllers.post.get({limit:6})
 	})
   .then(posts => {
