@@ -209,7 +209,7 @@ router.get('/site/:slug', (req, res) => {
 
 		data['posts'] = parsed.data
 		data.posts.forEach(post => {
-			post['site_slug'] = data.site.slug
+			post['link'] = (data.site.url.length==0) ? 'https://'+data.site.slug+'.vertex360.co/post/'+post.slug : 'https://'+data.site.url+'/post/'+post.slug
 		})
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
