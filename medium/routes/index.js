@@ -195,6 +195,7 @@ router.get('/site/:slug', (req, res) => {
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['site'] = site
+		site['link'] = (site.url.length==0) ? 'https://'+site.slug+'.vertex360.co' : 'https://'+site.url
 
 		const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
 		return utils.HTTP.get(postsEndpoint, null)
