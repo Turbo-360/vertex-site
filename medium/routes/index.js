@@ -223,7 +223,7 @@ router.get('/site/:slug', (req, res) => {
 		data['posts'] = parsed.data
 		data.posts.forEach(post => {
 			post['link'] = (data.site.url.length==0) ? 'https://'+data.site.slug+'.vertex360.co/post/'+post.slug : 'https://'+data.site.url+'/post/'+post.slug
-			post['text'] = post.preview
+			delete post['text']
 		})
 
 		delete req.user['notifications']
