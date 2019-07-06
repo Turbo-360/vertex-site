@@ -199,6 +199,7 @@ router.get('/site/:slug', (req, res) => {
 		return utils.HTTP.get(postsEndpoint, null)
 	})
 	.then(response => {
+		console.log('RESPOONSE == ' + JSON.stringify(response))
 		if (response.confirmation != 'success'){
 			throw new Error(response.message)
 			return
