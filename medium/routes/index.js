@@ -23,14 +23,14 @@ const hasVideo = (site) => {
 
 const sanitizedUser = (user) => {
 	currentUser = {
-		id: req.user.id,
-		username: req.user.username,
-		slug: req.user.slug,
-		firstName: req.user.firstName,
-		lastName: req.user.lastName,
-		image: req.user.image,
-		bio: req.user.bio,
-		tags: req.user.tags.join(',')
+		id: user.id,
+		username: user.username,
+		slug: user.slug,
+		firstName: user.firstName,
+		lastName: user.lastName,
+		image: user.image,
+		bio: user.bio,
+		tags: user.tags.join(',')
 	}
 
 	return currentUser
