@@ -199,13 +199,14 @@ router.get('/site/:slug', (req, res) => {
 		return utils.HTTP.get(postsEndpoint, null)
 	})
 	.then(response => {
-		console.log('RESPOONSE == ' + JSON.stringify(response))
-		if (response.confirmation != 'success'){
-			throw new Error(response.message)
+		// console.log('RESPOONSE == ' + JSON.stringify(response))
+		const parsed = JSON.parse(response)
+		if (parsed.confirmation != 'success'){
+			throw new Error(parsed.message)
 			return
 		}
 
-		data['posts'] = response.data
+		data['posts'] = parsed.data
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			user: req.user
