@@ -62,6 +62,9 @@
   {{>scripts}}
   <script>
     (function(){
+      var data = window.__PRELOADED__
+      var posts = data.posts
+
       $('.comments-button').each(function(i, btn){
         $(this).click(function(e){
           if (e)
@@ -80,8 +83,27 @@
               return
             }
 
+            var selectedPost = null
+            posts.forEach(function(post){
+              if (post.id == postId)
+                selectedPost = post
+            })
+
+            if (selectedPost == null){
+              console.log('POST NOT FOUND')
+              return
+            }
+
+            var site = data.site
+
             // not found, create one
-            window.vertexLib.postRequest('/account/createthread', {schema:'post', subject:postId}, function(err, resp2){
+            var params = {
+              site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image}),
+              subject: JSON.stringify({id:selectedPost.id, title:selectedPost.title, slug:selectedPost.slug, image:selectedPost.image}),
+              slug: selectedPost.slug
+            }
+
+            window.vertexLib.postRequest('/api/thread', params, function(err, resp2){
               if (err){
                 console.log('ERR2: ' + JSON.stringify(err))
                 return

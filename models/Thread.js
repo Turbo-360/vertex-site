@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const ThreadSchema = new mongoose.Schema({
   subject: {type:mongoose.Schema.Types.Mixed, default:{}}, // post, site, profile, etc
+  site: {type:mongoose.Schema.Types.Mixed, default:{}},
 	slug: {type:String, lowercase:true, trim:true, default:''},
-	// link: {type:String, trim:true, default:''}, // for links to outside posts
 	numReplies: {type:Number, default:0},
 	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
 	dateString: {type:String, default:''},
@@ -13,6 +13,7 @@ const ThreadSchema = new mongoose.Schema({
 ThreadSchema.methods.summary = function(authLevel) {
 	var summary = {
 		subject: this.subject,
+    site: this.site,
 		slug: this.slug,
 		numReplies: this.numReplies,
 		votes: this.votes,
