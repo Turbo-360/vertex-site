@@ -67,13 +67,22 @@
           if (e)
             e.preventDefault()
 
-          var postId = $(this).attr('id')
           $.ajax({
-            url:'/api/thread?subject.id='+postId,
+            url:'/api/thread?subject.id='+$(this).attr('id'),
             type:'GET',
             data:null,
             success: function(response){
-              console.log('CHECK COMMENTS: ' + JSON.stringify(response))
+              if (response.confirmation != 'success')
+                return
+
+              console.log('CHECK COMMENTS: ' + JSON.stringify(response)) // {"confirmation":"success","results":[]}
+              if (response.results.length == 0){ // create new thread
+                console.log('CREATE NEW THREAD')
+                return
+              }
+
+              var thread = response.results[0]
+              console.log('THREAD: ' + JSON.stringify(thread))
             },
             error: function(response){
               console.log('ERROR: ' + JSON.stringify(response))
