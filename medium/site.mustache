@@ -67,8 +67,18 @@
           if (e)
             e.preventDefault()
 
-          console.log('CHECK COMMENTS: ' + $(this).attr('id'))
-
+          var postId = $(this).attr('id')
+          $.ajax({
+            url:'/api/thread?subject.id='+postId,
+            type:'GET',
+            data:null,
+            success: function(response){
+              console.log('CHECK COMMENTS: ' + JSON.stringify(response))
+            },
+            error: function(response){
+              console.log('ERROR: ' + JSON.stringify(response))
+            }
+          })
         })
       })
     })()
