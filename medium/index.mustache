@@ -43,27 +43,27 @@
 		<div class="col-md-8">
 			<h5 class="font-weight-bold spanborder"><span>Recent</span></h5>
 
-      {{#posts}}
+      {{#threads}}
 			<div class="mb-5 d-flex justify-content-between post-preview">
 				<div class="pr-4">
 					<h2 class="mb-1 h4">
-						<a class="text-dark" href="/post/{{slug}}">{{title}}</a>
+						<a class="text-dark" href="/post/{{subject.slug}}">{{subject.title}}</a>
 					</h2>
-					<p class="text-muted">{{preview}}</p>
+					<p class="text-muted">{{subject.preview}}</p>
 					<div class="card-text text-muted small">
-							<img class="mr-2" style="border-radius:50%" src="{{{author.image}}}=s28-c" />
-						 	<span class="text-capitalize">{{author.firstName}} {{author.lastName}}</span>
+							<img class="mr-2" style="border-radius:50%" src="{{{site.image}}}=s28-c" />
+						 	<span class="text-capitalize">{{site.name}}</span>
 							<span style="margin:6px">&middot;</span>
-							{{dateString}}
+							{{subject.dateString}}
 							<span style="margin:6px">&middot;</span>
 							<a href="#">Comments</a>
 					</div>
 				</div>
-				<a href="/post/{{slug}}">
-					<img src="{{{image}}}=s220-c">
+				<a href="/post/{{subject.slug}}">
+					<img src="{{{subject.image}}}=s220-c">
 				</a>
 			</div>
-      {{/posts}}
+      {{/threads}}
 
 		</div>
 		<div class="col-md-4 pl-4">

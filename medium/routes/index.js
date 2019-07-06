@@ -49,10 +49,10 @@ router.get('/', (req, res) => {
 			site['description'] = utils.TextUtils.truncateText(site.description, 100)
 		})
 
-		return controllers.post.get({limit:6})
+		return controllers.thread.get({limit:6})
 	})
-  .then(posts => {
-    data['posts'] = posts
+  .then(threads => {
+    data['threads'] = threads
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
