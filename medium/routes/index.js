@@ -102,10 +102,11 @@ router.get('/me', (req, res) => {
 			allSites.push(site)
 		})
 
+		const currentUser = sanitizedUser(req.user)
 		const data = {
 			cdn: CDN,
 			sites: allSites,
-			user: sanitizedUser(req.user)
+			user: currentUser
 		}
 
 		data['preloaded'] = JSON.stringify({
