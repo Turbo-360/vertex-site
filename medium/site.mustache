@@ -101,7 +101,7 @@
             // not found, create one
             var params = {
               site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:siteUrl}),
-              subject: JSON.stringify({id:selectedPost.id, schema:'post', title:selectedPost.title, preview:selectedPost.preview, slug:selectedPost.slug, image:selectedPost.image, url:postUrl}),
+              subject: JSON.stringify({id:selectedPost.id, schema:'post', title:selectedPost.title, preview:selectedPost.preview, dateString:selectedPost.dateString, slug:selectedPost.slug, image:selectedPost.image, url:postUrl}),
               slug: selectedPost.slug
             }
 
