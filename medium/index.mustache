@@ -47,7 +47,7 @@
 			<div class="mb-5 d-flex justify-content-between post-preview">
 				<div class="pr-4">
 					<h2 class="mb-1 h4">
-						<a class="text-dark" href="/post/{{subject.slug}}">{{subject.title}}</a>
+						<a class="text-dark" target="_blank" href="{{{subject.url}}}">{{subject.title}}</a>
 					</h2>
 					<p class="text-muted">{{subject.preview}}</p>
 					<div class="card-text text-muted small">
@@ -59,7 +59,7 @@
 							<a href="#">Comments</a>
 					</div>
 				</div>
-				<a href="/post/{{subject.slug}}">
+				<a href="{{{subject.url}}}">
 					<img src="{{{subject.image}}}=s220-c">
 				</a>
 			</div>
