@@ -67,19 +67,28 @@
           if (e)
             e.preventDefault()
 
-          window.vertexLib.getRequest('/api/thread?subject.id='+$(this).attr('id'), null, function(err, response){
+          var postId = $(this).attr('id')
+          window.vertexLib.getRequest('/api/thread?subject.id='+postId, null, function(err, response){
             if (err){
               console.log('ERROR: ' + JSON.stringify(err))
               return
             }
 
-            console.log('RESPONSE: ' + JSON.stringify(response))
-            if (response.confirmation != 'success'){
+            if (response.results.length > 0){
+              var thread = response.results[0]
+              console.log('THREAD: ' + JSON.stringify(thread))
               return
             }
 
-            var thread = response.results[0]
-            console.log('THREAD: ' + JSON.stringify(thread))
+            // not found, create one
+            window.vertexLib.postRequest('/account/createthread', {schema:'post', subject:postId}, function(err, resp2){
+              if (err){
+                console.log('ERR2: ' + JSON.stringify(err))
+                return
+              }
+
+              console.log('THREAD CREATED: ' + JSON.stringify(resp2))
+            })
           })
         })
       })
