@@ -98,16 +98,6 @@ module.exports = {
 			// if (params.description != null)
 			// 	params['preview'] = scrapePreview(params.description, 200)
 
-			// from AJAX call, this comes in stringified
-			if (params.event != null){
-				try {
-					params['event'] = JSON.parse(params.event)
-				}
-				catch(err){
-
-				}
-			}
-
 			Thread.create(params, function(err, thread){
 				if (err){
 					reject(err)
