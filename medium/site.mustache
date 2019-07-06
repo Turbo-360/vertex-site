@@ -67,26 +67,18 @@
           if (e)
             e.preventDefault()
 
-          $.ajax({
-            url:'/api/thread?subject.id='+$(this).attr('id'),
-            type:'GET',
-            data:null,
-            success: function(response){
-              if (response.confirmation != 'success')
-                return
-
-              console.log('CHECK COMMENTS: ' + JSON.stringify(response)) // {"confirmation":"success","results":[]}
-              if (response.results.length == 0){ // create new thread
-                console.log('CREATE NEW THREAD')
-                return
-              }
-
-              var thread = response.results[0]
-              console.log('THREAD: ' + JSON.stringify(thread))
-            },
-            error: function(response){
-              console.log('ERROR: ' + JSON.stringify(response))
+          window.vertexLib.getRequest('/api/thread?subject.id='+$(this).attr('id'), null, function(err, response){
+            if (err){
+              console.log('ERROR: ' + JSON.stringify(err))
+              return
             }
+
+            if (response.confirmation != 'success'){
+              return
+            }
+
+            var thread = response.results[0]
+            console.log('THREAD: ' + JSON.stringify(thread))
           })
         })
       })
