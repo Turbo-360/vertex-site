@@ -15,24 +15,27 @@
 			<h5 class="font-weight-bold spanborder"><span>Recent</span></h5>
 
       {{#posts}}
-			<div class="mb-5 d-flex justify-content-between post-preview">
-				<div class="pr-4">
-					<h2 class="mb-1 h4">
-						<a class="text-dark" target="_blank" href="{{{link}}}">{{title}}</a>
-					</h2>
-					<p class="text-muted">{{preview}}</p>
-					<div class="card-text text-muted small">
-							<img class="mr-2" style="border-radius:50%" src="{{{author.image}}}=s28-c" />
-						 	<span class="text-capitalize">{{author.firstName}} {{author.lastName}}</span>
-							<span style="margin:6px">&middot;</span>
-							{{dateString}}
-							<span style="margin:6px">&middot;</span>
-							<a id="{{id}}" class="btn btn-sm btn-success comments-button" style="padding:0.12em 1em; box-shadow:none" href="#">Comments</a>
-					</div>
-				</div>
-				<a target="_blank" href="{{{link}}}">
-					<img src="{{{image}}}=s220-c">
-				</a>
+			<div class="mb-5 justify-content-between post-preview">
+        <h2 class="mb-1 h4">
+          <a class="text-dark" target="_blank" href="{{{link}}}">{{title}}</a>
+        </h2>
+        <div class="d-flex">
+          <div class="pr-4">
+  					<p class="text-muted">{{preview}}</p>
+  					<div class="card-text text-muted small">
+  							<img class="mr-2" style="border-radius:50%" src="{{{author.image}}}=s28-c" />
+  						 	<span class="text-capitalize">{{author.firstName}} {{author.lastName}}</span>
+  							<span style="margin:6px">&middot;</span>
+  							{{dateString}}
+  							<span style="margin:6px">&middot;</span>
+  							<a id="{{id}}" class="btn btn-sm btn-success comments-button" style="padding:0.12em 1em; box-shadow:none" href="#">Comments</a>
+  					</div>
+  				</div>
+  				<a target="_blank" href="{{{link}}}">
+  					<img src="{{{image}}}=s220-c">
+  				</a>
+        </div>
+
 			</div>
       {{/posts}}
 
