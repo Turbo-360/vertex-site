@@ -6,7 +6,7 @@ const ThreadSchema = new mongoose.Schema({
 	// link: {type:String, trim:true, default:''}, // for links to outside posts
 	numReplies: {type:Number, default:0},
 	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
-	dateString: {type:String, default:'' },
+	dateString: {type:String, default:''},
 	timestamp: {type:Date, default:Date.now}
 })
 
