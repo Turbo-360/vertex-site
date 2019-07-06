@@ -21,6 +21,21 @@ const hasVideo = (site) => {
 	return (site.template.video.length==11) // youtube IDs are 11 characters;
 }
 
+const sanitizedUser = (user) => {
+	currentUser = {
+		id: req.user.id,
+		username: req.user.username,
+		slug: req.user.slug,
+		firstName: req.user.firstName,
+		lastName: req.user.lastName,
+		image: req.user.image,
+		bio: req.user.bio,
+		tags: req.user.tags.join(',')
+	}
+
+	return currentUser
+}
+
 router.get('/', (req, res) => {
   const data = {
 		cdn: CDN,
@@ -41,7 +56,7 @@ router.get('/', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
-			user: req.user
+			user: sanitizedUser(req.user)
 		})
 
     res.render('index', data)
@@ -84,21 +99,21 @@ router.get('/me', (req, res) => {
 			allSites.push(site)
 		})
 
-		const currentUser = {
-			id: req.user.id,
-			username: req.user.username,
-			slug: req.user.slug,
-			firstName: req.user.firstName,
-			lastName: req.user.lastName,
-			image: req.user.image,
-			bio: req.user.bio,
-			tags: req.user.tags.join(',')
-		}
+		// const currentUser = {
+		// 	id: req.user.id,
+		// 	username: req.user.username,
+		// 	slug: req.user.slug,
+		// 	firstName: req.user.firstName,
+		// 	lastName: req.user.lastName,
+		// 	image: req.user.image,
+		// 	bio: req.user.bio,
+		// 	tags: req.user.tags.join(',')
+		// }
 
 		const data = {
 			cdn: CDN,
 			sites: allSites,
-			user: currentUser
+			user: sanitizedUser(req.user)
 		}
 
 		data['preloaded'] = JSON.stringify({
@@ -141,7 +156,7 @@ router.get('/templates', (req, res) => {
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
-			user: req.user,
+			user: sanitizedUser(req.user),
 			templates: sites
 		})
 
@@ -173,7 +188,7 @@ router.get('/post/:slug', (req, res) => {
 			post: data.post,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
-			user: req.user
+			user: sanitizedUser(req.user)
 		})
 
     res.render('article', data)
@@ -220,10 +235,12 @@ router.get('/site/:slug', (req, res) => {
 		data.posts.forEach(post => {
 			post['link'] = (data.site.url.length==0) ? 'https://'+data.site.slug+'.vertex360.co/post/'+post.slug : 'https://'+data.site.url+'/post/'+post.slug
 		})
+
+		delete req.user['notifications']
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			user: req.user
-			// site: data.site
+			user: sanitizedUser(req.user),
+			site: data.site
 		})
 
 		res.render('site', data)
@@ -263,7 +280,7 @@ router.get('/template/:slug', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			template: data.template,
-			user: req.user
+			user: sanitizedUser(req.user)
 		})
 
 		res.render('template', data)
@@ -298,7 +315,7 @@ router.get('/comments/:slug', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
-			user: req.user,
+			user: sanitizedUser(req.user),
 			comment: data.comment,
 			replies: data.replies
 		})
