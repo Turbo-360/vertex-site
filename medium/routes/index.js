@@ -198,8 +198,13 @@ router.get('/site/:slug', (req, res) => {
 		const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
 		return utils.HTTP.get(postsEndpoint, null)
 	})
-	.then(posts => {
-		data['posts'] = posts
+	.then(response => {
+		if (response.confirmation != 'success'){
+			throw new Error(response.message)
+			return
+		}
+
+		data['posts'] = response.data
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			user: req.user
