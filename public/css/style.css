@@ -10006,13 +10006,13 @@ span.like-icon {
 	position: relative;
 	z-index: 10;
 	height: 100%;
-	margin-left: 260px;
+	margin-left: 200px;
 }
 
 .dashboard-nav,
 .dashboard #logo {
-	min-width: 260px;
-	max-width: 260px;
+	min-width: 200px;
+	max-width: 200px;
 }
 
 .dashboard-nav {
