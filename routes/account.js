@@ -582,6 +582,31 @@ router.post('/:action', (req, res, next) => {
 			return
 		}
 
+		controllers.subscriber.get({sites:body.site})
+		.then(subscribers => {
+			if (subscribers.length == 0){
+				return controllers.subscriber.post({email:body.email, sites:[body.site]})
+			}
+			else {
+				const subscriber = subscribers[0]
+				const sites = Object.assign([], subscriber.sites)
+				sites.push(body.site)
+				return controllers.subscriber.put(subscriber.id, {email:body.email, sites:sites})
+			}
+		})
+		.then(subscriber => {
+			res.json({
+				confirmation: 'success',
+				data: subscriber
+			})
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
 		res.json({
 			confirmation: 'success',
 			data: body.email + 'successfully subscribed to ' + body.site
