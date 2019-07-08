@@ -594,10 +594,10 @@ router.post('/:action', (req, res, next) => {
 				return controllers.subscriber.put(subscriber.id, {email:body.email, sites:sites})
 			}
 		})
-		.then(subscriber => {
+		.then(data => {
 			res.json({
 				confirmation: 'success',
-				data: subscriber
+				data: data
 			})
 		})
 		.catch(err => {
