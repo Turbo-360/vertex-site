@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 var Subscriber = new mongoose.Schema({
-	sites: {type:Array, trim:true, default:[]},
+	sites: {type:Array, default:[]},
   email: {type:String, lowercase:true, trim:true, default:''},
   // event: {type:mongoose.Schema.Types.Mixed, default:{}},
 	timestamp: {type:Date, default:Date.now}
