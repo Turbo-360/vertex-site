@@ -213,11 +213,12 @@ router.get('/site/:slug', (req, res) => {
 		data['site'] = site
 		site['link'] = (site.url.length==0) ? 'https://'+site.slug+'.vertex360.co' : 'https://'+site.url
 
+		console.log('TEST 1')
 		const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
 		return utils.HTTP.get(postsEndpoint, null)
 	})
 	.then(response => {
-		// console.log('RESPOONSE == ' + JSON.stringify(response))
+		console.log('RESPOONSE == ' + JSON.stringify(response))
 		const parsed = JSON.parse(response) // this comes in as a string so have to parse
 		if (parsed.confirmation != 'success'){
 			throw new Error(parsed.message)
