@@ -213,7 +213,6 @@ router.get('/site/:slug', (req, res) => {
 		data['site'] = site
 		site['link'] = (site.url.length==0) ? 'https://'+site.slug+'.vertex360.co' : 'https://'+site.url
 
-		console.log('TEST 1')
 		const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
 		return utils.HTTP.get(postsEndpoint, null)
 	})
@@ -221,10 +220,12 @@ router.get('/site/:slug', (req, res) => {
 		console.log('RESPOONSE == ' + JSON.stringify(response))
 		const parsed = JSON.parse(response) // this comes in as a string so have to parse
 		if (parsed.confirmation != 'success'){
+			console.log('ERROR: ')
 			throw new Error(parsed.message)
 			return
 		}
 
+		console.log('TEST 2: ' + JSON.stringify(parsed))
 		data['posts'] = parsed.data
 		data.posts.forEach(post => {
 			post['link'] = (data.site.url.length==0) ? 'https://'+data.site.slug+'.vertex360.co/post/'+post.slug : 'https://'+data.site.url+'/post/'+post.slug
