@@ -613,11 +613,6 @@ router.post('/:action', (req, res, next) => {
 			})
 		})
 
-		res.json({
-			confirmation: 'success',
-			data: body.email + 'successfully subscribed to ' + body.site
-		})
-
 		return
 	}
 
