@@ -6,6 +6,7 @@ const CommentController = require('./CommentController')
 const EventController = require('./EventController')
 const TicketController = require('./TicketController')
 const ThreadController = require('./ThreadController')
+const SubscriberController = require('./SubscriberController')
 
 module.exports = {
 
@@ -16,6 +17,7 @@ module.exports = {
 	comment: CommentController,
 	event: EventController,
 	ticket: TicketController,
-	thread: ThreadController
+	thread: ThreadController,
+	subscriber: SubscriberController
 
 }
