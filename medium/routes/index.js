@@ -217,10 +217,8 @@ router.get('/site/:slug', (req, res) => {
 		return utils.HTTP.get(postsEndpoint, null)
 	})
 	.then(response => {
-		console.log('RESPOONSE == ' + JSON.stringify(response))
 		const parsed = JSON.parse(response) // this comes in as a string so have to parse
 		if (parsed.confirmation != 'success'){
-			console.log('ERROR: ')
 			throw new Error(parsed.message)
 			return
 		}
@@ -232,10 +230,9 @@ router.get('/site/:slug', (req, res) => {
 			delete post['text']
 		})
 
-		delete req.user['notifications']
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			user: sanitizedUser(req.user),
+			user: sanitizedUser(req.user) || {},
 			site: data.site,
 			posts: data.posts
 		})
