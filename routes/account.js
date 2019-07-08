@@ -574,9 +574,17 @@ router.post('/:action', (req, res, next) => {
 			return
 		}
 
+		if (body.site == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing site parameter'
+			})
+			return
+		}
+
 		res.json({
 			confirmation: 'success',
-			data: 'successfully subscribed'
+			data: body.email + 'successfully subscribed to ' + body.site
 		})
 
 		return
