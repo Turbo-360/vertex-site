@@ -14,13 +14,7 @@
   	<meta property="og:image:height" content="260px" />
   	<meta property="og:description" content="{{template.preview}}" />
 
-    <link rel="icon" href="https://lh3.googleusercontent.com/5SVrpLI9utkuVJbQb48cpD3tar59mgWaWSAM73Ghj8dxFJMD2UOzkhO5ptWDd2uV2eqgSvDCSa-Ad8aOrygXx6nv=s32-c" type="image/png" />
-    <link href="{{{cdn}}}/snap/css/inter-ui.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{{cdn}}}/snap/css/slick.min.css">
-    <link rel="stylesheet" href="{{{cdn}}}/snap/css/slick-theme.min.css">
-    <link rel="stylesheet" href="{{{cdn}}}/snap/css/blue.css" id="theme-color">
-
+    {{>head}}
     <style>
 			.logo {
 				width: 160px;
@@ -146,8 +140,8 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <img style="max-width:100%" src="{{{template.image}}}=s750" />
+              <div class="modal-body text-center">
+                <img style="max-width:50%;" src="{{{template.image}}}=s750" />
                 <p class="text-center mt-4">To launch this template on your account and update its configuration with your content, enter the name of your site below.</p>
                 <hr />
               </div>
