@@ -223,7 +223,6 @@ router.get('/site/:slug', (req, res) => {
 			return
 		}
 
-		console.log('TEST 2: ' + JSON.stringify(parsed))
 		data['posts'] = parsed.data
 		data.posts.forEach(post => {
 			post['link'] = (data.site.url.length==0) ? 'https://'+data.site.slug+'.vertex360.co/post/'+post.slug : 'https://'+data.site.url+'/post/'+post.slug
