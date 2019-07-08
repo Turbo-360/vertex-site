@@ -598,7 +598,7 @@ router.post('/:action', (req, res, next) => {
 			}
 		})
 		.then(data => {
-			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 Subscriber', JSON.stringify(body))
+			utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 Subscriber', JSON.stringify(body))
 			res.json({
 				confirmation: 'success',
 				data: data
