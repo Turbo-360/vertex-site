@@ -564,6 +564,25 @@ router.post('/:action', (req, res, next) => {
 		return
 	}
 
+	if (action == 'subscriber'){
+		const body = req.body
+		if (body.email == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'Missing email'
+			})
+			return
+		}
+
+		res.json({
+			confirmation: 'success',
+			data: 'successfully subscribed'
+		})
+
+		return
+	}
+
+
 	if (action == 'subscribe'){ // subscribe to mailing list
 		const body = req.body
 		if (body.email == null){
