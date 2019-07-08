@@ -590,6 +590,9 @@ router.post('/:action', (req, res, next) => {
 			else {
 				const subscriber = subscribers[0]
 				const sites = Object.assign([], subscriber.sites)
+				if (sites.indexOf(body.site) != -1) // already subscribed
+					return subscriber
+
 				sites.push(body.site)
 				return controllers.subscriber.put(subscriber.id, {email:body.email, sites:sites})
 			}
