@@ -585,9 +585,11 @@ router.post('/:action', (req, res, next) => {
 		controllers.subscriber.get({sites:body.site})
 		.then(subscribers => {
 			if (subscribers.length == 0){
+				console.log('TEST 1')
 				return controllers.subscriber.post({email:body.email, sites:[body.site]})
 			}
 			else {
+				console.log('TEST 2')
 				const subscriber = subscribers[0]
 				const sites = Object.assign([], subscriber.sites)
 				if (sites.indexOf(body.site) != -1) // already subscribed
@@ -598,6 +600,7 @@ router.post('/:action', (req, res, next) => {
 			}
 		})
 		.then(data => {
+			console.log('TEST 3:' + JSON.stringify(data))
 			res.json({
 				confirmation: 'success',
 				data: data
