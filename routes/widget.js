@@ -33,33 +33,34 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
-	const type = req.query.type // post, site, etc
-	if (type == null){
-		res.json({
-			confirmation: 'fail',
-			message: 'Missing type parameter'
-		})
-		return
-	}
+	// const type = req.query.type // post, site, etc
+	// if (type == null){
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: 'Missing type parameter'
+	// 	})
+	// 	return
+	// }
 
 	const data = {
 		cdn: CDN
 	}
 
-	const ctr = controllers['type']
-	if (ctr == null){
-		res.json({
-			confirmation: 'fail',
-			message: 'Invalid resource'
-		})
-		return
-	}
+	// const ctr = controllers[type]
+	// if (ctr == null){
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: 'Invalid resource'
+	// 	})
+	// 	return
+	// }
 
-	ctr.getById(thread)
-	then(entity => { // post, site, profile etc
-		data[type] = entity
-		return controllers.comment.get({thread:thread})
-	})
+	// ctr.getById(thread)
+	// then(entity => { // post, site, profile etc
+	// 	data[type] = entity
+	// 	return controllers.comment.get({thread:thread})
+	// })
+	controllers.comment.get({thread:thread})
 	.then(comments => {
 		data['comments'] = comments
 
