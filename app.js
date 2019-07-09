@@ -113,6 +113,7 @@ const api = require('./routes/api')
 const account = require('./routes/account')
 const admin = require('./routes/admin')
 const rest = require('./routes/rest')
+const widget = require('./routes/widget')
 
 // set routes
 app.use('/', index)
@@ -120,6 +121,7 @@ app.use('/api', api) // sample API Routes
 app.use('/account', account)
 app.use('/admin', admin)
 app.use('/rest', rest)
+app.use('/widget', widget)
 
 
 module.exports = app
