@@ -33,7 +33,7 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
-	const type = req.type // post, site, etc
+	const type = req.query.type // post, site, etc
 	if (type == null){
 		res.json({
 			confirmation: 'fail',
