@@ -98,6 +98,23 @@
     .comment-text a {
       color: red
     }
+
+    .comment-form {
+      display: flex;
+      padding: 16px;
+      background: #f9f9f9;
+      border-top: 1px solid #ddd;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+
+    .icon-avatar {
+      border-radius:50%;
+      margin-right: 8px;
+      width: 38px;
+      height:38px;
+    }
   </style>
 </head>
 
@@ -105,36 +122,31 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
-		<div class="messages-container margin-top-0">
-			<div class="messages-container-inner">
+  <div id="container-replies">
+    {{#comments}}
+    <div class="reply-box" style="border-bottom:1px solid #ededed">
+      <div style="padding:16px">
+        <p class="margin-top-0 comment-text">{{{text}}}</p>
+        <a target="_blank" href="/profile/{{profile.slug}}">
+          <img src="{{{profile.image}}}=s120-c" alt="" />
+        </a>
+        <small>
+          by <a target="_blank" class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
+          <span>·</span>
+          {{dateString}}
+        </small>
+      </div>
+    </div>
+    {{/comments}}
+  </div>
 
-				<!-- Message Content -->
-				<div class="message-content" style="padding:0px">
+  <div class="comment-form">
+    <img class="icon-avatar" src="https://lh3.googleusercontent.com/CuEfj955nT_eoHDAgH7m70-IpC4jFnN4XElxLr66N7TB1f8xInOfMpYPiDlG7Oxlw9eSl8zGmRLGme2TIGsxYfg7=s120-c" alt="" />
+    <input style="flex:1; margin-right:16px;margin-bottom:0px" type="text" class="form-control" placeholder="Enter comment" />
+    <button style="height:50px" class="btn btn-sm btn-info">Submit</button>
+  </div>
 
-          <div id="container-replies">
-            {{#comments}}
-            <div class="reply-box" style="border-bottom:1px solid #ededed">
-              <div style="padding:16px">
-                <p class="margin-top-0 comment-text">{{{text}}}</p>
-                <a target="_blank" href="/profile/{{profile.slug}}">
-                  <img src="{{{profile.image}}}=s120-c" alt="" />
-                </a>
-                <small>
-                  by <a target="_blank" class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
-                  <span>·</span>
-                  {{dateString}}
-                </small>
-              </div>
-            </div>
-            {{/comments}}
-          </div>
 
-				</div>
-				<!-- Message Content -->
-
-			</div>
-		</div>
-	</div>
 </div>
 
 <script type="text/template" id="tpl-reply">
