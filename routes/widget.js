@@ -6,15 +6,15 @@ const controllers = require('../controllers')
 const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
-// const ignore = process.env.IGNORE.split(',')
-// const renderAnalytics = (req) => {
-// 	if (req.user == null)
-// 		return (CDN!=null)
-//
-// 	const found = (ignore.indexOf(req.user.id) > -1)
-// 	return !found
-// }
-//
+const ignore = process.env.IGNORE.split(',')
+const renderAnalytics = (req) => {
+	if (req.user == null)
+		return (CDN!=null)
+
+	const found = (ignore.indexOf(req.user.id) > -1)
+	return !found
+}
+
 // const hasVideo = (site) => {
 // 	if (site.template.video == null)
 // 		return false
@@ -34,7 +34,8 @@ router.get('/comments', (req, res) => {
 	}
 
 	const data = {
-		cdn: CDN
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
 	}
 
 	controllers.comment.get({thread:thread})
