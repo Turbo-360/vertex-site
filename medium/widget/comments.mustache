@@ -116,7 +116,7 @@
             <div class="reply-box" style="border-bottom:1px solid #ededed">
               <div style="padding:16px">
                 <p class="margin-top-0 comment-text">{{{text}}}</p>
-                <a href="/profile/{{profile.slug}}">
+                <a target="_blank" href="/profile/{{profile.slug}}">
                   <img src="{{{profile.image}}}=s120-c" alt="" />
                 </a>
                 <small>
@@ -139,7 +139,7 @@
 
 <script type="text/template" id="tpl-reply">
   <div class="reply-box">
-    <a href="/profile/<% profile.slug %>">
+    <a target="_blank" href="/profile/<% profile.slug %>">
       <img src="<%{profile.image}%>=s96-c" alt="" />
     </a>
     <small>
