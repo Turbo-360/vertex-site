@@ -23,12 +23,44 @@ const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 // }
 
 
-router.get('/comments/:subject', (req, res) => {
+router.get('/comments', (req, res) => {
+	const thread = req.query.thread
+	if (thread == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing thread parameter'
+		})
+		return
+	}
+
+	// const id = req.query.id
+	// if (id == null){
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: 'Missing id parameter'
+	// 	})
+	// 	return
+	// }
+
 	const data = {
 		cdn: CDN
 	}
 
-  res.render('widget/comments', data)
+	const ctr = controllers['comment']
+	ctr.get({thread:thread})
+	.then(comments => {
+		data['comments'] = comments
+
+		// TODO: fetch comments based on type and id query params
+	  res.render('widget/comments', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
 })
 
 module.exports = router
