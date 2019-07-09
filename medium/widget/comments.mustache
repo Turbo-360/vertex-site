@@ -160,8 +160,8 @@
       Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
       var data = window.__PRELOADED__
       var user = data.user
-      var comment = data.comment
-      var replies = data.replies || []
+      var post = data.post
+      var comments = data.comments || []
       // console.log('USER == ' + JSON.stringify(user))
 
       var postRequest = function(url, params, completion){
@@ -196,7 +196,7 @@
           profile: JSON.stringify({id:user.id, firstName:user.firstName, lastName:user.lastName, username:user.username, image:user.image, slug:user.slug}),
           text: $('#input-reply-text').val(),
           isInitial: 'no',
-          thread: comment.id
+          thread: post.id
         }
 
         if (reply.text.length == 0){
@@ -216,10 +216,10 @@
           }
 
           // console.log('REPLY CREATED: ' + JSON.stringify(response))
-          replies.push(response.result)
+          comments.push(response.result)
           var tpl = $('#tpl-reply').html()
           var repliesHtml = ''
-          replies.forEach(function(reply){
+          comments.forEach(function(reply){
             repliesHtml += Mustache.render(tpl, reply)
           })
 
