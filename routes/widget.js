@@ -23,23 +23,12 @@ const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 // }
 
 
-router.get('/comments', (req, res) => {
+router.get('/comments/:subject', (req, res) => {
 	const data = {
 		cdn: CDN
 	}
 
-  res.json({
-    confirmation: 'success',
-    data: 'comments widget'
-  })
+  res.render('widget/comments', data)
 })
-
-
-
-
-
-
-
-
 
 module.exports = router
