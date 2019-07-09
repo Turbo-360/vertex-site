@@ -51,11 +51,13 @@ router.get('/comments', (req, res) => {
 
 	controllers.comment.get({thread:thread})
 	.then(comments => {
+		const currentUser = sanitizedUser(req.user)
 		data['comments'] = comments
+		data['user'] = currentUser
 		data['preloaded'] = JSON.stringify({
 			thread: thread,
 			comments: comments,
-			user: sanitizedUser(req.user)
+			user: currentUser
 		})
 
 		// TODO: fetch comments based on type and id query params
