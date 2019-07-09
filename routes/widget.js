@@ -15,12 +15,23 @@ const renderAnalytics = (req) => {
 	return !found
 }
 
-// const hasVideo = (site) => {
-// 	if (site.template.video == null)
-// 		return false
-//
-// 	return (site.template.video.length==11) // youtube IDs are 11 characters;
-// }
+const sanitizedUser = (user) => {
+	if (user == null)
+		return null
+
+	var currentUser = {
+		id: user.id,
+		username: user.username,
+		slug: user.slug,
+		firstName: user.firstName,
+		lastName: user.lastName,
+		image: user.image,
+		bio: user.bio,
+		tags: user.tags.join(',')
+	}
+
+	return currentUser
+}
 
 
 router.get('/comments', (req, res) => {
@@ -43,7 +54,8 @@ router.get('/comments', (req, res) => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			thread: thread,
-			comments: comments
+			comments: comments,
+			user: sanitizedUser(req.user)
 		})
 
 		// TODO: fetch comments based on type and id query params

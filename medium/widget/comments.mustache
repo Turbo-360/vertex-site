@@ -141,7 +141,7 @@
   </div>
 
   <div class="comment-form">
-    <img class="icon-avatar" src="https://lh3.googleusercontent.com/CuEfj955nT_eoHDAgH7m70-IpC4jFnN4XElxLr66N7TB1f8xInOfMpYPiDlG7Oxlw9eSl8zGmRLGme2TIGsxYfg7=s120-c" alt="" />
+    {{#user}}<img class="icon-avatar" src="{{{user.image}}}=s120-c" alt="" />{{/user}}
     <input style="flex:1; margin-right:16px;margin-bottom:0px" type="text" class="form-control" placeholder="Enter comment" />
     <button style="height:50px" class="btn btn-sm btn-info">Submit</button>
   </div>
