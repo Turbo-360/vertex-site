@@ -114,7 +114,7 @@ router.get('/seed-comments', (req, res) => {
 					lastName: '',
 					username:nameParts[0].toLowerCase(),
 					image: comment.authorThumb,
-					slug:nameParts[0].toLowerCase()+'='+comment.id.toLowerCase().substring(0, 6)
+					slug:nameParts[0].toLowerCase()+'-'+comment.id.toLowerCase().substring(0, 6)
 				},
 				timestamp: timestamp,
 				dateString: moment(timestamp).format("MMMM Do, YYYY"), // human readable date:
