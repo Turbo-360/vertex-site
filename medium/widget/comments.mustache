@@ -130,11 +130,9 @@
     <div class="reply-box" style="border-bottom:1px solid #ededed">
       <div style="padding:16px">
         <p class="margin-top-0 comment-text">{{{text}}}</p>
-        <a target="_blank" href="/profile/{{profile.slug}}">
-          <img src="{{{profile.image}}}=s120-c" alt="" />
-        </a>
+        <img src="{{{profile.image}}}=s120-c" alt="" />
         <small>
-          by <a target="_blank" class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
+          <span>by {{profile.slug}}">{{profile.username}}</span>
           <span>·</span>
           {{dateString}}
         </small>
