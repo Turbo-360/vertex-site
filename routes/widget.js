@@ -1,6 +1,7 @@
 // Full Documentation - https://www.turbo360.co/docs
 const turbo = require('turbo360')({site_id: process.env.TURBO_APP_ID})
 const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
+var moment = require('moment')
 const router = vertex.router()
 const controllers = require('../controllers')
 const utils = require('../utils')
@@ -69,6 +70,77 @@ router.get('/comments', (req, res) => {
 			message: err.message
 		})
 	})
+})
+
+router.get('/seed-comments', (req, res) => {
+
+	// https://yt-captions-c5wut7.vertex360.co/api/comments?video=NceV_YXfHfU
+	const yt = req.query.yt
+	if (yt==null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing yt parameter'
+		})
+		return
+	}
+
+	const entity = req.query.entity
+	if (entity==null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing entity parameter'
+		})
+		return
+	}
+
+	// const endpoint = 'https://yt-captions-c5wut7.vertex360.co/api/comments?video=NceV_YXfHfU'
+	const endpoint = 'https://yt-captions-c5wut7.vertex360.co/api/comments?video='+yt
+	utils.HTTP.get(endpoint, null, {'Accept':'application/json'})
+	.then(response => { //comes in as a string
+		const payload = JSON.parse(response)
+		if (payload.confirmation != 'success'){
+			throw new Error(payload.message)
+			return
+		}
+
+		const comments = payload.data.comments
+		const vertexComments = []
+		comments.forEach(comment => {
+			const nameParts = comment.author.split(' ')
+			const timestamp = new Date(comment.timestamp)
+			
+			const formatted = {
+				profile: {
+					id: comment.id.toLowerCase(),
+					firstName:'',
+					lastName: '',
+					username:nameParts[0].toLowerCase(),
+					image: comment.authorThumb,
+					slug:nameParts[0].toLowerCase()+'='+comment.id.toLowerCase().substring(0, 6)
+				},
+				timestamp: timestamp,
+				dateString: moment(timestamp).format("MMMM Do, YYYY"), // human readable date:
+				text: comment.text,
+				isInitial: 'no',
+				thread: entity
+			}
+
+			vertexComments.push(formatted)
+			controllers.comment.post(formatted)
+		})
+
+		res.json({
+			confirmation: 'success',
+			data: vertexComments
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
 
 })
 
