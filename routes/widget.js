@@ -73,7 +73,7 @@ router.get('/comments', (req, res) => {
 })
 
 router.get('/seed-comments', (req, res) => {
-	const yt = req.query.yt
+	const yt = req.query.yt // yt video ID
 	if (yt==null){
 		res.json({
 			confirmation: 'fail',
@@ -82,7 +82,7 @@ router.get('/seed-comments', (req, res) => {
 		return
 	}
 
-	const entity = req.query.entity
+	const entity = req.query.entity // blog post ID
 	if (entity==null){
 		res.json({
 			confirmation: 'fail',
@@ -91,7 +91,7 @@ router.get('/seed-comments', (req, res) => {
 		return
 	}
 
-	// const endpoint = 'https://yt-captions-c5wut7.vertex360.co/api/comments?video=NceV_YXfHfU'
+	// fetch YT comments
 	const endpoint = 'https://yt-captions-c5wut7.vertex360.co/api/comments?video='+yt
 	utils.HTTP.get(endpoint, null, {'Accept':'application/json'})
 	.then(response => { //comes in as a string
