@@ -92,9 +92,10 @@ router.get('/seed-comments', (req, res) => {
 	}
 
 	// fetch YT comments
-	const endpoint = 'https://yt-captions-c5wut7.vertex360.co/api/comments?video='+yt
+	const endpoint = 'https://storage.turbo360.co/demo-test-vxqkks/'+yt+'.json'
 	utils.HTTP.get(endpoint, null, {'Accept':'application/json'})
 	.then(response => { //comes in as a string
+		console.log('RESPONSE == ' + response)
 		const payload = JSON.parse(response)
 		if (payload.confirmation != 'success'){
 			throw new Error(payload.message)
@@ -133,6 +134,7 @@ router.get('/seed-comments', (req, res) => {
 		})
 	})
 	.catch(err => {
+		console.log('ERR: ' + err)
 		res.json({
 			confirmation: 'fail',
 			message: err.message
