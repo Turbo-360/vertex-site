@@ -73,8 +73,6 @@ router.get('/comments', (req, res) => {
 })
 
 router.get('/seed-comments', (req, res) => {
-
-	// https://yt-captions-c5wut7.vertex360.co/api/comments?video=NceV_YXfHfU
 	const yt = req.query.yt
 	if (yt==null){
 		res.json({
@@ -108,7 +106,7 @@ router.get('/seed-comments', (req, res) => {
 		comments.forEach(comment => {
 			const nameParts = comment.author.split(' ')
 			const timestamp = new Date(comment.timestamp)
-			
+
 			const formatted = {
 				profile: {
 					id: comment.id.toLowerCase(),
@@ -140,8 +138,6 @@ router.get('/seed-comments', (req, res) => {
 			message: err.message
 		})
 	})
-
-
 })
 
 module.exports = router
