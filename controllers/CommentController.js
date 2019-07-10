@@ -70,7 +70,9 @@ module.exports = {
 
 	post: (params) => {
 		return new Promise((resolve, reject) => {
-			params['dateString'] = moment().format("MMMM Do, YYYY") // human readable date:
+			if (params['dateString'] == null)
+				params['dateString'] = moment().format("MMMM Do, YYYY") // human readable date:
+
 			if (params.title)
 				params['slug'] = utils.TextUtils.slugVersion(params.title)+'-'+utils.TextUtils.randomString(6).toLowerCase()
 
