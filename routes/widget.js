@@ -71,8 +71,9 @@ router.get('/comments', (req, res) => {
 
 	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
 	utils.HTTP.get(endpoint)
-	.then(entity => {
-		data['entity'] = JSON.parse(entity)
+	.then(response => {
+		const parsed = JSON.parse(response)
+		data['entity'] = parsed.data
 		return controllers.comment.get({thread:thread})
 	})
 	.then(comments => {
