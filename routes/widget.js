@@ -58,7 +58,8 @@ router.get('/comments', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			thread: thread,
 			comments: comments,
-			user: currentUser
+			user: currentUser,
+			'user-agent': req.headers['user-agent']
 		})
 
 		// TODO: fetch comments based on type and id query params
