@@ -72,7 +72,7 @@ router.get('/comments', (req, res) => {
 	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
 	utils.HTTP.get(endpoint)
 	.then(entity => {
-		data[schema] = JSON.parse(entity)
+		data['entity'] = JSON.parse(entity)
 		return controllers.comment.get({thread:thread})
 	})
 	.then(comments => {
@@ -80,9 +80,10 @@ router.get('/comments', (req, res) => {
 		data['comments'] = comments
 		data['user'] = currentUser
 		data['preloaded'] = JSON.stringify({
-			thread: thread,
 			comments: comments,
-			user: currentUser
+			user: currentUser,
+			entity: data.entity,
+			thread: thread
 		})
 
 		// TODO: fetch comments based on type and id query params
