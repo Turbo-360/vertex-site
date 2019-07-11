@@ -64,9 +64,11 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
+	const userAgent = req.headers['user-agent'].toLowerCase()
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: renderAnalytics(req),
+		isMobile: (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
 	}
 
 	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
@@ -74,6 +76,8 @@ router.get('/comments', (req, res) => {
 	.then(response => {
 		const parsed = JSON.parse(response)
 		data['entity'] = parsed.data
+
+		// fetch comments based on type and id query params
 		return controllers.comment.get({thread:thread})
 	})
 	.then(comments => {
@@ -87,7 +91,6 @@ router.get('/comments', (req, res) => {
 			thread: thread
 		})
 
-		// TODO: fetch comments based on type and id query params
 	  res.render('widget/comments', data)
 	})
 	.catch(err => {
