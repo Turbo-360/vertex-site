@@ -76,10 +76,12 @@
 
 <div id="wrapper">
   {{#isMobile}}
-  <div style="padding:16px;background:#fffffa">
-    <h3>{{entity.title}}</h3>
-    <p>{{entity.preview}}</p>
-    <img src="https://lh3.googleusercontent.com/LARXvti0sZzR_lskYdL2sIZnIFaAMDu5KyyoZQCrRbFhVIHfno2OBNouNnEMkfnbqEYECqGfWzIFS6yGDZA8sBbw3g=s160" />
+  <div style="padding:16px;background:#5d5077;border-bottom:1px solid #ddd">
+    <a href="/">
+      <img style="width:160px" src="https://lh3.googleusercontent.com/LARXvti0sZzR_lskYdL2sIZnIFaAMDu5KyyoZQCrRbFhVIHfno2OBNouNnEMkfnbqEYECqGfWzIFS6yGDZA8sBbw3g=s320" />
+    </a>
+    <h3 style="color:#fff">{{entity.title}}</h3>
+    <p style="color:#999;font-size:14px;line-height:22px">{{entity.preview}}</p>
   </div>
   {{/isMobile}}
 
