@@ -1,7 +1,7 @@
 // Full Documentation - https://www.turbo360.co/docs
 const turbo = require('turbo360')({site_id: process.env.TURBO_APP_ID})
 const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
-var moment = require('moment')
+const moment = require('moment')
 const router = vertex.router()
 const controllers = require('../controllers')
 const utils = require('../utils')
@@ -45,12 +45,36 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
+	const schema = req.query.schema
+	if (schema == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing schema parameter'
+		})
+		return
+	}
+
+	// this is the site slug NOT id:
+	const site = req.query.site
+	if (site == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing site parameter'
+		})
+		return
+	}
+
 	const data = {
 		cdn: CDN,
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	controllers.comment.get({thread:thread})
+	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
+	utils.HTTP.get(endpoint)
+	.then(entity => {
+		data[schema] = JSON.parse(entity)
+		return controllers.comment.get({thread:thread})
+	})
 	.then(comments => {
 		const currentUser = sanitizedUser(req.user)
 		data['comments'] = comments
