@@ -130,11 +130,16 @@
         if (event)
           event.preventDefault()
 
+        if (user == null){
+          alert('Please login or register to submit comment.')
+          return
+        }
+
         var commentText = $('#text-area-comment').val()
         console.log('Submit Comment: ' + commentText)
 
-        if (user == null){
-          alert('Please login or register to submit comment.')
+        if (commentText.length == 0){
+          alert('Please enter a comment.')
           return
         }
 
