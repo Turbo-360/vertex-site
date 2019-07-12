@@ -136,8 +136,6 @@
         }
 
         var commentText = $('#text-area-comment').val()
-        console.log('Submit Comment: ' + commentText)
-
         if (commentText.length == 0){
           alert('Please enter a comment.')
           return
@@ -162,6 +160,7 @@
           }
 
           console.log('Comment Created: ' + JSON.stringify(resp))
+          $('#text-area-comment').val('')
           comments.unshift(resp.result)
           reloadUI()
         })
