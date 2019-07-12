@@ -22,8 +22,8 @@
 	<div class="row justify-content-between">
 		<div class="col-md-8">
       <div id="thread-container"></div>
-      <textarea class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px"></textarea>
-      <button class="mb-5 btn btn-info">Add Comment</button>
+      <textarea id="text-area-comment" class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px"></textarea>
+      <button id="btn-submit-comment" class="mb-5 btn btn-info">Add Comment</button>
       <div id="comments-container"></div>
 		</div>
 
@@ -37,8 +37,6 @@
           <p>Vertex 360 is a platform for content creators in the modern media age. Whether you manage a YouTube channel, podcast, blog, Instagram folowing, or all of the above, Vertex 360 provides the best way to deliver your content under a unified, coherent brand that you control.</p>
           <a href="/about" class="btn btn-danger w-100">Learn More</a>
         </div>
-
-
       </div>
 
 		</div>
@@ -111,21 +109,57 @@
         })
       }
 
-      // check if thread entity exists, if not create:
+      // check if thread entity exists:
       window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
         if (err){
           return
         }
 
-        if (resp.results.length == 0){ // not found, create
-          console.log('THREAD NOT FOUND')
-          // createThread()
+        if (resp.results.length == 0){
+          // console.log('THREAD NOT FOUND')
+          alert('Error - Inavlid URL.')
           return
         }
 
         thread = resp.results[0]
         fetchComments()
         return
+      })
+
+      $('#btn-submit-comment').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        var commentText = $('#text-area-comment').val()
+        console.log('Submit Comment: ' + commentText)
+
+        if (user == null){
+          alert('Please login or register to submit comment.')
+          return
+        }
+
+        var comment = {
+          text: commentText,
+          thread: threadId,
+          profile: JSON.stringify({
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            slug: user.slug
+          })
+        }
+
+        window.vertexLib.postRequest('/api/comment', comment, function(err, resp){
+          if (err){
+            alert('Error - '+err)
+            return
+          }
+
+          console.log('Comment Created: ' + JSON.stringify(resp))
+          comments.unshift(resp.result)
+          reloadUI()
+        })
       })
     })()
   </script>
