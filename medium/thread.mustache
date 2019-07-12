@@ -78,12 +78,12 @@
       var schema = data.schema // post, video, episode, etc
 
       var fetchComments = function(){
-        console.log('FETCH COMMENTS')
+        console.log('FETCH COMMENTS: ' + JSON.stringify(thread))
 
       }
 
       // check if thread entity exists, if not create:
-      window.vertexLib.getRequest('/api/thread/'+threadId, null, function(err, resp){
+      window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
         console.log('RESP == ' + resp)
         if (err){
           return
