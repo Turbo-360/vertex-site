@@ -84,30 +84,36 @@
 
       // check if thread entity exists, if not create:
       window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
-        console.log('RESP == ' + resp)
+        console.log('RESP == ' + JSON.stringify(resp))
         if (err){
           return
         }
 
-        // not found, create new thread:
-        if (resp.confirmation != 'success'){
-          window.vertexLib.postRequest('/api/thread', {}, function(err, resp){
-            if (err)
-              return
+        if (resp.confirmation == 'success'){
+          if (resp.results.length == 0){
+            console.log('THREAD NOT FOUND')
+            return
+          }
 
-            if (resp.confirmation != 'success'){
-              console.log('ERR2 - ' + JSON.stringify(resp))
-              return
-            }
-
-            thread = resp.data
-            fetchComments()
-          })
+          thread = resp.results[0]
+          fetchComments()
           return
         }
 
-        thread = resp.result
-        fetchComments()
+        // not found, create new thread:
+        window.vertexLib.postRequest('/api/thread', {}, function(err, resp){
+          if (err)
+            return
+
+          if (resp.confirmation != 'success'){
+            console.log('ERR2 - ' + JSON.stringify(resp))
+            return
+          }
+
+          thread = resp.data
+          fetchComments()
+        })
+        return
       })
 
     })()
