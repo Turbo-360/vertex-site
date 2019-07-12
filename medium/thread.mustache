@@ -75,10 +75,11 @@
       Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
       var data = window.__PRELOADED__
       var user = data.user
-      var site = data.user // full site data
+      var site = data.site // full site data
       var threadId = data.thread // ID number
-      var thread = null // full thread data
       var schema = data.schema // post, video, episode, etc
+
+      var thread = null // full thread data
       var comments = []
 
       var reloadUI = function(){
