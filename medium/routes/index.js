@@ -221,36 +221,34 @@ router.get('/comments', (req, res) => {
 		})
 	})
 
-	return
-
-	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
-	utils.HTTP.get(endpoint)
-	.then(response => {
-		const parsed = JSON.parse(response)
-		data['entity'] = parsed.data
-
-		// fetch comments based on type and id query params
-		return controllers.comment.get({thread:thread})
-	})
-	.then(comments => {
-		const currentUser = sanitizedUser(req.user)
-		data['comments'] = comments
-		data['user'] = currentUser
-		data['preloaded'] = JSON.stringify({
-			comments: comments,
-			user: currentUser,
-			entity: data.entity,
-			thread: thread
-		})
-
-	  res.render('thread', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
+	// const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
+	// utils.HTTP.get(endpoint)
+	// .then(response => {
+	// 	const parsed = JSON.parse(response)
+	// 	data['entity'] = parsed.data
+	//
+	// 	// fetch comments based on type and id query params
+	// 	return controllers.comment.get({thread:thread})
+	// })
+	// .then(comments => {
+	// 	const currentUser = sanitizedUser(req.user)
+	// 	data['comments'] = comments
+	// 	data['user'] = currentUser
+	// 	data['preloaded'] = JSON.stringify({
+	// 		comments: comments,
+	// 		user: currentUser,
+	// 		entity: data.entity,
+	// 		thread: thread
+	// 	})
+	//
+	//   res.render('thread', data)
+	// })
+	// .catch(err => {
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: err.message
+	// 	})
+	// })
 })
 
 router.get('/post/:slug', (req, res) => {

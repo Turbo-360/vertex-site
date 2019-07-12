@@ -64,34 +64,27 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
-	const userAgent = req.headers['user-agent'].toLowerCase()
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req),
-		isMobile: (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
+		renderAnalytics: renderAnalytics(req)
 	}
 
-	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
-	utils.HTTP.get(endpoint)
-	.then(response => {
-		const parsed = JSON.parse(response)
-		data['entity'] = parsed.data
+	controllers.site.get({slug:site})
+	.then(sites => {
+		if (sites.length == 0){
+			throw new Error('Site '+site+' not found')
+			return
+		}
 
-		// fetch comments based on type and id query params
-		return controllers.comment.get({thread:thread})
-	})
-	.then(comments => {
 		const currentUser = sanitizedUser(req.user)
-		data['comments'] = comments
-		data['user'] = currentUser
 		data['preloaded'] = JSON.stringify({
-			comments: comments,
 			user: currentUser,
-			entity: data.entity,
-			thread: thread
+			site: sites[0],
+			thread: thread,
+			schema: schema
 		})
 
-	  res.render('widget/comments', data)
+		res.render('widget/comments', data)
 	})
 	.catch(err => {
 		res.json({
