@@ -163,6 +163,70 @@ router.get('/templates', (req, res) => {
 	})
 })
 
+router.get('/comments', (req, res) => {
+	const thread = req.query.thread
+	if (thread == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing thread parameter'
+		})
+		return
+	}
+
+	const schema = req.query.schema
+	if (schema == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing schema parameter'
+		})
+		return
+	}
+
+	// this is the site slug NOT id:
+	const site = req.query.site
+	if (site == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing site parameter'
+		})
+		return
+	}
+
+	const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
+	utils.HTTP.get(endpoint)
+	.then(response => {
+		const parsed = JSON.parse(response)
+		data['entity'] = parsed.data
+
+		// fetch comments based on type and id query params
+		return controllers.comment.get({thread:thread})
+	})
+	.then(comments => {
+		const currentUser = sanitizedUser(req.user)
+		data['comments'] = comments
+		data['user'] = currentUser
+		data['preloaded'] = JSON.stringify({
+			comments: comments,
+			user: currentUser,
+			entity: data.entity,
+			thread: thread
+		})
+
+	  res.render('thread', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 router.get('/post/:slug', (req, res) => {
   const data = {
 		cdn: CDN,

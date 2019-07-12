@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Vertex 360</title>
+  <meta name="description" content="" />
+  {{>head}}
+</head>
+
+<body>
+  {{>nav}}
+
+<div class="container pt-5">
+  <div class="row">
+
+
+  </div>
+</div>
+<!-- End Header -->
+
+
+<div class="container pt-4 pb-4">
+	<div class="row justify-content-between">
+		<div class="col-md-8">
+			<h3 class="mb-0"><span>To the Ruling Class - Jeffrey Epstein is Your Last Chance</span></h3>
+      <small>July 8th, 2019</small>
+      <span style="margin:6px">&middot;</span>
+      <small><a target="_blank" style="text-decoration:none" href="#">The Narrative</a></small>
+      <textarea class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px"></textarea>
+      <button class="mb-5">Add Comment</button>
+
+      <div class="mt-2 d-flex justify-content-between post-preview">
+				<div class="pr-4">
+					<div class="card-text text-muted small">
+  					 	<a href="#">Dkwon</a>
+              <span style="margin:6px">&middot;</span>
+              <span>July 8th, 2019</span>
+					</div>
+          <p class="text-muted">Andrew Yang's new ideas are all over the place. He also comes off as a bit self-indulgent. He is being propped up and used by Fox News as a poster child for Democrats with crazy far-fetched "socialist" ideas.</p>
+				</div>
+			</div>
+
+      <div class="mt-2 d-flex justify-content-between post-preview">
+				<div class="pr-4">
+					<div class="card-text text-muted small">
+  					 	<a href="#">Dkwon</a>
+              <span style="margin:6px">&middot;</span>
+              <span>July 8th, 2019</span>
+					</div>
+          <p class="text-muted">Andrew Yang's new ideas are all over the place. He also comes off as a bit self-indulgent. He is being propped up and used by Fox News as a poster child for Democrats with crazy far-fetched "socialist" ideas.</p>
+				</div>
+			</div>
+
+      {{#comments}}
+      <div class="mt-2 d-flex justify-content-between post-preview">
+				<div class="pr-4">
+					<div class="card-text text-muted small">
+  					 	<a href="#">{{profile.username}}</a>
+              <span style="margin:6px">&middot;</span>
+              <span>{{dateString}}</span>
+					</div>
+          <p class="text-muted">{{text}}</p>
+				</div>
+			</div>
+      {{/comments}}
+
+		</div>
+		<div class="col-md-4 pl-4">
+      <div class="sticky-top">
+        <div class="mb-5" style="padding:24px;background:#dedafb">
+          <h2>Build Your Brand</h2>
+          <div class="text-center mb-4 mt-3">
+            <img style="max-width:200px" src="https://lh3.googleusercontent.com/uFcvuH_Yifl0PaAMqcNIvuUqXl67M2hc54S523D1pwceSWrphPExoGe2rhPauCNjTgxzVQWSUolQTNeoow4m9mK5ibI" />
+          </div>
+          <p>Vertex 360 is a platform for content creators in the modern media age. Whether you manage a YouTube channel, podcast, blog, Instagram folowing, or all of the above, Vertex 360 provides the best way to deliver your content under a unified, coherent brand that you control.</p>
+          <a href="/about" class="btn btn-danger w-100">Learn More</a>
+        </div>
+
+
+      </div>
+
+		</div>
+	</div>
+</div>
+  {{>footer}}
+  {{>auth}}
+  {{>scripts}}
+</body>
+</html>
