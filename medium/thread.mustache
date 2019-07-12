@@ -111,57 +111,6 @@
         })
       }
 
-      /*
-      var createThread = function(){
-        console.log('CREATE THREAD')
-        var entityEndpoint = site.url+'/'+schema+'/'+threadId
-        window.getRequest(entityEndpoint, null, function(err, resp){
-          if (err)
-            return
-
-          if (resp.confirmation != 'success'){
-            alert('Not Found')
-            return
-          }
-
-          var entity = resp.data // blog post, video, episode, etc
-          var params = {
-            slug: entity.slug,
-            subject: JSON.stringify({
-              id: entity.id,
-              schema: entity.schema,
-              title: entity.title,
-              preview: entity.preview,
-              dateString: entity.dateString,
-              slug: entity.slug,
-              image: entity.image,
-              url: entity.url,
-              category: entity.category
-            }),
-            site: JSON.stringify({
-              id: site.id,
-              slug: site.slug,
-              name: site.name,
-              image: site.image,
-              url: site.url
-            })
-          }
-
-          window.vertexLib.postRequest('/api/thread', params, function(err, resp){
-            if (err)
-              return
-
-            if (resp.confirmation != 'success'){
-              console.log('ERR2 - ' + JSON.stringify(resp))
-              return
-            }
-
-            thread = resp.data
-            reloadUI()
-          })
-        })
-      } */
-
       // check if thread entity exists, if not create:
       window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
         if (err){
