@@ -84,7 +84,7 @@
 
       var reloadUI = function(){
         var tplThread = $('#tpl-thread').html()
-        threadHtml += Mustache.render(tplThread, thread)
+        var threadHtml = Mustache.render(tplThread, thread)
         $('#thread-container').html(threadHtml)
 
         var tpl = $('#tpl-comment').html()
