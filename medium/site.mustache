@@ -79,7 +79,9 @@
 
             if (response.results.length > 0){
               var thread = response.results[0]
-              console.log('THREAD: ' + JSON.stringify(thread))
+              // console.log('THREAD: ' + JSON.stringify(thread))
+              // https://www.vertex360.co/comments?thread=GSyvfLS4nODhsGkh&schema=post&site=mediumish-l9g2k8
+              window.location.href = '/comments?thread='+thread.subject.id+'&schema='+thread.subject.schema+'&site='+thread.site.slug
               return
             }
 
@@ -112,6 +114,8 @@
               }
 
               console.log('THREAD CREATED: ' + JSON.stringify(resp2))
+              var thread = resp2.result
+              window.location.href = '/comments?thread='+thread.subject.id+'&schema='+thread.subject.schema+'&site='+thread.site.slug
             })
           })
         })
