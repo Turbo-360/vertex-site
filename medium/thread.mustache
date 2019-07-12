@@ -28,18 +28,7 @@
       <textarea class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px"></textarea>
       <button class="mb-5 btn btn-info">Add Comment</button>
 
-      {{#comments}}
-      <div class="mt-2 d-flex justify-content-between post-preview">
-				<div class="pr-4">
-					<div class="card-text text-muted small">
-  					 	<a href="#">{{profile.username}}</a>
-              <span style="margin:6px">&middot;</span>
-              <span>{{dateString}}</span>
-					</div>
-          <p class="text-muted">{{{text}}}</p>
-				</div>
-			</div>
-      {{/comments}}
+      <div id="comments-container"></div>
 
 		</div>
 		<div class="col-md-4 pl-4">
@@ -61,6 +50,67 @@
 </div>
   {{>footer}}
   {{>auth}}
+
+  <script type="text/template" id="tpl-comment">
+    <div class="mt-2 d-flex justify-content-between post-preview">
+      <div class="pr-4">
+        <div class="card-text text-muted small">
+            <a href="#"><% profile.username %></a>
+            <span style="margin:6px">&middot;</span>
+            <span><% dateString %></span>
+        </div>
+        <p class="text-muted"><%{text}%></p>
+      </div>
+    </div>
+  </script>
+
   {{>scripts}}
+  <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+
+  <script>
+    (function(){
+      Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+      var data = window.__PRELOADED__
+      var user = data.user
+      var site = data.user // full site data
+      var threadId = data.thread // ID number
+      var thread = null // full thread data
+      var schema = data.schema // post, video, episode, etc
+
+      var fetchComments = function(){
+        console.log('FETCH COMMENTS')
+
+      }
+
+      // check if thread entity exists, if not create:
+      window.vertexLib.getRequest('/api/thread/'+threadId, null, function(err, resp){
+        console.log('RESP == ' + JSON.stringify(resp))
+        if (err){
+          return
+        }
+
+        // not found, create new thread:
+        if (resp.confirmation != 'success'){
+          window.vertexLib.postRequest('/api/thread', {}, function(err, resp){
+            if (err)
+              return
+
+            if (resp.confirmation != 'success'){
+              console.log('ERR2 - ' + JSON.stringify(resp))
+              return
+            }
+
+            thread = resp.data
+            fetchComments()
+          })
+          return
+        }
+
+        thread = resp.result
+        fetchComments()
+      })
+
+    })()
+  </script>
 </body>
 </html>

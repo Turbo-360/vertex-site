@@ -197,6 +197,32 @@ router.get('/comments', (req, res) => {
 		renderAnalytics: renderAnalytics(req)
 	}
 
+	controllers.site.get({slug:site})
+	.then(sites => {
+		if (sites.length == 0){
+			throw new Error('Site '+site+' not found')
+			return
+		}
+
+		const currentUser = sanitizedUser(req.user)
+		data['preloaded'] = JSON.stringify({
+			user: currentUser,
+			site: sites[0],
+			thread: thread,
+			schema: schema
+		})
+
+		res.render('thread', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
+	return
+
 	const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
 	utils.HTTP.get(endpoint)
 	.then(response => {
