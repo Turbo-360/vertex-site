@@ -84,7 +84,7 @@
 
       // check if thread entity exists, if not create:
       window.vertexLib.getRequest('/api/thread/'+threadId, null, function(err, resp){
-        console.log('RESP == ' + JSON.stringify(resp))
+        console.log('RESP == ' + resp)
         if (err){
           return
         }
