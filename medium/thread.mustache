@@ -48,11 +48,13 @@
   {{>auth}}
 
   <script type="text/template" id="tpl-thread">
-    <h3 class="mb-0"><span><% subject.title %></span></h3>
+    <h3 class="mb-0">
+      <a target="_blank" style="text-decoration:none" href="<%{subject.url}%>"><span><% subject.title %></span></a>
+    </h3>
     <small><% subject.dateString %></small>
     <span style="margin:6px">&middot;</span>
     <small>
-      <a target="_blank" style="text-decoration:none" href="<%{subject.url}%>"><% site.name %></a>
+      <a target="_blank" style="text-decoration:none" href="<%{site.url}%>"><% site.name %></a>
     </small>
   </script>
 
