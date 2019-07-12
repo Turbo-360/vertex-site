@@ -51,7 +51,9 @@
     <h3 class="mb-0"><span><% subject.title %></span></h3>
     <small><% subject.dateString %></small>
     <span style="margin:6px">&middot;</span>
-    <small><a target="_blank" style="text-decoration:none" href="<% {subject.url} %>"><% site.name %></a></small>
+    <small>
+      <a target="_blank" style="text-decoration:none" href="<%{subject.url}%>"><% site.name %></a>
+    </small>
   </script>
 
   <script type="text/template" id="tpl-comment">
