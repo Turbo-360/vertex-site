@@ -33,7 +33,6 @@ const addToMailchimp = (body) => {
 			resolve(subscriber)
 		})
 		.catch(err => {
-			// console.log('MAILCHIMP ERR - '+err)
 			reject(err)
 		})
 	})
