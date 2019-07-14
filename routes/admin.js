@@ -208,6 +208,14 @@ router.get('/:slug', (req, res) => {
 	})
 })
 
+// fetch captions from youtube video based on ID:
+router.get('/caption/:youtubeid', (req, res) => {
+	res.json({
+		confirmation:'success',
+		data: 'CAPTIONS!'
+	})
+})
+
 router.get('/pages/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
