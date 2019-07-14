@@ -161,6 +161,14 @@ router.post('/config', (req, res) => {
 	})
 })
 
+// fetch captions from youtube video based on ID:
+router.get('/captions', (req, res) => {
+	res.json({
+		confirmation:'success',
+		data: 'CAPTIONS!'
+	})
+})
+
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -205,14 +213,6 @@ router.get('/:slug', (req, res) => {
 			confirmation: 'fail',
 			message: err.message
 		})
-	})
-})
-
-// fetch captions from youtube video based on ID:
-router.get('/caption/:youtubeid', (req, res) => {
-	res.json({
-		confirmation:'success',
-		data: 'CAPTIONS!'
 	})
 })
 
