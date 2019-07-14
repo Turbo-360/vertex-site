@@ -176,9 +176,14 @@ router.get('/captions', (req, res) => {
 	utils.HTTP.get('https://yt-api-puw95x.vertex360.co/api/captions', {video:req.query.video})
 	.then(data => {
 		const parsed = JSON.parse(data)
+		if (parsed.confirmation != 'success'){
+			throw new Error(parsed.message)
+			return
+		}
+
 		res.json({
 			confirmation:'success',
-			data: parsed
+			data: parsed.data
 		})
 	})
 	.catch(err => {
