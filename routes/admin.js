@@ -163,9 +163,29 @@ router.post('/config', (req, res) => {
 
 // fetch captions from youtube video based on ID:
 router.get('/captions', (req, res) => {
-	res.json({
-		confirmation:'success',
-		data: 'CAPTIONS!'
+	// https://yt-api-puw95x.vertex360.co/api/captions?video=j6fbYZxnuyk
+
+	if (req.query.video == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing video parameter.'
+		})
+		return
+	}
+
+	utils.HTTP.get('https://yt-api-puw95x.vertex360.co/api/captions', {video:req.query.video})
+	.then(data => {
+		const parsed = JSON.parse(data)
+		res.json({
+			confirmation:'success',
+			data: parsed
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
 	})
 })
 
