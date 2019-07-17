@@ -52,7 +52,7 @@ router.get('/', (req, res) => {
 			site['description'] = utils.TextUtils.truncateText(site.description, 100)
 		})
 
-		return controllers.thread.get({limit:6})
+		return controllers.thread.get({limit:20})
 	})
   .then(threads => {
     data['threads'] = threads
