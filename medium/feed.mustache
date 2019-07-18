@@ -249,16 +249,28 @@
             threadsMap[thread.id] = thread
           })
 
-          // console.log('TEST: ' + JSON.stringify(threads))
+          var setActive = function(id){
+            threads.forEach(function(thread){
+              if (thread.id == id){
+                $('#li-'+id).addClass('active')
+              }
+              else {
+                $('#li-'+id).removeClass('active')
+              }
+            })
+          }
+
           var firstThread = threads[0]
-          $('#li-'+firstThread.id).addClass('active')
+          setActive(firstThread.id)
 
           $('.sidebar-link').each(function(i, link){
             $(this).click(function(event){
               if (event)
                 event.preventDefault()
 
-              var thread = threadsMap[$(this).attr('id')]
+              var threadId = $(this).attr('id')
+              var thread = threadsMap[threadId]
+              setActive(threadId)
               console.log('Select Entity: ' + JSON.stringify(thread))
 
               var site = thread.site
