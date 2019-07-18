@@ -292,7 +292,8 @@
 
           var iframe = document.getElementById('entity-content-iframe')
           iframe.onload = function(){
-            console.log('myframe is loaded')
+            // console.log('myframe is loaded')
+            $('#loading-container').addClass('d-none')
             $('#entity-content-iframe').removeClass('invisible')
           }
 
@@ -325,6 +326,7 @@
               if (event)
                 event.preventDefault()
 
+              $('#loading-container').removeClass('d-none')
               $('#entity-content-iframe').addClass('invisible')
 
               var threadId = $(this).attr('id')
