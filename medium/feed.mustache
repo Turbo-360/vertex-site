@@ -244,9 +244,20 @@
           var data = window.__PRELOADED__
           var threads = data.threads
 
-          console.log('TEST: ' + JSON.stringify(threads))
+          // console.log('TEST: ' + JSON.stringify(threads))
           var firstThread = threads[0]
           $('#li-'+firstThread.id).addClass('active')
+
+          $('.sidebar-link').each(function(i, link){
+            $(this).click(function(event){
+              if (event)
+                event.preventDefault()
+
+              console.log('Select Entity: ' + $(this).attr('id'))
+            })
+
+
+          })
 
         })()
       </script>
