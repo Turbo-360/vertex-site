@@ -72,6 +72,32 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/feed', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	controllers.thread.get({limit:20})
+  .then(threads => {
+    data['threads'] = threads
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			threads: data.threads,
+			query: req.query,
+			user: sanitizedUser(req.user)
+		})
+
+    res.render('feed', data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+
 router.get('/about', (req, res) => {
 	const data = {
 		cdn: CDN,
