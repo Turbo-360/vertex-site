@@ -300,6 +300,9 @@
 
           var firstThread = threads[0]
           setActive(firstThread.id)
+          var site = firstThread.site
+          var url = 'https://'+site.slug+'.vertex360.co/post/'+firstThread.subject.slug
+          $('#entity-content').attr('src', url)
 
           $('.sidebar-link').each(function(i, link){
             $(this).click(function(event){
