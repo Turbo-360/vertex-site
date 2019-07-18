@@ -288,11 +288,13 @@
           var data = window.__PRELOADED__
           var query = data.query
           var threads = data.threads
+          var isLoading = false
           var threadsMap = {}
 
           var iframe = document.getElementById('entity-content-iframe')
           iframe.onload = function(){
             // console.log('myframe is loaded')
+            isLoading = false
             $('#loading-container').addClass('d-none')
             $('#entity-content-iframe').removeClass('invisible')
           }
@@ -326,6 +328,11 @@
               if (event)
                 event.preventDefault()
 
+              // something is currently loading, ignore
+              if (isLoading == true)
+                return
+
+              isLoading = true
               $('#loading-container').removeClass('d-none')
               $('#entity-content-iframe').addClass('invisible')
 
