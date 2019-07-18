@@ -199,7 +199,7 @@
           </nav>
 
           <div id="content">
-            <iframe style="width:100%;height:100vh;border:none" src="https://mediumish-l9g2k8.vertex360.co/post/is-pete-buttigiegs-plan-for-black-america-too-little-too-late-61sl9c"></iframe>
+            <iframe id="entity-content" style="width:100%;height:100vh;border:none" src="https://mediumish-l9g2k8.vertex360.co/post/is-pete-buttigiegs-plan-for-black-america-too-little-too-late-61sl9c"></iframe>
             {{>footer-dark}}
           </div>
       </div>
@@ -260,11 +260,12 @@
 
               var thread = threadsMap[$(this).attr('id')]
               console.log('Select Entity: ' + JSON.stringify(thread))
+
+              var site = thread.site
+              var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
+              $('#entity-content').attr('src', url)
             })
-
-
           })
-
         })()
       </script>
     </body>
