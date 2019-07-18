@@ -252,10 +252,10 @@
           var setActive = function(id){
             threads.forEach(function(thread){
               if (thread.id == id){
-                $('#li-'+id).addClass('active')
+                $('#li-'+thread.id).addClass('active')
               }
               else {
-                $('#li-'+id).removeClass('active')
+                $('#li-'+thread.id).removeClass('active')
               }
             })
           }
