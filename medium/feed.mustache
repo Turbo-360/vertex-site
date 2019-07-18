@@ -280,11 +280,24 @@
       <script>
         (function(){
           var data = window.__PRELOADED__
+          var query = data.query
           var threads = data.threads
           var threadsMap = {}
 
-          threads.forEach(function(thread){
+          // var selected = null
+          // if (query != null){
+          //   selected = query.current // 'current' is the slug value, can be null
+          //
+          //
+          // }
+
+          var selectedIndex = 0
+          threads.forEach(function(thread, i){
+            if (thread.subject.slug == query.current)
+              selectedIndex = i
+
             threadsMap[thread.id] = thread
+            threadsMap[thread.slug] = thread
           })
 
           var setActive = function(id){
@@ -298,10 +311,10 @@
             })
           }
 
-          var firstThread = threads[0]
-          setActive(firstThread.id)
-          var site = firstThread.site
-          var url = 'https://'+site.slug+'.vertex360.co/post/'+firstThread.subject.slug
+          var selectedThread = threads[selectedIndex]
+          setActive(selectedThread.id)
+          var site = selectedThread.site
+          var url = 'https://'+site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
           $('#entity-content').attr('src', url)
 
           $('.sidebar-link').each(function(i, link){
