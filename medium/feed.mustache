@@ -181,10 +181,47 @@
       .sidebar-link {
         text-decoration: none !important;
       }
+
+      .bg-dark {
+        background: #3a3a3a !important;
+      }
 		</style>
 </head>
     <body>
-      {{>nav}}
+      <nav class="topnav navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+      <div class="container">
+      	<a class="navbar-brand" href="/">
+      		<img style="max-width:160px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s320" />
+      	</a>
+      	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      		<span class="navbar-toggler-icon"></span>
+      	</button>
+      	<div class="navbar-collapse collapse" id="navbarColor02" style="">
+      		<ul class="navbar-nav ml-auto d-flex align-items-center">
+      			<li class="nav-item">
+      				<a class="nav-link text-white" href="/posts?category=culture">Culture</a>
+      			</li>
+      			<li class="nav-item">
+      				<a class="nav-link text-white" href="/posts?category=fashion">Fashion</a>
+      			</li>
+      			<li class="nav-item">
+      				<a class="nav-link text-white" href="/posts?category=tech">Tech</a>
+      			</li>
+      			<li class="nav-item">
+      				<a class="nav-link text-white" href="/about">About</a>
+      			</li>
+      			<li class="nav-item" id="nav-login">
+      				<a class="nav-link text-white" href="#" style="color:#03a87c" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a>
+      			</li>
+      			<li class="nav-item highlight ml-4" id="login-container">
+      				<a id="nav-register" style="background:#03a87c;color:#fff !important" class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">JOIN VERTEX</a>
+      			</li>
+      		</ul>
+      	</div>
+      </div>
+      </nav>
+      <!-- End Navbar -->
+
 
       <div class="wrapper">
 
@@ -200,7 +237,7 @@
           </nav>
 
           <div id="content">
-            <iframe id="entity-content" style="width:100%;height:100vh;border:none" src="https://mediumish-l9g2k8.vertex360.co/post/is-pete-buttigiegs-plan-for-black-america-too-little-too-late-61sl9c"></iframe>
+            <iframe id="entity-content" style="width:100%;height:100vh;border:none"></iframe>
             {{>footer-dark}}
           </div>
       </div>
