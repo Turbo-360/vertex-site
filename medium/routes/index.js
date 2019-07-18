@@ -78,7 +78,7 @@ router.get('/feed', (req, res) => {
 		renderAnalytics: renderAnalytics(req)
 	}
 
-	controllers.thread.get({limit:20})
+	controllers.thread.get({limit:50})
   .then(threads => {
     data['threads'] = threads
 		data['preloaded'] = JSON.stringify({
