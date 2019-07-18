@@ -39,6 +39,7 @@ const sanitizedUser = (user) => {
 	return currentUser
 }
 
+/*
 router.get('/', (req, res) => {
   const data = {
 		cdn: CDN,
@@ -70,12 +71,22 @@ router.get('/', (req, res) => {
       message: err.message
     })
   })
-})
+}) */
 
-router.get('/feed', (req, res) => {
+router.get('/', (req, res) => {
+	const userAgent = req.headers['user-agent'].toLowerCase()
+	const isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
+	console.log('isMobile: ' + isMobile)
+
   const data = {
 		cdn: CDN,
 		renderAnalytics: renderAnalytics(req)
+	}
+
+	// selected article, if any:
+	const current = req.query.current
+	if (current != null){
+
 	}
 
 	controllers.thread.get({limit:50})
@@ -88,7 +99,8 @@ router.get('/feed', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-    res.render('feed', data)
+		const template = (isMobile) ? 'index' : 'feed'
+    res.render(template, data)
   })
   .catch(err => {
     res.json({
