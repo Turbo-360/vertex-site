@@ -237,7 +237,7 @@
           </nav>
 
           <div id="content">
-            <iframe id="entity-content" style="width:100%;height:100vh;border:none"></iframe>
+            <iframe id="entity-content-iframe" style="width:100%;height:100vh;border:none"></iframe>
             {{>footer-dark}}
           </div>
       </div>
@@ -284,6 +284,9 @@
           var threads = data.threads
           var threadsMap = {}
 
+          var iframe = document.getElementById('entity-content-iframe')
+          iframe.onload = function() { alert('myframe is loaded') }
+
           var selectedIndex = 0
           threads.forEach(function(thread, i){
             if (thread.subject.slug == query.current)
@@ -308,7 +311,7 @@
           setActive(selectedThread.id)
           var site = selectedThread.site
           var url = 'https://'+site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
-          $('#entity-content').attr('src', url)
+          $('#entity-content-iframe').attr('src', url)
 
           $('.sidebar-link').each(function(i, link){
             $(this).click(function(event){
@@ -318,11 +321,11 @@
               var threadId = $(this).attr('id')
               var thread = threadsMap[threadId]
               setActive(threadId)
-              console.log('Select Entity: ' + JSON.stringify(thread))
+              // console.log('Select Entity: ' + JSON.stringify(thread))
 
               var site = thread.site
               var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
-              $('#entity-content').attr('src', url)
+              $('#entity-content-iframe').attr('src', url)
               window.history.pushState("string", thread.subject.title, "/?current="+thread.subject.slug)
             })
           })
