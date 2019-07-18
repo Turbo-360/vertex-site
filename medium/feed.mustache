@@ -290,6 +290,7 @@
           var iframe = document.getElementById('entity-content-iframe')
           iframe.onload = function(){
             console.log('myframe is loaded')
+            $('#entity-content-iframe').removeClass('invisible')
           }
 
           var selectedIndex = 0
@@ -320,6 +321,8 @@
             $(this).click(function(event){
               if (event)
                 event.preventDefault()
+
+              $('#entity-content-iframe').addClass('invisible')
 
               var threadId = $(this).attr('id')
               var thread = threadsMap[threadId]
