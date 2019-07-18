@@ -200,19 +200,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="/posts?category=culture">Culture</a>
+              <a class="nav-link text-white" href="/posts?category=culture"><span class="mr-2">&#8226;</span>Culture</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="/posts?category=fashion">Fashion</a>
+              <a class="nav-link text-white" href="/posts?category=fashion"><span class="mr-2 invisible">&#8226;</span>Fashion</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="/posts?category=tech">Tech</a>
+              <a class="nav-link text-white" href="/posts?category=tech"><span class="mr-2 invisible">&#8226;</span>Tech</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="/about">About</a>
+              <a class="nav-link text-white" href="/about"><span class="mr-2 invisible">&#8226;</span>About</a>
             </li>
             <li class="nav-item" id="nav-login">
-              <a class="nav-link text-white" href="#" style="color:#03a87c" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a>
+              <a class="nav-link text-white" href="#" style="color:#03a87c" href="#" data-toggle="modal" data-target="#login-modal"><span class="mr-2 invisible">&#8226;</span>Sign In</a>
             </li>
             <li class="nav-item highlight ml-4" id="login-container">
               <a id="nav-register" style="background:#03a87c;color:#fff !important" class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">JOIN VERTEX</a>
@@ -229,8 +229,9 @@
           <nav id="sidebar">
               <ul class="list-unstyled components">
                   {{#threads}}
-                  <li id="li-{{id}}">
+                  <li style="line-height:20px" id="li-{{id}}">
                       <a href="#" id="{{id}}" class="sidebar-link">{{subject.title}}</a>
+                      <span>{{site.name}}</span>
                   </li>
                   {{/threads}}
               </ul>
