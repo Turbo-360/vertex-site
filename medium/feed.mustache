@@ -243,6 +243,11 @@
         (function(){
           var data = window.__PRELOADED__
           var threads = data.threads
+          var threadsMap = {}
+
+          threads.forEach(function(thread){
+            threadsMap[thread.id] = thread
+          })
 
           // console.log('TEST: ' + JSON.stringify(threads))
           var firstThread = threads[0]
@@ -253,7 +258,8 @@
               if (event)
                 event.preventDefault()
 
-              console.log('Select Entity: ' + $(this).attr('id'))
+              var thread = threadsMap[$(this).attr('id')]
+              console.log('Select Entity: ' + JSON.stringify(thread))
             })
 
 
