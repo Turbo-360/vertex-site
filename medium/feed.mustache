@@ -284,13 +284,6 @@
           var threads = data.threads
           var threadsMap = {}
 
-          // var selected = null
-          // if (query != null){
-          //   selected = query.current // 'current' is the slug value, can be null
-          //
-          //
-          // }
-
           var selectedIndex = 0
           threads.forEach(function(thread, i){
             if (thread.subject.slug == query.current)
@@ -330,6 +323,7 @@
               var site = thread.site
               var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
               $('#entity-content').attr('src', url)
+              window.history.pushState("string", thread.subject.title, "/?current="+thread.subject.slug)
             })
           })
         })()
