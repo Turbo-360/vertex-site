@@ -100,17 +100,6 @@ router.get('/', (req, res) => {
 		data['threadsMap'] = threadsMap
 		data['selectedIndex'] = selectedIndex
 
-		// selected article, if any:
-		const current = req.query.current
-		if (current == null)
-			return null
-		else
-			return controllers.thread.get({'subject.slug':current})
-  })
-	.then(threads => {
-		if (threads.length > 0)
-			data.threads.unshift(threads[0])
-
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -122,7 +111,30 @@ router.get('/', (req, res) => {
 
 		const template = (isMobile) ? 'index' : 'feed'
     res.render(template, data)
-	})
+		
+		// selected article, if any:
+		// const current = req.query.current
+		// if (current == null)
+		// 	return null
+		// else
+		// 	return controllers.thread.get({'subject.slug':current})
+  })
+	// .then(threads => {
+	// 	if (threads.length > 0)
+	// 		data.threads.unshift(threads[0])
+	//
+	// 	data['preloaded'] = JSON.stringify({
+	// 		referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+	// 		query: req.query,
+	// 		threads: data.threads,
+	// 		threadsMap: data.threadsMap,
+	// 		selectedIndex: data.selectedIndex,
+	// 		user: sanitizedUser(req.user)
+	// 	})
+	//
+	// 	const template = (isMobile) ? 'index' : 'feed'
+  //   res.render(template, data)
+	// })
   .catch(err => {
     res.json({
       confirmation: 'fail',
