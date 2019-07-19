@@ -238,7 +238,7 @@
 
           <!-- Sidebar -->
           <nav id="sidebar">
-              <ul class="list-unstyled components">
+              <ul id="threads-sidebar" class="list-unstyled components">
                   {{#threads}}
                   <li style="line-height:20px" id="li-{{id}}">
                       <small style="font-size:12px;color:#ababab">{{subject.dateString}}</small><br />
@@ -261,6 +261,17 @@
       </div>
 
       {{>auth}}
+
+      <script type="text/template" id="tpl-thread-preview">
+        <li style="line-height:20px" id="li-<% id %>">
+            <small style="font-size:12px;color:#ababab"><% subject.dateString %></small><br />
+            <a href="#" id="<% id %>" class="sidebar-link"><% subject.title %></a>
+            <br /><br />
+            <a target="_blank" href="<%{site.url}%>"><img class="mr-2" style="border-radius:50%" src="<%{site.image}%>=s28-c" /></a>
+            <a target="_blank" href="<%{site.url}%>" style="color:#333;font-size:14px"><% site.name %></a>
+        </li>
+      </script>
+
       <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
       <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
       <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
@@ -276,6 +287,7 @@
 
       <script>
         (function(){
+          Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
           var data = window.__PRELOADED__
           var query = data.query // object
           var threads = data.threads // array
@@ -294,11 +306,20 @@
           }
 
           var reloadUI = function(){
+            var tpl = $('#tpl-thread-preview').html()
+            var threadsHtml = ''
+            replies.forEach(function(thread){
+              threadsHtml += Mustache.render(tpl, thread)
+            })
+
+            $('#threads-sidebar').html(threadsHtml)
+
             var selectedThread = threads[selectedIndex]
-            setActive(selectedThread.id)
-            // var site = selectedThread.site
             var url = 'https://'+selectedThread.site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
             $('#entity-content-iframe').attr('src', url)
+            setTimeout(function(){
+              setActive(selectedThread.id)
+            }, 200)
           }
 
           $('#category-select').change(function(e){
@@ -339,11 +360,6 @@
             $('#entity-content-iframe').removeClass('invisible')
           }
 
-          // var selectedThread = threads[selectedIndex]
-          // setActive(selectedThread.id)
-          // var site = selectedThread.site
-          // var url = 'https://'+site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
-          // $('#entity-content-iframe').attr('src', url)
           reloadUI()
 
           $('.sidebar-link').each(function(i, link){
@@ -370,6 +386,9 @@
               window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
             })
           })
+
+
+
         })()
       </script>
     </body>
