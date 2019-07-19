@@ -314,8 +314,15 @@ router.get('/feed/:slug', (req, res) => {
 		const threadsMap = {}
 		let selectedIndex = 0
 		threads.forEach((thread, i) => {
-			if (thread.subject.slug == req.query.current)
+			if (thread.subject.slug == req.params.slug){
 				selectedIndex = i
+				data['meta'] = {
+					title: thread.subject.title,
+					description: thread.subject.description,
+					image: thread.subject.image
+					// url: thread.subject
+				}
+			}
 
 			threadsMap[thread.id] = thread
 			threadsMap[thread.slug] = thread
