@@ -86,8 +86,8 @@ router.get('/', (req, res) => {
 		const threadsMap = {}
 		let selectedIndex = 0
 		threads.forEach((thread, i) => {
-			if (thread.subject.slug == req.query.current)
-				selectedIndex = i
+			// if (thread.subject.slug == req.query.current)
+			// 	selectedIndex = i
 
 			threadsMap[thread.id] = thread
 			threadsMap[thread.slug] = thread
@@ -95,21 +95,6 @@ router.get('/', (req, res) => {
 
 		data['threadsMap'] = threadsMap
 		data['selectedIndex'] = selectedIndex
-
-		// selected article, if any:
-		const current = req.query.current
-		if (current == null)
-			return null
-		else if (threadsMap[current] == null) // not already loaded, fetch
-			return controllers.thread.get({'subject.slug':current})
-		else
-			return null
-  })
-	.then(threads => {
-		if (threads != null){
-			if (threads.length > 0)
-				data.threads.unshift(threads[0])
-		}
 
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
@@ -122,7 +107,34 @@ router.get('/', (req, res) => {
 
 		const template = (req.isMobile) ? 'index' : 'feed'
     res.render(template, data)
-	})
+		
+		// selected article, if any:
+		// const current = req.query.current
+		// if (current == null)
+		// 	return null
+		// else if (threadsMap[current] == null) // not already loaded, fetch
+		// 	return controllers.thread.get({'subject.slug':current})
+		// else
+		// 	return null
+  })
+	// .then(threads => {
+	// 	if (threads != null){
+	// 		if (threads.length > 0)
+	// 			data.threads.unshift(threads[0])
+	// 	}
+	//
+	// 	data['preloaded'] = JSON.stringify({
+	// 		referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+	// 		query: req.query,
+	// 		threads: data.threads,
+	// 		threadsMap: data.threadsMap,
+	// 		selectedIndex: data.selectedIndex,
+	// 		user: sanitizedUser(req.user)
+	// 	})
+	//
+	// 	const template = (req.isMobile) ? 'index' : 'feed'
+  //   res.render(template, data)
+	// })
   .catch(err => {
     res.json({
       confirmation: 'fail',
