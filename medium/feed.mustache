@@ -208,23 +208,23 @@
                 <img style="max-width:160px;margin-bottom:12px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s320" />
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/posts?category=culture"><span class="mr-2">&#8226;</span>Culture</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/posts?category=fashion"><span class="mr-2 invisible">&#8226;</span>Fashion</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/posts?category=tech"><span class="mr-2 invisible">&#8226;</span>Tech</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link text-white" href="/about"><span class="mr-2 invisible">&#8226;</span>About</a>
             </li>
             <li class="nav-item" id="nav-login">
               <a class="nav-link text-white" href="#" style="color:#03a87c" href="#" data-toggle="modal" data-target="#login-modal"><span class="mr-2 invisible">&#8226;</span>Sign In</a>
             </li>
-            <li class="nav-item highlight ml-4" id="login-container">
-              <a id="nav-register" style="background:#03a87c;color:#fff !important" class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">JOIN VERTEX</a>
+            <li class="nav-item highlight ml-4 mr-2" id="login-container">
+              <a id="nav-register" style="background:#03a87c;border-radius:5px;color:#fff !important" class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">JOIN VERTEX</a>
+            </li>
+            <li class="nav-item ml-4">
+              <select id="category-select" style="width:110px;height:34px;border-radius:3px" class="btn btn-danger">
+                <option value="culture">Culture</option>
+                <option value="politics">Politics</option>
+                <option value="tech">Tech</option>
+                <option value="sports">Sports</option>
+              </select>
             </li>
           </ul>
         </div>
@@ -279,9 +279,15 @@
           var threads = data.threads
           var threadsMap = data.threadsMap
           var selectedIndex = data.selectedIndex
-          // var threadsMap = {}
-
           var isLoading = false
+          var currentCategory = 'culture'
+
+          $('#category-select').change(function(e){
+            console.log('Category Selected: ' + e.target.value)
+            currentCategory = e.target.value
+
+            // TODO: load new set of threads based on category
+          })
 
           var iframe = document.getElementById('entity-content-iframe')
           iframe.onload = function(){
@@ -290,14 +296,6 @@
             $('#loading-container').addClass('d-none')
             $('#entity-content-iframe').removeClass('invisible')
           }
-
-          // threads.forEach(function(thread, i){
-          //   if (thread.subject.slug == query.current)
-          //     selectedIndex = i
-          //
-          //   threadsMap[thread.id] = thread
-          //   threadsMap[thread.slug] = thread
-          // })
 
           var setActive = function(id){
             threads.forEach(function(thread){
