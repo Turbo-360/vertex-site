@@ -351,7 +351,7 @@
           }
 
           $('#category-select').change(function(e){
-            console.log('Category Selected: ' + e.target.value)
+            // console.log('Category Selected: ' + e.target.value)
             currentCategory = e.target.value
 
             // Load new set of threads based on category
@@ -370,8 +370,6 @@
               selectedIndex = 0
               threads = resp.results
               threads.forEach((thread, i) => {
-          			// if (thread.subject.slug == req.query.current)
-          			// 	selectedIndex = i
           			threadsMap[thread.id] = thread
           			threadsMap[thread.slug] = thread
           		})
