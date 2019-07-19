@@ -239,6 +239,7 @@
               <ul class="list-unstyled components">
                   {{#threads}}
                   <li style="line-height:20px" id="li-{{id}}">
+                      <small style="font-size:12px">{{subject.dateString}}</small><br />
                       <a href="#" id="{{id}}" class="sidebar-link">{{subject.title}}</a>
                       <br /><br />
                       <a href="/site/{{site.slug}}"><img class="mr-2" style="border-radius:50%" src="{{{site.image}}}=s28-c" /></a>
