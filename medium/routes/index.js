@@ -318,9 +318,9 @@ router.get('/feed/:slug', (req, res) => {
 				selectedIndex = i
 				data['meta'] = {
 					title: thread.subject.title,
-					description: thread.subject.description,
-					image: thread.subject.image
-					// url: thread.subject
+					description: thread.subject.preview,
+					image: thread.subject.image,
+					url: 'https://www.vertex360.co/feed/'+req.params.slug
 				}
 			}
 
