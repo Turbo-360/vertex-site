@@ -284,6 +284,23 @@
           var isLoading = false
           var currentCategory = 'culture'
 
+          var setActive = function(id){
+            threads.forEach(function(thread){
+              if (thread.id == id)
+                $('#li-'+thread.id).addClass('active')
+              else
+                $('#li-'+thread.id).removeClass('active')
+            })
+          }
+
+          var reloadUI = function(){
+            var selectedThread = threads[selectedIndex]
+            setActive(selectedThread.id)
+            // var site = selectedThread.site
+            var url = 'https://'+selectedThread.site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
+            $('#entity-content-iframe').attr('src', url)
+          }
+
           $('#category-select').change(function(e){
             console.log('Category Selected: ' + e.target.value)
             currentCategory = e.target.value
@@ -309,6 +326,8 @@
           			threadsMap[thread.id] = thread
           			threadsMap[thread.slug] = thread
           		})
+
+              reloadUI()
             })
           })
 
@@ -320,20 +339,11 @@
             $('#entity-content-iframe').removeClass('invisible')
           }
 
-          var setActive = function(id){
-            threads.forEach(function(thread){
-              if (thread.id == id)
-                $('#li-'+thread.id).addClass('active')
-              else
-                $('#li-'+thread.id).removeClass('active')
-            })
-          }
-
-          var selectedThread = threads[selectedIndex]
-          setActive(selectedThread.id)
-          var site = selectedThread.site
-          var url = 'https://'+site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
-          $('#entity-content-iframe').attr('src', url)
+          // var selectedThread = threads[selectedIndex]
+          // setActive(selectedThread.id)
+          // var site = selectedThread.site
+          // var url = 'https://'+site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
+          // $('#entity-content-iframe').attr('src', url)
 
           $('.sidebar-link').each(function(i, link){
             $(this).click(function(event){
