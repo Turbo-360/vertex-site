@@ -296,6 +296,33 @@
           var isLoading = false
           var currentCategory = 'culture'
 
+          var connectSidebar = function(){
+            $('.sidebar-link').each(function(i, link){
+              $(this).click(function(event){
+                if (event)
+                  event.preventDefault()
+
+                // something is currently loading, ignore
+                if (isLoading == true)
+                  return
+
+                isLoading = true
+                $('#loading-container').removeClass('d-none')
+                $('#entity-content-iframe').addClass('invisible')
+
+                var threadId = $(this).attr('id')
+                var thread = threadsMap[threadId]
+                setActive(threadId)
+                // console.log('Select Entity: ' + JSON.stringify(thread))
+
+                var site = thread.site
+                var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
+                $('#entity-content-iframe').attr('src', url)
+                window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
+              })
+            })
+          }
+
           var setActive = function(id){
             threads.forEach(function(thread){
               if (thread.id == id)
@@ -319,6 +346,7 @@
             $('#entity-content-iframe').attr('src', url)
             setTimeout(function(){
               setActive(selectedThread.id)
+              connectSidebar()
             }, 200)
           }
 
@@ -361,34 +389,7 @@
           }
 
           reloadUI()
-
-          $('.sidebar-link').each(function(i, link){
-            $(this).click(function(event){
-              if (event)
-                event.preventDefault()
-
-              // something is currently loading, ignore
-              if (isLoading == true)
-                return
-
-              isLoading = true
-              $('#loading-container').removeClass('d-none')
-              $('#entity-content-iframe').addClass('invisible')
-
-              var threadId = $(this).attr('id')
-              var thread = threadsMap[threadId]
-              setActive(threadId)
-              // console.log('Select Entity: ' + JSON.stringify(thread))
-
-              var site = thread.site
-              var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
-              $('#entity-content-iframe').attr('src', url)
-              window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
-            })
-          })
-
-
-
+          // connectSidebar()
         })()
       </script>
     </body>
