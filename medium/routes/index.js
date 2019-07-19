@@ -86,8 +86,8 @@ router.get('/', (req, res) => {
 		const threadsMap = {}
 		let selectedIndex = 0
 		threads.forEach((thread, i) => {
-			// if (thread.subject.slug == req.query.current)
-			// 	selectedIndex = i
+			if (thread.subject.slug == req.query.current)
+				selectedIndex = i
 
 			threadsMap[thread.id] = thread
 			threadsMap[thread.slug] = thread
@@ -107,7 +107,7 @@ router.get('/', (req, res) => {
 
 		const template = (req.isMobile) ? 'index' : 'feed'
     res.render(template, data)
-		
+
 		// selected article, if any:
 		// const current = req.query.current
 		// if (current == null)
