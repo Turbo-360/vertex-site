@@ -308,7 +308,7 @@
           var reloadUI = function(){
             var tpl = $('#tpl-thread-preview').html()
             var threadsHtml = ''
-            replies.forEach(function(thread){
+            threads.forEach(function(thread){
               threadsHtml += Mustache.render(tpl, thread)
             })
 
