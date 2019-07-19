@@ -277,10 +277,10 @@
       <script>
         (function(){
           var data = window.__PRELOADED__
-          var query = data.query
-          var threads = data.threads
-          var threadsMap = data.threadsMap
-          var selectedIndex = data.selectedIndex
+          var query = data.query // object
+          var threads = data.threads // array
+          var threadsMap = data.threadsMap // object
+          var selectedIndex = data.selectedIndex // number
           var isLoading = false
           var currentCategory = 'culture'
 
@@ -301,6 +301,14 @@
               }
 
               console.log(JSON.stringify(resp.results))
+              selectedIndex = 0
+              threads = resp.results
+              threads.forEach((thread, i) => {
+          			// if (thread.subject.slug == req.query.current)
+          			// 	selectedIndex = i
+          			threadsMap[thread.id] = thread
+          			threadsMap[thread.slug] = thread
+          		})
             })
           })
 
