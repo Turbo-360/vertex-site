@@ -288,7 +288,20 @@
             console.log('Category Selected: ' + e.target.value)
             currentCategory = e.target.value
 
-            // TODO: load new set of threads based on category
+            // Load new set of threads based on category
+            window.vertexLib.getRequest('/api/thread?subject.category='+currentCategory, null, function(err, resp){
+              if (err){
+                console.log('ERR - ' + err)
+                return
+              }
+
+              if (resp.confirmation != 'success'){
+                alert(resp.message)
+                return
+              }
+
+              console.log(JSON.stringify(resp.results))
+            })
           })
 
           var iframe = document.getElementById('entity-content-iframe')
