@@ -335,7 +335,6 @@
               var site = thread.site
               var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
               $('#entity-content-iframe').attr('src', url)
-              // window.history.pushState("string", thread.subject.title, "/feed?current="+thread.subject.slug)
               window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
             })
           })
