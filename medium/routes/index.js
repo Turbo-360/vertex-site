@@ -74,10 +74,6 @@ router.get('/', (req, res) => {
 }) */
 
 router.get('/', (req, res) => {
-	const userAgent = req.headers['user-agent'].toLowerCase()
-	const isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
-	console.log('isMobile: ' + isMobile)
-
   const data = {
 		cdn: CDN,
 		renderAnalytics: renderAnalytics(req)
@@ -99,18 +95,6 @@ router.get('/', (req, res) => {
 
 		data['threadsMap'] = threadsMap
 		data['selectedIndex'] = selectedIndex
-
-		// data['preloaded'] = JSON.stringify({
-		// 	referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-		// 	query: req.query,
-		// 	threads: data.threads,
-		// 	threadsMap: data.threadsMap,
-		// 	selectedIndex: data.selectedIndex,
-		// 	user: sanitizedUser(req.user)
-		// })
-		//
-		// const template = (isMobile) ? 'index' : 'feed'
-    // res.render(template, data)
 
 		// selected article, if any:
 		const current = req.query.current
@@ -136,7 +120,7 @@ router.get('/', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		const template = (isMobile) ? 'index' : 'feed'
+		const template = (req.isMobile) ? 'index' : 'feed'
     res.render(template, data)
 	})
   .catch(err => {
