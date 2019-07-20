@@ -208,6 +208,7 @@
               if (event)
                 event.preventDefault()
 
+              console.log('Click Article Link')
               document.getElementById('btn-menu-toggle').click()
 
               // something is currently loading, ignore
@@ -230,6 +231,8 @@
             })
           })
         }
+
+        connectSidebar()
 
       })()
     </script>
