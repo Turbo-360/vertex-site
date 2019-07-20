@@ -244,7 +244,8 @@ router.get('/comments', (req, res) => {
 
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: false
+		// renderAnalytics: renderAnalytics(req)
 	}
 
 	controllers.site.get({slug:site})
