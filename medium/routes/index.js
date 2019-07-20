@@ -98,6 +98,7 @@ router.get('/', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
+			showSidebar: true,
 			threads: data.threads,
 			threadsMap: data.threadsMap,
 			selectedIndex: data.selectedIndex,
@@ -334,6 +335,7 @@ router.get('/feed/:slug', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
+			showSidebar: false,
 			threads: data.threads,
 			threadsMap: data.threadsMap,
 			selectedIndex: data.selectedIndex,

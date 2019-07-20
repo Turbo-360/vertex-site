@@ -221,6 +221,7 @@
         var threads = data.threads // array
         var threadsMap = data.threadsMap // object
         var selectedIndex = data.selectedIndex // number
+        var showSidebar = data.showSidebar
         var isLoading = false
 
         var iframe = document.getElementById('entity-content-iframe')
@@ -294,8 +295,10 @@
         }
 
         reloadUI()
-        // connectSidebar()
 
+        if (showSidebar==false)
+          return
+          
         // slide out sidebar on initial page load
         setTimeout(function(){
           document.getElementById('btn-menu-toggle').click()
