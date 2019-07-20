@@ -15,15 +15,25 @@
 </head>
 
 <body id="mobile_wrap">
-    <div class="panel-overlay"></div>
+    <div id="panel-overlay" class="panel-overlay"></div>
 
-    <div class="panel panel-left panel-reveal">
+    <div id="panel-left" class="panel panel-left panel-reveal">
                   <!-- Slider -->
                  <div class="swiper-container-subnav multinav">
                     <div class="swiper-wrapper">
 			<div class="swiper-slide" style="background:#c8c8c8;">
 				<nav style="padding:0px;width:100%" class="main_nav_underline">
   				<ul style="width:100%">
+            <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
+              <div style="display:flex;padding:12px">
+                <img style="width:48px;height:48px;max-width:100%;margin-right:12px;border-radius:50%" src="{{{site.image}}}=s96-c" alt="Vertex 360" />
+                <a class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">TEST</a>
+              </div>
+              <div style="font-size:12px;text-align:right;padding:0px 12px 12px 0px">
+                <small>{{site.name}} | {{subject.dateString}}</small>
+              </div>
+            </li>
+
             {{#threads}}
             <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
               <div style="display:flex;padding:12px">
@@ -209,7 +219,10 @@
                 event.preventDefault()
 
               console.log('Click Article Link')
-              document.getElementById('mobile_wrap').click()
+
+              $('#panel-overlay').addClass('active')
+              $('#panel-overlay').css('display', 'block')
+              $('#panel-left').addClass('active')
 
               // something is currently loading, ignore
               // if (isLoading == true)
