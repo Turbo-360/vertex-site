@@ -227,7 +227,15 @@
           isLoading = false
           $('#loading-container').css('display', 'none')
           $('#entity-content-iframe').css('display', '')
-          // $('#entity-content-iframe').removeClass('invisible')
+        }
+
+        var setActive = function(id){
+          threads.forEach(function(thread){
+            if (thread.id == id)
+              $('#li-'+thread.id).addClass('selected')
+            else
+              $('#li-'+thread.id).removeClass('selected')
+          })
         }
 
         var connectSidebar = function(){
@@ -251,12 +259,10 @@
               isLoading = true
               $('#loading-container').css('display', '')
               $('#entity-content-iframe').css('display', 'none')
-              // $('#loading-container').removeClass('d-none')
-              // $('#entity-content-iframe').addClass('invisible')
 
               var threadId = $(this).attr('id')
               var thread = threadsMap[threadId]
-              // setActive(threadId)
+              setActive(threadId)
               console.log('Select Entity: ' + JSON.stringify(thread))
 
               var site = thread.site
@@ -264,15 +270,6 @@
               $('#entity-content-iframe').attr('src', url)
               window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
             })
-          })
-        }
-
-        var setActive = function(id){
-          threads.forEach(function(thread){
-            if (thread.id == id)
-              $('#li-'+thread.id).addClass('selected')
-            else
-              $('#li-'+thread.id).removeClass('selected')
           })
         }
 
