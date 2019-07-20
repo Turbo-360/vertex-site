@@ -122,6 +122,55 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/feed', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: renderAnalytics(req)
+	}
+
+	controllers.thread.get({limit:50})
+  .then(threads => {
+    data['threads'] = threads
+
+		const threadsMap = {}
+		let selectedIndex = 0
+		threads.forEach((thread, i) => {
+			if (thread.subject.slug == req.query.current)
+				selectedIndex = i
+
+			threadsMap[thread.id] = thread
+			threadsMap[thread.slug] = thread
+		})
+
+		data['threadsMap'] = threadsMap
+		data['selectedIndex'] = selectedIndex
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			threads: data.threads,
+			threadsMap: data.threadsMap,
+			selectedIndex: data.selectedIndex,
+			user: sanitizedUser(req.user)
+		})
+
+		const template = (req.isMobile) ? 'mobile-feed' : 'feed'
+		data['meta'] = {
+			title: 'Vertex 360',
+			url: 'https://www.vertex360.co/',
+			image: 'https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ',
+			description: 'Stay up to date with the latest entertainment, politics, sports news and more.'
+		}
+
+    res.render(template, data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+
 router.get('/about', (req, res) => {
 	const data = {
 		cdn: CDN,
