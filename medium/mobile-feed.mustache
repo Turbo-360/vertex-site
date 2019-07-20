@@ -99,9 +99,12 @@
     </div>
 
      <div id="pages_maincontent">
-       <iframe id="entity-content-iframe" src="https://mediumish-l9g2k8.vertex360.co/post/the-squad-the-future-of-the-democratic-party-a6cm6k" style="width:100%;height:100vh;border:none"></iframe>
-     </div>
+       <div id="loading-container" class="" style="text-align:center;margin-top:120px">
+         <img style="width:50%;margin:auto" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loading.gif" />
+       </div>
 
+       <iframe id="entity-content-iframe" class="invisible" style="width:100%;height:100vh;border:none"></iframe>
+     </div>
 
     </div>
   </div>
@@ -204,11 +207,15 @@
         var threads = data.threads // array
         var threadsMap = data.threadsMap // object
         var selectedIndex = data.selectedIndex // number
+        var isLoading = false
 
-        $('#btn-menu-toggle').click(function(e){
-          console.log('Toggle Menu')
-
-        })
+        var iframe = document.getElementById('entity-content-iframe')
+        iframe.onload = function(){
+          // console.log('myframe is loaded')
+          isLoading = false
+          $('#loading-container').addClass('d-none')
+          $('#entity-content-iframe').removeClass('invisible')
+        }
 
         var connectSidebar = function(){
           $('.sidebar-link').each(function(i, link){
@@ -225,13 +232,13 @@
               $('#panel-left').removeClass('active')
 
               // something is currently loading, ignore
-              // if (isLoading == true)
-              //   return
-              //
-              // isLoading = true
-              // $('#loading-container').removeClass('d-none')
-              // $('#entity-content-iframe').addClass('invisible')
-              //
+              if (isLoading == true)
+                return
+
+              isLoading = true
+              $('#loading-container').removeClass('d-none')
+              $('#entity-content-iframe').addClass('invisible')
+
               var threadId = $(this).attr('id')
               var thread = threadsMap[threadId]
               // setActive(threadId)
@@ -245,7 +252,35 @@
           })
         }
 
-        connectSidebar()
+        var setActive = function(id){
+          // threads.forEach(function(thread){
+          //   if (thread.id == id)
+          //     $('#li-'+thread.id).addClass('active')
+          //   else
+          //     $('#li-'+thread.id).removeClass('active')
+          // })
+        }
+
+        var reloadUI = function(){
+          // var tpl = $('#tpl-thread-preview').html()
+          // var threadsHtml = ''
+          // threads.forEach(function(thread){
+          //   threadsHtml += Mustache.render(tpl, thread)
+          // })
+          //
+          // $('#threads-sidebar').html(threadsHtml)
+
+          var selectedThread = threads[selectedIndex]
+          var url = 'https://'+selectedThread.site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
+          $('#entity-content-iframe').attr('src', url)
+          setTimeout(function(){
+            setActive(selectedThread.id)
+            connectSidebar()
+          }, 200)
+        }
+
+        reloadUI()
+        // connectSidebar()
 
         // slide out sidebar on initial page load
         setTimeout(function(){
