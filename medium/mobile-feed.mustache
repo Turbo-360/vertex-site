@@ -247,6 +247,11 @@
 
         connectSidebar()
 
+        // slide out sidebar on initial page load
+        setTimeout(function(){
+          document.getElementById('btn-menu-toggle').click()
+        }, 400)
+
       })()
     </script>
   </body>
