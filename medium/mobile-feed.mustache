@@ -213,8 +213,9 @@
         iframe.onload = function(){
           // console.log('myframe is loaded')
           isLoading = false
-          $('#loading-container').addClass('d-none')
-          $('#entity-content-iframe').removeClass('invisible')
+          $('#loading-container').css('display', 'none')
+          $('#entity-content-iframe').css('display', '')
+          // $('#entity-content-iframe').removeClass('invisible')
         }
 
         var connectSidebar = function(){
@@ -236,8 +237,10 @@
                 return
 
               isLoading = true
-              $('#loading-container').removeClass('d-none')
-              $('#entity-content-iframe').addClass('invisible')
+              $('#loading-container').css('display', '')
+              $('#entity-content-iframe').css('display', 'none')
+              // $('#loading-container').removeClass('d-none')
+              // $('#entity-content-iframe').addClass('invisible')
 
               var threadId = $(this).attr('id')
               var thread = threadsMap[threadId]
