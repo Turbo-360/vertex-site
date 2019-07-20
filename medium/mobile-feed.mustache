@@ -29,7 +29,7 @@
             <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
               <div style="display:flex;padding:12px">
                 <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
-                <a class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">{{subject.title}}</a>
+                <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">{{subject.title}}</a>
               </div>
               <div style="font-size:12px;text-align:right;padding:0px 12px 12px 0px">
                 <small>{{site.name}} | {{subject.dateString}}</small>
@@ -191,6 +191,7 @@
     </div>
     </div>
 
+    <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
     <script src="{{{cdn}}}/mobili/js/jquery-3.3.1.min.js"></script>
     <script src="{{{cdn}}}/mobili/js/jquery.validate.min.js" ></script>
     <script src="{{{cdn}}}/mobili/js/swiper.min.js"></script>
@@ -198,6 +199,12 @@
 
     <script>
       (function(){
+        var data = window.__PRELOADED__
+        var query = data.query // object
+        var threads = data.threads // array
+        var threadsMap = data.threadsMap // object
+        var selectedIndex = data.selectedIndex // number
+
         $('#btn-menu-toggle').click(function(e){
           console.log('Toggle Menu')
 
@@ -225,15 +232,15 @@
               // $('#loading-container').removeClass('d-none')
               // $('#entity-content-iframe').addClass('invisible')
               //
-              // var threadId = $(this).attr('id')
-              // var thread = threadsMap[threadId]
+              var threadId = $(this).attr('id')
+              var thread = threadsMap[threadId]
               // setActive(threadId)
-              // console.log('Select Entity: ' + JSON.stringify(thread))
+              console.log('Select Entity: ' + JSON.stringify(thread))
 
-              // var site = thread.site
-              // var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
-              // $('#entity-content-iframe').attr('src', url)
-              // window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
+              var site = thread.site
+              var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
+              $('#entity-content-iframe').attr('src', url)
+              window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
             })
           })
         }
