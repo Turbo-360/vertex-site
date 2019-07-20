@@ -28,8 +28,10 @@
             {{#threads}}
             <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
               <div style="display:flex;padding:12px">
-                <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
-                <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">{{subject.title}}</a>
+                <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">
+                  <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
+                  {{subject.title}}
+                </a>
               </div>
               <div style="font-size:12px;text-align:right;padding:0px 12px 12px 0px">
                 <small>{{site.name}} | {{subject.dateString}}</small>
