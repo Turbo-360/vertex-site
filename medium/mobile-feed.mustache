@@ -12,6 +12,13 @@
   <link rel="stylesheet" href="{{{cdn}}}/mobili/css/swiper.css" />
   <link rel="stylesheet" href="{{{cdn}}}/mobili/style.css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet">
+
+  <style>
+    .selected {
+      background:#fff;
+    }
+
+  </style>
 </head>
 
 <body id="mobile_wrap">
@@ -26,7 +33,7 @@
   				<ul style="width:100%">
 
             {{#threads}}
-            <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
+            <li id="li-{{id}}" style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
               <div style="display:flex;padding:12px">
                 <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">
                   <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
@@ -261,12 +268,12 @@
         }
 
         var setActive = function(id){
-          // threads.forEach(function(thread){
-          //   if (thread.id == id)
-          //     $('#li-'+thread.id).addClass('active')
-          //   else
-          //     $('#li-'+thread.id).removeClass('active')
-          // })
+          threads.forEach(function(thread){
+            if (thread.id == id)
+              $('#li-'+thread.id).addClass('selected')
+            else
+              $('#li-'+thread.id).removeClass('selected')
+          })
         }
 
         var reloadUI = function(){
