@@ -27,11 +27,9 @@
   				<ul>
             {{#threads}}
             <li>
-              <div>
-                <a href="#">
-                  <img src="{{{site.image}}}=s28-c" alt="Vertex 360" />
-                  <span>{{subject.title}}</span>
-                </a>
+              <div style="display:flex">
+                <img src="{{{site.image}}}=s28-c" alt="Vertex 360" />
+                <a style="flex:1" href="#">{{subject.title}}</a>
               </div>
             </li>
             {{/threads}}
