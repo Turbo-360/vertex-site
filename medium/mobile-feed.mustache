@@ -24,15 +24,6 @@
 			<div class="swiper-slide" style="background:#c8c8c8;">
 				<nav style="padding:0px;width:100%" class="main_nav_underline">
   				<ul style="width:100%">
-            <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
-              <div style="display:flex;padding:12px">
-                <img style="width:48px;height:48px;max-width:100%;margin-right:12px;border-radius:50%" src="{{{site.image}}}=s96-c" alt="Vertex 360" />
-                <a class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">TEST</a>
-              </div>
-              <div style="font-size:12px;text-align:right;padding:0px 12px 12px 0px">
-                <small>{{site.name}} | {{subject.dateString}}</small>
-              </div>
-            </li>
 
             {{#threads}}
             <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
@@ -220,6 +211,8 @@
 
               console.log('Click Article Link')
 
+              // this slides the main view back and hides sidebar:
+              $('#mobile_wrap').attr('class', 'panel-closing')
               $('#panel-overlay').removeClass('active')
               $('#panel-overlay').css('display', '')
               $('#panel-left').removeClass('active')
