@@ -34,7 +34,10 @@
                 </a>
               </div>
               <div style="font-size:12px;text-align:right;padding:0px 12px 12px 0px">
-                <small>{{site.name}} | {{subject.dateString}}</small>
+                <a target="_blank" href="{{{site.url}}}">
+                  <img style="border-radius:50%;margin-right:4px" src="{{{site.image}}}=s28-c" />
+                  <small>{{site.name}} | {{subject.dateString}}</small>
+                </a>
               </div>
             </li>
             {{/threads}}
