@@ -10,7 +10,6 @@ const truncateText = (str, limit) => {
 const SiteSchema = new mongoose.Schema({
 	profile: {type:mongoose.Schema.Types.Mixed, default:{}},
 	level: {type:String, trim:true, default: 'basic'},
-	category: {type:String, trim:true, default: 'misc'},
 	origin: {type:String, trim:true, default: 'vertex360'}, // vertex360, turbo360
 	format: {type:String, trim:true, default: 'vertex'}, // static, vertex, react
 	clonePrice: {type:Number, default:0},
@@ -61,7 +60,6 @@ SiteSchema.methods.summary = function(authLevel) {
 		slug: this.slug,
 		name: this.name,
 		level: this.level,
-		category: this.category,
 		description: this.description,
 		image: (this.image.length == 0) ? process.env.IMAGE_PLACEHOLDER : this.image,
 		images: this.images,
