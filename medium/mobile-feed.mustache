@@ -28,7 +28,7 @@
             <li style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
               <div style="display:flex;padding:12px">
                 <img style="width:48px;height:48px;max-width:100%;margin-right:12px;border-radius:50%" src="{{{site.image}}}=s96-c" alt="Vertex 360" />
-                <a style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">{{subject.title}}</a>
+                <a class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">{{subject.title}}</a>
               </div>
               <div style="font-size:12px;text-align:right;padding:0px 12px 12px 0px">
                 <small>{{site.name}} | {{subject.dateString}}</small>
@@ -201,6 +201,35 @@
           console.log('Toggle Menu')
 
         })
+
+        var connectSidebar = function(){
+          $('.sidebar-link').each(function(i, link){
+            $(this).click(function(event){
+              if (event)
+                event.preventDefault()
+
+              document.getElementById('btn-menu-toggle').click()
+
+              // something is currently loading, ignore
+              // if (isLoading == true)
+              //   return
+              //
+              // isLoading = true
+              // $('#loading-container').removeClass('d-none')
+              // $('#entity-content-iframe').addClass('invisible')
+              //
+              // var threadId = $(this).attr('id')
+              // var thread = threadsMap[threadId]
+              // setActive(threadId)
+              // console.log('Select Entity: ' + JSON.stringify(thread))
+
+              // var site = thread.site
+              // var url = 'https://'+site.slug+'.vertex360.co/post/'+thread.subject.slug
+              // $('#entity-content-iframe').attr('src', url)
+              // window.history.pushState("string", thread.subject.title, "/feed/"+thread.subject.slug)
+            })
+          })
+        }
 
       })()
     </script>
