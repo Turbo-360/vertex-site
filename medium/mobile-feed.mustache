@@ -11,7 +11,6 @@
 
   <link rel="stylesheet" href="{{{cdn}}}/mobili/css/swiper.css" />
   <link rel="stylesheet" href="{{{cdn}}}/mobili/style.css" />
-
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet">
 </head>
 
@@ -48,30 +47,10 @@
 				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/car.png" alt="" title="" /><span>Cars</span></a></li>
 				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/bus.png" alt="" title="" /><span>Buses</span></a></li>
 				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/bike.png" alt="" title="" /><span>Bikes</span></a></li>
-
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/drink.png" alt="" title="" /><span>Drinks</span></a></li>
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/food.png" alt="" title="" /><span>Food</span></a></li>
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/orders.png" alt="" title="" /><span>Clothes</span></a></li>
-
 				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/rocket.png" alt="" title="" /><span>Rockets</span></a></li>
 				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/briefcase.png" alt="" title="" /><span>Accessories</span></a></li>
 				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/gift.png" alt="" title="" /><span>Gifts</span></a></li>
 				<li class="subnav opensubsubnav"><img src="{{{cdn}}}/mobili/images/icons/gray/categories.png" alt="" title="" /><span>Third sublevel menu</span></li>
-				</ul>
-				</nav>
-			</div>
-			<div class="swiper-slide">
-				<div class="subnav_header backtosubnav"><img src="{{{cdn}}}/mobili/images/icons/gray/back.png" alt="" title="" /><span>BACK TO 2 SUBLEVEL MENU</span></div>
-				<nav class="main_nav_underline">
-				<ul>
-
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/car.png" alt="" title="" /><span>Subcategory 01</span></a></li>
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/bus.png" alt="" title="" /><span>Subcategory 02</span></a></li>
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/bike.png" alt="" title="" /><span>Subcategory 03</span></a></li>
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/drink.png" alt="" title="" /><span>Subcategory 04</span></a></li>
-				<li><a href="shop.html"><img src="{{{cdn}}}/mobili/images/icons/gray/food.png" alt="" title="" /><span>Subcategory 05</span></a></li>
-
-
 				</ul>
 				</nav>
 			</div>
@@ -109,9 +88,9 @@
   <div data-page="team" class="page">
     <div class="page-content">
 
-		<div style="background:#333" class="navbar navbar--fixed navbar--fixed-top navbar--bg">
+		<div style="background:#333;" class="navbar navbar--fixed navbar--fixed-top navbar--bg">
 			<div class="navbar__col navbar__col--icon navbar__col--icon-left">
-				<a href="#" data-panel="left" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/menu.png" alt="Vertex 360" title="" /></a>
+				<a id="btn-menu-toggle" href="#" data-panel="left" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/menu.png" alt="Vertex 360" title="" /></a>
 			</div>
       <div class="navbar__col navbar__col--title" style="text-align:center">
 				<a href="/"><img style="width:140px;margin-top:6px;margin-right:32px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s280" /></a>
@@ -211,9 +190,19 @@
     </div>
     </div>
 
-<script src="{{{cdn}}}/mobili/js/jquery-3.3.1.min.js"></script>
-<script src="{{{cdn}}}/mobili/js/jquery.validate.min.js" ></script>
-<script src="{{{cdn}}}/mobili/js/swiper.min.js"></script>
-<script src="{{{cdn}}}/mobili/js/jquery.custom.js"></script>
+    <script src="{{{cdn}}}/mobili/js/jquery-3.3.1.min.js"></script>
+    <script src="{{{cdn}}}/mobili/js/jquery.validate.min.js" ></script>
+    <script src="{{{cdn}}}/mobili/js/swiper.min.js"></script>
+    <script src="{{{cdn}}}/mobili/js/jquery.custom.js"></script>
+
+    <script>
+      (function(){
+        $('#btn-menu-toggle').click(function(e){
+          console.log('Toggle Menu')
+
+        })
+
+      })()
+    </script>
   </body>
 </html>
