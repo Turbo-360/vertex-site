@@ -290,7 +290,7 @@
             return
 
           console.log('Fetch Comments: ' + JSON.stringify(selectedThread))
-          window.vertexLib.getRequest('/api/comment?thread='+selectedThread.id, null, function(err, resp){
+          window.vertexLib.getRequest('/api/comment?thread='+selectedThread.subject.id, null, function(err, resp){
             if (err){
               console.log('ERR: ' + JSON.stringify(err))
               return
