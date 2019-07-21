@@ -774,7 +774,8 @@ clear:both;
 padding:10px 5%;
 background-color:#f1f7f8;
 color:#333;
-font-weight: 600;
+font-weight: 400;
+letter-spacing: 4px;
 cursor:pointer;
 height: 32px;
 }
