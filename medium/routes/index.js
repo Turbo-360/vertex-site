@@ -7,6 +7,8 @@ const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const ignore = process.env.IGNORE.split(',')
 const renderAnalytics = (req) => {
+	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+	console.log('renderAnalytics: ' + ip)
 	if (req.user == null)
 		return (CDN!=null)
 
@@ -121,6 +123,15 @@ router.get('/', (req, res) => {
       message: err.message
     })
   })
+})
+
+router.get('/ip', (req, res) => {
+	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+	res.json({
+		confirmation: 'success',
+		data: ip
+	})
+
 })
 
 router.get('/about', (req, res) => {
