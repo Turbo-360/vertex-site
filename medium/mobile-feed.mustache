@@ -202,6 +202,12 @@
           isLoading = false
           $('#loading-container').css('display', 'none')
           $('#entity-content-iframe').css('display', '')
+
+          var selectedThread = threads[selectedIndex]
+          if (selectedThread==null)
+            return
+            
+          $('#comment-title').html(selectedThread.subject.title)
         }
 
         var setActive = function(id){
@@ -263,7 +269,6 @@
           setTimeout(function(){
             setActive(selectedThread.id)
             connectSidebar()
-            $('#comment-title').html(selectedThread.subject.title)
           }, 200)
         }
 
