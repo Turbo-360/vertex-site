@@ -56,15 +56,6 @@
 				</nav>
 			</div>
 
-			<div class="swiper-slide">
-				<div class="subnav_header backtonav"><img src="{{{cdn}}}/mobili/images/icons/gray/back.png" alt="Vertex 360" /><span>BACK TO MAIN MENU</span></div>
-				<nav class="main_nav_underline">
-				<ul>
-
-				<li class="subnav opensubsubnav"><img src="{{{cdn}}}/mobili/images/icons/gray/categories.png" alt="Vertex 360" /><span>Third sublevel menu</span></li>
-				</ul>
-				</nav>
-			</div>
 		    </div>
 		</div>
     </div>
@@ -72,7 +63,7 @@
     <div class="panel panel-right panel-reveal">
       <div class="user_login_info">
         <div style="padding:12px;background:#f9f9f9">
-          <h4 id="comment-title" style="margin-bottom:8px;padding:0px"></h4>
+          <div id="comment-header"></div>
           <textarea style="margin-top:0px;width:92%;border:none;border-radius:0px;background:#fff" rows="4"></textarea>
           <button style="border-radius:0px;border:none;background:#333;padding:6px;color:#fff;">Submit</button>
         </div>
@@ -210,7 +201,8 @@
           }
 
           console.log('TEST 2')
-          $('#comment-title').text(selectedThread.subject.title)
+          var header = '<h4 style="margin-bottom:8px;padding:0px">'+selectedThread.subject.title+'</h4>'
+          $('#comment-header').html(header)
         }
 
         var setActive = function(id){
