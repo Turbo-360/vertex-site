@@ -261,6 +261,7 @@
           var url = 'https://'+selectedThread.site.slug+'.vertex360.co/post/'+selectedThread.subject.slug
           $('#entity-content-iframe').attr('src', url)
           setTimeout(function(){
+            $('#comment-title').html(selectedThread.subject.title)
             setActive(selectedThread.id)
             connectSidebar()
           }, 200)
@@ -271,7 +272,6 @@
           if (selectedThread==null)
             return
 
-          $('#comment-title').html(selectedThread.subject.title)
         })
 
         reloadUI()
