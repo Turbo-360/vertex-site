@@ -8,18 +8,18 @@ const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const ignore = process.env.IGNORE.split(',')
-const renderAnalytics = (req) => {
-	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-	// console.log('renderAnalytics: ' + ip)
-	if (ip==process.env.IGNORE_IP) // ignore this ip address
-		return false
-
-	if (req.user == null)
-		return (CDN!=null)
-
-	const found = (ignore.indexOf(req.user.id) > -1)
-	return !found
-}
+// const renderAnalytics = (req) => {
+// 	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+// 	// console.log('renderAnalytics: ' + ip)
+// 	if (ip==process.env.IGNORE_IP) // ignore this ip address
+// 		return false
+//
+// 	if (req.user == null)
+// 		return (CDN!=null)
+//
+// 	const found = (ignore.indexOf(req.user.id) > -1)
+// 	return !found
+// }
 
 const sanitizedUser = (user) => {
 	if (user == null)
@@ -71,7 +71,7 @@ router.get('/comments', (req, res) => {
 
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.site.get({slug:site})

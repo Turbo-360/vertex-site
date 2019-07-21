@@ -7,18 +7,18 @@ const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const ignore = process.env.IGNORE.split(',')
-const renderAnalytics = (req) => {
-	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-	// console.log('renderAnalytics: ' + ip)
-	if (ip==process.env.IGNORE_IP) // ignore this ip address
-		return false
-
-	if (req.user == null)
-		return (CDN!=null)
-
-	const found = (ignore.indexOf(req.user.id) > -1)
-	return !found
-}
+// const renderAnalytics = (req) => {
+// 	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+// 	// console.log('renderAnalytics: ' + ip)
+// 	if (ip==process.env.IGNORE_IP) // ignore this ip address
+// 		return false
+//
+// 	if (req.user == null)
+// 		return (CDN!=null)
+//
+// 	const found = (ignore.indexOf(req.user.id) > -1)
+// 	return !found
+// }
 
 const hasVideo = (site) => {
 	if (site.template.video == null)
@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 	// const selected = 'landing'
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
@@ -75,7 +75,7 @@ router.get('/', (req, res) => {
 router.get('/community', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req),
+		renderAnalytics: utils.renderAnalytics(req, CDN),
 		profile: req.user
 	}
 
@@ -187,7 +187,7 @@ router.get('/submitevent', (req, res) => {
 router.get('/blog', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.post.get()
@@ -213,7 +213,7 @@ router.get('/templates', (req, res) => {
 	const selected = 'landing'
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.site.get({'template.status':'live', format:'vertex'})
@@ -254,7 +254,7 @@ router.get('/templates', (req, res) => {
 router.get('/template/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	// TODO: check if template is live
@@ -294,7 +294,7 @@ router.get('/template/:slug', (req, res) => {
 router.get('/post/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.post.get({slug:req.params.slug})
@@ -326,7 +326,7 @@ router.get('/post/:slug', (req, res) => {
 router.get('/comments/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.comment.get({slug:req.params.slug})
@@ -364,7 +364,7 @@ router.get('/comments/:slug', (req, res) => {
 router.get('/profile/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.profile.get({slug:req.params.slug})
@@ -412,7 +412,7 @@ router.get('/profile/:slug', (req, res) => {
 router.get('/event/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
 	controllers.event.get({slug:req.params.slug})
