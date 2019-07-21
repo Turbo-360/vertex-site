@@ -204,9 +204,12 @@
           $('#entity-content-iframe').css('display', '')
 
           var selectedThread = threads[selectedIndex]
-          if (selectedThread==null)
+          if (selectedThread==null){
+            console.log('TEST 1')
             return
-            
+          }
+
+          console.log('TEST 2')
           $('#comment-title').html(selectedThread.subject.title)
         }
 
