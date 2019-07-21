@@ -21,6 +21,18 @@ module.exports = {
 	HTTP: HTTP,
 	Stripe: Stripe,
 	Scraper: Scraper,
+	renderAnalytics: function(){
+		const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+		// console.log('renderAnalytics: ' + ip)
+		if (ip==process.env.IGNORE_IP) // ignore this ip address
+			return false
+
+		if (req.user == null)
+			return (CDN!=null)
+
+		const found = (ignore.indexOf(req.user.id) > -1)
+		return !found
+	},
 	fetchFile: function(path){
 		return new Promise(function(resolve, reject){
 			fs.readFile(path, 'utf8', function(err, data) {
