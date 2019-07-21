@@ -33,11 +33,11 @@
         <div class="subnav_header">
           <span>Recent Stories</span>
         </div>
-				<nav style="padding:0px;width:100%" class="main_nav_underline">
+				<nav style="width:100%;background:#f1f7f8;padding:0px !important;" class="main_nav_underline">
   				<ul style="width:100%">
 
             {{#threads}}
-            <li id="li-{{id}}" style="border-bottom:1px solid #ededed;width:100%;padding:0px;margin:0px">
+            <li id="li-{{id}}" style="border-bottom:1px solid #ddd;width:100%;padding:0px;margin:0px">
               <div style="display:flex;padding:12px">
                 <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">
                   <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
@@ -233,10 +233,11 @@
                 return
 
               isLoading = true
+              selectedIndex = i
+
               $('#loading-container').css('display', '')
               $('#entity-content-iframe').css('display', 'none')
 
-              selectedIndex = i
               var threadId = $(this).attr('id')
               var thread = threadsMap[threadId]
               setActive(threadId)
