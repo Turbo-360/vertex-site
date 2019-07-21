@@ -25,7 +25,7 @@ Template:	Mobili - Mobile HTML Template
     7-4. MUSIC LIST DESIGN LAYOUT
 8. POPUPS
 9. SHOP LAYOUT
-     9-1. SHOP ITEM PAGE 
+     9-1. SHOP ITEM PAGE
      9-2. SHOPPING CART - CECKOUT
      9-3. SUCCESS PAGE
 10. PHOTO GALLERY
@@ -43,7 +43,7 @@ Template:	Mobili - Mobile HTML Template
 
 /*===============================================*/
 /* 2. GENERAL		 						 */
-/*===============================================*/	
+/*===============================================*/
 html,
 body {
 position: relative;
@@ -68,13 +68,13 @@ font-family: 'Roboto', sans-serif;
 color: #232323;
 font-size: 14px;
 }
-.clear{ 
-clear:both; 
+.clear{
+clear:both;
 display:block;
 }
-.clearleft{ 
-clear:both; 
-float:left; 
+.clearleft{
+clear:both;
+float:left;
 display:block;
 }
 a {
@@ -103,9 +103,9 @@ text-transform:uppercase;
 line-height:30px;
 }
 .videocontainer{
-max-width:100%; 
-padding:0; 
-display: block; 
+max-width:100%;
+padding:0;
+display: block;
 margin:0;
 }
 #mobile_wrap{
@@ -187,7 +187,7 @@ width:50%;
 }
 /*===============================================*/
 /* 3. H TITLES		 						 */
-/*===============================================*/	
+/*===============================================*/
 h1, h2, h3, h4, h5, h6{
 	font-weight:300;
 	letter-spacing:-0.5px;
@@ -197,7 +197,7 @@ h1, h2, h3, h4, h5, h6{
 }
 h1{
 	font-size:60px;
-	
+
 }
 h2{
 	font-size:26px;
@@ -277,7 +277,7 @@ bottom:0;
 .navbar__col{
 flex-grow:1;
 }
-.navbar__col--title{ 
+.navbar__col--title{
 font-size:28px;
 font-weight:900;
 }
@@ -286,21 +286,21 @@ display:block;
 font-size:10px;
 font-weight:300;
 }
-.navbar__col--title-sm{ 
+.navbar__col--title-sm{
 font-size:22px;
 }
-.navbar__col--title-centered{ 
+.navbar__col--title-centered{
 text-align:center;
 }
 .navbar__col--title a{
 color: #fff;
 }
-.navbar__col--title a span{ 
+.navbar__col--title a span{
 color:#060043;
 }
 .navbar__col--icon{
 width:30px;
-flex-grow:0;	
+flex-grow:0;
 position:relative;
 }
 .navbar__col--icon img{
@@ -322,14 +322,14 @@ width:15px;
 height:15px;
 background-color:#445cfd;
 color:#fff;
--webkit-border-radius:50%; 
--moz-border-radius:50%;  
-border-radius:50%; 
+-webkit-border-radius:50%;
+-moz-border-radius:50%;
+border-radius:50%;
 text-align:center;
 line-height:15px;
--webkit-box-shadow: 0px 0px 4px 0px #303030; 
+-webkit-box-shadow: 0px 0px 4px 0px #303030;
 -moz-box-shadow:    0px 0px 4px 0px #303030;
-box-shadow:         0px 0px 4px 0px #303030; 
+box-shadow:         0px 0px 4px 0px #303030;
 }
 
 
@@ -348,9 +348,9 @@ background: linear-gradient(60deg, #4f40f1, #6100bc);
 border-radius: 20px;
 padding: 12px 30px;
 font-size: 12px;
-}	
+}
 .btn--full{
-width:100%; 
+width:100%;
 padding: 12px 0px;
 text-align:center;
 margin:0 0 40px 0;
@@ -362,9 +362,9 @@ float:right;
 text-align:center;
 }
 a.button_small{
-background-color:#455dfe; 
+background-color:#455dfe;
 display:inline-block;
-color:#222222; 
+color:#222222;
 padding:10px 20px;
 text-align:center;
 -webkit-appearance: none;
@@ -410,7 +410,7 @@ color: #222222;
 }
 .btyellow{
 background-color:#455dfe;
-color:#fff; 
+color:#fff;
 }
 .btmint{
 background-color:#61bb7e;
@@ -418,7 +418,7 @@ color:#fff;
 }
 /*===============================================*/
 /* 6. LEFT AND RIGHT SLIDE PANELS */
-/*===============================================*/	
+/*===============================================*/
 /* === Panels === */
 .panel-overlay {
   position: absolute;
@@ -432,7 +432,7 @@ color:#fff;
   display: none;
 }
 .panel-overlay.active{
-  
+
 }
 .panel {
 z-index: 1000;
@@ -773,8 +773,10 @@ float:left;
 clear:both;
 padding:10px 5%;
 background-color:#f1f7f8;
-color:#455dfe;
+color:#333;
+font-weight: 600;
 cursor:pointer;
+height: 32px;
 }
 .subnav_header img{
 display:inline-block;
@@ -785,15 +787,16 @@ margin:5px 0 0 0;
 }
 .subnav_header span{
 display:block;
+font-size: 18px;
 float:left;
 text-align:left;
-padding:5px 0 0 20px;
+padding:5px 0 0 0px;
 }
 
 .tc { text-align: center; }
 /*===============================================*/
 /* 7. PAGES LAYOUT GENERAL */
-/*===============================================*/	
+/*===============================================*/
 /* === Views === */
 .views,
 .view {
@@ -849,12 +852,12 @@ background-color:#f7f7f7;
 width:100%;
 padding:0 0 30px 0;
 margin:0px;
-position: absolute; 
-top: 70px; 
-left: 0; 
-right: 0; 
+position: absolute;
+top: 70px;
+left: 0;
+right: 0;
 bottom: 0px;
-overflow: scroll; 
+overflow: scroll;
 -webkit-overflow-scrolling: touch;
 }
 #pages_maincontent.pages_maincontent--conversation{
@@ -895,7 +898,7 @@ right:0px;
 overflow: hidden;
 z-index: 999999;
 height:60px;
-background-color:#455dfe;	
+background-color:#455dfe;
 width:20%;
 }
 .bottom_menu_open a{
@@ -960,13 +963,13 @@ border-bottom-right-radius: 30px;
 .swiper-slide {
 width:100%;
 text-align:left;
--webkit-background-size: 100%; 
+-webkit-background-size: 100%;
 -moz-background-size: 100%;
 -o-background-size: 100%;
 background-size: 100%;
 -webkit-background-size: cover;
 -moz-background-size: cover;
--o-background-size: cover; 
+-o-background-size: cover;
 background-size: cover;
 background-position:center center;
 }
@@ -1008,7 +1011,7 @@ z-index:99999;
 margin:0;
 }
 .slidertoolbar .slider-caption{
-bottom:30%;	
+bottom:30%;
 }
 .slider-caption h2{
 width:100%;
@@ -1020,10 +1023,10 @@ line-height:42px;
 font-weight:900;
 letter-spacing:-0.5px;
 color:#060043;
-} 
+}
 .slider-caption h2.title--white{
 color:#fff;
-} 
+}
 .slider-caption span.subtitle{
 width:100%;
 margin:0;
@@ -1032,7 +1035,7 @@ padding:0px;
 font-weight:700;
 color:#445cfd;
 display:inline;
-} 
+}
 .slider-caption p{
 color:#060043;
 font-size:14px;
@@ -1046,7 +1049,7 @@ color:#fff;
 display:inline-block;
 color:#fff;
 background-color:#4f40f1;
-background: -webkit-linear-gradient(60deg, #4f40f1, #6100bc); 
+background: -webkit-linear-gradient(60deg, #4f40f1, #6100bc);
 background: linear-gradient(60deg, #4f40f1, #6100bc);
 -webkit-border-radius: 20px;
 -moz-border-radius: 20px;
@@ -1132,14 +1135,14 @@ background: #000;
     top:auto;
 }
 .swiper-button-next{
-	background:url(images/nav-next.png) no-repeat center; 
+	background:url(images/nav-next.png) no-repeat center;
 	width: 21px;
     height: 21px;
 	bottom:23%;
 	right:2.5%;
 }
 .swiper-button-prev{
-	background:url(images/nav-prev.png) no-repeat center; 
+	background:url(images/nav-prev.png) no-repeat center;
 	width: 21px;
     height: 21px;
 	bottom:23%;
@@ -1429,7 +1432,7 @@ left:5px;
 	background-color:#fff;
 	border:none;
 	resize: none;
-	
+
 }
 .conversation-submit__send{
 	max-width:20px;
@@ -1487,9 +1490,9 @@ margin:auto;
 
 /* 7-4. MUSIC LIST DESIGN LAYOUT */
 
-.audiojs{ 
+.audiojs{
 width:100%;
-margin:auto; 
+margin:auto;
 box-shadow:none;
 background-image:none;
 }
@@ -1542,7 +1545,7 @@ line-height:30px;
 }
 /*===============================================*/
 /* 8. POPUPS */
-/*===============================================*/	
+/*===============================================*/
 .popup{
   position: absolute;
   left: 0;
@@ -1637,7 +1640,7 @@ right:0px;
 .close_popup_button a img{
 display:block;
 max-width:60%;
-margin:auto; 
+margin:auto;
 }
 /*===============================================*/
 /* 9. SHOP LAYOUT */
@@ -2098,11 +2101,11 @@ width:100%;
 clear:both;
 display:block;
 float:left;
-padding:15px 0; 
-margin:15px 0; 
+padding:15px 0;
+margin:15px 0;
 font-weight:normal;
 text-align:center;
-cursor:pointer; 
+cursor:pointer;
 font-size:14px;
 color:#FFFFFF;
 -webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;
@@ -2207,43 +2210,43 @@ display:inline-block;
 max-width:70%;
 }
 ul.photo_gallery_13, ul.photo_gallery_12, ul.photo_gallery_11{
-width:100%; 
-list-style:none; 
-padding:0px; 
+width:100%;
+list-style:none;
+padding:0px;
 margin:0 0 70px 0;
-float:left; 
+float:left;
 clear:both;
-} 
-ul.photo_gallery_13 li{ 
-width:33.3%; 
-padding:0; 
-float:left; 
-margin:0; 
 }
-ul.photo_gallery_13 li img{ 
-max-width:100%; 
-display:block; 
-}
-ul.photo_gallery_12 li{ 
-width:50%; 
-padding:0; 
-float:left;  
+ul.photo_gallery_13 li{
+width:33.3%;
+padding:0;
+float:left;
 margin:0;
 }
-ul.photo_gallery_12 li img{ 
-max-width:100%; 
+ul.photo_gallery_13 li img{
+max-width:100%;
 display:block;
 }
-ul.photo_gallery_11 li{ 
-width:100%; 
-padding:0; 
-float:left; 
+ul.photo_gallery_12 li{
+width:50%;
+padding:0;
+float:left;
+margin:0;
+}
+ul.photo_gallery_12 li img{
+max-width:100%;
+display:block;
+}
+ul.photo_gallery_11 li{
+width:100%;
+padding:0;
+float:left;
 margin:0;
 }
 ul.photo_gallery_11 li img{
-max-width:100%; 
+max-width:100%;
 display:block;
-} 
+}
 .photo-categories{
 width:90%;
 padding:0;
@@ -2272,7 +2275,7 @@ background-color:#455dfe;
 	width:100%;
 	overflow:hidden;
 	position:relative;
-}	
+}
 .posts li{
 	width:100%;
 	display:block;
@@ -2441,18 +2444,18 @@ font-style:italic;
 
 /*===============================================*/
 /* 12. FORMS */
-/*===============================================*/	
+/*===============================================*/
 /* 12.1 LOGIN FORM */
 .loginform{
 width:90%;
 padding:0 0 15px 5%;
 }
 .loginform label.error{
-padding:0 0 20px 0; 
+padding:0 0 20px 0;
 margin:0px;
 line-height:10px;
-width:100%; 
-text-align:left; 
+width:100%;
+text-align:left;
 font-size:14px;
 color:#f65821;
 font-weight:400;
@@ -2460,8 +2463,8 @@ clear:both;
 float:left;
 }
 .loginform input.form_input{
-padding:10px 3%; 
-width:93%; 
+padding:10px 3%;
+width:93%;
 margin:0 0 15px 0;
 border-bottom:1px solid #d5d5d5;
 border-left:none;
@@ -2475,8 +2478,8 @@ color:#000000;
  background-color:#f5f5f5;
 }
 .loginform .form_select{
-padding:2% 3%; 
-width:100%; 
+padding:2% 3%;
+width:100%;
 margin:20px 0 10px 0;
 border-bottom:1px solid #d5d5d5;
 border-left:none;
@@ -2489,11 +2492,11 @@ background:url(images/dropdown.png) no-repeat right;
 .loginform .form_select option{
 padding:3px;
 }
-.loginform input.form_submit{ 
-width:100%; 
-margin:10px 0 0 0; 
+.loginform input.form_submit{
+width:100%;
+margin:10px 0 0 0;
 text-align:center;
-cursor:pointer; 
+cursor:pointer;
 font-size:18px;
 font-weight:300;
 border: none;
@@ -2573,28 +2576,28 @@ padding:0 0 15px 0;
 }
 .contactform label{
 width:100%;
-padding:5px 0 3px 0; 
-display:block; 
+padding:5px 0 3px 0;
+display:block;
 font-size:16px;
 font-weight:700;
 }
 .contactform label.error{
-padding:0 0 10px 0; 
-width:100%; 
-text-align:left; 
+padding:0 0 10px 0;
+width:100%;
+text-align:left;
 font-size:14px;
 color:#f65821;
 font-weight:400;
 }
 .contactform input.form_input{
-padding:3%; 
-width:93%; 
+padding:3%;
+width:93%;
 margin:0 0 5px 0;
 border:1px solid #ddd;
 }
 /* --------Custom select input----------- */
 .selector_overlay{
-padding:0; 
+padding:0;
 width:100%;
 float:left;
 margin:0 0 5px 0;
@@ -2605,8 +2608,8 @@ background:url(images/dropdown.png) no-repeat top right;
 backface-visibility: hidden;
 }
 .selector_overlay select{
-padding:8px 0 8px 1%; 
-width:99.5%; 
+padding:8px 0 8px 1%;
+width:99.5%;
 margin:0 0 5px 0;
 border:1px solid #ddd;
 box-shadow: none;
@@ -2620,8 +2623,8 @@ appearance: none;
 	color:#000;
 }
 .custom_select .item-after{
-padding:8px 0 8px 2%; 
-width:97%; 
+padding:8px 0 8px 2%;
+width:97%;
 float:left;
 margin:0 0 5px 0;
 overflow: hidden;
@@ -2747,19 +2750,19 @@ display:inline-block;
     box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
 }
 .contactform textarea.form_textarea{
-padding:3%; 
-width:93%; 
-height:50px; 
+padding:3%;
+width:93%;
+height:50px;
 margin:0 0 5px 0;
 border:1px solid #ddd;
 font-family: 'Roboto', sans-serif;
 font-size:14px;
 }
-.contactform input.form_submit{ 
-width:100%; 
-margin:10px 0 0 0; 
+.contactform input.form_submit{
+width:100%;
+margin:10px 0 0 0;
 text-align:center;
-cursor:pointer; 
+cursor:pointer;
 font-size:18px;
 font-weight:300;
 border: none;
@@ -2780,12 +2783,12 @@ h2#Note{
 
 /*===============================================*/
 /* 13. TABS & ACCORDION & TABLES */
-/*===============================================*/	
+/*===============================================*/
 /* Tabs
 /*------------------------------------------*/
 .tabs {
 	display: flex;
-	flex-wrap: wrap; 
+	flex-wrap: wrap;
 	width:100%;
 }
 .tabs--photos{
@@ -2967,36 +2970,36 @@ h2#Note{
 }
 
 /* TABLES */
-ul.responsive_table{ 
-width:100%; 
-float:left; 
-clear:both; 
-margin:0 0 10px 0; 
-padding:0px; 
+ul.responsive_table{
+width:100%;
+float:left;
+clear:both;
+margin:0 0 10px 0;
+padding:0px;
 list-style:none;
 }
 li.table_row{
-width:100%; 
-float:left; 
-clear:both; 
+width:100%;
+float:left;
+clear:both;
 line-height:30px;
-padding:0px; 
+padding:0px;
 list-style:none;
 margin:0 0 1px 0;
 background-color:#f5f5f4;
 }
 .table_section_small{
-width:14%; 
-float:left; 
-padding:0 0 0 2%;
-}
-.table_section{ 
-width:40%; 
+width:14%;
 float:left;
 padding:0 0 0 2%;
 }
-.table_section_14{ 
-width:23%; 
+.table_section{
+width:40%;
+float:left;
+padding:0 0 0 2%;
+}
+.table_section_14{
+width:23%;
 float:left;
 padding:0 0 0 2%;
 text-align:center;
@@ -3021,7 +3024,7 @@ background-color:#94cb01;
 color:#FFFFFF;
 font-size:12px;
 -moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;
-}  
+}
 ul.responsive_table li:first-child{
 background-color:#86d7ec;
 color:#222222;
@@ -3031,7 +3034,7 @@ color:#222222;
 }
 /*===============================================*/
 /* 14. MEDIA QUERIES */
-/*===============================================*/	
+/*===============================================*/
 /* -------------SMALL DESKTOP--------- */
 @media screen and (max-width: 1200px) {
 .bottombarpages{
@@ -3054,10 +3057,10 @@ max-width:20%;
 .navbar{
 height:50px;
 }
-.navbar__col--title{ 
+.navbar__col--title{
 font-size:22px;
 }
-.navbar__col--title-sm{ 
+.navbar__col--title-sm{
 font-size:18px;
 }
 .navbar__col--icon{
@@ -3070,7 +3073,7 @@ margin-right:15px;
 margin-left:15px;
 }
 #pages_maincontent{
-top: 50px; 
+top: 50px;
 }
 blockquote{
 font-size:15px;
@@ -3079,7 +3082,7 @@ line-height:22px;
 blockquote span{
 font-size:14px;
 line-height:22px;
-} 
+}
 ul.features_list li{
 width:96%;
 clear:both;
@@ -3126,7 +3129,7 @@ bottom: 13%;
 	bottom:13%;
 }
 .slidertoolbar .slider-caption{
-bottom:20%;	
+bottom:20%;
 }
 .main_nav_underline ul li img{
 max-width:8%;
@@ -3198,7 +3201,7 @@ padding:13px 0 0 0;
 
 }
 /* -----------------SMALLER MOBILE---------------- */
-@media screen and (max-width: 360px) {	
+@media screen and (max-width: 360px) {
 .gallery_switch a{
 width:10%;
 padding:0px 3px;
