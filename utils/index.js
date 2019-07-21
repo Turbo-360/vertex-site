@@ -11,7 +11,6 @@ const HTTP = require('./HTTP')
 const Stripe = require('./Stripe')
 const Scraper = require('./Scraper')
 
-
 module.exports = {
 	JWT: JWT,
 	AWS: AWS,
@@ -22,6 +21,7 @@ module.exports = {
 	Stripe: Stripe,
 	Scraper: Scraper,
 	renderAnalytics: function(req, CDN){
+		const ignore = process.env.IGNORE.split(',')
 		const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
 		// console.log('renderAnalytics: ' + ip)
 		if (ip==process.env.IGNORE_IP) // ignore this ip address
