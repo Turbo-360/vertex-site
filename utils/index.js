@@ -21,7 +21,7 @@ module.exports = {
 	HTTP: HTTP,
 	Stripe: Stripe,
 	Scraper: Scraper,
-	renderAnalytics: function(){
+	renderAnalytics: function(req, CDN){
 		const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
 		// console.log('renderAnalytics: ' + ip)
 		if (ip==process.env.IGNORE_IP) // ignore this ip address
