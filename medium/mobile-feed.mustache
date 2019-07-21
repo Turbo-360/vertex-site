@@ -32,7 +32,7 @@
 			<div class="swiper-slide" style="background:#c8c8c8;">
         <div class="subnav_header" style="border-bottom:1px solid #ddd">
           <span>Recent Stories</span>
-          <select style="float:right;margin-top:8px">
+          <select id="category-select" style="float:right;margin-top:8px">
             <option value="news">News</option>
             <option value="culture">Culture</option>
             <option value="politics">Politics</option>
@@ -204,14 +204,16 @@
 
           var selectedThread = threads[selectedIndex]
           if (selectedThread==null){
-            console.log('TEST 1')
             return
           }
 
           var header = '<h4 style="margin-bottom:8px;padding:0px">'+selectedThread.subject.title+'</h4>'
-          console.log('TEST 2: ' + header)
           $('#comment-header').html(header)
         }
+
+        $('#category-select').change(function(e){
+          console.log('Category Selected: ' + e.target.value)
+        })
 
         var setActive = function(id){
           threads.forEach(function(thread){
