@@ -174,8 +174,11 @@
     </div>
 
     <script type="text/template" id="tpl-comment">
-      <img style="float:left;width:32px;height:32px;margin-right:12px;border-radius:4px" src="<%{profile.image}%>=s64-c" alt="Vertex 360" />
       <p style="font-size:12px;padding:12px"><%{text}%></p>
+      <div style="text-align:right;padding:12px">
+        <small><% profile.username %></small>
+        <img style="width:24px;height:24px;margin-right:12px;border-radius:50%" src="<%{profile.image}%>=s48-c" alt="Vertex 360" />
+      </div>
     </script>
 
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
