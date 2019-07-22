@@ -227,6 +227,11 @@
               }
 
               console.log('LOGGED IN: ' + JSON.stringify(resp.user))
+              data.user = resp.user
+              window.__PRELOADED__ = data
+              $('#user-container').css('display', '')
+              $('#user-username').html(resp.user.username)
+              $('#user-icon').attr('src', resp.user.image+'=s28-c')
               document.getElementById('btn-close-popup').click()
             })
             return
@@ -244,7 +249,12 @@
               return
             }
 
-            console.log('LOGGED IN: ' + JSON.stringify(resp.user))
+            // console.log('LOGGED IN: ' + JSON.stringify(resp.user))
+            data.user = resp.user
+            window.__PRELOADED__ = data
+            $('#user-container').css('display', '')
+            $('#user-username').html(resp.user.username)
+            $('#user-icon').attr('src', resp.user.image+'=s28-c')
             document.getElementById('btn-close-popup').click()
           })
         })
