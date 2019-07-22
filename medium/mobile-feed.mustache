@@ -73,14 +73,14 @@
         <div style="padding:12px;background:#f9f9f9">
           <div id="comment-header"></div>
           <div style="background:#fff;padding:4px;margin-bottom:8px">
-            <textarea style="margin-bottom:4px;margin-top:0px;width:100%;border:none;border-radius:0px;background:#fff" rows="5"></textarea>
+            <textarea id="input-comment" style="margin-bottom:4px;margin-top:0px;width:100%;border:none;border-radius:0px;background:#fff" rows="5"></textarea>
 
             <div id="user-container" style="text-align:right">
               <small id="user-username" style="font-size:12px;margin-bottom:12px;vertical-align:middle;display:inline-block">username</small>
               <img id="user-icon" style="width:24px;height:24px;margin-left:6px;border-radius:50%" src="https://lh3.googleusercontent.com/DjvUJb57y-56_aB9apRxN78m_7cJ2BVTK1D8Wum7y-x7iC-P7s-lrcxQUxjWak29bO3PnI5tareyPSepTebhDSCZ=s28-c" alt="Vertex 360" />
             </div>
           </div>
-          <button data-popup=".popup-signup" class="open-popup" style="width:100%;border-radius:0px;border:none;background:#43603e;padding:9px;color:#fff;">Submit</button>
+          <button id="btn-submit-comment" style="width:100%;border-radius:0px;border:none;background:#43603e;padding:9px;color:#fff;">Submit</button>
         </div>
 
         <div id="comments-container" style="min-height:150vh"></div>
@@ -171,6 +171,9 @@
       <div class="close_popup_button"><a href="#" class="close-popup" data-popup=".popup-social"><img src="{{{cdn}}}/mobili/images/icons/black/menu_close.png" alt="Vertex 360" /></a></div>
     </div>
     </div>
+
+    <a id="btn-popup-modal" data-popup=".popup-signup" class="open-popup" style="display:none"></a>
+
 
     <script type="text/template" id="tpl-comment">
       <div style="border-bottom:1px solid #ededed">
@@ -290,17 +293,77 @@
         var comments = []
         var isLoading = false
 
-        if (data.user == null){
+        var currentUser = function(){
+          return window.__PRELOADED__.user
+        }
+
+        var user = currentUser()
+        if (user == null){
           $('#user-container').css('display', 'none')
         }
         else {
-          $('#user-username').html(data.user.username)
-          $('#user-icon').attr('src', data.user.image+'=s28-c')
+          $('#user-username').html(user.username)
+          $('#user-icon').attr('src', user.image+'=s28-c')
         }
+
+        $('#btn-submit-comment').click(function(){
+          var user = currentUser()
+
+          // show login/register modal:
+          if (user == null){
+            document.getElementById('btn-popup-modal').click()
+            return
+          }
+
+          var selectedThread = threads[selectedIndex]
+          if (selectedThread)
+            return
+
+          var commentText = $('#input-comment').val()
+          if (commentText.length == 0){
+            alert('Please Enter a Comment.')
+            return
+          }
+
+          var comment = {
+            text: commentText,
+            thread: selectedThread.subject.id,
+            profile: JSON.stringify({
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              username: user.username,
+              image: user.image,
+              slug: user.slug
+            })
+          }
+
+          window.vertexLib.postRequest('/api/comment', comment, function(err, resp){
+            if (err){
+              alert(err.message)
+              return
+            }
+
+            if (resp.confirmation != 'success'){
+              alert('Error - '+resp.message)
+              return
+            }
+
+            var result = resp.result
+            comments.unshift(result)
+
+            var commentTpl = $('#tpl-comment').html()
+            var commentsHtml = ''
+            comments.forEach(function(comment){
+              commentsHtml += Mustache.render(commentTpl, comment)
+            })
+
+            $('#comments-container').html(commentsHtml)
+          })
+        })
 
         var iframe = document.getElementById('entity-content-iframe')
         iframe.onload = function(){
-          // console.log('myframe is loaded')
           isLoading = false
           $('#loading-container').css('display', 'none')
           $('#entity-content-iframe').css('display', '')
