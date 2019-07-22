@@ -210,7 +210,7 @@
             console.log('LOGIN')
             window.vertexLib.postRequest('/account/login', credentials, function(err, resp){
               if (err){
-                alert(err)
+                alert(err.message)
                 return
               }
 
