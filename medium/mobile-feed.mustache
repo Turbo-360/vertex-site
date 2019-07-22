@@ -72,9 +72,14 @@
       <div class="user_login_info" style="background:#f1f7f8;border-left:1px solid #ddd">
         <div style="padding:12px;background:#f9f9f9">
           <div id="comment-header"></div>
-          <textarea style="margin-top:0px;width:100%;border:none;border-radius:0px;background:#fff" rows="6">
-            <div style="background:#fff;padding:4px;margin-bottom:0px">username</div>
-          </textarea>
+          <div style="background:#fff;padding:4px;margin-bottom:8px">
+            <textarea style="margin-bottom:4px;margin-top:0px;width:100%;border:none;border-radius:0px;background:#fff" rows="5"></textarea>
+
+            <div id="user-container" style="text-align:right">
+              <small id="user-username" style="font-size:12px;margin-bottom:12px;vertical-align:middle;display:inline-block">username</small>
+              <img id="user-icon" style="width:24px;height:24px;margin-left:6px;border-radius:50%" src="https://lh3.googleusercontent.com/DjvUJb57y-56_aB9apRxN78m_7cJ2BVTK1D8Wum7y-x7iC-P7s-lrcxQUxjWak29bO3PnI5tareyPSepTebhDSCZ=s28-c" alt="Vertex 360" />
+            </div>
+          </div>
           <button data-popup=".popup-signup" class="open-popup" style="width:100%;border-radius:0px;border:none;background:#43603e;padding:9px;color:#fff;">Submit</button>
         </div>
 
@@ -274,6 +279,14 @@
         var showSidebar = data.showSidebar
         var comments = []
         var isLoading = false
+
+        if (data.user == null){
+          $('#user-container').css('display', 'none')
+        }
+        else {
+          $('#user-username').html(data.user.username)
+          $('#user-icon').attr('src', data.user.image+'=s28-c')
+        }
 
         var iframe = document.getElementById('entity-content-iframe')
         iframe.onload = function(){
