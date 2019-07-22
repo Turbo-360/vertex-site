@@ -25,47 +25,47 @@
 <body id="mobile_wrap">
     <div id="panel-overlay" class="panel-overlay"></div>
 
-    <div id="panel-left" class="panel panel-left panel-reveal">
-                  <!-- Slider -->
-                 <div class="swiper-container-subnav multinav">
-                    <div class="swiper-wrapper">
-			<div class="swiper-slide" style="background:#c8c8c8;">
-        <div class="subnav_header" style="border-bottom:1px solid #ddd">
-          <span>Recent Stories</span>
-          <select id="category-select" style="float:right;margin-top:8px">
-            <option value="news">News</option>
-            <option value="culture">Culture</option>
-            <option value="politics">Politics</option>
-            <option value="tech">Tech</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="sports">Sports</option>
-          </select>
-        </div>
-				<nav style="width:100%;background:#f1f7f8;padding:0px !important;" class="main_nav_underline">
-  				<ul style="width:100%">
-
-            {{#threads}}
-            <li id="li-{{id}}" style="border-bottom:1px solid #ddd;width:100%;padding:0px;margin:0px">
-              <div style="display:flex;padding:12px">
-                <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">
-                  <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
-                  {{subject.title}}
-                </a>
+      <div id="panel-left" class="panel panel-left panel-reveal">
+        <!-- Slider -->
+       <div class="swiper-container-subnav multinav">
+          <div class="swiper-wrapper">
+      			<div class="swiper-slide" style="background:#c8c8c8;">
+              <div class="subnav_header" style="border-bottom:1px solid #ddd">
+                <span>Recent Stories</span>
+                <select id="category-select" style="float:right;margin-top:8px">
+                  <option value="news">News</option>
+                  <option value="culture">Culture</option>
+                  <option value="politics">Politics</option>
+                  <option value="tech">Tech</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="sports">Sports</option>
+                </select>
               </div>
-              <div style="font-size:12px;height:22px;text-align:right;">
-                <a target="_blank" href="{{{site.url}}}">
-                  <img style="border-radius:50%;margin-left:8px;margin-bottom:9px;float:right" src="{{{site.image}}}=s28-c" />
-                  <span style="float:initial;display:inline-block;margin-top:6px">{{subject.dateString}} | {{site.name}}</span>
-                </a>
-              </div>
-            </li>
-            {{/threads}}
-  				</ul>
-				</nav>
-			</div>
+      				<nav style="width:100%;background:#f1f7f8;padding:0px !important;" class="main_nav_underline">
+        				<ul style="width:100%">
 
-		    </div>
-		</div>
+                  {{#threads}}
+                  <li id="li-{{id}}" style="border-bottom:1px solid #ddd;width:100%;padding:0px;margin:0px">
+                    <div style="display:flex;padding:12px">
+                      <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">
+                        <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
+                        {{subject.title}}
+                      </a>
+                    </div>
+                    <div style="font-size:12px;height:22px;text-align:right;">
+                      <a target="_blank" href="{{{site.url}}}">
+                        <img style="border-radius:50%;margin-left:8px;margin-bottom:9px;float:right" src="{{{site.image}}}=s28-c" />
+                        <span style="float:initial;display:inline-block;margin-top:6px">{{subject.dateString}} | {{site.name}}</span>
+                      </a>
+                    </div>
+                  </li>
+                  {{/threads}}
+        				</ul>
+      				</nav>
+      			</div>
+
+  		    </div>
+  		</div>
     </div>
 
     <div class="panel panel-right panel-reveal">
@@ -83,36 +83,36 @@
     <div class="views">
 
       <div class="view view-main">
-<div class="pages">
-  <div data-page="team" class="page">
-    <div class="page-content">
+        <div class="pages">
+          <div data-page="team" class="page">
+            <div class="page-content">
 
-		<div style="background:#333;" class="navbar navbar--fixed navbar--fixed-top navbar--bg">
-			<div class="navbar__col navbar__col--icon navbar__col--icon-left">
-				<a id="btn-menu-toggle" href="#" data-panel="left" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/menu.png" alt="Vertex 360" /></a>
-			</div>
-      <div class="navbar__col navbar__col--title" style="text-align:center">
-				<a href="/"><img style="width:140px;margin-top:6px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s280" /></a>
-			</div>
-      <div class="navbar__col navbar__col--icon navbar__col--icon-right">
-				<a id="btn-nav-comments" href="#" data-panel="right" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/message.png" alt="Vertex 360" /></a>
-			</div>
+        		<div style="background:#333;" class="navbar navbar--fixed navbar--fixed-top navbar--bg">
+        			<div class="navbar__col navbar__col--icon navbar__col--icon-left">
+        				<a id="btn-menu-toggle" href="#" data-panel="left" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/menu.png" alt="Vertex 360" /></a>
+        			</div>
+              <div class="navbar__col navbar__col--title" style="text-align:center">
+        				<a href="/"><img style="width:140px;margin-top:6px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s280" /></a>
+        			</div>
+              <div class="navbar__col navbar__col--icon navbar__col--icon-right">
+        				<a id="btn-nav-comments" href="#" data-panel="right" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/message.png" alt="Vertex 360" /></a>
+        			</div>
 
-    </div>
+            </div>
 
-     <div id="pages_maincontent">
-       <div id="loading-container" class="" style="text-align:center;margin-top:120px">
-         <img style="width:50%;margin:auto" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loading.gif" />
-       </div>
+             <div id="pages_maincontent">
+               <div id="loading-container" class="" style="text-align:center;margin-top:120px">
+                 <img style="width:50%;margin:auto" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loading.gif" />
+               </div>
 
-       <iframe id="entity-content-iframe" class="invisible" style="width:100%;height:100vh;border:none"></iframe>
-     </div>
+               <iframe id="entity-content-iframe" class="invisible" style="width:100%;height:100vh;border:none"></iframe>
+             </div>
 
-    </div>
-  </div>
-</div>
+            </div>
+          </div>
+        </div>
 
-         </div>
+      </div>
     </div>
 
 
