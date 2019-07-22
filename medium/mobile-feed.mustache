@@ -122,8 +122,8 @@
             <h4>REGISTER</h4>
             <div class="loginform">
                 <form method="post" style="margin-bottom:4px">
-                    <input id="auth-email" type="text" name="Email" value="" class="form_input required" placeholder="Email" />
-                    <input id="auth-password" type="password" name="Password" value="" class="form_input required" placeholder="Password" />
+                    <input id="auth-email" type="text" name="Email" class="form_input required" placeholder="Email" />
+                    <input id="auth-password" type="password" name="Password" class="form_input required" placeholder="Password" />
                     <button style="background:#43603e;width:100%;padding:16px;border:none;color:#fff;font-size:18px" id="auth-submit" type="submit" class="form_submit" />SIGN UP</button>
                 </form>
                 <div style="text-align:center">
@@ -142,7 +142,7 @@
             </div>
 
             <div class="close_popup_button">
-                <a href="#" class="close-popup" data-popup=".popup-signup"><img src="{{{cdn}}}/mobili/images/icons/black/menu_close.png" alt="Vertex 360" /></a>
+                <a id="btn-close-popup" href="#" class="close-popup" data-popup=".popup-signup"><img src="{{{cdn}}}/mobili/images/icons/black/menu_close.png" alt="Vertex 360" /></a>
             </div>
         </div>
     </div>
@@ -192,12 +192,36 @@
             e.preventDefault()
 
           var credentials = {
-            email: '',
-            password: ''
+            email: $('#auth-email').val().toLowerCase().trim(),
+            password: $('#auth-password').val()
+          }
+
+          if (credentials.email.length == 0){
+            alert('Please Enter Your EMAIL')
+            return
+          }
+
+          if (credentials.password.length == 0){
+            alert('Please Enter Your PASSWORD')
+            return
           }
 
           if (authMode == 'login'){
             console.log('LOGIN')
+            window.vertexLib.postRequest('/account/login', credentials, function(err, resp){
+              if (err){
+                alert(err)
+                return
+              }
+
+              if (resp.confirmation != 'success'){
+                alert(resp.message)
+                return
+              }
+
+              console.log('LOGGED IN: ' + JSON.stringify(resp.user))
+              document.getElementById('btn-close-popup').click()
+            })
             return
           }
 
