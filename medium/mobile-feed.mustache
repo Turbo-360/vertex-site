@@ -226,6 +226,20 @@
           }
 
           console.log('REGISTER')
+          window.vertexLib.postRequest('/account/register', credentials, function(err, resp){
+            if (err){
+              alert(err.message)
+              return
+            }
+
+            if (resp.confirmation != 'success'){
+              alert(resp.message)
+              return
+            }
+
+            console.log('LOGGED IN: ' + JSON.stringify(resp.user))
+            document.getElementById('btn-close-popup').click()
+          })
         })
 
         $('#btn-toggle-auth-mode').click(function(e){
