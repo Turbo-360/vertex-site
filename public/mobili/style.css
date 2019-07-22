@@ -2562,6 +2562,15 @@ color:#FFFFFF;
 font-size:12px;
 font-weight:700;
 }
+a.signup_google{
+background-color:red;
+width:47%;
+padding:12px 0;
+display:inline-block;
+color:#FFFFFF;
+font-size:12px;
+font-weight:700;
+}
 
 /* 12.2 CONTACT FORM */
 
