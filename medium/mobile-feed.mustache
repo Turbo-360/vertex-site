@@ -187,6 +187,23 @@
         var data = window.__PRELOADED__
         var authMode = 'register'
 
+        $('#auth-submit').click(function(e){
+          if (e)
+            e.preventDefault()
+
+          var credentials = {
+            email: '',
+            password: ''
+          }
+
+          if (authMode == 'login'){
+            console.log('LOGIN')
+            return
+          }
+
+          console.log('REGISTER')
+        })
+
         $('#btn-toggle-auth-mode').click(function(e){
           if (e)
             e.preventDefault()
