@@ -19,6 +19,47 @@
     .selected {
       background:#fff;
     }
+
+    .swiper-slide {
+      background:#c8c8c8;
+    }
+
+    .subnav_header {
+      border-bottom:1px solid #ddd
+    }
+
+    .main_nav_underline {
+      width: 100%;
+      background: #f1f7f8;
+      padding: 0px !important;
+    }
+
+    .post-preview {
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      padding: 0px;
+      margin: 0px
+    }
+
+    .post-preview-container {
+      display: flex;
+      padding: 12px
+    }
+
+    .post-preview-container a {
+      flex:1;
+      color:#333;
+      font-weight:400;
+      font-size:15px
+    }
+
+    .post-preview-container img {
+      width: 64px;
+      height: 64px;
+      max-width: 100%;
+      margin-right: 12px;
+      border-radius: 4px;
+    }
   </style>
 </head>
 
@@ -29,8 +70,8 @@
         <!-- Slider -->
        <div class="swiper-container-subnav multinav">
           <div class="swiper-wrapper">
-      			<div class="swiper-slide" style="background:#c8c8c8;">
-              <div class="subnav_header" style="border-bottom:1px solid #ddd">
+      			<div class="swiper-slide">
+              <div class="subnav_header">
                 <span>Recent Stories</span>
                 <select id="category-select" style="float:right;margin-top:8px">
                   <option value="news">News</option>
@@ -41,14 +82,14 @@
                   <option value="sports">Sports</option>
                 </select>
               </div>
-      				<nav style="width:100%;background:#f1f7f8;padding:0px !important;" class="main_nav_underline">
+      				<nav class="main_nav_underline">
         				<ul style="width:100%">
 
                   {{#threads}}
-                  <li id="li-{{id}}" style="border-bottom:1px solid #ddd;width:100%;padding:0px;margin:0px">
-                    <div style="display:flex;padding:12px">
-                      <a id="{{id}}" class="sidebar-link" style="flex:1;color:#333;font-weight:400;font-size:15px" href="#">
-                        <img style="width:64px;height:64px;max-width:100%;margin-right:12px;border-radius:4px" src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
+                  <li class="post-preview" id="li-{{id}}">
+                    <div class="post-preview-container">
+                      <a id="{{id}}" class="sidebar-link" href="#">
+                        <img src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
                         {{subject.title}}
                       </a>
                     </div>
@@ -138,14 +179,8 @@
                   <a href="#" id="btn-toggle-auth-mode" style="color:red">LOGIN HERE</a>
                 </div>
             </div>
-            <h5>- OR REGISTER WITH A SOCIAL ACCOUNT -</h5>
-            <div class="signup_social">
-        			<a href="http://www.facebook.com/" class="signup_facebook">FACEBOOK</a>
-        			<a href="http://www.google.com/" class="signup_google">GOOGLE</a>
-            </div>
-            <br />
             <div style="text-align:center">
-              <img style="width:160px;margin-top:64px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
+              <img style="width:160px;margin-top:72px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
             </div>
 
             <div class="close_popup_button">
@@ -361,6 +396,7 @@
               return
             }
 
+            $('#input-comment').val('')
             comments.unshift(resp.result)
             reloadComments()
           })
