@@ -115,20 +115,16 @@ router.get('/', (req, res) => {
   })
 })
 
-router.get('/ip', (req, res) => {
-	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-	res.json({
-		confirmation: 'success',
-		data: ip
-	})
-
-})
-
 router.get('/about', (req, res) => {
 	const data = {
 		cdn: CDN,
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
+
+	data['preloaded'] = JSON.stringify({
+		user: sanitizedUser(req.user),
+		query: req.query
+	})
 
 	res.render('about', data)
 })
