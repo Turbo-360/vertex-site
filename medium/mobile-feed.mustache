@@ -217,7 +217,7 @@
           }
 
           if (authMode == 'login'){
-            console.log('LOGIN')
+            // console.log('LOGIN')
             window.vertexLib.postRequest('/account/login', credentials, function(err, resp){
               if (err){
                 alert(err.message)
@@ -240,7 +240,7 @@
             return
           }
 
-          console.log('REGISTER')
+          // console.log('REGISTER')
           window.vertexLib.postRequest('/account/register', credentials, function(err, resp){
             if (err){
               alert(err.message)
@@ -306,20 +306,27 @@
           $('#user-icon').attr('src', user.image+'=s28-c')
         }
 
+        var reloadComments = function(){
+          var commentTpl = $('#tpl-comment').html()
+          var commentsHtml = ''
+          comments.forEach(function(comment){
+            commentsHtml += Mustache.render(commentTpl, comment)
+          })
+
+          $('#comments-container').html(commentsHtml)
+        }
+
         $('#btn-submit-comment').click(function(){
-          console.log('test 0')
           var user = currentUser()
 
           // show login/register modal:
           if (user == null){
-            console.log('test 1')
             document.getElementById('btn-popup-modal').click()
             return
           }
 
           var selectedThread = threads[selectedIndex]
           if (selectedThread == null){
-            console.log('test 2')
             return
           }
 
@@ -354,16 +361,8 @@
               return
             }
 
-            var result = resp.result
-            comments.unshift(result)
-
-            var commentTpl = $('#tpl-comment').html()
-            var commentsHtml = ''
-            comments.forEach(function(comment){
-              commentsHtml += Mustache.render(commentTpl, comment)
-            })
-
-            $('#comments-container').html(commentsHtml)
+            comments.unshift(resp.result)
+            reloadComments()
           })
         })
 
@@ -472,15 +471,7 @@
             }
 
             comments = resp.results
-            console.log(JSON.stringify(comments))
-
-            var commentTpl = $('#tpl-comment').html()
-            var commentsHtml = ''
-            comments.forEach(function(comment){
-              commentsHtml += Mustache.render(commentTpl, comment)
-            })
-
-            $('#comments-container').html(commentsHtml)
+            reloadComments()
           })
         })
 
