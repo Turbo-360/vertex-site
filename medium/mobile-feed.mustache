@@ -307,17 +307,21 @@
         }
 
         $('#btn-submit-comment').click(function(){
+          console.log('test 0')
           var user = currentUser()
 
           // show login/register modal:
           if (user == null){
+            console.log('test 1')
             document.getElementById('btn-popup-modal').click()
             return
           }
 
           var selectedThread = threads[selectedIndex]
-          if (selectedThread)
+          if (selectedThread){
+            console.log('test 2')
             return
+          }
 
           var commentText = $('#input-comment').val()
           if (commentText.length == 0){
@@ -339,6 +343,7 @@
           }
 
           window.vertexLib.postRequest('/api/comment', comment, function(err, resp){
+            console.log(JSON.stringify(resp))
             if (err){
               alert(err.message)
               return
