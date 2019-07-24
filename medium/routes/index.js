@@ -180,7 +180,7 @@ router.get('/templates', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.site.get({'template.status':'live', format:'vertex'})
+	controllers.site.get({'template.status':'live', format:'vertex', featured:'yes'})
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['index'] = i
