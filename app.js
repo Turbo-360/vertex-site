@@ -68,8 +68,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
   // check if mobile:
-  const userAgent = req.headers['user-agent'].toLowerCase()
-	req.isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
+  if (req.headers['user-agent']){
+    const userAgent = req.headers['user-agent'].toLowerCase()
+  	req.isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
+  }
+  else {
+    req.isMobile = false
+  }
 
   // set CDN
   req.cdn = (process.env.TURBO_ENV == 'dev') ? '' : process.env.TURBO_CDN
