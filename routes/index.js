@@ -202,7 +202,7 @@ router.get('/templates', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.site.get({'template.status':'live', format:'vertex'})
+	controllers.site.get({'template.status':'live', format:'vertex', featured:'yes'})
 	.then(sites => {
 		sites.forEach((site, i) => {
 			site['index'] = i
@@ -222,9 +222,6 @@ router.get('/templates', (req, res) => {
 			user: req.user,
 			selected: sites[0],
 			templates: sites
-			// static: {
-			// 	faq: require('../public/static/faq.json')
-			// }
 		})
 
 		res.render('templates', data)
