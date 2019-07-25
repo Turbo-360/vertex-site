@@ -163,8 +163,6 @@ router.post('/config', (req, res) => {
 
 // fetch captions from youtube video based on ID:
 router.get('/captions', (req, res) => {
-	// https://yt-api-puw95x.vertex360.co/api/captions?video=j6fbYZxnuyk
-
 	if (req.query.video == null){
 		res.json({
 			confirmation: 'fail',
@@ -173,7 +171,13 @@ router.get('/captions', (req, res) => {
 		return
 	}
 
-	utils.HTTP.get('https://yt-api-puw95x.vertex360.co/api/captions', {video:req.query.video})
+	const roots = ['yt-api-1-3idc80', 'yt-api-2-asovo8', 'yt-api-3-gtktdh']
+	const root = roots[Math.floor(Math.random()*roots.length)]
+
+	// const endpoint = 'https://yt-api-puw95x.vertex360.co/api/captions'
+	const endpoint = 'https://'+root+'.vertex360.co/api/captions'
+
+	utils.HTTP.get(endpoint, {video:req.query.video})
 	.then(data => {
 		const parsed = JSON.parse(data)
 		if (parsed.confirmation != 'success'){
