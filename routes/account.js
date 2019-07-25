@@ -982,15 +982,17 @@ router.post('/:action', (req, res, next) => {
 
 	if (action == 'uploadurl') {
 		// query requires folder, filename, filetype
-
+		console.log('uploadurl test')
 		utils.AWS.uploadUrl(req.body, req.body.bucket)
 		.then(function(data){
+			console.log('uploadurl test 1 - '+JSON.stringify(data))
 			res.json({
 				confirmation: 'success',
 				data: data
 			})
 		})
 		.catch(function(err){
+			console.log('uploadurl test 2 - '+err.message)
 			res.json({
 				confirmation: 'fail',
 				message: err.message
