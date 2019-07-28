@@ -369,6 +369,9 @@
               var template = templatesMap[tplId]
               console.log('Select Template: ' + JSON.stringify(template))
 
+              var tpl = $('#tpl-modal').html()
+              var tplModal = Mustache.render(tpl, template)
+              $('#template-modal').html(tplModal)
             })
           })
 
