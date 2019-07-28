@@ -96,6 +96,10 @@ router.get('/feed', (req, res) => {
   })
 })
 
+router.get('/about', (req, res) => {
+	res.redirect('/')
+})
+
 router.get('/me', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
@@ -154,13 +158,6 @@ router.get('/templates', (req, res) => {
 			site['features'] = site.tags.join(' ').toLowerCase()
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
 			templatesMap[site.id] = site
-
-			// site['index'] = i
-			// site['tags'] = site.tags.slice(0, 3) // use only first 3
-
-			// site['hasVideo'] = false
-			// if (site.template.video != null)
-			// 	site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
 		})
 
 		data['templates'] = sites
