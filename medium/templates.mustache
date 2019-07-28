@@ -259,7 +259,7 @@
             </div>
             <div id="template-modal-content" class="modal-body" style="display:flex"></div>
             <div class="text-center" style="padding:1.5rem;border-top:1px solid #ededed">
-              <input type="text" class="form-control w-25 mr-3" placeholder="Your Site Name" style="display:initial;height:48px;padding-top:2px;background:#fffffa" />
+              <input id="input-site-name" type="text" class="form-control w-25 mr-3" placeholder="Your Site Name" style="display:initial;height:48px;padding-top:2px;background:#fffffa" />
               <button id="btn-launch-template" type="button" class="btn btn-primary btn-lg mr-2">LAUNCH SITE</button>
             </div>
           </div>
@@ -336,11 +336,38 @@
           var user = data.user
           var templates = data.templates
           var templatesMap = data.templatesMap
+          var selected = null
+
+          // checks if a template is ready when cloning:
+          var checkTemplate = function(siteSlug){
+            var body = {template:siteSlug}
+            window.vertexLib.postRequest('/account/check-template', body, function(err, response){
+              if (err){
+                // console.log('TEMPLATE NOT READY: ' + siteSlug)
+                setTimeout(function(){
+                  checkTemplate(siteSlug)
+                }, 4000)
+                return
+              }
+
+              if (response.confirmation != 'success'){
+                setTimeout(function(){
+                  checkTemplate(siteSlug)
+                }, 4000)
+                return
+              }
+
+              console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+              if (response.confirmation != 'success'){
+                alert('Error - ' + response.message)
+                return
+              }
+
+              window.location.href = '/admin/pages/'+siteSlug // redirect to site admin page
+            })
+          }
 
           var launchTemplate = function(){
-            console.log('launchTemplate')
-            return
-
             var body = {
               name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
               source: selected.id // ID of the template being copied
@@ -350,6 +377,8 @@
               alert('Please enter a name for your site')
               return
             }
+
+            console.log('launchTemplate: ' + JSON.stringify(body))
 
             $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
             window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
@@ -370,6 +399,8 @@
               var tplId = $(this).attr('id')
               tplId = tplId.split('-')[0]
               var template = templatesMap[tplId]
+              selected = template
+
               template['url'] = (template.url.length==0) ? template.slug+'.vertex360.co' : template.url
               template['description'] = (template.description.length==0) ? 'No Description' : template.description
               console.log('Select Template: ' + JSON.stringify(template))
@@ -388,6 +419,9 @@
               alert('Please log in or register to clone this site.')
               return
             }
+
+            if (selected == null)
+              return
 
             launchTemplate()
           })
