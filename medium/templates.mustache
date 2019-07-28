@@ -364,7 +364,9 @@
 
           $('.tpl-link').each(function(i, link){
             $(this).click(function(e){
-              var template = templatesMap[$(this).attr('id')]
+              var tplId = $(this).attr('id')
+              tplId = tplId.split('-')[0]
+              var template = templatesMap[tplId]
               console.log('Select Template: ' + JSON.stringify(template))
 
             })
