@@ -149,6 +149,7 @@ router.get('/templates', (req, res) => {
 
 	controllers.site.get({'template.status':'live', format:'vertex', featured:'yes'})
 	.then(sites => {
+		const templatesMap = {}
 		sites.forEach((site, i) => {
 			site['index'] = i
 			site['tags'] = site.tags.slice(0, 3) // use only first 3
@@ -158,6 +159,7 @@ router.get('/templates', (req, res) => {
 			if (site.template.video != null)
 				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
 
+			templatesMap[site.id] = site
 		})
 
 		data['templates'] = sites
@@ -166,7 +168,8 @@ router.get('/templates', (req, res) => {
 			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: sanitizedUser(req.user),
-			templates: sites
+			templates: sites,
+			templatesMap: templatesMap
 		})
 
 		res.render('templates', data)
