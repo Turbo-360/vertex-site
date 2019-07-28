@@ -379,9 +379,7 @@
             }
 
             // console.log('launchTemplate: ' + JSON.stringify(body))
-            $('#btn-launch-container').html("<img style='width:60px;margin-right:12px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
-            return
-            
+            $('#btn-launch-container').html("<img style='width:50px;margin-right:12px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
             window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
               if (err){
                 alert('Error: ' + err.message)
