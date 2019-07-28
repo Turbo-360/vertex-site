@@ -151,16 +151,16 @@ router.get('/templates', (req, res) => {
 	.then(sites => {
 		const templatesMap = {}
 		sites.forEach((site, i) => {
-			site['index'] = i
 			site['features'] = site.tags.join(' ').toLowerCase()
-			site['tags'] = site.tags.slice(0, 3) // use only first 3
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
-
-			site['hasVideo'] = false
-			if (site.template.video != null)
-				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
-
 			templatesMap[site.id] = site
+
+			// site['index'] = i
+			// site['tags'] = site.tags.slice(0, 3) // use only first 3
+
+			// site['hasVideo'] = false
+			// if (site.template.video != null)
+			// 	site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
 		})
 
 		data['templates'] = sites
