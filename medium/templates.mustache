@@ -207,19 +207,10 @@
                       <a href="#" class="sidebar-link" data-rel="all">All templates</a>
                   </li>
                   <li>
-                      <a href="#" class="sidebar-link" data-rel="landing">Landing</a>
+                      <a href="#" class="sidebar-link" data-rel="Youtube">Youtube</a>
                   </li>
                   <li>
-                      <a href="#" class="sidebar-link" data-rel="resume">Resume</a>
-                  </li>
-                  <li>
-                      <a href="#" class="sidebar-link" data-rel="portfolio">Portfolio</a>
-                  </li>
-                  <li>
-                      <a href="#" class="sidebar-link" data-rel="agency">Agency</a>
-                  </li>
-                  <li>
-                      <a href="#" class="sidebar-link" data-rel="performer">Performer</a>
+                      <a href="#" class="sidebar-link" data-rel="blog">Blog</a>
                   </li>
               </ul>
           </nav>
@@ -231,7 +222,7 @@
                       <div class="row">
 
                           {{#templates}}
-                          <article class="col-md-6 {{template.category}} all">
+                          <article class="col-md-6 {{template.features}} all">
                               <a id="{{id}}-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
                                 <div class="card mb-4" style="background-image: url('{{{image}}}=s1024')"></div>
                               </a>
