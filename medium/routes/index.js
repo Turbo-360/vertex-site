@@ -31,41 +31,22 @@ const sanitizedUser = (user) => {
 	return currentUser
 }
 
-/*
+
 router.get('/', (req, res) => {
-  const data = {
+	const data = {
 		cdn: CDN,
-		renderAnalytics: renderAnalytics(req)
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.site.get({limit:3, origin:'vertex360', featured:'yes'})
-	.then(sites => {
-		data['sites'] = sites
-		data.sites.forEach(site => {
-			site['description'] = utils.TextUtils.truncateText(site.description, 100)
-		})
-
-		return controllers.thread.get({limit:20})
+	data['preloaded'] = JSON.stringify({
+		user: sanitizedUser(req.user),
+		query: req.query
 	})
-  .then(threads => {
-    data['threads'] = threads
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			query: req.query,
-			user: sanitizedUser(req.user)
-		})
 
-    res.render('index', data)
-  })
-  .catch(err => {
-    res.json({
-      confirmation: 'fail',
-      message: err.message
-    })
-  })
-}) */
+	res.render('about', data)
+})
 
-router.get('/', (req, res) => {
+router.get('/feed', (req, res) => {
   const data = {
 		cdn: CDN,
 		renderAnalytics: utils.renderAnalytics(req, CDN)
@@ -113,20 +94,6 @@ router.get('/', (req, res) => {
       message: err.message
     })
   })
-})
-
-router.get('/about', (req, res) => {
-	const data = {
-		cdn: CDN,
-		renderAnalytics: utils.renderAnalytics(req, CDN)
-	}
-
-	data['preloaded'] = JSON.stringify({
-		user: sanitizedUser(req.user),
-		query: req.query
-	})
-
-	res.render('about', data)
 })
 
 router.get('/me', (req, res) => {
