@@ -96,8 +96,13 @@ router.get('/feed', (req, res) => {
   })
 })
 
+// redirects (old links that use to work):
 router.get('/about', (req, res) => {
 	res.redirect('/')
+})
+
+router.get('/blog', (req, res) => {
+	res.redirect('https://blog.vertex360.co')
 })
 
 router.get('/me', (req, res) => {
