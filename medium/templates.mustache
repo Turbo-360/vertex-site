@@ -227,7 +227,7 @@
 
                           {{#templates}}
                           <article class="col-md-6 {{template.category}} all">
-                              <a href="/template/{{slug}}">
+                              <a href="#" data-toggle="modal" data-target="#template-modal">
                                   <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
                               </a>
                               <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
@@ -239,6 +239,28 @@
               </section>
               {{>footer-dark}}
           </div>
+      </div>
+
+      <div class="modal fade" id="template-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content" style="border-radius:4px">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input id="input-login-email" style="background:#fffffa" class="form-control mb-4" type="text" placeholder="Email" />
+              <input id="input-login-password" style="background:#fffffa" class="form-control mb-4" type="password" placeholder="Password" />
+              <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg">Login</button>
+              <hr />
+            </div>
+            <div class="text-center" style="padding:1.5rem">
+              <img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -277,20 +299,20 @@
       {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
 
       <script>
-          $(document).ready(function () {
-              $('.sidebar-link').on('click', function (e) {
-                  e.preventDefault();
-                  $(this).parent().addClass('active').siblings().removeClass('active');
+        (function(){
+          $('.sidebar-link').on('click', function (e) {
+              e.preventDefault();
+              $(this).parent().addClass('active').siblings().removeClass('active');
 
-                  var type = $(this).attr("data-rel");
-                  $("#features").fadeTo(100, 0.1);
-                  $("#features .container .row article").not("."+type).fadeOut();
-                  setTimeout(function() {
-                      $("."+type).fadeIn();
-                      $("#features").fadeTo(300, 1);
-                  }, 300);
-              });
+              var type = $(this).attr("data-rel");
+              $("#features").fadeTo(100, 0.1);
+              $("#features .container .row article").not("."+type).fadeOut();
+              setTimeout(function() {
+                  $("."+type).fadeIn();
+                  $("#features").fadeTo(300, 1);
+              }, 300);
           });
+        })()
       </script>
     </body>
 </html>
