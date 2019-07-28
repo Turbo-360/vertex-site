@@ -257,32 +257,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div id="template-modal-content" class="modal-body" style="display:flex">
-              <div style="flex:1">
-                <div class="mb-2">
-                  <img src="https://lh3.googleusercontent.com/L0BGdl3ZcgP7Wms9mgWeWC2C0GKnLiTdiwhmGvlnyIjtdi8Fc7yjPmd7-c6p6_OxgAqcDxX9Kt2gdYkaXvhKN6qFnUM=s282-c" />
-                </div>
-                <div>
-                  <img class="preview-image" src="https://lh3.googleusercontent.com/L0BGdl3ZcgP7Wms9mgWeWC2C0GKnLiTdiwhmGvlnyIjtdi8Fc7yjPmd7-c6p6_OxgAqcDxX9Kt2gdYkaXvhKN6qFnUM=s50-c" />
-                  <img class="preview-image" src="https://lh3.googleusercontent.com/AHDM8lXubydTYAetqHA7qAWPksbJC_ugPZilfad6_2ogJju3Bd7nfuNnBc-iR9IPlddFcPzhC1m_YnBnBAdWVNoqgw=s50-c" />
-                  <img class="preview-image" src="https://lh3.googleusercontent.com/HCN6lj15yOKZvgWmivVg4Wsh_9Gxs4uOmJTsy9npKB_7o292XeRx158Wg1hEv8Sg7E2oHGglGLDj51LFBJGQI5z9=s50-c" />
-                  <img class="preview-image" src="https://lh3.googleusercontent.com/nJJY-YH7RuMLRQxCgXWnxovDzH1nXqiG2Nt9tI9TeMqwKcUiXjqpQqrMziqVedQf2iZ1UqoJ0JKK3k4dUD-mP-SuAA=s50-c" />
-                </div>
-              </div>
-              <div style="flex:2">
-                <a style="float:right" href="#" class="btn btn-sm btn-danger">Live Example</a>
-                <h3>The K Feature</h3>
-                <p>If you find yourself wrestling with CSS layout, it’s likely you’re making decisions for browsers they should be making themselves. Through a series of simple, composable layouts, Every Layout will teach you how to better harness the built-in algorithms that power browsers and CSS.</p>
-                <h4 class="mb-0">Includes</h4>
-                <ol style="padding-left:16px">
-                  <li>YouTube Transcriptions</li>
-                  <li>Podcast Player</li>
-                  <li>Instagram Gallery</li>
-                  <li>Blog</li>
-                  <li>Email Subscribers</li>
-                </ol>
-              </div>
-            </div>
+            <div id="template-modal-content" class="modal-body" style="display:flex"></div>
             <div class="text-center" style="padding:1.5rem;border-top:1px solid #ededed">
               <input type="text" class="form-control w-25 mr-3" placeholder="Your Site Name" style="display:initial;height:48px;padding-top:2px;background:#fffffa" />
               <button type="button" class="btn btn-primary btn-lg mr-2">LAUNCH SITE</button>
@@ -320,10 +295,9 @@
               <img src="<% image %>=s282-c" />
             </div>
             <div>
-              <img class="preview-image" src="https://lh3.googleusercontent.com/L0BGdl3ZcgP7Wms9mgWeWC2C0GKnLiTdiwhmGvlnyIjtdi8Fc7yjPmd7-c6p6_OxgAqcDxX9Kt2gdYkaXvhKN6qFnUM=s50-c" />
-              <img class="preview-image" src="https://lh3.googleusercontent.com/AHDM8lXubydTYAetqHA7qAWPksbJC_ugPZilfad6_2ogJju3Bd7nfuNnBc-iR9IPlddFcPzhC1m_YnBnBAdWVNoqgw=s50-c" />
-              <img class="preview-image" src="https://lh3.googleusercontent.com/HCN6lj15yOKZvgWmivVg4Wsh_9Gxs4uOmJTsy9npKB_7o292XeRx158Wg1hEv8Sg7E2oHGglGLDj51LFBJGQI5z9=s50-c" />
-              <img class="preview-image" src="https://lh3.googleusercontent.com/nJJY-YH7RuMLRQxCgXWnxovDzH1nXqiG2Nt9tI9TeMqwKcUiXjqpQqrMziqVedQf2iZ1UqoJ0JKK3k4dUD-mP-SuAA=s50-c" />
+              <%#images%>
+              <img class="preview-image" src="<% . %>=s50-c" />
+              <%/images%>
             </div>
           </div>
           <div style="flex:2">
