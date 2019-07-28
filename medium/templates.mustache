@@ -225,16 +225,14 @@
                   <div class="container mt-4">
                       <div class="row">
 
-                        <div class="col-md-6">
                           {{#templates}}
-                          <article class="{{template.category}} all">
+                          <article class="col-md-6 {{template.category}} all">
                               <a href="/template/{{slug}}">
                                   <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
                               </a>
                               <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
                           </article>
                           {{/templates}}
-                        </div>
 
                       </div>
                   </div>
