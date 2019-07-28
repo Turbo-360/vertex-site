@@ -260,7 +260,7 @@
             <div id="template-modal-content" class="modal-body" style="display:flex"></div>
             <div class="text-center" style="padding:1.5rem;border-top:1px solid #ededed">
               <input type="text" class="form-control w-25 mr-3" placeholder="Your Site Name" style="display:initial;height:48px;padding-top:2px;background:#fffffa" />
-              <button type="button" class="btn btn-primary btn-lg mr-2">LAUNCH SITE</button>
+              <button id="btn-launch-template" type="button" class="btn btn-primary btn-lg mr-2">LAUNCH SITE</button>
             </div>
           </div>
         </div>
@@ -333,8 +333,37 @@
         (function(){
           Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
           var data = window.__PRELOADED__
+          var user = data.user
           var templates = data.templates
           var templatesMap = data.templatesMap
+
+          var launchTemplate = function(){
+            console.log('launchTemplate')
+            return
+
+            var body = {
+              name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+              source: selected.id // ID of the template being copied
+            }
+
+            if (body.name.length == 0){
+              alert('Please enter a name for your site')
+              return
+            }
+
+            $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><br /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
+            window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
+              if (err){
+                alert('Error: ' + err.message)
+                return
+              }
+
+              console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+              setTimeout(function(){
+                checkTemplate(response.data.slug)
+              }, 4000)
+            })
+          }
 
           $('.tpl-link').each(function(i, link){
             $(this).click(function(e){
@@ -349,6 +378,18 @@
               var tplModal = Mustache.render(tpl, template)
               $('#template-modal-content').html(tplModal)
             })
+          })
+
+          $('#btn-launch-template').click(function(event){
+            if (event)
+              event.preventDefault()
+
+            if (user == null){
+              alert('Please log in or register to clone this site.')
+              return
+            }
+
+            launchTemplate()
           })
 
           $('.sidebar-link').on('click', function(e){
