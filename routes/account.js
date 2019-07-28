@@ -810,7 +810,7 @@ router.post('/:action', (req, res, next) => {
 			folder['source'] = copiedSite.slug
 			newSiteInfo['pages'] = (copiedSite.pages) ? Object.assign([], copiedSite.pages) : ['home']
 			newSiteInfo['image'] = copiedSite.image
-			newSiteInfo['template'] = {staus:'dev', category:copiedSite.template.category}
+			newSiteInfo['template'] = {status:'dev', category:copiedSite.template.category}
 			newSiteInfo['globalConfig'] = Object.assign({}, copiedSite.globalConfig)
 			newSiteInfo['cloneSource'] = copiedSite.id
 			return controllers.site.post(newSiteInfo) // create new site
