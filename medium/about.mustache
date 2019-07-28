@@ -351,14 +351,6 @@
               }, 1000)
             })
 
-            // $('#btn-join-premium').click(function(event){
-            //   if (event)
-            //     event.preventDefault()
-            //
-            //   $('#tab-register').click()
-            //   document.getElementById('btn-show-premium-modal').click()
-            // })
-
             if (data.stripe==null)
               return
 
@@ -419,11 +411,6 @@
                 alert('Please enter your EMAIL')
                 return
               }
-
-              // if (TextUtils.validateEmail(visitor.email) == false){
-              // 	alert('Please enter a valid EMAIL')
-              // 	return
-              // }
 
               if (visitor.address_line1.length == 0){
                 alert('Please enter your ADDRESS')
