@@ -341,7 +341,7 @@
               var tplId = $(this).attr('id')
               tplId = tplId.split('-')[0]
               var template = templatesMap[tplId]
-              template['url'] + (template.url.length==0) ? template.slug+'.vertex360.co' : template.url
+              template['url'] = (template.url.length==0) ? template.slug+'.vertex360.co' : template.url
               console.log('Select Template: ' + JSON.stringify(template))
 
               var tpl = $('#tpl-modal').html()
