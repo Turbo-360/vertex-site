@@ -358,10 +358,13 @@
       <script>
         (function(){
           Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+          var data = window.__PRELOADED__
+          var templates = data.templates
 
           $('.tpl-link').each(function(i, link){
             $(this).click(function(e){
-              console.log('Select Template: ' + $(this).attr('id'))
+              var template = templates[$(this).attr('id')]
+              console.log('Select Template: ' + JSON.stringify(template))
 
             })
           })

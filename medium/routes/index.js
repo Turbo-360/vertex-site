@@ -149,6 +149,7 @@ router.get('/templates', (req, res) => {
 
 	controllers.site.get({'template.status':'live', format:'vertex', featured:'yes'})
 	.then(sites => {
+		const sitesMap = {}
 		sites.forEach((site, i) => {
 			site['index'] = i
 			site['tags'] = site.tags.slice(0, 3) // use only first 3
@@ -157,9 +158,11 @@ router.get('/templates', (req, res) => {
 			site['hasVideo'] = false
 			if (site.template.video != null)
 				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+
+			sitesMap[site.id] = site
 		})
 
-		data['templates'] = sites
+		data['templates'] = sitesMap
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			// stripe: process.env.STRIPE_PK_LIVE,
