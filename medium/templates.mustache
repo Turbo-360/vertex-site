@@ -360,10 +360,14 @@
           Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
           var data = window.__PRELOADED__
           var templates = data.templates
+          var templatesMap = {}
+          templates.forEach(function(template){
+            templatesMap[template.id] = template
+          })
 
           $('.tpl-link').each(function(i, link){
             $(this).click(function(e){
-              var template = templates[$(this).attr('id')]
+              var template = templatesMap[$(this).attr('id')]
               console.log('Select Template: ' + JSON.stringify(template))
 
             })
