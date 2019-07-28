@@ -152,7 +152,7 @@ router.get('/templates', (req, res) => {
 		const templatesMap = {}
 		sites.forEach((site, i) => {
 			site['index'] = i
-			site['features'] = site.tags.join(' ')
+			site['features'] = site.tags.join(' ').toLowerCase()
 			site['tags'] = site.tags.slice(0, 3) // use only first 3
 			site['description'] = utils.TextUtils.convertToHtml(site.description)
 
