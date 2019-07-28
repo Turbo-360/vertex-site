@@ -258,7 +258,7 @@
               </button>
             </div>
             <div id="template-modal-content" class="modal-body" style="display:flex"></div>
-            <div class="text-center" style="padding:1.5rem;border-top:1px solid #ededed">
+            <div class="text-left" style="padding:1.5rem;border-top:1px solid #ededed">
               <input id="input-site-name" type="text" class="form-control w-25 mr-3" placeholder="Your Site Name" style="display:initial;height:48px;padding-top:2px;background:#fffffa" />
               <div style="display:inline-block" id="btn-launch-container"><button id="btn-launch-template" type="button" class="btn btn-primary btn-lg mr-2">LAUNCH SITE</button></div>
             </div>
@@ -378,11 +378,8 @@
               return
             }
 
-            console.log('launchTemplate: ' + JSON.stringify(body))
-
-            $('#btn-launch-container').html("<img style='width:100px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
-            return
-            
+            // console.log('launchTemplate: ' + JSON.stringify(body))
+            $('#btn-launch-container').html("<img style='width:60px;margin-right:12px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
             window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
               if (err){
                 alert('Error: ' + err.message)
