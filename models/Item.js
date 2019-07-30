@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 var Item = new mongoose.Schema({
-	site: {type:String, trim:true, default:''}, // ID of host site
+	site: {type:mongoose.Schema.Types.Mixed, default:{}},
 	name: {type:String, trim:true, default:''},
   price: {type:Number, default:0},
   description: {type:String, trim:true, default: ''},
