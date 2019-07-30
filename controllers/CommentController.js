@@ -84,6 +84,13 @@ module.exports = {
 				catch(err){}
 			}
 
+			if (params.site != null){
+				try {
+					params['site'] = JSON.parse(params.site)
+				}
+				catch(err){}
+			}
+
 			if (params.image == null)
 				params['image'] = process.env.IMAGE_PLACEHOLDER
 
