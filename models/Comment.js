@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const CommentSchema = new mongoose.Schema({
 	profile: {type:mongoose.Schema.Types.Mixed, default:{}},
+	site: {type:mongoose.Schema.Types.Mixed, default:{}},
 	title: {type:String, trim:true, default:''},
 	text: {type:String, trim:true, default:''},
 	slug: {type:String, trim:true, default:''},
@@ -21,6 +22,7 @@ const CommentSchema = new mongoose.Schema({
 CommentSchema.methods.summary = function() {
 	var summary = {
 		profile: this.profile,
+		site: this.site,
 		text: this.text,
 		title: this.title,
 		slug: this.slug,
