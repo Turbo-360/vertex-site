@@ -1,17 +1,17 @@
 var mongoose = require('mongoose')
 
 var Subscriber = new mongoose.Schema({
-	sites: {type:Array, default:[]},
+	site: {type:String, default:''}, // ID number of site
   email: {type:String, lowercase:true, trim:true, default:''},
-  // event: {type:mongoose.Schema.Types.Mixed, default:{}},
+	referrer: {type:String, lowercase:true, trim:true, default:''},
 	timestamp: {type:Date, default:Date.now}
 })
 
 Subscriber.methods.summary = function(){
 	return {
-		sites: this.sites,
+		site: this.site,
     email: this.email,
-    // event: this.event,
+		referrer: this.referrer,
 		timestamp: this.timestamp,
 		schema: 'subscriber',
 		id: this._id.toString()
