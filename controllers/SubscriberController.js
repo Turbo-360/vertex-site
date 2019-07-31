@@ -90,13 +90,13 @@ module.exports = {
 
 	post: function(params){
 		return new Promise(function(resolve, reject){
-			// var date = new Date(params.date)
-			// params['dateString'] = moment(date).format('MMMM Do, YYYY @ hh:mm a')
 			// if (params.name != null)
 			// 	params['slug'] = slugVersion(params.name, 6)
       //
 			// if (params.description != null)
 			// 	params['preview'] = scrapePreview(params.description, 200)
+
+			params['dateString'] = moment().format('MMMM Do, YYYY')
 
 			// from AJAX call, this comes in stringified
 			if (params.event != null){
