@@ -51,8 +51,12 @@
 
                           {{#threads}}
                           <div class="col-md-10">
-                            <div style="padding:16px;border:1px solid #ededed;border-radius:6px">
-                              <h2>{{subject.title}}</h2>
+                            <div class="bg-white mb-4" style="padding:16px;border:1px solid #ededed;border-radius:6px;display:flex">
+                              <img src="{{subject.image}}=s220-c" />
+                              <div>
+                                <h3>{{subject.title}}</h2>
+                                <p>{{subject.preview}}</p>
+                              </div>
 
                             </div>
                           </div>
