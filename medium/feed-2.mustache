@@ -53,7 +53,9 @@
                           {{#threads}}
                             <div class="bg-white mb-4" style="border:1px solid #ededed;border-radius:6px;display:flex">
                               <div style="padding:0px">
-                                <img style="max-width:190px;max-height:190px" src="{{subject.image}}=s300-c" />
+                                <a target="_blank" href="{{subject.url}}">
+                                  <img style="max-width:190px;max-height:190px" src="{{subject.image}}=s300-c" />
+                                </a>
                               </div>
                               <div style="flex:1;padding:16px">
                                 <div class="mb-2" style="text-align:right">
@@ -62,8 +64,10 @@
                                   <small style="color:#b1b0b0;font-size:12px">{{site.name}}</small>
                                   <img style="margin-left:6px;width:22px;border-radius:50%" src="{{{site.image}}}=s44-c" />
                                 </div>
-                                <h4>{{subject.title}}</h4>
-                                <p>{{subject.preview}}</p>
+                                <a target="_blank" href="{{subject.url}}">
+                                  <h4>{{subject.title}}</h4>
+                                </a>
+                                <p><a target="_blank" href="{{subject.url}}">{{subject.preview}}</a></p>
                               </div>
                               <div style="width:24px;background:#e8f2ff">
                               </div>
