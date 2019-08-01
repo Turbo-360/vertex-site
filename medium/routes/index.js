@@ -54,7 +54,6 @@ router.get('/feed', (req, res) => {
 
 	controllers.thread.get({limit:50})
   .then(threads => {
-    data['threads'] = threads
 
 		const threadsMap = {}
 		let selectedIndex = 0
@@ -64,8 +63,11 @@ router.get('/feed', (req, res) => {
 
 			threadsMap[thread.id] = thread
 			threadsMap[thread.slug] = thread
+			if (thread.subject.title.length > 54)
+				thread.subject.title = thread.subject.title.substring(0, 54)+'...'
 		})
 
+		data['threads'] = threads
 		data['threadsMap'] = threadsMap
 		data['selectedIndex'] = selectedIndex
 		data['preloaded'] = JSON.stringify({
