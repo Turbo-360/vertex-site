@@ -23,7 +23,7 @@
       <div class="wrapper">
 
           <!-- Sidebar -->
-          <nav id="sidebar">
+          <nav id="sidebar" style="padding-top:1.5rem">
               <div class="sidebar-header">
                   <h5 style="color:#333">Category</h5>
               </div>
@@ -145,6 +145,50 @@
       <script type="text/javascript" src="{{{cdn}}}/snap/js/scripts.js"></script>
       <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
       <script type="text/javascript" src="{{{cdn}}}/scripts/referrer.js"></script>
+
+      <script>
+        (function(){
+          var data = window.__PRELOADED__
+          var threads = data.threads
+          var threadsMap = data.threadsMap
+          var currentCategory = 'recent'
+
+          var reloadUI = function(){
+            $('.sidebar-link').each(function(i, link){
+              var category = $(this).html().toLowerCase()
+              if (category != currentCategory)
+                $(this).parent().removeClass('active')
+            })
+          }
+
+          $('.sidebar-link').each(function(i, link){
+            $(this).click(function(e){
+              if (e)
+                e.preventDefault()
+
+              window.scrollTo(0, 0)
+
+              var category = $(this).html().toLowerCase()
+              console.log('click sidebar: ' + category)
+              currentCategory = category
+              $(this).parent().addClass('active')
+
+              window.vertexLib.getRequest('/api/thread', null, function(err, resp){
+                if (err)
+                  return
+
+                if (resp.confirmation != 'success')
+                  return
+
+                var results = resp.results
+                console.log(JSON.stringify(results))
+                reloadUI()
+
+              })
+            })
+          })
+        })()
+      </script>
 
     </body>
 </html>
