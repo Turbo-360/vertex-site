@@ -23,7 +23,7 @@
       <div class="wrapper">
 
           <!-- Sidebar -->
-          <nav id="sidebar" style="padding-top:1.5rem">
+          <nav id="sidebar">
               <div class="sidebar-header">
                   <h5 style="color:#333">Category</h5>
               </div>
@@ -61,7 +61,9 @@
                                 <div class="mb-2" style="text-align:right">
                                   <small style="color:#b1b0b0;font-size:12px">{{subject.dateString}}</small>
                                   <span style="margin:6px">&middot;</span>
-                                  <small style="color:#b1b0b0;font-size:12px">Comments</small>
+                                  <a style="text-decoration:none" href="#">
+                                    <small style="color:#b1b0b0;font-size:12px">Comments</small>
+                                  </a>
                                   <span style="margin:6px">&middot;</span>
                                   <a style="text-decoration:none" target="_blank" href="{{{site.url}}}">
                                     <small style="color:#b1b0b0;font-size:12px">{{site.name}}</small>
