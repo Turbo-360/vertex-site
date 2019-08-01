@@ -3,7 +3,7 @@
     width: 100%;
 }
 #sidebar {
-    width: 200px;
+    width: 180px;
     position: sticky;
     top: 0;
     left: 0;
@@ -30,7 +30,7 @@
     padding: .5rem 0;
 }
 #content {
-    width: calc(100% - 200px);
+    width: calc(100% - 180px);
     min-height: 100vh;
     transition: all 0.3s;
     position: relative;
@@ -62,7 +62,7 @@
 
 @media (max-width: 768px) {
     #sidebar {
-        width: 200px;
+        width: 180px;
     }
     #content {
         width: 100%;
