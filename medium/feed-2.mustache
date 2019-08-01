@@ -52,16 +52,16 @@
                         <div class="col-md-9">
                           {{#threads}}
                             <div class="bg-white mb-4" style="border:1px solid #ededed;border-radius:6px;display:flex">
-                              <div style="text-align:right">
-                                <small style="color:#b1b0b0">{{subject.dateString}}</small>
-                                <span style="margin:6px">&middot;</span>
-                                <small style="color:#b1b0b0">{{site.name}}</small>
-                                <img style="margin-left:6px;width:24px;border-radius:50%" src="{{{site.image}}}=s48-c" />
-                              </div>
-                              <div style="padding:16px 0px 16px 16px">
-                                <img style="max-width:150px;max-height:150px" src="{{subject.image}}=s300-c" />
+                              <div style="padding:0px">
+                                <img style="max-width:190px;max-height:190px" src="{{subject.image}}=s300-c" />
                               </div>
                               <div style="flex:1;padding:16px">
+                                <div style="text-align:right">
+                                  <small style="color:#b1b0b0">{{subject.dateString}}</small>
+                                  <span style="margin:6px">&middot;</span>
+                                  <small style="color:#b1b0b0">{{site.name}}</small>
+                                  <img style="margin-left:6px;width:24px;border-radius:50%" src="{{{site.image}}}=s48-c" />
+                                </div>
                                 <h4>{{subject.title}}</h4>
                                 <p>{{subject.preview}}</p>
                               </div>
