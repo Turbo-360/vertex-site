@@ -64,7 +64,7 @@ router.get('/feed', (req, res) => {
 			threadsMap[thread.id] = thread
 			threadsMap[thread.slug] = thread
 			if (thread.subject.title.length > 44)
-				thread.subject.title = thread.subject.title.substring(0, 44)+'...'
+				thread.subject.title = thread.subject.title.substring(0, 44).trim()+'...'
 		})
 
 		data['threads'] = threads
