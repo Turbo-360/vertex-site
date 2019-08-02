@@ -70,14 +70,9 @@
       var site = data.site // full site data
       var thread = data.thread
       var schema = data.schema // post, video, episode, etc
-
       var comments = []
 
       var reloadUI = function(){
-        // var tplThread = $('#tpl-thread').html()
-        // var threadHtml = Mustache.render(tplThread, thread)
-        // $('#thread-container').html(threadHtml)
-
         var tpl = $('#tpl-comment').html()
         var commentsHtml = ''
         comments.forEach(function(comment){
@@ -93,27 +88,10 @@
             return
 
           comments = resp.results
-          console.log('FETCH COMMENTS: ' + JSON.stringify(comments))
+          // console.log('FETCH COMMENTS: ' + JSON.stringify(comments))
           reloadUI()
         })
       }
-
-      // check if thread entity exists:
-      // window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
-      //   if (err){
-      //     return
-      //   }
-      //
-      //   if (resp.results.length == 0){
-      //     // console.log('THREAD NOT FOUND')
-      //     // alert('Error - Inavlid URL.')
-      //     return
-      //   }
-      //
-      //   thread = resp.results[0]
-      //   fetchComments()
-      //   return
-      // })
 
       $('#btn-submit-comment').click(function(event){
         if (event)
@@ -157,7 +135,6 @@
       })
 
       fetchComments()
-
     })()
   </script>
 </body>
