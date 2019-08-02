@@ -21,7 +21,16 @@
 <div class="container pt-4 pb-4">
 	<div class="row justify-content-between">
 		<div class="col-md-8 mx-auto">
-      <div id="thread-container"></div>
+      <div>
+        <h3 class="mb-0">
+          <a target="_blank" style="text-decoration:none" href="{{subject.url}}"><span>{{subject.title}}</span></a>
+        </h3>
+        <small>{{subject.dateString}}</small>
+        <span style="margin:6px">&middot;</span>
+        <small>
+          <a style="text-decoration:none" href="/site/{{site.slug}}">{{site.name}}</a>
+        </small>
+      </div>
       <textarea id="text-area-comment" class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px;resize:none"></textarea>
       <button id="btn-submit-comment" class="mb-5 btn btn-success">Add Comment</button>
       <div id="comments-container"></div>
@@ -31,17 +40,6 @@
 </div>
   {{>footer}}
   {{>auth}}
-
-  <script type="text/template" id="tpl-thread">
-    <h3 class="mb-0">
-      <a target="_blank" style="text-decoration:none" href="<%{subject.url}%>"><span><% subject.title %></span></a>
-    </h3>
-    <small><% subject.dateString %></small>
-    <span style="margin:6px">&middot;</span>
-    <small>
-      <a style="text-decoration:none" href="/site/<% site.slug %>"><% site.name %></a>
-    </small>
-  </script>
 
   <script type="text/template" id="tpl-comment">
     <div class="mt-2 d-flex justify-content-between post-preview">
@@ -72,9 +70,9 @@
       var comments = []
 
       var reloadUI = function(){
-        var tplThread = $('#tpl-thread').html()
-        var threadHtml = Mustache.render(tplThread, thread)
-        $('#thread-container').html(threadHtml)
+        // var tplThread = $('#tpl-thread').html()
+        // var threadHtml = Mustache.render(tplThread, thread)
+        // $('#thread-container').html(threadHtml)
 
         var tpl = $('#tpl-comment').html()
         var commentsHtml = ''
@@ -97,21 +95,21 @@
       }
 
       // check if thread entity exists:
-      window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
-        if (err){
-          return
-        }
-
-        if (resp.results.length == 0){
-          // console.log('THREAD NOT FOUND')
-          // alert('Error - Inavlid URL.')
-          return
-        }
-
-        thread = resp.results[0]
-        fetchComments()
-        return
-      })
+      // window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
+      //   if (err){
+      //     return
+      //   }
+      //
+      //   if (resp.results.length == 0){
+      //     // console.log('THREAD NOT FOUND')
+      //     // alert('Error - Inavlid URL.')
+      //     return
+      //   }
+      //
+      //   thread = resp.results[0]
+      //   fetchComments()
+      //   return
+      // })
 
       $('#btn-submit-comment').click(function(event){
         if (event)
