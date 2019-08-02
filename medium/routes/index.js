@@ -54,11 +54,6 @@ router.get('/feed', (req, res) => {
 
 	controllers.thread.get({limit:50})
   .then(threads => {
-		// threads.forEach((thread, i) => {
-		// 	if (thread.subject.title.length > 44)
-		// 		thread.subject.title = thread.subject.title.substring(0, 44).trim()+'...'
-		// })
-
 		data['threads'] = {recent:threads}
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
