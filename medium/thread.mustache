@@ -23,12 +23,12 @@
 		<div class="col-md-8 mx-auto">
       <div>
         <h3 class="mb-0">
-          <a target="_blank" style="text-decoration:none" href="{{subject.url}}"><span>{{subject.title}}</span></a>
+          <a target="_blank" style="text-decoration:none" href="{{thread.subject.url}}"><span>{{thread.subject.title}}</span></a>
         </h3>
-        <small>{{subject.dateString}}</small>
+        <small>{{thread.subject.dateString}}</small>
         <span style="margin:6px">&middot;</span>
         <small>
-          <a style="text-decoration:none" href="/site/{{site.slug}}">{{site.name}}</a>
+          <a style="text-decoration:none" href="/site/{{thread.site.slug}}">{{thread.site.name}}</a>
         </small>
       </div>
       <textarea id="text-area-comment" class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px;resize:none"></textarea>
