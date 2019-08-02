@@ -153,7 +153,45 @@
                  <img style="width:50%;margin:auto" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loading.gif" />
                </div>
 
-               <iframe id="entity-content-iframe" class="invisible" style="width:100%;height:100vh;border:none"></iframe>
+               <div class="swiper-wrapper">
+           			<div class="swiper-slide">
+                   <div class="subnav_header">
+                     <span>Recent Stories</span>
+                     <select id="category-select" style="float:right;margin-top:8px">
+                       <option value="news">News</option>
+                       <option value="culture">Culture</option>
+                       <option value="politics">Politics</option>
+                       <option value="tech">Tech</option>
+                       <option value="entertainment">Entertainment</option>
+                       <option value="sports">Sports</option>
+                     </select>
+                   </div>
+           				<nav class="main_nav_underline">
+             				<ul style="width:100%">
+
+                       {{#threads}}
+                       <li class="post-preview" id="li-{{id}}">
+                         <div class="post-preview-container">
+                           <a id="{{id}}" class="sidebar-link" href="#">
+                             <img src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
+                             {{subject.title}}
+                           </a>
+                         </div>
+                         <div style="font-size:12px;height:22px;text-align:right;">
+                           <a target="_blank" href="{{{site.url}}}">
+                             <img style="border-radius:50%;margin-left:8px;margin-bottom:9px;float:right" src="{{{site.image}}}=s28-c" />
+                             <span style="float:initial;display:inline-block;margin-top:6px">{{subject.dateString}} | {{site.name}}</span>
+                           </a>
+                         </div>
+                       </li>
+                       {{/threads}}
+             				</ul>
+           				</nav>
+           			</div>
+
+       		    </div>
+
+
              </div>
 
             </div>
