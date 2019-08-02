@@ -83,7 +83,7 @@
       }
 
       var fetchComments = function(){
-        window.vertexLib.getRequest('/api/comment?thread='+thread.id, null, function(err, resp){
+        window.vertexLib.getRequest('/api/comment?thread='+thread.subject.id, null, function(err, resp){
           if (err)
             return
 
@@ -152,7 +152,7 @@
       })
 
       fetchComments()
-      
+
     })()
   </script>
 </body>
