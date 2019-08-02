@@ -20,10 +20,11 @@ const SiteSchema = new mongoose.Schema({
 	cloneSource: {type:String, trim:true, default: ''}, // SLUG of original clone source
 	canClone: {type:String, trim:true, default: 'no'},
 	featured: {type:String, trim:true, default: 'no'},
-	published: {type:String, trim:true, default: 'no'}, // published means other sites can use the vectors. no means only host site can use. open means anyone can use.
+	// published: {type:String, trim:true, default: 'no'}, // published means other sites can use the vectors. no means only host site can use. open means anyone can use.
 	github: {type:String, trim:true, default: ''}, // github repo
 	name: {type:String, trim:true, default: ''},
 	description: {type:String, trim:true, default: ''},
+	category: {type:String, trim:true, default:'lifestyle', lowercase:true},
 	image: {type:String, trim:true, default: process.env.IMAGE_PLACEHOLDER},
 	images: {type:Array, default:[]},
 	slug: {type:String, trim:true, default: ''}, // this is also the S3 bucket identifier
@@ -55,12 +56,13 @@ SiteSchema.methods.summary = function(authLevel) {
 		cloneSource: this.cloneSource,
 		canClone: this.canClone,
 		featured: this.featured,
-		published: this.published,
+		// published: this.published,
 		github: this.github,
 		slug: this.slug,
 		name: this.name,
 		level: this.level,
 		description: this.description,
+		category: this.category,
 		image: (this.image.length == 0) ? process.env.IMAGE_PLACEHOLDER : this.image,
 		images: this.images,
 		url: this.url,
