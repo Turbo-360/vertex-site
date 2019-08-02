@@ -277,6 +277,7 @@ router.get('/comments', (req, res) => {
 	// })
 })
 
+/*
 router.get('/feed/:slug', (req, res) => {
   const data = {
 		cdn: CDN,
@@ -316,7 +317,38 @@ router.get('/feed/:slug', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		// const template = (req.isMobile) ? 'index' : 'feed'
+		const template = (req.isMobile) ? 'mobile-feed' : 'feed'
+    res.render(template, data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+}) */
+
+router.get('/feed/:slug', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.thread.get({'subject.slug':req.params.slug})
+  .then(threads => {
+		if (threads.length == 0){
+			throw new Error('Not Found')
+			return
+		}
+
+    data['thread'] = threads[0]
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			thread: data.thread,
+			user: sanitizedUser(req.user)
+		})
+
 		const template = (req.isMobile) ? 'mobile-feed' : 'feed'
     res.render(template, data)
   })
