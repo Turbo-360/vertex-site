@@ -40,6 +40,9 @@
                   <li>
                       <a href="#" class="sidebar-link">Politics</a>
                   </li>
+                  <li>
+                      <a href="#" class="sidebar-link">Tech</a>
+                  </li>
               </ul>
           </nav>
 
@@ -50,7 +53,7 @@
                       <div class="row">
 
                         <div class="col-md-9">
-                          {{#threads}}
+                          {{#threads.recent}}
                             <div class="bg-white mb-4" style="border:1px solid #ededed;border-radius:6px;display:flex">
                               <div style="padding:0px">
                                 <a target="_blank" href="{{subject.url}}">
@@ -80,7 +83,7 @@
                               <div style="width:24px;background:#e8f2ff">
                               </div>
                             </div>
-                          {{/threads}}
+                          {{/threads.recent}}
                         </div>
 
                       </div>
@@ -153,8 +156,8 @@
       <script>
         (function(){
           var data = window.__PRELOADED__
-          var threads = data.threads
-          var threadsMap = data.threadsMap
+          var threads = data.threads // this is an object
+          // var threadsMap = data.threadsMap
           var currentCategory = 'recent'
 
           var reloadUI = function(){

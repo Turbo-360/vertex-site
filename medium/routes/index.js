@@ -54,33 +54,32 @@ router.get('/feed', (req, res) => {
 
 	controllers.thread.get({limit:50})
   .then(threads => {
-
 		const threadsMap = {}
-		let selectedIndex = 0
+		// let selectedIndex = 0
 		threads.forEach((thread, i) => {
-			if (thread.subject.slug == req.query.current)
-				selectedIndex = i
-
-			threadsMap[thread.id] = thread
-			threadsMap[thread.slug] = thread
+			// if (thread.subject.slug == req.query.current)
+			// 	selectedIndex = i
+			//
+			// threadsMap[thread.id] = thread
+			// threadsMap[thread.slug] = thread
 			if (thread.subject.title.length > 44)
 				thread.subject.title = thread.subject.title.substring(0, 44).trim()+'...'
 		})
 
-		data['threads'] = threads
-		data['threadsMap'] = threadsMap
-		data['selectedIndex'] = selectedIndex
+
+		// data['threadsMap'] = threadsMap
+		// data['selectedIndex'] = selectedIndex
+		data['threads'] = {recent:threads}
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
-			showSidebar: true,
 			threads: data.threads,
-			threadsMap: data.threadsMap,
-			selectedIndex: data.selectedIndex,
+			// showSidebar: true,
+			// threadsMap: data.threadsMap,
+			// selectedIndex: data.selectedIndex,
 			user: sanitizedUser(req.user)
 		})
 
-		// const template = (req.isMobile) ? 'mobile-feed' : 'feed'
 		const template = (req.isMobile) ? 'mobile-feed' : 'feed-2'
 		data['meta'] = {
 			title: 'Vertex 360',
