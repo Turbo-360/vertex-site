@@ -342,17 +342,20 @@ router.get('/feed/:slug', (req, res) => {
 		}
 
     data['thread'] = threads[0]
+		return controllers.comment.get()
+  })
+	.then(comments => {
+		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
 			thread: data.thread,
+			comments: data.comments,
 			user: sanitizedUser(req.user)
 		})
 
-		// const template = (req.isMobile) ? 'mobile-feed' : 'thread'
-    // res.render(template, data)
 		res.render('thread', data)
-  })
+	})
   .catch(err => {
     res.json({
       confirmation: 'fail',

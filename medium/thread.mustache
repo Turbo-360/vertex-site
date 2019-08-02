@@ -7,7 +7,7 @@
   <style>
     @media screen and (max-width: 525px) {
       .subject-image-container {
-        display: none;        
+        display: none;
       }
     }
   </style>
@@ -77,7 +77,7 @@
       var site = data.site // full site data
       var thread = data.thread
       var schema = data.schema // post, video, episode, etc
-      var comments = []
+      var comments = data.comments
 
       var reloadUI = function(){
         var tpl = $('#tpl-comment').html()
@@ -95,7 +95,6 @@
             return
 
           comments = resp.results
-          // console.log('FETCH COMMENTS: ' + JSON.stringify(comments))
           reloadUI()
         })
       }
@@ -141,7 +140,7 @@
         })
       })
 
-      fetchComments()
+      // fetchComments()
     })()
   </script>
 </body>
