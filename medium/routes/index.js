@@ -342,7 +342,7 @@ router.get('/feed/:slug', (req, res) => {
 		}
 
     data['thread'] = threads[0]
-		return controllers.comment.get()
+		return controllers.comment.get({thread:data.thread.subject.id})
   })
 	.then(comments => {
 		data['comments'] = comments
