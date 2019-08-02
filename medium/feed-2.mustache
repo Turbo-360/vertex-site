@@ -92,7 +92,7 @@
                   <div class="container mt-4">
                       <div class="row">
 
-                        <div class="col-md-9">
+                        <div id="threads-container" class="col-md-9">
                           {{#threads.recent}}
                           <div class="bg-white mb-4 thread-preview">
                             <div class="thread-preview-img">
@@ -169,6 +169,7 @@
 
       <script>
         (function(){
+          Mustache.tags = ['<%', '%>']
           var data = window.__PRELOADED__
           var threads = data.threads // this is an object
           var currentCategory = 'recent'
@@ -178,6 +179,18 @@
               var category = $(this).html().toLowerCase()
               if (category != currentCategory)
                 $(this).parent().removeClass('active')
+
+              var currentThreads = threads[currentCategory] // array
+              if (currentThreads == null)
+                return
+
+              var threadsHtml = ''
+              var tpl = $('#tpl-thread-preview').html()
+              currentThreads.forEach(function(thread, i){
+                threadsHtml += Mustache.render(tpl, thread)
+              })
+
+              $('#threads-container').html(threadsHtml)
             })
           }
 
@@ -193,6 +206,11 @@
               currentCategory = category
               $(this).parent().addClass('active')
 
+              if (threads[currentCategory] != null){
+                reloadUI()
+                return
+              }
+
               window.vertexLib.getRequest('/api/thread', null, function(err, resp){
                 if (err)
                   return
@@ -200,8 +218,9 @@
                 if (resp.confirmation != 'success')
                   return
 
-                var results = resp.results
-                console.log(JSON.stringify(results))
+                // var results = resp.results
+                console.log(JSON.stringify(resp.results))
+                threads[currentCategory] = resp.results
                 reloadUI()
               })
             })
