@@ -94,29 +94,29 @@
 
                         <div class="col-md-9">
                           {{#threads.recent}}
-                            <div class="bg-white mb-4 thread-preview">
-                              <div class="thread-preview-img">
-                                <a target="_blank" href="{{subject.url}}">
-                                  <img src="{{subject.image}}=s300-c" />
-                                </a>
-                              </div>
-                              <div class="thread-preview-container">
-                                <div class="mb-2" style="text-align:right">
-                                  <small>{{subject.dateString}}</small>
-                                  <span>&middot;</span>
-                                  <a href="/feed/{{subject.slug}}"><small>Comments</small></a>
-                                  <span>&middot;</span>
-                                  <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
-                                  <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
-                                </div>
-                                <a style="color:#333" target="_blank" href="{{{subject.url}}}">
-                                  <h4>{{subject.title}}</h4>
-                                </a>
-                                <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
-                              </div>
-                              <div style="width:24px;background:#e8f2ff">
-                              </div>
+                          <div class="bg-white mb-4 thread-preview">
+                            <div class="thread-preview-img">
+                              <a target="_blank" href="{{subject.url}}">
+                                <img src="{{subject.image}}=s300-c" />
+                              </a>
                             </div>
+                            <div class="thread-preview-container">
+                              <div class="mb-2" style="text-align:right">
+                                <small>{{subject.dateString}}</small>
+                                <span>&middot;</span>
+                                <a href="/feed/{{subject.slug}}"><small>Comments</small></a>
+                                <span>&middot;</span>
+                                <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
+                                <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
+                              </div>
+                              <a style="color:#333" target="_blank" href="{{{subject.url}}}">
+                                <h4>{{subject.title}}</h4>
+                              </a>
+                              <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
+                            </div>
+                            <div style="width:24px;background:#e8f2ff">
+                            </div>
+                          </div>
                           {{/threads.recent}}
                         </div>
 
@@ -128,6 +128,32 @@
       </div>
 
       {{>auth}}
+
+      <script type="text/template" id="tpl-thread-preview">
+        <div class="bg-white mb-4 thread-preview">
+          <div class="thread-preview-img">
+            <a target="_blank" href="<% subject.url %>">
+              <img src="<%{subject.image}%>=s300-c" />
+            </a>
+          </div>
+          <div class="thread-preview-container">
+            <div class="mb-2" style="text-align:right">
+              <small><% subject.dateString %></small>
+              <span>&middot;</span>
+              <a href="/feed/<% subject.slug %>"><small>Comments</small></a>
+              <span>&middot;</span>
+              <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
+              <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
+            </div>
+            <a style="color:#333" target="_blank" href="<%{subject.url}%>">
+              <h4><% subject.title}}</h4>
+            </a>
+            <p><a style="color:#7d7d7d" target="_blank" href="<%{subject.url}%>"><% subject.preview %></a></p>
+          </div>
+          <div style="width:24px;background:#e8f2ff">
+          </div>
+        </div>
+      </script>
 
       <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
       <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
