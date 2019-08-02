@@ -72,52 +72,7 @@
 
 <body id="mobile_wrap">
     <div id="panel-overlay" class="panel-overlay"></div>
-
-      <div id="panel-left" class="panel panel-left panel-reveal">
-        <!-- Slider -->
-       <div class="swiper-container-subnav multinav">
-          <div class="swiper-wrapper">
-      			<div class="swiper-slide">
-              <div class="subnav_header">
-                <span>Recent Stories</span>
-                <select id="category-select" style="float:right;margin-top:8px">
-                  <option value="news">News</option>
-                  <option value="culture">Culture</option>
-                  <option value="politics">Politics</option>
-                  <option value="tech">Tech</option>
-                  <option value="entertainment">Entertainment</option>
-                  <option value="sports">Sports</option>
-                </select>
-              </div>
-      				<nav class="main_nav_underline">
-        				<ul style="width:100%">
-
-                  {{#threads}}
-                  <li class="post-preview" id="li-{{id}}">
-                    <a id="{{id}}" class="sidebar-link" href="#">
-                      <img src="{{{subject.image}}}=s128-c" alt="Vertex 360" />
-                    </a>
-                    <div style="flex:1" class="post-preview-container">
-                      <a id="{{id}}" class="sidebar-link" href="#">
-                        {{subject.title}}
-                      </a>
-                      <div style="font-size:12px;height:22px;text-align:right;">
-                        <a target="_blank" href="{{{site.url}}}">
-                          <img style="border-radius:50%;margin-left:8px;margin-bottom:9px;float:right" src="{{{site.image}}}=s28-c" />
-                          <span style="float:initial;display:inline-block;margin-top:6px">{{subject.dateString}} | {{site.name}}</span>
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                  {{/threads}}
-        				</ul>
-      				</nav>
-      			</div>
-
-  		    </div>
-  		</div>
-    </div>
-
+    
     <div class="panel panel-right panel-reveal">
       <div class="user_login_info" style="background:#f1f7f8;border-left:1px solid #ddd">
         <div style="padding:12px;background:#f9f9f9">
@@ -176,17 +131,21 @@
 
                        {{#threads.recent}}
                        <li class="post-preview" id="li-{{id}}">
-                         <div class="post-preview-container">
+                         <div style="display:flex" class="post-preview-container">
                            <a id="{{id}}" class="sidebar-link" target="_blank" href="{{{subject.url}}}">
                              <img src="{{{subject.image}}}=s160-c" alt="Vertex 360" />
-                             {{subject.title}}
                            </a>
-                         </div>
-                         <div style="font-size:12px;height:22px;text-align:right;">
-                           <a target="_blank" href="{{{site.url}}}">
-                             <img style="border-radius:50%;margin-left:8px;margin-bottom:9px;float:right" src="{{{site.image}}}=s28-c" />
-                             <span style="float:initial;display:inline-block;margin-top:6px">{{subject.dateString}} | {{site.name}}</span>
-                           </a>
+                           <div style="flex:1">
+                             <a id="{{id}}" class="sidebar-link" target="_blank" href="{{{subject.url}}}">
+                               {{subject.title}}
+                             </a>
+                             <div style="font-size:12px;height:22px;text-align:right;">
+                               <a target="_blank" href="{{{site.url}}}">
+                                 <img style="border-radius:50%;margin-left:8px;margin-bottom:9px;float:right" src="{{{site.image}}}=s28-c" />
+                                 <span style="float:initial;display:inline-block;margin-top:6px">{{subject.dateString}} | {{site.name}}</span>
+                               </a>
+                             </div>
+                           </div>
                          </div>
                        </li>
                        {{/threads.recent}}
