@@ -36,7 +36,7 @@
 
     .main_nav_underline {
       width: 100%;
-      background: #f1f7f8;
+      background: #fff;
       padding: 0px !important;
     }
 
@@ -73,22 +73,20 @@
 <body id="mobile_wrap">
     <div id="panel-overlay" class="panel-overlay"></div>
 
-    <div class="panel panel-right panel-reveal">
-      <div class="user_login_info" style="background:#f1f7f8;border-left:1px solid #ddd">
-        <div style="padding:12px;background:#f9f9f9">
-          <div id="comment-header"></div>
-          <div style="background:#fff;padding:4px;margin-bottom:8px">
-            <textarea id="input-comment" style="margin-bottom:4px;margin-top:0px;width:100%;border:none;border-radius:0px;background:#fff" rows="5"></textarea>
-
-            <div id="user-container" style="text-align:right">
-              <small id="user-username" style="font-size:12px;margin-bottom:12px;vertical-align:middle;display:inline-block">username</small>
-              <img id="user-icon" style="width:24px;height:24px;margin-left:6px;border-radius:50%" src="https://lh3.googleusercontent.com/DjvUJb57y-56_aB9apRxN78m_7cJ2BVTK1D8Wum7y-x7iC-P7s-lrcxQUxjWak29bO3PnI5tareyPSepTebhDSCZ=s28-c" alt="Vertex 360" />
-            </div>
+    <div class="panel panel-left panel-reveal">
+      <div class="swiper-container-subnav multinav">
+         <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <nav class="main_nav_underline">
+              <ul>
+                <li><a href="/"><img src="/images/icons/gray/home.png" alt="" title="" /><span>Home</span></a></li>
+                <li><a href="/feed"><img src="/images/icons/gray/mobile.png" alt="" title="" /><span>Feed</span></a></li>
+                <li><a href="/templates"><img src="/images/icons/gray/features.png" alt="" title="" /><span>Templates</span></a></li>
+                <li><a href="/blog"><img src="/images/icons/gray/features.png" alt="" title="" /><span>Blog</span></a></li>
+              </ul>
+            </nav>
           </div>
-          <button id="btn-submit-comment" style="width:100%;border-radius:0px;border:none;background:#43603e;padding:9px;color:#fff;">Submit</button>
         </div>
-
-        <div id="comments-container" style="min-height:150vh"></div>
       </div>
     </div>
 
@@ -104,12 +102,8 @@
         				<a id="btn-menu-toggle" href="#" data-panel="left" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/menu.png" alt="Vertex 360" /></a>
         			</div>
               <div class="navbar__col navbar__col--title" style="text-align:center">
-        				<a href="/"><img style="width:140px;margin-top:6px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s280" /></a>
+        				<a href="/"><img style="width:140px;margin-top:6px;margin-right:36px" src="https://lh3.googleusercontent.com/pdS5a8pCwrYEp2dbvBPvBxq1WPO57VexjG0fkCNOSw6lIeUNuLK1PAyizKIWEvX6UgFBVQ9OHzbtkQMhvbS57ZRXww=s280" /></a>
         			</div>
-              <div class="navbar__col navbar__col--icon navbar__col--icon-right">
-        				<a id="btn-nav-comments" href="#" data-panel="right" class="open-panel"><img src="{{{cdn}}}/mobili/images/icons/white/message.png" alt="Vertex 360" /></a>
-        			</div>
-
             </div>
 
              <div id="pages_maincontent">
@@ -198,26 +192,7 @@
         </div>
     </div>
 
-
-    <!-- Social Icons Popup -->
-    <div class="popup popup-social">
-    <div class="content-block">
-      <h4>Social Share</h4>
-      <p>Share icons solution that allows you share and increase your social popularity.</p>
-      <ul class="social_share">
-      <li><a href="http://twitter.com/"><img src="{{{cdn}}}/mobili/images/icons/black/twitter.png" alt="Vertex 360" /><span>TWITTER</span></a></li>
-      <li><a href="http://www.facebook.com/"><img src="{{{cdn}}}/mobili/images/icons/black/facebook.png" alt="Vertex 360" /><span>FACEBOOK</span></a></li>
-      <li><a href="http://plus.google.com"><img src="{{{cdn}}}/mobili/images/icons/black/gplus.png" alt="Vertex 360" /><span>GOOGLE</span></a></li>
-      <li><a href="http://www.dribbble.com/"><img src="{{{cdn}}}/mobili/images/icons/black/dribbble.png" alt="Vertex 360" /><span>DRIBBBLE</span></a></li>
-      <li><a href="http://www.linkedin.com/"><img src="{{{cdn}}}/mobili/images/icons/black/linkedin.png" alt="Vertex 360" /><span>LINKEDIN</span></a></li>
-      <li><a href="http://www.pinterest.com/"><img src="{{{cdn}}}/mobili/images/icons/black/pinterest.png" alt="Vertex 360" /><span>PINTEREST</span></a></li>
-      </ul>
-      <div class="close_popup_button"><a href="#" class="close-popup" data-popup=".popup-social"><img src="{{{cdn}}}/mobili/images/icons/black/menu_close.png" alt="Vertex 360" /></a></div>
-    </div>
-    </div>
-
     <a id="btn-popup-modal" data-popup=".popup-signup" class="open-popup" style="display:none"></a>
-
 
     <script type="text/template" id="tpl-comment">
       <div style="border-bottom:1px solid #ededed">
