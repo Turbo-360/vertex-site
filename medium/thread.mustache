@@ -4,6 +4,13 @@
   <title>Vertex 360</title>
   <meta name="description" content="" />
   {{>head}}
+  <style>
+    @media screen and (max-width: 525px) {
+      .subject-image-container {
+        display: none;        
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -22,7 +29,7 @@
 	<div class="row justify-content-between">
 		<div class="col-md-8 mx-auto">
       <div style="display:flex">
-        <div class="mr-3">
+        <div class="mr-3 subject-image-container">
           <img style="max-width:110px" src="{{{thread.subject.image}}}=s220-c" />
         </div>
         <div style="flex:1">
