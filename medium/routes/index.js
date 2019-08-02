@@ -349,8 +349,9 @@ router.get('/feed/:slug', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		const template = (req.isMobile) ? 'mobile-feed' : 'thread'
-    res.render(template, data)
+		// const template = (req.isMobile) ? 'mobile-feed' : 'thread'
+    // res.render(template, data)
+		res.render('thread', data)
   })
   .catch(err => {
     res.json({
