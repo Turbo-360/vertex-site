@@ -48,7 +48,7 @@ module.exports = {
 		})
 	},
 
-	getById: function(id, isRaw){
+	getById: function(id, isRaw, auth){
 		return new Promise(function(resolve, reject){
 			Site.findById(id, function(err, site){
 				if (err){
@@ -66,7 +66,7 @@ module.exports = {
 					return
 				}
 
-				resolve(site.summary())
+				resolve(site.summary(auth))
 			})
 		})
 	},
