@@ -85,6 +85,15 @@ router.get('/comments', (req, res) => {
 	})
 })
 
+router.get('/store', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	res.render('widget/store', data)
+})
+
 router.get('/seed-comments', (req, res) => {
 	const yt = req.query.yt // yt video ID
 	if (yt==null){
