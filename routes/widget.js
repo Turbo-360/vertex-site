@@ -127,8 +127,13 @@ router.get('/item/:id', (req, res) => {
 	controllers.item.getById(req.params.id)
 	.then(item => {
 		data['item'] = item
+		return controllers.site.getById(item.site.id)
+	})
+	.then(site => {
+		data['site'] = site
 		data['preloaded'] = JSON.stringify({
-			item: data.item
+			item: data.item,
+			site: data.site
 		})
 
 		res.render('widget/item', data)

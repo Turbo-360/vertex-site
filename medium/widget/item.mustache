@@ -20,6 +20,7 @@
               <span>${{ item.price }}</span>
           </div>
           <p class="text-muted">{{{item.description}}}</p>
+          <div id="paypal-button-container"></div>
         </div>
       </div>
 
@@ -30,9 +31,55 @@
   {{>auth}}
   <a id="nav-register" style="display:none;background:#03a87c;color:#fff !important" class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">JOIN VERTEX</a>
 
-
   {{>scripts}}
   <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AdcGRFQgx5_0cIwqpYjZ0X-fHW2KcEX_XCFv1EESMr6R39QXM2TYGJguy7_FjiqBfLHfLAr1Hp855QbC&disable-funding=credit&disable-card=amex,discover"></script>
+  <script>
+		(function(){
+			paypal.Buttons({
+				style:{
+					layout: 'vertical',
+					color:   'white',
+			    shape:   'rect',
+			    label:   'paypal'
+				},
+		    createOrder: function(data, actions) {
+		      return actions.order.create({
+		        purchase_units: [{
+		          amount: {
+		            value: '3.00'
+		          }
+		        }]
+		      });
+		    },
+		    onApprove: function(data, actions) {
+		      return actions.order.capture().then(function(details) {
+		        console.log('Transaction completed by ' + details.payer.name.given_name);
+		        // Call your server to save the transaction
+
+						console.log('SEND TO SERVER: ' + JSON.stringify(data)) // SEND TO SERVER: {"orderID":"6MY18367X92392056","payerID":"PHB8GZAU8N74Q"}
+						$.ajax({
+							url: '/paypal/order',
+							type: 'POST',
+							data: {
+								item: '', // item id
+								orderID: data.orderID
+							},
+							success: function(resp){
+								console.log('SUCCESS - ' + JSON.stringify(resp))
+							},
+							error: function(resp){
+								alert('ERR - ' + resp)
+							}
+						})
+
+
+		      });
+		    }
+		  }).render('#paypal-button-container')
+
+		})()
+	</script>
 
 </body>
 </html>
