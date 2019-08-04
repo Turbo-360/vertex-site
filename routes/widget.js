@@ -91,7 +91,27 @@ router.get('/store', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	res.render('widget/store', data)
+ 	// Site ID
+	const site = req.query.site
+	if (site == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing site parameter'
+		})
+		return
+	}
+
+	controllers.item.get({'site.id':site})
+	.then(items => {
+		data['items'] = items
+		res.render('widget/store', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
 })
 
 router.get('/seed-comments', (req, res) => {
