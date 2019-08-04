@@ -123,6 +123,7 @@ const account = require('./routes/account')
 const admin = require('./routes/admin')
 const rest = require('./routes/rest')
 const widget = require('./routes/widget')
+const paypal = require('./routes/paypal')
 
 // set routes
 app.use('/', index)
@@ -131,6 +132,7 @@ app.use('/account', account)
 app.use('/admin', admin)
 app.use('/rest', rest)
 app.use('/widget', widget)
+app.use('/paypal', paypal)
 
 
 module.exports = app
