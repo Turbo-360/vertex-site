@@ -33,9 +33,13 @@
 
   {{>scripts}}
   <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=AdcGRFQgx5_0cIwqpYjZ0X-fHW2KcEX_XCFv1EESMr6R39QXM2TYGJguy7_FjiqBfLHfLAr1Hp855QbC&disable-funding=credit&disable-card=amex,discover"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id={{site.paypal.clientId}}&disable-funding=credit&disable-card=amex,discover"></script>
   <script>
 		(function(){
+      var preloaded = window.__PRELOADED__
+      var item = preloaded.item
+      var site = preloaded.site
+
 			paypal.Buttons({
 				style:{
 					layout: 'vertical',
@@ -62,7 +66,8 @@
 							url: '/paypal/order',
 							type: 'POST',
 							data: {
-								item: '', // item id
+                site: site.id,
+								item: item.id, // item id
 								orderID: data.orderID
 							},
 							success: function(resp){
@@ -72,8 +77,6 @@
 								alert('ERR - ' + resp)
 							}
 						})
-
-
 		      });
 		    }
 		  }).render('#paypal-button-container')
