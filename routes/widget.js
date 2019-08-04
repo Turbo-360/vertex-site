@@ -104,7 +104,34 @@ router.get('/store', (req, res) => {
 	controllers.item.get({'site.id':site})
 	.then(items => {
 		data['items'] = items
+		data['preloaded'] = JSON.stringify({
+
+		})
+
 		res.render('widget/store', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+router.get('/item/:id', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.item.getById(req.params.id)
+	.then(item => {
+		data['item'] = item
+		data['preloaded'] = JSON.stringify({
+			item: data.item
+		})
+
+		res.render('widget/item', data)
 	})
 	.catch(err => {
 		res.json({
