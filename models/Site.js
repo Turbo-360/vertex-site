@@ -38,6 +38,7 @@ const SiteSchema = new mongoose.Schema({
 	globalConfig: {type:mongoose.Schema.Types.Mixed, default:{key:'value'}}, // global configuration for pages
 	pages: {type:Array, default:['home']}, // array of static pages
 	api: {type:mongoose.Schema.Types.Mixed, default:{key:'', secret:''}}, // api key and secret
+	paypal: {type:mongoose.Schema.Types.Mixed, default:{clientId:'', clientSecret:''}},
 	authorized: {type:Array, default:[]}, // array of authorized api keys
 	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
 	services: {type:Array, default: ['datastore', 'blog', 'storage']}, // the defaults are free. after that, updgrade required.
@@ -45,6 +46,13 @@ const SiteSchema = new mongoose.Schema({
 })
 
 SiteSchema.methods.summary = function(authLevel) {
+	let paypal = this.paypal
+	if (authLevel!='admin'){
+		paypal = {
+			clientId: this.paypal.clientId
+		}
+	}
+
 	const summary = {
 		profile: this.profile,
 		format: this.format,
@@ -57,7 +65,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		canClone: this.canClone,
 		featured: this.featured,
 		// published: this.published,
-		github: this.github,
+		// github: this.github,
 		slug: this.slug,
 		name: this.name,
 		level: this.level,
@@ -76,6 +84,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		// authorized: this.authorized,
 		// services: this.services,
 		api: this.api,
+		paypal: paypal,
 		globalConfig: this.globalConfig,
 		pages: this.pages,
 		template: this.template,
