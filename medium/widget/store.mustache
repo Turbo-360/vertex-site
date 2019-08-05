@@ -18,17 +18,18 @@
       <h1 class="mb-4">Store</h1>
 
       {{#items}}
-      <div class="item-preview">
+      <div class="item-preview" style="display:flex">
         <a href="/widget/item/{{id}}">
           <img style="border:1px solid #ededed" src="{{{image}}}=s120-c" />
         </a>
-        <a style="font-size:18px;font-weight:600" href="/widget/item/{{id}}">
-          {{ name }}
-          <span style="margin:6px">&middot;</span>
-          <span>${{ price }}</span>
-        </a>
-        <p>{{description}}</p>
-
+        <div>
+          <a style="font-size:18px;font-weight:600" href="/widget/item/{{id}}">
+            {{ name }}
+            <span style="margin:6px">&middot;</span>
+            <span>${{ price }}</span>
+          </a>
+          <p>{{description}}</p>
+        </div>
       </div>
 
       {{/items}}
