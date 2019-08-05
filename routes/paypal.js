@@ -16,6 +16,7 @@ router.post('/order', (req, res) => {
   const orderID = req.body.orderID
 
   let selectedItem = null
+  let currentSite = null
   controllers.site.getById(siteID, null, 'admin')
   .then(site => {
     if (site.paypal.clientId.length == 0){
@@ -28,14 +29,15 @@ router.post('/order', (req, res) => {
       return
     }
 
+    currentSite = site
     return controllers.item.getById(itemID)
   })
   .then(item => {
     selectedItem = item
     let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
     const credentials = {
-      clientId: site.paypal.clientId,
-      clientSecret: site.paypal.clientSecret
+      clientId: currentSite.paypal.clientId,
+      clientSecret: currentSite.paypal.clientSecret
     }
 
     return payPalClient.client(credentials).execute(request)
