@@ -16,10 +16,14 @@
       <div class="mt-2 d-flex justify-content-between post-preview">
         <div class="pr-4">
           <div class="card-text text-muted small">
-            <img src="{{{image}}}=s120-c" /><br />
-            <a href="/widget/item/{{id}}">{{ name }}</a>
-            <span style="margin:6px">&middot;</span>
-            <span>${{ price }}</span>
+            <a href="/widget/item/{{id}}">
+              <img src="{{{image}}}=s120-c" />
+            </a>
+            <a style="font-size:18px;font-weight:600" href="/widget/item/{{id}}">
+              {{ name }}
+              <span style="margin:6px">&middot;</span>
+              <span>${{ price }}</span>
+            </a>
           </div>
         </div>
       </div>
