@@ -49,7 +49,7 @@
         text-decoration: none;
       }
 
-      .thread-preview-container img {
+      .site-icon {
         border-radius: 50%;
         margin-left: 6px;
         width: 22px;
@@ -69,7 +69,6 @@
                       {{#threads.recent}}
                       <div class="bg-white mb-4 thread-preview">
                         <div class="thread-preview-container">
-
                           <a target="_blank" href="{{subject.url}}">
                             <img src="{{subject.image}}=s240-c" />
                           </a>
@@ -83,7 +82,7 @@
                             <a href="/feed/{{subject.slug}}"><small>Comments</small></a>
                             <span>&middot;</span>
                             <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
-                            <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
+                            <a target="_blank" href="{{{site.url}}}"><img class="site-icon" src="{{{site.image}}}=s44-c" /></a>
                           </div>
                         </div>
                         <div style="width:24px;background:#e8f2ff">
