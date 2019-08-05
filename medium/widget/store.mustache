@@ -5,8 +5,16 @@
   <meta name="description" content="" />
   {{>head}}
   <style>
+    .item-preview {
+      display: flex;
+    }
+
     .item-preview a {
       text-decoration: none;
+    }
+
+    .item-preview img {
+      border: 1px solid #ededed;
     }
   </style>
 </head>
@@ -18,17 +26,17 @@
       <h1 class="mb-4">Store</h1>
 
       {{#items}}
-      <div class="item-preview" style="display:flex">
+      <div class="item-preview mb-3">
         <a href="/widget/item/{{id}}">
-          <img style="border:1px solid #ededed" src="{{{image}}}=s120-c" />
+          <img src="{{{image}}}=s120-c" />
         </a>
         <div class="ml-2">
-          <a style="font-size:18px;font-weight:600" href="/widget/item/{{id}}">
+          <a href="/widget/item/{{id}}">
             {{ name }}
             <span style="margin:6px">&middot;</span>
             <span>${{ price }}</span>
           </a>
-          <p><a style="text-decoration:none;color:#212529;" href="#">{{description}}</a></p>
+          <p><a style="color:#212529;" href="#">{{description}}</a></p>
         </div>
       </div>
 
