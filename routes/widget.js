@@ -85,6 +85,41 @@ router.get('/comments', (req, res) => {
 	})
 })
 
+
+router.get('/feed', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.thread.get({limit:50})
+  .then(threads => {
+		data['threads'] = {recent:threads}
+		data['preloaded'] = JSON.stringify({
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			threads: data.threads,
+			user: sanitizedUser(req.user)
+		})
+
+		// const template = (req.isMobile) ? 'mobile-feed' : 'feed-2'
+		// data['meta'] = {
+		// 	title: 'Vertex 360',
+		// 	url: 'https://www.vertex360.co/',
+		// 	image: 'https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ',
+		// 	description: 'Stay up to date with the latest entertainment, politics, sports news and more.'
+		// }
+
+    res.render('widget/feed', data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+
 router.get('/store', (req, res) => {
 	const data = {
 		cdn: CDN,

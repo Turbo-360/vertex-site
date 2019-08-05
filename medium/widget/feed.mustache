@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vertex 360 | The Easiest Website Builder. Period.</title>
+    <meta name="description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
+
+    <meta property="og:title" content="Vertex 360 | The Easiest Website Builder. Period." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.vertex360.co" />
+    <meta property="og:image" content="https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ=s260-c" />
+    <meta property="og:image:width" content="260px" />
+    <meta property="og:image:height" content="260px" />
+    <meta property="og:description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
+
+    {{>head}}
+    <style>
+      .thread-preview {
+        border: 1px solid #ededed;
+        border-radius: 6px;
+        display: flex
+      }
+
+      .thread-preview-img {
+        padding: 0px;
+      }
+
+      .thread-preview-img img {
+        max-width: 220px;
+        max-height: 220px;
+      }
+
+      .thread-preview-container {
+        flex: 1;
+        padding: 16px;
+      }
+
+      .thread-preview-container small {
+        color: #b1b0b0;
+        font-size: 12px;
+      }
+
+      .thread-preview-container span {
+        margin: 6px;
+      }
+
+      .thread-preview-container a {
+        text-decoration: none;
+      }
+
+      .thread-preview-container img {
+        border-radius: 50%;
+        margin-left: 6px;
+        width: 22px;
+      }
+    </style>
+</head>
+    <body>
+
+      <div id="content">
+          <!-- features section -->
+          <section class="py-4" id="features" style="background:#f9f9f9">
+              <div class="container mt-0">
+                  <div class="row">
+
+                    <div id="threads-container" class="col-md-12">
+
+                      {{#threads.recent}}
+                      <div class="bg-white mb-4 thread-preview">
+                        <div class="thread-preview-img">
+                          <a target="_blank" href="{{subject.url}}">
+                            <img src="{{subject.image}}=s440-c" />
+                          </a>
+                        </div>
+                        <div class="thread-preview-container">
+                          <div class="mb-2" style="text-align:right">
+                            <small>{{subject.dateString}}</small>
+                            <span>&middot;</span>
+                            <a href="/feed/{{subject.slug}}"><small>Comments</small></a>
+                            <span>&middot;</span>
+                            <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
+                            <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
+                          </div>
+                          <a style="color:#333" target="_blank" href="{{{subject.url}}}">
+                            <h4>{{subject.title}}</h4>
+                          </a>
+                          <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
+                        </div>
+                        <div style="width:24px;background:#e8f2ff">
+                        </div>
+                      </div>
+                      {{/threads.recent}}
+                    </div>
+
+                  </div>
+              </div>
+          </section>
+      </div>
+
+      {{>auth}}
+
+      <script type="text/template" id="tpl-thread-preview">
+        <div class="bg-white mb-4 thread-preview">
+          <div class="thread-preview-img">
+            <a target="_blank" href="<% subject.url %>">
+              <img src="<%{subject.image}%>=s440-c" />
+            </a>
+          </div>
+          <div class="thread-preview-container">
+            <div class="mb-2" style="text-align:right">
+              <small><% subject.dateString %></small>
+              <span>&middot;</span>
+              <a href="/feed/<% subject.slug %>"><small>Comments</small></a>
+              <span>&middot;</span>
+              <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
+              <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
+            </div>
+            <a style="color:#333" target="_blank" href="<%{subject.url}%>">
+              <h4><% subject.title %></h4>
+            </a>
+            <p><a style="color:#7d7d7d" target="_blank" href="<%{subject.url}%>"><% subject.preview %></a></p>
+          </div>
+          <div style="width:24px;background:#e8f2ff">
+          </div>
+        </div>
+      </script>
+
+      <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/popper.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/feather.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/slick.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/scripts.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/referrer.js"></script>
+
+    </body>
+</html>
