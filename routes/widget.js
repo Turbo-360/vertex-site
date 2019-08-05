@@ -127,9 +127,20 @@ router.get('/item/:id', (req, res) => {
 	controllers.item.getById(req.params.id)
 	.then(item => {
 		data['item'] = item
-		return controllers.site.getById(item.site.id)
+		return controllers.site.getById(item.site.id, null, 'admin')
 	})
 	.then(site => {
+		if (site.paypal.clientId.length == 0){
+			throw new Error('Missing PayPal Credentials')
+			return
+		}
+
+		if (site.paypal.clientSecret.length == 0){
+			throw new Error('Missing PayPal Credentials')
+			return
+		}
+
+		site['paypal'] = {clientId:site.paypal.clientId}
 		data['site'] = site
 		data['preloaded'] = JSON.stringify({
 			item: data.item,
