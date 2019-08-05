@@ -7,6 +7,7 @@ const express = require('express')
 const router = express.Router()
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk')
 const payPalClient = require('../utils/PayPalClient')
+const controllers = require('../controllers')
 
 // https://developer.paypal.com/docs/checkout/integrate/#6-verify-the-transaction
 router.post('/order', (req, res) => {
