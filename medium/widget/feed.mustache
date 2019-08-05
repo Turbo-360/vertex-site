@@ -56,7 +56,7 @@
       }
     </style>
 </head>
-    <body>
+    <body style="padding-top:0px">
 
       <div id="content">
           <!-- features section -->
@@ -68,13 +68,16 @@
 
                       {{#threads.recent}}
                       <div class="bg-white mb-4 thread-preview">
-                        <div class="thread-preview-img">
-                          <a target="_blank" href="{{subject.url}}">
-                            <img src="{{subject.image}}=s440-c" />
-                          </a>
-                        </div>
                         <div class="thread-preview-container">
-                          <div class="mb-2" style="text-align:right">
+
+                          <a target="_blank" href="{{subject.url}}">
+                            <img src="{{subject.image}}=s240-c" />
+                          </a>
+                          <a style="color:#333" target="_blank" href="{{{subject.url}}}">
+                            <h4>{{subject.title}}</h4>
+                          </a>
+                          <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
+                          <div class="mb-0 mb-2" style="text-align:right">
                             <small>{{subject.dateString}}</small>
                             <span>&middot;</span>
                             <a href="/feed/{{subject.slug}}"><small>Comments</small></a>
@@ -82,10 +85,6 @@
                             <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
                             <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
                           </div>
-                          <a style="color:#333" target="_blank" href="{{{subject.url}}}">
-                            <h4>{{subject.title}}</h4>
-                          </a>
-                          <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
                         </div>
                         <div style="width:24px;background:#e8f2ff">
                         </div>
