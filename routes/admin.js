@@ -193,7 +193,8 @@ router.get('/captions', (req, res) => {
 	.catch(err => {
 		res.json({
 			confirmation: 'fail',
-			message: err.message
+			message: root // send back which one failed
+			// message: err.message+' - '+root // send back which one failed
 		})
 	})
 })
