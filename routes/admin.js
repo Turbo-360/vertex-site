@@ -171,8 +171,32 @@ router.get('/captions', (req, res) => {
 		return
 	}
 
+	// if included, do not use specified option. comma separated string.
+	var exclude = req.query.exclude
 	const roots = ['yt-api-1-3idc80', 'yt-api-2-asovo8', 'yt-api-3-gtktdh']
-	const root = roots[Math.floor(Math.random()*roots.length)]
+	let root = null
+
+	if (exclude == null){
+		root = roots[Math.floor(Math.random()*roots.length)]
+	}
+	else {
+		const ignore = exclude.split(',')
+		const options = roots.map(option => {
+			if (ignore.indexOf(option) != -1)
+				return option
+		})
+
+		if (options.length == 0){
+			res.json({
+				confirmation: 'fail',
+				message: 'No more YT API options'
+			})
+			return
+		}
+
+		root = options[Math.floor(Math.random()*options.length)]
+	}
+
 
 	// const endpoint = 'https://yt-api-puw95x.vertex360.co/api/captions'
 	const endpoint = 'https://'+root+'.vertex360.co/api/captions'
