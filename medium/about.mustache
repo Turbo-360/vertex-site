@@ -521,9 +521,8 @@
             var nameParts = profile.getName().split(' ')
             var visitor = {
               auth: 'register',
-              email: profile.getEmail().toLowerCase(),
-              firstName: nameParts[0],
-              lastName: (nameParts.length==1) ? '' : nameParts[nameParts.length-1]
+              fullName: profile.getName(),
+              email: profile.getEmail().toLowerCase()
             }
 
             window.vertexLib.postRequest('/account/googleauth', visitor, function(err, response){
