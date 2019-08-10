@@ -513,9 +513,7 @@
 
             var profile = googleUser.getBasicProfile();
             console.log('Logged in as: ' + profile.getName());
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
             var nameParts = profile.getName().split(' ')
@@ -525,14 +523,14 @@
               email: profile.getEmail().toLowerCase()
             }
 
-            window.vertexLib.postRequest('/account/googleauth', visitor, function(err, response){
-              if (err){
-                alert(err.message)
-                return
-              }
-
-              window.location.href = '/templates'
-            })
+            // window.vertexLib.postRequest('/account/googleauth', visitor, function(err, response){
+            //   if (err){
+            //     alert(err.message)
+            //     return
+            //   }
+            //
+            //   window.location.href = '/templates'
+            // })
           }
 
           function onLoginSuccess(googleUser){
@@ -542,9 +540,7 @@
 
             var profile = googleUser.getBasicProfile();
             console.log('Login Successful: ' + profile.getName());
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
           }
 
@@ -571,7 +567,6 @@
               'onsuccess': onLoginSuccess,
               'onfailure': onFailure
             });
-
           }
         </script>
 
