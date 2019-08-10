@@ -504,5 +504,78 @@
           })()
         </script>
 
+        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+        <script>
+          function onRegisterSuccess(googleUser){
+            var data = window.__PRELOADED__
+            if (data.user != null) // already signed in
+              return
+
+            var profile = googleUser.getBasicProfile();
+            console.log('Logged in as: ' + profile.getName());
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+            var nameParts = profile.getName().split(' ')
+            var visitor = {
+              auth: 'register',
+              email: profile.getEmail().toLowerCase(),
+              firstName: nameParts[0],
+              lastName: (nameParts.length==1) ? '' : nameParts[nameParts.length-1]
+            }
+
+            window.vertexLib.postRequest('/account/googleauth', visitor, function(err, response){
+              if (err){
+                alert(err.message)
+                return
+              }
+
+              window.location.href = '/templates'
+            })
+          }
+
+          function onLoginSuccess(googleUser){
+            var data = window.__PRELOADED__
+            if (data.user != null) // already signed in
+              return
+
+            var profile = googleUser.getBasicProfile();
+            console.log('Login Successful: ' + profile.getName());
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+          }
+
+          function onFailure(error) {
+            console.log(error)
+          }
+
+          function renderButton(){
+            console.log('renderButton')
+            gapi.signin2.render('google-register', {
+              'scope': 'profile email',
+              'width': 265,
+              'height': 50,
+              'longtitle': true,
+              'onsuccess': onRegisterSuccess,
+              'onfailure': onFailure
+            });
+
+            gapi.signin2.render('google-login', {
+              'scope': 'profile email',
+              'width': 265,
+              'height': 50,
+              'longtitle': true,
+              'onsuccess': onLoginSuccess,
+              'onfailure': onFailure
+            });
+
+          }
+        </script>
+
+
     </body>
 </html>
