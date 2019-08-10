@@ -25,6 +25,35 @@ const sanitizedUser = (user) => {
 	return currentUser
 }
 
+// router.get('/apps', (req, res) => {
+// 	const apps = [
+//     {name:'Comments', description:'View comments or leave a comment on this site.', image:'https://lh3.googleusercontent.com/LguTYWcYVsAQIIIiblHARcuoRYsSKjh14YuJHYSXWsEXASdeJUqtOjU4L9YNArhrcNDKJYc9wWKU9OySrY9cvxhdyg'},
+//     {name:'Feed', description:'View related news, videos, blog posts from other sites similar to this one.', image:'https://lh3.googleusercontent.com/VRci17sHyXHKc-XswotXk6zs7DXEF8zfuZbA_Tm189C-2c53I_sIqYDhWru_US1HfojEhczOTVauVmZRT5-63Mrn'},
+//     {name:'Store', description:'Purchase items sold on this site using PayPal or credit card.', image:'https://lh3.googleusercontent.com/YTbGgxpsFQDjTj5JQ3zF2lBFYIlb0bSkO4Kev9Y6zcr_7XPU034Qi2bCC-sgTtHWbojztJ6ddD9t7Gi_SN0O4enAxjs'}
+//   ]
+//
+// 	const profile = {
+// 		id: '0',
+// 		firstName: 'Vertex',
+// 		lastName: '360',
+// 		username: 'vertex360',
+// 		image: 'https://lh3.googleusercontent.com/9BBnktlJDxKkD49ollfnTr5OQ6KgDMx-fCsE_8vDcGvBVVYxW8yZdCgv61SYTz40jdBhQ561usRmfRsAUvmpsoQlBA',
+// 		slug: 'vertex360'
+// 	}
+//
+// 	apps.forEach(app => {
+// 		app['profile'] = profile
+// 		controllers.app.post(app)
+// 		.then(data => {})
+// 		.catch(err => {})
+// 	})
+//
+// 	res.json({
+// 		confirmation:'success',
+// 		data:apps
+// 	})
+//
+// })
 
 router.get('/comments', (req, res) => {
 	const thread = req.query.thread
@@ -84,36 +113,6 @@ router.get('/comments', (req, res) => {
 			message: err.message
 		})
 	})
-})
-
-router.get('/apps', (req, res) => {
-	const apps = [
-    {name:'Comments', description:'View comments or leave a comment on this site.', image:'https://lh3.googleusercontent.com/LguTYWcYVsAQIIIiblHARcuoRYsSKjh14YuJHYSXWsEXASdeJUqtOjU4L9YNArhrcNDKJYc9wWKU9OySrY9cvxhdyg'},
-    {name:'Feed', description:'View related news, videos, blog posts from other sites similar to this one.', image:'https://lh3.googleusercontent.com/VRci17sHyXHKc-XswotXk6zs7DXEF8zfuZbA_Tm189C-2c53I_sIqYDhWru_US1HfojEhczOTVauVmZRT5-63Mrn'},
-    {name:'Store', description:'Purchase items sold on this site using PayPal or credit card.', image:'https://lh3.googleusercontent.com/YTbGgxpsFQDjTj5JQ3zF2lBFYIlb0bSkO4Kev9Y6zcr_7XPU034Qi2bCC-sgTtHWbojztJ6ddD9t7Gi_SN0O4enAxjs'}
-  ]
-
-	const profile = {
-		id: '0',
-		firstName: 'Vertex',
-		lastName: '360',
-		username: 'vertex360',
-		image: 'https://lh3.googleusercontent.com/9BBnktlJDxKkD49ollfnTr5OQ6KgDMx-fCsE_8vDcGvBVVYxW8yZdCgv61SYTz40jdBhQ561usRmfRsAUvmpsoQlBA',
-		slug: 'vertex360'
-	}
-
-	apps.forEach(app => {
-		app['profile'] = profile
-		controllers.app.post(app)
-		.then(data => {})
-		.catch(err => {})
-	})
-
-	res.json({
-		confirmation:'success',
-		data:apps
-	})
-
 })
 
 router.get('/feed', (req, res) => {
