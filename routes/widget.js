@@ -86,6 +86,7 @@ router.get('/comments', (req, res) => {
 
 	const data = {
 		cdn: CDN,
+		user: sanitizedUser(req.user),
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
@@ -96,10 +97,9 @@ router.get('/comments', (req, res) => {
 			return
 		}
 
-		// const currentUser = sanitizedUser(req.user)
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
-			user: sanitizedUser(req.user),
+			user: data.user,
 			site: sites[0],
 			thread: thread,
 			schema: schema
