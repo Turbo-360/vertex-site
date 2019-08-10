@@ -7,6 +7,7 @@ var App = new mongoose.Schema({
   description: {type:String, trim:true, default:''},
 	preview: {type:String, trim:true, default: ''},
 	tags: {type:Array, default:[]},
+	users: {type:Array, default:[]}, // list of sites using the app
 	slug: {type:String, lowercase:true, trim:true, default:''},
 	link: {type:String, trim:true, default:''}, // link to 3rd party landing page, if any
 	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
