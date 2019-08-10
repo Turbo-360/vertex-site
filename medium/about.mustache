@@ -556,14 +556,14 @@
               email: profile.getEmail().toLowerCase()
             }
 
-            // window.vertexLib.postRequest('/account/googleauth', googleLoginProfile, function(err, response){
-            //   if (err){
-            //     alert(err.message)
-            //     return
-            //   }
-            //
-            //   window.location.href = '/me'
-            // })
+            window.vertexLib.postRequest('/account/googleauth', googleLoginProfile, function(err, response){
+              if (err){
+                alert(err.message)
+                return
+              }
+
+              window.location.href = '/me'
+            })
           }
 
           function onFailure(error) {

@@ -1364,7 +1364,38 @@ router.post('/:action', (req, res, next) => {
 		}
 
 		if (auth == 'login'){
-			
+			let params = req.body
+			controllers.profile.get({email:params.email.toLowerCase(), authsource:'google'}, true)
+			.then(profiles => {
+				if (profiles.length == 0){
+					throw new Error('Profile Not Found')
+					return
+				}
+
+				const profile = profiles[0]
+				// if (profile.password != params.password){
+				// 	throw new Error('Password Incorrect')
+				// 	return
+				// }
+
+				// set session here:
+				req.vertex_session.user = profile.id
+				res.json({
+					confirmation: 'success',
+					user: profile
+				})
+
+				return
+			})
+			.catch(err => {
+				res.json({
+					confirmation: 'fail',
+					message: err.message
+				})
+
+				return
+			})
+
 			return
 		}
 
