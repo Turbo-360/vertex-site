@@ -8,6 +8,7 @@ const TicketController = require('./TicketController')
 const ThreadController = require('./ThreadController')
 const SubscriberController = require('./SubscriberController')
 const ItemController = require('./ItemController')
+const AppController = require('./AppController')
 
 module.exports = {
 
@@ -20,6 +21,7 @@ module.exports = {
 	ticket: TicketController,
 	thread: ThreadController,
 	subscriber: SubscriberController,
-	item: ItemController
+	item: ItemController,
+	app: AppController
 
 }
