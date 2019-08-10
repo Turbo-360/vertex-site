@@ -39,6 +39,7 @@ router.get('/', (req, res) => {
 	}
 
 	data['preloaded'] = JSON.stringify({
+		timestamp: req.timestamp,
 		user: sanitizedUser(req.user),
 		query: req.query
 	})
@@ -56,6 +57,7 @@ router.get('/feed', (req, res) => {
   .then(threads => {
 		data['threads'] = {recent:threads}
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
 			threads: data.threads,
@@ -151,6 +153,7 @@ router.get('/templates', (req, res) => {
 
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
@@ -213,6 +216,7 @@ router.get('/comments', (req, res) => {
 
 		const currentUser = sanitizedUser(req.user)
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			user: currentUser,
 			site: sites[0],
 			thread: thread,
@@ -328,6 +332,7 @@ router.get('/feed/:slug', (req, res) => {
 	.then(comments => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
 			thread: data.thread,
@@ -360,6 +365,7 @@ router.get('/post/:slug', (req, res) => {
 
     data['post'] = posts[0]
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			post: data.post,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -412,6 +418,7 @@ router.get('/site/:slug', (req, res) => {
 		})
 
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			// user: sanitizedUser(req.user) || {},
 			user: sanitizedUser(req.user),
@@ -454,6 +461,7 @@ router.get('/template/:slug', (req, res) => {
 	.then(cloneSource => {
 		data.template['cloneSource'] = cloneSource
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			template: data.template,
 			user: sanitizedUser(req.user)
@@ -489,6 +497,7 @@ router.get('/comments/:slug', (req, res) => {
 		data['replies'] = replies
 		data['profile'] = req.user
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
 			user: sanitizedUser(req.user),
