@@ -11,6 +11,7 @@ const ProfileSchema = new mongoose.Schema({
 	firstName: {type:String, trim:true, lowercase:true, default:''},
 	lastName: {type:String, trim:true, lowercase:true, default:''},
 	slug: {type:String, trim:true, lowercase:true, default:''},
+	authsource: {type:String, trim:true, lowercase:true, default:'standard'}, // standard or google
 	referrer: {type:String, default:''},
 	featured: {type:String, default:'no'},
 	confirmed: {type:String, default:'no'},
@@ -55,6 +56,7 @@ ProfileSchema.methods.summary = function(key) {
 		firstName: this.firstName,
 		lastName: this.lastName,
 		slug: this.slug,
+		authsource: this.authsource,
 		referrer: this.referrer,
 		featured: this.featured,
 		confirmed: this.confirmed,
