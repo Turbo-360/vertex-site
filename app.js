@@ -67,6 +67,8 @@ app.use(sessions({
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
+  req.timestamp = Date.now()
+
   // check if mobile:
   if (req.headers['user-agent']){
     const userAgent = req.headers['user-agent'].toLowerCase()
