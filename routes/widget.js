@@ -96,10 +96,10 @@ router.get('/comments', (req, res) => {
 			return
 		}
 
-		const currentUser = sanitizedUser(req.user)
+		// const currentUser = sanitizedUser(req.user)
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
-			user: currentUser,
+			user: sanitizedUser(req.user),
 			site: sites[0],
 			thread: thread,
 			schema: schema
