@@ -527,7 +527,7 @@
               email: profile.getEmail().toLowerCase()
             }
 
-            window.vertexLib.postRequest('/account/googleauth', visitor, function(err, response){
+            window.vertexLib.postRequest('/account/googleauth', googleRegisterProfile, function(err, response){
               if (err){
                 alert(err.message)
                 return
@@ -556,7 +556,7 @@
               email: profile.getEmail().toLowerCase()
             }
 
-            // window.vertexLib.postRequest('/account/googleauth', visitor, function(err, response){
+            // window.vertexLib.postRequest('/account/googleauth', googleLoginProfile, function(err, response){
             //   if (err){
             //     alert(err.message)
             //     return
