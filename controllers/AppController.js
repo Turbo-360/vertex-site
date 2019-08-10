@@ -1,6 +1,29 @@
 var App = require('../models/App')
 var utils = require('../utils')
 
+
+const slugVersion = (text, numRandomChars) => {
+	let slug = text.toString().toLowerCase()
+			.replace(/\s+/g, '-')           // Replace spaces with -
+			.replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+			.replace(/\-\-+/g, '-')         // Replace multiple - with single -
+			.replace(/^-+/, '')             // Trim - from start of text
+			.replace(/-+$/, '');            // Trim - from end of text
+
+	if (numRandomChars == null)
+		return slug.toLowerCase()
+
+	if (numRandomChars <= 0)
+		return slug.toLowerCase()
+
+	const possible = 'abcdefghijklmnopqrstuvwxyz0123456789'
+	let randomString = ''
+	for (var i=0; i <numRandomChars; i++)
+		randomString += possible.charAt(Math.floor(Math.random() * possible.length))
+
+	return slug.toLowerCase()+'-'+randomString
+}
+
 module.exports = {
 	get: function(params){
 		return new Promise(function(resolve, reject){
@@ -53,6 +76,9 @@ module.exports = {
 
 	post: function(params){
 		return new Promise(function(resolve, reject){
+			if (params.name != null)
+				params['slug'] = slugVersion(params.name, 6)
+
 			App.create(params, function(err, app){
 				if (err){
 					reject(err)
