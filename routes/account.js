@@ -7,6 +7,7 @@ const Base64 = require('js-base64').Base64
 const fs = require('fs')
 const deepmerge = require('deepmerge')
 const sessions = require('client-sessions')
+var uuidv4 = require('uuid/v4') // https://www.npmjs.com/package/uuid
 
 const VERTEX_BUCKET = 'turbo360-vertex'
 
@@ -377,13 +378,12 @@ router.post('/:action', (req, res, next) => {
 			user = data
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 User', JSON.stringify(params))
 		})
+		// .then(data => {
+		// 	return utils.fetchFile('emailtemplates/welcome/welcome.html')
+		// })
 		.then(data => {
-			return utils.fetchFile('emailtemplates/welcome/welcome.html')
-		})
-		.then(data => {
-			const firstName = params.firstName || ''
-			const html = data.replace('{{firstName}}', utils.TextUtils.capitalize(firstName))
-			// utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [params.email], 'Welcome to Turbo 360!', html)
+			// const firstName = params.firstName || ''
+			// const html = data.replace('{{firstName}}', utils.TextUtils.capitalize(firstName))
 
 			// set session here:
 			const id = user._id || user.id
@@ -1306,6 +1306,67 @@ router.post('/:action', (req, res, next) => {
 			confirmation: 'success',
 			data: req.body.referrer
 		})
+
+		return
+	}
+
+	if (action == 'googleauth'){
+		const auth = req.body.auth // register or login
+		if (auth == 'register'){
+			let params = req.body
+
+			let user = null
+			const pw = uuidv4()
+			params['password'] = pw.split('-')[0]
+			params['authsource'] = 'google'
+
+			controllers.profile.post(params)
+			.then(data => {
+				user = data
+				return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 User', JSON.stringify(params))
+			})
+			.then(data => {
+				// const firstName = params.firstName || ''
+				// const html = data.replace('{{firstName}}', utils.TextUtils.capitalize(firstName))
+
+				// set session here:
+				const id = user._id || user.id
+				req.vertex_session.user = id
+				res.json({
+					confirmation: 'success',
+					redirect: params.redirect || null,
+					user: {
+						id: id,
+						username: user.username,
+						email: user.email,
+						image: user.image,
+						slug: user.slug,
+						notifications: user.notifications
+					}
+				})
+
+				// const slackInvite = 'http://api.turbo360.co/vectors/slack-invite-jofodi/slackInvite'
+				// utils.HTTP.get(slackInvite, {email:user.email, slack:'turbo-360', token:process.env.SLACK_ACCESS_TOKEN, key:'b6e61258-1151-4dd0-95d3-db2bec32d808'})
+				// addToMailchimp({
+				// 	email: user.email,
+				// 	name: user.firstName+' '+user.lastName
+				// })
+				return
+			})
+			.catch(err => {
+				res.json({
+					confirmation: 'fail',
+					message: err.message
+				})
+			})
+
+			return
+		}
+
+		if (auth == 'login'){
+			
+			return
+		}
 
 		return
 	}
