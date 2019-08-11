@@ -16,7 +16,7 @@
 
   var authorizeUser = function(redirect){
     if (redirect == 'reload'){
-      window.location.relaod()
+      window.location.reload()
       return
     }
 
