@@ -27,13 +27,12 @@ function onRegisterSuccess(googleUser){
       return
     }
 
-    // window.location.href = '/me'
     if (onRegisterRedirect == 'reload'){
       window.location.reload()
       return
     }
 
-    window.location.href = onLoginRedirect
+    window.location.href = onRegisterRedirect
   })
 }
 
