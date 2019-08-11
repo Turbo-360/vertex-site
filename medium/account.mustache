@@ -3,6 +3,8 @@
   <title>Vertex 360 | Powerful Website Builder. Easy, Fast, Professional.</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="google-signin-client_id" content="684486304077-s4rcr24i6209vpk0g4380saiqobalcma.apps.googleusercontent.com">
+
   <link rel="stylesheet" href="{{{cdn}}}/dist/css/style.min.css">
   <link rel="icon" href="https://lh3.googleusercontent.com/5SVrpLI9utkuVJbQb48cpD3tar59mgWaWSAM73Ghj8dxFJMD2UOzkhO5ptWDd2uV2eqgSvDCSa-Ad8aOrygXx6nv=s32-c" type="image/png" />
 
@@ -91,7 +93,7 @@
 			<ul data-submenu-title="Account">
 				<li id="list-item-profile"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-user-following"></i> Profile</a></li>
 				<li id="list-item-sites"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-docs"></i> Sites</a></li>
-        <li><a id="link-logout" style="margin-left:4px" href="/account/logout"><i class="sl sl-icon-close"></i> Log Out</a></li>
+        <li><a id="link-logout" style="margin-left:4px" href="#"><i class="sl sl-icon-close"></i> Log Out</a></li>
         <li><a style="width:86%;border-radius:4px;margin-left:4px;background:#357d3e" class="button" href="/templates"><i class="sl sl-icon-plus"></i> Create Site</a></li>
 			</ul>
 		</div>
@@ -268,12 +270,29 @@
     <a href="#" id="btn-update-password" class="button fw margin-top-10">Reset Password</a>
   </div>
 </div>
-
+<div style="display:none" id="google-register"></div>
 </div>
 
+  <script>
+    function renderButton(){
+      // console.log('renderButton')
+      gapi.signin2.render('google-register', {
+        'scope': 'profile email',
+        'width': 265,
+        'height': 50,
+        'longtitle': true,
+        'onsuccess': function(){},
+        'onfailure': function(){}
+      });
+    }
+  </script>
+
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
   <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
   <script type="text/javascript" src="{{{cdn}}}/dist/js/account.min.js"></script>
+
+
 </body>
 </html>
