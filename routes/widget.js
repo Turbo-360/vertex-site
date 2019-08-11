@@ -91,6 +91,8 @@ router.get('/comments', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
+	let site = null
+
 	controllers.site.get({slug:site})
 	.then(sites => {
 		if (sites.length == 0){
@@ -98,10 +100,15 @@ router.get('/comments', (req, res) => {
 			return
 		}
 
+		site = sites[0]
+		return controllers.comment.get({thread:thread})
+	})
+	.then(comments => {
+		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			user: data.user,
-			site: sites[0],
+			site: site,
 			thread: thread,
 			schema: schema
 		})
