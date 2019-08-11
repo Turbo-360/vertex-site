@@ -68,11 +68,9 @@
       var data = window.__PRELOADED__
       var user = data.user
       var site = data.site // full site data
-      var threadId = data.thread // ID number
       var schema = data.schema // post, video, episode, etc
-
-      var thread = null // full thread data
-      var comments = []
+      var comments = data.comments || []
+      // var thread = null // full thread data
 
       var reloadUI = function(){
         var tpl = $('#tpl-comment').html()
@@ -83,17 +81,6 @@
 
         $('#comments-container').html(commentsHtml)
       }
-
-      // var fetchComments = function(){
-      //   console.log('FETCH COMMENTS: ' + JSON.stringify(thread))
-      //   window.vertexLib.getRequest('/api/comment?thread='+threadId, null, function(err, resp){
-      //     if (err)
-      //       return
-      //
-      //     comments = resp.results
-      //     reloadUI()
-      //   })
-      // }
 
       $('#btn-submit-comment').click(function(event){
         if (event)
@@ -110,6 +97,10 @@
           alert('Please enter a comment.')
           return
         }
+
+        var threadId = data.thread // ID number
+        if (threadId == null)
+          return
 
         var comment = {
           text: commentText,
@@ -135,23 +126,6 @@
           reloadUI()
         })
       })
-
-      // check if thread entity exists:
-      // window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
-      //   if (err){
-      //     return
-      //   }
-      //
-      //   if (resp.results.length == 0){
-      //     console.log('THREAD NOT FOUND')
-      //     // alert('Error - Inavlid URL.')
-      //     return
-      //   }
-      //
-      //   thread = resp.results[0]
-      //   fetchComments()
-      // })
-
     })()
   </script>
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
