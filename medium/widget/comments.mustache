@@ -99,21 +99,21 @@
       }
 
       // check if thread entity exists:
-      window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
-        if (err){
-          return
-        }
-
-        if (resp.results.length == 0){
-          // console.log('THREAD NOT FOUND')
-          // alert('Error - Inavlid URL.')
-          return
-        }
-
-        thread = resp.results[0]
-        fetchComments()
-        return
-      })
+      // window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
+      //   if (err){
+      //     return
+      //   }
+      //
+      //   if (resp.results.length == 0){
+      //     // console.log('THREAD NOT FOUND')
+      //     // alert('Error - Inavlid URL.')
+      //     return
+      //   }
+      //
+      //   thread = resp.results[0]
+      //   fetchComments()
+      //   return
+      // })
 
       $('#btn-submit-comment').click(function(event){
         if (event)
@@ -155,6 +155,24 @@
           reloadUI()
         })
       })
+
+      // check if thread entity exists:
+      window.vertexLib.getRequest('/api/thread?subject.id='+threadId, null, function(err, resp){
+        if (err){
+          return
+        }
+
+        if (resp.results.length == 0){
+          console.log('THREAD NOT FOUND')
+          // alert('Error - Inavlid URL.')
+          return
+        }
+
+        thread = resp.results[0]
+        fetchComments()
+        return
+      })
+
     })()
   </script>
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
