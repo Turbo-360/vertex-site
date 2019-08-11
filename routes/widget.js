@@ -106,9 +106,10 @@ router.get('/comments', (req, res) => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
+			comments: data.comments,
 			user: data.user,
 			site: currentSite,
-			thread: thread,
+			thread: thread, // this is the thread ID number
 			schema: schema
 		})
 
