@@ -8,6 +8,8 @@ function onRegisterSuccess(googleUser){
   if (delta < 5000)
     return
 
+  var onRegisterRedirect = data.onRegisterRedirect || '/templates'
+
   var profile = googleUser.getBasicProfile()
   console.log('Logged in as: ' + profile.getName())
   console.log('Name: ' + profile.getName())
@@ -25,7 +27,13 @@ function onRegisterSuccess(googleUser){
       return
     }
 
-    window.location.href = '/templates'
+    // window.location.href = '/me'
+    if (onRegisterRedirect == 'reload'){
+      window.location.reload()
+      return
+    }
+
+    window.location.href = onLoginRedirect
   })
 }
 
@@ -38,6 +46,8 @@ function onLoginSuccess(googleUser){
   var delta = now-data.timestamp
   if (delta < 5000)
     return
+
+  var onLoginRedirect = data.onLoginRedirect || '/me'
 
   var profile = googleUser.getBasicProfile()
   console.log('Login Successful: ' + profile.getName())
@@ -54,7 +64,13 @@ function onLoginSuccess(googleUser){
       return
     }
 
-    window.location.href = '/me'
+    if (onLoginRedirect == 'reload'){
+      window.location.reload()
+      return
+    }
+
+    // window.location.href = '/me'
+    window.location.href = onLoginRedirect
   })
 }
 

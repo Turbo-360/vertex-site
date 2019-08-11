@@ -4,12 +4,23 @@
     return
 
   var user = data.user
+  var onLoginRedirect = data.onLoginRedirect || '/me'
+  var onRegisterRedirect = data.onRegisterRedirect || '/templates'
 
   if (user != null){
     $('#login-container').html('<a href="/me" class="nav-link btn btn-primary text-white hidden-xs">My Account</a>')
     $('#nav-menu').addClass('right-side-loggedin')
     $('#nav-login').hide()
     return
+  }
+
+  var authorizeUser = function(redirect){
+    if (redirect == 'reload'){
+      window.location.relaod()
+      return
+    }
+
+    window.location.href = redirect
   }
 
   $('#input-register').click(function(event){
@@ -44,7 +55,18 @@
         return
       }
 
-      window.location.href = '/me'
+      // log out of google if logged in:
+      var auth2 = gapi.auth2.getAuthInstance()
+      if (auth2 == null){
+        authorizeUser(onRegisterRedirect)
+        // window.location.href = onRegisterRedirect
+        return
+      }
+
+      auth2.signOut().then(function () {
+        authorizeUser(onRegisterRedirect)
+        // window.location.href = onRegisterRedirect
+      })
     })
   })
 
@@ -78,7 +100,18 @@
         return
       }
 
-      window.location.href = '/me'
+      // log out of google if logged in:
+      var auth2 = gapi.auth2.getAuthInstance()
+      if (auth2 == null){
+        authorizeUser(onLoginRedirect)
+        // window.location.href = onLoginRedirect
+        return
+      }
+
+      auth2.signOut().then(function () {
+        authorizeUser(onLoginRedirect)
+        // window.location.href = onLoginRedirect
+      })
     })
   })
 
