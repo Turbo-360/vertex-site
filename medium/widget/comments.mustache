@@ -84,16 +84,16 @@
         $('#comments-container').html(commentsHtml)
       }
 
-      var fetchComments = function(){
-        console.log('FETCH COMMENTS: ' + JSON.stringify(thread))
-        window.vertexLib.getRequest('/api/comment?thread='+threadId, null, function(err, resp){
-          if (err)
-            return
-
-          comments = resp.results
-          reloadUI()
-        })
-      }
+      // var fetchComments = function(){
+      //   console.log('FETCH COMMENTS: ' + JSON.stringify(thread))
+      //   window.vertexLib.getRequest('/api/comment?thread='+threadId, null, function(err, resp){
+      //     if (err)
+      //       return
+      //
+      //     comments = resp.results
+      //     reloadUI()
+      //   })
+      // }
 
       $('#btn-submit-comment').click(function(event){
         if (event)
