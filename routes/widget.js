@@ -65,6 +65,7 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
+	// post, video, episode, etc
 	const schema = req.query.schema
 	if (schema == null){
 		res.json({
@@ -93,7 +94,7 @@ router.get('/comments', (req, res) => {
 	controllers.site.get({slug:site})
 	.then(sites => {
 		if (sites.length == 0){
-			throw new Error('Site '+site+' not found')
+			throw new Error('Site ' + site + ' not found')
 			return
 		}
 
