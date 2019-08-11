@@ -59,13 +59,11 @@
       var auth2 = gapi.auth2.getAuthInstance()
       if (auth2 == null){
         authorizeUser(onRegisterRedirect)
-        // window.location.href = onRegisterRedirect
         return
       }
 
       auth2.signOut().then(function () {
         authorizeUser(onRegisterRedirect)
-        // window.location.href = onRegisterRedirect
       })
     })
   })
@@ -104,14 +102,28 @@
       var auth2 = gapi.auth2.getAuthInstance()
       if (auth2 == null){
         authorizeUser(onLoginRedirect)
-        // window.location.href = onLoginRedirect
         return
       }
 
       auth2.signOut().then(function () {
         authorizeUser(onLoginRedirect)
-        // window.location.href = onLoginRedirect
       })
+    })
+  })
+
+  $('#link-logout').click(function(event){
+    if (event)
+      event.preventDefault()
+
+    // lot out of google if logged in:
+    var auth2 = gapi.auth2.getAuthInstance()
+    if (auth2 == null){
+      window.location.href = '/account/logout'
+      return
+    }
+
+    auth2.signOut().then(function(){
+      window.location.href = '/account/logout'
     })
   })
 
