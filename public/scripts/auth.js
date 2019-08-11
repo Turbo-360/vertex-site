@@ -110,21 +110,5 @@
       })
     })
   })
-
-  $('#link-logout').click(function(event){
-    if (event)
-      event.preventDefault()
-
-    // lot out of google if logged in:
-    var auth2 = gapi.auth2.getAuthInstance()
-    if (auth2 == null){
-      window.location.href = '/account/logout'
-      return
-    }
-
-    auth2.signOut().then(function(){
-      window.location.href = '/account/logout'
-    })
-  })
-
+  
 })();
