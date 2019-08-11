@@ -361,6 +361,7 @@
         {{>auth}}
 
         <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
         <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
         <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
         <script type="text/javascript" src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
@@ -369,6 +370,7 @@
         <script type="text/javascript" src="{{{cdn}}}/snap/js/feather.min.js"></script>
         <script type="text/javascript" src="{{{cdn}}}/snap/js/slick.min.js"></script>
         <script type="text/javascript" src="{{{cdn}}}/snap/js/scripts.js"></script>
+        <script type="text/javascript" src="{{{cdn}}}/scripts/googleauth.js"></script>
         <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
         <script type="text/javascript" src="{{{cdn}}}/scripts/referrer.js"></script>
 
@@ -504,7 +506,5 @@
           })()
         </script>
 
-        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-        <script type="text/javascript" src="{{{cdn}}}/scripts/googleauth.js"></script>
     </body>
 </html>
