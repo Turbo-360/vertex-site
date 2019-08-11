@@ -105,6 +105,8 @@ router.get('/comments', (req, res) => {
 	.then(comments => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
 			comments: data.comments,
 			user: data.user,
