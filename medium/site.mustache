@@ -9,53 +9,34 @@
 <body>
   {{>nav}}
 
-<div class="container pt-5 pb-4">
-	<div class="row justify-content-between">
-		<div class="col-md-8">
-			<h5 class="font-weight-bold spanborder"><span>Recent</span></h5>
+  <div class="container pt-5 pb-4">
+  	<div class="row justify-content-between">
+  		<div class="col-md-8 mx-auto">
+  			<h5 class="font-weight-bold spanborder"><span>{{site.name}}</span></h5>
 
-      {{#posts}}
-			<div class="mb-5 justify-content-between post-preview">
-        <h2 class="mb-1 h4">
-          <a class="text-dark" target="_blank" href="{{{link}}}">{{title}}</a>
-        </h2>
-        <div class="d-flex">
-          <div class="pr-4">
-  					<p class="text-muted">{{preview}}</p>
-  					<div class="card-text text-muted small">
-  							<img class="mr-2" style="border-radius:50%" src="{{{author.image}}}=s28-c" />
-  						 	<span class="text-capitalize">{{author.firstName}} {{author.lastName}}</span>
-  							<span style="margin:6px">&middot;</span>
-  							{{dateString}}
-  							<span style="margin:6px">&middot;</span>
-  							<a id="{{id}}" class="btn btn-sm btn-success comments-button" style="padding:0.12em 1em; box-shadow:none" href="#">Comments</a>
-  					</div>
-  				</div>
-  				<a target="_blank" href="{{{link}}}">
-  					<img src="{{{image}}}=s220-c">
-  				</a>
-        </div>
-
-			</div>
-      {{/posts}}
-		</div>
-
-		<div class="col-md-4 pl-4">
-      <div class="sticky-top">
-        <h5 class="font-weight-bold spanborder"><span>Site</span></h5>
-        <div style="padding:24px;background:#dedafb">
-          <h2>{{site.name}}</h2>
-          <div class="text-center mb-4 mt-3">
-            <img src="{{{site.image}}}=s512" />
+        <div class="mb-5 justify-content-between post-preview">
+          <div class="d-flex">
+            <a target="_blank" href="{{{link}}}">
+    					<img style="width:220px" src="{{{site.image}}}=s440-c">
+    				</a>
+            <div style="flex:1" class="pl-3">
+    					<p class="text-muted">{{site.description}}</p>
+    					<div class="card-text text-muted small">
+    							<img class="mr-2" style="border-radius:50%" src="{{{site.profile.image}}}=s28-c" />
+    						 	<span class="text-capitalize">{{site.profile.firstName}} {{site.profile.lastName}}</span>
+    							<span style="margin:6px">&middot;</span>
+    							<span class="text-capitalize">{{site.category}}</span>
+    							<span style="margin:6px">&middot;</span>
+    							<a class="btn btn-sm btn-success comments-button" style="padding:0.12em 1em; box-shadow:none" href="#">Subscribe</a>
+    					</div>
+    				</div>
           </div>
-          <p>{{site.description}}</p>
-          <a target="_blank" href="{{{site.link}}}" class="btn btn-danger w-100">View Site</a>
-        </div>
-      </div>
+  			</div>
 
-		</div>
-	</div>
-</div>
+  		</div>
+
+  	</div>
+  </div>
 
   {{>footer}}
   {{>auth}}
