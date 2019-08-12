@@ -401,29 +401,13 @@ router.get('/site/:slug', (req, res) => {
 		data['site'] = site
 		site['link'] = (site.url.length==0) ? 'https://'+site.slug+'.vertex360.co' : 'https://'+site.url
 
-		const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
-		return utils.HTTP.get(postsEndpoint, null)
-	})
-	.then(response => {
-		const parsed = JSON.parse(response) // this comes in as a string so have to parse
-		if (parsed.confirmation != 'success'){
-			throw new Error(parsed.message)
-			return
-		}
-
-		data['posts'] = parsed.data
-		data.posts.forEach(post => {
-			post['link'] = (data.site.url.length==0) ? 'https://'+data.site.slug+'.vertex360.co/post/'+post.slug : 'https://'+data.site.url+'/post/'+post.slug
-			delete post['text']
-		})
-
+		// const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
+		// return utils.HTTP.get(postsEndpoint, null)
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			// user: sanitizedUser(req.user) || {},
 			user: sanitizedUser(req.user),
-			site: data.site,
-			posts: data.posts
+			site: data.site
 		})
 
 		res.render('site', data)
