@@ -64,8 +64,6 @@ SiteSchema.methods.summary = function(authLevel) {
 		cloneSource: this.cloneSource,
 		canClone: this.canClone,
 		featured: this.featured,
-		// published: this.published,
-		// github: this.github,
 		slug: this.slug,
 		name: this.name,
 		level: this.level,
@@ -75,27 +73,11 @@ SiteSchema.methods.summary = function(authLevel) {
 		images: this.images,
 		url: this.url,
 		votes: {up:this.votes.up.length, down:this.votes.down.length, score:this.votes.score},
-		// clonePrice: this.clonePrice,
-		// resources: this.resources,
-		// oauth: this.oauth,
-		// smtp: this.smtp,
-		// stripe: this.stripe,
-		// functions: this.functions,
-		// authorized: this.authorized,
-		// services: this.services,
 		api: this.api,
 		paypal: paypal,
 		globalConfig: this.globalConfig,
 		pages: this.pages,
 		template: this.template,
-		// meta: () => { // meta data for <head> tag
-		// 	return {
-		// 		title: this.name,
-		// 		url: 'https://www.turbo360.co/app/' + this.slug,
-		// 		image: this.image+'=s260-c',
-		// 		description: truncateText(this.description, 220)
-		// 	}
-		// },
 		timestamp: this.timestamp,
 		schema: 'site',
 		id: this._id.toString()
