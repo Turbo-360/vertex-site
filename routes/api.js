@@ -1,15 +1,22 @@
 const express = require('express')
 const router = express.Router()
 const controllers = require('../controllers')
-// const CDN = (process.env.TURBO_ENV == 'dev') ? '' : process.env.TURBO_CDN
 
-const currentUser = (req) => {
+const sanitizedUser = (req) => {
 	if (req.user == null)
 		return null
 
 	const user = req.user
-	delete user['password']
-	return user
+	const currentUser = {
+		id: user.id,
+		username: user.username,
+		slug: user.slug,
+		firstName: user.firstName,
+		lastName: user.lastName,
+		image: user.image
+	}
+
+	return currentUser
 }
 
 router.get('/:resource', (req, res, next) => {
@@ -29,7 +36,7 @@ router.get('/:resource', (req, res, next) => {
 	.then(results => {
 		res.json({
 			confirmation: 'success',
-			user: currentUser(req),
+			user: sanitizedUser(req),
 			results: results
 		})
 
@@ -63,7 +70,7 @@ router.get('/:resource/:id', (req, res, next) => {
 	.then(result => {
 		res.json({
 			confirmation: 'success',
-			user: currentUser(req),
+			user: sanitizedUser(req),
 			result: result
 		})
 
@@ -96,7 +103,7 @@ router.post('/:resource', (req, res, next) => {
 	.then(result => {
 		res.json({
 			confirmation: 'success',
-			user: currentUser(req),
+			user: sanitizedUser(req),
 			result: result
 		})
 
@@ -131,7 +138,7 @@ router.put('/:resource/:id', (req, res, next) => {
 	.then(result => {
 		res.json({
 			confirmation: 'success',
-			user: currentUser(req),
+			user: sanitizedUser(req),
 			result: result
 		})
 
@@ -168,7 +175,7 @@ router.delete('/:resource/:id', (req, res, next) => {
 	.then(() => {
 		res.json({
 			confirmation: 'success',
-			user: currentUser(req),
+			user: sanitizedUser(req),
 			result: {id: id} // return the ID so client side can track which entity removed
 		})
 		return
