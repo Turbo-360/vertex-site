@@ -7,6 +7,7 @@ const currentUser = (req) => {
 	if (req.user == null)
 		return null
 
+	const user = req.user
 	delete user['password']
 	return user
 }

@@ -3,6 +3,10 @@
   if (!data)
     return
 
+  var userAgent = navigator.userAgent.toLowerCase()
+  console.log('USER AGENT: ' + userAgent) // USER AGENT: mozilla/5.0 (macintosh; intel mac os x 10_13_4) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.100 safari/537.36
+  var isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
+
   var user = data.user
   var onLoginRedirect = data.onLoginRedirect || '/me'
   var onRegisterRedirect = data.onRegisterRedirect || '/templates'
@@ -14,7 +18,7 @@
     return
   }
 
-  var authorizeUser = function(redirect){
+  var authorizeUser = function(redirect, data){
     if (redirect == 'reload'){
       window.location.reload()
       return
@@ -98,17 +102,40 @@
         return
       }
 
+      if (response.confirmation != 'success'){
+        alert(response.message)
+        return
+      }
+
+      // var user = response.user
+      console.log('LOGGED IN: ' + JSON.stringify(response.user))
+
+      if (userAgent.includes('iphone')){ // iphone
+        alert('prevent reload')
+        data.user = response.user
+        window.vertexLib.getRequest('/account/currentuser', null, function(err2, resp2){
+          console.log('CURRENT USER: ' + JSON.stringify(resp2))
+
+        })
+        return
+      }
+
+      if (gapi != null){
+        authorizeUser(onLoginRedirect, response)
+        return
+      }
+
       // log out of google if logged in:
       var auth2 = gapi.auth2.getAuthInstance()
       if (auth2 == null){
-        authorizeUser(onLoginRedirect)
+        authorizeUser(onLoginRedirect, response)
         return
       }
 
       auth2.signOut().then(function () {
-        authorizeUser(onLoginRedirect)
+        authorizeUser(onLoginRedirect, response)
       })
     })
   })
-  
+
 })();
