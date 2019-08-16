@@ -454,7 +454,7 @@ router.post('/:action', (req, res, next) => {
 
 			// set session here:
 			req.vertex_session.user = profile.id
-			return controllers.profile.put(profile.id, {token:uuidv4()})
+			return controllers.profile.put(profile.id, {token:uuidv4()}, process.env.AUTH_API_KEY)
 		})
 		.then(profile => {
 			res.json({

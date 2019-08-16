@@ -92,7 +92,12 @@ ProfileSchema.methods.summary = function(key) {
 		id: this._id.toString()
 	}
 
-	if (key === process.env.ADMIN_API_KEY){
+	if (key === process.env.AUTH_API_KEY){
+		summary['api'] = this.api
+		summary['token'] = this.token
+	}
+
+	if (key === process.env.ADMIN_API_KEY){ // everything
 		summary['ip'] = this.ip
 		summary['api'] = this.api
 		summary['creditCard'] = this.creditCard

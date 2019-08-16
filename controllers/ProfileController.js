@@ -227,7 +227,7 @@ module.exports = {
 					return
 				}
 
-				resolve(profile.summary())
+				resolve(profile.summary(token))
 			})
 		})
 	},
