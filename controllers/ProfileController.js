@@ -86,7 +86,7 @@ module.exports = {
 		})
 	},
 
-	getById: (id, isRaw) => {
+	getById: (id, isRaw, token) => {
 		return new Promise((resolve, reject) => {
 			Profile.findById(id, (err, profile) => {
 				if (err) {
@@ -104,7 +104,7 @@ module.exports = {
 					return
 				}
 
-				resolve(profile.summary())
+				resolve(profile.summary(token))
 			})
 		})
 	},
