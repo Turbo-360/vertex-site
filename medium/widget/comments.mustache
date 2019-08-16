@@ -72,6 +72,8 @@
 
       if (user == null)
         $('#register-or-login').removeClass('d-none')
+      else
+        $('#comments-header').removeClass('d-none')
 
       if (userAgent.includes('iphone')){
         window.addEventListener('message', function(event){
