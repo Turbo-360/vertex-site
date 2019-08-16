@@ -286,6 +286,28 @@ router.get('/:action', function(req, res, next){
 		return
 	}
 
+	if (action == 'verifytoken'){
+		const profileId = req.body.profile
+		const token = req.body.token
+		controllers.profile.getById(profileId, false, process.env.AUTH_API_KEY) // controller.getById(entityId, isRaw, token, req)
+		.then(result => {
+			res.json({
+				confirmation: 'success',
+				user: sanitizedUser(req)
+			})
+
+			return
+		})
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
+		})
+
+		return
+	}
+
 	res.json({
 		confirmation: 'fail',
 		message: 'Invalid action'
