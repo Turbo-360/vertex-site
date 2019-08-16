@@ -34,6 +34,7 @@ const ProfileSchema = new mongoose.Schema({
 	ip: {type:mongoose.Schema.Types.Mixed, default:{}}, // http://ip-api.com/json/173.166.182.94
 	location: {type:mongoose.Schema.Types.Mixed, default:{city:'', state:'', country:''}},
 	lastLogin: {type:Date, default:null},
+	token: {type:String, default:''},
 	timestamp: {type:Date, default:Date.now},
 	activityIndex: {type: Number, default: 0}, // an index which reflects how 'active' user is
 	promoCode: {type:String, trim:true, lowercase:true, default:''}
@@ -77,6 +78,7 @@ ProfileSchema.methods.summary = function(key) {
 		// ip: this.ip,
 		location: this.location,
 		lastLogin: this.lastLogin,
+		token: this.token,
 		meta: () => { // meta data for <head> tag
 			return {
 				title: this.firstName+' '+this.lastName,

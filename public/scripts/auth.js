@@ -107,16 +107,12 @@
         return
       }
 
-      // var user = response.user
-      console.log('LOGGED IN: ' + JSON.stringify(response.user))
-
-      if (userAgent.includes('iphone')){ // iphone
-        alert('prevent reload')
-        data.user = response.user
-        window.vertexLib.getRequest('/account/currentuser', null, function(err2, resp2){
-          console.log('CURRENT USER: ' + JSON.stringify(resp2))
-
-        })
+      // special case for iphone. Safari does not honor cookies
+      // from different domains.
+      if (userAgent.includes('iphone')){
+        // send message back to parent container (react bundle) so
+        // user auth can be handled on individual site domains:
+        parent.postMessage({action:'logged-in', data:response.user}, '*')
         return
       }
 
