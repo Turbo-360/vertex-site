@@ -1422,6 +1422,7 @@ router.post('/:action', (req, res, next) => {
 				return
 			}
 
+			console.log('TEST - SUCCESS')
 			res.json({
 				confirmation: 'success',
 				user: {
