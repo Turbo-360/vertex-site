@@ -82,6 +82,8 @@
 
           if (message.type == 'user-logged-in'){
             user = message.user
+            document.getElementById('btn-close-login').click()
+            document.getElementById('btn-close-register').click()
             reloadUI()
           }
         })
