@@ -1406,7 +1406,7 @@ router.post('/:action', (req, res, next) => {
 	}
 
 	if (action == 'verifytoken'){
-		console.log('verifytoken: ' + JSON.stringify(req.body))
+		// console.log('verifytoken: ' + JSON.stringify(req.body))
 		const profileId = req.body.profile
 		const token = req.body.token
 		controllers.profile.getById(profileId, false, process.env.AUTH_API_KEY) // controller.getById(entityId, isRaw, token, req)
@@ -1422,7 +1422,6 @@ router.post('/:action', (req, res, next) => {
 				return
 			}
 
-			console.log('TEST - SUCCESS')
 			res.json({
 				confirmation: 'success',
 				user: {
