@@ -76,9 +76,9 @@ ProfileSchema.methods.summary = function(key) {
 		promoCode: this.promoCode,
 		// api: this.api,
 		// ip: this.ip,
+		// token: this.token,
 		location: this.location,
 		lastLogin: this.lastLogin,
-		token: this.token,
 		meta: () => { // meta data for <head> tag
 			return {
 				title: this.firstName+' '+this.lastName,
@@ -97,6 +97,7 @@ ProfileSchema.methods.summary = function(key) {
 		summary['api'] = this.api
 		summary['creditCard'] = this.creditCard
 		summary['stripeId'] = this.stripeId
+		summary['token'] = this.token
 	}
 
 	return summary
