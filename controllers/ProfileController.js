@@ -166,6 +166,7 @@ module.exports = {
 
 				const apiKey = 'pk_'+uuidv4() // pk_ prefix indicates that this is a profile key
 				params['api'] = {key:apiKey, secret:''} // generate random api key:
+				params['token'] = uuidv4()
 
 				// 04/20/2019 - this started timing out and breaking registrations on Turbo 360:
 				// estimate location based on ip addr:
