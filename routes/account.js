@@ -1411,6 +1411,7 @@ router.post('/:action', (req, res, next) => {
 		const token = req.body.token
 		controllers.profile.getById(profileId, false, process.env.AUTH_API_KEY) // controller.getById(entityId, isRaw, token, req)
 		.then(user => {
+			console.log('USER: ' + JSON.stringify(user))
 			if (user.token == null){
 				throw new Error('Invalid Token')
 				return
