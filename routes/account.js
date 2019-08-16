@@ -1409,10 +1409,17 @@ router.post('/:action', (req, res, next) => {
 		const profileId = req.body.profile
 		const token = req.body.token
 		controllers.profile.getById(profileId, false, process.env.AUTH_API_KEY) // controller.getById(entityId, isRaw, token, req)
-		.then(result => {
+		.then(user => {
 			res.json({
 				confirmation: 'success',
-				user: sanitizedUser(req)
+				user: {
+					id: user.id,
+					slug: user.slug,
+					image: user.image,
+					username: user.username,
+					firstName: user.firstName,
+					lastName: user.lastName
+				}
 			})
 
 			return
