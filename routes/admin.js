@@ -217,8 +217,7 @@ router.get('/captions', (req, res) => {
 	.catch(err => {
 		res.json({
 			confirmation: 'fail',
-			message: err.message + '. ROOT: '+root
-			// root: root // send back which one failed
+			message: err.message + '. ROOT: '+root+'. Endpoint: '+ endpoint
 		})
 	})
 })
