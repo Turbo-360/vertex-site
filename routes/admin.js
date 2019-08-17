@@ -181,10 +181,17 @@ router.get('/captions', (req, res) => {
 		// if included, do not use specified option. comma separated string.
 		var exclude = req.query.exclude
 
+		// const ignore = exclude.split(',')
+		// const options = roots.map(option => {
+		// 	if (ignore.indexOf(option) != -1)
+		// 		return option
+		// })
+
 		const ignore = exclude.split(',')
-		const options = roots.map(option => {
-			if (ignore.indexOf(option) != -1)
-				return option
+		const remainingOptions = []
+		roots.forEach(option => {
+			if (ignore.indexOf(option) == -1)
+				remainingOptions.push(option)
 		})
 
 		if (options.length == 0){
