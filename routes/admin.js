@@ -171,15 +171,16 @@ router.get('/captions', (req, res) => {
 		return
 	}
 
-	// if included, do not use specified option. comma separated string.
-	var exclude = req.query.exclude
 	const roots = ['yt-api-1-3idc80', 'yt-api-2-asovo8', 'yt-api-3-gtktdh', 'yt-api-4-cqtuum']
 	let root = null
 
-	if (exclude == null){
+	if (req.query.exclude == null){
 		root = roots[Math.floor(Math.random()*roots.length)]
 	}
 	else {
+		// if included, do not use specified option. comma separated string.
+		var exclude = req.query.exclude
+
 		const ignore = exclude.split(',')
 		const options = roots.map(option => {
 			if (ignore.indexOf(option) != -1)
