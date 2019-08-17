@@ -194,7 +194,7 @@ router.get('/captions', (req, res) => {
 				remainingOptions.push(option)
 		})
 
-		if (options.length == 0){
+		if (remainingOptions.length == 0){
 			res.json({
 				confirmation: 'fail',
 				message: 'No more YT API options'
@@ -202,7 +202,7 @@ router.get('/captions', (req, res) => {
 			return
 		}
 
-		root = options[Math.floor(Math.random()*options.length)]
+		root = remainingOptions[Math.floor(Math.random()*remainingOptions.length)]
 	}
 
 
