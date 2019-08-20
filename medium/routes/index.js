@@ -155,7 +155,6 @@ router.get('/templates', (req, res) => {
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
 			user: sanitizedUser(req.user),
 			templates: sites,

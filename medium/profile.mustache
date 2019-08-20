@@ -187,7 +187,8 @@
     }
 
     .sidebar-link {
-    text-decoration: none !important;
+      text-decoration: none !important;
+      text-transform: capitalize;
     }
 
     .preview-image {
@@ -216,7 +217,7 @@
                       <a href="#" class="sidebar-link" data-rel="templates">Templates</a>
                   </li>
                   <li>
-                      <a href="#" class="sidebar-link" data-rel="influencer">Influencers</a>
+                      <a href="#" class="sidebar-link" data-rel="about">About {{profile.firstName}}</a>
                   </li>
                   <li>
                       <a href="#" class="sidebar-link" data-rel="portfolio">Portfolio</a>
@@ -240,6 +241,15 @@
                               </h5>
                           </article>
                           {{/templates}}
+
+                          <article class="col-md-9 mx-auto about">
+                              <a id="{{id}}-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
+                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024')"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px">
+                                <a id="{{id}}-title"class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">{{name}}</a>
+                              </h5>
+                          </article>
 
                       </div>
                   </div>
