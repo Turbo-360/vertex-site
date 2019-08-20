@@ -240,12 +240,13 @@
                           {{/templates}}
 
                           <article class="col-md-9 mx-auto about" style="display:none">
-                              <a id="{{id}}-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
-                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024')"></div>
-                              </a>
-                              <h5 style="margin-bottom:0px">
-                                <a id="{{id}}-title"class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">{{name}}</a>
-                              </h5>
+                            <div style="background:#fff;padding:36px">
+                              <img style="width:256px;" src="{{{profile.image}}}=s512-c" />
+                              <h1 style="text-transform:capitalize">{{profile.firstName}} {{profile.lastName}}</h1>
+                              <hr />
+                              <p>{{profile.bio}}</p>
+                            </div>
+
                           </article>
 
                       </div>
