@@ -420,7 +420,6 @@ router.get('/site/:slug', (req, res) => {
 	})
 })
 
-
 router.get('/template/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
@@ -490,6 +489,52 @@ router.get('/comments/:slug', (req, res) => {
 		})
 
 		res.render('comments', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+
+router.get('/profile/:slug', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.profile.get({slug:req.params.slug})
+	.then(profiles => {
+		if (profiles.length == 0){
+			throw new Error('Profile '+req.params.slug+' not found.')
+			return
+		}
+
+		data['profile'] = profiles[0]
+		return controllers.site.get({'profile.id':data.profile.id, format:'vertex'})
+	})
+	.then(sites => {
+		const templatesMap = {}
+		sites.forEach((site, i) => {
+			site['features'] = site.tags.join(' ').toLowerCase()
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
+			templatesMap[site.id] = site
+		})
+
+		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			// stripe: process.env.STRIPE_PK_LIVE,
+			query: req.query,
+			user: sanitizedUser(req.user),
+			templates: sites,
+			templatesMap: templatesMap
+		})
+
+		res.render('profile', data)
 	})
 	.catch(err => {
 		res.json({
