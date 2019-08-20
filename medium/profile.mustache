@@ -219,9 +219,6 @@
                   <li>
                       <a href="#" class="sidebar-link" data-rel="about">About {{profile.firstName}}</a>
                   </li>
-                  <li>
-                      <a href="#" class="sidebar-link" data-rel="portfolio">Portfolio</a>
-                  </li>
               </ul>
           </nav>
 
@@ -242,7 +239,7 @@
                           </article>
                           {{/templates}}
 
-                          <article class="col-md-9 mx-auto about">
+                          <article class="col-md-9 mx-auto about" style="display:none">
                               <a id="{{id}}-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
                                 <div class="card mb-4" style="background-image: url('{{{image}}}=s1024')"></div>
                               </a>
