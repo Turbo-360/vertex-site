@@ -404,10 +404,11 @@ router.post('/:action', (req, res, next) => {
 			// send invite to slack channel:
 			// const slackInvite = 'http://api.turbo360.co/vectors/slack-invite-jofodi/slackInvite'
 			// utils.HTTP.get(slackInvite, {email:user.email, slack:'turbo-360', token:process.env.SLACK_ACCESS_TOKEN, key:'b6e61258-1151-4dd0-95d3-db2bec32d808'})
-			addToMailchimp({
-				email: user.email,
-				name: user.firstName+' '+user.lastName
-			})
+			// addToMailchimp({
+			// 	email: user.email,
+			// 	name: user.firstName+' '+user.lastName
+			// })
+
 			return
 		})
 		.catch(err => {
