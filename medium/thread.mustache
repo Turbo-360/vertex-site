@@ -46,7 +46,7 @@
       <textarea id="text-area-comment" class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px;resize:none"></textarea>
       <button id="btn-submit-comment" class="mb-5 btn btn-success">Add Comment</button>
       <div id="comments-container">
-        
+
         {{#comments}}
         <div class="mt-2 d-flex justify-content-between post-preview">
           <div class="pr-4">
@@ -133,6 +133,7 @@
         var comment = {
           text: commentText,
           thread: thread.subject.id,
+          site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image}),
           profile: JSON.stringify({
             id: user.id,
             firstName: user.firstName,
