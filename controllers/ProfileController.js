@@ -109,7 +109,7 @@ module.exports = {
 		})
 	},
 
-	post: (params) => {
+	post: (params, token) => {
 		return new Promise((resolve, reject) => {
 			if (params.password == null)
 				params['confirmed'] = 'no'
@@ -144,7 +144,7 @@ module.exports = {
 						return
 					}
 
-					resolve(profile.summary())
+					resolve(profile.summary(token))
 					return
 				}
 
@@ -200,7 +200,7 @@ module.exports = {
 						return
 					}
 
-					resolve(profile.summary())
+					resolve(profile.summary(token))
 					return
 				})
 			})
