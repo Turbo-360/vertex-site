@@ -373,7 +373,7 @@ router.post('/:action', (req, res, next) => {
 	let user = null
 	if (action == 'register'){
 		params['referrer'] = req.vertex_session.referrer || ''
-		controllers.profile.post(params)
+		controllers.profile.post(params, process.env.AUTH_API_KEY)
 		.then(data => {
 			user = data
 			return utils.Email.sendHtmlEmails(process.env.BASE_EMAIL, 'Vertex 360', ['dkwon@turbo360.co'], 'New Vertex 360 User', JSON.stringify(params))
