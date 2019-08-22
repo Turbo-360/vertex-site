@@ -397,6 +397,7 @@ router.post('/:action', (req, res, next) => {
 					email: user.email,
 					image: user.image,
 					slug: user.slug,
+					token: user.token,
 					notifications: user.notifications
 				}
 			})
