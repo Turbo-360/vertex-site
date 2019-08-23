@@ -32,8 +32,11 @@
       }
 
       .thread-preview-img img {
-        max-width: 220px;
-        max-height: 220px;
+        /* max-width: 220px;
+        max-height: 220px; */
+        width: 100%;
+        height: 100%;
+        opacity:0;
       }
 
       .thread-preview-container {
@@ -98,7 +101,7 @@
                           <div class="bg-white mb-4 thread-preview">
                             <div class="thread-preview-img" style="background: url('{{{subject.image}}}=s440-c')">
                               <a target="_blank" href="{{subject.url}}">
-                                <img style="opacity:0;width:100%" src="{{subject.image}}=s440-c" />
+                                <img src="{{subject.image}}=s440-c" />
                               </a>
                             </div>
                             <div class="thread-preview-container">
