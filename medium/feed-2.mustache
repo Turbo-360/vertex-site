@@ -191,6 +191,14 @@
           var threads = data.threads // this is an object
           var currentCategory = 'recent'
 
+          var formattedDate = function(date){
+            var options = {year:'numeric', month:'long', day:'numeric'}
+            if (date == null)
+              date = new Date()
+
+            return date.toLocaleDateString('en-US', options) // Monday, May 6, 2019
+          }
+
           var reloadUI = function(){
             $('.sidebar-link').each(function(i, link){
               var category = $(this).html().toLowerCase()
@@ -277,24 +285,47 @@
           })
 
           $('#btn-submit-thread').click(function(event){
-            var thread = {
+            var subject = {
+              // id: '',
+              // slug: '',
+              // schema: '',
+              dateString: formattedDate(),
               title: $('#input-thread-title').val(),
               url: $('#input-thread-url').val(),
-              description: $('#input-thread-description').val(),
+              preview: $('#input-thread-description').val(),
               category: $('#input-thread-category').val()
             }
 
-            if (thread.title.length == 0){
+            if (subject.title.length == 0){
               alert('Please enter a TITLE')
               return
             }
 
-            if (thread.title.length == 0){
+            if (subject.url.length == 0){
               alert('Please enter a URL')
               return
             }
 
+            var thread = {
+              slug: '',
+              subject: JSON.stringify(subject)
+            }
+
             console.log('SUBMIT THREAD: ' + JSON.stringify(thread))
+            window.vertexLib.postRequest('/api/thread', thread, function(err, resp){
+              if (err){
+                alert('Error - ' + err)
+                return
+              }
+
+              if (resp.confirmation != 'success'){
+                alert('Error - ' + resp.message)
+                return
+              }
+
+              console.log('THREAD CREATED: ' + JSON.stringify(resp.result))
+
+            })
           })
 
         })()
