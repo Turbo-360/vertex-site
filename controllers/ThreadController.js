@@ -25,18 +25,18 @@ const slugVersion = (text, numRandomChars) => {
 	return slug.toLowerCase()+'-'+randomString
 }
 
-const scrapePreview = (text, limit) => {
-  $ = cheerio.load(text)
-  let plainText = ''
-  $('p').each((i, element) => {
-    plainText += element.children[0].data
-  })
-
-  if (plainText.length >= limit)
-    return plainText.substring(0, limit)+'...'
-
-  return plainText
-}
+// const scrapePreview = (text, limit) => {
+//   $ = cheerio.load(text)
+//   let plainText = ''
+//   $('p').each((i, element) => {
+//     plainText += element.children[0].data
+//   })
+//
+//   if (plainText.length >= limit)
+//     return plainText.substring(0, limit)+'...'
+//
+//   return plainText
+// }
 
 module.exports = {
 	get: function(params){
