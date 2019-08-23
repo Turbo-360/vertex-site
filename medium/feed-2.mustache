@@ -109,7 +109,7 @@
                               <div class="mb-2" style="text-align:right">
                                 <small>{{subject.dateString}}</small>
                                 <span>&middot;</span>
-                                <a href="/feed/{{subject.slug}}"><small>Comments</small></a>
+                                <a href="/feed/{{slug}}"><small>Comments</small></a>
                                 <span>&middot;</span>
                                 <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
                                 <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
@@ -166,7 +166,7 @@
             <div class="mb-2" style="text-align:right">
               <small><% subject.dateString %></small>
               <span>&middot;</span>
-              <a href="/feed/<% subject.slug %>"><small>Comments</small></a>
+              <a href="/feed/<% slug %>"><small>Comments</small></a>
               <span>&middot;</span>
               <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
               <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
