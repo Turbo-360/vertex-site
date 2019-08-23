@@ -318,7 +318,8 @@ router.get('/feed/:slug', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.thread.get({'subject.slug':req.params.slug})
+	// controllers.thread.get({'subject.slug':req.params.slug})
+	controllers.thread.get({'slug':req.params.slug})
   .then(threads => {
 		if (threads.length == 0){
 			throw new Error('Not Found')
