@@ -127,7 +127,7 @@
                               <input id="input-thread-url" style="background:#f9f9f9;border:none;padding:4px" class="form-control mb-3" type="text" placeholder="URL">
                               <input id="input-thread-title" style="background:#f9f9f9;border:none;padding:4px" class="form-control mb-3" type="text" placeholder="Title">
                               <textarea id="input-thread-description" style="background:#f9f9f9;border:none;padding:4px;resize: none;" rows="4" class="form-control mb-3" placeholder="Description"></textarea>
-                              <select id="input-thread-category mb-3">
+                              <select id="input-thread-category">
                                 <option value="sports">Sports</option>
                                 <option value="culture">Culture</option>
                               </select>
@@ -282,6 +282,16 @@
               url: $('#input-thread-url').val(),
               description: $('#input-thread-description').val(),
               category: $('#input-thread-category').val()
+            }
+
+            if (thread.title.length == 0){
+              alert('Please enter a TITLE')
+              return
+            }
+
+            if (thread.title.length == 0){
+              alert('Please enter a URL')
+              return
             }
 
             console.log('SUBMIT THREAD: ' + JSON.stringify(thread))
