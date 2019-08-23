@@ -118,6 +118,8 @@ module.exports = {
 				}
 			}
 
+			if (params.slug.length == 0)
+				params['slug'] = slugVersion(params.subject.title, 6)
 
 			Thread.create(params, function(err, thread){
 				if (err){
