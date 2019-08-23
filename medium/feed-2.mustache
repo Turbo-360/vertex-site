@@ -25,6 +25,10 @@
 
       .thread-preview-img {
         padding: 0px;
+        width: 230px;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
       }
 
       .thread-preview-img img {
@@ -92,9 +96,9 @@
                         <div id="threads-container" class="col-md-9">
                           {{#threads.recent}}
                           <div class="bg-white mb-4 thread-preview">
-                            <div class="thread-preview-img">
+                            <div class="thread-preview-img" style="background: url('{{{subject.image}}}=s440-c')">
                               <a target="_blank" href="{{subject.url}}">
-                                <img src="{{subject.image}}=s440-c" />
+                                <img style="opacity:0;width:100%" src="{{subject.image}}=s440-c" />
                               </a>
                             </div>
                             <div class="thread-preview-container">
@@ -277,7 +281,7 @@
               // {"title":"Daniel Jones has given Eli Manning no room to fail","url":"https://nypost.com/2019/08/23/daniel-jones-has-given-eli-manning-no-room-to-fail/","description":"We hold these truths to be self-evident: Eli Manning was not brought back to be a $23.2 million backup quarterback. You don’t draft a quarterback with the sixth pick to sit him. “Eli ‘s our starter…","image":"https://thenypost.files.wordpress.com/2019/08/djones.jpg?quality=90&strip=all&w=1200"}
               $('#input-thread-description').val(meta.description)
               $('#input-thread-title').val(meta.title)
-              $('#preview-image-container').html('<img style="max-width:100%" src="'+meta.image+'" />')
+              $('#preview-image-container').html('<img id="thread-image" style="max-width:100%" src="'+meta.image+'" />')
 
               $('#btn-submit-thread').css('display', '')
               $('#loading-indicator').html('')
@@ -291,6 +295,7 @@
               // schema: '',
               dateString: formattedDate(),
               title: $('#input-thread-title').val(),
+              image: $('#thread-image').attr('src'),
               url: $('#input-thread-url').val(),
               preview: $('#input-thread-description').val(),
               category: $('#input-thread-category').val()
