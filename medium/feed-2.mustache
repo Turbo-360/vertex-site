@@ -117,6 +117,27 @@
                           {{/threads.recent}}
                         </div>
 
+                        <div class="col-md-3">
+
+                          <div class="modal-content" style="border-radius:4px;margin:auto">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Submit Link</h5>
+                            </div>
+                            <div class="modal-body">
+                              <input id="input-thread-url" style="background:#f9f9f9;border:none;padding:4px" class="form-control mb-3" type="text" placeholder="URL">
+                              <input id="input-thread-title" style="background:#f9f9f9;border:none;padding:4px" class="form-control mb-3" type="text" placeholder="Title">
+                              <textarea id="input-thread-description" style="background:#f9f9f9;border:none;padding:4px;resize: none;" rows="4" class="form-control mb-3" placeholder="Description"></textarea>
+                              <select id="input-thread-category mb-3">
+                                <option value="sports">Sports</option>
+                                <option value="culture">Culture</option>
+                              </select>
+                              <div id="preview-image-container" style="margin-top:12px"></div>
+                              <button id="btn-submit-thread" style="width:100%" type="button" class="btn btn-primary btn-lg mb-3 mt-4">Submit</button>
+                              <div id="loading-indicator" style="text-align:center"></div>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                   </div>
               </section>
@@ -221,6 +242,51 @@
               })
             })
           })
+
+          $('#input-thread-url').change(function(){
+            var url = $(this).val()
+            if (url.indexOf('http') == -1){
+              alert('Invalid URL. Copy & paste url from browser.')
+              return
+            }
+
+            $('#btn-submit-thread').css('display', 'none')
+            $('#loading-indicator').html('<img style="width:30%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
+            window.vertexLib.getRequest('/account/scrape', {url:url}, function(err, resp){
+              if (err){
+                console.log('ERR - ' + err)
+                return
+              }
+
+              if (resp.confirmation != 'success'){
+                console.log('ERR - ' + resp.message)
+                return
+              }
+
+              var meta = resp.data
+              console.log(JSON.stringify(meta))
+              // {title: '', description:'', image:'', url:''}
+              // {"title":"Daniel Jones has given Eli Manning no room to fail","url":"https://nypost.com/2019/08/23/daniel-jones-has-given-eli-manning-no-room-to-fail/","description":"We hold these truths to be self-evident: Eli Manning was not brought back to be a $23.2 million backup quarterback. You don’t draft a quarterback with the sixth pick to sit him. “Eli ‘s our starter…","image":"https://thenypost.files.wordpress.com/2019/08/djones.jpg?quality=90&strip=all&w=1200"}
+              $('#input-thread-description').val(meta.description)
+              $('#input-thread-title').val(meta.title)
+              $('#preview-image-container').html('<img style="max-width:100%" src="'+meta.image+'" />')
+
+              $('#btn-submit-thread').css('display', '')
+              $('#loading-indicator').html('')
+            })
+          })
+
+          $('#btn-submit-thread').click(function(event){
+            var thread = {
+              title: $('#input-thread-title').val(),
+              url: $('#input-thread-url').val(),
+              description: $('#input-thread-description').val(),
+              category: $('#input-thread-category').val()
+            }
+
+            console.log('SUBMIT THREAD: ' + JSON.stringify(thread))
+          })
+
         })()
       </script>
 
