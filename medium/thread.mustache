@@ -5,6 +5,14 @@
   <meta name="description" content="" />
   {{>head}}
   <style>
+    .subject-image-container {
+      width:110px;
+      height: 110px;
+      background-size: cover !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+    }
+
     @media screen and (max-width: 525px) {
       .subject-image-container {
         display: none;
@@ -29,8 +37,7 @@
 	<div class="row justify-content-between">
 		<div class="col-md-8 mx-auto">
       <div style="display:flex">
-        <div class="mr-3 subject-image-container">
-          <img style="max-width:110px" src="{{{thread.subject.image}}}=s220-c" />
+        <div class="mr-3 subject-image-container" style="background:url('{{{thread.subject.image}}}')">
         </div>
         <div style="flex:1">
           <h3 class="mb-0">
