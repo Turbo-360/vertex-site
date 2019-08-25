@@ -67,7 +67,7 @@ router.get('/feed', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		const template = (req.isMobile) ? 'mobile-feed' : 'feed-2'
+		// const template = (req.isMobile) ? 'mobile-feed' : 'feed-2'
 		data['meta'] = {
 			title: 'Vertex 360',
 			url: 'https://www.vertex360.co/',
@@ -75,7 +75,7 @@ router.get('/feed', (req, res) => {
 			description: 'Stay up to date with the latest entertainment, politics, sports news and more.'
 		}
 
-    res.render(template, data)
+    res.render('feed-2', data)
   })
   .catch(err => {
     res.json({
