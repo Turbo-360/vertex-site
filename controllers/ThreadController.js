@@ -2,6 +2,7 @@ var Thread = require('../models/Thread')
 var cheerio = require('cheerio')
 var moment = require('moment')
 var utils = require('../utils')
+var SiteController = require('./SiteController')
 
 const slugVersion = (text, numRandomChars) => {
 	let slug = text.toString().toLowerCase()
@@ -99,14 +100,15 @@ module.exports = {
 			// 	params['preview'] = scrapePreview(params.description, 200)
 
 			// from AJAX call, this comes in stringified
-			if (params.site != null){
-				try {
-					params['site'] = JSON.parse(params.site)
-				}
-				catch(err){
+			// if (params.site != null){
+			// 	try {
+			// 		params['site'] = JSON.parse(params.site)
+			// 	}
+			// 	catch(err){
+			//
+			// 	}
+			// }
 
-				}
-			}
 
 			// from AJAX call, this comes in stringified
 			if (params.subject != null){
@@ -130,14 +132,46 @@ module.exports = {
 			if (params.slug.length == 0)
 				params['slug'] = slugVersion(params.subject.title, 6)
 
-			Thread.create(params, function(err, thread){
-				if (err){
-					reject(err)
+			if (params.site.length == 0){
+				params['site'] = {} // this is the default value
+				Thread.create(params, (err, thread) => {
+					if (err){
+						reject(err)
+						return
+					}
+
+					resolve(thread.summary())
 					return
+				})
+
+				return
+			}
+
+			// 'site' param comes in as a string but should be
+			// parsed into an object before inserting to db:
+			SiteController.getById(params.site, false, null)
+			.then(site => {
+				// console.log('SITE == ' + JSON.stringify(site))
+				params['site'] = {
+					id: site.id,
+					name: site.name,
+					slug: site.slug,
+					image: site.image
 				}
 
-				resolve(thread.summary())
-				return
+				Thread.create(params, (err, thread) => {
+					if (err){
+						reject(err)
+						return
+					}
+
+					resolve(thread.summary())
+					return
+				})
+			})
+			.catch(err => {
+				// console.log('ERR: ' + err)
+				reject(err)
 			})
 		})
 	},
