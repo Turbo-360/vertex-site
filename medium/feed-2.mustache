@@ -63,6 +63,21 @@
         margin-left: 6px;
         width: 22px;
       }
+
+      @media (max-width: 568px) {
+        .thread-preview-img {
+          display: none;
+        }
+
+        #sidebar {
+          padding-top: 1rem;
+        }
+
+        #features {
+          padding-top: 1px !important;
+        }
+      }
+
     </style>
 </head>
     <body>
@@ -204,6 +219,7 @@
         (function(){
           Mustache.tags = ['<%', '%>']
           var data = window.__PRELOADED__
+          var query = data.query
           var user = data.user
           var threads = data.threads // this is an object
           var currentCategory = 'recent'
@@ -362,6 +378,26 @@
               reloadUI()
             })
           })
+
+          console.log('QUERY: ' + JSON.stringify(query))
+          if (query.selected == null)
+            return
+
+          var selected = query.selected // thread slug
+          if (document.getElementById(selected)==null)
+            return
+
+          var scrollToTargetAdjusted = function(id, offset){
+            var element = document.getElementById(id)
+            var elementPosition = element.getBoundingClientRect().top
+            var offsetPosition = elementPosition - offset
+            window.scrollTo({top:offsetPosition, behavior:'smooth'})
+          }
+
+          setTimeout(function(){
+            // console.log('selected == '+ selected)
+            scrollToTargetAdjusted(selected, 95)
+          }, 400)
 
         })()
       </script>
