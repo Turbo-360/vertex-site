@@ -150,7 +150,7 @@ router.get('/:action', function(req, res, next){
 			return
 		}
 
-		const props = ['title', 'description', 'image', 'url', 'vtx:schema', 'vtx:id', 'vtx:slug']
+		const props = ['title', 'description', 'image', 'url', 'vtx:site', 'vtx:schema', 'vtx:id', 'vtx:slug']
 		utils.Scraper.scrape({url:req.query.url, props:props})
 		.then(data => {
 			res.json({
