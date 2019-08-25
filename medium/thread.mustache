@@ -146,7 +146,7 @@
         var comment = {
           text: commentText,
           thread: thread.subject.id,
-          site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image}),
+          site: (site==null) ? null : JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image}),
           profile: JSON.stringify({
             id: user.id,
             firstName: user.firstName,
