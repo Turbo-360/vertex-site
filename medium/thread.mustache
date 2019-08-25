@@ -44,10 +44,16 @@
             <a target="_blank" style="text-decoration:none" href="{{{thread.subject.url}}}"><span>{{thread.subject.title}}</span></a>
           </h3>
           <small>{{thread.subject.dateString}}</small>
+          {{#thread.site.id}}
           <span style="margin:6px">&middot;</span>
-          <small>
-            <a target="_blank" style="text-decoration:none" href="{{{thread.site.url}}}">{{thread.site.name}}</a>
-          </small>
+          <small><a target="_blank" style="text-decoration:none" href="{{{thread.site.url}}}">{{thread.site.name}}</a></small>
+          {{/thread.site.id}}
+
+          {{#thread.profile.id}}
+          <span style="margin:6px">&middot;</span>
+          <small><a target="_blank" style="text-decoration:none" href="#">{{thread.profile.username}}</a></small>
+          {{/thread.profile.id}}
+
         </div>
       </div>
       <textarea id="text-area-comment" class="form-control mt-4 mb-3" rows="4" style="padding:0px 8px;resize:none"></textarea>
