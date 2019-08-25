@@ -107,6 +107,8 @@
                             </div>
                             <div class="thread-preview-container">
                               <div class="mb-2" style="text-align:right">
+                                <small>{{subject.category}}</small>
+                                <span>&middot;</span>
                                 <small>{{subject.dateString}}</small>
                                 <span>&middot;</span>
                                 <a href="/feed/{{slug}}"><small>Comments</small></a>
@@ -166,6 +168,8 @@
           </div>
           <div class="thread-preview-container">
             <div class="mb-2" style="text-align:right">
+              <small><% subject.category %></small>
+              <span>&middot;</span>
               <small><% subject.dateString %></small>
               <span>&middot;</span>
               <a href="/feed/<% slug %>"><small>Comments</small></a>
@@ -349,7 +353,13 @@
               }
 
               console.log('THREAD CREATED: ' + JSON.stringify(resp.result))
+              // var category = resp.result.subject.category
+              var recentThreads = threads['recent']
+              recentThreads.unshift(resp.result)
 
+              currentCategory = 'recent'
+              window.scrollTo(0,0)
+              reloadUI()
             })
           })
 
