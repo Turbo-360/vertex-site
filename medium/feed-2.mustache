@@ -196,6 +196,7 @@
         (function(){
           Mustache.tags = ['<%', '%>']
           var data = window.__PRELOADED__
+          var user = data.user
           var threads = data.threads // this is an object
           var currentCategory = 'recent'
 
@@ -293,6 +294,11 @@
           })
 
           $('#btn-submit-thread').click(function(event){
+            if (user == null){
+              alert('Please login or register to submit.')
+              return
+            }
+
             var subject = {
               // id: '',
               // slug: '',
@@ -317,7 +323,13 @@
 
             var thread = {
               slug: '',
-              subject: JSON.stringify(subject)
+              subject: JSON.stringify(subject),
+              profile: JSON.stringify({
+                id: user.id,
+                slug: user.slug,
+                username: user.username,
+                image: user.image
+              })
             }
 
             console.log('SUBMIT THREAD: ' + JSON.stringify(thread))
