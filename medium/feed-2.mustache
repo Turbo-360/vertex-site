@@ -158,10 +158,10 @@
       {{>auth}}
 
       <script type="text/template" id="tpl-thread-preview">
-        <div class="bg-white mb-4 thread-preview">
-          <div class="thread-preview-img">
+        <div id="<%id%>" class="bg-white mb-4 thread-preview">
+          <div class="thread-preview-img" style="background: url('<%{subject.image}%>')">
             <a target="_blank" href="<% subject.url %>">
-              <img src="<%{subject.image}%>=s440-c" />
+              <img src="<%{subject.image}%>" />
             </a>
           </div>
           <div class="thread-preview-container">
@@ -169,9 +169,11 @@
               <small><% subject.dateString %></small>
               <span>&middot;</span>
               <a href="/feed/<% slug %>"><small>Comments</small></a>
+              <%#site.id%>
               <span>&middot;</span>
               <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
               <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
+              <%/site.id%>
             </div>
             <a style="color:#333" target="_blank" href="<%{subject.url}%>">
               <h4><% subject.title %></h4>
