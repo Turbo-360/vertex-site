@@ -133,8 +133,10 @@
                               </a>
                               <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
                               {{#site.id}}
-                              <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
-                              <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
+                              <a target="_blank" href="{{{site.url}}}">
+                                <img class="mr-1" src="{{{site.image}}}=s44-c" />
+                                <small>{{site.name}}</small>
+                              </a>
                               {{/site.id}}
                             </div>
                             <div style="width:24px;background:#e8f2ff">
@@ -193,9 +195,10 @@
             </a>
             <p><a style="color:#7d7d7d" target="_blank" href="<%{subject.url}%>"><% subject.preview %></a></p>
             <%#site.id%>
-            <span>&middot;</span>
-            <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
-            <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
+            <a target="_blank" href="<%{site.url}%>">
+              <img class="mr-1" src="<%{site.image}%>=s44-c" />
+              <small><% site.name %></small>
+            </a>
             <%/site.id%>
           </div>
           <div style="width:24px;background:#e8f2ff">
