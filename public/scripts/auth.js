@@ -73,7 +73,6 @@
           parent.postMessage({action:'logged-in', data:response.user}, '*')
           return
         }
-        // return
       }
 
       // log out of google if logged in:
@@ -127,10 +126,12 @@
       // special case for iphone. Safari does not honor cookies
       // from different domains.
       if (userAgent.includes('iphone')){
-        // send message back to parent container (react bundle) so
-        // user auth can be handled on individual site domains:
-        parent.postMessage({action:'logged-in', data:response.user}, '*')
-        return
+        if (data.isWidget){
+          // send message back to parent container (react bundle) so
+          // user auth can be handled on individual site domains:
+          parent.postMessage({action:'logged-in', data:response.user}, '*')
+          return
+        }
       }
 
       if (gapi != null){
