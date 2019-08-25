@@ -127,16 +127,15 @@
                                 <small>{{subject.dateString}}</small>
                                 <span>&middot;</span>
                                 <a href="/feed/{{slug}}"><small>Comments</small></a>
-                                {{#site.id}}
-                                <span>&middot;</span>
-                                <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
-                                <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
-                                {{/site.id}}
                               </div>
                               <a style="color:#333" target="_blank" href="{{{subject.url}}}">
                                 <h4>{{subject.title}}</h4>
                               </a>
                               <p><a style="color:#7d7d7d" target="_blank" href="{{{subject.url}}}">{{subject.preview}}</a></p>
+                              {{#site.id}}
+                              <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
+                              <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
+                              {{/site.id}}
                             </div>
                             <div style="width:24px;background:#e8f2ff">
                             </div>
@@ -188,16 +187,16 @@
               <small><% subject.dateString %></small>
               <span>&middot;</span>
               <a href="/feed/<% slug %>"><small>Comments</small></a>
-              <%#site.id%>
-              <span>&middot;</span>
-              <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
-              <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
-              <%/site.id%>
             </div>
             <a style="color:#333" target="_blank" href="<%{subject.url}%>">
               <h4><% subject.title %></h4>
             </a>
             <p><a style="color:#7d7d7d" target="_blank" href="<%{subject.url}%>"><% subject.preview %></a></p>
+            <%#site.id%>
+            <span>&middot;</span>
+            <a target="_blank" href="<%{site.url}%>"><small><% site.name %></small></a>
+            <a target="_blank" href="<%{site.url}%>"><img src="<%{site.image}%>=s44-c" /></a>
+            <%/site.id%>
           </div>
           <div style="width:24px;background:#e8f2ff">
           </div>
