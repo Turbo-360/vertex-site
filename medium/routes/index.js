@@ -55,7 +55,10 @@ router.get('/feed', (req, res) => {
 
 	controllers.thread.get({limit:50})
   .then(threads => {
-		data['threads'] = {recent:threads}
+		data['threads'] = { // sorted into recent, culture, sports, and tech
+			recent: threads
+		}
+
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
