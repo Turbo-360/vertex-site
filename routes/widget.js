@@ -105,6 +105,7 @@ router.get('/comments', (req, res) => {
 	.then(comments => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
+			isWidget: true,
 			onLoginRedirect: 'reload',
 			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
@@ -135,6 +136,7 @@ router.get('/feed', (req, res) => {
   .then(threads => {
 		data['threads'] = {recent:threads}
 		data['preloaded'] = JSON.stringify({
+			isWidget: true,
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -180,6 +182,7 @@ router.get('/store', (req, res) => {
 	.then(items => {
 		data['items'] = items
 		data['preloaded'] = JSON.stringify({
+			isWidget: true,
 			timestamp: req.timestamp
 		})
 
@@ -218,6 +221,7 @@ router.get('/item/:id', (req, res) => {
 		site['paypal'] = {clientId:site.paypal.clientId}
 		data['site'] = site
 		data['preloaded'] = JSON.stringify({
+			isWidget: true,
 			timestamp: req.timestamp,
 			item: data.item,
 			site: data.site
