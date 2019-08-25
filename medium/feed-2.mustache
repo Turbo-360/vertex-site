@@ -160,6 +160,11 @@
                                 <option value="sports">Sports</option>
                                 <option value="tech">Tech</option>
                               </select>
+
+                              <input id="input-vtx-id" type="hidden">
+                              <input id="input-vtx-schema" type="hidden">
+                              <input id="input-vtx-site" type="hidden">
+
                               <div id="preview-image-container" style="margin-top:12px"></div>
                               <button id="btn-submit-thread" style="width:100%" type="button" class="btn btn-primary btn-lg mb-3 mt-4">Submit</button>
                               <div id="loading-indicator" style="text-align:center"></div>
@@ -233,6 +238,15 @@
               date = new Date()
 
             return date.toLocaleDateString('en-US', options) // Monday, May 6, 2019
+          }
+
+          var randomString = function(numRandomChars){
+            var randomStr = ''
+        		var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        		for (var i=0; i <numRandomChars; i++)
+        			randomStr += possible.charAt(Math.floor(Math.random() * possible.length))
+
+            return randomStr
           }
 
           var reloadUI = function(){
@@ -317,6 +331,17 @@
 
               $('#btn-submit-thread').css('display', '')
               $('#loading-indicator').html('')
+
+              // hidden fields:
+              if (meta['vtx:schema'])
+                $('#input-vtx-schema').val(meta['vtx:schema'])
+
+              if (meta['vtx:id'])
+                $('#input-vtx-id').val(meta['vtx:id'])
+
+              if (meta['vtx:site'])
+                $('#input-vtx-site').val(meta['vtx:site'])
+
             })
           })
 
@@ -326,10 +351,14 @@
               return
             }
 
+            // check if this is a Vertex post, if so use the Vertex post ID
+            var id = ($('#input-vtx-id').val().length==0) ? randomString(10) : $('#input-vtx-id').val()
+            var schema = ($('#input-vtx-schema').val().length==0) ? null : $('#input-vtx-schema').val()
+
             var subject = {
-              // id: '',
-              // slug: '',
-              // schema: '',
+              // slug: '', // TODO: check this this value is scraped from a Vertex post
+              id: id,
+              schema: schema,
               dateString: formattedDate(),
               title: $('#input-thread-title').val(),
               image: $('#thread-image').attr('src'),
@@ -348,7 +377,10 @@
               return
             }
 
+            var siteId = ($('#input-vtx-site').val().length==0) ? '' : $('#input-vtx-site').val()
+
             var thread = {
+              site: siteId, // this gets parsed into full site details on create
               slug: '',
               subject: JSON.stringify(subject),
               profile: JSON.stringify({
@@ -359,10 +391,10 @@
               })
             }
 
-            console.log('SUBMIT THREAD: ' + JSON.stringify(thread))
+            // console.log('SUBMIT THREAD: ' + JSON.stringify(thread))
             window.vertexLib.postRequest('/api/thread', thread, function(err, resp){
               if (err){
-                alert('Error - ' + err)
+                alert('Error - ' + err.message)
                 return
               }
 
@@ -371,7 +403,7 @@
                 return
               }
 
-              console.log('THREAD CREATED: ' + JSON.stringify(resp.result))
+              // console.log('THREAD CREATED: ' + JSON.stringify(resp.result))
               // var category = resp.result.subject.category
               var recentThreads = threads['recent']
               recentThreads.unshift(resp.result)
@@ -382,7 +414,7 @@
             })
           })
 
-          console.log('QUERY: ' + JSON.stringify(query))
+          // console.log('QUERY: ' + JSON.stringify(query))
           if (query.selected == null)
             return
 
