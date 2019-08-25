@@ -60,8 +60,8 @@ router.get('/feed', (req, res) => {
 		}
 
 		data['preloaded'] = JSON.stringify({
-			onLoginRedirect: 'redirect',
-			onRegisterRedirect: 'redirect',
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -220,8 +220,8 @@ router.get('/comments', (req, res) => {
 
 		const currentUser = sanitizedUser(req.user)
 		data['preloaded'] = JSON.stringify({
-			onLoginRedirect: 'redirect',
-			onRegisterRedirect: 'redirect',
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
 			user: currentUser,
 			site: sites[0],
@@ -339,8 +339,8 @@ router.get('/feed/:slug', (req, res) => {
 	.then(comments => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
-			onLoginRedirect: 'redirect',
-			onRegisterRedirect: 'redirect',
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
