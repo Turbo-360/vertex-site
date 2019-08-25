@@ -60,6 +60,8 @@ router.get('/feed', (req, res) => {
 		}
 
 		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'redirect',
+			onRegisterRedirect: 'redirect',
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -218,6 +220,8 @@ router.get('/comments', (req, res) => {
 
 		const currentUser = sanitizedUser(req.user)
 		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'redirect',
+			onRegisterRedirect: 'redirect',
 			timestamp: req.timestamp,
 			user: currentUser,
 			site: sites[0],
@@ -335,6 +339,8 @@ router.get('/feed/:slug', (req, res) => {
 	.then(comments => {
 		data['comments'] = comments
 		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'redirect',
+			onRegisterRedirect: 'redirect',
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -353,6 +359,7 @@ router.get('/feed/:slug', (req, res) => {
   })
 })
 
+/*
 router.get('/post/:slug', (req, res) => {
   const data = {
 		cdn: CDN,
@@ -384,6 +391,7 @@ router.get('/post/:slug', (req, res) => {
     })
   })
 })
+*/
 
 router.get('/site/:slug', (req, res) => {
   const data = {
