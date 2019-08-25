@@ -118,6 +118,15 @@ module.exports = {
 				}
 			}
 
+			if (params.profile != null){
+				try {
+					params['profile'] = JSON.parse(params.profile)
+				}
+				catch(err){
+
+				}
+			}
+
 			if (params.slug.length == 0)
 				params['slug'] = slugVersion(params.subject.title, 6)
 
