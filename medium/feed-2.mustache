@@ -110,9 +110,11 @@
                                 <small>{{subject.dateString}}</small>
                                 <span>&middot;</span>
                                 <a href="/feed/{{slug}}"><small>Comments</small></a>
+                                {{#site.id}}
                                 <span>&middot;</span>
                                 <a target="_blank" href="{{{site.url}}}"><small>{{site.name}}</small></a>
                                 <a target="_blank" href="{{{site.url}}}"><img src="{{{site.image}}}=s44-c" /></a>
+                                {{/site.id}}
                               </div>
                               <a style="color:#333" target="_blank" href="{{{subject.url}}}">
                                 <h4>{{subject.title}}</h4>
