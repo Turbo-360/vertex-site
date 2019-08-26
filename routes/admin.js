@@ -231,6 +231,32 @@ router.get('/captions', (req, res) => {
 	})
 })
 
+router.get('/scrape', (req, res) => {
+	if (req.query.url == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'missing URL parameter'
+		})
+		return
+	}
+
+	const props = ['title', 'description', 'image', 'url', 'vtx:site', 'vtx:schema', 'vtx:id', 'vtx:slug']
+	utils.Scraper.scrape({url:req.query.url, props:props})
+	.then(data => {
+		res.json({
+			confirmation: 'success',
+			data: data
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			data: err.message
+		})
+	})
+})
+
+
 router.get('/:slug', (req, res) => {
 	if (req.user == null){
 		res.redirect('/')
