@@ -180,6 +180,39 @@
     padding: 12px 11em;
     }
 
+    .profile-card {
+      background:#fff;
+      border:1px solid #ededed;
+      padding:16px;
+      text-align:center
+    }
+
+    .profile-card img {
+      border-radius:50%;
+    }
+
+    .profile-card h5 {
+      margin-bottom:0px;
+      line-height:0.3;
+    }
+
+    .profile-card small {
+      color:#999;
+      font-size:0.85rem;
+    }
+
+    .profile-card p {
+      height:20px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      font-size:0.85rem;
+      line-height:1.2rem;
+      text-align:left;
+      margin-top:12px;
+      margin-bottom:0px;
+    }
+
     @media (max-width: 768px) {
     .btn-get-started {
       padding: 12px 5.5em;
@@ -225,16 +258,16 @@
 
                           {{#profiles}}
                           <article class="col-md-3 col-6">
-                              <div style="background:#fff;border:1px solid #ededed;padding:16px;text-align:center">
+                              <div class="profile-card">
                                 <a href="/profile/{{slug}}">
-                                  <img class="mb-0 w-75" style="border-radius:50%" src="{{{image}}}=s320-c" />
+                                  <img class="mb-0 w-75" src="{{{image}}}=s320-c" />
                                 </a>
 
-                                <h5 class="mt-3" style="margin-bottom:0px;line-height:0.3">
+                                <h5 class="mt-3">
                                   <a style="text-decoration:none" href="/profile/{{slug}}">{{firstName}}</a>
                                 </h5>
-                                <small style="color:#999;font-size:0.85rem">{{username}}</small>
-                                <p style="height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:0.85rem;line-height:1.2rem;text-align:left;margin-top:12px;margin-bottom:0px">{{bio}}</p>
+                                <small>{{username}}</small>
+                                <p>{{bio}}</p>
                               </div>
                           </article>
                           {{/profiles}}
