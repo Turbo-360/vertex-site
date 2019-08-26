@@ -1,6 +1,7 @@
 var Comment = require('../models/Comment')
 var moment = require('moment')
 var utils = require('../utils')
+var ProfileController = require('./ProfileController')
 
 module.exports = {
 	get: function(params, isRaw){
@@ -96,9 +97,20 @@ module.exports = {
 
 			params['text'] = utils.TextUtils.convertToHtml(params.text)
 
+			let cmt = null
       Comment.create(params)
 			.then(comment => {
-				resolve(comment.summary())
+				cmt = comment.summary()
+				if (params.op == null) // profile ID of thread creator
+					return null
+				else
+					return ProfileController.getById(params.op, false, process.env.ADMIN_API_KEY)
+			})
+			.then(profile => {
+				if (profile != null)
+					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', profile.email, 'TEST', 'This is a test email')
+
+				resolve(cmt)
 			})
 			.catch(err => {
 				console.log('ERROR: '+err)
