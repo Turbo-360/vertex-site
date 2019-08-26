@@ -213,10 +213,10 @@
               </div>
               <hr />
               <ul class="list-unstyled components">
-                  <li>
+                  <li class="active">
                       <a href="#" class="sidebar-link" data-rel="about">About {{profile.firstName}}</a>
                   </li>
-                  <li class="active">
+                  <li>
                       <a href="#" class="sidebar-link" data-rel="all">Templates</a>
                   </li>
               </ul>
@@ -229,7 +229,7 @@
                       <div class="row">
 
                           {{#templates}}
-                          <article class="col-md-6 {{features}} all">
+                          <article class="col-md-6 {{features}} all" style="display:none">
                               <a id="{{id}}-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
                                 <div class="card mb-4" style="background-image: url('{{{image}}}=s1024')"></div>
                               </a>
@@ -239,7 +239,7 @@
                           </article>
                           {{/templates}}
 
-                          <article class="col-md-9 mx-auto about" style="display:none">
+                          <article class="col-md-9 mx-auto about">
                             <div style="background:#fff;padding:36px">
                               <img style="width:256px;" src="{{{profile.image}}}=s512-c" />
                               <h1 style="text-transform:capitalize">{{profile.firstName}} {{profile.lastName}}</h1>
