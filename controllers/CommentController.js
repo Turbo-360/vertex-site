@@ -107,8 +107,10 @@ module.exports = {
 					return ProfileController.getById(params.op, false, process.env.ADMIN_API_KEY)
 			})
 			.then(profile => {
-				if (profile != null)
-					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', profile.email, 'TEST', 'This is a test email')
+				if (profile != null){
+					console.log('SEND EMAIL: '+profile.email)
+					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', [profile.email], 'TEST', 'This is a test email')
+				}
 
 				resolve(cmt)
 			})
