@@ -150,6 +150,16 @@ router.get('/community', (req, res) => {
 	controllers.profile.get({limit:30})
 	.then(profiles => {
 		data['profiles'] = profiles
+		data['preloaded'] = JSON.stringify({
+			// onLoginRedirect: 'reload',
+			// onRegisterRedirect: 'reload',
+			// threads: data.threads,
+			timestamp: req.timestamp,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: sanitizedUser(req.user)
+		})
+
 		res.render('community', data)
 	})
 	.catch(err => {
