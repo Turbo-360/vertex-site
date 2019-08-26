@@ -51,7 +51,7 @@
 
           {{#thread.profile.id}}
           <span style="margin:6px">&middot;</span>
-          <small>posted by <a target="_blank" style="text-decoration:none" href="#">{{thread.profile.username}}</a></small>
+          <small>posted by <a target="_blank" style="text-decoration:none" href="/profile/{{thread.profile.slug}}">{{thread.profile.username}}</a></small>
           {{/thread.profile.id}}
 
         </div>
@@ -64,7 +64,7 @@
         <div class="mt-2 d-flex justify-content-between post-preview">
           <div class="pr-4">
             <div class="card-text text-muted small">
-                <a href="#">{{ profile.username }}</a>
+                <a href="/profile/{{slug}}">{{ profile.username }}</a>
                 <span style="margin:6px">&middot;</span>
                 <span>{{ dateString }}</span>
             </div>
@@ -85,7 +85,7 @@
     <div class="mt-2 d-flex justify-content-between post-preview">
       <div class="pr-4">
         <div class="card-text text-muted small">
-            <a href="#"><% profile.username %></a>
+            <a href="/profile/<% profile.slug %>"><% profile.username %></a>
             <span style="margin:6px">&middot;</span>
             <span><% dateString %></span>
         </div>
