@@ -75,6 +75,20 @@
         }
       }
 
+      authorizeUser(onRegisterRedirect)
+
+      /*
+      if (gapi==null){
+        authorizeUser(onRegisterRedirect)
+        return
+      }
+
+
+      if (gapi.auth2==null){
+        authorizeUser(onRegisterRedirect)
+        return
+      }
+
       // log out of google if logged in:
       var auth2 = gapi.auth2.getAuthInstance()
       if (auth2 == null){
@@ -85,6 +99,7 @@
       auth2.signOut().then(function () {
         authorizeUser(onRegisterRedirect)
       })
+      */
     })
   })
 
@@ -134,8 +149,16 @@
         }
       }
 
+      authorizeUser(onLoginRedirect, response)
+
+      /*
       if (gapi != null){
         authorizeUser(onLoginRedirect, response)
+        return
+      }
+
+      if (gapi.auth2==null){
+        authorizeUser(onRegisterRedirect)
         return
       }
 
@@ -149,6 +172,7 @@
       auth2.signOut().then(function () {
         authorizeUser(onLoginRedirect, response)
       })
+      */
     })
   })
 
