@@ -245,8 +245,8 @@
           <nav id="sidebar" class="hidden-xs">
               <div class="sidebar-header">
                   <h5 style="color:#333">Search</h5>
-                  <input type="text" class="form-control mr-3" style="width:88%" />
-                  <button class="btn btn-success mt-3" style="width:88%">Submit</button>
+                  <input id="input-search" type="text" class="form-control mr-3" style="width:88%" />
+                  <button id="btn-search" class="btn btn-success mt-3" style="width:88%">Submit</button>
               </div>
           </nav>
 
@@ -254,7 +254,7 @@
               <!-- features section -->
               <section class="py-6" id="features" style="background:#f9f9f9">
                   <div class="container mt-4">
-                      <div class="row">
+                      <div id="profiles-row" class="row">
 
                           {{#profiles}}
                           <article class="col-md-3 col-6">
@@ -280,6 +280,23 @@
       </div>
       {{>auth}}
 
+
+      <script type="text/template" id="tpl-profile-card">
+        <article class="col-md-3 col-6">
+            <div class="profile-card">
+              <a href="/profile/<% slug %>">
+                <img class="mb-0 w-75" src="<%{image}%>=s320-c" />
+              </a>
+
+              <h5 class="mt-3">
+                <a style="text-decoration:none" href="/profile/<%slug%>"><%firstName%></a>
+              </h5>
+              <small><%username%></small>
+              <p><%bio%></p>
+            </div>
+        </article>
+      </script>
+
       <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
       <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
       <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
@@ -296,5 +313,46 @@
       <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
 
       {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
+
+      <script>
+        (function(){
+          Mustache.tags = ["<%", "%>"]
+          $('#btn-search').click(function(event){
+            if (event)
+              event.preventDefault()
+
+            var text = $('#input-search').val()
+            if (text.length == 0){
+              alert('Please enter a search term')
+              return
+            }
+
+            // console.log('SEARCH: '+text)
+            window.vertexLib.postRequest('/admin/search', {text:text}, function(err, response){
+              if (err){
+                alert('Err - ' + err.message)
+                return
+              }
+
+              if (response.confirmation != 'success'){
+                alert('Err - ' + response.message)
+                return
+              }
+
+              var profiles = response.results
+              // console.log(JSON.stringify(profiles))
+
+              var profilesHtml = ''
+              var tplProfileCard = $('#tpl-profile-card').html()
+              profiles.forEach(function(profile){
+                profilesHtml += Mustache.render(tplProfileCard, profile)
+              })
+
+              $('#profiles-row').html(profilesHtml)
+            })
+          })
+
+        })()
+      </script>
     </body>
 </html>
