@@ -21,7 +21,7 @@ module.exports = {
 	search: (text, isRaw, key) => {
 		return new Promise((resolve, reject) => {
 			const params = {
-				$text:{
+				$text: {
 					$search: text
 				}
 			}

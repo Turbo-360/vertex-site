@@ -242,7 +242,7 @@ router.get('/search', (req, res) => {
 		return
 	}
 
-	controllers.profile.search({text:req.query.text})
+	controllers.profile.search(req.query.text)
 	.then(profiles => {
 		res.json({
 			confirmation: 'success',
