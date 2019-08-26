@@ -161,6 +161,30 @@ router.post('/config', (req, res) => {
 	})
 })
 
+router.post('/search', (req, res) => {
+	if (req.body.text == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'missing text parameter'
+		})
+		return
+	}
+
+	controllers.profile.search(req.body.text)
+	.then(profiles => {
+		res.json({
+			confirmation: 'success',
+			results: profiles
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 // fetch captions from youtube video based on ID:
 router.get('/captions', (req, res) => {
 	if (req.query.video == null){
