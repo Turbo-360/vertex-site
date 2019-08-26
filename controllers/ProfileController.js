@@ -26,6 +26,19 @@ module.exports = {
 				}
 			}
 
+			// const sortOrder = (params.sort == 'asc') ? 1 : -1
+			// delete params['sort']
+
+			/* Query by filters passed into parameter string: */
+			// let limit = params.limit
+			// if (limit == null)
+			// 	limit = '0'
+			//
+			// delete params['limit']
+
+			// default filter to timestamp
+			const filters = {limit:50, sort:{timestamp: -1}}
+
 			Profile.find(params, null, null, (err, profiles) => {
 				if (err){
 					reject(err)
