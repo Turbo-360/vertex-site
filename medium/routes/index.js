@@ -141,6 +141,26 @@ router.get('/me', (req, res) => {
 	})
 })
 
+router.get('/community', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.profile.get({limit:30})
+	.then(profiles => {
+		data['profiles'] = profiles
+		res.render('community', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+
 router.get('/templates', (req, res) => {
 	const data = {
 		cdn: CDN,
