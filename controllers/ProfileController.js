@@ -38,7 +38,6 @@ module.exports = {
 
 			// default filter to timestamp
 			const filters = {limit:50, sort:{timestamp: -1}}
-
 			Profile.find(params, null, null, (err, profiles) => {
 				if (err){
 					reject(err)
