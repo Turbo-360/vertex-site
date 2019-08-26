@@ -101,15 +101,12 @@ module.exports = {
       Comment.create(params)
 			.then(comment => {
 				cmt = comment.summary()
-				if (params.op == null) // profile ID of thread creator
-					return null
-				else
-					return ProfileController.getById(params.op, false, process.env.ADMIN_API_KEY)
+				return (params.op == null) ? null : ProfileController.getById(params.op, false, process.env.ADMIN_API_KEY)
 			})
 			.then(profile => {
 				if (profile != null){
 					console.log('SEND EMAIL: '+profile.email)
-					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', [profile.email], 'TEST', 'This is a test email')
+					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', [profile.email], '[vertex 360] new message from'+cmt.profile.username, 'Hello!<br /><br />'+cmt.profile.username+' responded to your post. Read it <a style="color:red" href="https://www.vertex360.co/feed/'+params.slug+'">HERE</a><br /><br /><img src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s160" />')
 				}
 
 				resolve(cmt)
