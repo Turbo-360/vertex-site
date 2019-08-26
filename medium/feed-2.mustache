@@ -231,6 +231,7 @@
           var user = data.user
           var threads = data.threads // this is an object
           var currentCategory = 'recent'
+          var isFetchingMeta = false
 
           var formattedDate = function(date){
             var options = {year:'numeric', month:'long', day:'numeric'}
@@ -301,7 +302,8 @@
             })
           })
 
-          $('#input-thread-url').change(function(){
+          // $('#input-thread-url').change(function(){
+          $('#input-thread-url').on('input', function(){
             var url = $(this).val()
             if (url.indexOf('http') == -1){
               alert('Invalid URL. Copy & paste url from browser.')
@@ -310,7 +312,9 @@
 
             $('#btn-submit-thread').css('display', 'none')
             $('#loading-indicator').html('<img style="width:30%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
+            isFetchingMeta = true
             window.vertexLib.getRequest('/account/scrape', {url:url}, function(err, resp){
+              isFetchingMeta = false
               if (err){
                 console.log('ERR - ' + err)
                 return
