@@ -18,6 +18,31 @@ const avatars = [
 ]
 
 module.exports = {
+	search: (text, isRaw, key) => {
+		return new Promise((resolve, reject) => {
+			const params = {
+				$text:{
+					$search: text
+				}
+			}
+
+			Profile.find(params, null, null, (err, profiles) => {
+				if (err){
+					reject(err)
+					return
+				}
+
+				if (isRaw){
+					resolve(profiles)
+					return
+				}
+
+				// resolve(utils.Resource.convertToJson(profiles))
+				resolve(Profile.convertToJson(profiles, key))
+			})
+		})
+	},
+
 	get: (params, isRaw, token, req) => {
 		return new Promise((resolve, reject) => {
 			if (params == null)

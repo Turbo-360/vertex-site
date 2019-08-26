@@ -231,6 +231,34 @@ router.get('/captions', (req, res) => {
 	})
 })
 
+
+// test endpoint for text search:
+router.get('/search', (req, res) => {
+	if (req.query.text == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'missing text parameter'
+		})
+		return
+	}
+
+	controllers.profile.search({text:req.query.text})
+	.then(profiles => {
+		res.json({
+			confirmation: 'success',
+			results: profiles
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
+
+// test endpoint for scraping links:
 router.get('/scrape', (req, res) => {
 	if (req.query.url == null){
 		res.json({
