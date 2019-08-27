@@ -89,6 +89,9 @@
         #content {
             width: 100%;
         }
+        .btn-get-started {
+          padding: 12px 5.5em;
+        }
     }
 
     @media (max-width: 475px) {
@@ -117,6 +120,10 @@
         #sidebar ul li a,
         #sidebar .sidebar-header {
             padding-left: 0;
+        }
+
+        .sidebar-header {
+          display: none;
         }
     }
 
@@ -171,19 +178,14 @@
     }
 
     .btn-get-started {
-    width: 100%;
-    border-radius: 4px;
-    padding: 12px 11em;
+      width: 100%;
+      border-radius: 4px;
+      padding: 12px 11em;
     }
 
-    @media (max-width: 768px) {
-    .btn-get-started {
-      padding: 12px 5.5em;
-    }
-    }
 
     h5 {
-    text-transform: capitalize;
+      text-transform: capitalize;
     }
 
     .sidebar-link {
@@ -196,6 +198,19 @@
     border: 1px solid #ededed;
     }
 
+    @media (max-width: 568px) {
+      .thread-preview-img {
+        display: none;
+      }
+
+      #sidebar {
+        padding-top: 1rem;
+      }
+
+      #features {
+        padding-top: 1px !important;
+      }
+    }
 
     </style>
 </head>
