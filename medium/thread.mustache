@@ -13,8 +13,16 @@
       background-position: center !important;
     }
 
-    @media screen and (max-width: 525px) {
+    .top-pad {
+      height: 24px;
+    }
+
+    @media screen and (max-width: 568px) {
       .subject-image-container {
+        display: none;
+      }
+
+      .top-pad {
         display: none;
       }
     }
@@ -24,16 +32,8 @@
 <body>
   {{>nav}}
 
-<div class="container pt-5">
-  <div class="row">
-
-
-  </div>
-</div>
-<!-- End Header -->
-
-
 <div class="container pt-4 pb-4">
+  <div class="top-pad"></div>
 	<div class="row justify-content-between">
 		<div class="col-md-8 mx-auto">
       <div style="display:flex">
