@@ -20,7 +20,7 @@ const SiteSchema = new mongoose.Schema({
 	cloneSource: {type:String, trim:true, default: ''}, // SLUG of original clone source
 	canClone: {type:String, trim:true, default: 'no'},
 	featured: {type:String, trim:true, default: 'no'},
-	// published: {type:String, trim:true, default: 'no'}, // published means other sites can use the vectors. no means only host site can use. open means anyone can use.
+	published: {type:String, trim:true, default: 'no'},
 	github: {type:String, trim:true, default: ''}, // github repo
 	name: {type:String, trim:true, default: ''},
 	description: {type:String, trim:true, default: ''},
@@ -64,6 +64,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		cloneSource: this.cloneSource,
 		canClone: this.canClone,
 		featured: this.featured,
+		published: this.published,
 		slug: this.slug,
 		name: this.name,
 		level: this.level,
