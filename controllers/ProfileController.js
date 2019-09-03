@@ -55,6 +55,46 @@ module.exports = {
 		})
 	},
 
+	// fetches profiles who have either updated their
+	// bio or profile image:
+	active: (attr, max) => {
+		return new Promise((resolve, reject) => {
+			// default to bio:
+			if (attr==null)
+				attr = 'bio'
+
+			let params = null
+			if (attr=='bio'){
+				params = {
+					bio: {
+						$ne: ''
+					}
+				}
+			}
+
+			if (attr=='image'){
+				params = {
+					image: {
+						$nin: avatars
+					}
+				}	
+			}
+
+			const limit = max || 100
+
+			// default filter to timestamp
+			const filters = {limit:limit, sort:{timestamp: -1}}
+			Profile.find(params, null, filters, (err, profiles) => {
+				if (err){
+					reject(err)
+					return
+				}
+
+				resolve(Profile.convertToJson(profiles, null))
+			})
+		})
+	},
+
 	get: (params, isRaw, token, req) => {
 		return new Promise((resolve, reject) => {
 			if (params == null)
