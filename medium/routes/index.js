@@ -147,7 +147,8 @@ router.get('/community', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.profile.get({limit:30})
+	// controllers.profile.get({limit:30})
+	controllers.profile.active('image', 50)
 	.then(profiles => {
 		data['profiles'] = profiles
 		data['preloaded'] = JSON.stringify({
