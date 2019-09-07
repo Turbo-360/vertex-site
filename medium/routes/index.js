@@ -492,7 +492,8 @@ router.get('/template/:slug', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		res.render('template', data)
+		res.render('template-2', data)
+		// res.render('template', data)
 	})
 	.catch(err => {
 		res.json({
