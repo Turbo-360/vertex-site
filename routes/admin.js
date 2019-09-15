@@ -132,6 +132,43 @@ router.post('/page', (req, res) => {
 	})
 })
 
+router.post('/resetpage', (req, res) => {
+	// if (req.user == null){
+	// 	res.redirect('/')
+	// 	return
+	// }
+
+	const appslug = req.body.appslug
+	if (appslug == null){
+		res.json({
+			confirmation:'fail',
+			message: 'missing appslug parameter'
+		})
+		return
+	}
+
+	const page = req.body.page
+	if (page == null){
+		res.json({
+			confirmation:'fail',
+			message: 'missing page parameter'
+		})
+		return
+	}
+
+	const endpoint = 'https://'+appslug+'.vertex360.co/api'
+	utils.HTTP.post(endpoint, {task:'resetpage', page:page, appslug:appslug})
+	.then(data => {
+		res.json(data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+})
+
 // fetch page config
 router.post('/config', (req, res) => {
 	if (req.user == null){
