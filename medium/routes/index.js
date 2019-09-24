@@ -486,7 +486,7 @@ router.get('/template/:slug', (req, res) => {
 		return utils.HTTP.get(promoConfigEndpont, null, {'Accept':'text/plain'})
 	})
 	.then(config => {
-		console.log('PROMO CONFIG: ' + config)
+		// console.log('PROMO CONFIG: ' + config)
 		data['promo'] = JSON.parse(config)
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
