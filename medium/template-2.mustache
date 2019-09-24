@@ -24,12 +24,13 @@
                     </div>
 
                     <div class="col-12 col-md-6">
-                        <div class="main-carousel overflow-visible" data-flickity='{ "cellAlign": "center", "contain": true, "prevNextButtons": false, "pageDots":true, "wrapAround":true, "autoPlay":5000, "imagesLoaded":true, "initialIndex":3, "draggable":false }'>
+                        <div class="main-carousel overflow-visible" data-flickity='{ "cellAlign": "center", "contain": true, "prevNextButtons": false, "pageDots":true, "wrapAround":true, "autoPlay":5000, "imagesLoaded":true, "initialIndex":0, "draggable":false }'>
 
+                            {{#promo.hero.screenshots}}
                             <div class="carousel-cell col-11">
                                 <div class="card card-sm bg-gradient border-0">
                                     <a href="#">
-                                        <img class="card-img-top" src="{{{promo.hero.img_cover}}}=s1024-c" alt="Screenshot">
+                                        <img class="card-img-top" src="{{{.}}}=s1024-c" alt="Screenshot">
                                     </a>
                                     <div class="card-footer d-flex justify-content-between bg-white">
                                         <a href="#" class="h6 m-0">Screenshot</a>
@@ -37,6 +38,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{/promo.hero.screenshots}}
 
                         </div>
                     </div>
