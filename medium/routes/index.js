@@ -482,10 +482,6 @@ router.get('/template/:slug', (req, res) => {
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
 
-		// const turbo = require('turbo360')({site_id:site.id})
-		// var pageConfig = function(page, apiKey, env)
-		// return turbo.pageConfig('promo', site.api.key, 'prod')
-
 		const promoConfigEndpont = process.env.S3_BASE_URL+'/turbo360-vertex/pages/'+site.slug+'/promo.txt'
 		return utils.HTTP.get(promoConfigEndpont, null, {'Accept':'text/plain'})
 	})
@@ -502,9 +498,10 @@ router.get('/template/:slug', (req, res) => {
 		res.render('template-2', data)
 	})
 	.catch(err => {
+		const msg = (err.message=='Forbidden') ? 'promo config file not found.' : err.message
 		res.json({
 			confirmation: 'fail',
-			message: err.message
+			message: msg
 		})
 	})
 })
