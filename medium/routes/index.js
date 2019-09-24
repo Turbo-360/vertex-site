@@ -482,6 +482,10 @@ router.get('/template/:slug', (req, res) => {
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
 
+		// var pageConfig = function(page, apiKey, env)
+		return turbo.pageConfig('promo', site.api.key, 'prod')
+	})
+	.then(config => {
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
