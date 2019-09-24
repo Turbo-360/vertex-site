@@ -1,4 +1,4 @@
-const turbo = require('turbo360')({site_id: process.env.TURBO_APP_ID})
+// const turbo = require('turbo360')({site_id: process.env.TURBO_APP_ID})
 const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const router = vertex.router()
 const controllers = require('../../controllers')
@@ -481,6 +481,8 @@ router.get('/template/:slug', (req, res) => {
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
+
+		const turbo = require('turbo360')({site_id:site.id})
 
 		// var pageConfig = function(page, apiKey, env)
 		return turbo.pageConfig('promo', site.api.key, 'prod')
