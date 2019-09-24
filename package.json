@@ -56,7 +56,7 @@
     "statuses": "^1.4.0",
     "stripe": "^6.28.0",
     "superagent": "^4.0.0",
-    "turbo360": "latest",
+    "turbo360": "^1.8.67",
     "type-is": "^1.6.16",
     "utils-merge": "1.0.1",
     "uuid": "^3.3.2",
