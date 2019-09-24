@@ -486,7 +486,7 @@ router.get('/template/:slug', (req, res) => {
 		// var pageConfig = function(page, apiKey, env)
 		// return turbo.pageConfig('promo', site.api.key, 'prod')
 
-		const promoConfigEndpont = S3_BASE_URL+'/turbo360-vertex/pages/'+site.slug+'/promo.txt'
+		const promoConfigEndpont = process.env.S3_BASE_URL+'/turbo360-vertex/pages/'+site.slug+'/promo.txt'
 		return utils.HTTP.get(promoConfigEndpont, null, {'Accept':'text/plain'})
 	})
 	.then(config => {
