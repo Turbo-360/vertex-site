@@ -482,12 +482,15 @@ router.get('/template/:slug', (req, res) => {
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
 
-		const turbo = require('turbo360')({site_id:site.id})
-
+		// const turbo = require('turbo360')({site_id:site.id})
 		// var pageConfig = function(page, apiKey, env)
-		return turbo.pageConfig('promo', site.api.key, 'prod')
+		// return turbo.pageConfig('promo', site.api.key, 'prod')
+
+		const promoConfigEndpont = S3_BASE_URL+'/turbo360-vertex/pages/'+site.slug+'/promo.txt'
+		return utils.HTTP.get(promoConfigEndpont, null, {'Accept':'text/plain'})
 	})
 	.then(config => {
+		console.log('PROMO CONFIG: ' + config)
 		data['promo'] = config
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
