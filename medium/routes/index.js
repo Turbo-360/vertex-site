@@ -487,7 +487,7 @@ router.get('/template/:slug', (req, res) => {
 	})
 	.then(config => {
 		console.log('PROMO CONFIG: ' + config)
-		data['promo'] = config
+		data['promo'] = JSON.parse(config)
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
