@@ -488,6 +488,7 @@ router.get('/template/:slug', (req, res) => {
 		return turbo.pageConfig('promo', site.api.key, 'prod')
 	})
 	.then(config => {
+		data['promo'] = config
 		data['preloaded'] = JSON.stringify({
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
