@@ -490,20 +490,7 @@ router.get('/template/:slug', (req, res) => {
 		})
 
 		res.render('template-2', data)
-
-		// return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
 	})
-	// .then(cloneSource => {
-	// 	data.template['cloneSource'] = cloneSource
-	// 	data['preloaded'] = JSON.stringify({
-	// 		timestamp: req.timestamp,
-	// 		referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-	// 		template: data.template,
-	// 		user: sanitizedUser(req.user)
-	// 	})
-
-	// 	res.render('template-2', data)
-	// })
 	.catch(err => {
 		res.json({
 			confirmation: 'fail',
