@@ -468,6 +468,12 @@
                     data: body,
                     success: function(resp){
                         console.log('SUCCESS - ' + JSON.stringify(resp))
+                        if (resp.confirmation != 'success'){
+                            alert('Error - '+resp.message)
+                            return
+                        }
+
+                        currentUser = resp.user
                         // window.location.href = '/me'
 
                         console.log('LAUNCH TEMPLATE: ' + JSON.stringify(template))
