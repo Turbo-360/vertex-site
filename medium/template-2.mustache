@@ -500,14 +500,49 @@
                         onApprove: function(data, actions) {
                             return actions.order.capture().then(function(details) {
                                 console.log('Transaction completed by ' + details.payer.name.given_name);
-                                paypalHandler({
-                                    type: button.type, // register or upgrade
-                                    item: template.id,
-                                    // amount: 3000,
-                                    amount: 300,
-                                    orderID: data.orderID,
-                                    user: currentUser.id // null if user not logged in
-                                })
+                                if (button.type == 'register'){
+                                    var visitor = {
+                                        fullName: $('#input-register-name').val(),
+                                        email: $('#input-register-email').val(),
+                                        password: $('#input-register-password').val()
+                                        // promoCode: $('#input-register-promo').val()
+                                    }
+
+                                    if (visitor.fullName.length == 0){
+                                        alert('Please enter your NAME')
+                                        return
+                                    }
+
+                                    if (visitor.email.length == 0){
+                                        alert('Please enter your EMAIL')
+                                        return
+                                    }
+
+                                    if (visitor.password.length == 0){
+                                        alert('Please enter your PASSWORD')
+                                        return
+                                    }
+
+                                    paypalHandler({
+                                        type: button.type, // register or upgrade
+                                        item: template.id,
+                                        // amount: 3000,
+                                        amount: 300,
+                                        orderID: data.orderID,
+                                        user: JSON.stringify(visitor)
+                                    })
+                                }
+
+                                if (button.type == 'currentuser'){
+                                    paypalHandler({
+                                        type: button.type, // register or upgrade
+                                        item: template.id,
+                                        // amount: 3000,
+                                        amount: 300,
+                                        orderID: data.orderID,
+                                        user: currentUser.id
+                                    })                                    
+                                }
                             });
                         }
                     }).render('#'+button.id)
