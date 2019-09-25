@@ -437,6 +437,7 @@
 
 
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+    <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/jquery.min.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/popper.min.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/jquery.smartWizard.min.js"></script>
@@ -459,6 +460,57 @@
                 {id:'paypal-button', type:'currentuser'}
             ]
 
+            // checks if a template is ready when cloning:
+            var checkTemplate = function(siteSlug){
+                var body = {template:siteSlug}
+                window.vertexLib.postRequest('/account/check-template', body, function(err, response){
+                if (err){
+                    // console.log('TEMPLATE NOT READY: ' + siteSlug)
+                    setTimeout(function(){
+                        checkTemplate(siteSlug)
+                    }, 4000)
+                    return
+                }
+
+                if (response.confirmation != 'success'){
+                    setTimeout(function(){
+                        checkTemplate(siteSlug)
+                    }, 4000)
+                    return
+                }
+
+                console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+                if (response.confirmation != 'success'){
+                    alert('Error - ' + response.message)
+                    return
+                }
+
+                    window.location.href = '/admin/pages/'+siteSlug // redirect to site admin page
+                })
+            }
+
+            var launchTemplate = function(name){
+                console.log('LAUNCH TEMPLATE: ' + name)
+                var body = {
+                    // name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+                    name: name,
+                    source: template.id // ID of the template being copied
+                }
+
+                // console.log('launchTemplate: ' + JSON.stringify(body))
+                window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
+                    if (err){
+                        alert('Error: ' + err.message)
+                        return
+                    }
+
+                    console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+                    setTimeout(function(){
+                        checkTemplate(response.data.slug)
+                    }, 4000)
+                })
+            }
+
             var paypalHandler = function(body){
                 // console.log('SEND TO SERVER: ' + JSON.stringify(body)) // SEND TO SERVER: {"orderID":"6MY18367X92392056","payerID":"PHB8GZAU8N74Q"}
                 $('#paypal-button-register').html('<img style="max-width:40%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" /><br /><small>This may take a couple minutes...</small>')
@@ -476,8 +528,8 @@
                         currentUser = resp.user
                         // window.location.href = '/me'
 
-                        console.log('LAUNCH TEMPLATE: ' + JSON.stringify(template))
                         // charge processed, launch template:
+                        launchTemplate(currentUser.firstName)
                     },
                     error: function(resp){
                         console.log('ERROR - ' + JSON.stringify(resp))
