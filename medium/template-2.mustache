@@ -526,10 +526,7 @@
                         }
 
                         currentUser = resp.user
-                        // window.location.href = '/me'
-
-                        // charge processed, launch template:
-                        launchTemplate(currentUser.firstName)
+                        launchTemplate(currentUser.firstName) // charge processed, launch template:
                     },
                     error: function(resp){
                         console.log('ERROR - ' + JSON.stringify(resp))
@@ -553,7 +550,7 @@
                                 purchase_units: [{
                                     amount: {
                                         //value: '30.00'
-                                        value: '3.00'
+                                        value: '2.00'
                                     }
                                 }]
                             });
@@ -588,7 +585,7 @@
                                         type: button.type, // register or upgrade
                                         item: template.id,
                                         // amount: 3000,
-                                        amount: 300,
+                                        amount: 200,
                                         orderID: data.orderID,
                                         user: JSON.stringify(visitor)
                                     })
@@ -599,7 +596,7 @@
                                         type: button.type, // register or upgrade
                                         item: template.id,
                                         // amount: 3000,
-                                        amount: 300,
+                                        amount: 200,
                                         orderID: data.orderID,
                                         user: currentUser.id
                                     })                                    
