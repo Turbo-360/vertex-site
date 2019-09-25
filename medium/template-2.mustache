@@ -221,7 +221,7 @@
                                                 5 Project Maximum
                                             </li>
                                         </ul>
-                                        <a href="#" class="btn btn-info mt-0 w-100 mb-4" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
+                                        <a id="btn-launch-30" href="#" class="btn btn-info mt-0 w-100 mb-4" data-toggle="modal" data-target="#register-modal">LAUNCH YOUR SITE</a>
                                     </div>
                                 </div>
                                 <!--end card-->
@@ -251,13 +251,10 @@
                                                 Vertex 360 Developer License
                                             </li>
                                         </ul>
-                                        <a id="register-btn-upgrade" href="#" class="btn btn-success mt-0 w-100 mb-4" data-toggle="modal" data-target="#upgrade-modal">UPGRADE</a>
-                                        <a id="register-btn-premium" href="#" class="btn btn-success mt-0 w-100 mb-4" data-toggle="modal" data-target="#register-premium-modal" style="display: none;">JOIN NOW</a>
+                                        <a id="btn-launch-50" href="#" class="btn btn-success mt-0 w-100 mb-4" data-toggle="modal" data-target="#upgrade-modal">LAUNCH YOUR SITE</a>
                                     </div>
                                 </div>
-                                <!--end card-->
                             </div>
-                            <!--end of col-->
 
                         </div>
                         <!--end of row-->
@@ -384,6 +381,38 @@
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/zoom.min.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/bootstrap.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/theme.js"></script>
+    <script>
+        (function(){
+            var data = window.__PRELOADED__
+            var currentUser = data.user // null if not logged in
+
+            var purchaseSite = function(price){
+                if (currentUser == null){
+                    console.log('user not logged in')
+                }
+                else {
+                    console.log('current user: '+JSON.stringify(currentUser))
+                }
+            }
+
+            $('#btn-launch-30').click(function(e){
+                if (e)
+                    e.preventDefault()
+                
+                console.log('BTN LAUNCH 30: ')
+                purchaseSite(30)
+            })
+
+            $('#btn-launch-50').click(function(e){
+                if (e)
+                    e.preventDefault()
+                
+                console.log('BTN LAUNCH 50: ')
+                purchaseSite(50)
+            })
+
+        })()
+    </script>
 
 </body>
 
