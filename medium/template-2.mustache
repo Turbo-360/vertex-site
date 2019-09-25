@@ -368,6 +368,49 @@
         </footer>
     </div>
 
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
+      <div class="modal-header text-center">
+        <img class="mx-auto mt-1 mb-2" style="width:130px" src="https://lh3.googleusercontent.com/YJUXmq576Zepuq0gf01z-y1lLHeV5xU17F86UoVYZSBBCCmuwP4t_BkvrcDvK7EEIDWWdJxFLMa8bLABTOZISFJ5=s260" />
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-3">
+          <h4>Join</h4>
+        </div>
+        <input id="input-register-name" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Name" />
+        <input id="input-register-email" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Email" />
+        <input id="input-register-password" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-3" type="password" placeholder="Password" />
+        <div style="text-align:center">
+          <small>Already have an account? Sign in <a id="href-show-login" style="color:red" href="#">HERE</a></small>
+        </div>
+        <hr />
+        <button id="input-register" style="width:100%" type="button" class="btn btn-primary btn-lg mb-1">REGISTER</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
+      <div class="modal-header text-center">
+        <img class="mx-auto mt-1 mb-2" style="width:130px" src="https://lh3.googleusercontent.com/YJUXmq576Zepuq0gf01z-y1lLHeV5xU17F86UoVYZSBBCCmuwP4t_BkvrcDvK7EEIDWWdJxFLMa8bLABTOZISFJ5=s260" />
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-3">
+          <h4>Log In</h4>
+        </div>
+        <input id="input-login-email" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Email" />
+        <input id="input-login-password" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-3" type="password" placeholder="Password" />
+        <hr />
+        <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg mb-3">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a id="btn-register-modal" data-toggle="modal" data-target="#register-modal" href="#" style="display:none"></a>
 
 
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
@@ -387,12 +430,13 @@
             var currentUser = data.user // null if not logged in
 
             var purchaseSite = function(price){
-                if (currentUser == null){
-                    console.log('user not logged in')
-                }
-                else {
+                if (currentUser != null){
                     console.log('current user: '+JSON.stringify(currentUser))
+                    return
                 }
+
+                // console.log('current user: '+JSON.stringify(currentUser))
+                document.getElementById('btn-register-modal').click()
             }
 
             $('#btn-launch-30').click(function(e){
