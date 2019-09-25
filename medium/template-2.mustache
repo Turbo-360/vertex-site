@@ -388,7 +388,7 @@
         <div style="text-align:center">
             <h4 id="register-price-header" class="mb-2">$30 per 6 months</h4>
         </div>
-        <div id="paypal-button-register"></div>
+        <div style="text-align:center" id="paypal-button-register"></div>
       </div>
     </div>
   </div>
@@ -461,7 +461,7 @@
 
             var paypalHandler = function(body){
                 // console.log('SEND TO SERVER: ' + JSON.stringify(body)) // SEND TO SERVER: {"orderID":"6MY18367X92392056","payerID":"PHB8GZAU8N74Q"}
-                $('#paypal-button-register').html('<img style="max-width:60%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" /><br /><small>This may take a couple minutes...</small>')
+                $('#paypal-button-register').html('<img style="max-width:40%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" /><br /><small>This may take a couple minutes...</small>')
                 $.ajax({
                     url: '/paypal/launchtemplate',
                     type: 'POST',
