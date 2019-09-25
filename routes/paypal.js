@@ -85,25 +85,22 @@ router.post('/launchtemplate', (req, res) => {
     // }
     // console.log('ORDER SUCCESSFULLY PROCESSED: ' + JSON.stringify(data))
 
-    // if (type == 'register'){ // create new user first
-		// 	req.session.user = user // log user in
-    //   return controllers.profile.put(user, {accountType:'premium'})
-    // }
-    // if (item == 'currentuser') { // fetch current user
-    //   return purchaseTutorial(req.body)
-    // }
+    if (type == 'register'){ // create new user first
+      return controllers.profile.post(JSON.parse(user))
+    }
+    if (item == 'currentuser') { // fetch current user
+      return controllers.profile.getById(user)
+    }
+  })
+  .then(user => {
+		req.session.user = user.id // log user in
 
     res.json({
       confirmation: 'success',
       data: data
     })
+
   })
-  // .then(data => {
-  //   res.json({
-  //     confirmation: 'success',
-  //     data: data
-  //   })
-  // })
   .catch(err => {
     res.json({
       confirmation: 'fail',
