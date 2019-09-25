@@ -410,7 +410,28 @@
   </div>
 </div>
 
+<div class="modal fade" id="purchase-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
+      <div class="modal-header text-center">
+        <img class="mx-auto mt-1 mb-2" style="width:130px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s260" />
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-3">
+          <h4>LAUNCH WEBSITE</h4>
+          <p>Upgrade to Premium to access <strong>ALL</strong> tutorials on Turbo 360 as well as all future tutorials forever!</p>
+          <h4 id="upgrade-price-modal" class="mb-0 text-blue">$30 one time fee</h4>
+          <span>Lifetime Acces</span>
+        </div>
+        <hr />
+        <div id="paypal-button"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <a id="btn-register-modal" data-toggle="modal" data-target="#register-modal" href="#" style="display:none"></a>
+<a id="btn-purchase-modal" data-toggle="modal" data-target="#purchase-modal" href="#" style="display:none"></a>
 
 
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
@@ -424,6 +445,71 @@
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/zoom.min.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/bootstrap.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/theme.js"></script>
+    <script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id={{pp_client_id}}&disable-funding=credit&disable-card=amex,discover"></script>
+
+    <script>
+        (function(){
+            var preloaded = window.__PRELOADED__
+            var currentUser = preloaded.user // null if not registered
+            var buttons = [
+                // {id:'paypal-button-register', type:'register'},
+                {id:'paypal-button', type:'template'}
+            ]
+
+            var postHandler = function(body){
+                // console.log('SEND TO SERVER: ' + JSON.stringify(body)) // SEND TO SERVER: {"orderID":"6MY18367X92392056","payerID":"PHB8GZAU8N74Q"}
+                $.ajax({
+                    url: '/paypal/order',
+                    type: 'POST',
+                    data: body,
+                    success: function(resp){
+                        // console.log('SUCCESS - ' + JSON.stringify(resp))
+                        window.location.href = '/me'
+                    },
+                    error: function(resp){
+                        console.log('ERROR - ' + JSON.stringify(resp))
+                        alert('ERR - ' + resp.message)
+                    }
+                })
+            }
+
+            buttons.forEach(function(button){
+            if (document.getElementById(button.id) != null){
+                paypal.Buttons({
+                style:{
+                    size:   'large',
+                    layout:  'horizontal',
+                    color:   'blue',
+                    shape:   'rect',
+                    label:   'checkout'
+                },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: '30.00'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        console.log('Transaction completed by ' + details.payer.name.given_name);
+                        postHandler({
+                            type: button.type, // register or upgrade
+                            item: 'template',
+                            amount: 3000,
+                            orderID: data.orderID,
+                            user: currentUser.id // null if user not logged in
+                        })
+                    });
+                }
+                }).render('#'+button.id)
+            }
+            })
+        })()
+    </script>
+
     <script>
         (function(){
             var data = window.__PRELOADED__
@@ -432,6 +518,7 @@
             var purchaseSite = function(price){
                 if (currentUser != null){
                     console.log('current user: '+JSON.stringify(currentUser))
+                    document.getElementById('btn-purchase-modal').click()
                     return
                 }
 
