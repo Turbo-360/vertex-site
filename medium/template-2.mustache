@@ -460,24 +460,6 @@
                 {id:'paypal-button', type:'currentuser'}
             ]
 
-            $('#btn-launch-30').click(function(e){
-                if (e)
-                    e.preventDefault()
-                
-                console.log('BTN LAUNCH 30: ')
-                $('#register-price-header').html('$30 per 6 months')
-                purchaseSite(30)
-            })
-
-            $('#btn-launch-50').click(function(e){
-                if (e)
-                    e.preventDefault()
-                
-                console.log('BTN LAUNCH 50: ')
-                $('#register-price-header').html('$50 per 12 months')
-                purchaseSite(50)
-            })
-
             // checks if a template is ready when cloning:
             var checkTemplate = function(siteSlug){
                 var body = {template:siteSlug}
@@ -623,6 +605,42 @@
                         }
                     }).render('#'+button.id)
                 }
+            })
+        })()
+    </script>
+
+    <script>
+        (function(){
+            var data = window.__PRELOADED__
+            var currentUser = data.user // null if not logged in
+
+            var purchaseSite = function(price){
+                if (currentUser != null){
+                    console.log('current user: '+JSON.stringify(currentUser))
+                    document.getElementById('btn-purchase-modal').click()
+                    return
+                }
+
+                // console.log('current user: '+JSON.stringify(currentUser))
+                document.getElementById('btn-register-modal').click()
+            }
+
+            $('#btn-launch-30').click(function(e){
+                if (e)
+                    e.preventDefault()
+                
+                console.log('BTN LAUNCH 30: ')
+                $('#upgrade-price-modal').html('$30 per 6 months')
+                purchaseSite(30)
+            })
+
+            $('#btn-launch-50').click(function(e){
+                if (e)
+                    e.preventDefault()
+                
+                console.log('BTN LAUNCH 50: ')
+                $('#upgrade-price-modal').html('$50 per 12 months')
+                purchaseSite(50)
             })
         })()
     </script>
