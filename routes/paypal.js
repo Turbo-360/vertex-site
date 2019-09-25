@@ -69,6 +69,8 @@ router.post('/launchtemplate', (req, res) => {
   const amount = req.body.amount
   const orderID = req.body.orderID
 
+
+  const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
   const credentials = {
     clientId: process.env.PP_CLIENT_ID,
     clientSecret: process.env.PP_CLIENT_SECRET
