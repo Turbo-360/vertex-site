@@ -461,6 +461,7 @@
 
             var paypalHandler = function(body){
                 // console.log('SEND TO SERVER: ' + JSON.stringify(body)) // SEND TO SERVER: {"orderID":"6MY18367X92392056","payerID":"PHB8GZAU8N74Q"}
+                $('#paypal-button-register').html('<img style="max-width:60%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" /><br /><small>This may take a couple minutes...</small>')
                 $.ajax({
                     url: '/paypal/launchtemplate',
                     type: 'POST',
