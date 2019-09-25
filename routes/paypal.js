@@ -93,8 +93,7 @@ router.post('/launchtemplate', (req, res) => {
     }
   })
   .then(user => {
-		req.session.user = user.id // log user in
-
+		req.vertex_session.user = user.id // log user in
     res.json({
       confirmation: 'success',
       data: data
