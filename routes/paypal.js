@@ -65,7 +65,7 @@ router.post('/order', (req, res) => {
 router.post('/launchtemplate', (req, res) => {
   const type = req.body.type // register or currentuser
   const item = req.body.item // template id string
-  const user = req.body.user
+  const user = req.body.user // if (type=='register'), user is stringified registration json
   const amount = req.body.amount
   const orderID = req.body.orderID
 
@@ -83,15 +83,12 @@ router.post('/launchtemplate', (req, res) => {
     // }
     // console.log('ORDER SUCCESSFULLY PROCESSED: ' + JSON.stringify(data))
 
-    // if (item == 'premium'){
+    // if (type == 'register'){ // create new user first
 		// 	req.session.user = user // log user in
     //   return controllers.profile.put(user, {accountType:'premium'})
     // }
-    // else if (item == 'tutorial') {    
+    // if (item == 'currentuser') { // fetch current user
     //   return purchaseTutorial(req.body)
-    // }
-    // else {
-    //   return null
     // }
 
     res.json({
