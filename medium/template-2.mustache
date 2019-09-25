@@ -418,10 +418,9 @@
       </div>
       <div class="modal-body">
         <div class="text-center mb-3">
-          <h4>LAUNCH WEBSITE</h4>
+          <h4 class="mb-3">LAUNCH WEBSITE</h4>
           <p>Upgrade to Premium to access <strong>ALL</strong> tutorials on Turbo 360 as well as all future tutorials forever!</p>
-          <h4 id="upgrade-price-modal" class="mb-0 text-blue">$30 one time fee</h4>
-          <span>Lifetime Acces</span>
+          <h4 id="upgrade-price-modal" class="mb-0 text-blue">$30 per 6 months</h4>
         </div>
         <hr />
         <div id="paypal-button"></div>
@@ -474,38 +473,38 @@
             }
 
             buttons.forEach(function(button){
-            if (document.getElementById(button.id) != null){
-                paypal.Buttons({
-                style:{
-                    size:   'large',
-                    layout:  'horizontal',
-                    color:   'blue',
-                    shape:   'rect',
-                    label:   'checkout'
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '30.00'
-                            }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        console.log('Transaction completed by ' + details.payer.name.given_name);
-                        postHandler({
-                            type: button.type, // register or upgrade
-                            item: 'template',
-                            amount: 3000,
-                            orderID: data.orderID,
-                            user: currentUser.id // null if user not logged in
-                        })
-                    });
+                if (document.getElementById(button.id) != null){
+                    paypal.Buttons({
+                        style:{
+                            size:   'large',
+                            layout:  'horizontal',
+                            color:   'blue',
+                            shape:   'rect',
+                            label:   'checkout'
+                        },
+                        createOrder: function(data, actions) {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '30.00'
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                console.log('Transaction completed by ' + details.payer.name.given_name);
+                                postHandler({
+                                    type: button.type, // register or upgrade
+                                    item: 'template',
+                                    amount: 3000,
+                                    orderID: data.orderID,
+                                    user: currentUser.id // null if user not logged in
+                                })
+                            });
+                        }
+                    }).render('#'+button.id)
                 }
-                }).render('#'+button.id)
-            }
             })
         })()
     </script>
@@ -514,6 +513,56 @@
         (function(){
             var data = window.__PRELOADED__
             var currentUser = data.user // null if not logged in
+
+            $('#input-register').click(function(event){
+                if (event)
+                    event.preventDefault()
+
+                var visitor = {
+                    fullName: $('#input-register-name').val(),
+                    email: $('#input-register-email').val(),
+                    password: $('#input-register-password').val()
+                    // promoCode: $('#input-register-promo').val()
+                }
+
+                if (visitor.fullName.length == 0){
+                    alert('Please enter your NAME')
+                    return
+                }
+
+                if (visitor.email.length == 0){
+                    alert('Please enter your EMAIL')
+                    return
+                }
+
+                if (visitor.password.length == 0){
+                    alert('Please enter your PASSWORD')
+                    return
+                }
+
+                $.ajax({
+                    url: '/account/register',
+                    type: 'POST',
+                    data: visitor,
+                    success: function(resp){
+                        if (resp.confirmation != 'success'){
+                            alert(resp.message)
+                            return
+                        }
+
+                        // window.location.href = '/me'
+                        console.log('SUCCESS - ' + JSON.stringify(resp))
+                        document.getElementById('btn-register-modal').click()
+                        setTimeout(function(){
+                            document.getElementById('btn-purchase-modal').click()
+                        }, 400)
+                    },
+                    error: function(resp){
+                        console.log('ERROR - ' + JSON.stringify(resp))
+                        alert('ERR - ' + resp.message)
+                    }
+                })            
+            }
 
             var purchaseSite = function(price){
                 if (currentUser != null){
