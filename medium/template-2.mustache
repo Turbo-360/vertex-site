@@ -404,7 +404,7 @@
         <input id="input-login-email" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Email" />
         <input id="input-login-password" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-3" type="password" placeholder="Password" />
         <hr />
-        <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg mb-3">Login</button>
+        <div id="paypal-button-register"></div>
       </div>
     </div>
   </div>
@@ -452,8 +452,8 @@
             var currentUser = preloaded.user // null if not registered
             var template = preloaded.template
             var buttons = [
-                // {id:'paypal-button-register', type:'register'},
-                {id:'paypal-button', type:'template'}
+                {id:'paypal-button-register', type:'register'},
+                {id:'paypal-button', type:'currentuser'}
             ]
 
             var paypalHandler = function(body){
@@ -500,7 +500,7 @@
                             return actions.order.capture().then(function(details) {
                                 console.log('Transaction completed by ' + details.payer.name.given_name);
                                 paypalHandler({
-                                    type: 'template', // register or upgrade
+                                    type: button.type, // register or upgrade
                                     item: template.id,
                                     // amount: 3000,
                                     amount: 300,

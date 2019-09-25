@@ -63,7 +63,7 @@ router.post('/order', (req, res) => {
 })
 
 router.post('/launchtemplate', (req, res) => {
-  const type = req.body.type // template
+  const type = req.body.type // register or currentuser
   const item = req.body.item // template id string
   const user = req.body.user
   const amount = req.body.amount
@@ -93,7 +93,7 @@ router.post('/launchtemplate', (req, res) => {
     // else {
     //   return null
     // }
-    
+
     res.json({
       confirmation: 'success',
       data: data
