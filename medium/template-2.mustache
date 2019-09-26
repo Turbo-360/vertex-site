@@ -549,7 +549,10 @@
                             if (button.type == 'register'){
                                 // Disable the buttons
                                 actions.disable()
-                                $('#activate-pp-button').click(function(){
+                                $('#activate-pp-button').click(function(e){
+                                    if (e)
+                                        e.preventDefault()
+                                        
                                     actions.enable()
                                 })
                             }
