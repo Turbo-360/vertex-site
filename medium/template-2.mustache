@@ -557,12 +557,36 @@
                             shape:   'rect',
                             label:   'checkout'
                         },
-                        onClick: function(){
+                        onClick: function(data, actions){
                             console.log('paypal button clicked!')
-                            if (button.type == 'register'){
-                                console.log('validate register fields.')
-                                
+                            if (button.type != 'register')
+                                return
+                            
+                            console.log('validate register fields.')
+                            var visitor = {
+                                fullName: $('#input-register-name').val(),
+                                email: $('#input-register-email').val(),
+                                password: $('#input-register-password').val()
+                                // promoCode: $('#input-register-promo').val()
                             }
+
+                            if (visitor.fullName.length == 0){
+                                alert('Please enter your NAME')
+                                return
+                            }
+
+                            if (visitor.email.length == 0){
+                                alert('Please enter your EMAIL')
+                                return
+                            }
+
+                            if (visitor.password.length == 0){
+                                alert('Please enter your PASSWORD')
+                                return
+                            }
+
+                            actions.enable()
+                            actions.resolve()
                         },
                         createOrder: function(data, actions) {
                             return actions.order.create({
@@ -585,6 +609,7 @@
                                         // promoCode: $('#input-register-promo').val()
                                     }
 
+                                    /*
                                     if (visitor.fullName.length == 0){
                                         alert('Please enter your NAME')
                                         return
@@ -598,7 +623,7 @@
                                     if (visitor.password.length == 0){
                                         alert('Please enter your PASSWORD')
                                         return
-                                    }
+                                    } */
 
                                     paypalHandler({
                                         type: button.type, // register or upgrade
