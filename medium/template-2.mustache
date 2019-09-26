@@ -544,12 +544,12 @@
             buttons.forEach(function(button){
                 if (document.getElementById(button.id) != null){
                     paypal.Buttons({
-                        onInit: function(data, actions){
+                        /* onInit: function(data, actions){
                             if (button.type == 'register'){
                                 // Disable the buttons
                                 actions.disable()                                
                             }
-                        },
+                        }, */
                         style:{
                             size:   'large',
                             layout:  'horizontal',
