@@ -547,12 +547,11 @@
                     paypal.Buttons({
                         onInit: function(data, actions){
                             if (button.type == 'register'){
-                                // Disable the buttons
-                                actions.disable()
+                                actions.disable() // Disable the button until register fields are filled
                                 $('#activate-pp-button').click(function(e){
                                     if (e)
                                         e.preventDefault()
-                                        
+
                                     actions.enable()
                                 })
                             }
@@ -565,11 +564,11 @@
                             label:   'checkout'
                         },
                         onClick: function(data, actions){
-                            console.log('paypal button clicked!')
+                            // console.log('paypal button clicked!')
                             if (button.type != 'register')
                                 return
                             
-                            console.log('validate register fields.')
+                            // console.log('validate register fields.')
                             var visitor = {
                                 fullName: $('#input-register-name').val(),
                                 email: $('#input-register-email').val(),
@@ -592,13 +591,9 @@
                                 return
                             }
 
+                            // activate the pp button:
                             document.getElementById('activate-pp-button').click()
                             actions.resolve()
-
-                            // actions.enable() // this crashed it
-                            //setTimeout(function(){
-                                //actions.resolve()
-                            //}, 200)
                         },
                         createOrder: function(data, actions) {
                             return actions.order.create({
@@ -620,22 +615,6 @@
                                         password: $('#input-register-password').val()
                                         // promoCode: $('#input-register-promo').val()
                                     }
-
-                                    /*
-                                    if (visitor.fullName.length == 0){
-                                        alert('Please enter your NAME')
-                                        return
-                                    }
-
-                                    if (visitor.email.length == 0){
-                                        alert('Please enter your EMAIL')
-                                        return
-                                    }
-
-                                    if (visitor.password.length == 0){
-                                        alert('Please enter your PASSWORD')
-                                        return
-                                    } */
 
                                     paypalHandler({
                                         type: button.type, // register or upgrade
