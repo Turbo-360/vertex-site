@@ -553,6 +553,10 @@
                         },
                         onClick: function(){
                             console.log('paypal button clicked!')
+                            if (button.type == 'register'){
+                                console.log('validate register fields.')
+                                
+                            }
                         },
                         createOrder: function(data, actions) {
                             return actions.order.create({
