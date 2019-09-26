@@ -565,8 +565,10 @@
                         },
                         onClick: function(data, actions){
                             // console.log('paypal button clicked!')
-                            if (button.type != 'register')
+                            if (button.type != 'register'){
+                                actions.resolve()
                                 return
+                            }
                             
                             // console.log('validate register fields.')
                             var visitor = {
