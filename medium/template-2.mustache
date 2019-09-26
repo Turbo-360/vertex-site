@@ -590,11 +590,12 @@
                             }
 
                             document.getElementById('activate-pp-button').click()
+                            actions.resolve()
 
                             // actions.enable() // this crashed it
-                            setTimeout(function(){
-                                actions.resolve()
-                            }, 200)
+                            //setTimeout(function(){
+                                //actions.resolve()
+                            //}, 200)
                         },
                         createOrder: function(data, actions) {
                             return actions.order.create({
