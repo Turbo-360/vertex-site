@@ -613,8 +613,8 @@
                             return actions.order.create({
                                 purchase_units: [{
                                     amount: {
-                                        //value: '30.00'
-                                        value: '2.00'
+                                        value: amount.str
+                                        // value: '2.00'
                                     }
                                 }]
                             });
@@ -633,8 +633,8 @@
                                     paypalHandler({
                                         type: button.type, // register or upgrade
                                         item: template.id,
-                                        // amount: 3000,
-                                        amount: 200,
+                                        amount: amount.num,
+                                        // amount: 200,
                                         orderID: data.orderID,
                                         user: JSON.stringify(visitor)
                                     })
@@ -644,8 +644,8 @@
                                     paypalHandler({
                                         type: button.type, // register or upgrade
                                         item: template.id,
-                                        // amount: 3000,
-                                        amount: 200,
+                                        amount: amount.num,
+                                        // amount: 200,
                                         orderID: data.orderID,
                                         user: currentUser.id
                                     })                                    
