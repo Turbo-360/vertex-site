@@ -405,6 +405,7 @@
 
 <a id="btn-register-modal" data-toggle="modal" data-target="#register-modal" href="#" style="display:none"></a>
 <a id="btn-purchase-modal" data-toggle="modal" data-target="#purchase-modal" href="#" style="display:none"></a>
+<a id="activate-pp-button" href="#" style="display:none"></a>
 
 
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
@@ -544,12 +545,15 @@
             buttons.forEach(function(button){
                 if (document.getElementById(button.id) != null){
                     paypal.Buttons({
-                        /* onInit: function(data, actions){
+                        onInit: function(data, actions){
                             if (button.type == 'register'){
                                 // Disable the buttons
-                                actions.disable()                                
+                                actions.disable()
+                                $('#activate-pp-button').click(function(){
+                                    actions.enable()
+                                })
                             }
-                        }, */
+                        },
                         style:{
                             size:   'large',
                             layout:  'horizontal',
@@ -585,8 +589,12 @@
                                 return
                             }
 
-                            // actions.enable()
-                            actions.resolve()
+                            document.getElementById('activate-pp-button').click()
+
+                            // actions.enable() // this crashed it
+                            setTimeout(function(){
+                                actions.resolve()
+                            }, 200)
                         },
                         createOrder: function(data, actions) {
                             return actions.order.create({
