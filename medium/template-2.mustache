@@ -551,6 +551,9 @@
                             shape:   'rect',
                             label:   'checkout'
                         },
+                        onClick: function(){
+                            console.log('paypal button clicked!')
+                        },
                         createOrder: function(data, actions) {
                             return actions.order.create({
                                 purchase_units: [{
