@@ -442,7 +442,7 @@
             var preloaded = window.__PRELOADED__
             var currentUser = preloaded.user // null if not registered
             var template = preloaded.template
-            var amount = {num:3000, str:'30.00'}
+            var amount = {num:200, str:'2.00'}
             var buttons = [
                 {id:'paypal-button-register', type:'register'},
                 {id:'paypal-button', type:'currentuser'}
@@ -467,7 +467,9 @@
                 // console.log('BTN LAUNCH 30: ')
                 $('#upgrade-price-modal').html('$30 per 6 months')
                 $('#register-price-header').html('$30 per 6 months')
-                amount = {num:3000, str:'30.00'}
+                
+                // amount = {num:3000, str:'30.00'}
+                amount = {num:200, str:'2.00'}
                 purchaseSite(30)
             })
 
@@ -478,7 +480,9 @@
                 // console.log('BTN LAUNCH 50: ')
                 $('#upgrade-price-modal').html('$50 per 12 months')
                 $('#register-price-header').html('$50 per 12 months')
-                amount = {num:5000, str:'50.00'}
+
+                // amount = {num:5000, str:'50.00'}
+                amount = {num:300, str:'3.00'}
                 purchaseSite(50)
             })
 
