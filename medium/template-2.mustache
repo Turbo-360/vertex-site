@@ -468,8 +468,8 @@
                 $('#upgrade-price-modal').html('$30 per 6 months')
                 $('#register-price-header').html('$30 per 6 months')
                 
-                // amount = {num:200, str:'2.00'} // test price
-                amount = {num:3000, str:'30.00'}
+                amount = {num:200, str:'2.00'} // test price
+                // amount = {num:3000, str:'30.00'}
                 purchaseSite(30)
             })
 
@@ -481,8 +481,8 @@
                 $('#upgrade-price-modal').html('$50 per 12 months')
                 $('#register-price-header').html('$50 per 12 months')
 
-                // amount = {num:300, str:'3.00'} // test price
-                amount = {num:5000, str:'50.00'}
+                amount = {num:300, str:'3.00'} // test price
+                // amount = {num:5000, str:'50.00'}
                 purchaseSite(50)
             })
 
@@ -619,6 +619,7 @@
                         createOrder: function(data, actions) {
                             return actions.order.create({
                                 purchase_units: [{
+                                    description: 'Launch template: '+template.name,
                                     amount: {
                                         value: amount.str
                                         // value: '2.00'
