@@ -1475,7 +1475,7 @@ router.post('/:action', (req, res, next) => {
 		utils.Email.addToMailingList(pkg)
 		.then(data => {
 			// send email to self for notification:
-			utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Vertex 360', ['dkwon@turbo360.co'], 'New Mailing List Subscriber - '+list, JSON.stringify(body))
+			utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Vertex 360', ['dkwon@turbo360.co'], 'New Mailing List Subscriber - '+list, JSON.stringify(req.body))
 
 			res.json({
 				confirmation: 'success',
