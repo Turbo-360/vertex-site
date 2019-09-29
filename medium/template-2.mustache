@@ -730,13 +730,16 @@
                     success: function(response){
                         if (response.confirmation != 'success'){
                             alert('Err - '+response.message)
+                            document.getElementById('btn-newsletter-modal').click()
                             return
                         }
 
                         alert('Thanks! Please check your email to confirm.')
+                        document.getElementById('btn-newsletter-modal').click()
                     },
                     error: function(response){
                         alert(response)
+                        document.getElementById('btn-newsletter-modal').click()
                     }
                 })
             })
