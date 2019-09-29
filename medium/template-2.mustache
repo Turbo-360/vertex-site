@@ -728,6 +728,7 @@
                     type: 'POST',
                     data: {email:email, list:'designers'},
                     success: function(response){
+                        console.log(JSON.stringify(response))
                         if (response.confirmation != 'success'){
                             alert('Err - '+response.message)
                             document.getElementById('btn-newsletter-modal').click()
