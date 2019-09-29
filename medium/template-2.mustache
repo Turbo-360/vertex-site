@@ -723,7 +723,22 @@
                 }
 
                 console.log('JOIN NEWSLETTER: ' + email)
+                $.ajax({
+                    url: '/account/newsletter',
+                    type: 'POST',
+                    data: {email:email, list:'designers'},
+                    success: function(response){
+                        if (response.confirmation != 'success'){
+                            alert('Err - '+response.message)
+                            return
+                        }
 
+                        alert('Thanks! Please check your email to confirm.')
+                    },
+                    error: function(response){
+                        alert(response)
+                    }
+                })
             })
         })()
     </script>

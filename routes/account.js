@@ -1449,6 +1449,34 @@ router.post('/:action', (req, res, next) => {
 		return
 	}
 
+	if (action == 'newsletter'){
+		const lists = {
+			designers: 'mail@designers.vertex360-mail.com'
+		}
+
+		const email = req.body.email
+		const list = req.body.list
+
+		const listUrl = lists[list]
+		if (listUrl == null){
+			res.json({
+				confirmation: 'fail',
+				message: 'invalid mailing list: '+list
+			})
+			return
+		}
+
+		res.json({
+			confirmation: 'success',
+			data: {
+				email: email,
+				list: listUrl
+			}
+		})
+
+		return
+	}
+
 	res.json({
 		confirmation: 'fail',
 		message: 'Invalid action'
