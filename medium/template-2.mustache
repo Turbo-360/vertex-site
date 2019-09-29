@@ -421,7 +421,28 @@
 <a id="btn-register-modal" data-toggle="modal" data-target="#register-modal" href="#" style="display:none"></a>
 <a id="btn-purchase-modal" data-toggle="modal" data-target="#purchase-modal" href="#" style="display:none"></a>
 <a id="activate-pp-button" href="#" style="display:none"></a>
+<a id="btn-newsletter-modal" data-toggle="modal" data-target="#newsletter-modal" href="#" style="display:none">newsletter modal</a>
 
+
+<div class="modal fade" id="newsletter-modal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius:4px;margin:auto">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Newsletter</h5>
+        <button id="btn-close-register" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+      </div>
+      <div class="text-center mb-4" style="padding:1rem">
+        <img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
+      </div>
+    </div>
+  </div>
+</div>
 
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
     <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
@@ -663,6 +684,23 @@
                     }).render('#'+button.id)
                 }
             })
+        })()
+    </script>
+
+    <script type="text/javascript">
+        (function(){
+            var modalShowed = false
+            var showModal = function(){
+                var offsetY = window.scrollY
+                if (offsetY < 2250)
+                    return
+
+                console.log('show modal')
+                document.getElementById('btn-newsletter-modal').click()
+                document.removeEventListener('scroll', showModal)
+            }
+
+            document.addEventListener('scroll', showModal)
         })()
     </script>
 
