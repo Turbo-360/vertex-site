@@ -1451,7 +1451,7 @@ router.post('/:action', (req, res, next) => {
 
 	if (action == 'newsletter'){
 		const lists = {
-			designers: 'mail@designers.vertex360-mail.com'
+			designers: 'newsletter@designers.vertex360-mail.com'
 		}
 
 		const email = req.body.email
@@ -1466,12 +1466,34 @@ router.post('/:action', (req, res, next) => {
 			return
 		}
 
-		res.json({
-			confirmation: 'success',
-			data: {
-				email: email,
-				list: listUrl
-			}
+		const pkg = {
+			// name: body.name, // can be null
+			email: email,
+			list: listUrl
+		}
+
+		utils.Email.addToMailingList(pkg)
+		.then(data => {
+			// send email to self for notification:
+			utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Vertex 360', ['dkwon@turbo360.co'], 'New Mailing List Subscriber - '+list, JSON.stringify(body))
+
+			res.json({
+				confirmation: 'success',
+				data: pkg
+			})
+		})
+		// .then(data => {
+		// 	return utils.fetchFile('emailtemplates/welcome/'+templates[mailingList])
+		// })
+		// .then(data => { // Send email to subscriber for confirmation
+		// 	const html = data
+		// 	return utils.Email.sendHtmlEmails('katrina@turbo360.co', 'Turbo 360', [body.email], 'Welcome to Turbo 360!', html)
+		// })
+		.catch(err => {
+			res.json({
+				confirmation: 'fail',
+				message: err.message
+			})
 		})
 
 		return
