@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const payPalClient = require('../utils/PayPalClient')
+const vertex = require('vertex360')({site_id:'5c244564231ff10015a113ea'})
+// const payPalClient = require('../utils/PayPalClient')
 const controllers = require('../controllers')
 // https://developer.paypal.com/docs/checkout/integrate/#6-verify-the-transaction
 
@@ -38,7 +39,7 @@ router.post('/order', (req, res) => {
       environment: process.env.ENVIRONMENT
     }
 
-    return payPalClient.executeRequest(orderID, credentials)
+    return vertex.payPalClient.executeRequest(orderID, credentials)
 
     // let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
     // return payPalClient.client(credentials).execute(request)
@@ -78,7 +79,7 @@ router.post('/launchtemplate', (req, res) => {
     environment: process.env.ENVIRONMENT
   }
 
-  payPalClient.executeRequest(orderID, credentials)
+  vertex.payPalClient.executeRequest(orderID, credentials)
   .then(data => {
     // Validate the transaction details are as expected
     // if (data.result.purchase_units[0].amount.value !== '3.00') {
