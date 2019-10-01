@@ -61,7 +61,7 @@
     "utils-merge": "1.0.1",
     "uuid": "^3.3.2",
     "vary": "^1.1.2",
-    "vertex360": "latest"
+    "vertex360": "^0.25.43"
   },
   "deploy": [
     "."
