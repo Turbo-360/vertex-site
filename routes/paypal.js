@@ -33,12 +33,12 @@ router.post('/order', (req, res) => {
   })
   .then(item => {
     selectedItem = item
-    let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
     const credentials = {
       clientId: currentSite.paypal.clientId,
       clientSecret: currentSite.paypal.clientSecret
     }
 
+    let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
     return payPalClient.client(credentials).execute(request)
   })
   .then(data => {
