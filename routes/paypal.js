@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk')
+// const checkoutNodeJssdk = require('@paypal/checkout-server-sdk')
 const payPalClient = require('../utils/PayPalClient')
 const controllers = require('../controllers')
 // https://developer.paypal.com/docs/checkout/integrate/#6-verify-the-transaction
@@ -38,8 +38,10 @@ router.post('/order', (req, res) => {
       clientSecret: currentSite.paypal.clientSecret
     }
 
-    let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
-    return payPalClient.client(credentials).execute(request)
+    return payPalClient.executeRequest(orderID, credentials)
+
+    // let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
+    // return payPalClient.client(credentials).execute(request)
   })
   .then(data => {
     // Validate the transaction details are as expected
@@ -70,13 +72,14 @@ router.post('/launchtemplate', (req, res) => {
   const orderID = req.body.orderID
 
 
-  const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
   const credentials = {
     clientId: process.env.PP_CLIENT_ID,
     clientSecret: process.env.PP_CLIENT_SECRET
   }
 
-  payPalClient.client(credentials, process.env.ENVIRONMENT).execute(request)
+  // const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
+  // payPalClient.client(credentials, process.env.ENVIRONMENT).execute(request)
+  payPalClient.executeRequest(orderID, credentials)
   .then(data => {
     // Validate the transaction details are as expected
     // if (data.result.purchase_units[0].amount.value !== '3.00') {

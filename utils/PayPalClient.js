@@ -23,6 +23,7 @@ function client(credentials) {
 function environment(credentials) {
     let clientId = credentials.clientId || 'PAYPAL-CLIENT-ID';
     let clientSecret = credentials.clientSecret || 'PAYPAL-CLIENT-SECRET';
+    
     // return new checkoutNodeJssdk.core.SandboxEnvironment(
     //     clientId, clientSecret
     // );
@@ -31,6 +32,15 @@ function environment(credentials) {
         clientId, clientSecret
     );
 
+}
+
+function executeRequest(orderID, credentials){
+    // const ppClient = client(credentials)
+    const ppClient = new checkoutNodeJssdk.core.PayPalHttpClient(environment(credentials));
+    const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
+
+    // this returns a promise:
+    return ppClient.execute(request)
 }
 
 async function prettyPrint(jsonData, pre=""){
@@ -57,4 +67,8 @@ async function prettyPrint(jsonData, pre=""){
     return pretty;
 }
 
-module.exports = {client: client, prettyPrint:prettyPrint};
+module.exports = {
+    client: client,
+    prettyPrint: prettyPrint,
+    executeRequest: executeRequest
+}
