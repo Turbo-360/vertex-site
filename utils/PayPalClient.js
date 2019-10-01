@@ -23,14 +23,19 @@ function client(credentials) {
 function environment(credentials) {
     let clientId = credentials.clientId || 'PAYPAL-CLIENT-ID';
     let clientSecret = credentials.clientSecret || 'PAYPAL-CLIENT-SECRET';
+    const environment = credentials.environment || 'dev' // 'dev' or 'production'
 
-    // return new checkoutNodeJssdk.core.SandboxEnvironment(
-    //     clientId, clientSecret
-    // );
+    if (environment == 'production'){
+        return new checkoutNodeJssdk.core.LiveEnvironment(
+            clientId, clientSecret
+        );
+    }
+    else {
+        return new checkoutNodeJssdk.core.SandboxEnvironment(
+            clientId, clientSecret
+        );
+    }
 
-    return new checkoutNodeJssdk.core.LiveEnvironment(
-        clientId, clientSecret
-    );
 }
 
 function executeRequest(orderID, credentials){

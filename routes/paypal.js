@@ -34,7 +34,8 @@ router.post('/order', (req, res) => {
     selectedItem = item
     const credentials = {
       clientId: currentSite.paypal.clientId,
-      clientSecret: currentSite.paypal.clientSecret
+      clientSecret: currentSite.paypal.clientSecret,
+      environment: process.env.ENVIRONMENT
     }
 
     return payPalClient.executeRequest(orderID, credentials)
@@ -73,7 +74,8 @@ router.post('/launchtemplate', (req, res) => {
 
   const credentials = {
     clientId: process.env.PP_CLIENT_ID,
-    clientSecret: process.env.PP_CLIENT_SECRET
+    clientSecret: process.env.PP_CLIENT_SECRET,
+    environment: process.env.ENVIRONMENT
   }
 
   payPalClient.executeRequest(orderID, credentials)
