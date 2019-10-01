@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const vertex = require('vertex360')({site_id:'5c244564231ff10015a113ea'})
-// const payPalClient = require('../utils/PayPalClient')
 const controllers = require('../controllers')
 // https://developer.paypal.com/docs/checkout/integrate/#6-verify-the-transaction
 
