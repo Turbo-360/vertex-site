@@ -39,7 +39,7 @@ router.post('/order', (req, res) => {
       environment: process.env.ENVIRONMENT
     }
 
-    return vertex.payPalClient.executeRequest(orderID, credentials)
+    return vertex.paypalClient.executeRequest(orderID, credentials)
 
     // let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
     // return payPalClient.client(credentials).execute(request)
@@ -79,7 +79,7 @@ router.post('/launchtemplate', (req, res) => {
     environment: process.env.ENVIRONMENT
   }
 
-  vertex.payPalClient.executeRequest(orderID, credentials)
+  vertex.paypalClient.executeRequest(orderID, credentials)
   .then(data => {
     // Validate the transaction details are as expected
     // if (data.result.purchase_units[0].amount.value !== '3.00') {
