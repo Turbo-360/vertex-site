@@ -23,7 +23,7 @@ function client(credentials) {
 function environment(credentials) {
     let clientId = credentials.clientId || 'PAYPAL-CLIENT-ID';
     let clientSecret = credentials.clientSecret || 'PAYPAL-CLIENT-SECRET';
-    
+
     // return new checkoutNodeJssdk.core.SandboxEnvironment(
     //     clientId, clientSecret
     // );
@@ -31,11 +31,9 @@ function environment(credentials) {
     return new checkoutNodeJssdk.core.LiveEnvironment(
         clientId, clientSecret
     );
-
 }
 
 function executeRequest(orderID, credentials){
-    // const ppClient = client(credentials)
     const ppClient = new checkoutNodeJssdk.core.PayPalHttpClient(environment(credentials));
     const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
 

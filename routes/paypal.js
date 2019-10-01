@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-// const checkoutNodeJssdk = require('@paypal/checkout-server-sdk')
 const payPalClient = require('../utils/PayPalClient')
 const controllers = require('../controllers')
 // https://developer.paypal.com/docs/checkout/integrate/#6-verify-the-transaction
@@ -77,8 +76,6 @@ router.post('/launchtemplate', (req, res) => {
     clientSecret: process.env.PP_CLIENT_SECRET
   }
 
-  // const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID)
-  // payPalClient.client(credentials, process.env.ENVIRONMENT).execute(request)
   payPalClient.executeRequest(orderID, credentials)
   .then(data => {
     // Validate the transaction details are as expected
