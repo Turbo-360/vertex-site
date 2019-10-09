@@ -87,4 +87,15 @@ SiteSchema.methods.summary = function(authLevel) {
 	return summary
 }
 
+SiteSchema.statics.convertToJson = function(sites, key){ // key can be null
+	const results = new Array()
+	for (var i=0; i<sites.length; i++){
+		var p = sites[i]
+		results.push(p.summary(key))
+	}
+
+	return results
+}
+
+
 module.exports = mongoose.model('SiteSchema', SiteSchema)
