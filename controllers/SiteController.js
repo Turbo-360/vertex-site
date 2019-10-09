@@ -7,6 +7,7 @@ module.exports = {
 	search: (text, isRaw, key) => {
 		return new Promise((resolve, reject) => {
 			const params = {
+				isClone: 'no',
 				$text: {
 					$search: text
 				}
