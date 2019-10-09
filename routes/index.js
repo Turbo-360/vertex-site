@@ -152,9 +152,6 @@ router.get('/community', (req, res) => {
 	.then(profiles => {
 		data['profiles'] = profiles
 		data['preloaded'] = JSON.stringify({
-			// onLoginRedirect: 'reload',
-			// onRegisterRedirect: 'reload',
-			// threads: data.threads,
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -189,6 +186,7 @@ router.get('/templates', (req, res) => {
 
 		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
+			onRegisterRedirect: '/me',
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
@@ -268,95 +266,14 @@ router.get('/comments', (req, res) => {
 			message: err.message
 		})
 	})
-
-	// const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
-	// utils.HTTP.get(endpoint)
-	// .then(response => {
-	// 	const parsed = JSON.parse(response)
-	// 	data['entity'] = parsed.data
-	//
-	// 	// fetch comments based on type and id query params
-	// 	return controllers.comment.get({thread:thread})
-	// })
-	// .then(comments => {
-	// 	const currentUser = sanitizedUser(req.user)
-	// 	data['comments'] = comments
-	// 	data['user'] = currentUser
-	// 	data['preloaded'] = JSON.stringify({
-	// 		comments: comments,
-	// 		user: currentUser,
-	// 		entity: data.entity,
-	// 		thread: thread
-	// 	})
-	//
-	//   res.render('thread', data)
-	// })
-	// .catch(err => {
-	// 	res.json({
-	// 		confirmation: 'fail',
-	// 		message: err.message
-	// 	})
-	// })
 })
 
-/*
 router.get('/feed/:slug', (req, res) => {
   const data = {
 		cdn: CDN,
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.thread.get({limit:50})
-  .then(threads => {
-    data['threads'] = threads
-
-		const threadsMap = {}
-		let selectedIndex = 0
-		threads.forEach((thread, i) => {
-			if (thread.subject.slug == req.params.slug){
-				selectedIndex = i
-				data['meta'] = {
-					title: thread.subject.title,
-					description: thread.subject.preview,
-					image: thread.subject.image,
-					url: 'https://www.vertex360.co/feed/'+req.params.slug
-				}
-			}
-
-			threadsMap[thread.id] = thread
-			threadsMap[thread.slug] = thread
-		})
-
-		data['threadsMap'] = threadsMap
-		data['selectedIndex'] = selectedIndex
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			query: req.query,
-			showSidebar: false,
-			threads: data.threads,
-			threadsMap: data.threadsMap,
-			selectedIndex: data.selectedIndex,
-			user: sanitizedUser(req.user)
-		})
-
-		const template = (req.isMobile) ? 'mobile-feed' : 'feed'
-    res.render(template, data)
-  })
-  .catch(err => {
-    res.json({
-      confirmation: 'fail',
-      message: err.message
-    })
-  })
-}) */
-
-router.get('/feed/:slug', (req, res) => {
-  const data = {
-		cdn: CDN,
-		renderAnalytics: utils.renderAnalytics(req, CDN)
-	}
-
-	// controllers.thread.get({'subject.slug':req.params.slug})
 	controllers.thread.get({'slug':req.params.slug})
   .then(threads => {
 		if (threads.length == 0){
@@ -389,40 +306,6 @@ router.get('/feed/:slug', (req, res) => {
     })
   })
 })
-
-/*
-router.get('/post/:slug', (req, res) => {
-  const data = {
-		cdn: CDN,
-		renderAnalytics: utils.renderAnalytics(req, CDN)
-	}
-
-  controllers.post.get({slug:req.params.slug})
-  .then(posts => {
-    if (posts.length == 0){
-      throw new Error('Post '+req.params.slug+' not found.')
-      return
-    }
-
-    data['post'] = posts[0]
-		data['preloaded'] = JSON.stringify({
-			timestamp: req.timestamp,
-			post: data.post,
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			query: req.query,
-			user: sanitizedUser(req.user)
-		})
-
-    res.render('article', data)
-  })
-  .catch(err => {
-    res.json({
-      confirmation: 'fail',
-      message: err.message
-    })
-  })
-})
-*/
 
 router.get('/site/:slug', (req, res) => {
   const data = {
