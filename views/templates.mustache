@@ -36,7 +36,7 @@
           <!-- features section -->
           <section class="py-6" id="features" style="background:#f9f9f9">
               <div class="container mt-4">
-                  <div class="row">
+                  <div id="templates-row" class="row">
 
                       {{#templates}}
                       <article class="col-md-6 {{features}} all">
@@ -105,6 +105,17 @@
     </div>
   </script>
 
+  <script type="text/template" id="tpl-card">
+    <article class="col-md-6 <% features %> all">
+        <a id="<% id %>-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
+          <div class="card mb-4" style="background-image: url('<%{image}%>=s1024')"></div>
+        </a>
+        <h5 style="margin-bottom:0px">
+          <a id="<% id %>-title"class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal"><% name %></a>
+        </h5>
+    </article>
+  </script>
+
   <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
   <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
   <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
@@ -144,7 +155,21 @@
             return
           }
 
-          console.log('SEARCH RESULTS: ' + JSON.stringify(response))
+          if (response.confirmation != 'success'){
+            alert('Error - ' + response.message)
+            return
+          }
+
+          var results = response.results
+          console.log('SEARCH RESULTS: ' + JSON.stringify(results))
+
+          var templatesHtml = ''
+          var tpl = $('#tpl-card').html()
+          results.forEach(function(template){
+            templatesHtml += Mustache.render(tpl, template)
+          })
+
+          $('#templates-row').html(templatesHtml)
         })
       })
 
