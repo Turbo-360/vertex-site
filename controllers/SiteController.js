@@ -8,6 +8,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			const params = {
 				isClone: 'no',
+				origin: 'vertex360',
 				$text: {
 					$search: text
 				}
