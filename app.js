@@ -118,8 +118,7 @@ const requireHTTPS = (req, res, next) => {
 app.use(requireHTTPS)
 
 // import routes
-// const index = require('./routes/index')
-const index = require('./medium/routes/index')
+const index = require('./routes/index')
 const api = require('./routes/api')
 const account = require('./routes/account')
 const admin = require('./routes/admin')

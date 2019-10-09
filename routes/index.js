@@ -1,10 +1,10 @@
-// Full Documentation - https://www.turbo360.co/docs
-const turbo = require('turbo360')({site_id: process.env.TURBO_APP_ID})
+// const turbo = require('turbo360')({site_id: process.env.TURBO_APP_ID})
 const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const router = vertex.router()
 const controllers = require('../controllers')
 const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
+
 
 const hasVideo = (site) => {
 	if (site.template.video == null)
@@ -13,41 +13,125 @@ const hasVideo = (site) => {
 	return (site.template.video.length==11) // youtube IDs are 11 characters;
 }
 
+const sanitizedUser = (user) => {
+	if (user == null)
+		return null
+
+	var currentUser = {
+		id: user.id,
+		username: user.username,
+		slug: user.slug,
+		firstName: user.firstName,
+		lastName: user.lastName,
+		image: user.image,
+		bio: user.bio,
+		tags: user.tags.join(',')
+	}
+
+	return currentUser
+}
+
 
 router.get('/', (req, res) => {
-	// const selected = 'landing'
 	const data = {
 		cdn: CDN,
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	// controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
-	controllers.site.get({'template.status':'live', format:'vertex'})
-	.then(sites => {
-		sites.forEach((site, i) => {
-			site['hasVideo'] = false
-			if (site.template.video != null)
-				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+	data['preloaded'] = JSON.stringify({
+		timestamp: req.timestamp,
+		user: sanitizedUser(req.user),
+		query: req.query
+	})
 
-			site['index'] = i
-			site['tags'] = site.tags.slice(0, 3) // use only first 3
-			site['description'] = utils.TextUtils.convertToHtml(site.description)
-		})
+	res.render('about', data)
+})
 
-		data['templates'] = sites
+router.get('/feed', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.thread.get({limit:50})
+  .then(threads => {
+		data['threads'] = { // sorted into recent, culture, sports, and tech
+			recent: threads
+		}
+
 		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
-			user: req.user,
-			templates: sites,
-			static: {
-				faq: require('../public/static/faq.json')
-			}
+			threads: data.threads,
+			user: sanitizedUser(req.user)
 		})
 
-		// res.render('landing', data)
-		res.render('index', data)
+		// const template = (req.isMobile) ? 'mobile-feed' : 'feed-2'
+		data['meta'] = {
+			title: 'Vertex 360',
+			url: 'https://www.vertex360.co/',
+			image: 'https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ',
+			description: 'Stay up to date with the latest entertainment, politics, sports news and more.'
+		}
+
+    res.render('feed-2', data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+
+// redirects (old links that use to work):
+router.get('/about', (req, res) => {
+	res.redirect('/')
+})
+
+router.get('/blog', (req, res) => {
+	res.redirect('https://blog.vertex360.co')
+})
+
+router.get('/me', (req, res) => {
+	if (req.user == null){
+		res.redirect('/')
+		return
+	}
+
+	const allSites = []
+	controllers.site.get({'profile.id':req.user.id, format:'vertex', origin:'vertex360'})
+	.then(sites => {
+		sites.forEach(site => {
+			allSites.push(site)
+		})
+
+		// Fetch collaborator sites also:
+		return controllers.site.get({'collaborators.id':req.user.id, format:'vertex', origin:'vertex360'})
+	})
+	.then(sites => {
+		sites.forEach(site => {
+			allSites.push(site)
+		})
+
+		const currentUser = sanitizedUser(req.user)
+		const data = {
+			cdn: CDN,
+			sites: allSites,
+			user: currentUser
+		}
+
+		data['preloaded'] = JSON.stringify({
+			user: currentUser,
+			sites: allSites,
+			selected: req.query.selected || 'profile',
+			query: req.query
+		})
+
+		res.render('account', data)
 	})
 	.catch(err => {
 		res.json({
@@ -57,40 +141,24 @@ router.get('/', (req, res) => {
 	})
 })
 
-/*
 router.get('/community', (req, res) => {
 	const data = {
 		cdn: CDN,
-		renderAnalytics: utils.renderAnalytics(req, CDN),
-		profile: req.user
+		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-
-	controllers.comment.get({limit:10, isInitial:'yes'})
-	.then(comments => {
-		comments.forEach(comment => {
-			comment['isLink'] = (comment.url.length > 0)
-		})
-
-		data['comments'] = comments
-		return controllers.post.get()
-	})
-	.then(posts => {
-		data['posts'] = posts
-		return controllers.site.get({'template.status':'live', format:'vertex', sort:'asc'})
-	})
-	.then(sites => {
-		sites.forEach((site, i) => {
-			site['index'] = i
-			site['tags'] = site.tags.slice(0, 3) // use only first 3
-			site['description'] = utils.TextUtils.convertToHtml(site.description)
-		})
-
-		data['templates'] = sites
+	// controllers.profile.get({limit:30})
+	controllers.profile.active('image', 50)
+	.then(profiles => {
+		data['profiles'] = profiles
 		data['preloaded'] = JSON.stringify({
+			// onLoginRedirect: 'reload',
+			// onRegisterRedirect: 'reload',
+			// threads: data.threads,
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
-			user: req.user
+			user: sanitizedUser(req.user)
 		})
 
 		res.render('community', data)
@@ -102,90 +170,34 @@ router.get('/community', (req, res) => {
 		})
 	})
 })
-*/
 
-router.get('/submitpost', (req, res) => {
-	const data = {
-		cdn: CDN
-	}
 
-	if (req.query.id == null){
-		data['preloaded'] = JSON.stringify({
-			query: req.query,
-			user: req.user,
-			post: null
-		})
-
-		res.render('submitpost', data)
-	}
-
-	controllers.post.getById(req.query.id)
-	.then(post => {
-		data['preloaded'] = JSON.stringify({
-			query: req.query,
-			user: req.user,
-			post: post
-		})
-
-		res.render('submitpost', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: 'Post '+req.query.id+' not found'
-		})
-	})
-})
-
-router.get('/submitevent', (req, res) => {
-	const data = {
-		cdn: CDN
-	}
-
-	if (req.query.id == null){
-		data['preloaded'] = JSON.stringify({
-			query: req.query,
-			user: req.user,
-			post: null
-		})
-
-		res.render('submitevent', data)
-	}
-
-	// controllers.post.getById(req.query.id)
-	// .then(post => {
-	// 	data['preloaded'] = JSON.stringify({
-	// 		query: req.query,
-	// 		user: req.user,
-	// 		post: post
-	// 	})
-	//
-	// 	res.render('submitpost', data)
-	// })
-	// .catch(err => {
-	// 	res.json({
-	// 		confirmation: 'fail',
-	// 		message: 'Post '+req.query.id+' not found'
-	// 	})
-	// })
-})
-
-router.get('/blog', (req, res) => {
+router.get('/templates', (req, res) => {
 	const data = {
 		cdn: CDN,
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.post.get()
-	.then(posts => {
-		data['posts'] = posts
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			query: req.query,
-			user: req.user
+	controllers.site.get({'template.status':'live', format:'vertex', featured:'yes'})
+	.then(sites => {
+		const templatesMap = {}
+		sites.forEach((site, i) => {
+			site['features'] = site.tags.join(' ').toLowerCase()
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
+			templatesMap[site.id] = site
 		})
 
-		res.render('blog', data)
+		data['templates'] = sites
+		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: sanitizedUser(req.user),
+			templates: sites,
+			templatesMap: templatesMap
+		})
+
+		res.render('templates', data)
 	})
 	.catch(err => {
 		res.json({
@@ -195,36 +207,252 @@ router.get('/blog', (req, res) => {
 	})
 })
 
-router.get('/templates', (req, res) => {
-	const selected = 'landing'
+router.get('/comments', (req, res) => {
+	const thread = req.query.thread
+	if (thread == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing thread parameter'
+		})
+		return
+	}
+
+	const schema = req.query.schema
+	if (schema == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing schema parameter'
+		})
+		return
+	}
+
+	// this is the site slug NOT id:
+	const site = req.query.site
+	if (site == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Missing site parameter'
+		})
+		return
+	}
+
 	const data = {
+		cdn: CDN,
+		renderAnalytics: false
+		// renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.site.get({slug:site})
+	.then(sites => {
+		if (sites.length == 0){
+			throw new Error('Site '+site+' not found')
+			return
+		}
+
+		const currentUser = sanitizedUser(req.user)
+		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
+			timestamp: req.timestamp,
+			user: currentUser,
+			site: sites[0],
+			thread: thread,
+			schema: schema
+		})
+
+		res.render('thread', data)
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+
+	// const endpoint = 'https://'+site+'.vertex360.co/api/'+schema+'/'+thread
+	// utils.HTTP.get(endpoint)
+	// .then(response => {
+	// 	const parsed = JSON.parse(response)
+	// 	data['entity'] = parsed.data
+	//
+	// 	// fetch comments based on type and id query params
+	// 	return controllers.comment.get({thread:thread})
+	// })
+	// .then(comments => {
+	// 	const currentUser = sanitizedUser(req.user)
+	// 	data['comments'] = comments
+	// 	data['user'] = currentUser
+	// 	data['preloaded'] = JSON.stringify({
+	// 		comments: comments,
+	// 		user: currentUser,
+	// 		entity: data.entity,
+	// 		thread: thread
+	// 	})
+	//
+	//   res.render('thread', data)
+	// })
+	// .catch(err => {
+	// 	res.json({
+	// 		confirmation: 'fail',
+	// 		message: err.message
+	// 	})
+	// })
+})
+
+/*
+router.get('/feed/:slug', (req, res) => {
+  const data = {
 		cdn: CDN,
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	controllers.site.get({'template.status':'live', format:'vertex', featured:'yes'})
-	.then(sites => {
-		sites.forEach((site, i) => {
-			site['index'] = i
-			site['tags'] = site.tags.slice(0, 3) // use only first 3
-			site['description'] = utils.TextUtils.convertToHtml(site.description)
+	controllers.thread.get({limit:50})
+  .then(threads => {
+    data['threads'] = threads
 
-			site['hasVideo'] = false
-			if (site.template.video != null)
-				site['hasVideo'] = (site.template.video.length==11) // youtube IDs are 11 characters
+		const threadsMap = {}
+		let selectedIndex = 0
+		threads.forEach((thread, i) => {
+			if (thread.subject.slug == req.params.slug){
+				selectedIndex = i
+				data['meta'] = {
+					title: thread.subject.title,
+					description: thread.subject.preview,
+					image: thread.subject.image,
+					url: 'https://www.vertex360.co/feed/'+req.params.slug
+				}
+			}
+
+			threadsMap[thread.id] = thread
+			threadsMap[thread.slug] = thread
 		})
 
-		data['templates'] = sites
+		data['threadsMap'] = threadsMap
+		data['selectedIndex'] = selectedIndex
 		data['preloaded'] = JSON.stringify({
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
-			user: req.user,
-			selected: sites[0],
-			templates: sites
+			showSidebar: false,
+			threads: data.threads,
+			threadsMap: data.threadsMap,
+			selectedIndex: data.selectedIndex,
+			user: sanitizedUser(req.user)
 		})
 
-		res.render('templates', data)
+		const template = (req.isMobile) ? 'mobile-feed' : 'feed'
+    res.render(template, data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+}) */
+
+router.get('/feed/:slug', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	// controllers.thread.get({'subject.slug':req.params.slug})
+	controllers.thread.get({'slug':req.params.slug})
+  .then(threads => {
+		if (threads.length == 0){
+			throw new Error('Not Found')
+			return
+		}
+
+    data['thread'] = threads[0]
+		return controllers.comment.get({thread:data.thread.subject.id})
+  })
+	.then(comments => {
+		data['comments'] = comments
+		data['preloaded'] = JSON.stringify({
+			onLoginRedirect: 'reload',
+			onRegisterRedirect: 'reload',
+			timestamp: req.timestamp,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			thread: data.thread,
+			comments: data.comments,
+			user: sanitizedUser(req.user)
+		})
+
+		res.render('thread', data)
+	})
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+
+/*
+router.get('/post/:slug', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+  controllers.post.get({slug:req.params.slug})
+  .then(posts => {
+    if (posts.length == 0){
+      throw new Error('Post '+req.params.slug+' not found.')
+      return
+    }
+
+    data['post'] = posts[0]
+		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
+			post: data.post,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			query: req.query,
+			user: sanitizedUser(req.user)
+		})
+
+    res.render('article', data)
+  })
+  .catch(err => {
+    res.json({
+      confirmation: 'fail',
+      message: err.message
+    })
+  })
+})
+*/
+
+router.get('/site/:slug', (req, res) => {
+  const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	controllers.site.get({slug:req.params.slug}) // query template by slug
+	.then(results => {
+		if (results.length == 0){
+			throw new Error('Template not found')
+			return
+		}
+
+		const site = results[0]
+		site['description'] = utils.TextUtils.convertToHtml(site.description)
+		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
+		data['site'] = site
+		site['link'] = (site.url.length==0) ? 'https://'+site.slug+'.vertex360.co' : 'https://'+site.url
+
+		// const postsEndpoint = 'https://'+site.slug+'.vertex360.co/api/post'
+		// return utils.HTTP.get(postsEndpoint, null)
+		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			user: sanitizedUser(req.user),
+			site: data.site
+		})
+
+		res.render('site', data)
 	})
 	.catch(err => {
 		res.json({
@@ -253,59 +481,32 @@ router.get('/template/:slug', (req, res) => {
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
-		return (site.cloneSource.length == 0) ? null : controllers.site.getById(site.cloneSource)
+
+		const promoConfigEndpont = process.env.S3_BASE_URL+'/turbo360-vertex/pages/'+site.slug+'/promo.txt'
+		return utils.HTTP.get(promoConfigEndpont, null, {'Accept':'text/plain'})
 	})
-	.then(cloneSource => {
-		data.template['cloneSource'] = cloneSource
+	.then(config => {
+		// console.log('PROMO CONFIG: ' + config)
+		data['promo'] = JSON.parse(config)
+		data['pp_client_id'] = process.env.PP_CLIENT_ID
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			template: data.template,
-			user: req.user
+			user: sanitizedUser(req.user)
 		})
 
-		res.render('template', data)
+		res.render('template-2', data)
 	})
 	.catch(err => {
+		const msg = (err.message=='Forbidden') ? 'promo config file not found.' : err.message
 		res.json({
 			confirmation: 'fail',
-			message: err.message
+			message: msg
 		})
 	})
 })
 
-// blog post
-router.get('/post/:slug', (req, res) => {
-	const data = {
-		cdn: CDN,
-		renderAnalytics: utils.renderAnalytics(req, CDN)
-	}
-
-	controllers.post.get({slug:req.params.slug})
-	.then(posts => {
-		if (posts.length == 0){
-			throw new Error('Post '+req.params.slug+' not found.')
-			return
-		}
-
-		data['post'] = posts[0]
-		data['isAuthor'] = (req.user) ? (req.user.id == data.post.author.id) : false
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			post: data.post,
-			user: req.user
-		})
-
-		res.render('post', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-/*
 router.get('/comments/:slug', (req, res) => {
 	const data = {
 		cdn: CDN,
@@ -326,9 +527,10 @@ router.get('/comments/:slug', (req, res) => {
 		data['replies'] = replies
 		data['profile'] = req.user
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			query: req.query,
-			user: req.user,
+			user: sanitizedUser(req.user),
 			comment: data.comment,
 			replies: data.replies
 		})
@@ -342,7 +544,7 @@ router.get('/comments/:slug', (req, res) => {
 		})
 	})
 })
-*/
+
 
 router.get('/profile/:slug', (req, res) => {
 	const data = {
@@ -353,33 +555,30 @@ router.get('/profile/:slug', (req, res) => {
 	controllers.profile.get({slug:req.params.slug})
 	.then(profiles => {
 		if (profiles.length == 0){
-			throw new Error('Profile not found')
+			throw new Error('Profile '+req.params.slug+' not found.')
 			return
 		}
 
 		data['profile'] = profiles[0]
-		data.profile['keywords'] = data.profile.tags.join(', ') // for <meta> tag
 		return controllers.site.get({'profile.id':data.profile.id, format:'vertex', origin:'vertex360'})
 	})
 	.then(sites => {
-		data['sites'] = sites
-		return controllers.site.get({'collaborators.id':data.profile.id, format:'vertex', origin:'vertex360'})
-	})
-	.then(sites => {
-		sites.forEach(site => {
-			data.sites.push(site)
+		const templatesMap = {}
+		sites.forEach((site, i) => {
+			site['features'] = site.tags.join(' ').toLowerCase()
+			site['description'] = utils.TextUtils.convertToHtml(site.description)
+			templatesMap[site.id] = site
 		})
 
+		data['templates'] = sites
 		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			// stripe: process.env.STRIPE_PK_LIVE,
 			query: req.query,
-			profile: data.profile,
-			user: req.user,
-			content: {
-				templates: data.sites,
-				posts: null,
-				comments: null
-			}
+			user: sanitizedUser(req.user),
+			templates: sites,
+			templatesMap: templatesMap
 		})
 
 		res.render('profile', data)
@@ -390,107 +589,6 @@ router.get('/profile/:slug', (req, res) => {
 			message: err.message
 		})
 	})
-})
-
-router.get('/event/:slug', (req, res) => {
-	const data = {
-		cdn: CDN,
-		renderAnalytics: utils.renderAnalytics(req, CDN)
-	}
-
-	controllers.event.get({slug:req.params.slug})
-	.then(events => {
-		if (events.length == 0){
-			throw new Error('Event '+req.params.slug+' not found.')
-			return
-		}
-
-		data['event'] = events[0]
-		data['profile'] = req.user
-		data['preloaded'] = JSON.stringify({
-			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-			query: req.query,
-			user: req.user,
-			event: data.event
-			// comment: data.comment,
-			// replies: data.replies
-		})
-
-		res.render('event', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-router.get('/me', (req, res) => {
-	if (req.user == null){
-		res.redirect('/')
-		return
-	}
-
-	const allSites = []
-	controllers.site.get({'profile.id':req.user.id, format:'vertex', origin:'vertex360'})
-	.then(sites => {
-		sites.forEach(site => {
-			allSites.push(site)
-		})
-
-		// Fetch collaborator sites also:
-		return controllers.site.get({'collaborators.id':req.user.id, format:'vertex', origin:'vertex360'})
-	})
-	.then(sites => {
-		sites.forEach(site => {
-			allSites.push(site)
-		})
-
-		const currentUser = {
-			id: req.user.id,
-			username: req.user.username,
-			slug: req.user.slug,
-			firstName: req.user.firstName,
-			lastName: req.user.lastName,
-			image: req.user.image,
-			bio: req.user.bio,
-			tags: req.user.tags.join(',')
-		}
-
-		const data = {
-			cdn: CDN,
-			sites: allSites,
-			user: currentUser
-		}
-
-		data['preloaded'] = JSON.stringify({
-			user: currentUser,
-			sites: allSites,
-			selected: req.query.selected || 'profile',
-			query: req.query
-		})
-
-		res.render('account', data)
-	})
-	.catch(err => {
-		res.json({
-			confirmation: 'fail',
-			message: err.message
-		})
-	})
-})
-
-router.get('/dashboard', (req, res) => {
-	const data = {"user":{"firstName":"denny","lastName":"kwon","slug":"dennykwon2-t2gjis","referrer":"","featured":"no","confirmed":"no","githubId":"","accountType":"basic","email":"dennykwon2@gmail.com","tags":[],"notifications":[],"followers":[],"following":[],"bio":"","username":"dennykwon2","image":"https://lh3.googleusercontent.com/wtsr7fa5uIKV8pzNSwKyPRqcH0fE9nqjyB48pb_-mVPtQN6Gkq6mCzzRmB0n_bdYf9rEtkT9_wglYmT4hLYh8WJr_Wg","activityIndex":0,"promoCode":"","location":{"city":"","state":"","country":""},"lastLogin":null,"timestamp":"2018-12-24T05:45:17.645Z","schema":"profile","id":"5c20726d07f5280017e26074"},"sites":[{"profile":{"id":"5c20726d07f5280017e26074","slug":"dennykwon2-t2gjis","image":"https://lh3.googleusercontent.com/wtsr7fa5uIKV8pzNSwKyPRqcH0fE9nqjyB48pb_-mVPtQN6Gkq6mCzzRmB0n_bdYf9rEtkT9_wglYmT4hLYh8WJr_Wg","username":"dennykwon2","lastName":"kwon","firstName":"denny"},"format":"vertex","collaborators":[],"tags":[],"invited":[],"isClone":"no","cloneSource":"","canClone":"no","featured":"no","published":"no","github":"","slug":"template-test-65-mimyw1","name":"template-test-65","description":"","image":"https://lh3.googleusercontent.com/zcu5RGyy3JbHQkhvMlrT6fjGcrs1TC7Gu0VaIJbCtwCA-vBr_NabfWTt_Sk0YceR59XoLROBANLiSPG6x-XfTlZMOA","images":[],"url":"","api":{"key":"0b866e50-1bc2-4950-b1b9-92c8a1a4be15","secret":""},"pages":["home","blog"],"template":{"category":"misc","status":"dev"},"timestamp":"2019-01-09T08:46:48.755Z","schema":"site","id":"5c35b4f88ad3da0017fd8c71"},{"profile":{"id":"5c20726d07f5280017e26074","slug":"dennykwon2-t2gjis","image":"https://lh3.googleusercontent.com/wtsr7fa5uIKV8pzNSwKyPRqcH0fE9nqjyB48pb_-mVPtQN6Gkq6mCzzRmB0n_bdYf9rEtkT9_wglYmT4hLYh8WJr_Wg","username":"dennykwon2","lastName":"kwon","firstName":"denny"},"format":"vertex","collaborators":[],"tags":[],"invited":[],"isClone":"no","cloneSource":"","canClone":"no","featured":"no","published":"no","github":"","slug":"robert-demo-gjcpze","name":"robert-demo","description":"","image":"https://lh3.googleusercontent.com/zcu5RGyy3JbHQkhvMlrT6fjGcrs1TC7Gu0VaIJbCtwCA-vBr_NabfWTt_Sk0YceR59XoLROBANLiSPG6x-XfTlZMOA","images":[],"url":"","api":{"key":"cecca4fa-154d-45b5-ab54-97cecf58b498","secret":""},"pages":["home","blog"],"template":{"category":"misc","status":"dev"},"timestamp":"2018-12-30T04:44:31.886Z","schema":"site","id":"5c284d2f9017330017094988"}]}
-
-	data['preloaded'] = JSON.stringify({
-		user: data.user,
-		sites: data.sites,
-		selected: req.query.selected || 'profile'
-	})
-
-	res.render('account', data)
 })
 
 module.exports = router
