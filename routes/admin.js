@@ -5,7 +5,7 @@ const superagent = require('superagent')
 const router = vertex.router()
 const utils = require('../utils')
 const controllers = require('../controllers')
-var VERTEX_BUCKET = 'turbo360-vertex'
+const VERTEX_BUCKET = 'turbo360-vertex'
 
 const createCollection = (collectionName, appSlug) => {
 	console.log('createCollection: ' + collectionName + ', ' + appSlug)
@@ -207,11 +207,22 @@ router.post('/search', (req, res) => {
 		return
 	}
 
-	controllers.profile.search(req.body.text)
-	.then(profiles => {
+	const resource = req.body.resource || 'profile'
+	const controller = controllers[resource]
+	if (controller == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Invalid Resource: ' + resource
+		})
+		return
+	}
+
+	// controllers.profile.search(req.body.text)
+	controller.search(req.body.text)
+	.then(entities => {
 		res.json({
 			confirmation: 'success',
-			results: profiles
+			results: entities
 		})
 	})
 	.catch(err => {
