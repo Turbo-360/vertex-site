@@ -26,8 +26,8 @@
           <div class="sidebar-header mb-4">
               <h5 style="color:#333">Search Templates</h5>
               <div>
-                <input type="text" class="pl-1" placeholder="ex: blog, portfolio..." />
-                <button class="btn btn-sm btn-primary ml-1">GO</button>
+                <input id="input-search-templates" type="text" class="pl-1" placeholder="ex: blog, portfolio..." />
+                <button id="btn-search-templates" class="btn btn-sm btn-primary ml-1">GO</button>
               </div>
           </div>
       </nav>
@@ -125,6 +125,19 @@
       var templates = data.templates
       var templatesMap = data.templatesMap
       var selected = null
+
+      $('#btn-search-templates').click(function(event){
+        if (event)
+          event.preventDefault()
+        
+        var searchTerm = $('#input-search-templates').val()
+        if (searchTerm.length == 0){
+          alert('Please enter a search term.')
+          return
+        }
+
+        console.log('Search Templates: '+searchTerm)
+      })
 
       // checks if a template is ready when cloning:
       var checkTemplate = function(siteSlug){
