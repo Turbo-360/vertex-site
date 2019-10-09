@@ -14,7 +14,7 @@ require('dotenv').config()
 // plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
 mongoose.Promise = require('bluebird')
 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser:true, useUnifiedTopology:true})
 .then(data => {
   console.log ('DB Connection success')
 })
