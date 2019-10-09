@@ -1,11 +1,35 @@
 var Site = require('../models/Site')
-// var UpdateController = require('./UpdateController')
-// var Promise = require('bluebird')
 var uuidv4 = require('uuid/v4') // https://www.npmjs.com/package/uuid
 var bcrypt = require('bcryptjs')
 var utils = require('../utils')
 
 module.exports = {
+	search: (text, isRaw, key) => {
+		return new Promise((resolve, reject) => {
+			const params = {
+				$text: {
+					$search: text
+				}
+			}
+
+			// default filter to timestamp
+			const filters = {limit:50, sort:{timestamp: -1}}
+			Site.find(params, null, filters, (err, sites) => {
+				if (err){
+					reject(err)
+					return
+				}
+
+				if (isRaw){
+					resolve(sites)
+					return
+				}
+
+				resolve(Site.convertToJson(sites, key))
+			})
+		})
+	},
+	
 	get: function(params, isRaw){
 		return new Promise(function(resolve, reject){
 			if (params == null)
