@@ -156,7 +156,7 @@
           })
         })
       }
-      
+
       $('#btn-search-templates').click(function(event){
         if (event)
           event.preventDefault()
@@ -182,7 +182,7 @@
           var results = response.results
           // console.log('SEARCH RESULTS: ' + JSON.stringify(results))
 
-          var templatesMap = {} // reset map
+          templatesMap = {} // reset map
           var templatesHtml = ''
           var tpl = $('#tpl-card').html()
           results.forEach(function(template){
