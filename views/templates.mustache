@@ -138,6 +138,25 @@
       var templatesMap = data.templatesMap
       var selected = null
 
+      var connectModalHandlers = function(){
+        $('.tpl-link').each(function(i, link){
+          $(this).click(function(e){
+            var tplId = $(this).attr('id')
+            tplId = tplId.split('-')[0]
+            var template = templatesMap[tplId]
+            selected = template
+
+            template['url'] = (template.url.length==0) ? template.slug+'.vertex360.co' : template.url
+            template['description'] = (template.description.length==0) ? 'No Description' : template.description
+            console.log('Select Template: ' + JSON.stringify(template))
+
+            var tpl = $('#tpl-modal').html()
+            var tplModal = Mustache.render(tpl, template)
+            $('#template-modal-content').html(tplModal)
+          })
+        })
+      }
+      
       $('#btn-search-templates').click(function(event){
         if (event)
           event.preventDefault()
@@ -148,7 +167,7 @@
           return
         }
 
-        console.log('Search Templates: '+searchTerm)
+        // console.log('Search Templates: '+searchTerm)
         window.vertexLib.postRequest('/admin/search', {text:searchTerm, resource:'site'}, function(err, response){
           if (err){
             alert('Error - '+err.message)
@@ -161,15 +180,20 @@
           }
 
           var results = response.results
-          console.log('SEARCH RESULTS: ' + JSON.stringify(results))
+          // console.log('SEARCH RESULTS: ' + JSON.stringify(results))
 
+          var templatesMap = {} // reset map
           var templatesHtml = ''
           var tpl = $('#tpl-card').html()
           results.forEach(function(template){
+            templatesMap[template.id] = template
             templatesHtml += Mustache.render(tpl, template)
           })
 
           $('#templates-row').html(templatesHtml)
+          setTimeout(function(){
+            connectModalHandlers()
+          }, 500)
         })
       })
 
@@ -228,23 +252,6 @@
         })
       }
 
-      $('.tpl-link').each(function(i, link){
-        $(this).click(function(e){
-          var tplId = $(this).attr('id')
-          tplId = tplId.split('-')[0]
-          var template = templatesMap[tplId]
-          selected = template
-
-          template['url'] = (template.url.length==0) ? template.slug+'.vertex360.co' : template.url
-          template['description'] = (template.description.length==0) ? 'No Description' : template.description
-          console.log('Select Template: ' + JSON.stringify(template))
-
-          var tpl = $('#tpl-modal').html()
-          var tplModal = Mustache.render(tpl, template)
-          $('#template-modal-content').html(tplModal)
-        })
-      })
-
       $('#btn-launch-template').click(function(event){
         if (event)
           event.preventDefault()
@@ -259,6 +266,9 @@
 
         launchTemplate()
       })
+
+      connectModalHandlers()
+
     })()
   </script>
 
