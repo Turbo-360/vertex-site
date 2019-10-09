@@ -28,6 +28,9 @@
               <div>
                 <input id="input-search-templates" type="text" class="pl-1" placeholder="ex: blog, portfolio..." />
                 <button id="btn-search-templates" class="btn btn-sm btn-primary ml-1">GO</button>
+                <p class="mt-4" style="color:#333;width:95%">
+                  Search for templates by category (blog, resume, portfolio etc), name ("the gallery") or feature (newsletter).
+                </p>
               </div>
           </div>
       </nav>
@@ -157,10 +160,7 @@
         })
       }
 
-      $('#btn-search-templates').click(function(event){
-        if (event)
-          event.preventDefault()
-        
+      var searchTemplates = function(){
         var searchTerm = $('#input-search-templates').val()
         if (searchTerm.length == 0){
           alert('Please enter a search term.')
@@ -195,6 +195,21 @@
             connectModalHandlers()
           }, 500)
         })
+      }
+
+      $('#input-search-templates').on('keyup', function(event){
+        if (event.keyCode !== 13)
+          return
+          
+        // console.log('KEYUP == '+event.keyCode)
+        searchTemplates()
+      })
+
+      $('#btn-search-templates').click(function(event){
+        if (event)
+          event.preventDefault()
+
+        searchTemplates()        
       })
 
       // checks if a template is ready when cloning:
