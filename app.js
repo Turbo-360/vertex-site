@@ -28,8 +28,8 @@ app.use(compression())
 
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'))
-app.set('views', path.join(__dirname, 'medium'))
+app.set('views', path.join(__dirname, 'views'))
+// app.set('views', path.join(__dirname, 'medium'))
 app.set('view engine', 'mustache')
 app.engine('mustache', require('hogan-middleware').__express)
 

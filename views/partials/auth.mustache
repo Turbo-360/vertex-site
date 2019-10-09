@@ -1,132 +1,44 @@
-<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide" style="background:#fffffa">
-  <div class="small-dialog-header">
-    <img style="max-width:180px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s360" />
-  </div>
-
-  <div id="modal-container" class="sign-in-form style-1">
-    <ul class="tabs-nav">
-      <li><a id="tab-login" href="#tab1">Log In</a></li>
-      <li><a id="tab-register" href="#tab2">Register</a></li>
-    </ul>
-
-    <div class="tabs-container alt">
-      <div class="tab-content" id="tab1" style="display: none;">
-        <form method="post" class="login">
-
-          <div class="input-row">
-            <div class="input-label">Email</div>
-            <div class="input-container">
-              <input id="input-login-email" type="text" />
-            </div>
-          </div>
-
-          <div class="input-row">
-            <div class="input-label">Password</div>
-            <div class="input-container">
-              <input id="input-login-password" type="password" />
-            </div>
-          </div>
-
-          <input id="input-login" style="width:100%" type="submit" class="button border fw margin-top-10 width-100" name="login" value="Log In" />
-        </form>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button id="btn-close-login" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-
-      <!-- Register -->
-      <div class="tab-content" id="tab2" style="display: none;">
-        <form method="post" class="register">
-          <div class="input-row">
-            <div class="input-label">Name</div>
-            <div class="input-container">
-              <input id="input-register-name" placeholder="First and Last Name" type="text" />
-            </div>
-          </div>
-
-          <div class="input-row">
-            <div class="input-label">Email</div>
-            <div class="input-container">
-              <input id="input-register-email" placeholder="email@example.com" type="text" />
-            </div>
-          </div>
-
-          <div class="input-row">
-            <div class="input-label">Password</div>
-            <div class="input-container">
-              <input id="input-register-password" placeholder="" type="password" />
-            </div>
-          </div>
-
-          <input style="width:100%" id="input-register" type="submit" class="button border fw margin-top-10" name="register" value="Register" />
-        </form>
+      <div class="modal-body">
+        <input id="input-login-email" style="background:#f9f9f9;border:none" class="form-control mb-3" type="text" placeholder="Email" />
+        <input id="input-login-password" style="background:#f9f9f9;border:none" class="form-control mb-3" type="password" placeholder="Password" />
+        <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg mb-3">Login</button>
+        <hr />
+      </div>
+      <div class="text-center mb-4" style="padding:1rem">
+        <img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
       </div>
     </div>
   </div>
 </div>
 
-
-<div id="premium-dialog" class="zoom-anim-dialog mfp-hide" style="background:#fffffa">
-  <div class="small-dialog-header text-center">
-    <img style="max-width:180px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s360" />
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Join</h5>
+        <button id="btn-close-register" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input id="input-register-name" style="background:#f9f9f9;border:none" class="form-control mb-3" type="text" placeholder="Name" />
+        <input id="input-register-email" style="background:#f9f9f9;border:none" class="form-control mb-3" type="text" placeholder="Email" />
+        <input id="input-register-password" style="background:#f9f9f9;border:none" class="form-control mb-3" type="password" placeholder="Password" />
+        <button id="input-register" style="width:100%" type="button" class="btn btn-primary btn-lg mb-3">REGISTER</button>
+        <hr />
+      </div>
+      <div class="text-center mb-4" style="padding:1rem">
+        <img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />
+      </div>
+    </div>
   </div>
-
-  <form method="post" class="login">
-    <div class="input-row">
-      <div class="input-label">Name</div>
-      <div class="input-container">
-        <input id="input-premium-name" type="text" />
-      </div>
-    </div>
-
-    <div class="input-row">
-      <div class="input-label">Email</div>
-      <div class="input-container">
-        <input id="input-premium-email" type="text" />
-      </div>
-    </div>
-
-    <div class="input-row">
-      <div class="input-label">Password</div>
-      <div class="input-container">
-        <input id="input-premium-password" type="password" />
-      </div>
-    </div>
-
-    <hr />
-    <div class="text-center margin-bottom-20">
-      <h4>Payment Info</h4>
-    </div>
-
-    <div class="input-row">
-      <div class="input-label">Street</div>
-      <div class="input-container">
-        <input id="input-address-street" type="text" />
-      </div>
-    </div>
-
-    <div class="input-row">
-      <div class="input-label">City</div>
-      <div class="input-container">
-        <input id="input-address-city" type="text" />
-      </div>
-    </div>
-
-    <div class="input-row">
-      <div class="input-label">Country</div>
-      <div class="input-container">
-        <select id="input-address-country">
-          <option value="US">United States</option>
-          <option value="CA">Canada</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="input-row">
-      <div class="input-label">Card</div>
-      <div class="input-container">
-        <div id="card-element" style="width:100%;"></div>
-        <div id="card-errors" role="alert"></div>
-      </div>
-    </div>
-
-    <input id="input-register-premium" style="width:100%" type="submit" class="button border fw margin-top-20" value="Register" />
-  </form>
 </div>

@@ -1,338 +1,358 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <head>
-  {{>head}}
-  <style>
-    .message-by {
-      margin-left: 50px !important;
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vertex 360 | The Easiest Website Builder. Period.</title>
+    <meta name="description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
+
+    <meta property="og:title" content="Vertex 360 | Websites for the Modern Digital Age" />
+  	<meta property="og:type" content="article" />
+  	<meta property="og:url" content="https://www.vertex360.co" />
+  	<meta property="og:image" content="https://lh3.googleusercontent.com/ZM_FCvAPcwUXd3NZJNpvA-t8jb4RQkkjVAKNXYk_SQHV155T-W36Ghos9W7iiTyxaiKzXl9Z2XhaABotatD3HomhAQ=s260-c" />
+  	<meta property="og:image:width" content="260px" />
+  	<meta property="og:image:height" content="260px" />
+  	<meta property="og:description" content="Vertex 360 launches websites for influencers, YouTubers, content creators, startups, podcasters or anyone who want to expand their online brand." />
+
+    {{>head}}
+    <style>
+    .wrapper {
+        display: flex;
+        width: 100%;
+    }
+    #sidebar {
+        width: 240px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        color: #fff;
+        transition: all 0.3s;
+        padding-top: 6.5rem;
+    }
+    #sidebar ul li a,
+    #sidebar .sidebar-header {
+        padding-left: 2rem;
+    }
+    #sidebar .sidebar-header img {
+        max-width:160px;
+        margin-bottom:24px;
+    }
+    #sidebar ul li a:hover {
+        transition: all 0.2s;
+        color: #0000cc;
+    }
+    #sidebar ul li.active {
+        background: #f9f9f9;
+    }
+    #sidebar ul li.active a {
+        color: #0000cc;
+    }
+    #sidebar ul li {
+        padding: .5rem 0;
+    }
+    #content {
+        width: calc(100% - 240px);
+        min-height: 100vh;
+        transition: all 0.3s;
+        position: relative;
+    }
+    #features {
+        min-height: 100vh;
+    }
+    #features .card {
+        margin-bottom: 1rem !important;
+        height: 300px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 5px;
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+    }
+    #features article {
+        margin-bottom: 3rem;
+    }
+    #features article h5 {
+        text-align: center;
+        font-size: 1.15rem;
     }
 
-    .user-link {
-      padding: 0px !important;
-      display: inherit !important;
-      color: #37b6bd !important;
+    @media (min-width: 820px) {
+        #features .container {
+            max-width: 93%;
+        }
     }
 
-    .post-preview {
-      margin-bottom: 24px;
-      display: flex;
+    @media (max-width: 768px) {
+        #sidebar {
+            width: 240px;
+        }
+        #content {
+            width: 100%;
+        }
     }
 
-    .post-preview p {
-      font-weight: 400;
-      line-height: 20px;
+    @media (max-width: 475px) {
+        #sidebar {
+            margin-left: 0;
+            height: auto;
+            width: 100%;
+            padding-left: 0;
+            padding-top: 7rem;
+            transition: all 0.3s;
+        }
+        .wrapper {
+            display: block;
+        }
+        .sidebar-header h5,
+        .list-unstyled {
+            text-align: center;
+        }
+        .list-unstyled {
+            margin-bottom: 0;
+        }
+        #sidebar ul li {
+            display: inline-block;
+            margin-right: .5rem;
+        }
+        #sidebar ul li a,
+        #sidebar .sidebar-header {
+            padding-left: 0;
+        }
+
+        .hidden-xs {
+          display: none
+        }
     }
 
-    .post-preview span {
-      margin: 8px;
-      font-weight: 600;
-      color: #000;
+    .logo {
+    width: 160px;
     }
 
-    .post-preview small {
-      color: #999;
-      font-weight: 200;
-      font-size: 12px;
+    .icon-avatar {
+    border-radius: 50%;
+    margin-right: 6px;
+    padding: 4px;
+    border: 1px solid #56b48c;
     }
 
-    .post-preview img {
-      float: left;
-      width: 44px;
-      margin-right: 12px;
-      border-radius: 50%;
+    .author-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+    padding: 20px 0px
     }
 
-    .text-green {
-      color: #0f949b;
+    .author-container h3 {
+    text-transform: capitalize;
     }
 
-    .text-blue {
-      color: blue;
+    .template-header {
+    background: #fff;
+    padding: 24px;
     }
 
-    .message-bubble input {
-      border: none !important;
-      box-shadow: none !important;
-      background: #f6f6f6;
-      height: 30px;
-      margin: 0px;
-      padding: 0px;
+    .template-header small {
+    font-size: 14px;
     }
 
-    .message-bubble textarea {
-      font-size:14px;
-      font-weight:200;
-      min-height:72px;
-      resize:none;
-      border:none;
-      background:#f6f6f6;
-      box-shadow:none;
-      padding:0px;
-      margin-bottom: 0px !important;
+    .template-header p {
+    margin-bottom: 0px;
+    line-height: 2.0;
+    font-size: 18px;
     }
 
-    .message-bubble button {
-      padding:0px 9px;
-      border-radius:3px;
-      margin:0px;
+    .screenshot {
+    margin-bottom: 24px;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    padding: 3px;
+    background: #fff;
     }
 
-    .message-avatar img {
-      width: 44px !important;
-      height: 44px  !important;
+    .bg-green {
+    background: #56b48c;
+    border-color: #56b48c;
     }
 
-    .vote-box {
-      text-align: center;
-      max-width: 30px;
-      line-height: 16px
+    .btn-get-started {
+    width: 100%;
+    border-radius: 4px;
+    padding: 12px 11em;
     }
 
-    .submit-button-container {
-      text-align: right;
+    .profile-card {
+      background:#fff;
+      border:1px solid #ededed;
+      padding:16px;
+      text-align:center
     }
 
-    .submit-button-container button {
-      padding: 0px 9px;
-      border-radius: 3px;
-      margin: 0px;
+    .profile-card img {
+      border-radius:50%;
     }
 
-    .comment-by small {
-      color: #999;
-      font-weight: 400;
-      font-size: 12px;
+    .profile-card h5 {
+      margin-bottom:0px;
+      line-height:0.3;
     }
 
-    .comment-by span {
-      margin: 8px;
-      font-weight: 600;
-      color: #000;
+    .profile-card small {
+      color:#999;
+      font-size:0.85rem;
     }
 
-    .small-button {
-      flex:1;
-      text-align: center;
-      font-size: 14px;
-      margin: 0px;
-      padding: 8px !important;
-      border-radius: 4px !important;
+    .profile-card p {
+      height:20px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      font-size:0.85rem;
+      line-height:1.2rem;
+      text-align:left;
+      margin-top:12px;
+      margin-bottom:0px;
     }
-  </style>
+
+    @media (max-width: 768px) {
+    .btn-get-started {
+      padding: 12px 5.5em;
+    }
+    }
+
+    h5 {
+    text-transform: capitalize;
+    }
+
+    .sidebar-link {
+      text-decoration: none !important;
+      text-transform: capitalize;
+    }
+
+    .preview-image {
+    padding: 8px;
+    border: 1px solid #ededed;
+    }
+
+
+    </style>
 </head>
+    <body>
+      {{>nav}}
 
-<body>
+      <div class="wrapper">
 
-<!-- Wrapper -->
-<div id="wrapper">
-  {{>nav}}
-  <div class="clearfix"></div>
+          <!-- Sidebar -->
+          <nav id="sidebar" class="hidden-xs">
+              <div class="sidebar-header">
+                  <h5 style="color:#333">Search</h5>
+                  <input id="input-search" type="text" class="form-control mr-3" style="width:88%" />
+                  <button id="btn-search" class="btn btn-success mt-3" style="width:88%">Submit</button>
+              </div>
+          </nav>
 
-  <div id="dashboard">
-  	<div class="dashboard-nav hidden-xs">
-  		<div class="dashboard-nav-inner">
+          <div id="content">
+              <!-- features section -->
+              <section class="py-6" id="features" style="background:#f9f9f9">
+                  <div class="container mt-4">
+                      <div id="profiles-row" class="row">
 
-  			<ul data-submenu-title="Community">
-  				<li id="sidebar-forum" class="active"><a href="#"><i class="sl sl-icon-bubbles"></i> Forum</a></li>
-  				<li id="sidebar-blog"><a href="#"><i class="sl sl-icon-book-open"></i> Blog</a></li>
-  			</ul>
+                          {{#profiles}}
+                          <article class="col-md-3 col-6">
+                              <div class="profile-card">
+                                <a href="/profile/{{slug}}">
+                                  <img class="mb-0 w-75" src="{{{image}}}=s320-c" />
+                                </a>
 
-  		</div>
-  	</div>
+                                <h5 class="mt-3">
+                                  <a style="text-decoration:none" href="/profile/{{slug}}">{{firstName}}</a>
+                                </h5>
+                                <small>{{username}}</small>
+                                <p>{{bio}}</p>
+                              </div>
+                          </article>
+                          {{/profiles}}
 
-  	<div class="dashboard-content mobile-container">
-  		<div class="row">
-
-  			<!-- Listings -->
-  			<div class="col-lg-8 col-md-8">
-
-  				<div class="messages-container margin-top-0">
-  					<div class="messages-headline">
-              <h4 id="selected-header">FORUM</h4>
-  					</div>
-
-  					<div class="messages-container-inner">
-
-  						<!-- Message Content -->
-  						<div id="container-forum" class="message-content">
-
-                {{#profile}}
-                <div class="message-bubble margin-bottom-60 hidden-xs">
-  								<div class="message-avatar">
-                    <img id="comment-avatar" src="" alt="" />
-                  </div>
-  								<div class="message-text" style="margin-left:60px">
-                    <input id="input-comment-title" type="text" placeholder="Title" />
-                    <textarea id="input-comment-text"  placeholder="Enter your comment or link (https://www.example.com)"></textarea>
-                    <div class="submit-button-container">
-                      <button id="btn-submit-comment" class="button">Submit post</button>
-                    </div>
-                  </div>
-  							</div>
-                {{/profile}}
-
-                {{#comments}}
-                <div class="post-preview">
-                  <a class="hidden-xs" href="/profile/{{profile.slug}}">
-                    <img src="{{{profile.image}}}=s96-c" alt="Vertex 360 | {{profile.username}}" />
-                  </a>
-                  <p style="flex:1">
-                    {{#isLink}}
-                    <a class="text-green" target="_blank" href="{{url}}">{{title}} <small><i class="margin-left-10 sl sl-icon-share-alt"></i> ({{domain}})</small></a>
-                    {{/isLink}}
-                    {{^isLink}}
-                    <a class="text-green" href="/comments/{{slug}}">{{title}}</a>
-                    {{/isLink}}
-                    <br />
-                    <small>
-                      by
-                      <a class="text-blue" href="/profile/{{profile.slug}}">{{profile.username}}</a>
-                      <span>·</span>{{dateString}}
-                      <span>·</span><a class="text-blue" href="/comments/{{slug}}">{{numReplies}} comments</a>
-                    </small>
-                  </p>
-                  <div class="vote-box">
-                    <a id="upvote-{{id}}" href="#"><i class="sl sl-icon-arrow-up"></i></a>
-                    <div id="score-{{id}}">{{votes.score}}</div>
-                    <a id="downvote-{{id}}" href="#"><i class="sl sl-icon-arrow-down"></i></a>
-                  </div>
-                </div>
-                {{/comments}}
-
-  						</div>
-  						<!-- Message Content -->
-
-              <section id="container-blog" class="message-content">
-      					<ul style="list-style-type:none;padding-left:0px">
-                  {{#posts}}
-      						<li>
-                    <div class="margin-bottom-60">
-                      <div class="comment-by">
-                        <h4 class="margin-top-0 margin-bottom-0">
-                          <a style="color:#37b6bd" href="/post/{{slug}}">{{title}}</a>
-                        </h4>
-                        <small>
-                          by
-                          <a class="text-blue" href="/profile/{{author.slug}}">{{author.username}}</a>
-                          <span>·</span>{{dateString}}
-                        </small>
                       </div>
-                      <a style="float:right;margin-left:12px" href="/post/{{slug}}"><img style="max-width:120px" src="{{{image}}}=s220-c" alt="Vertex 360"></a>
-                      <p style="min-height:115px"><a href="/post/{{slug}}">{{preview}}</a><a style="color:red" href="/post/{{slug}}"> read more</a></p>
-                    </div>
-      						</li>
-                  {{/posts}}
-      					 </ul>
-      				</section>
+                  </div>
+              </section>
+              {{>footer-dark}}
+          </div>
+      </div>
+      {{>auth}}
 
-              <section id="container-templates" class="dashboard-list-box margin-top-0" style="width:100%">
-                <ul>
-                  {{#templates}}
-                  <li>
-        						<div class="list-box-listing" style="min-height:110px">
-        							<div class="list-box-listing-img" style="max-width:110px">
-                        <a href="/template/{{slug}}">
-                          <img src="{{{image}}}=s220-c" alt="Vertex 360">
-                        </a>
-                      </div>
-        							<div class="list-box-listing-content">
-        								<div class="inner">
-        									<h3><a href="/template/{{slug}}">{{name}}</a></h3>
-        									<span style="text-transform:capitalize">{{template.category}}</span>
-                          <div class="margin-top-20">
-                            <a href="/template/{{slug}}" class="button margin-right-10"><i class="sl sl-icon-magnifier-add"></i> View Details</a>
-              							<a target="_blank" href="https://{{slug}}.vertex360.co" class="button"><i class="sl sl-icon-share-alt"></i> Example</a>
-                          </div>
-        								</div>
-        							</div>
-        						</div>
-        					</li>
-                  {{/templates}}
 
-        				</ul>
-      				</section>
-  					</div>
-  				</div>
-  			</div>
-
-        <div class="col-lg-4 col-md-4 hidden-xs">
-          {{#profile}}
-          <div id="profile-card" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
-            <h4 class="gray">Profile</h4>
-            <div class="dashboard-list-box-static">
-              <a href="/profile/{{profile.slug}}">
-                <img style="border-radius:50%" src="{{{profile.image}}}=s96-c">
+      <script type="text/template" id="tpl-profile-card">
+        <article class="col-md-3 col-6">
+            <div class="profile-card">
+              <a href="/profile/<% slug %>">
+                <img class="mb-0 w-75" src="<%{image}%>=s320-c" />
               </a>
-              <br /><br />
-              <small>Profile</small>
-              <h4 class="padding-left-0 margin-bottom-20 padding-top-0 padding-bottom-10">
-                <a style="text-transform:capitalize" href="/profile/{{profile.slug}}">{{profile.firstName}} {{profile.lastName}}</a>
-              </h4>
-              <p style="font-size:14px;line-height:20px">{{profile.bio}}</p>
-              <a href="/profile/{{profile.slug}}" class="button btn-view">View Full Profile</a>
+
+              <h5 class="mt-3">
+                <a style="text-decoration:none" href="/profile/<%slug%>"><%firstName%></a>
+              </h5>
+              <small><%username%></small>
+              <p><%bio%></p>
             </div>
-          </div>
-          {{/profile}}
+        </article>
+      </script>
 
-          {{^profile}}
-          <div class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;">
-            <h4 class="gray">Register or Login</h4>
-            <div class="dashboard-list-box-static">
-              <div class="input-container margin-left-0">
-                <input id="input-sidebar-email" type="text" placeholder="Email" />
-              </div>
+      <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/popper.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/feather.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/slick.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/scripts.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/referrer.js"></script>
 
-              <div class="input-container margin-left-0">
-                <input id="input-sidebar-password" type="password" placeholder="Password" />
-              </div>
+      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/googleauth.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
 
-              <hr />
-              <div style="display:flex">
-                <button id="btn-sidebar-login" class="button small-button margin-right-10">LOG IN</button>
-                <button id="btn-sidebar-register" class="button small-button">JOIN</button>
-              </div>
-            </div>
-          </div>
-          {{/profile}}
+      {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
 
-          <div id="create-template-form" class="dashboard-list-box margin-top-0" style="position:fixed;width:310px;display:none">
-            <h4 class="gray">Create Template</h4>
-            <div class="dashboard-list-box-static">
+      <script>
+        (function(){
+          Mustache.tags = ["<%", "%>"]
+          $('#btn-search').click(function(event){
+            if (event)
+              event.preventDefault()
 
-              <div class="input-container margin-left-0">
-                <input id="input-template-name" type="text" placeholder="Name">
-              </div>
+            var text = $('#input-search').val()
+            if (text.length == 0){
+              alert('Please enter a search term')
+              return
+            }
 
-              <div class="input-container margin-left-0">
-                <input id="input-template-description" type="text" placeholder="Description (optional)">
-              </div>
+            // console.log('SEARCH: '+text)
+            window.vertexLib.postRequest('/admin/search', {text:text}, function(err, response){
+              if (err){
+                alert('Err - ' + err.message)
+                return
+              }
 
-              <div class="input-container margin-left-0">
-                <select id="input-template-category">
-                  <option value="base">Base</option>
-                  <option value="resume">Resume</option>
-                  <option value="landing">Landing</option>
-                  <option value="portfolio">Portfolio</option>
-                </select>
-              </div>
+              if (response.confirmation != 'success'){
+                alert('Err - ' + response.message)
+                return
+              }
 
-              <hr>
-              <a href="#" id="btn-create-template" class="button btn-view">Create Template</a>
-            </div>
-          </div>
-        </div>
+              var profiles = response.results
+              // console.log(JSON.stringify(profiles))
 
-        {{>copyright}}
-  		</div>
-  	</div>
+              var profilesHtml = ''
+              var tplProfileCard = $('#tpl-profile-card').html()
+              profiles.forEach(function(profile){
+                profilesHtml += Mustache.render(tplProfileCard, profile)
+              })
 
-  </div>
-</div>
+              $('#profiles-row').html(profilesHtml)
+            })
+          })
 
-  <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
-  <script type="text/javascript" src="{{{cdn}}}/dist/js/vendor.min.js"></script>
-  <script type="text/javascript" src="{{{cdn}}}/dist/js/community.min.js"></script>
-  <script type="text/javascript" src="{{{cdn}}}/dist/js/sidebar.min.js"></script>
-  <script type="text/javascript" src="{{{cdn}}}/dist/js/referrer.min.js"></script>
-  {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
-</body>
+        })()
+      </script>
+    </body>
 </html>

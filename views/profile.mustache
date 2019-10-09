@@ -14,175 +14,205 @@
     <meta property="og:image:height" content="260px" />
     <meta property="og:description" content="Vertex 360 is a powerful, fully featured, easy website builder made for busy people. Create your website in under an hour by selecting one of our professional templates and simply updating it with your content. No more messing with confusing editors, drag & drop tools, or ridiculously complicated features for 'beginners'. On Vertex 360, simply input your text and images and move on with your life, business, family - the important stuff." />
 
-    {{>styles}}
+    {{>head}}
     <style>
-        .wrapper {
-            display: flex;
-            width: 100%;
+    .wrapper {
+        display: flex;
+        width: 100%;
+    }
+    #sidebar {
+        width: 240px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        color: #fff;
+        transition: all 0.3s;
+        padding-top: 6.5rem;
+    }
+    #sidebar ul li a,
+    #sidebar .sidebar-header {
+        padding-left: 2rem;
+    }
+    #sidebar .sidebar-header img {
+        max-width:160px;
+        margin-bottom:24px;
+    }
+    #sidebar ul li a:hover {
+        transition: all 0.2s;
+        color: #0000cc;
+    }
+    #sidebar ul li.active {
+        background: #f9f9f9;
+    }
+    #sidebar ul li.active a {
+        color: #0000cc;
+    }
+    #sidebar ul li {
+        padding: .5rem 0;
+    }
+    #content {
+        width: calc(100% - 240px);
+        min-height: 100vh;
+        transition: all 0.3s;
+        position: relative;
+    }
+    #features {
+        min-height: 100vh;
+    }
+    #features .card {
+        margin-bottom: 1rem !important;
+        height: 300px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 5px;
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+    }
+    #features article {
+        margin-bottom: 3rem;
+    }
+    #features article h5 {
+        text-align: center;
+        font-size: 1.15rem;
+    }
+
+    @media (min-width: 820px) {
+        #features .container {
+            max-width: 93%;
         }
+    }
+
+    @media (max-width: 768px) {
         #sidebar {
-            width: 250px;
-            position: sticky;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            color: #fff;
-            transition: all 0.3s;
-            padding-top: 10rem;
-        }
-        #sidebar ul li a,
-        #sidebar .sidebar-header {
-            padding-left: 2rem;
-        }
-        #sidebar ul li a:hover {
-            transition: all 0.2s;
-            color: #0000cc;
-        }
-        #sidebar ul li.active {
-            background: #f9f9f9;
-        }
-        #sidebar ul li.active a {
-            color: #0000cc;
-        }
-        #sidebar ul li {
-            padding: .5rem 0;
+            width: 240px;
         }
         #content {
-            width: calc(100% - 250px);
-            min-height: 100vh;
-            transition: all 0.3s;
-            position: relative;
-            padding-top: 3rem;
+            width: 100%;
         }
-        #features {
-            min-height: 100vh;
-        }
-        #features .card {
-            margin-bottom: 1rem !important;
-            height: 300px;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: 5px;
-            box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
-        }
-        #features article {
-            margin-bottom: 3rem;
-        }
-        #features article h5 {
-            text-align: center;
-            font-size: 1.15rem;
-        }
-
-        @media (min-width: 820px) {
-            #features .container {
-                max-width: 93%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            #sidebar {
-                width: 200px;
-            }
-            #content {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 475px) {
-            #sidebar {
-                margin-left: 0;
-                height: auto;
-                width: 100%;
-                padding-left: 0;
-                padding-top: 7rem;
-                transition: all 0.3s;
-            }
-            .wrapper {
-                display: block;
-            }
-            .sidebar-header h5,
-            .list-unstyled {
-                text-align: center;
-            }
-            .list-unstyled {
-                margin-bottom: 0;
-            }
-            #sidebar ul li {
-                display: inline-block;
-                margin-right: .5rem;
-            }
-            #sidebar ul li a,
-            #sidebar .sidebar-header {
-                padding-left: 0;
-            }
-        }
-
-			.logo {
-				width: 160px;
-			}
-
-      .icon-avatar {
-        border-radius: 50%;
-        margin-right: 6px;
-        padding: 4px;
-        border: 1px solid #56b48c;
-      }
-
-      .author-container {
-        display: flex;
-        border-top: 1px solid #ddd;
-        margin-top: 40px;
-        padding: 20px 0px
-      }
-
-      .author-container h3 {
-        text-transform: capitalize;
-      }
-
-      .template-header {
-        background: #fff;
-        padding: 24px;
-      }
-
-      .template-header small {
-        font-size: 14px;
-      }
-
-      .template-header p {
-        margin-bottom: 0px;
-        line-height: 2.0;
-        font-size: 18px;
-      }
-
-      .screenshot {
-        margin-bottom: 24px;
-        max-width: 100%;
-        border: 1px solid #ddd;
-        padding: 3px;
-        background: #fff;
-      }
-
-      .bg-green {
-        background: #56b48c;
-        border-color: #56b48c;
-      }
-
-      .btn-get-started {
-        width: 100%;
-        border-radius: 4px;
-        padding: 12px 11em;
-      }
-
-      @media (max-width: 768px) {
         .btn-get-started {
           padding: 12px 5.5em;
         }
+    }
+
+    @media (max-width: 475px) {
+        #sidebar {
+            margin-left: 0;
+            height: auto;
+            width: 100%;
+            padding-left: 0;
+            padding-top: 7rem;
+            transition: all 0.3s;
+        }
+        .wrapper {
+            display: block;
+        }
+        .sidebar-header h5,
+        .list-unstyled {
+            text-align: center;
+        }
+        .list-unstyled {
+            margin-bottom: 0;
+        }
+        #sidebar ul li {
+            display: inline-block;
+            margin-right: .5rem;
+        }
+        #sidebar ul li a,
+        #sidebar .sidebar-header {
+            padding-left: 0;
+        }
+
+        .sidebar-header {
+          display: none;
+        }
+    }
+
+    .logo {
+    width: 160px;
+    }
+
+    .icon-avatar {
+    border-radius: 50%;
+    margin-right: 6px;
+    padding: 4px;
+    border: 1px solid #56b48c;
+    }
+
+    .author-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+    padding: 20px 0px
+    }
+
+    .author-container h3 {
+    text-transform: capitalize;
+    }
+
+    .template-header {
+    background: #fff;
+    padding: 24px;
+    }
+
+    .template-header small {
+    font-size: 14px;
+    }
+
+    .template-header p {
+    margin-bottom: 0px;
+    line-height: 2.0;
+    font-size: 18px;
+    }
+
+    .screenshot {
+    margin-bottom: 24px;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    padding: 3px;
+    background: #fff;
+    }
+
+    .bg-green {
+    background: #56b48c;
+    border-color: #56b48c;
+    }
+
+    .btn-get-started {
+      width: 100%;
+      border-radius: 4px;
+      padding: 12px 11em;
+    }
+
+
+    h5 {
+      text-transform: capitalize;
+    }
+
+    .sidebar-link {
+      text-decoration: none !important;
+      text-transform: capitalize;
+    }
+
+    .preview-image {
+    padding: 8px;
+    border: 1px solid #ededed;
+    }
+
+    @media (max-width: 568px) {
+      .thread-preview-img {
+        display: none;
       }
 
-      h5 {
-        text-transform: capitalize;
+      #sidebar {
+        padding-top: 1rem;
       }
-		</style>
+
+      #features {
+        padding-top: 1px !important;
+      }
+    }
+
+    </style>
 </head>
     <body>
       {{>nav}}
@@ -192,15 +222,17 @@
           <!-- Sidebar -->
           <nav id="sidebar">
               <div class="sidebar-header">
-                  <img style="border-radius:50%" src="{{{profile.image}}}=s160-c" />
-                  <h5 class="mt-5">{{profile.firstName}} {{profile.lastName}}</h5>
+                  <img src="{{{profile.image}}}=s512-c" />
+                  <h5 style="color:#333;margin-bottom:0px">{{profile.firstName}} {{profile.lastName}}</h5>
+                  <small style="color:#333">{{profile.username}}</small>
               </div>
+              <hr />
               <ul class="list-unstyled components">
                   <li class="active">
-                      <a href="#" class="sidebar-link" data-rel="all">Sites</a>
+                      <a href="#" class="sidebar-link" data-rel="about">About {{profile.firstName}}</a>
                   </li>
                   <li>
-                      <a href="#" class="sidebar-link" data-rel="bio">About</a>
+                      <a href="#" class="sidebar-link" data-rel="all">Sites</a>
                   </li>
               </ul>
           </nav>
@@ -211,22 +243,26 @@
                   <div class="container mt-4">
                       <div class="row">
 
-                        {{#sites}}
-                        <article class="col-md-6 all">
-                            <a href="/template/{{slug}}">
-                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024');"></div>
-                            </a>
-                            <h5 style="margin-bottom:0px"><a href="/template/{{slug}}">{{name}}</a></h5>
-                        </article>
-                        {{/sites}}
+                          {{#templates}}
+                          <article class="col-md-6 {{features}} all" style="display:none">
+                              <a id="{{id}}-card" class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">
+                                <div class="card mb-4" style="background-image: url('{{{image}}}=s1024')"></div>
+                              </a>
+                              <h5 style="margin-bottom:0px">
+                                <a id="{{id}}-title"class="tpl-link" href="#" data-toggle="modal" data-target="#template-modal">{{name}}</a>
+                              </h5>
+                          </article>
+                          {{/templates}}
 
-                        <article style="display:none" class="col-md-10 offset-md-1 bio">
-                            <h5>Meet {{profile.firstName}}</h5>
-                            <hr />
-                            <p>
-                              {{profile.bio}}
-                            </p>
-                        </article>
+                          <article class="col-md-9 mx-auto about">
+                            <div style="background:#fff;padding:36px">
+                              <img style="width:256px;" src="{{{profile.image}}}=s512-c" />
+                              <h1 style="text-transform:capitalize">{{profile.firstName}} {{profile.lastName}}</h1>
+                              <hr />
+                              <p>{{profile.bio}}</p>
+                            </div>
+
+                          </article>
 
                       </div>
                   </div>
@@ -235,22 +271,180 @@
           </div>
       </div>
 
-      {{>scripts}}
-      <script>
-          $(document).ready(function () {
-              $('.sidebar-link').on('click', function(e){
-                  e.preventDefault();
-                  $(this).parent().addClass('active').siblings().removeClass('active');
+      {{>auth}}
 
-                  var type = $(this).attr("data-rel");
-                  $("#features").fadeTo(100, 0.1);
-                  $("#features .container .row article").not("."+type).fadeOut();
-                  setTimeout(function() {
-                      $("."+type).fadeIn();
-                      $("#features").fadeTo(300, 1);
-                  }, 300);
-              });
-          });
+      <div class="modal fade" id="template-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="max-width:960px" role="document">
+          <div class="modal-content" style="border-radius:4px">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Launch Site</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div id="template-modal-content" class="modal-body" style="display:flex"></div>
+            <div class="text-left" style="padding:1.5rem;border-top:1px solid #ededed">
+              <input id="input-site-name" type="text" class="form-control mr-3" placeholder="Your Site Name" style="display:initial;width:290px;height:48px;padding-top:2px;background:#fffffa" />
+              <div style="display:inline-block" id="btn-launch-container"><button id="btn-launch-template" type="button" class="btn btn-primary btn-lg mr-2">LAUNCH SITE</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/template" id="tpl-modal">
+        <div class="modal-body" style="display:flex">
+          <div style="flex:1">
+            <div class="mb-2">
+              <img src="<% image %>=s282-c" />
+            </div>
+            <div>
+              <%#images%>
+              <img class="preview-image" src="<% . %>=s50-c" />
+              <%/images%>
+            </div>
+          </div>
+          <div style="flex:2">
+            <a target="_blank" style="float:right" href="https://<% url %>" class="btn btn-sm btn-danger">Live Example</a>
+            <button style="float:right" class="btn btn-sm btn-success mr-2">Free</button>
+            <h3><% name %></h3>
+            <p><%{description}%></p>
+            <h4 class="mb-0">Includes</h4>
+            <ol style="padding-left:16px">
+              <li>YouTube Transcriptions</li>
+              <li>Podcast Player</li>
+              <li>Instagram Gallery</li>
+              <li>Blog</li>
+              <li>Email Subscribers</li>
+            </ol>
+          </div>
+        </div>
       </script>
+
+      <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/js/mustache.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/popper.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/feather.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/slick.min.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/snap/js/scripts.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/referrer.js"></script>
+      {{#renderAnalytics}}{{>analytics}}{{/renderAnalytics}}
+
+      <script>
+        (function(){
+          Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
+          var data = window.__PRELOADED__
+          var user = data.user
+          var templates = data.templates
+          var templatesMap = data.templatesMap
+          var selected = null
+
+          // checks if a template is ready when cloning:
+          var checkTemplate = function(siteSlug){
+            var body = {template:siteSlug}
+            window.vertexLib.postRequest('/account/check-template', body, function(err, response){
+              if (err){
+                // console.log('TEMPLATE NOT READY: ' + siteSlug)
+                setTimeout(function(){
+                  checkTemplate(siteSlug)
+                }, 4000)
+                return
+              }
+
+              if (response.confirmation != 'success'){
+                setTimeout(function(){
+                  checkTemplate(siteSlug)
+                }, 4000)
+                return
+              }
+
+              console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+              if (response.confirmation != 'success'){
+                alert('Error - ' + response.message)
+                return
+              }
+
+              window.location.href = '/admin/pages/'+siteSlug // redirect to site admin page
+            })
+          }
+
+          var launchTemplate = function(){
+            var body = {
+              name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
+              source: selected.id // ID of the template being copied
+            }
+
+            if (body.name.length == 0){
+              alert('Please enter a name for your site')
+              return
+            }
+
+            // console.log('launchTemplate: ' + JSON.stringify(body))
+            $('#btn-launch-container').html("<img style='width:50px;margin-right:12px' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' /><em style='color:#888'>Launching your site. This may take up to 2 minutes...</em>")
+            window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
+              if (err){
+                alert('Error: ' + err.message)
+                return
+              }
+
+              console.log('SITE LAUNCHED: ' + JSON.stringify(response))
+              setTimeout(function(){
+                checkTemplate(response.data.slug)
+              }, 4000)
+            })
+          }
+
+          $('.tpl-link').each(function(i, link){
+            $(this).click(function(e){
+              var tplId = $(this).attr('id')
+              tplId = tplId.split('-')[0]
+              var template = templatesMap[tplId]
+              selected = template
+
+              template['url'] = (template.url.length==0) ? template.slug+'.vertex360.co' : template.url
+              template['description'] = (template.description.length==0) ? 'No Description' : template.description
+              console.log('Select Template: ' + JSON.stringify(template))
+
+              var tpl = $('#tpl-modal').html()
+              var tplModal = Mustache.render(tpl, template)
+              $('#template-modal-content').html(tplModal)
+            })
+          })
+
+          $('#btn-launch-template').click(function(event){
+            if (event)
+              event.preventDefault()
+
+            if (user == null){
+              alert('Please log in or register to clone this site.')
+              return
+            }
+
+            if (selected == null)
+              return
+
+            launchTemplate()
+          })
+
+          $('.sidebar-link').on('click', function(e){
+              e.preventDefault();
+              $(this).parent().addClass('active').siblings().removeClass('active');
+
+              var type = $(this).attr("data-rel");
+              $("#features").fadeTo(100, 0.1);
+              $("#features .container .row article").not("."+type).fadeOut();
+              setTimeout(function() {
+                  $("."+type).fadeIn();
+                  $("#features").fadeTo(300, 1);
+              }, 300);
+          });
+        })()
+      </script>
+
+      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/googleauth.js"></script>
+      <script type="text/javascript" src="{{{cdn}}}/scripts/auth.js"></script>
     </body>
 </html>
