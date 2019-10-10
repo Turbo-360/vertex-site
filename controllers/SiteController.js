@@ -8,6 +8,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			const params = {
 				origin: 'vertex360',
+				'template.status': 'live',
 				$text: {
 					$search: text
 				}
