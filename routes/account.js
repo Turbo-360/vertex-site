@@ -764,7 +764,7 @@ router.post('/:action', (req, res, next) => {
 			// utils.AWS.deleteFunction({name: site.slug})
 
 			const endpoint = process.env.PLATFORM_VECTOR_URL+'/deletesite'
-			utils.HTTP.post(endpoint, {name:site.name, id:site.id, slug:site.slug})
+			utils.HTTP.post(endpoint, {site:{name:site.name, id:site.id, slug:site.slug}})
 			res.json({
 				confirmation: 'success',
 				data: req.body
