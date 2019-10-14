@@ -761,7 +761,10 @@ router.post('/:action', (req, res, next) => {
 		.then(data => {
 			// delete function from lamdba.
 			// do this without waiting for return.
-			utils.AWS.deleteFunction({name: site.slug})
+			// utils.AWS.deleteFunction({name: site.slug})
+
+			const endpoint = process.env.PLATFORM_VECTOR_URL+'/deletesite'
+			utils.HTTP.post(endpoint, {name:site.name, id:site.id, slug:site.slug})
 			res.json({
 				confirmation: 'success',
 				data: req.body
