@@ -78,19 +78,19 @@ router.post('/seed', (req, res) => {
 
 	utils.HTTP.get('https://'+req.body.app+'.vertex360.co/api', null, {'Accept': 'application/json', 'turbo-vertex-client':'mothership'})
 	.then(response => {
-			const parsed = JSON.parse(response)
-			if (parsed.confirmation != 'success'){
-				throw new Error(parsed.message)
-				return
-			}
+		const parsed = JSON.parse(response)
+		if (parsed.confirmation != 'success'){
+			throw new Error(parsed.message)
+			return
+		}
 
-			const resources = parsed.data
-			resources.forEach(resource => {
-				if (resource.collectionName) // older versions won't have this
-					checkCollection(req.body.app, resource.collectionName.trim())
-			})
+		const resources = parsed.data
+		resources.forEach(resource => {
+			if (resource.collectionName) // older versions won't have this
+				checkCollection(req.body.app, resource.collectionName.trim())
+		})
 
-			res.json(parsed)
+		res.json(parsed)
 	})
 	.catch(err => {
 		res.json({
