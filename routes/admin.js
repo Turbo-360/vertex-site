@@ -76,7 +76,7 @@ router.post('/seed', (req, res) => {
 		return
 	}
 
-	utils.HTTP.get('https://'+req.body.app+'.vertex360.co/api')
+	utils.HTTP.get('https://'+req.body.app+'.vertex360.co/api', null, {'Accept': 'application/json', 'turbo-vertex-client':'mothership'})
 	.then(response => {
 			const parsed = JSON.parse(response)
 			if (parsed.confirmation != 'success'){
