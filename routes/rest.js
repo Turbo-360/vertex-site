@@ -17,19 +17,20 @@ const queryEndpoint = (endpoint, params, method) => {
     if (method == null)
       method = 'get'
 
-    console.log('queryEndpoint: ' + method.toUpperCase()+' - '+endpoint)
+    //console.log('queryEndpoint: ' + method.toUpperCase()+' - '+endpoint)
+    const reqHeaders = {'Accept': 'application/json', 'turbo-vertex-client':'mothership'}
 
     let request = null
     if (method == 'get')
-      request = utils.HTTP.get(endpoint, params)
+      request = utils.HTTP.get(endpoint, params, reqHeaders)
     else if (method == 'post')
-      request = utils.HTTP.post(endpoint, params)
+      request = utils.HTTP.post(endpoint, params, reqHeaders)
     else if (method == 'put')
-      request = utils.HTTP.put(endpoint, params)
+      request = utils.HTTP.put(endpoint, params, reqHeaders)
     else if (method == 'delete')
-      request = utils.HTTP.delete(endpoint, params)
+      request = utils.HTTP.delete(endpoint, params, reqHeaders)
     else // default to GET method
-      request = utils.HTTP.get(endpoint, params)
+      request = utils.HTTP.get(endpoint, params, reqHeaders)
 
     request.then(data => {
       try {
