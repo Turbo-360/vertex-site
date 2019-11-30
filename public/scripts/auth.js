@@ -66,6 +66,7 @@
 
       // special case for iphone. Safari does not honor cookies
       // from different domains.
+      /*
       if (userAgent.includes('iphone')){
         if (data.isWidget){
           // send message back to parent container (react bundle) so
@@ -73,6 +74,13 @@
           parent.postMessage({action:'logged-in', data:response.user}, '*')
           return
         }
+      } */
+
+      if (data.isWidget){
+        // send message back to parent container (react bundle) so
+        // user auth can be handled on individual site domains:
+        parent.postMessage({action:'logged-in', data:response.user}, '*')
+        return
       }
 
       authorizeUser(onRegisterRedirect)
@@ -140,6 +148,7 @@
 
       // special case for iphone. Safari does not honor cookies
       // from different domains.
+      /*
       if (userAgent.includes('iphone')){
         if (data.isWidget){
           // send message back to parent container (react bundle) so
@@ -147,7 +156,15 @@
           parent.postMessage({action:'logged-in', data:response.user}, '*')
           return
         }
+      } */
+
+      if (data.isWidget){
+        // send message back to parent container (react bundle) so
+        // user auth can be handled on individual site domains:
+        parent.postMessage({action:'logged-in', data:response.user}, '*')
+        return
       }
+
 
       authorizeUser(onLoginRedirect, response)
 
