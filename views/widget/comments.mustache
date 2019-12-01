@@ -75,6 +75,7 @@
       else
         $('#comments-header').removeClass('d-none')
 
+      /*
       if (userAgent.includes('iphone')){
         window.addEventListener('message', function(event){
           var message = event.data
@@ -89,7 +90,22 @@
             reloadUI()
           }
         })
-      }
+      } */
+
+      window.addEventListener('message', function(event){
+        var message = event.data
+        console.log('MESSAGE RECEIVED == ' + JSON.stringify(message))
+        if (message.type == null)
+          return
+
+        if (message.type == 'user-logged-in'){
+          user = message.user
+          document.getElementById('btn-close-login').click()
+          document.getElementById('btn-close-register').click()
+          reloadUI()
+        }
+      })
+
 
       var reloadUI = function(){
         if (user){
