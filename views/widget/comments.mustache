@@ -137,7 +137,8 @@
         var comment = {
           text: commentText,
           thread: threadId,
-          site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image}),
+          url: window.location.href,
+          site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:window.location.hostname}),
           profile: JSON.stringify({
             id: user.id,
             // firstName: user.firstName,
