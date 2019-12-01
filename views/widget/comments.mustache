@@ -66,7 +66,8 @@
 
       Mustache.tags = ["<%", "%>"] // change delimiter so it doesn't conflict server side
       var data = window.__PRELOADED__
-      var user = data.user
+      // var user = data.user
+      var user = null
       var site = data.site // full site data
       var schema = data.schema // post, video, episode, etc
       var comments = data.comments || []
@@ -75,23 +76,6 @@
         $('#register-or-login').removeClass('d-none')
       else
         $('#comments-header').removeClass('d-none')
-
-      /*
-      if (userAgent.includes('iphone')){
-        window.addEventListener('message', function(event){
-          var message = event.data
-          console.log('MESSAGE RECEIVED == ' + JSON.stringify(message))
-          if (message.type == null)
-            return
-
-          if (message.type == 'user-logged-in'){
-            user = message.user
-            document.getElementById('btn-close-login').click()
-            document.getElementById('btn-close-register').click()
-            reloadUI()
-          }
-        })
-      } */
 
       window.addEventListener('message', function(event){
         var message = event.data
@@ -159,6 +143,7 @@
             firstName: user.firstName,
             lastName: user.lastName,
             username: user.username,
+            image: user.image,
             slug: user.slug
           })
         }
