@@ -4,7 +4,7 @@
     return
 
   var userAgent = navigator.userAgent.toLowerCase()
-  console.log('USER AGENT: ' + userAgent) // USER AGENT: mozilla/5.0 (macintosh; intel mac os x 10_13_4) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.100 safari/537.36
+  // console.log('USER AGENT: ' + userAgent) // USER AGENT: mozilla/5.0 (macintosh; intel mac os x 10_13_4) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.100 safari/537.36
   var isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
 
   var user = data.user
