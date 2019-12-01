@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const ThreadSchema = new mongoose.Schema({
-  subject: {type:mongoose.Schema.Types.Mixed, default:{}}, // post, site, profile, etc
-  profile: {type:mongoose.Schema.Types.Mixed, default:{}},
-  site: {type:mongoose.Schema.Types.Mixed, default:{}},
+	subject: {type:mongoose.Schema.Types.Mixed, default:{}}, // post, site, profile, etc
+	profile: {type:mongoose.Schema.Types.Mixed, default:{}},
+	site: {type:mongoose.Schema.Types.Mixed, default:{}},
 	slug: {type:String, lowercase:true, trim:true, default:''},
 	numReplies: {type:Number, default:0},
 	votes: {type:mongoose.Schema.Types.Mixed, default:{up:[], down:[], score:0}},
