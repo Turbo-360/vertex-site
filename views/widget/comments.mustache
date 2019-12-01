@@ -145,8 +145,10 @@
         }
 
         var threadId = data.thread // ID number
-        if (threadId == null)
+        if (threadId == null){
+          console.log('THREAD ID NUMBER MISSING')
           return
+        }
 
         var comment = {
           text: commentText,
