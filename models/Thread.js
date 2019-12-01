@@ -14,8 +14,8 @@ const ThreadSchema = new mongoose.Schema({
 ThreadSchema.methods.summary = function(authLevel) {
 	var summary = {
 		subject: this.subject,
-    profile: this.profile,
-    site: this.site,
+		profile: this.profile,
+		site: this.site,
 		slug: this.slug,
 		numReplies: this.numReplies,
 		votes: this.votes,
