@@ -87,7 +87,8 @@ router.get('/comments', (req, res) => {
 
 	const data = {
 		cdn: CDN,
-		user: sanitizedUser(req.user),
+		user: null, // always set user from the host site, not vertex360.co
+		// user: sanitizedUser(req.user),
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
