@@ -137,8 +137,8 @@
         var comment = {
           text: commentText,
           thread: threadId,
-          url: window.location.href,
-          site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:window.location.hostname}),
+          // url: window.location.href,
+          site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:'https://'+site.url}),
           profile: JSON.stringify({
             id: user.id,
             // firstName: user.firstName,
@@ -150,8 +150,6 @@
         }
 
         console.log('SUBMIT COMMENT: '+JSON.stringify(comment))
-        return
-
         window.vertexLib.postRequest('/api/comment', comment, function(err, resp){
           if (err){
             alert('Error - '+err)
