@@ -65,18 +65,6 @@
       </div>
 
       <div id="comments-container" class="mt-5">
-        {{#comments}}
-        <div class="mt-2 d-flex justify-content-between post-preview">
-          <div class="pr-4">
-            <div class="card-text text-muted small">
-                <a href="#">{{ profile.username }}</a>
-                <span style="margin:6px">&middot;</span>
-                <span>{{ dateString }}</span>
-            </div>
-            <p class="text-muted">{{{text}}}</p>
-          </div>
-        </div>
-        {{/comments}}
 
         {{#comments}}
         <div class="bg-white mb-4 thread-preview">
@@ -92,7 +80,6 @@
           <div style="width:24px;background:#e8f2ff">
           </div>
         </div>
-
         {{/comments}}
 
       </div>
@@ -105,14 +92,17 @@
 
 
   <script type="text/template" id="tpl-comment">
-    <div class="mt-2 d-flex justify-content-between post-preview">
-      <div class="pr-4">
-        <div class="card-text text-muted small">
-            <a href="#"><% profile.username %></a>
-            <span style="margin:6px">&middot;</span>
-            <span><% dateString %></span>
+    <div class="bg-white mb-4 thread-preview">
+      <div class="thread-preview-container">
+        <p style="color:#7d7d7d"><%{text}%></p>
+        <div class="mb-0 mb-2" style="text-align:right">
+          <small><%dateString%></small>
+          <span>&middot;</span>
+          <a target="_blank" href="#"><small><%profile.username%></small></a>
+          <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
         </div>
-        <p class="text-muted"><%{text}%></p>
+      </div>
+      <div style="width:24px;background:#e8f2ff">
       </div>
     </div>
   </script>
