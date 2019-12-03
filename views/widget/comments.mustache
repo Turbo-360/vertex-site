@@ -41,7 +41,7 @@
 
     .site-icon {
       border-radius: 50%;
-      margin-left: 6px;
+      margin-right: 6px;
       width: 22px;
     }
   </style>
@@ -69,13 +69,13 @@
         {{#comments}}
         <div class="bg-white mb-4 thread-preview">
           <div class="thread-preview-container">
-            <p style="color:#7d7d7d">{{{text}}}</p>
-            <div class="mb-0" style="text-align:right">
-              <small>{{dateString}}</small>
-              <span>&middot;</span>
+            <div class="mb-2" style="text-align:right">
               <a target="_blank" href="{{{site.url}}}"><small>{{profile.username}}</small></a>
               <a target="_blank" href="{{{site.url}}}"><img class="site-icon" src="{{{profile.image}}}=s44-c" /></a>
+              <span>&middot;</span>
+              <small>{{dateString}}</small>
             </div>
+            <p style="color:#7d7d7d">{{{text}}}</p>
           </div>
           <div style="width:24px;background:#e8f2ff">
           </div>
@@ -94,11 +94,11 @@
   <script type="text/template" id="tpl-comment">
     <div class="bg-white mb-4 thread-preview">
       <div class="thread-preview-container">
-        <div class="mb-0">
-          <small><%dateString%></small>
-          <span>&middot;</span>
-          <a target="_blank" href="#"><small><%profile.username%></small></a>
+        <div class="mb-2">
           <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
+          <a target="_blank" href="#"><small><%profile.username%></small></a>
+          <span>&middot;</span>
+          <small><%dateString%></small>
         </div>
         <p style="color:#7d7d7d"><%{text}%></p>
       </div>
