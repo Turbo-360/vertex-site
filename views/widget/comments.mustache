@@ -67,11 +67,11 @@
       <div id="comments-container" class="mt-5">
 
         {{#comments}}
-        <div class="bg-white mb-4 thread-preview">
+        <div class="bg-white mb-3 thread-preview">
           <div class="thread-preview-container">
             <div class="mb-2">
-              <a target="_blank" href="{{{site.url}}}"><small>{{profile.username}}</small></a>
               <a target="_blank" href="{{{site.url}}}"><img class="site-icon" src="{{{profile.image}}}=s44-c" /></a>
+              <a target="_blank" href="{{{site.url}}}"><small>{{profile.username}}</small></a>
               <span>&middot;</span>
               <small>{{dateString}}</small>
             </div>
@@ -92,7 +92,7 @@
 
 
   <script type="text/template" id="tpl-comment">
-    <div class="bg-white mb-4 thread-preview">
+    <div class="bg-white mb-3 thread-preview">
       <div class="thread-preview-container">
         <div class="mb-2">
           <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
