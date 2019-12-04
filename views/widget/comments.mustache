@@ -44,6 +44,30 @@
       margin-right: 6px;
       width: 22px;
     }
+
+    .entity-header {
+      padding: 12px;
+      background: #f9f9f9;
+      text-align: left;
+      line-height: 20px;
+    }
+
+    .entity-header h1 {
+      font-size: 22px;
+      margin-bottom: 0px;
+      text-align: left;
+      font-family: Arial;
+      line-height: 28px;
+      font-weight: 400;
+      color: #333;
+    }
+
+    .entity-header small {
+      color: #999;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: Arial;
+    }
   </style>
 
 </head>
@@ -52,6 +76,11 @@
 <div class="container pt-0 pb-4">
 	<div class="row justify-content-between">
 		<div class="col-md-8">
+      <div class="entity-header">
+        <h1 id="entity-title"></h1>
+        <small id="entity-date"></small>
+      </div>
+
       <div id="comments-header" class="d-none">
         <textarea id="text-area-comment" class="form-control mt-3 mb-1" rows="3" style="padding:0px 8px;resize:none"></textarea>
         <small class="text-muted" id="display-username"></small>
@@ -155,10 +184,7 @@
         if (message.type == 'set-entity'){
           console.log('SET ENTITY: '+JSON.stringify(message.entity))
           entity = message.entity
-          // user = message.user
-          // document.getElementById('btn-close-login').click()
-          // document.getElementById('btn-close-register').click()
-          // reloadUI()
+          reloadUI()
         }
       })
 
@@ -171,6 +197,11 @@
         else {
           $('#comments-header').addClass('d-none')
           $('#register-or-login').removeClass('d-none')
+        }
+
+        if (entity!=null){
+          $('#entity-title').html(entity.title)
+          $('#entity-date').html(entity.dateString)
         }
 
         var tpl = $('#tpl-comment').html()
