@@ -129,6 +129,7 @@
       var data = window.__PRELOADED__
       // var user = data.user
       var user = null
+      var entity = null
       var site = data.site // full site data
       var schema = data.schema // post, video, episode, etc
       var comments = data.comments || []
@@ -150,8 +151,16 @@
           document.getElementById('btn-close-register').click()
           reloadUI()
         }
-      })
 
+        if (message.type == 'set-entity'){
+          console.log('SET ENTITY: '+JSON.stringify(message.entity))
+          entity = message.entity
+          // user = message.user
+          // document.getElementById('btn-close-login').click()
+          // document.getElementById('btn-close-register').click()
+          // reloadUI()
+        }
+      })
 
       var reloadUI = function(){
         if (user){
