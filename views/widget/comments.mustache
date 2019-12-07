@@ -182,7 +182,7 @@
         }
 
         if (message.type == 'set-entity'){
-          console.log('SET ENTITY: '+JSON.stringify(message.entity))
+          // console.log('SET ENTITY: '+JSON.stringify(message.entity))
           entity = message.entity
           reloadUI()
         }
@@ -250,7 +250,7 @@
           })
         }
 
-        console.log('SUBMIT COMMENT: '+JSON.stringify(comment))
+        // console.log('SUBMIT COMMENT: '+JSON.stringify(comment))
         window.vertexLib.postRequest('/api/comment', comment, function(err, resp){
           if (err){
             alert('Error - '+err)
