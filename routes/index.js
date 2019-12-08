@@ -5,7 +5,6 @@ const controllers = require('../controllers')
 const utils = require('../utils')
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
-
 const hasVideo = (site) => {
 	if (site.template.video == null)
 		return false
@@ -167,7 +166,6 @@ router.get('/community', (req, res) => {
 		})
 	})
 })
-
 
 router.get('/templates', (req, res) => {
 	const data = {
