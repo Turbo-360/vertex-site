@@ -231,8 +231,9 @@
         if (event)
           event.preventDefault()
 
-        user = null
-        reloadUI()
+        parent.postMessage({action:'log-out', data:null}, '*')
+        // user = null
+        // reloadUI()
       })
 
       $('#btn-submit-comment').click(function(event){
