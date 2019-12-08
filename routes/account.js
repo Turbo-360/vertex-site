@@ -960,8 +960,10 @@ router.post('/:action', (req, res, next) => {
 			format: 'vertex',
 			origin: 'vertex360',
 			isClone: 'no',
+			category: req.body.category,
 			template: {
-				category: req.body.category,
+				// category: req.body.category,
+				category: 'base',
 				status: 'dev'
 			}
 		}
@@ -971,7 +973,8 @@ router.post('/:action', (req, res, next) => {
 			// TODO: create stores and pages folders
 			// this lamdba creates 'stores' and 'pages' directories for
 			// the new template. don't wait for it to return, let it run.
-			utils.HTTP.post(process.env.PLATFORM_VECTOR_URL+'/seedtemplate', {source:req.body.category, app:data.slug}, null)
+			// utils.HTTP.post(process.env.PLATFORM_VECTOR_URL+'/seedtemplate', {source:req.body.category, app:data.slug}, null)
+			utils.HTTP.post(process.env.PLATFORM_VECTOR_URL+'/seedtemplate', {source:template.template.category, app:data.slug}, null)
 
 			res.json({
 				confirmation: 'success',
