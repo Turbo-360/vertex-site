@@ -27,6 +27,13 @@
     window.location.href = redirect
   }
 
+  $('#btn-logout').click(function(){
+    if (event)
+      event.preventDefault()
+
+    parent.postMessage({action:'log-out', data:null}, '*')
+  })
+
   $('#input-register').click(function(event){
     if (event)
       event.preventDefault()
@@ -34,14 +41,14 @@
     var visitor = {
       fullName: $('#input-register-name').val(),
       email: $('#input-register-email').val(),
-      password: $('#input-register-password').val(),
-      promoCode: $('#input-register-promo').val()
+      password: $('#input-register-password').val()
+      // promoCode: $('#input-register-promo').val()
     }
 
-    if (visitor.fullName.length == 0){
-      alert('Please enter your NAME')
-      return
-    }
+    // if (visitor.fullName.length == 0){
+    //   alert('Please enter your NAME')
+    //   return
+    // }
 
     if (visitor.email.length == 0){
       alert('Please enter your EMAIL')
