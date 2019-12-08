@@ -181,6 +181,11 @@
           reloadUI()
         }
 
+        if (message.type == 'user-logged-out'){
+          user = null
+          reloadUI()
+        }
+
         if (message.type == 'set-entity'){
           // console.log('SET ENTITY: '+JSON.stringify(message.entity))
           entity = message.entity
