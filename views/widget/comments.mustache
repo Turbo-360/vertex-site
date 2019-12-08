@@ -89,7 +89,7 @@
             <img class="ml-1" style="max-width:26px;opacity:0.6" src="https://lh3.googleusercontent.com/eJ6Xz07dlPwSEaT8pdPgsrBwExjl0IzK2DpEpJ_8ljbTmBAu0tqQ0KGT9IHJr_LkiQ-BaJs9VmsXI365lRSYt_bB4kk=s120" />
           </a>
           <div style="padding:6px" class="dropdown-menu">
-            <a style="text-decoration:none" href="#">Logout</a>
+            <a id="btn-logout" style="text-decoration:none" href="#">Logout</a>
           </div>
         </div>
 
@@ -226,6 +226,14 @@
 
         $('#comments-container').html(commentsHtml)
       }
+
+      $('#btn-logout').click(function(){
+        if (event)
+          event.preventDefault()
+
+        user = null
+        reloadUI()
+      })
 
       $('#btn-submit-comment').click(function(event){
         if (event)
