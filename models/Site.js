@@ -78,7 +78,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		api: this.api,
 		paypal: paypal,
 		globalConfig: this.globalConfig,
-		pages: this.pages,
+		// pages: this.pages,
 		template: this.template,
 		timestamp: this.timestamp,
 		schema: 'site',
