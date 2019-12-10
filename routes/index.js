@@ -46,6 +46,15 @@ router.get('/', (req, res) => {
 	res.render('about', data)
 })
 
+router.get('/landing', (req, res) => {
+	const data = {
+		cdn: CDN,
+		renderAnalytics: utils.renderAnalytics(req, CDN)
+	}
+
+	res.render('landing', data)
+})
+
 router.get('/feed', (req, res) => {
   const data = {
 		cdn: CDN,
