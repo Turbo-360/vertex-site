@@ -234,10 +234,12 @@ module.exports = {
 						// params['image'] = params.image || process.env.DEFAULT_ICON
 						params['image'] = params.image || avatars[Math.floor(Math.random()*avatars.length)]
 
-						const nameParts = params['fullName'].split(' ')
-						params['firstName'] = nameParts[0]
-						if (nameParts.length > 1)
-							params['lastName'] = nameParts[nameParts.length-1]
+						if (params['fullName'] != null){
+							const nameParts = params['fullName'].split(' ')
+							params['firstName'] = nameParts[0]
+							if (nameParts.length > 1)
+								params['lastName'] = nameParts[nameParts.length-1]
+						}
 					}
 				}
 
