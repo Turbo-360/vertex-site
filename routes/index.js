@@ -75,7 +75,7 @@ router.get('/landing', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		res.render('template-2', data)
+		res.render('landing', data)
 	})
 	.catch(err => {
 		const msg = (err.message=='Forbidden') ? 'promo config file not found.' : err.message
@@ -85,7 +85,6 @@ router.get('/landing', (req, res) => {
 		})
 	})
 
-//	res.render('landing', data)
 })
 
 router.get('/feed', (req, res) => {
