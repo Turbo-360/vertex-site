@@ -52,7 +52,40 @@ router.get('/landing', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
-	res.render('landing', data)
+	// TODO: check if template is live
+	// controllers.site.get({slug:req.params.slug}) // query template by slug
+	controllers.site.get({slug:'turbo-blog-ksq2wy'})
+	.then(results => {
+		if (results.length == 0){
+			throw new Error('Template not found')
+			return
+		}
+
+		const site = results[0]
+		site['hasVideo'] = false
+		site['description'] = utils.TextUtils.convertToHtml(site.description)
+		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
+		data['template'] = site
+
+		data['pp_client_id'] = process.env.PP_CLIENT_ID
+		data['preloaded'] = JSON.stringify({
+			timestamp: req.timestamp,
+			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+			template: data.template,
+			user: sanitizedUser(req.user)
+		})
+
+		res.render('template-2', data)
+	})
+	.catch(err => {
+		const msg = (err.message=='Forbidden') ? 'promo config file not found.' : err.message
+		res.json({
+			confirmation: 'fail',
+			message: msg
+		})
+	})
+
+//	res.render('landing', data)
 })
 
 router.get('/feed', (req, res) => {
