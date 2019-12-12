@@ -32,7 +32,7 @@
     if (event)
       event.preventDefault()
 
-    $('#btn-logout').html("<img style='width:100%' src='" + loaderUrl + "' />")
+    $('#btn-logout-container').html("<img style='width:80px' src='" + loaderUrl + "' />")
     parent.postMessage({action:'log-out', data:null}, '*')
   })
 
