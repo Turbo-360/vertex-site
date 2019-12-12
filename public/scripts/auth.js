@@ -31,6 +31,7 @@
     if (event)
       event.preventDefault()
 
+    $('#btn-logout').html("<img style='width:100%' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' />")
     parent.postMessage({action:'log-out', data:null}, '*')
   })
 
