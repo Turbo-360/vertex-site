@@ -62,7 +62,7 @@
       return
     }
 
-    $('#input-register').html("<img style='width:100%' src='" + loaderUrl + "' />")
+    $('#input-register-container').html("<img style='width:100%' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/register', visitor, function(err, response){
       if (err){
         alert(err.message)
@@ -145,7 +145,7 @@
       return
     }
 
-    $('#input-register').html("<img style='width:100%' src='" + loaderUrl + "' />")
+    $('#input-login-container').html("<img style='width:100%' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/login', visitor, function(err, response){
       if (err){
         alert(err.message)
