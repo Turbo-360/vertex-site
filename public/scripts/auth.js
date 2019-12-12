@@ -3,6 +3,7 @@
   if (!data)
     return
 
+  var loaderUrl = 'https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif'
   var userAgent = navigator.userAgent.toLowerCase()
   // console.log('USER AGENT: ' + userAgent) // USER AGENT: mozilla/5.0 (macintosh; intel mac os x 10_13_4) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.100 safari/537.36
   var isMobile = (userAgent.includes('iphone')==true || userAgent.includes('android')==true)
@@ -31,7 +32,7 @@
     if (event)
       event.preventDefault()
 
-    $('#btn-logout').html("<img style='width:100%' src='https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif' />")
+    $('#btn-logout').html("<img style='width:100%' src='" + loaderUrl + "' />")
     parent.postMessage({action:'log-out', data:null}, '*')
   })
 
@@ -61,6 +62,7 @@
       return
     }
 
+    $('#input-register').html("<img style='width:100%' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/register', visitor, function(err, response){
       if (err){
         alert(err.message)
@@ -143,6 +145,7 @@
       return
     }
 
+    $('#input-register').html("<img style='width:100%' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/login', visitor, function(err, response){
       if (err){
         alert(err.message)
