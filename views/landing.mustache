@@ -32,7 +32,9 @@
                                 <input id="input-register-email" placeholder="Email" type="text" class="form-control mb-2" />
                                 <input id="input-register-password" placeholder="Password" type="password" class="form-control mb-2" />
                             </form>
-                            <a id="btn-launch-site" href="#" class="btn btn-info btn-lg w-100 mt-3 mb-4">LAUNCH YOUR SITE</a>
+                            <div id="btn-launch-site-container">
+                                <a id="btn-launch-site" href="#" class="btn btn-info btn-lg w-100 mt-3 mb-4">LAUNCH YOUR SITE</a>                            
+                            </div>
                             <div style="text-align:center">
                                 <small>Already have an account? Sign in <a data-toggle="modal" data-target="#login-modal" style="color:red" href="#">HERE</a></small>
                             </div>
@@ -148,7 +150,7 @@
                 }
 
                 console.log('REGISTER: ' + JSON.stringify(visitor))
-                $('#btn-launch-site').html('<img style="max-width:50%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
+                $('#btn-launch-site-container').html('<img style="max-width:50%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
                 return
 
                 window.vertexLib.postRequest('/account/register', visitor, function(){
