@@ -69,29 +69,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="purchase-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
-      <div class="modal-header text-center">
-        <img class="mx-auto mt-1 mb-2" style="width:130px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s260" />
-      </div>
-      <div class="modal-body">
-        <div class="text-center mb-3">
-          <h4 class="mb-3">LAUNCH WEBSITE</h4>
-          <p>Upgrade to Premium to access <strong>ALL</strong> tutorials on Turbo 360 as well as all future tutorials forever!</p>
-          <h4 id="upgrade-price-modal" class="mb-0 text-blue">$30 per 6 months</h4>
-        </div>
-        <hr />
-        <div id="paypal-button"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<a id="btn-purchase-modal" data-toggle="modal" data-target="#purchase-modal" href="#" style="display:none"></a>
-<a id="activate-pp-button" href="#" style="display:none"></a>
-
-
     <script type="text/javascript">window.__PRELOADED__ = {{{preloaded}}}</script>
     <script type="text/javascript" src="{{{cdn}}}/scripts/vertex-lib.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/jquery.min.js"></script>
@@ -104,30 +81,12 @@
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/zoom.min.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/bootstrap.js"></script>
     <script type="text/javascript" src="{{{cdn}}}/wingman/js/theme.js"></script>
-    <script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id={{pp_client_id}}&disable-funding=credit&disable-card=amex,discover"></script>
 
     <script>
         (function(){
             var preloaded = window.__PRELOADED__
             var currentUser = preloaded.user // null if not registered
             var template = preloaded.template
-
-            var amount = {num:200, str:'2.00'}
-            var buttons = [
-                {id:'paypal-button-register', type:'register'},
-                {id:'paypal-button', type:'currentuser'}
-            ]
-
-            var purchaseSite = function(price){
-                if (currentUser != null){
-                    console.log('current user: '+JSON.stringify(currentUser))
-                    document.getElementById('btn-purchase-modal').click()
-                    return
-                }
-
-                // console.log('current user: '+JSON.stringify(currentUser))
-                document.getElementById('btn-register-modal').click()
-            }
 
             $('#btn-launch-site').click(function(e){
                 if (e)
@@ -161,32 +120,6 @@
                     var user = response.user
                     launchTemplate(user.username)
                 })
-            })
-
-            $('#btn-launch-30').click(function(e){
-                if (e)
-                    e.preventDefault()
-                
-                // console.log('BTN LAUNCH 30: ')
-                $('#upgrade-price-modal').html('$30 per 6 months')
-                $('#register-price-header').html('$30 per 6 months')
-                
-                // amount = {num:200, str:'2.00'} // test price
-                amount = {num:3000, str:'30.00'}
-                purchaseSite(30)
-            })
-
-            $('#btn-launch-50').click(function(e){
-                if (e)
-                    e.preventDefault()
-                
-                // console.log('BTN LAUNCH 50: ')
-                $('#upgrade-price-modal').html('$50 per 12 months')
-                $('#register-price-header').html('$50 per 12 months')
-
-                // amount = {num:300, str:'3.00'} // test price
-                amount = {num:5000, str:'50.00'}
-                purchaseSite(50)
             })
 
             // checks if a template is ready when cloning:
@@ -239,133 +172,6 @@
                     }, 4000)
                 })
             }
-
-            var paypalHandler = function(body){
-                // console.log('SEND TO SERVER: ' + JSON.stringify(body)) // SEND TO SERVER: {"orderID":"6MY18367X92392056","payerID":"PHB8GZAU8N74Q"}
-                $('#paypal-button-register').html('<img style="max-width:40%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" /><br /><small>This may take a couple minutes...</small>')
-                $.ajax({
-                    url: '/paypal/launchtemplate',
-                    type: 'POST',
-                    data: body,
-                    success: function(resp){
-                        console.log('SUCCESS - ' + JSON.stringify(resp))
-                        if (resp.confirmation != 'success'){
-                            alert('Error - '+resp.message)
-                            return
-                        }
-
-                        currentUser = resp.user
-                        launchTemplate(currentUser.firstName) // charge processed, launch template:
-                    },
-                    error: function(resp){
-                        console.log('ERROR - ' + JSON.stringify(resp))
-                        alert('ERR - ' + resp.message)
-                    }
-                })
-            }
-
-            buttons.forEach(function(button){
-                if (document.getElementById(button.id) != null){
-                    paypal.Buttons({
-                        onInit: function(data, actions){
-                            if (button.type == 'register'){
-                                actions.disable() // Disable the button until register fields are filled
-                                $('#activate-pp-button').click(function(e){
-                                    if (e)
-                                        e.preventDefault()
-
-                                    actions.enable()
-                                })
-                            }
-                        },
-                        style:{
-                            size:   'large',
-                            layout:  'horizontal',
-                            color:   'blue',
-                            shape:   'rect',
-                            label:   'checkout'
-                        },
-                        onClick: function(data, actions){
-                            // console.log('paypal button clicked!')
-                            if (button.type != 'register'){
-                                actions.resolve()
-                                return
-                            }
-                            
-                            // console.log('validate register fields.')
-                            var visitor = {
-                                fullName: $('#input-register-name').val(),
-                                email: $('#input-register-email').val(),
-                                password: $('#input-register-password').val()
-                                // promoCode: $('#input-register-promo').val()
-                            }
-
-                            if (visitor.fullName.length == 0){
-                                alert('Please enter your NAME')
-                                return
-                            }
-
-                            if (visitor.email.length == 0){
-                                alert('Please enter your EMAIL')
-                                return
-                            }
-
-                            if (visitor.password.length == 0){
-                                alert('Please enter your PASSWORD')
-                                return
-                            }
-
-                            // activate the pp button:
-                            document.getElementById('activate-pp-button').click()
-                            actions.resolve()
-                        },
-                        createOrder: function(data, actions) {
-                            return actions.order.create({
-                                purchase_units: [{
-                                    description: 'Launch template: '+template.name,
-                                    amount: {
-                                        value: amount.str
-                                        // value: '2.00'
-                                    }
-                                }]
-                            });
-                        },
-                        onApprove: function(data, actions) {
-                            return actions.order.capture().then(function(details) {
-                                console.log('Transaction completed by ' + details.payer.name.given_name);
-                                if (button.type == 'register'){
-                                    var visitor = {
-                                        fullName: $('#input-register-name').val(),
-                                        email: $('#input-register-email').val(),
-                                        password: $('#input-register-password').val()
-                                        // promoCode: $('#input-register-promo').val()
-                                    }
-
-                                    paypalHandler({
-                                        type: button.type, // register or upgrade
-                                        item: template.id,
-                                        amount: amount.num,
-                                        // amount: 200,
-                                        orderID: data.orderID,
-                                        user: JSON.stringify(visitor)
-                                    })
-                                }
-
-                                if (button.type == 'currentuser'){
-                                    paypalHandler({
-                                        type: button.type, // register or upgrade
-                                        item: template.id,
-                                        amount: amount.num,
-                                        // amount: 200,
-                                        orderID: data.orderID,
-                                        user: currentUser.id
-                                    })                                    
-                                }
-                            });
-                        }
-                    }).render('#'+button.id)
-                }
-            })
         })()
     </script>
 
