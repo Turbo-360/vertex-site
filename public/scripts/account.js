@@ -63,15 +63,15 @@
     if (selected == 'profile'){
       $('#content-sites').css('display', 'none')
       $('#content-profile').css('display', '')
-      $('#create-template-form').css('display', 'none')
-      $('#profile-card').css('display', '')
+      // $('#create-template-form').css('display', 'none')
+      // $('#profile-card').css('display', '')
     }
 
     if (selected == 'sites'){
       $('#content-profile').css('display', 'none')
       $('#content-sites').css('display', '')
-      $('#create-template-form').css('display', '')
-      $('#profile-card').css('display', 'none')
+      // $('#create-template-form').css('display', '')
+      // $('#profile-card').css('display', 'none')
     }
 
     sidebarMenu.forEach(function(listItem){
