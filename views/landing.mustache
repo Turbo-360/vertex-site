@@ -151,8 +151,6 @@
 
                 console.log('REGISTER: ' + JSON.stringify(visitor))
                 $('#btn-launch-site-container').html('<img style="max-width:30%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
-                return
-
                 window.vertexLib.postRequest('/account/register', visitor, function(err, response){
                     if (err){
                         $('#btn-launch-site-container').html('')
@@ -196,7 +194,7 @@
                 var body = {template:siteSlug}
                 window.vertexLib.postRequest('/account/check-template', body, function(err, response){
                 if (err){
-                    // console.log('TEMPLATE NOT READY: ' + siteSlug)
+                    console.log('TEMPLATE NOT READY: ' + siteSlug)
                     setTimeout(function(){
                         checkTemplate(siteSlug)
                     }, 4000)
@@ -228,7 +226,7 @@
                     source: template.id // ID of the template being copied
                 }
 
-                // console.log('launchTemplate: ' + JSON.stringify(body))
+                console.log('launchTemplate: ' + JSON.stringify(body))
                 window.vertexLib.postRequest('/account/launch-template', body, function(err, response){
                     if (err){
                         alert('Error: ' + err.message)
