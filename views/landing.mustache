@@ -20,106 +20,32 @@
     <section>
         <div class="container">
 
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="pricing-monthly" role="tab">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4 offset-md-2">
-                            <div class="card pricing card-lg">
-                                <div class="card-body">
-                                    <span class="display-3 price-collapse collapse show mt-0 mb-2">$30</span>
-                                    <span>6 MONTHS</span>
-                                    <hr>
-                                    <span class="h6">Includes:</span>
-                                    <ul class="list-unstyled" style="height:160px">
-                                        <li>
-                                            Hosting
-                                        </li>
-                                        <li>
-                                            Custom Domain
-                                        </li>
-                                        <li>
-                                            Blog
-                                        </li>
-                                        <li>
-                                            Automatic SSL
-                                        </li>
-                                        <li>
-                                            Contact Form
-                                        </li>
-                                    </ul>
-                                    <a id="btn-launch-30" href="#" class="btn btn-info mt-0 w-100 mb-4">LAUNCH YOUR SITE</a>
-                                </div>
-                            </div>
-                            <!--end card-->
-                        </div>
-                        <!--end of col-->
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card pricing card-lg">
-                                <div class="card-body">
-                                    <span class="display-3 mt-0 mb-2">$50</span>
-                                    <span>12 MONTHS</span>
-                                    <hr>
-                                    <span class="h6">Includes:</span>
-                                    <ul class="list-unstyled" style="height:160px">
-                                        <li>
-                                            Hosting
-                                        </li>
-                                        <li>
-                                            Custom Domain
-                                        </li>
-                                        <li>
-                                            Blog
-                                        </li>
-                                        <li>
-                                            Automatic SSL
-                                        </li>
-                                        <li>
-                                            Contact Form
-                                        </li>
-                                    </ul>
-                                    <a id="btn-launch-50" href="#" class="btn btn-success mt-0 w-100 mb-4">LAUNCH YOUR SITE</a>
-                                </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 offset-md-4">
+                    <div class="card pricing card-lg">
+                        <div class="card-body">
+                            <span class="display-4 price-collapse collapse show mt-0 mb-2">Join</span>
+                            <span>6 MONTHS</span>
+                            <hr>
+                            <span class="h6">Includes:</span>
+                            <form>
+                                <input id="input-register-email" placeholder="Email" type="text" class="form-control mb-2" />
+                                <input id="input-register-password" placeholder="Password" type="password" class="form-control mb-2" />
+                            </form>
+                            <a id="btn-launch-site" href="#" class="btn btn-info btn-lg w-100 mt-3 mb-4">LAUNCH YOUR SITE</a>
+                            <div style="text-align:center">
+                                <small>Already have an account? Sign in <a data-toggle="modal" data-target="#login-modal" style="color:red" href="#">HERE</a></small>
                             </div>
                         </div>
-
                     </div>
-                    <!--end of row-->
                 </div>
 
             </div>
-            <!--end of tab content-->
+            <!--end of row-->
 
         </div>
         <!--end of container-->
     </section>
-
-
-</div>
-
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content" style="border-radius:4px;max-width:300px;margin:auto">
-      <div class="modal-header text-center">
-        <img class="mx-auto mt-1 mb-2" style="width:130px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s260" />
-      </div>
-      <div class="modal-body">
-        <div class="text-center mb-3">
-          <h4>Join</h4>
-        </div>
-        <input id="input-register-name" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Name" />
-        <input id="input-register-email" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Email" />
-        <input id="input-register-password" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-3" type="password" placeholder="Password" />
-        <div style="text-align:center">
-          <small>Already have an account? Sign in <a id="href-show-login" style="color:red" href="#">HERE</a></small>
-        </div>
-        <hr />
-        <div style="text-align:center">
-            <h4 id="register-price-header" class="mb-2">$30 per 6 months</h4>
-        </div>
-        <div style="text-align:center" id="paypal-button-register"></div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -160,7 +86,6 @@
   </div>
 </div>
 
-<a id="btn-register-modal" data-toggle="modal" data-target="#register-modal" href="#" style="display:none"></a>
 <a id="btn-purchase-modal" data-toggle="modal" data-target="#purchase-modal" href="#" style="display:none"></a>
 <a id="activate-pp-button" href="#" style="display:none"></a>
 
@@ -200,6 +125,29 @@
                 // console.log('current user: '+JSON.stringify(currentUser))
                 document.getElementById('btn-register-modal').click()
             }
+
+            $('#btn-launch-site').click(function(e){
+                if (e)
+                    e.preventDefault()
+
+                // console.log('validate register fields.')
+                var visitor = {
+                    email: $('#input-register-email').val(),
+                    password: $('#input-register-password').val()
+                }
+
+                if (visitor.email.length == 0){
+                    alert('Please enter your EMAIL')
+                    return
+                }
+
+                if (visitor.password.length == 0){
+                    alert('Please enter your PASSWORD')
+                    return
+                }
+
+                console.log('REGISTER: ' + JSON.stringify(visitor))
+            })
 
             $('#btn-launch-30').click(function(e){
                 if (e)
