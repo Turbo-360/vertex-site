@@ -78,10 +78,9 @@ router.get('/landing', (req, res) => {
 		res.render('landing', data)
 	})
 	.catch(err => {
-		const msg = (err.message=='Forbidden') ? 'promo config file not found.' : err.message
 		res.json({
 			confirmation: 'fail',
-			message: msg
+			message: err.message
 		})
 	})
 
