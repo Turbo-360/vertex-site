@@ -54,7 +54,7 @@ router.get('/landing', (req, res) => {
 
 	// TODO: check if template is live
 	// controllers.site.get({slug:req.params.slug}) // query template by slug
-	controllers.site.get({slug:'turbo-blog-ksq2wy'})
+	controllers.site.get({slug:'base-template-tnzakf'})
 	.then(results => {
 		if (results.length == 0){
 			throw new Error('Template not found')
@@ -83,7 +83,6 @@ router.get('/landing', (req, res) => {
 			message: err.message
 		})
 	})
-
 })
 
 router.get('/feed', (req, res) => {
