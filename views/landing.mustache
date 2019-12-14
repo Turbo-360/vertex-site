@@ -25,7 +25,7 @@
                     <div class="card pricing card-lg">
                         <div class="card-body">
                             <span class="display-4 price-collapse collapse show mt-0 mb-2">Join</span>
-                            <span>6 MONTHS</span>
+                            <span>Free</span>
                             <hr>
                             <span class="h6">Includes:</span>
                             <form>
@@ -109,6 +109,7 @@
             var preloaded = window.__PRELOADED__
             var currentUser = preloaded.user // null if not registered
             var template = preloaded.template
+
             var amount = {num:200, str:'2.00'}
             var buttons = [
                 {id:'paypal-button-register', type:'register'},
@@ -147,6 +148,17 @@
                 }
 
                 console.log('REGISTER: ' + JSON.stringify(visitor))
+                $('#').html('<img style="max-width:50%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
+                return
+
+                window.vertexLib.postRequest('/account/register', visitor, function(){
+                    if (err){
+                        alert(err.message)
+                        return
+                    }
+
+
+                })
             })
 
             $('#btn-launch-30').click(function(e){
@@ -200,14 +212,14 @@
                     return
                 }
 
-                    window.location.href = '/admin/pages/'+siteSlug // redirect to site admin page
+                    // window.location.href = '/admin/pages/'+siteSlug // redirect to site admin page
+                    window.location.href = '/me?selected=sites'
                 })
             }
 
             var launchTemplate = function(name){
                 console.log('LAUNCH TEMPLATE: ' + name)
                 var body = {
-                    // name: $('#input-site-name').val().trim(), // this needs to be entered by the user,
                     name: name,
                     source: template.id // ID of the template being copied
                 }
