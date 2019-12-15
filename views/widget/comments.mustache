@@ -224,8 +224,10 @@
           $('.fa-arrow-up').each(function(i, upvote){
             var id = $(this).attr('id')
             $(this).click(function(event){
-              if (event)
+              if (event){
+                event.stopPropagation();
                 event.preventDefault()
+              }
 
               console.log('UPVOTE: ' + id)
             })
@@ -234,8 +236,10 @@
           $('.fa-arrow-down').each(function(i, downvote){
             var id = $(this).attr('id')
             $(this).click(function(event){
-              if (event)
+              if (event){
+                event.stopPropagation();
                 event.preventDefault()
+              }
 
               console.log('DOWNVOTE: ' + id)
             })
