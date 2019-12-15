@@ -90,6 +90,7 @@
           </a>
           <div style="padding:6px" class="dropdown-menu">
             <a id="btn-logout" style="text-decoration:none" href="#">Logout</a>
+            <a id="btn-view-profile" style="text-decoration:none" href="#">View Profile</a>
           </div>
         </div>
 
@@ -256,8 +257,6 @@
           site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:'https://'+site.url}),
           profile: JSON.stringify({
             id: user.id,
-            // firstName: user.firstName,
-            // lastName: user.lastName,
             username: user.username,
             image: user.image,
             slug: user.slug
