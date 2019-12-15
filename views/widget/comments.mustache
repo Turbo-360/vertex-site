@@ -269,6 +269,14 @@
               }
 
               console.log('DOWNVOTE: ' + JSON.stringify(params))
+              window.vertexLib.postRequest('/account/vote', params, function(err, resp){
+                if (err){
+                  alert('Error - ' + err)
+                  return
+                }
+
+                console.log('COMMENT DOWNVOTED: ' + JSON.stringify(resp))
+              })
             })
           })
         }, 1000)
