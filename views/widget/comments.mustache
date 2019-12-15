@@ -246,7 +246,14 @@
                   return
                 }
 
+                if (resp.confirmation != 'success'){
+                  alert('Error - '+resp.message)
+                  return
+                }
+
                 console.log('COMMENT UPVOTED: ' + JSON.stringify(resp))
+                var comment = resp.data
+                $('#score-'+comment.id).html(comment.votes.score)
               })
             })
           })
@@ -275,7 +282,14 @@
                   return
                 }
 
+                if (resp.confirmation != 'success'){
+                  alert('Error - '+resp.message)
+                  return
+                }
+
                 console.log('COMMENT DOWNVOTED: ' + JSON.stringify(resp))
+                var comment = resp.data
+                $('#score-'+comment.id).html(comment.votes.score)
               })
             })
           })
