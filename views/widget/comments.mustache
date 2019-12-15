@@ -240,7 +240,14 @@
               }
 
               console.log('UPVOTE: ' + JSON.stringify(params))
+              window.vertexLib.postRequest('/account/vote', params, function(err, resp){
+                if (err){
+                  alert('Error - ' + err)
+                  return
+                }
 
+                console.log('COMMENT UPVOTED: ' + JSON.stringify(resp))
+              })
             })
           })
 
