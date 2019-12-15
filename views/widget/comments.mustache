@@ -241,13 +241,19 @@
 
         setTimeout(function(){
           $('.fa-arrow-up').each(function(i, upvote){
-            $(this).click(function(e){
+            $(this).click(function(event){
+              if (event)
+                event.preventDefault()
+
               console.log('UPVOTE')
             })
           })
 
           $('.fa-arrow-down').each(function(i, downvote){
-            $(this).click(function(e){
+            $(this).click(function(event){
+              if (event)
+                event.preventDefault()
+
               console.log('DOWNVOTE')
             })
           })
