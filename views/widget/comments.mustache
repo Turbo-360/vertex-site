@@ -242,12 +242,12 @@
               console.log('UPVOTE: ' + JSON.stringify(params))
               window.vertexLib.postRequest('/account/vote', params, function(err, resp){
                 if (err){
-                  alert('Error - ' + err)
+                  alert('Error - ' + err.message)
                   return
                 }
 
                 if (resp.confirmation != 'success'){
-                  alert('Error - '+resp.message)
+                  alert(resp.message)
                   return
                 }
 
@@ -278,12 +278,12 @@
               console.log('DOWNVOTE: ' + JSON.stringify(params))
               window.vertexLib.postRequest('/account/vote', params, function(err, resp){
                 if (err){
-                  alert('Error - ' + err)
+                  alert('Error - ' + err.message)
                   return
                 }
 
                 if (resp.confirmation != 'success'){
-                  alert('Error - '+resp.message)
+                  alert(resp.message)
                   return
                 }
 
