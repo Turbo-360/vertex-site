@@ -143,9 +143,9 @@
         <p style="color:#7d7d7d"><%{text}%></p>
       </div>
       <div style="padding:6px;background:#e8f2ff;display:flex;flex-direction:column;text-align:center">
-        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-up"></i></a>
+        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-up btn-upvote"></i></a>
         <small>15</small>
-        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-down"></i></a>
+        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-down btn-downvote"></i></a>
       </div>
     </div>
   </script>
@@ -221,11 +221,10 @@
         $('#comments-container').html(commentsHtml)
 
         setTimeout(function(){
-          $('.fa-arrow-up').each(function(i, upvote){
+          $('.btn-upvote').each(function(i, upvote){
             var id = $(this).attr('id')
             $(this).click(function(event){
               if (event){
-                event.stopPropagation();
                 event.preventDefault()
               }
 
@@ -233,11 +232,10 @@
             })
           })
 
-          $('.fa-arrow-down').each(function(i, downvote){
+          $('.btn-downvote').each(function(i, downvote){
             var id = $(this).attr('id')
             $(this).click(function(event){
               if (event){
-                event.stopPropagation();
                 event.preventDefault()
               }
 
