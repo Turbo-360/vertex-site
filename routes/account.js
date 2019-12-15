@@ -1143,17 +1143,34 @@ router.post('/:action', (req, res, next) => {
 
 	// upvote or downvote something
 	if (action == 'vote'){
-		if (req.user == null){
+		// if (req.user == null){
+		// 	res.json({
+		// 		confirmation: 'fail',
+		// 		message: 'Please register or login to vote.'
+		// 	})
+
+		// 	return
+		// }
+
+		// let profileId = null
+		// if (req.user == null){
+		// 	profileId = req.body.profile
+		// }
+		// else {
+		// 	profileId = req.user.id
+		// }
+
+		// req.body == {"profile":"5cb93ce57df02703d5ddc25a","comment":"downvote-5cd859b13c68910c1f909bad"}
+		const voteInfo = req.body.comment
+		const profileId = (req.user == null) ? req.body.profile : req.user.id
+		if (profileId == null){
 			res.json({
 				confirmation: 'fail',
 				message: 'Please register or login to vote.'
 			})
-
 			return
 		}
 
-		// req.body == {"profile":"5cb93ce57df02703d5ddc25a","comment":"downvote-5cd859b13c68910c1f909bad"}
-		const voteInfo = req.body.comment
 		const parts = voteInfo.split('-')
 		if (parts.length < 2){
 			res.json({
@@ -1170,18 +1187,18 @@ router.post('/:action', (req, res, next) => {
 		.then(comment => {
 			const votes = Object.assign({}, comment.votes)
 			let votesChanged = false
-			if (upOrDown=='upvote' && votes.up.indexOf(req.user.id)==-1){
+			if (upOrDown=='upvote' && votes.up.indexOf(profileId)==-1){
 				votesChanged = true
-				votes.up.push(req.user.id)
-				if (votes.down.indexOf(req.user.id)!=-1)
-					votes.down.splice(votes.up.indexOf(req.user.id), 1)
+				votes.up.push(profileId)
+				if (votes.down.indexOf(profileId)!=-1)
+					votes.down.splice(votes.up.indexOf(profileId), 1)
 			}
 
-			if (upOrDown=='downvote' && votes.down.indexOf(req.user.id)==-1){
+			if (upOrDown=='downvote' && votes.down.indexOf(profileId)==-1){
 				votesChanged = true
-				votes.down.push(req.user.id)
-				if (votes.up.indexOf(req.user.id)!=-1)
-					votes.up.splice(votes.up.indexOf(req.user.id), 1)
+				votes.down.push(profileId)
+				if (votes.up.indexOf(profileId)!=-1)
+					votes.up.splice(votes.up.indexOf(profileId), 1)
 			}
 
 			if (votesChanged == true){
