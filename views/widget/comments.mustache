@@ -69,6 +69,23 @@
       font-weight: 400;
       font-family: Arial;
     }
+
+    .comment-vote {
+      padding: 6px;
+      background: #e8f2ff;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .comment-vote small {
+      margin-bottom: 3px;
+    }
+
+    .comment-vote i {
+      font-size: 20px;
+    }
   </style>
 
 </head>
@@ -142,10 +159,10 @@
         </div>
         <p style="color:#7d7d7d"><%{text}%></p>
       </div>
-      <div style="padding:6px;background:#e8f2ff;display:flex;flex-direction:column;text-align:center;justify-content:center">
-        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-up btn-upvote"></i></a>
+      <div class="comment-vote">
+        <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
         <small id="score-<%id%>"><% votes.score %></small>
-        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-down btn-downvote"></i></a>
+        <a href="#"><i id="<% id %>" class="fa fa-arrow-down btn-downvote"></i></a>
       </div>
     </div>
   </script>
