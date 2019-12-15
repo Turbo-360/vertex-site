@@ -224,6 +224,7 @@
           $('.btn-upvote').each(function(i, upvote){
             var id = $(this).attr('id')
             console.log('bind click handler: '+id)
+            $(this).unbind()
             $(this).click(function(event){
               if (event){
                 event.preventDefault()
