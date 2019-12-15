@@ -1143,23 +1143,6 @@ router.post('/:action', (req, res, next) => {
 
 	// upvote or downvote something
 	if (action == 'vote'){
-		// if (req.user == null){
-		// 	res.json({
-		// 		confirmation: 'fail',
-		// 		message: 'Please register or login to vote.'
-		// 	})
-
-		// 	return
-		// }
-
-		// let profileId = null
-		// if (req.user == null){
-		// 	profileId = req.body.profile
-		// }
-		// else {
-		// 	profileId = req.user.id
-		// }
-
 		// req.body == {"profile":"5cb93ce57df02703d5ddc25a","comment":"downvote-5cd859b13c68910c1f909bad"}
 		const voteInfo = req.body.comment
 		const profileId = (req.user == null) ? req.body.profile : req.user.id
