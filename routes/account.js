@@ -1190,9 +1190,12 @@ router.post('/:action', (req, res, next) => {
 				comment.save()
 			}
 
+			const summary = comment.summary()
+			delete summary['site']
+			delete summary['profile']
 			res.json({
 				confirmation: 'success',
-				data: comment.summary()
+				data: summary
 			})
 		})
 		.catch(err => {
