@@ -238,6 +238,20 @@
         })
 
         $('#comments-container').html(commentsHtml)
+
+        setTimeout(function(){
+          $('.fa-arrow-up').each(function(i, upvote){
+            $(this).click(function(e){
+              console.log('UPVOTE')
+            })
+          })
+
+          $('.fa-arrow-down').each(function(i, downvote){
+            $(this).click(function(e){
+              console.log('DOWNVOTE')
+            })
+          })
+        }, 1000)
       }
 
       $('#btn-submit-comment').click(function(event){
