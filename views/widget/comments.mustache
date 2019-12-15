@@ -109,27 +109,8 @@
       </div>
 
       <div id="comments-container" class="mt-5">
-
-        {{#comments}}
-        <div class="bg-white mb-3 thread-preview">
-          <div class="thread-preview-container">
-            <div class="mb-2">
-              <a target="_blank" href="{{{site.url}}}"><img class="site-icon" src="{{{profile.image}}}=s44-c" /></a>
-              <a target="_blank" href="{{{site.url}}}"><small>{{profile.username}}</small></a>
-              <span>&middot;</span>
-              <small>{{dateString}}</small>
-            </div>
-            <p style="color:#7d7d7d">{{{text}}}</p>
-          </div>
-          <div style="width:24px;background:#e8f2ff;display:flex;flex-direction:column">
-            <a href="#">up</a>
-            <span>score</span>
-            <a href="#">down</a>
-          </div>
-        </div>
-        {{/comments}}
-
       </div>
+
 		</div>
 	</div>
 </div>
@@ -162,9 +143,9 @@
         <p style="color:#7d7d7d"><%{text}%></p>
       </div>
       <div style="padding:6px;background:#e8f2ff;display:flex;flex-direction:column;text-align:center">
-        <a href="#"><i style="font-size:20px" class="fa fa-arrow-up"></i></a>
+        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-up"></i></a>
         <small>15</small>
-        <a href="#"><i style="font-size:20px" class="fa fa-arrow-down"></i></a>
+        <a href="#"><i id="<% id %>" style="font-size:20px" class="fa fa-arrow-down"></i></a>
       </div>
     </div>
   </script>
@@ -241,20 +222,22 @@
 
         setTimeout(function(){
           $('.fa-arrow-up').each(function(i, upvote){
+            var id = $(this).attr('id')
             $(this).click(function(event){
               if (event)
                 event.preventDefault()
 
-              console.log('UPVOTE')
+              console.log('UPVOTE: ' + id)
             })
           })
 
           $('.fa-arrow-down').each(function(i, downvote){
+            var id = $(this).attr('id')
             $(this).click(function(event){
               if (event)
                 event.preventDefault()
 
-              console.log('DOWNVOTE')
+              console.log('DOWNVOTE: ' + id)
             })
           })
         }, 1000)
