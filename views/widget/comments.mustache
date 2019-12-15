@@ -228,7 +228,19 @@
               if (event)
                 event.preventDefault()
               
-              console.log('UPVOTE: ' + id)
+              if (user==null){
+                alert('Please login or register to upvote')
+                return
+              }
+
+              // {"profile":"5cb93ce57df02703d5ddc25a","comment":"downvote-5cd859b13c68910c1f909bad"}
+              var params = {
+                profile: user.id,
+                comment: 'upvote-'+id,
+              }
+
+              console.log('UPVOTE: ' + JSON.stringify(params))
+
             })
           })
 
@@ -239,7 +251,17 @@
               if (event)
                 event.preventDefault()
               
-              console.log('DOWNVOTE: ' + id)
+              if (user==null){
+                alert('Please login or register to downvote')
+                return
+              }
+
+              var params = {
+                profile: user.id,
+                comment: 'downvote-'+id,
+              }
+
+              console.log('DOWNVOTE: ' + JSON.stringify(params))
             })
           })
         }, 1000)
