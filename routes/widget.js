@@ -101,7 +101,8 @@ router.get('/comments', (req, res) => {
 		}
 
 		currentSite = sites[0]
-		return controllers.comment.get({thread:thread})
+		// return controllers.comment.get({thread:thread})
+		return controllers.comment.get({thread:thread, 'site.id':currentSite.id})
 	})
 	.then(comments => {
 		data['comments'] = comments
