@@ -88,7 +88,6 @@ router.get('/comments', (req, res) => {
 	const data = {
 		cdn: CDN,
 		user: null, // always set user from the host site, not vertex360.co
-		// user: sanitizedUser(req.user),
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
@@ -101,7 +100,6 @@ router.get('/comments', (req, res) => {
 		}
 
 		currentSite = sites[0]
-		// return controllers.comment.get({thread:thread})
 		return controllers.comment.get({thread:thread, 'site.id':currentSite.id})
 	})
 	.then(comments => {
