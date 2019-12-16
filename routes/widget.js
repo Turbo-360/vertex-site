@@ -100,7 +100,9 @@ router.get('/comments', (req, res) => {
 		}
 
 		currentSite = sites[0]
-		return controllers.comment.get({thread:thread, 'site.id':currentSite.id})
+		const commentsFilter = (schema==='site') ? {'site.id':currentSite.id} : {thread:thread, 'site.id':currentSite.id}
+		return controllers.comment.get(commentsFilter)
+		// return controllers.comment.get({thread:thread, 'site.id':currentSite.id})
 	})
 	.then(comments => {
 		data['comments'] = comments
