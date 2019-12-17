@@ -108,13 +108,19 @@ router.get('/comments', (req, res) => {
 		// return controllers.comment.get({thread:thread, 'site.id':currentSite.id})
 	})
 	.then(comments => {
-		data['comments'] = comments
+		// data['comments'] = comments
+		const commentsMap = {}
+		comments.forEach(comment => {
+			commentsMap[comments.id] = comments
+		})
+
 		data['preloaded'] = JSON.stringify({
 			isWidget: true,
 			onLoginRedirect: 'reload',
 			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
 			comments: data.comments,
+			commentsMap: commentsMap,
 			user: data.user,
 			site: currentSite,
 			thread: thread, // this is the thread ID number
