@@ -216,21 +216,21 @@
 
       var reloadUI = function(){
         if (user){
-          $('#comments-header').removeClass('d-none')
+          if (canComment){
+            $('#comments-header').removeClass('d-none')
+          }
+          else {
+            $('#comments-header').addClass('d-none')
+          }
+
+          // $('#comments-header').removeClass('d-none')
           $('#register-or-login').addClass('d-none')
           $('#display-username').html('Logged in as '+user.username)
           $('#btn-view-profile').attr('href', '/profile/'+user.slug)
         }
         else {
           $('#comments-header').addClass('d-none')
-          // $('#register-or-login').removeClass('d-none')
-
-          if (canComment){
-            $('#register-or-login').removeClass('d-none')
-          }
-          else {
-            $('#register-or-login').addClass('d-none')
-          }
+          $('#register-or-login').removeClass('d-none')
         }
 
         if (entity!=null){
