@@ -246,7 +246,7 @@
         var tpl = $('#tpl-comment').html()
         var commentsHtml = ''
         comments.forEach(function(comment){
-          tpl['showContext'] = (showContext) ? 'true' : null
+          comment['showContext'] = (showContext) ? 'true' : null
           commentsHtml += Mustache.render(tpl, comment)
         })
 
