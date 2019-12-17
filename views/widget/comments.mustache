@@ -177,7 +177,7 @@
 
         <%#showContext%>
         <div class="context-container">
-          <a href="#" class="context-link">
+          <a href="#" id="<% id %>" class="context-link">
             <small><% context.title %></small>
             <i class="fa fa-external-link-alt"></i>
           </a>
@@ -276,11 +276,13 @@
         setTimeout(function(){
           $('.context-link').each(function(i, link){
             $(this).unbind()
+            var id = $(this).attr('id')
             $(this).click(function(event){
               if (event)
                 event.preventDefault()
 
-              console.log('click context link: ')
+              console.log('click context link: ' + id)
+              parent.postMessage({action:'click-context-link', data:null}, '*')
             })
           })
 
