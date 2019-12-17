@@ -158,6 +158,10 @@
           <small><%dateString%></small>
         </div>
         <p style="color:#7d7d7d"><%{text}%></p>
+
+        <%#showContext>
+        <div>SHOW CONTEXT!</div>
+        <%/showContext>
       </div>
       <div class="comment-vote">
         <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
@@ -241,7 +245,7 @@
         var tpl = $('#tpl-comment').html()
         var commentsHtml = ''
         comments.forEach(function(comment){
-          tpl['showContext'] = showContext
+          tpl['showContext'] = (showContext) ? 'true' : null
           commentsHtml += Mustache.render(tpl, comment)
         })
 
