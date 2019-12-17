@@ -111,7 +111,7 @@ router.get('/comments', (req, res) => {
 		// data['comments'] = comments
 		const commentsMap = {}
 		comments.forEach(comment => {
-			commentsMap[comments.id] = comments
+			commentsMap[comment.id] = comment
 		})
 
 		data['preloaded'] = JSON.stringify({
