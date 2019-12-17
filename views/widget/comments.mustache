@@ -216,14 +216,7 @@
 
       var reloadUI = function(){
         if (user){
-          if (canComment){
-            $('#comments-header').removeClass('d-none')
-          }
-          else {
-            $('#comments-header').addClass('d-none')
-          }
-
-          // $('#comments-header').removeClass('d-none')
+          $('#comments-header').removeClass('d-none')
           $('#register-or-login').addClass('d-none')
           $('#display-username').html('Logged in as '+user.username)
           $('#btn-view-profile').attr('href', '/profile/'+user.slug)
