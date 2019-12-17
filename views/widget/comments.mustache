@@ -280,8 +280,10 @@
             $(this).click(function(event){
               if (event)
                 event.preventDefault()
-
-              console.log('click context link: ' + id)
+              
+              var comment = data.commentsMap[id]
+              
+              console.log('click context link: ' + JSON.stringify(comment))
               parent.postMessage({action:'click-context-link', data:null}, '*')
             })
           })
