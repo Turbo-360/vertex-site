@@ -183,6 +183,7 @@
       var comments = data.comments || []
       var format = data.format // readonly or comment
       var canComment = (format!=='readonly')
+      var showContext = (format==='readonly')
 
       if (user == null)
         $('#register-or-login').removeClass('d-none')
@@ -240,6 +241,7 @@
         var tpl = $('#tpl-comment').html()
         var commentsHtml = ''
         comments.forEach(function(comment){
+          tpl['showContext'] = showContext
           commentsHtml += Mustache.render(tpl, comment)
         })
 
