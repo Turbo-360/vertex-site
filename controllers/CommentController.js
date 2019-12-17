@@ -92,6 +92,13 @@ module.exports = {
 				catch(err){}
 			}
 
+			if (params.context != null){
+				try {
+					params['context'] = JSON.parse(params.context)
+				}
+				catch(err){}
+			}
+
 			if (params.image == null)
 				params['image'] = process.env.IMAGE_PLACEHOLDER
 
