@@ -85,6 +85,9 @@ router.get('/comments', (req, res) => {
 		return
 	}
 
+	// readonly or comment
+	const format = req.query.format || 'readonly'
+
 	const data = {
 		cdn: CDN,
 		user: null, // always set user from the host site, not vertex360.co
@@ -115,7 +118,8 @@ router.get('/comments', (req, res) => {
 			user: data.user,
 			site: currentSite,
 			thread: thread, // this is the thread ID number
-			schema: schema
+			schema: schema,
+			format: format
 		})
 
 		res.render('widget/comments', data)
