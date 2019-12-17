@@ -119,7 +119,7 @@ router.get('/comments', (req, res) => {
 			onLoginRedirect: 'reload',
 			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
-			comments: data.comments,
+			comments: comments,
 			commentsMap: commentsMap,
 			user: data.user,
 			site: currentSite,
