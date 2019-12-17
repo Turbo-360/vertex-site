@@ -283,9 +283,14 @@
                 event.preventDefault()
               
               var comment = data.commentsMap[id]
+              if (comment == null)
+                return
               
+              if (comment.context == null)
+                return
+
               console.log('click context link: ' + JSON.stringify(comment))
-              parent.postMessage({action:'click-context-link', data:null}, '*')
+              parent.postMessage({action:'click-context-link', data:comment.context}, '*')
             })
           })
 
