@@ -95,6 +95,10 @@
       color: #6c757d;
       margin-left: 6px;
     }
+
+    .context-link i {
+      font-size: 12px;
+    }
   </style>
 
 </head>
@@ -160,9 +164,9 @@
   <script type="text/template" id="tpl-comment">
     <div class="mb-3">
       <%#showContext%>
-      <a href="#" id="<% id %>" class="context-link">
+      <a href="#" id="<% id %>" class="context-link ml-1">
         <small><% context.title %></small>
-        <i class="fa fa-external-link-alt"></i>
+        <i class="fa fa-external-link-alt ml-1"></i>
       </a>
       <%/showContext%>
       <div class="bg-white thread-preview">
