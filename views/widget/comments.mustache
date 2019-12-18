@@ -87,13 +87,6 @@
       font-size: 20px;
     }
 
-    .context-container {
-      padding: 0px 4px 0px 8px;
-      background: #d0d1d2;
-      width: fit-content;
-      border-radius: 3px;
-    }
-
     .context-container small {
       color: #6c757d;
     }
@@ -166,6 +159,12 @@
 
   <script type="text/template" id="tpl-comment">
     <div class="mb-3">
+      <%#showContext%>
+      <a href="#" id="<% id %>" class="context-link">
+        <small><% context.title %></small>
+        <i class="fa fa-external-link-alt"></i>
+      </a>
+      <%/showContext%>
       <div class="bg-white thread-preview">
         <div class="thread-preview-container">
           <div class="mb-2">
@@ -183,14 +182,6 @@
         </div>
       </div>    
 
-      <%#showContext%>
-      <div class="context-container">
-        <a href="#" id="<% id %>" class="context-link">
-          <small><% context.title %></small>
-          <i class="fa fa-external-link-alt"></i>
-        </a>
-      </div>
-      <%/showContext%>
     </div>
   </script>
 
