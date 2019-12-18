@@ -165,31 +165,32 @@
 
 
   <script type="text/template" id="tpl-comment">
-    <div class="bg-white mb-3 thread-preview">
-      <div class="thread-preview-container">
-        <div class="mb-2">
-          <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
-          <a target="_blank" href="#"><small><%profile.username%></small></a>
-          <span>&middot;</span>
-          <small><%dateString%></small>
+    <div class="mb-3">
+      <div class="bg-white thread-preview">
+        <div class="thread-preview-container">
+          <div class="mb-2">
+            <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
+            <a target="_blank" href="#"><small><%profile.username%></small></a>
+            <span>&middot;</span>
+            <small><%dateString%></small>
+          </div>
+          <p style="color:#7d7d7d"><%{text}%></p>
         </div>
-        <p style="color:#7d7d7d"><%{text}%></p>
-      </div>
-      <div class="comment-vote">
-        <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
-        <small id="score-<%id%>"><% votes.score %></small>
-        <a href="#"><i id="<% id %>" class="fa fa-arrow-down btn-downvote"></i></a>
-      </div>
-
-        <%#showContext%>
-        <div class="context-container">
-          <a href="#" id="<% id %>" class="context-link">
-            <small><% context.title %></small>
-            <i class="fa fa-external-link-alt"></i>
-          </a>
+        <div class="comment-vote">
+          <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
+          <small id="score-<%id%>"><% votes.score %></small>
+          <a href="#"><i id="<% id %>" class="fa fa-arrow-down btn-downvote"></i></a>
         </div>
-        <%/showContext%>
+      </div>    
 
+      <%#showContext%>
+      <div class="context-container">
+        <a href="#" id="<% id %>" class="context-link">
+          <small><% context.title %></small>
+          <i class="fa fa-external-link-alt"></i>
+        </a>
+      </div>
+      <%/showContext%>
     </div>
   </script>
 
