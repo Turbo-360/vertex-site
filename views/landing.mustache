@@ -126,26 +126,26 @@
             var checkTemplate = function(siteSlug){
                 var body = {template:siteSlug}
                 window.vertexLib.postRequest('/account/check-template', body, function(err, response){
-                if (err){
-                    console.log('TEMPLATE NOT READY: ' + siteSlug)
-                    setTimeout(function(){
-                        checkTemplate(siteSlug)
-                    }, 4000)
-                    return
-                }
+                    if (err){
+                        console.log('TEMPLATE NOT READY: ' + siteSlug)
+                        setTimeout(function(){
+                            checkTemplate(siteSlug)
+                        }, 4000)
+                        return
+                    }
 
-                if (response.confirmation != 'success'){
-                    setTimeout(function(){
-                        checkTemplate(siteSlug)
-                    }, 4000)
-                    return
-                }
+                    if (response.confirmation != 'success'){
+                        setTimeout(function(){
+                            checkTemplate(siteSlug)
+                        }, 4000)
+                        return
+                    }
 
-                console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
-                if (response.confirmation != 'success'){
-                    alert('Error - ' + response.message)
-                    return
-                }
+                    console.log('CHECK TEMPLATE: ' + JSON.stringify(response))
+                    if (response.confirmation != 'success'){
+                        alert('Error - ' + response.message)
+                        return
+                    }
 
                     // window.location.href = '/me?selected=sites'
                     window.location.href = 'https://'+siteSlug+'.vertex360.co'
