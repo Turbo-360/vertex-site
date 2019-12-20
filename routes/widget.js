@@ -125,7 +125,8 @@ router.get('/comments', (req, res) => {
 			site: currentSite,
 			thread: thread, // this is the thread ID number
 			schema: schema,
-			format: format
+			format: format,
+			token: req.query.token || null
 		})
 
 		res.render('widget/comments', data)
