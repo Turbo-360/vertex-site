@@ -230,7 +230,9 @@
         $('#register-or-login').removeClass('d-none')
         if (data.token != null){
           console.log('TOKEN: ' + data.token)
-          parent.postMessage({action:'validate-token', data:data.token}, '*')
+          setTimeout(function(){
+            parent.postMessage({action:'validate-token', data:data.token}, '*')
+          }, 500)
           return
         }
       }
