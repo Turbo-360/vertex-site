@@ -799,11 +799,11 @@ router.post('/:action', (req, res, next) => {
 			source: 'vertex360',
 			profile: {
 				id: req.user.id,
-		    slug: req.user.slug,
-  			image: req.user.image,
-  			username: req.user.username,
-  			lastName: req.user.lastName,
-  			firstName: req.user.firstName
+				slug: req.user.slug,
+				image: req.user.image,
+				username: req.user.username,
+				lastName: req.user.lastName,
+				firstName: req.user.firstName
 			}
 		}
 
