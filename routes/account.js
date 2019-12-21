@@ -1431,8 +1431,8 @@ router.post('/:action', (req, res, next) => {
 		let token = null
 		if (req.body.encode == 'base64'){
 			console.log('decode base64 token: ')
-			const token = req.body.token
-			const decoded = Base64.decode(token)
+			// const token = req.body.token
+			const decoded = Base64.decode(req.body.token)
 			try {
 				const parsed = JSON.parse(decoded)
 				console.log('base64 token decoded: ' + JSON.stringify(parsed))
