@@ -399,6 +399,7 @@ router.post('/:action', (req, res, next) => {
 					image: user.image,
 					slug: user.slug,
 					token: user.token,
+					token64: Base64.encode(user.token+process.env.BASE64_SALT+user.email),
 					notifications: user.notifications
 				}
 			})
