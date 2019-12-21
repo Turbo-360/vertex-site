@@ -127,7 +127,9 @@
                     user = response.user
                     // launchTemplate(user.username)
 
-                    launchTemplate(siteName)
+                    var parts = siteName.toLowerCase().split(' ')
+                    var hyphenatedSiteName = parts.join('-')
+                    launchTemplate(hyphenatedSiteName)
                 })
             })
 
