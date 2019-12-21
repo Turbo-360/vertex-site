@@ -1423,19 +1423,18 @@ router.post('/:action', (req, res, next) => {
 	}
 
 	if (action == 'verifytoken'){
-		console.log('verifytoken: ' + JSON.stringify(req.body))
+		// console.log('verifytoken: ' + JSON.stringify(req.body))
 		// const profileId = req.body.profile
 		// const token = req.body.token
 
 		let profileId = null
 		let token = null
 		if (req.body.encode == 'base64'){
-			console.log('decode base64 token: ')
-			// const token = req.body.token
+			// console.log('decode base64 token: ')
 			const decoded = Base64.decode(req.body.token)
 			try {
 				const parsed = JSON.parse(decoded)
-				console.log('base64 token decoded: ' + JSON.stringify(parsed))
+				// console.log('base64 token decoded: ' + JSON.stringify(parsed))
 				profileId = parsed.id
 				token = parsed.token
 			}
@@ -1450,8 +1449,8 @@ router.post('/:action', (req, res, next) => {
 			token = req.body.token
 		}
 
-		console.log('VALIDATE: profileId==' + profileId)
-		console.log('VALIDATE: token==' + token)
+		// console.log('VALIDATE: profileId==' + profileId)
+		// console.log('VALIDATE: token==' + token)
 
 		controllers.profile.getById(profileId, false, process.env.AUTH_API_KEY) // controller.getById(entityId, isRaw, token, req)
 		.then(user => {
