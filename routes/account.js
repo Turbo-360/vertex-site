@@ -1450,6 +1450,9 @@ router.post('/:action', (req, res, next) => {
 			token = req.body.token
 		}
 
+		console.log('VALIDATE: profileId==' + profileId)
+		console.log('VALIDATE: token==' + token)
+
 		controllers.profile.getById(profileId, false, process.env.AUTH_API_KEY) // controller.getById(entityId, isRaw, token, req)
 		.then(user => {
 			// console.log('USER: ' + JSON.stringify(user))
