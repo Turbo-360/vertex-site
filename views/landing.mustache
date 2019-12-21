@@ -62,6 +62,7 @@
         </div>
         <input id="input-login-email" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-2" type="text" placeholder="Email" />
         <input id="input-login-password" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-3" type="password" placeholder="Password" />
+        <input id="input-site-name" style="background:#f9f9f9;border:none;padding:0.5125rem 1rem" class="form-control mb-3" type="text" placeholder="Your Site Name" />
         <hr />
         <button id="input-login" style="width:100%" type="button" class="btn btn-primary btn-lg mb-1">LOG IN</button>
       </div>
@@ -109,6 +110,12 @@
                     return
                 }
 
+                var siteName = $('#input-site-name').val()
+                if (siteName.length == 0){
+                    alert('Please enter a name for your site.')
+                    return
+                }
+
                 console.log('REGISTER: ' + JSON.stringify(visitor))
                 $('#btn-launch-site-container').html('<img style="max-width:30%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
                 window.vertexLib.postRequest('/account/register', visitor, function(err, response){
@@ -119,7 +126,9 @@
                     }
 
                     user = response.user
-                    launchTemplate(user.username)
+                    // launchTemplate(user.username)
+
+                    launchTemplate(siteName)
                 })
             })
 
