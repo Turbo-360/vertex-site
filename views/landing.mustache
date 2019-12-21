@@ -87,6 +87,7 @@
             var preloaded = window.__PRELOADED__
             var currentUser = preloaded.user // null if not registered
             var template = preloaded.template
+            var user = null
 
             $('#btn-launch-site').click(function(e){
                 if (e)
@@ -117,7 +118,7 @@
                         return
                     }
 
-                    var user = response.user
+                    user = response.user
                     launchTemplate(user.username)
                 })
             })
@@ -148,7 +149,7 @@
                     }
 
                     // window.location.href = '/me?selected=sites'
-                    window.location.href = 'https://'+siteSlug+'.vertex360.co'
+                    window.location.href = 'https://'+siteSlug+'.vertex360.co?vtxtoken='+user.token64
                 })
             }
 
