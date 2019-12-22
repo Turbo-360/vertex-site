@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var Subscriber = new mongoose.Schema({
 	site: {type:String, default:''}, // ID number of site
-  email: {type:String, lowercase:true, trim:true, default:''},
+	email: {type:String, lowercase:true, trim:true, default:''},
 	referrer: {type:String, lowercase:true, trim:true, default:''},
 	dateString: {type:String, default:''},
 	timestamp: {type:Date, default:Date.now}
