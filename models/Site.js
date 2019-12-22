@@ -13,6 +13,7 @@ const SiteSchema = new mongoose.Schema({
 	origin: {type:String, trim:true, default: 'vertex360'}, // vertex360, turbo360
 	format: {type:String, trim:true, default: 'vertex'}, // static, vertex, react
 	clonePrice: {type:Number, default:0},
+	numSubscribers: {type:Number, default:0},
 	collaborators: {type:Array, default:[]},
 	tags: {type:Array, default:[]},
 	invited: {type:Array, default:[]},
@@ -58,8 +59,9 @@ SiteSchema.methods.summary = function(authLevel) {
 		format: this.format,
 		origin: this.origin,
 		clonePrice: this.clonePrice,
+		numSubscribers: this.numSubscribers,
 		collaborators: this.collaborators,
-		tags: this.tags,
+		// tags: this.tags,
 		invited: this.invited,
 		isClone: this.isClone,
 		cloneSource: this.cloneSource,
