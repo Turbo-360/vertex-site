@@ -108,6 +108,15 @@ module.exports = {
 				}
 			}
 
+			if (params.profile != null){
+				try {
+					params['profile'] = JSON.parse(params.profile)
+				}
+				catch(err){
+
+				}
+			}
+
 			Subscriber.create(params, function(err, subscriber){
 				if (err){
 					reject(err)
