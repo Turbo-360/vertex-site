@@ -11,7 +11,7 @@ var Subscriber = new mongoose.Schema({
 Subscriber.methods.summary = function(){
 	return {
 		site: this.site,
-    email: this.email,
+		email: this.email,
 		referrer: this.referrer,
 		dateString: this.dateString,
 		timestamp: this.timestamp,
