@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 
 var Subscriber = new mongoose.Schema({
 	site: {type:String, default:''}, // ID number of site
+	profile: {type:mongoose.Schema.Types.Mixed, default:{}},
 	email: {type:String, lowercase:true, trim:true, default:''},
 	referrer: {type:String, lowercase:true, trim:true, default:''},
 	dateString: {type:String, default:''},
@@ -11,6 +12,7 @@ var Subscriber = new mongoose.Schema({
 Subscriber.methods.summary = function(){
 	return {
 		site: this.site,
+		profile: this.profile,
 		email: this.email,
 		referrer: this.referrer,
 		dateString: this.dateString,
