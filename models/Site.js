@@ -61,7 +61,7 @@ SiteSchema.methods.summary = function(authLevel) {
 		clonePrice: this.clonePrice,
 		numSubscribers: this.numSubscribers,
 		collaborators: this.collaborators,
-		// tags: this.tags,
+		tags: this.tags,
 		invited: this.invited,
 		isClone: this.isClone,
 		cloneSource: this.cloneSource,
