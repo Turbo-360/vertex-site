@@ -77,7 +77,8 @@ router.get('/landing', (req, res) => {
 			user: sanitizedUser(req.user)
 		})
 
-		res.render('landing', data)
+		res.render('landing-2', data)
+		// res.render('landing', data)
 	})
 	.catch(err => {
 		res.json({
