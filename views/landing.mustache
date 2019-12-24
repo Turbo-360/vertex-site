@@ -17,37 +17,97 @@
 
 <div class="main-container">
 
-    <section>
+    <section class="space-sm">
         <div class="container">
+            <div class="row flex-md-row card card-lg">
+                <div class="col-12 col-md-7 card-body">
+                    <div>
+                        <div class="mb-3 text-center">
+                            <img style="width:220px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s440" />
+                            <p class="py-3"><span>All plans come with 14 days free</span></p>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-6 col-lg-4 offset-md-4">
-                    <div class="card pricing card-lg">
-                        <div class="card-body">
-                            <span class="display-4 price-collapse collapse show mt-0 mb-2">Join</span>
-                            <span>Create your own Vertex 360 site for free below</span>
-                            <hr>
-                            <form>
-                                <input id="input-register-email" placeholder="Email" type="text" class="form-control mb-2" />
-                                <input id="input-register-password" placeholder="Password" type="password" class="form-control mb-2" />
-                                <input id="input-site-name" placeholder="Your Site Name" type="text" class="form-control mb-2" />
-                            </form>
-                            <div id="btn-launch-site-container">
-                                <a id="btn-launch-site" href="#" class="btn btn-info btn-lg w-100 mt-3 mb-4">LAUNCH YOUR SITE</a>                            
-                            </div>
-                            <div style="text-align:center">
-                                <small>Already have an account? Sign in <a data-toggle="modal" data-target="#login-modal" style="color:red" href="#">HERE</a></small>
+                        <div class="card card-sm shadow text-left">
+                            <div class="card-body p-4">
+                                <div class="media">
+                                    <img alt="Image" src="assets/img/avatar-male-1.jpg" class="avatar avatar-xs" />
+                                    <div class="media-body">
+                                        <p class="mb-1 text-small">
+                                            “Let’s get one thing straight, this theme’s a straight-up winner. No posers here, just beautiful design and code.”
+                                        </p>
+                                        <small>Daniel Cameron</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <ul class="list-unstyled list-spacing-sm mt-4">
+                            <li class="row">
+                                <div class="col-2 col-md-1"><i class="icon-check h5 text-muted"></i>
+                                </div>
+                                <div class="col-10">Introduce the major benefits of your product and set the scene for what's to come</div>
+                            </li>
+                            <li class="row align-items-center">
+                                <div class="col-2 col-md-1"><i class="icon-check h5 text-muted"></i>
+                                </div>
+                                <div class="col-10">Make a bold new start today</div>
+                            </li>
+                            <li class="row">
+                                <div class="col-2 col-md-1"><i class="icon-check h5 text-muted"></i>
+                                </div>
+                                <div class="col-10">Describe some key features of this aspect of the product</div>
+                            </li>
+                            <li class="row align-items-center">
+                                <div class="col-2 col-md-1"><i class="icon-check h5 text-muted"></i>
+                                </div>
+                                <div class="col-10">Make a bold new start today</div>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
 
-            </div>
-            <!--end of row-->
+                <div class="col-12 col-md-5 card-body bg-secondary">
+                    <div class="text-center mb-5">
+                        <h1 class="h2 mb-2">Start creating immediately</h1>
+                        <span>Create your own Vertex 360 site for free below</span>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-9">
+                            <form>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" type="text" id="input-register-email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" type="password" id="input-register-password" placeholder="Password" />
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" type="text" id="input-site-name" placeholder="Your Site Name" />
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col">
+                                        <button id="btn-launch-site" class="btn btn-block btn-success btn-lg mt-3" type="submit">Create Your Site</button>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-small">Already have an account? <a href="#" data-toggle="modal" data-target="#login-modal">Log in here</a></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--end of col-->
 
+            </div>
         </div>
-        <!--end of container-->
     </section>
+
 </div>
 
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
