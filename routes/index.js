@@ -52,6 +52,12 @@ router.get('/landing', (req, res) => {
 		renderAnalytics: utils.renderAnalytics(req, CDN)
 	}
 
+	const currentUser = sanitizedUser(req.user)
+	if (currentUser != null){
+		res.redirect('/me')
+		return
+	}
+
 	// TODO: check if template is live
 	// controllers.site.get({slug:req.params.slug}) // query template by slug
 
@@ -74,7 +80,8 @@ router.get('/landing', (req, res) => {
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			template: data.template,
-			user: sanitizedUser(req.user)
+			user: currentUser
+			// user: sanitizedUser(req.user)
 		})
 
 		res.render('landing', data)
