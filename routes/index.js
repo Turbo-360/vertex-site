@@ -54,7 +54,9 @@ router.get('/landing', (req, res) => {
 
 	// TODO: check if template is live
 	// controllers.site.get({slug:req.params.slug}) // query template by slug
-	controllers.site.get({slug:'base-template-tnzakf'})
+
+	const tpl = (process.env.TURBO_ENV=='dev') ? 'test-template-qjcthm' : 'base-template-tnzakf'
+	controllers.site.get({slug:tpl})
 	.then(results => {
 		if (results.length == 0){
 			throw new Error('Template not found')
