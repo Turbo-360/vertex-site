@@ -73,14 +73,17 @@
       return
     }
 
+    var btnLogin = $('#input-register-container').html()
     $('#input-register-container').html("<img style='width:80px' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/register', visitor, function(err, response){
       if (err){
+        $('#input-register-container').html(btnLogin)
         alert(err.message)
         return
       }
 
       if (response.confirmation != 'success'){
+        $('#input-register-container').html(btnLogin)
         alert(response.message)
         return
       }
