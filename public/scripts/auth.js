@@ -73,17 +73,14 @@
       return
     }
 
-    var btnLogin = $('#input-register-container').html()
     $('#input-register-container').html("<img style='width:80px' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/register', visitor, function(err, response){
       if (err){
-        $('#input-register-container').html(btnLogin)
         alert(err.message)
         return
       }
 
       if (response.confirmation != 'success'){
-        $('#input-register-container').html(btnLogin)
         alert(response.message)
         return
       }
@@ -164,15 +161,17 @@
       alert('Please enter your PASSWORD')
       return
     }
-
+    var btnLogin = $('#input-login-container').html()
     $('#input-login-container').html("<img style='width:80px' src='" + loaderUrl + "' />")
     window.vertexLib.postRequest('/account/login', visitor, function(err, response){
       if (err){
+        $('#input-register-container').html(btnLogin)
         alert(err.message)
         return
       }
 
       if (response.confirmation != 'success'){
+        $('#input-login-container').html(btnLogin)
         alert(response.message)
         return
       }
