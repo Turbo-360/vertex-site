@@ -19,6 +19,11 @@
     return
   }
 
+  function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase())
+  }
+
   var authorizeUser = function(redirect, data){
     if (redirect == 'reload'){
       window.location.reload()
@@ -54,6 +59,12 @@
 
     if (visitor.email.length == 0){
       alert('Please enter your EMAIL')
+      return
+    }
+
+    // validate email string:
+    if (validateEmail(visitor.email) != true){
+      alert('Please enter a VALID EMAIL')
       return
     }
 
@@ -137,6 +148,12 @@
 
     if (visitor.email.length == 0){
       alert('Please enter your EMAIL')
+      return
+    }
+
+    // validate email string:
+    if (validateEmail(visitor.email) != true){
+      alert('Please enter a VALID EMAIL')
       return
     }
 
