@@ -200,6 +200,11 @@
             var template = preloaded.template
             var user = null
 
+            var validateEmail = function(email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase())
+            }
+
             $('#btn-launch-site').click(function(e){
                 if (e)
                     e.preventDefault()
@@ -213,6 +218,12 @@
 
                 if (visitor.email.length == 0){
                     alert('Please enter your EMAIL')
+                    return
+                }
+
+                // validate email string:
+                if (validateEmail(visitor.email) != true){
+                    alert('Please enter a VALID EMAIL')
                     return
                 }
 
