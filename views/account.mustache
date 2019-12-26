@@ -94,7 +94,6 @@
 				<li id="list-item-profile"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-user-following"></i> Profile</a></li>
 				<li id="list-item-sites"><a class="sidebar-menu-option" href="#"><i class="sl sl-icon-docs"></i> Sites</a></li>
         <li><a id="link-logout" style="margin-left:4px" href="#"><i class="sl sl-icon-close"></i> Log Out</a></li>
-        <li><a style="width:86%;border-radius:4px;margin-left:4px;background:#357d3e" class="button" href="/templates"><i class="sl sl-icon-plus"></i> Create Site</a></li>
 			</ul>
 		</div>
 	</div>
@@ -105,7 +104,7 @@
 
 			<div class="col-lg-8 col-md-8">
         <div id="content-profile" class="dashboard-list-box margin-top-0 margin-bottom-40">
-          <a style="float:right;border-radius:4px;background:#357d3e;margin-top:16px;margin-right:16px" class="button" href="/templates"><i class="sl sl-icon-plus"></i> Create Your Site</a>
+          <a style="float:right;border-radius:4px;background:#357d3e;margin-top:16px;margin-right:16px" class="button" href="/templates"><i class="sl sl-icon-plus"></i> Create Site</a>
           <a style="float:right;border-radius:4px;background:#354e7d;margin-top:16px;margin-right:16px" class="button" href="/profile/{{user.slug}}">View Your Profile</a>
 					<h4 class="gray">Profile Details</h4>
 					<div class="dashboard-list-box-static">
@@ -165,9 +164,7 @@
 			</div>
 
       <div id="content-sites" class="dashboard-list-box margin-top-0 margin-bottom-40">
-        <div style="float: right; padding: 20px;">
-          <a href="/templates" class="button" style="float: right; border-radius: 4px; background: rgb(53, 125, 62);">Create Site</a>
-        </div>
+        <a href="/templates" class="button" style="float: right; border-radius: 4px; background: rgb(53, 125, 62);"><i class="sl sl-icon-plus"></i> Create Site</a>
         <h4 class="gray">Manage Your Sites</h4>
         <ul>
           {{#sites}}
