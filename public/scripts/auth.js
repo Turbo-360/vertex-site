@@ -49,13 +49,7 @@
       fullName: $('#input-register-name').val(),
       email: $('#input-register-email').val(),
       password: $('#input-register-password').val()
-      // promoCode: $('#input-register-promo').val()
     }
-
-    // if (visitor.fullName.length == 0){
-    //   alert('Please enter your NAME')
-    //   return
-    // }
 
     if (visitor.email.length == 0){
       alert('Please enter your EMAIL')
@@ -84,18 +78,6 @@
         alert(response.message)
         return
       }
-
-      // special case for iphone. Safari does not honor cookies
-      // from different domains.
-      /*
-      if (userAgent.includes('iphone')){
-        if (data.isWidget){
-          // send message back to parent container (react bundle) so
-          // user auth can be handled on individual site domains:
-          parent.postMessage({action:'logged-in', data:response.user}, '*')
-          return
-        }
-      } */
 
       if (data.isWidget){
         // send message back to parent container (react bundle) so
@@ -132,95 +114,69 @@
     })
   })
 
-  $('#input-login').click(function(event){
-    if (event)
-      event.preventDefault()
+  var bindLoginHandler = function(){
+    $('#input-login').click(function(event){
+      if (event)
+        event.preventDefault()
 
-    if (user != null){
-      window.location.href = '/me'
-      return
-    }
-
-    var visitor = {
-      email: $('#input-login-email').val().trim(),
-      password: $('#input-login-password').val().trim()
-    }
-
-    if (visitor.email.length == 0){
-      alert('Please enter your EMAIL')
-      return
-    }
-
-    // validate email string:
-    if (validateEmail(visitor.email) != true){
-      alert('Please enter a VALID EMAIL')
-      return
-    }
-
-    if (visitor.password.length == 0){
-      alert('Please enter your PASSWORD')
-      return
-    }
-    var btnLogin = $('#input-login-container').html()
-    $('#input-login-container').html("<img style='width:80px' src='" + loaderUrl + "' />")
-    window.vertexLib.postRequest('/account/login', visitor, function(err, response){
-      if (err){
-        $('#input-register-container').html(btnLogin)
-        alert(err.message)
+      if (user != null){
+        window.location.href = '/me'
         return
       }
 
-      if (response.confirmation != 'success'){
-        $('#input-login-container').html(btnLogin)
-        alert(response.message)
+      var visitor = {
+        email: $('#input-login-email').val().trim(),
+        password: $('#input-login-password').val().trim()
+      }
+
+      if (visitor.email.length == 0){
+        alert('Please enter your EMAIL')
         return
       }
 
-      // special case for iphone. Safari does not honor cookies
-      // from different domains.
-      /*
-      if (userAgent.includes('iphone')){
+      // validate email string:
+      if (validateEmail(visitor.email) != true){
+        alert('Please enter a VALID EMAIL')
+        return
+      }
+
+      if (visitor.password.length == 0){
+        alert('Please enter your PASSWORD')
+        return
+      }
+      var btnLogin = $('#input-login-container').html()
+      $('#input-login-container').html("<img style='width:80px' src='" + loaderUrl + "' />")
+      window.vertexLib.postRequest('/account/login', visitor, function(err, response){
+        if (err){
+          $('#input-login-container').html(btnLogin)
+          setTimeout(function(){
+            bindLoginHandler()
+          }, 500)
+          alert(err.message)
+          return
+        }
+
+        if (response.confirmation != 'success'){
+          $('#input-login-container').html(btnLogin)
+          setTimeout(function(){
+            bindLoginHandler()
+          }, 500)
+          alert(response.message)
+          return
+        }
+
         if (data.isWidget){
           // send message back to parent container (react bundle) so
           // user auth can be handled on individual site domains:
           parent.postMessage({action:'logged-in', data:response.user}, '*')
           return
         }
-      } */
 
-      if (data.isWidget){
-        // send message back to parent container (react bundle) so
-        // user auth can be handled on individual site domains:
-        parent.postMessage({action:'logged-in', data:response.user}, '*')
-        return
-      }
-
-
-      authorizeUser(onLoginRedirect, response)
-
-      /*
-      if (gapi != null){
-        authorizeUser(onLoginRedirect, response)
-        return
-      }
-
-      if (gapi.auth2==null){
-        authorizeUser(onRegisterRedirect)
-        return
-      }
-
-      // log out of google if logged in:
-      var auth2 = gapi.auth2.getAuthInstance()
-      if (auth2 == null){
-        authorizeUser(onLoginRedirect, response)
-        return
-      }
-
-      auth2.signOut().then(function () {
         authorizeUser(onLoginRedirect, response)
       })
-      */
     })
-  })
+  }
+
+  bindLoginHandler()
 
 })();
