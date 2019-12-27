@@ -3,6 +3,11 @@ const router = express.Router()
 const controllers = require('../controllers')
 const utils = require('../utils')
 
+const baseUrl = (appSlug) => {
+  const base = 'https://'+appSlug+'.vertex360.co'
+  return base
+}
+
 const apiBaseUrl = (appSlug, resource, resourceId) => {
   let base = 'https://'+appSlug+'.vertex360.co/api'
   if (resourceId == null)
@@ -48,7 +53,11 @@ const queryEndpoint = (endpoint, params, method) => {
 }
 
 router.get('/:app', (req, res, next) => {
-  queryEndpoint('https://'+req.params.app+'.vertex360.co/api', null, null)
+  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  .then(data => {
+    return queryEndpoint('https://'+req.params.app+'.vertex360.co/api', null, null)
+  })
+  // queryEndpoint('https://'+req.params.app+'.vertex360.co/api', null, null)
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
@@ -68,8 +77,14 @@ router.get('/:app', (req, res, next) => {
 router.get('/:app/:resource', (req, res, next) => {
 
   // template-test-55-4bkhc9
-  const endpoint = apiBaseUrl(req.params.app, req.params.resource)
-  queryEndpoint(endpoint, null, null)
+  // const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+  // queryEndpoint(endpoint, null, null)
+
+  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  .then(data => {
+    const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+    return queryEndpoint(endpoint, null, null)
+  })
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
@@ -87,8 +102,14 @@ router.get('/:app/:resource', (req, res, next) => {
 })
 
 router.get('/:app/:resource/:id', (req, res, next) => {
-  const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
-  queryEndpoint(endpoint, null, null)
+  // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+  // queryEndpoint(endpoint, null, null)
+
+  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  .then(data => {
+    const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+    return queryEndpoint(endpoint, null, null)
+  })
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
@@ -106,10 +127,16 @@ router.get('/:app/:resource/:id', (req, res, next) => {
 })
 
 router.post('/:app/:resource', (req, res, next) => {
-  const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+  // const endpoint = apiBaseUrl(req.params.app, req.params.resource)
   console.log('REST POST: ' + JSON.stringify(req.body))
   console.log('endpoint: ' + endpoint)
-  queryEndpoint(endpoint, req.body, 'post')
+  // queryEndpoint(endpoint, req.body, 'post')
+
+  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  .then(data => {
+    const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+    return queryEndpoint(endpoint, req.body, 'post')
+  })
   .then(data => {
     console.log('DATA: ' + JSON.stringify(data))
     if (data.confirmation != 'success'){
@@ -128,8 +155,14 @@ router.post('/:app/:resource', (req, res, next) => {
 })
 
 router.put('/:app/:resource/:id', (req, res, next) => {
-  const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
-  queryEndpoint(endpoint, req.body, 'put')
+  // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+  // queryEndpoint(endpoint, req.body, 'put')
+
+  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  .then(data => {
+    const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+    return queryEndpoint(endpoint, req.body, 'put')
+  })
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
@@ -147,8 +180,14 @@ router.put('/:app/:resource/:id', (req, res, next) => {
 })
 
 router.delete('/:app/:resource/:id', (req, res, next) => {
-  const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
-  queryEndpoint(endpoint, null, 'delete')
+  // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+  // queryEndpoint(endpoint, null, 'delete')
+
+  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  .then(data => {
+    const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+    return queryEndpoint(endpoint, null, 'delete')
+  })
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
