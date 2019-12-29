@@ -119,7 +119,7 @@ module.exports = {
 				// {content:"this is a test email", subject:"EMAIL TEST", recipient:"dkwon@turbo360.co", fromname:"Vertex 360", from:"katrina@vertex360.co"}
 				if (profile != null){
 					console.log('SEND EMAIL: '+profile.email)
-					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', [profile.email], '[vertex 360] new message from '+cmt.profile.username, 'Hello!<br /><br />'+cmt.profile.username+' responded to your post "'+params.contex.title+'". Read it <a style="color:red" href="https://www.vertex360.co/feed/'+params.threadSlug+'">HERE</a><br /><br /><img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />')
+					utils.Email.sendHtmlEmails('dan@vertex360.co', 'Vertex 360', [profile.email], '[vertex 360] new message from '+cmt.profile.username, 'Hello!<br /><br />'+cmt.profile.username+' responded to your post "'+params.context.title+'". Read it <a style="color:red" href="https://www.vertex360.co/feed/'+params.threadSlug+'">HERE</a><br /><br /><img style="width:160px" src="https://lh3.googleusercontent.com/hlcLdauNL9UiLa3K4wF5ZPNpHzi50R26y61Ahx7oRMbUNgujN-1SmeC_3zG4EHLBH5WnRhQ1ZS19KF_xcWqkTKoENw=s320" />')
 				}
 
 				resolve(cmt)
