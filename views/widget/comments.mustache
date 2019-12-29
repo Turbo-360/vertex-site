@@ -218,6 +218,7 @@
       // var user = data.user
       var user = null
       var entity = null
+      var url = null
       var site = data.site // full site data
       var schema = data.schema // post, video, episode, etc
       var comments = data.comments || []
@@ -262,6 +263,7 @@
         if (message.type == 'set-entity'){
           // console.log('SET ENTITY: '+JSON.stringify(message.entity))
           entity = message.entity
+          url = message.url
           reloadUI()
         }
       })
@@ -431,7 +433,8 @@
             slug: entity.slug || '',
             preview: entity.preview || '',
             image: entity.image || '',
-            dateString: entity.dateString || ''
+            dateString: entity.dateString || '',
+            url: url || ''
           })
         }
 
