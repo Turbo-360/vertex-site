@@ -105,7 +105,7 @@ module.exports = {
 			params['text'] = utils.TextUtils.convertToHtml(params.text)
 
 			let cmt = null
-      Comment.create(params)
+			Comment.create(params)
 			.then(comment => {
 				cmt = comment.summary()
 				return (params.op == null) ? null : ProfileController.getById(params.op, false, process.env.ADMIN_API_KEY)
