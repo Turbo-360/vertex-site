@@ -105,13 +105,19 @@ router.get('/comments', (req, res) => {
 		currentSite = sites[0]
 		const commentsFilter = (schema==='site') ? {'site.id':currentSite.id} : {thread:thread, 'site.id':currentSite.id}
 		return controllers.comment.get(commentsFilter)
-		// return controllers.comment.get({thread:thread, 'site.id':currentSite.id})
 	})
 	.then(comments => {
-		// data['comments'] = comments
 		const commentsMap = {}
 		comments.forEach(comment => {
 			commentsMap[comment.id] = comment
+			comment['replies'] = [
+				{text: 'this is a test reply'}
+			]
+
+			// this is a reply to another comment
+			if (comment.context.schema == 'comment'){
+
+			}
 		})
 
 		data['preloaded'] = JSON.stringify({
