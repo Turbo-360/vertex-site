@@ -197,6 +197,10 @@
           </div>
           <p style="color:#7d7d7d"><%{text}%></p>
           <a class="btn-reply-comment" id="reply-<% id %>" href="#">Reply</a>
+          <div id="input-reply-<% id %>" style="display:flex">
+            <input style="display:none" type="text" class="form-control" />
+            <button>Submit</button>
+          </div>
         </div>
         <div class="comment-vote">
           <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
@@ -339,8 +343,9 @@
                 return
               }
 
-
               console.log('reply comment: ' + JSON.stringify(comment))
+              $('#reply-'+commentId).css('display', 'none')
+              $('#input-reply-'+commentId).css('display', '')
             })
           })
 
