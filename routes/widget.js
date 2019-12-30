@@ -109,6 +109,7 @@ router.get('/comments', (req, res) => {
 	.then(comments => {
 		const commentsMap = {}
 		const repliesMap = {}
+		const filteredComments = []
 		comments.forEach(comment => {
 			commentsMap[comment.id] = comment
 
@@ -121,6 +122,7 @@ router.get('/comments', (req, res) => {
 			}
 			else {
 				comment['replies'] = repliesMap[comment.id] || null
+				filteredComments.push(comment)
 			}
 		})
 
@@ -131,7 +133,8 @@ router.get('/comments', (req, res) => {
 			onLoginRedirect: 'reload',
 			onRegisterRedirect: 'reload',
 			timestamp: req.timestamp,
-			comments: comments,
+			// comments: comments,
+			comments: filteredComments,
 			commentsMap: commentsMap,
 			user: data.user,
 			site: currentSite,
