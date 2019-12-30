@@ -111,11 +111,6 @@ router.get('/comments', (req, res) => {
 		const repliesMap = {}
 		comments.forEach(comment => {
 			commentsMap[comment.id] = comment
-			comment['replies'] = repliesMap[comment.id] || null
-
-			// comment['replies'] = [
-			// 	{text: 'this is a test reply'}
-			// ]
 
 			// this is a reply to another comment
 			if (comment.context.schema == 'comment'){
@@ -124,7 +119,12 @@ router.get('/comments', (req, res) => {
 				repliesArray.push(comment)
 				repliesMap[originalCommentId] = repliesArray
 			}
+			else {
+				comment['replies'] = repliesMap[comment.id] || null
+			}
 		})
+
+		console.log(JSON.stringify(comments))
 
 		data['preloaded'] = JSON.stringify({
 			isWidget: true,
