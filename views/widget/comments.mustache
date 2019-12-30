@@ -359,9 +359,29 @@
                   thread: data.thread,
                   site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:'https://'+site.url}),
                   profile: JSON.stringify({id:user.id, username:user.username, image:user.image, slug:user.slug}),
+                  context: JSON.stringify({
+                    id: comment.id,
+                    schema: 'comment',
+                    dateString: comment.dateString || ''
+                    // title: entity.title || '',
+                    // slug: entity.slug || '',
+                    // preview: entity.preview || '',
+                    // image: entity.image || '',
+                  })
                 }
 
                 console.log('submit reply: ' + JSON.stringify(reply))
+                window.vertexLib.postRequest('/api/comment', reply, function(err, resp){
+                  if (err){
+                    alert('Error - '+err)
+                    return
+                  }
+
+                  console.log('Comment Created: ' + JSON.stringify(resp))
+                  $('#text-area-comment').val('')
+                  comments.unshift(resp.result)
+                  reloadUI()
+                })
               })
 
               $('#reply-'+commentId).css('display', 'none')
