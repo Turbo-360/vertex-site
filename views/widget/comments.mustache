@@ -348,8 +348,20 @@
                 if (event)
                   event.preventDefault()
 
-                var reply = $('#input-reply-'+commentId).val()
-                console.log('submit reply: '+reply)
+                var replyText = $('#input-reply-'+commentId).val()
+                if (reply.length == 0){
+                  alert('Please enter a reply.')
+                  return
+                }
+
+                var reply = {
+                  text: replyText,
+                  thread: '',
+                  site: JSON.stringify({id:site.id, slug:site.slug, name:site.name, image:site.image, url:'https://'+site.url}),
+                  profile: JSON.stringify({id:user.id, username:user.username, image:user.image, slug:user.slug}),
+                }
+
+                console.log('submit reply: ' + JSON.stringify(reply))
               })
 
               $('#reply-'+commentId).css('display', 'none')
