@@ -121,8 +121,8 @@ router.get('/comments', (req, res) => {
 			if (comment.context.schema == 'comment'){
 				const originalCommentId = comment.context.schema.id
 				const repliesArray = repliesMap[originalCommentId] || []
-				repliesMap[originalCommentId] = repliesArray
 				repliesArray.push(comment)
+				repliesMap[originalCommentId] = repliesArray
 			}
 		})
 
