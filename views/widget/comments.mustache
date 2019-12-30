@@ -196,6 +196,7 @@
 
           </div>
           <p style="color:#7d7d7d"><%{text}%></p>
+          <a class="btn-reply-comment" id="reply-<% id %>" href="#">Reply</a>
         </div>
         <div class="comment-vote">
           <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
@@ -319,6 +320,27 @@
 
               console.log('click context link: ' + JSON.stringify(comment))
               parent.postMessage({action:'click-context-link', data:comment.context}, '*')
+            })
+          })
+
+          $('.btn-reply-comment').each(function(i, btnReply){
+            var id = $(this).attr('id') // "reply-1231a..."
+            var parts = id.split('-')
+            var commentId = parts[1]
+            var comment = data.commentsMap[commentId]
+
+            $(this).unbind()
+            $(this).click(function(event){
+              if (event)
+                event.preventDefault()
+
+              if (user==null){
+                alert('Please login or register to reply to comments')
+                return
+              }
+
+
+              console.log('reply comment: ' + JSON.stringify(commentId))
             })
           })
 
