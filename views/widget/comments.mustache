@@ -163,14 +163,14 @@
 
 
   <script type="text/template" id="tpl-comment">
-    <div class="mb-3">
+    <div class="mb-3" style="border:1px solid #ededed">
       <%#showContext%>
       <a href="#" id="<% id %>" class="context-link ml-1">
         <small><% context.title %></small>
         <i class="fa fa-external-link-alt ml-1"></i>
       </a>
       <%/showContext%>
-      <div class="bg-white thread-preview">
+      <div class="bg-white" style="display:flex">
         <div class="thread-preview-container">
           <div class="mb-2">
             <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
