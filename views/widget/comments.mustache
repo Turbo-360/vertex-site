@@ -211,7 +211,15 @@
 
       <%#replies%>
       <div class="bg-white thread-preview">
-        <% text %>
+        <div class="thread-preview-container">
+          <div class="mb-2">
+            <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
+            <a target="_blank" href="#"><small><%profile.username%></small></a>
+            <span>&middot;</span>
+            <small><%dateString%></small>
+          </div>
+          <p style="color:#7d7d7d"><%{text}%></p>
+        </div>
       </div>
       <%/replies%>
     </div>
