@@ -210,7 +210,7 @@
       </div>    
 
       <%#replies%>
-      <div class="bg-white reply" style="border-top:1px solid #ededed;display:flex">
+      <div class="reply" style="border-top:1px solid #ededed;display:flex;background:#fffffa">
         <div class="thread-preview-container">
           <div class="mb-2">
             <a target="_blank" href="#"><img class="site-icon" src="<%{profile.image}%>=s44-c" /></a>
@@ -219,6 +219,11 @@
             <small><%dateString%></small>
           </div>
           <p style="color:#7d7d7d"><%{text}%></p>
+          <div class="comment-vote">
+            <a href="#"><i id="<% id %>" class="fa fa-arrow-up btn-upvote"></i></a>
+            <small id="score-<%id%>"><% votes.score %></small>
+            <a href="#"><i id="<% id %>" class="fa fa-arrow-down btn-downvote"></i></a>
+          </div>
         </div>
       </div>
       <%/replies%>
