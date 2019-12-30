@@ -108,15 +108,19 @@ router.get('/comments', (req, res) => {
 	})
 	.then(comments => {
 		const commentsMap = {}
+		const repliesMap = {}
 		comments.forEach(comment => {
 			commentsMap[comment.id] = comment
-			comment['replies'] = [
-				{text: 'this is a test reply'}
-			]
+			comment['replies'] = repliesMap[comment.id] || null
+
+			// comment['replies'] = [
+			// 	{text: 'this is a test reply'}
+			// ]
 
 			// this is a reply to another comment
 			if (comment.context.schema == 'comment'){
-
+				const repliesArray = repliesMap[comment.context.schema.id] || []
+				repliesArray.push(comment)
 			}
 		})
 
