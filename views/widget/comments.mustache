@@ -197,9 +197,9 @@
           </div>
           <p style="color:#7d7d7d"><%{text}%></p>
           <a class="btn-reply-comment" id="reply-<% id %>" href="#">Reply</a>
-          <div id="input-reply-<% id %>" style="display:none">
-            <input type="text" class="form-control p-1" />
-            <button class="btn btn-success btn-sm mt-2" style="float:right">Submit</button>
+          <div id="input-reply-container-<% id %>" style="display:none">
+            <input id="input-reply-<% id %>" type="text" class="form-control p-1" />
+            <button id="btn-submit-reply-<% id %>" class="btn btn-success btn-sm mt-2" style="float:right">Submit</button>
           </div>
         </div>
         <div class="comment-vote">
@@ -344,8 +344,16 @@
               }
 
               console.log('reply comment: ' + JSON.stringify(comment))
+              $('#btn-submit-reply-'+commentId).click(function(event){
+                if (event)
+                  event.preventDefault()
+
+                var reply = $('#input-reply-'+commentId).val()
+                console.log('submit reply: '+reply)
+              })
+
               $('#reply-'+commentId).css('display', 'none')
-              $('#input-reply-'+commentId).css('display', '')
+              $('#input-reply-container-'+commentId).css('display', '')
             })
           })
 
