@@ -109,7 +109,7 @@ router.get('/comments', (req, res) => {
 	.then(comments => {
 		const commentsMap = {}
 		const repliesMap = {}
-		const filteredComments = []
+		const filteredComments = [] // only original comments, no replies
 		comments.forEach(comment => {
 			commentsMap[comment.id] = comment
 
