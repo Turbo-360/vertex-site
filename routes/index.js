@@ -55,18 +55,11 @@ router.get('/landing', (req, res) => {
 
 	const currentUser = sanitizedUser(req.user)
 	data['currentUser'] = currentUser
-	currentUser['token64'] = Base64.encode(JSON.stringify({
-		id: currentUser.id,
-		token: currentUser.token
-	}))
 
 	// if (currentUser != null){
 	// 	res.redirect('/me')
 	// 	return
 	// }
-
-	// TODO: check if template is live
-	// controllers.site.get({slug:req.params.slug}) // query template by slug
 
 	const tpl = (process.env.TURBO_ENV=='dev') ? 'test-template-qjcthm' : 'base-template-tnzakf'
 	controllers.site.get({slug:tpl})
@@ -81,6 +74,26 @@ router.get('/landing', (req, res) => {
 		site['description'] = utils.TextUtils.convertToHtml(site.description)
 		site['preview'] = utils.TextUtils.truncateText(site.description, 220)
 		data['template'] = site
+
+		return (currentUser == null) ? null : controllers.profile.getById(currentUser.id, true, process.env.AUTH_API_KEY, req)
+
+		// data['pp_client_id'] = process.env.PP_CLIENT_ID
+		// data['preloaded'] = JSON.stringify({
+		// 	timestamp: req.timestamp,
+		// 	referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
+		// 	template: data.template,
+		// 	user: currentUser
+		// })
+
+		// res.render('landing', data)
+	})
+	.then(user => {
+		if (user != null){
+			currentUser['token64'] = Base64.encode(JSON.stringify({
+				id: currentUser.id,
+				token: user.token
+			}))
+		}
 
 		data['pp_client_id'] = process.env.PP_CLIENT_ID
 		data['preloaded'] = JSON.stringify({
