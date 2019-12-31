@@ -77,14 +77,8 @@ router.get('/:app', (req, res, next) => {
 router.get('/:app/:resource', (req, res, next) => {
 
   // template-test-55-4bkhc9
-  // const endpoint = apiBaseUrl(req.params.app, req.params.resource)
-  // queryEndpoint(endpoint, null, null)
-
-  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
-  .then(data => {
-    const endpoint = apiBaseUrl(req.params.app, req.params.resource)
-    return queryEndpoint(endpoint, null, null)
-  })
+  const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+  queryEndpoint(endpoint, null, null)
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
@@ -102,14 +96,9 @@ router.get('/:app/:resource', (req, res, next) => {
 })
 
 router.get('/:app/:resource/:id', (req, res, next) => {
-  // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
-  // queryEndpoint(endpoint, null, null)
+  const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
 
-  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
-  .then(data => {
-    const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
-    return queryEndpoint(endpoint, null, null)
-  })
+  queryEndpoint(endpoint, null, null)
   .then(data => {
     if (data.confirmation != 'success'){
       throw new Error(data.message)
