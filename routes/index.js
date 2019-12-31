@@ -76,16 +76,6 @@ router.get('/landing', (req, res) => {
 		data['template'] = site
 
 		return (currentUser == null) ? null : controllers.profile.getById(currentUser.id, true, process.env.AUTH_API_KEY, req)
-
-		// data['pp_client_id'] = process.env.PP_CLIENT_ID
-		// data['preloaded'] = JSON.stringify({
-		// 	timestamp: req.timestamp,
-		// 	referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
-		// 	template: data.template,
-		// 	user: currentUser
-		// })
-
-		// res.render('landing', data)
 	})
 	.then(user => {
 		if (user != null){
