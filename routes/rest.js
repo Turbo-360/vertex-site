@@ -127,14 +127,14 @@ router.get('/:app/:resource/:id', (req, res, next) => {
 })
 
 router.post('/:app/:resource', (req, res, next) => {
-  // const endpoint = apiBaseUrl(req.params.app, req.params.resource)
-  console.log('REST POST: ' + JSON.stringify(req.body))
-  console.log('endpoint: ' + endpoint)
-  // queryEndpoint(endpoint, req.body, 'post')
+  const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+  // console.log('REST POST: ' + JSON.stringify(req.body))
+  // console.log('endpoint: ' + endpoint)
 
-  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  // utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  queryEndpoint(endpoint, {limit:1}, 'get')
   .then(data => {
-    const endpoint = apiBaseUrl(req.params.app, req.params.resource)
+    // const endpoint = apiBaseUrl(req.params.app, req.params.resource)
     return queryEndpoint(endpoint, req.body, 'post')
   })
   .then(data => {
@@ -155,12 +155,12 @@ router.post('/:app/:resource', (req, res, next) => {
 })
 
 router.put('/:app/:resource/:id', (req, res, next) => {
-  // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+  const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
   // queryEndpoint(endpoint, req.body, 'put')
 
-  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  queryEndpoint(endpoint, null, 'get')
   .then(data => {
-    const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+    // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
     return queryEndpoint(endpoint, req.body, 'put')
   })
   .then(data => {
@@ -180,12 +180,12 @@ router.put('/:app/:resource/:id', (req, res, next) => {
 })
 
 router.delete('/:app/:resource/:id', (req, res, next) => {
-  // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
-  // queryEndpoint(endpoint, null, 'delete')
+  const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
 
-  utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  // utils.HTTP.get(baseUrl(req.params.app), null, {'Accept': 'text/html'})
+  queryEndpoint(endpoint, null, 'get')
   .then(data => {
-    const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
+    // const endpoint = apiBaseUrl(req.params.app, req.params.resource, req.params.id)
     return queryEndpoint(endpoint, null, 'delete')
   })
   .then(data => {
