@@ -56,11 +56,6 @@ router.get('/landing', (req, res) => {
 	const currentUser = sanitizedUser(req.user)
 	data['currentUser'] = currentUser
 
-	// if (currentUser != null){
-	// 	res.redirect('/me')
-	// 	return
-	// }
-
 	const tpl = (process.env.TURBO_ENV=='dev') ? 'test-template-qjcthm' : 'base-template-tnzakf'
 	controllers.site.get({slug:tpl})
 	.then(results => {
@@ -90,7 +85,8 @@ router.get('/landing', (req, res) => {
 			timestamp: req.timestamp,
 			referrer: req.vertex_session.referrer, // if undefined, the 'referrer' key doesn't show up at all
 			template: data.template,
-			user: currentUser
+			user: currentUser,
+			utm: req.query.utm
 		})
 
 		res.render('landing', data)
