@@ -395,7 +395,17 @@
 
                   console.log('Comment Created: ' + JSON.stringify(resp))
                   $('#text-area-comment').val('')
-                  comments.unshift(resp.result)
+                  // comments.unshift(resp.result)
+                  
+                  var replyData = resp.result
+                  comments.forEach(function(comment){
+                    if (comment.id == replyData.context.id){
+                      var replies = comment.replies || []
+                      replies.push(replyData)
+                      comment.replies = replies
+                    }
+                  })
+
                   reloadUI()
                 })
               })
