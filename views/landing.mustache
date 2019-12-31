@@ -221,6 +221,19 @@
                 
                 if (currentUser != null){
                     console.log('Logged In: '+JSON.stringify(currentUser))
+
+                    var siteName = $('#input-site-name').val()
+                    if (siteName.length == 0){
+                        alert('Please enter a name for your site.')
+                        return
+                    }
+
+                    var parts = siteName.toLowerCase().split(' ')
+                    var hyphenatedSiteName = parts.join('-')
+
+                    $('#btn-launch-site-container').html('<img style="max-width:30%" src="https://storage.turbo360.co/vertex360-cms-4hujkc/loader.gif" />')
+                    $('#loading-message').html('Launching your site. This may take a couple minutes...')
+                    launchTemplate(hyphenatedSiteName)
                     return
                 }
 
