@@ -243,7 +243,8 @@
                 var visitor = {
                     email: $('#input-register-email').val(),
                     password: $('#input-register-password').val(),
-                    source: window.location.href
+                    source: window.location.href,
+                    utm: preloaded.utm
                 }
 
                 if (visitor.email.length == 0){
