@@ -206,9 +206,9 @@
     <script>
         (function(){
             var preloaded = window.__PRELOADED__
-            var currentUser = preloaded.user // null if not registered
+            var user = preloaded.user // null if not registered
             var template = preloaded.template
-            var user = null
+            // var user = null
 
             var validateEmail = function(email) {
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -219,8 +219,8 @@
                 if (e)
                     e.preventDefault()
                 
-                if (currentUser != null){
-                    console.log('Logged In: '+JSON.stringify(currentUser))
+                if (user != null){
+                    console.log('Logged In: '+JSON.stringify(user))
 
                     var siteName = $('#input-site-name').val()
                     if (siteName.length == 0){
