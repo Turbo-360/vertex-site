@@ -126,8 +126,6 @@ router.get('/comments', (req, res) => {
 			}
 		})
 
-		console.log(JSON.stringify(comments))
-
 		data['preloaded'] = JSON.stringify({
 			isWidget: true,
 			onLoginRedirect: 'reload',
