@@ -398,13 +398,25 @@
                   // comments.unshift(resp.result)
                   
                   var replyData = resp.result
+
+                  /*
                   comments.forEach(function(comment){
                     if (comment.id == replyData.context.id){
                       var replies = comment.replies || []
                       replies.push(replyData)
                       comment.replies = replies
                     }
-                  })
+                  }) */
+
+                  for (var i=0; i<comments.length; i++){
+                    var comment = comments[i]
+                    if (comment.id == replyData.context.id){
+                      var replies = comment.replies || []
+                      replies.push(replyData)
+                      comment.replies = replies
+                      break
+                    }
+                  }
 
                   reloadUI()
                 })
