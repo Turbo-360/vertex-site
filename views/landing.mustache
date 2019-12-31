@@ -127,8 +127,9 @@
                         <div class="col-12 col-lg-9">
                             <form>
                                 {{#currentUser}}
-                                <div>
-                                    <h3>Welcome Back {{currentUser.username}}!</h3>
+                                <div style="display:flex">
+                                    <img style="width:48px;border-radius:50%" src="{{{currentUser.image}}}=s96-c" />
+                                    <h5>Welcome Back {{currentUser.username}}!</h5>
                                 </div>
                                 {{/currentUser}}
 
