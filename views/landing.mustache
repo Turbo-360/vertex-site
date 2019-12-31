@@ -126,6 +126,13 @@
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-9">
                             <form>
+                                {{#currentUser}}
+                                <div>
+                                    <h3>Welcome Back {{currentUser.username}}!</h3>
+                                </div>
+                                {{/currentUser}}
+
+                                {{^currentUser}}
                                 <div class="form-row form-group">
                                     <div class="col">
                                         <input class="form-control form-control-lg" type="text" id="input-register-email" placeholder="Email" />
@@ -136,6 +143,8 @@
                                         <input class="form-control form-control-lg" type="password" id="input-register-password" placeholder="Password" />
                                     </div>
                                 </div>
+                                {{/currentUser}}
+
                                 <div class="form-row form-group">
                                     <div class="col">
                                         <input class="form-control form-control-lg" type="text" id="input-site-name" placeholder="Your Site Name" />
@@ -208,6 +217,11 @@
             $('#btn-launch-site').click(function(e){
                 if (e)
                     e.preventDefault()
+                
+                if (currentUser != null){
+                    console.log('Logged In: '+JSON.stringify(currentUser))
+                    return
+                }
 
                 // console.log('validate register fields.')
                 var visitor = {
