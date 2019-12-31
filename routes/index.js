@@ -3,6 +3,7 @@ const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const router = vertex.router()
 const controllers = require('../controllers')
 const utils = require('../utils')
+const Base64 = require('js-base64').Base64
 const CDN = (process.env.TURBO_ENV=='dev') ? null : process.env.CDN_ROOT
 
 const hasVideo = (site) => {
@@ -54,6 +55,10 @@ router.get('/landing', (req, res) => {
 
 	const currentUser = sanitizedUser(req.user)
 	data['currentUser'] = currentUser
+	currentUser['token64'] = Base64.encode(JSON.stringify({
+		id: currentUser.id,
+		token: currentUser.token
+	}))
 
 	// if (currentUser != null){
 	// 	res.redirect('/me')
