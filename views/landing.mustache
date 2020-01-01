@@ -159,7 +159,12 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <span id="loading-message" class="text-small">Already have an account? <a href="#" data-toggle="modal" data-target="#login-modal">Log in here</a></span>
+                                    <span id="loading-message" class="text-small">
+                                        {{#currentUser}}{{/currentUser}}
+                                        {{^currentUser}}
+                                        Already have an account? <a href="#" data-toggle="modal" data-target="#login-modal">Log in here</a>
+                                        {{/currentUser}}
+                                    </span>
                                 </div>
                             </form>
                         </div>
